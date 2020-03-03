@@ -1,0 +1,47 @@
+!	groupes.la
+!		- id:<groupe>.<id>			// identifiant syntaxique,identifiant unique 
+!	    - pos:<pos>				// liste, sép " "
+!       - morph:<traits morphos>	// liste sép " " et ";"
+!		- lexSyntN:<lexicosyntaxe>	// liste, sép " "
+!		- a:id-lien;pos;morpho;accord  // morpho sép " "
+!		- p:   "     "    "      "
+!
+!  Prometheus Iapeti filius homines ex luto finxit.
+!  Aesculapius Apollinis filius Glauco Minois filio vitam reddidit.
+!
+
+id:GN.0
+pos:n npr
+
+id:GN.prepabl
+pos:n,npr
+morph:abl
+a:reg;prepabl
+
+id:GN.fam
+pos:n
+a:gen;npr;gén
+
+id:GN.gen
+pos:n
+p:app;GN.fam;;cgn
+
+id:GV.objprep
+pos:v
+morph:act
+lexSynt:trans
+a:objet;GN.0;acc
+a:gprep;prepabl
+
+id:GV.datobj
+pos:v
+morph:act
+lexSynt:trans datif
+a:dat;GN;dat
+a:obj;GN;acc
+
+id:P.sv
+pos:GV
+morph:indic;subj;impér
+a:sujet;GN;nomin;n
+
