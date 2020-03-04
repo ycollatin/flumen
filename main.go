@@ -65,6 +65,7 @@ func chxTexte() {
 	ftexte := textes[chx-1]
 	texte = CreeTexte(ftexte)
 	texte.affiche(aidePh)
+	majPhrase()
 }
 
 func motprec() {
