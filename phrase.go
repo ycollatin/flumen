@@ -18,6 +18,11 @@ func (p *Phrase) append(m *Mot) {
 	p.mots = append(p.mots, m)
 }
 
+func (p *Phrase) arbre() string {
+	// groupes terminaux
+	// groupes non terminaux
+}
+
 // extrait de la phrase p n mots à partir du mot
 // n° d
 func (p *Phrase) ex(d, n int) (e string) {
