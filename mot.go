@@ -1,4 +1,4 @@
-//        element.go - Publicola
+//        mot.go - Publicola
 
 package main
 
