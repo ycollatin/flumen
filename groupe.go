@@ -30,10 +30,10 @@ func creeSub(v string) *Sub {
 	vv := strings.Split(v, ";")
 	for i, e := range(vv) {
 		switch i {
-			case 0:	// id-lien
-			sub.lien = e
-			case 1:	// pos
+			case 0:	// pos
 			sub.pos = e
+			case 1:	// id-lien
+			sub.lien = e
 			case 2: // morpho
 			sub.morpho = strings.Split(e, " ")
 			case 3: // accord
