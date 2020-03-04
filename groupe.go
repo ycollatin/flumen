@@ -8,10 +8,15 @@ import (
 )
 
 type Sub struct {
-	lien	string
 	pos		string
+	lien	string
 	morpho	[]string
 	accord	string
+}
+
+func (s *Sub) idGr() string {
+	ee := strings.Split(s.pos, ".")
+	return ee[0]
 }
 
 type Groupe struct {
@@ -23,7 +28,7 @@ type Groupe struct {
 	post	[]*Sub
 }
 
-var groupes []*Groupe
+var grpTerm, grp []*Groupe
 
 func creeSub(v string) *Sub {
 	sub := new(Sub)
@@ -76,15 +81,19 @@ func lisGroupes(nf string) {
 	llin := gocol.Lignes(nf)
 	var ll []string
 	for _, l := range llin {
-		if l[:3] == "id:" {
+		deb := l[:4]
+		switch deb {
+		case "grp:":
 			g := creeGroupe(ll)
-			if g != nil {
-				groupes = append(groupes, g)
-			}
+			grp = append(grp, g)
 			ll = nil
-		} else {
+		case "ter:":
+			g := creeGroupe(ll)
+			grpTerm = append(grpTerm, g)
+			ll = nil
+		default:
 			ll = append(ll, l)
 		}
 	}
-	groupes = append(groupes, creeGroupe(ll))
+	grp = append(grp, creeGroupe(ll))
 }
