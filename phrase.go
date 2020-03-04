@@ -10,6 +10,12 @@ type Phrase struct {
 	mots	[]*Mot
 }
 
+type Nod struct {
+	mm	[]*Mot
+	nod	int
+	grp	*Groupe
+}
+
 var (
 	phrase *Phrase
 )
@@ -19,8 +25,19 @@ func (p *Phrase) append(m *Mot) {
 }
 
 func (p *Phrase) arbre() string {
-	// groupes terminaux
+	var noeuds []*Nod
+	// groupes terminaux, recherche
+	for _, m := range p.mots {
+		for _, g := range grpTerm {
+			n := p.noeud(m, g)
+			if n != nil {
+				noeuds = append(noeuds, n)
+			}
+		}
+		// résolution des conflits
+	}
 	// groupes non terminaux
+	return "incomplet"
 }
 
 // extrait de la phrase p n mots à partir du mot
@@ -67,6 +84,29 @@ func (p *Phrase) enClair() (ec string) {
 
 func majPhrase() {
 	phrase = texte.phrases[ip]
+}
+
+// nombre de mots
+func (p *Phrase) nbm() int {
+	return len(p.mots)
+}
+
+func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
+	rang := p.rang(m)
+	// mot de rang trop faible
+	if rang < len(g.ante) {
+		return nil
+	}
+	// ou trop élevé
+	if p.nbm() - rang < len(g.post) {
+		return nil
+	}
+	// vérif noyau
+	if !g.estNoyau(m) {
+		return nil
+	}
+
+	return nil
 }
 
 func (p *Phrase) rang(m *Mot) int {

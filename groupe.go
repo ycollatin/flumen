@@ -21,9 +21,9 @@ func (s *Sub) idGr() string {
 
 type Groupe struct {
 	id,idGr	string
-	pos		[]string
-	morph	[]string
-	lexSynt	[]string
+	pos		[]string	// pos du noyau
+	morph	[]string	// traits morpho du noyau
+	lexSynt	[]string	// étiquettes lexicosyntaxiques du noyyau
 	ante	[]*Sub
 	post	[]*Sub
 }
@@ -75,6 +75,36 @@ func creeGroupe(ll []string) *Groupe {
 		}
 	}
 	return g
+}
+
+func (g *Groupe) estNoyau(m *Mot) bool {
+	//pos		[]string	// pos du noyau
+	//morph	[]string	// traits morpho du noyau
+	//lexSynt	[]string	// étiquettes lexicosyntaxiques du noyyau
+	for _, an := range m.ans {
+		// pos
+		if !contient(g.pos, an.Lem.Pos) {
+			return false
+		}
+		// morpho
+		var va bool
+		for _, morf := range an.Morphos {
+			va = true
+			for _, gmorf := range g.morph {
+				va = va && strings.Contains(morf, gmorf)
+			}
+		}
+		if !va {
+			return false
+		}
+		for _, ls := range(g.lexSynt) {
+			va = va && contient(m.lexsynt, ls)
+		}
+		if !va {
+			return false
+		}
+	}
+	return true
 }
 
 func lisGroupes(nf string) {
