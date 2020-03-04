@@ -6,41 +6,44 @@
 !		- a:pos;id-lien;morpho;accord  // morpho sép " "
 !		- p:   "     "    "      "
 !
+!	phrases de test :
 !  Prometheus Iapeti filius homines ex luto finxit.
 !  Aesculapius Apollinis filius Glauco Minois filio vitam reddidit.
 !
+!  CAVEAT : il faut terminer par un groupe non terminal
+!
 
-id:GN.0
+ter:GN.0
 pos:n npr
 
-id:GN.prepabl
+ter:GN.prepabl
 pos:n,npr
 morph:abl
 a:prepabl;reg
 
-id:GN.fam
+ter:GN.fam
 pos:n
 a:npr;gen;gén
 
-id:GN.gen
+grp:GN.gen
 pos:n
 p:GN.fam;app;;cgn
 
-id:GV.objprep
+grp:GV.objprep
 pos:v
 morph:act
 lexSynt:trans
 a:GN.0;objet;acc
 a:prepabl;gprep
 
-id:GV.datobj
+grp:GV.datobj
 pos:v
 morph:act
 lexSynt:trans datif
 a:GN;dat;dat
 a:GN;obj;acc
 
-id:P.sv
+grp:P.sv
 pos:GV
 morph:indic 3;subj 3
 a:GN;sujet;nomin;n
