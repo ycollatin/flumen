@@ -47,6 +47,10 @@ var (
 	texte		*Texte
 )
 
+func analyse() {
+	fmt.Println(phrase.arbre())
+}
+
 // choix du texte latin
 func chxTexte() {
 	files, err := ioutil.ReadDir(ch + "/corpus/")
@@ -149,8 +153,8 @@ func main() {
 			porro()
 		case "k":
 			retro()
-		//case "a":
-			//analyse()
+		case "a":
+			analyse()
 		case "x":
 			fmt.Println("\nVale")
 			os.Exit(0)
