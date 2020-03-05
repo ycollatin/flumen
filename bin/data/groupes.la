@@ -14,10 +14,10 @@
 !
 
 ter:GN.0
-pos:n npr
+pos:n NP
 
 ter:GN.prepabl
-pos:n,npr
+pos:n NP
 morph:abl
 a:prepabl;reg
 
