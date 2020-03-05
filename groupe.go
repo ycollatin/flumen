@@ -58,7 +58,7 @@ func creeGroupe(ll []string) *Groupe {
 		k := kv[0]
 		v := kv[1]
 		switch k {
-		case "id":
+		case "ter", "grp":
 			g.id = v
 			ee := strings.Split(v, ".")
 			g.idGr = ee[0]
@@ -111,18 +111,18 @@ func lisGroupes(nf string) {
 	llin := gocol.Lignes(nf)
 	var ll []string
 	for _, l := range llin {
+		ll = append(ll, l)
 		deb := l[:4]
 		switch deb {
-		case "grp:":
+		case "grp:", "ter:":
 			g := creeGroupe(ll)
-			grp = append(grp, g)
-			ll = nil
-		case "ter:":
-			g := creeGroupe(ll)
-			grpTerm = append(grpTerm, g)
-			ll = nil
-		default:
-			ll = append(ll, l)
+			if g != nil {
+				if deb == "grp:" {
+					grp = append(grp, g)
+				} else {
+					grpTerm = append(grpTerm, g)
+				}
+			}
 		}
 	}
 	grp = append(grp, creeGroupe(ll))
