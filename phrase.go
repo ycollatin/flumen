@@ -106,7 +106,12 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 		return nil
 	}
 
-	return nil
+	nod := new(Nod)
+	nod.mm = append(nod.mm, m)
+	nod.nod = p.rang(m)
+	nod.grp = g
+	fmt.Println("noeud",m.gr,"id", g.id, "nod", nod.nod, nod.grp.id,".")
+	return nod
 }
 
 func (p *Phrase) rang(m *Mot) int {
