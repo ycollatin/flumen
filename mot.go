@@ -3,6 +3,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -39,15 +40,50 @@ func creeMot(m string) *Mot {
 	return mot
 }
 
-func (m *Mot) estSub(sub *Sub) bool {
-	/*
-	type Sub struct {
-		pos		string
-		lien	string
-		morpho	[]string
-		accord	string
+func (m *Mot) estNoyau(g *Groupe) bool {
+	debog := m.gr == "Prometheus" && g.id == "GN.0"
+	if debog {
+		fmt.Println(m.gr, "estNoyau",g.id)
 	}
-	*/
+	for _, an := range m.ans {
+		if debog {
+			fmt.Println(" an.Lem",an.Lem.Gr, an.Lem.Pos,"g.pos",g.pos)
+		}
+		// pos
+		if !contient(g.pos, an.Lem.Pos) {
+			return false
+		}
+		if debog {
+			fmt.Println("   OKa")
+		}
+		// morpho
+		var va bool
+		for _, morf := range an.Morphos {
+			va = true
+			for _, gmorf := range g.morph {
+				va = va && strings.Contains(morf, gmorf)
+			}
+		}
+		if !va {
+			return false
+		}
+		if debog {
+			fmt.Println("   OKb")
+		}
+		for _, ls := range(g.lexSynt) {
+			va = va && contient(m.lexsynt, ls)
+		}
+		if !va {
+			return false
+		}
+		if debog {
+			fmt.Println("   OKc")
+		}
+	}
+	return true
+}
+
+func (m *Mot) estSub(sub *Sub) bool {
 	for _, an := range m.ans {
 		// pos
 		if sub.pos != an.Lem.Pos {
