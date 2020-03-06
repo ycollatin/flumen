@@ -105,6 +105,23 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	if !g.estNoyau(m) {
 		return nil
 	}
+	// vérif des subs
+	// ante
+	for ia, sub := range g.ante {
+		r := rang - len(g.ante) + ia
+		ma := p.mots[r]
+		if !ma.estSub(sub) {
+			return nil
+		}
+	}
+	// post
+	for ip, sub := range g.post {
+		r := rang + ip
+		mp := p.mots[r]
+		if !mp.estSub(sub) {
+			return nil
+		}
+	}
 
 	nod := new(Nod)
 	nod.mm = append(nod.mm, m)

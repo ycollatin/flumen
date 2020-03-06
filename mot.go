@@ -4,6 +4,7 @@ package main
 
 import (
 	"github.com/ycollatin/gocol"
+	"strings"
 )
 
 // rappel de la lemmatisation dans gocol :
@@ -36,6 +37,43 @@ func creeMot(m string) *Mot {
 		}
 	}
 	return mot
+}
+
+func (m *Mot) estSub(sub *Sub) bool {
+	/*
+	type Sub struct {
+		pos		string
+		lien	string
+		morpho	[]string
+		accord	string
+	}
+	*/
+	for _, an := range m.ans {
+		// pos
+		if sub.pos != an.Lem.Pos {
+			return false
+		}
+		// morpho
+		var va bool
+		for _, morf := range an.Morphos {
+			va = true
+			for _, gmorf := range sub.morpho {
+				va = va && strings.Contains(morf, gmorf)
+			}
+		}
+		if !va {
+			return false
+		}
+		/*
+		for _, ls := range(g.lexSynt) {
+			va = va && contient(m.lexsynt, ls)
+		}
+		if !va {
+			return false
+		}
+		*/
+	}
+	return true
 }
 
 func genre(sr gocol.Sr) gocol.Sr {
