@@ -23,7 +23,7 @@ type Groupe struct {
 	id,idGr	string
 	pos		[]string	// pos du noyau
 	morph	[]string	// traits morpho du noyau
-	lexSynt	[]string	// étiquettes lexicosyntaxiques du noyyau
+	lexSynt	[]string	// étiquettes lexicosyntaxiques du noyau
 	ante	[]*Sub
 	post	[]*Sub
 }
@@ -77,44 +77,12 @@ func creeGroupe(ll []string) *Groupe {
 	return g
 }
 
-func (g *Groupe) estNoyau(m *Mot) bool {
-	//pos		[]string	// pos du noyau
-	//morph	[]string	// traits morpho du noyau
-	//lexSynt	[]string	// étiquettes lexicosyntaxiques du noyyau
-	for _, an := range m.ans {
-		// pos
-		if !contient(g.pos, an.Lem.Pos) {
-			return false
-		}
-		// morpho
-		var va bool
-		for _, morf := range an.Morphos {
-			va = true
-			for _, gmorf := range g.morph {
-				va = va && strings.Contains(morf, gmorf)
-			}
-		}
-		if !va {
-			return false
-		}
-		for _, ls := range(g.lexSynt) {
-			va = va && contient(m.lexsynt, ls)
-		}
-		if !va {
-			return false
-		}
-	}
-	return true
-}
-
 func lisGroupes(nf string) {
 	llin := gocol.Lignes(nf)
 	var ll []string
 	for _, l := range llin {
-		ll = append(ll, l)
 		deb := l[:4]
-		switch deb {
-		case "grp:", "ter:":
+		if deb == "ter:" || deb == "grp:" {
 			g := creeGroupe(ll)
 			if g != nil {
 				if deb == "grp:" {
@@ -122,8 +90,10 @@ func lisGroupes(nf string) {
 				} else {
 					grpTerm = append(grpTerm, g)
 				}
+				ll = nil
 			}
 		}
+		ll = append(ll, l)
 	}
 	grp = append(grp, creeGroupe(ll))
 }
