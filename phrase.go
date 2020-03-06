@@ -11,9 +11,10 @@ type Phrase struct {
 }
 
 type Nod struct {
-	mm	[]*Mot
-	nod	int
-	grp	*Groupe
+	mm		[]*Mot
+	nod		int		// rang du 1er mot
+	grp		*Groupe
+	graf	[]string
 }
 
 var (
@@ -102,9 +103,15 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 		return nil
 	}
 	// vérif noyau
-	if !g.estNoyau(m) {
+	if !m.estNoyau(g) {
 		return nil
 	}
+
+	// création du noeud de retour
+	nod := new(Nod)
+	nod.mm = append(nod.mm, m)
+	nod.nod = rang - len(g.ante)
+	nod.grp = g
 	// vérif des subs
 	// ante
 	for ia, sub := range g.ante {
@@ -113,6 +120,7 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 		if !ma.estSub(sub) {
 			return nil
 		}
+		nod.graf = append(nod.graf, fmt.Sprintf("%s -> %s", m.gr, ma.gr))
 	}
 	// post
 	for ip, sub := range g.post {
@@ -121,13 +129,10 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 		if !mp.estSub(sub) {
 			return nil
 		}
+		nod.graf = append(nod.graf, fmt.Sprintf("%s -> %s", m.gr, mp.gr))
 	}
 
-	nod := new(Nod)
-	nod.mm = append(nod.mm, m)
-	nod.nod = p.rang(m)
-	nod.grp = g
-	fmt.Println("noeud",m.gr,"id", g.id, "nod", nod.nod, nod.grp.id,".")
+	fmt.Println("   trouvé graf:",nod.graf)
 	return nod
 }
 
