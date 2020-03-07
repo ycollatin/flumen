@@ -39,6 +39,7 @@ func CreeTexte(nf string) *Texte {
 	var (
 		mot string
 		p	*Phrase
+		tp	string	// texte de la phrase
 	)
 	texte := new(Texte)
 	for i :=0; i < len(contenu); i++ {
@@ -51,6 +52,7 @@ func CreeTexte(nf string) *Texte {
 			}
 		}
 		s := string(r)
+		tp += s
 		if unicode.IsLetter(rune(r)) {
 			mot += s
 		} else if mot > "" {
@@ -60,8 +62,10 @@ func CreeTexte(nf string) *Texte {
 			p.append(creeMot(mot))
 			mot = "";
 			if strings.ContainsAny(".;?!", s) {
+				p.gr = tp
 				texte.append(p)
 				p = nil
+				tp = ""
 			}
 		}
 	}
