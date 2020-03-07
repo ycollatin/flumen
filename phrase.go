@@ -4,17 +4,29 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 type Phrase struct {
+	gr		string
 	mots	[]*Mot
 }
 
 type Nod struct {
 	mm		[]*Mot
+	nucl	*Mot
 	nod		int		// rang du 1er mot
 	grp		*Groupe
-	graf	[]string
+}
+
+// lignes graphviz du nœud
+func (n *Nod) graf() (string) {
+	var ll []string
+	inod := phrase.rang(n.nucl)
+	for _, m := range n.mm {
+		ll = append(ll, fmt.Sprintf("%d -> %d", phrase.rang(m), inod))
+	}
+	return strings.Join(ll, "\n")
 }
 
 var (
@@ -38,7 +50,12 @@ func (p *Phrase) arbre() string {
 		// résolution des conflits
 	}
 	// groupes non terminaux
-	return "incomplet"
+	var ll []string
+	ll = append(ll, p.gr)
+	for _, n := range noeuds {
+		ll = append(ll, n.graf())
+	}
+	return strings.Join(ll, "\n")
 }
 
 // extrait de la phrase p n mots à partir du mot
@@ -110,27 +127,31 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 
 	// création du noeud de retour
 	nod := new(Nod)
-	nod.mm = append(nod.mm, m)
 	nod.nod = rang - len(g.ante)
 	nod.grp = g
+	nod.nucl = m
 	// vérif des subs
 	// ante
 	for ia, sub := range g.ante {
 		r := rang - len(g.ante) + ia
 		ma := p.mots[r]
+		fmt.Println("groupe",m.gr,"rang",rang,"id",g.id,"ajout",ma.gr)
 		if !ma.estSub(sub) {
 			return nil
 		}
-		nod.graf = append(nod.graf, fmt.Sprintf("%s -> %s", m.gr, ma.gr))
+		fmt.Println("  OK")
+		nod.mm = append(nod.mm, ma)
 	}
 	// post
 	for ip, sub := range g.post {
 		r := rang + ip
 		mp := p.mots[r]
+		fmt.Println("groupe",m.gr,"rang",rang,"ajout",mp.gr)
 		if !mp.estSub(sub) {
 			return nil
 		}
-		nod.graf = append(nod.graf, fmt.Sprintf("%s -> %s", m.gr, mp.gr))
+		fmt.Println("  OK")
+		nod.mm = append(nod.mm, mp)
 	}
 
 	return nod
