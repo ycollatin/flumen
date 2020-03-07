@@ -3,7 +3,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -41,20 +40,10 @@ func creeMot(m string) *Mot {
 }
 
 func (m *Mot) estNoyau(g *Groupe) bool {
-	debog := m.gr == "Prometheus" && g.id == "GN.0"
-	if debog {
-		fmt.Println(m.gr, "estNoyau",g.id)
-	}
 	for _, an := range m.ans {
-		if debog {
-			fmt.Println(" an.Lem",an.Lem.Gr, an.Lem.Pos,"g.pos",g.pos)
-		}
 		// pos
 		if !contient(g.pos, an.Lem.Pos) {
 			return false
-		}
-		if debog {
-			fmt.Println("   OKa")
 		}
 		// morpho
 		var va bool
@@ -67,17 +56,11 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 		if !va {
 			return false
 		}
-		if debog {
-			fmt.Println("   OKb")
-		}
 		for _, ls := range(g.lexSynt) {
 			va = va && contient(m.lexsynt, ls)
 		}
 		if !va {
 			return false
-		}
-		if debog {
-			fmt.Println("   OKc")
 		}
 	}
 	return true
