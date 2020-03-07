@@ -92,6 +92,7 @@ func (p *Phrase) nbm() int {
 	return len(p.mots)
 }
 
+// renvoie le noeud dont m peut être le noyau
 func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	rang := p.rang(m)
 	// mot de rang trop faible
@@ -132,7 +133,6 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 		nod.graf = append(nod.graf, fmt.Sprintf("%s -> %s", m.gr, mp.gr))
 	}
 
-	fmt.Println("   trouvé graf:",nod.graf)
 	return nod
 }
 
