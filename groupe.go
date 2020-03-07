@@ -8,10 +8,11 @@ import (
 )
 
 type Sub struct {
-	pos		string
-	lien	string
-	morpho	[]string
-	accord	string
+	pos		string		// pos du sub
+	lien	string		// étiquette du lien noyau -> sub
+	morpho	[]string	// traits morphos requis
+	accord	string		// accord sub - noyau
+	// lexsynt ?
 }
 
 func (s *Sub) idGr() string {
