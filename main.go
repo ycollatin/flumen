@@ -9,6 +9,8 @@
 
 */
 
+// FIXME : phrase.go, 138, estSub() ne marche pas
+
 // main.go - Publicola
 
 package main
