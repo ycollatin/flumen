@@ -66,33 +66,30 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 	return true
 }
 
+// vrai si m est compatible avec Sub
+// Sub : pos string, morpho []string, accord string
+// gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub) bool {
+	var respos, resmorf gocol.Res
+	// pos
 	for _, an := range m.ans {
-		// pos
-		if sub.pos != an.Lem.Pos {
-			return false
+		if an.Lem.Pos == an.Lem.Pos {
+			respos = append(respos, an)
 		}
-		// morpho
-		var va bool
-		for _, morf := range an.Morphos {
-			va = true
-			for _, gmorf := range sub.morpho {
-				va = va && strings.Contains(morf, gmorf)
+	}
+	// morpho
+	for _, an := range respos {
+		for _, anmorf := range an.Morphos {
+			va := true
+			for _, trait := range sub.morpho {
+				va = va && strings.Contains(anmorf, trait)
+			}
+			if va {
+				resmorf = append(resmorf, an)
 			}
 		}
-		if !va {
-			return false
-		}
-		/*
-		for _, ls := range(g.lexSynt) {
-			va = va && contient(m.lexsynt, ls)
-		}
-		if !va {
-			return false
-		}
-		*/
 	}
-	return true
+	return len(resmorf) > 0
 }
 
 func genre(sr gocol.Sr) gocol.Sr {
