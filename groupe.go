@@ -8,10 +8,11 @@ import (
 )
 
 type Sub struct {
-	pos		string		// pos du sub
-	lien	string		// étiquette du lien noyau -> sub
-	morpho	[]string	// traits morphos requis
-	accord	string		// accord sub - noyau
+	pos			string		// pos du sub
+	lien		string		// étiquette du lien noyau -> sub
+	morpho		[]string	// traits morphos requis
+	accord		string		// accord sub - noyau
+	terminal	bool	// le sub est un mot
 	// lexsynt ?
 }
 
@@ -31,7 +32,7 @@ type Groupe struct {
 
 var grpTerm, grp []*Groupe
 
-func creeSub(v string) *Sub {
+func creeSub(v string, t bool) *Sub {
 	sub := new(Sub)
 	vv := strings.Split(v, ";")
 	for i, e := range(vv) {
@@ -46,6 +47,7 @@ func creeSub(v string) *Sub {
 			sub.accord = e
 		}
 	}
+	sub.terminal = t
 	return sub
 }
 
@@ -70,9 +72,13 @@ func creeGroupe(ll []string) *Groupe {
 		case "lexSynt":
 			g.lexSynt = strings.Split(v, " ")
 		case "a":
-			g.ante = append(g.ante, creeSub(v))
+			g.ante = append(g.ante, creeSub(v, true))
+		case "ag":
+			g.ante = append(g.ante, creeSub(v, false))
 		case "p":
-			g.post = append(g.post, creeSub(v))
+			g.post = append(g.post, creeSub(v, true))
+		case "pg":
+			g.post = append(g.post, creeSub(v, false))
 		}
 	}
 	return g
