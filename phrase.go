@@ -15,7 +15,7 @@ type Phrase struct {
 type Nod struct {
 	mm		[]*Mot
 	nucl	*Mot
-	nod		int		// rang du 1er mot
+	rangPr	int		// rang du 1er mot
 	grp		*Groupe
 }
 
@@ -24,7 +24,7 @@ func (n *Nod) graf() (string) {
 	var ll []string
 	inod := phrase.rang(n.nucl)
 	for _, m := range n.mm {
-		ll = append(ll, fmt.Sprintf("%d -> %d", phrase.rang(m), inod))
+		ll = append(ll, fmt.Sprintf("%d -> %d", inod, phrase.rang(m)))
 	}
 	return strings.Join(ll, "\n")
 }
@@ -50,6 +50,9 @@ func (p *Phrase) arbre() string {
 		// résolution des conflits
 	}
 	// groupes non terminaux
+	// à écrire...
+
+	// graphe
 	var ll []string
 	ll = append(ll, p.gr)
 	for _, n := range noeuds {
@@ -127,34 +130,32 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 
 	// création du noeud de retour
 	nod := new(Nod)
-	nod.nod = rang - len(g.ante)
+	nod.rangPr = rang - len(g.ante)
 	nod.grp = g
 	nod.nucl = m
 	// vérif des subs
 	// ante
 	for ia, sub := range g.ante {
-		r := rang - len(g.ante) + ia
+		r := nod.rangPr + ia
 		ma := p.mots[r]
-		fmt.Println("groupe",m.gr,"rang",rang,"id",g.id,"ajout",ma.gr)
 		if !ma.estSub(sub) {
 			return nil
 		}
-		fmt.Println("  OK")
 		nod.mm = append(nod.mm, ma)
 	}
 	// post
 	for ip, sub := range g.post {
 		r := rang + ip
 		mp := p.mots[r]
-		fmt.Println("groupe",m.gr,"rang",rang,"ajout",mp.gr)
 		if !mp.estSub(sub) {
 			return nil
 		}
-		fmt.Println("  OK")
 		nod.mm = append(nod.mm, mp)
 	}
-
-	return nod
+	if len(nod.mm) > 0 {
+		return nod
+	}
+	return nil
 }
 
 func (p *Phrase) rang(m *Mot) int {
