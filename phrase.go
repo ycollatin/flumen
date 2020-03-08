@@ -7,11 +7,6 @@ import (
 	"strings"
 )
 
-type Phrase struct {
-	gr		string
-	mots	[]*Mot
-}
-
 type Nod struct {
 	mm		[]*Mot
 	nucl	*Mot
@@ -29,36 +24,72 @@ func (n *Nod) graf() (string) {
 	return strings.Join(ll, "\n")
 }
 
-var (
-	phrase *Phrase
-)
+type Phrase struct {
+	gr		string
+	mots	[]*Mot
+	nods	[]*Nod
+}
+
+var phrase *Phrase
 
 func (p *Phrase) append(m *Mot) {
 	p.mots = append(p.mots, m)
 }
 
 func (p *Phrase) arbre() string {
-	var noeuds []*Nod
 	// groupes terminaux, recherche
 	for _, m := range p.mots {
 		for _, g := range grpTerm {
 			n := p.noeud(m, g)
 			if n != nil {
-				noeuds = append(noeuds, n)
+				p.nods = append(p.nods, n)
 			}
 		}
 		// résolution des conflits
 	}
 	// groupes non terminaux
-	// à écrire...
+	// pour chaque mot
+	for _, m := range p.mots {
+		// si le mot est sub, passer
+		if p.estSub(m) || p.estNucl(m) {
+			continue
+		}
+		// pour chaque groupe non terminal
+		for _, g := range grp {
+			// tester le mot TODO: changer Mot.estSub(Groupe)
+			// si l'élément est un groupe, tester le groupe
+			// tester la validité du groupe
+			// ajouter le groupe
+		}
+	}
 
 	// graphe
 	var ll []string
 	ll = append(ll, p.gr)
-	for _, n := range noeuds {
+	for _, n := range p.nods {
 		ll = append(ll, n.graf())
 	}
 	return strings.Join(ll, "\n")
+}
+
+func (p *Phrase) estNucl(m *Mot) bool {
+	for _, nod := range p.nods {
+		if nod.nucl == m {
+			return true
+		}
+	}
+	return false
+}
+
+func (p *Phrase) estSub(m *Mot) bool {
+	for _, nod := range p.nods {
+		for _, el := range nod.mm {
+			if el == m {
+				return true
+			}
+		}
+	}
+	return false
 }
 
 // extrait de la phrase p n mots à partir du mot
@@ -110,6 +141,16 @@ func majPhrase() {
 // nombre de mots
 func (p *Phrase) nbm() int {
 	return len(p.mots)
+}
+
+// renvoie le noeud dont m *est* le noyau
+func (p *Phrase) nod(m *Mot) *Nod {
+	for _, n := range p.nods {
+		if n.nucl == m {
+			return n
+		}
+	}
+	return nil
 }
 
 // renvoie le noeud dont m peut être le noyau
