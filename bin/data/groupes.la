@@ -27,24 +27,24 @@ a:NP;gen;gén
 
 grp:GN.gen
 pos:n
-p:GN.fam;app;;cgn
+pg:GN.fam;app;;cgn
 
 grp:GV.objprep
 pos:v
 morph:act
 lexSynt:trans
-a:GN.0;objet;acc
-a:prepabl;gprep
+ag:GN.0;objet;acc
+ag:GN.prepabl;gprep
 
 grp:GV.datobj
 pos:v
 morph:act
 lexSynt:trans datif
-a:GN;dat;dat
-a:GN;obj;acc
+ag:GN;dat;dat
+ag:GN;obj;acc
 
 grp:P.sv
 pos:GV
 morph:indic 3;subj 3
-a:GN;sujet;nomin;n
+ag:GN;sujet;nomin;n
 
