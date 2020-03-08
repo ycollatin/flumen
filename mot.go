@@ -39,6 +39,7 @@ func creeMot(m string) *Mot {
 	return mot
 }
 
+// teste si m peut être le noyau du groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
 	for _, an := range m.ans {
 		// pos
@@ -89,6 +90,8 @@ func (m *Mot) estSub(sub *Sub) bool {
 			}
 		}
 	}
+	// accord
+	// . . .
 	return len(resmorf) > 0
 }
 
