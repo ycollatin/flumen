@@ -82,8 +82,15 @@ func (m *Mot) estSub(sub *Sub) bool {
 	for _, an := range respos {
 		for _, anmorf := range an.Morphos {
 			va := true
-			for _, trait := range sub.morpho {
-				va = va && strings.Contains(anmorf, trait)
+			// si le mot est déjà noyau, contrôler 
+			// le nom de son groupe
+			idgrp := phrase.estNuclDe(m)
+			if idgrp > "" {
+				va = va && sub.pos == idgrp
+			} else {
+				for _, trait := range sub.morpho {
+					va = va && strings.Contains(anmorf, trait)
+				}
 			}
 			if va {
 				resmorf = append(resmorf, an)
