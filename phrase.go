@@ -47,6 +47,7 @@ func (p *Phrase) arbre() string {
 		}
 		// résolution des conflits
 	}
+
 	// groupes non terminaux
 	// pour chaque mot
 	for _, m := range p.mots {
@@ -54,12 +55,12 @@ func (p *Phrase) arbre() string {
 		if p.estSub(m) || p.estNucl(m) {
 			continue
 		}
-		// pour chaque groupe non terminal
 		for _, g := range grp {
-			// tester le mot TODO: changer Mot.estSub(Groupe)
-			// si l'élément est un groupe, tester le groupe
-			// tester la validité du groupe
-			// ajouter le groupe
+			// m noyau ?
+			n := p.noeud(m, g)
+			if n != nil {
+				p.nods = append(p.nods, n)
+			}
 		}
 	}
 
@@ -79,6 +80,15 @@ func (p *Phrase) estNucl(m *Mot) bool {
 		}
 	}
 	return false
+}
+
+func (p *Phrase) estNuclDe(m *Mot) string {
+	for _, nod := range p.nods {
+		if nod.nucl == m {
+			return nod.grp.id
+		}
+	}
+	return ""
 }
 
 func (p *Phrase) estSub(m *Mot) bool {
