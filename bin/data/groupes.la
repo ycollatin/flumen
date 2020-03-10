@@ -13,8 +13,8 @@
 !  CAVEAT : il faut terminer par un groupe non terminal
 !
 
-ter:GN.0
-pos:n NP
+!ter:GN.0
+!pos:n NP
 
 ter:GN.prepabl
 pos:n NP
