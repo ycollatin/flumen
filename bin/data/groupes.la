@@ -25,8 +25,8 @@ ter:GN.fam
 pos:n
 a:NP;gen;gén
 
-grp:GN.gen
-pos:n
+grp:GN.app
+pos:NP
 pg:GN.fam;app;;cgn
 
 grp:GV.objprep
