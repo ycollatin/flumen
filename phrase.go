@@ -8,7 +8,7 @@ import (
 )
 
 type Nod struct {
-	mm		[]*Mot
+	mma,mmp	[]*Mot
 	nucl	*Mot
 	rangPr	int		// rang du 1er mot
 	grp		*Groupe
@@ -18,8 +18,11 @@ type Nod struct {
 func (n *Nod) graf() (string) {
 	var ll []string
 	inod := phrase.rang(n.nucl)
-	for _, m := range n.mm {
-		ll = append(ll, fmt.Sprintf("%d->%d[%s]", inod, phrase.rang(m), n.grp.id))
+	for i, m := range n.mma {
+		ll = append(ll, fmt.Sprintf("%d->%d[%s]", inod, phrase.rang(m), n.grp.ante[i].lien))
+	}
+	for i, m := range n.mmp {
+		ll = append(ll, fmt.Sprintf("%d->%d[%s]", inod, phrase.rang(m), n.grp.post[i].lien))
 	}
 	return strings.Join(ll, "\n")
 }
@@ -95,7 +98,12 @@ func (p *Phrase) estNuclDe(m *Mot) string {
 
 func (p *Phrase) estSub(m *Mot) bool {
 	for _, nod := range p.nods {
-		for _, el := range nod.mm {
+		for _, el := range nod.mma {
+			if el == m {
+				return true
+			}
+		}
+		for _, el := range nod.mmp {
 			if el == m {
 				return true
 			}
@@ -195,7 +203,7 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 		if !ma.estSub(sub) {
 			return nil
 		}
-		nod.mm = append(nod.mm, ma)
+		nod.mma = append(nod.mma, ma)
 	}
 	// post
 	fmt.Println(m.gr, "  post")
@@ -205,10 +213,10 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 		if !mp.estSub(sub) {
 			return nil
 		}
-		nod.mm = append(nod.mm, mp)
+		nod.mmp = append(nod.mmp, mp)
 		fmt.Println("   post",nod.graf(), nod.grp.id)
 	}
-	if len(nod.mm) > 0 {
+	if len(nod.mma) + len(nod.mmp) > 0 {
 		return nod
 	}
 	return nil
