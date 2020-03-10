@@ -19,7 +19,7 @@ func (n *Nod) graf() (string) {
 	var ll []string
 	inod := phrase.rang(n.nucl)
 	for _, m := range n.mm {
-		ll = append(ll, fmt.Sprintf("%d -> %d", inod, phrase.rang(m)))
+		ll = append(ll, fmt.Sprintf("%d->%d[%s]", inod, phrase.rang(m), n.grp.id))
 	}
 	return strings.Join(ll, "\n")
 }
@@ -45,16 +45,18 @@ func (p *Phrase) arbre() string {
 				p.nods = append(p.nods, n)
 			}
 		}
-		// résolution des conflits
+		// résolution des conflits (à écrire)
 	}
 
 	// groupes non terminaux
+	// recherche des noyaux
 	// pour chaque mot
 	for _, m := range p.mots {
-		// si le mot est sub, passer
-		if p.estSub(m) || p.estNucl(m) {
+		// passer s'il est déjà noyau
+		if p.estNucl(m) {
 			continue
 		}
+		// pour chaque déf. de groupe non terminal
 		for _, g := range grp {
 			// m noyau ?
 			n := p.noeud(m, g)
@@ -174,11 +176,12 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	if p.nbm() - rang < len(g.post) {
 		return nil
 	}
-	// vérif noyau
+	// m peut-il être noyau ?
 	if !m.estNoyau(g) {
 		return nil
 	}
 
+	fmt.Println("noeud",m.gr)
 	// création du noeud de retour
 	nod := new(Nod)
 	nod.rangPr = rang - len(g.ante)
@@ -195,13 +198,15 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 		nod.mm = append(nod.mm, ma)
 	}
 	// post
+	fmt.Println(m.gr, "  post")
 	for ip, sub := range g.post {
-		r := rang + ip
+		r := rang + ip + 1
 		mp := p.mots[r]
 		if !mp.estSub(sub) {
 			return nil
 		}
 		nod.mm = append(nod.mm, mp)
+		fmt.Println("   post",nod.graf(), nod.grp.id)
 	}
 	if len(nod.mm) > 0 {
 		return nod
