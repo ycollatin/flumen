@@ -33,10 +33,39 @@ func creeMot(m string) *Mot {
 	}
 	if !echec {
 		for i, an := range mot.ans {
-			mot.ans[i] = genre(an)
+			mot.ans[i] = genus(an)
 		}
 	}
 	return mot
+}
+
+func (ma *Mot) accord(mb *Mot, cgn string) bool {
+	for _, sra := range ma.ans {
+		for _, srb := range mb.ans {
+			for _, morfa := range sra.Morphos {
+				for _, morfb := range srb.Morphos {
+					va := true
+					for i:=0; i<len(cgn); i++ {
+						switch cgn[i] {
+						case 'c':
+							k := cas(morfa)
+							va = va && strings.Contains(morfb, k)
+						case 'g':
+							g := genre(morfa)
+							va = va && strings.Contains(morfb, g)
+						case 'n':
+							n := nombre(morfa)
+							va = va && strings.Contains(morfb, n)
+						}
+						if va {
+							return true
+						}
+					}
+				}
+			}
+		}
+	}
+	return false
 }
 
 // teste si m peut être le noyau du groupe g
@@ -70,7 +99,7 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 // vrai si m est compatible avec Sub
 // Sub : pos string, morpho []string, accord string
 // gocol.Sr : Lem, Morphos []string
-func (m *Mot) estSub(sub *Sub) bool {
+func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 	var respos, resmorf gocol.Res
 	// pos
 	for _, an := range m.ans {
@@ -94,15 +123,20 @@ func (m *Mot) estSub(sub *Sub) bool {
 			}
 			if va {
 				resmorf = append(resmorf, an)
+			} else {
+				return false
+			}
+			// accord
+			if !mn.accord(m, sub.accord) {
+				return false
 			}
 		}
 	}
-	// accord
 	// . . .
 	return len(resmorf) > 0
 }
 
-func genre(sr gocol.Sr) gocol.Sr {
+func genus(sr gocol.Sr) gocol.Sr {
 	if sr.Lem.Pos != "n" && sr.Lem.Pos != "NP" {
 		return sr
 	}
