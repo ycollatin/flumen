@@ -54,6 +54,8 @@ func (p *Phrase) arbre() string {
 	// groupes non terminaux
 	// recherche des noyaux
 	// pour chaque mot
+	// debog
+	fmt.Println("non terminaux")
 	for _, m := range p.mots {
 		// passer s'il est déjà noyau
 		if p.estNucl(m) {
@@ -189,7 +191,6 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 		return nil
 	}
 
-	fmt.Println("noeud",m.gr)
 	// création du noeud de retour
 	nod := new(Nod)
 	nod.rangPr = rang - len(g.ante)
@@ -200,21 +201,20 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	for ia, sub := range g.ante {
 		r := nod.rangPr + ia
 		ma := p.mots[r]
-		if !ma.estSub(sub) {
+		if !ma.estSub(sub, m) {
 			return nil
 		}
 		nod.mma = append(nod.mma, ma)
 	}
 	// post
-	fmt.Println(m.gr, "  post")
 	for ip, sub := range g.post {
 		r := rang + ip + 1
 		mp := p.mots[r]
-		if !mp.estSub(sub) {
+		if !mp.estSub(sub, m) {
 			return nil
 		}
 		nod.mmp = append(nod.mmp, mp)
-		fmt.Println("   post",nod.graf(), nod.grp.id)
+		fmt.Println("   post, noy",m.gr,"grp",g.id,"sub",mp.gr,sub.accord,"graf",nod.graf())
 	}
 	if len(nod.mma) + len(nod.mmp) > 0 {
 		return nod
