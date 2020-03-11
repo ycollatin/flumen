@@ -2,9 +2,11 @@
 !		- id:<groupe>.<id>			// identifiant syntaxique,identifiant unique 
 !	    - pos:<pos>				// liste, sép " "
 !       - morph:<traits morphos>	// liste sép " " et ";"
-!		- lexSyntN:<lexicosyntaxe>	// liste, sép " "
-!		- a:pos;id-lien;morpho;accord  // morpho sép " "
-!		- p:   "     "    "      "
+!		- lexSyntN:<lexicosyntaxe>		// liste, sép " "
+!		- a:pos;id-lien;morpho;accord	// sub avant le noyau; morpho sép " "
+!		- ag: "  "        "     "		// comme a, pour les groupes
+!		- p:   "     "    "      "		// sub après le noyau
+!		- pg:   "     "    "      "		// comme p, pour les groupes
 !
 !	phrases de test :
 !  Prometheus Iapeti filius homines ex luto finxit.
