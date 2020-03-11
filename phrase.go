@@ -177,6 +177,8 @@ func (p *Phrase) nod(m *Mot) *Nod {
 // renvoie le noeud dont m peut être le noyau
 func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	rang := p.rang(m)
+	debog := rang == 0 && g.id == "GN.app"
+	if debog {fmt.Println("noeud",m.gr,g.id)}
 	// mot de rang trop faible
 	if rang < len(g.ante) {
 		return nil
@@ -189,6 +191,7 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	if !m.estNoyau(g) {
 		return nil
 	}
+	if debog {fmt.Println("  oka")}
 
 	// création du noeud de retour
 	nod := new(Nod)
@@ -209,6 +212,10 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	for ip, sub := range g.post {
 		r := rang + ip + 1
 		mp := p.mots[r]
+		for mp.dejaSub() {
+			r++
+			mp = p.mots[r]
+		}
 		if !mp.estSub(sub, m) {
 			return nil
 		}
