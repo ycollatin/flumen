@@ -68,6 +68,29 @@ func (ma *Mot) accord(mb *Mot, cgn string) bool {
 	return false
 }
 
+func (m *Mot) dejaSub() bool {
+	for _, n := range phrase.nods {
+		if m.elDe(n) {
+			return true
+		}
+	}
+	return false
+}
+
+func (m *Mot) elDe(n *Nod) bool {
+	for _, ma := range n.mma {
+		if ma == m {
+			return true
+		}
+	}
+	for _, mp := range n.mmp {
+		if mp == m {
+			return true
+		}
+	}
+	return false
+}
+
 // teste si m peut être le noyau du groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
 	for _, an := range m.ans {
