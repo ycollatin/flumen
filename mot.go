@@ -130,9 +130,12 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 			if sub.accord != "" && !mn.accord(m, sub.accord) {
 				return false
 			}
+			if len(resmorf) > 0 {
+				return true
+			}
 		}
 	}
-	return len(resmorf) > 0
+	return false
 }
 
 func genus(sr gocol.Sr) gocol.Sr {
