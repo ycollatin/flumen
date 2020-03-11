@@ -55,7 +55,6 @@ func (p *Phrase) arbre() string {
 	// recherche des noyaux
 	// pour chaque mot
 	// debog
-	fmt.Println("non terminaux")
 	for _, m := range p.mots {
 		// passer s'il est déjà noyau
 		if p.estNucl(m) {
