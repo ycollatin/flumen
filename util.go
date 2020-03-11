@@ -44,6 +44,39 @@ func afflin(ll []string, h int) {
 	}
 }
 
+var (
+	lcas = [...]string {"nominatif","vocatif","accusatif","génitif","datif","ablatif","locatif"}
+	lgenre = [...]string {"masculin","féminin","neutre"}
+	lnombre = [...]string {"singulier", "pluriel"}
+)
+
+func cas(morpho string) string {
+	for _, c := range lcas {
+		if strings.Contains(morpho, c) {
+			return c
+		}
+	}
+	return ""
+}
+
+func genre(morpho string) string {
+	for _, g := range lgenre {
+		if strings.Contains(morpho, g) {
+			return g
+		}
+	}
+	return ""
+}
+
+func nombre(morpho string) string {
+	for _, n := range lnombre {
+		if strings.Contains(morpho, n) {
+			return n
+		}
+	}
+	return ""
+}
+
 func chxMultiple(q string, ll []string) string {
 	fmt.Println(q)
 	for i := 0; i < len(ll); i++ {
