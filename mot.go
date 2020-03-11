@@ -57,9 +57,9 @@ func (ma *Mot) accord(mb *Mot, cgn string) bool {
 							n := nombre(morfa)
 							va = va && strings.Contains(morfb, n)
 						}
-						if va {
-							return true
-						}
+					}
+					if va {
+						return true
 					}
 				}
 			}
@@ -127,12 +127,11 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 				return false
 			}
 			// accord
-			if !mn.accord(m, sub.accord) {
+			if sub.accord != "" && !mn.accord(m, sub.accord) {
 				return false
 			}
 		}
 	}
-	// . . .
 	return len(resmorf) > 0
 }
 
