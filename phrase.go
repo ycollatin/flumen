@@ -42,6 +42,9 @@ func (p *Phrase) append(m *Mot) {
 func (p *Phrase) arbre() string {
 	// groupes terminaux, recherche
 	for _, m := range p.mots {
+		if m.dejaNoy() {
+			continue
+		}
 		for _, g := range grpTerm {
 			n := p.noeud(m, g)
 			if n != nil {
@@ -54,10 +57,9 @@ func (p *Phrase) arbre() string {
 	// groupes non terminaux
 	// recherche des noyaux
 	// pour chaque mot
-	// debog
 	for _, m := range p.mots {
 		// passer s'il est déjà noyau
-		if p.estNucl(m) {
+		if m.dejaNoy() {
 			continue
 		}
 		// pour chaque déf. de groupe non terminal
@@ -77,15 +79,6 @@ func (p *Phrase) arbre() string {
 		ll = append(ll, n.graf())
 	}
 	return strings.Join(ll, "\n")
-}
-
-func (p *Phrase) estNucl(m *Mot) bool {
-	for _, nod := range p.nods {
-		if nod.nucl == m {
-			return true
-		}
-	}
-	return false
 }
 
 func (p *Phrase) estNuclDe(m *Mot) string {
@@ -177,8 +170,6 @@ func (p *Phrase) nod(m *Mot) *Nod {
 // renvoie le noeud dont m peut être le noyau
 func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	rang := p.rang(m)
-	debog := rang == 0 && g.id == "GN.app"
-	if debog {fmt.Println("noeud",m.gr,g.id)}
 	// mot de rang trop faible
 	if rang < len(g.ante) {
 		return nil
@@ -191,7 +182,6 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	if !m.estNoyau(g) {
 		return nil
 	}
-	if debog {fmt.Println("  oka")}
 
 	// création du noeud de retour
 	nod := new(Nod)
@@ -220,7 +210,6 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 			return nil
 		}
 		nod.mmp = append(nod.mmp, mp)
-		fmt.Println("   post, noy",m.gr,"grp",g.id,"sub",mp.gr,sub.accord,"graf",nod.graf())
 	}
 	if len(nod.mma) + len(nod.mmp) > 0 {
 		return nod
