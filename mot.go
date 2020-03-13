@@ -68,6 +68,15 @@ func (ma *Mot) accord(mb *Mot, cgn string) bool {
 	return false
 }
 
+func (m *Mot) dejaNoy() bool {
+	for _, n := range phrase.nods {
+		if n.nucl == m {
+			return true
+		}
+	}
+	return false
+}
+
 func (m *Mot) dejaSub() bool {
 	for _, n := range phrase.nods {
 		if m.elDe(n) {
@@ -119,15 +128,23 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 	return true
 }
 
-// vrai si m est compatible avec Sub
+// vrai si m est compatible avec Sub et le noyau mn
 // Sub : pos string, morpho []string, accord string
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 	var respos, resmorf gocol.Res
 	// pos
-	for _, an := range m.ans {
-		if an.Lem.Pos == an.Lem.Pos {
-			respos = append(respos, an)
+	if sub.terminal {
+		for _, an := range m.ans {
+			if an.Lem.Pos == an.Lem.Pos {
+				respos = append(respos, an)
+			}
+		}
+	} else {
+		if m.noyId(sub.pos) {
+			respos = m.ans
+		} else {
+			return false
 		}
 	}
 	// morpho
@@ -176,4 +193,24 @@ func genus(sr gocol.Sr) gocol.Sr {
 		sr.Nmorph[i] += inc
 	}
 	return sr
+}
+
+// le mot m est il noyau d'un groupe d'id id ?
+func (m *Mot) noyId(id string) bool {
+	for _, n := range phrase.nods {
+		if n.grp.id == id && n.nucl == m {
+			return true
+		}
+	}
+	return false
+}
+
+func (ma *Mot) subDe(mb *Mot) bool {
+	// chercher le groupe dont mb est noyau
+	for _, n := range phrase.nods {
+		if mb == n.nucl {
+			return ma.elDe(n)
+		}
+	}
+	return false
 }
