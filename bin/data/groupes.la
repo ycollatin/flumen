@@ -34,8 +34,8 @@ pg:GN.fam;app;;cgn
 grp:GV.objprep
 pos:v
 morph:act
-lexSynt:trans
-ag:GN.0;objet;acc
+!lexSynt:trans
+a:n;obj;acc
 ag:GN.prepabl;gprep
 
 grp:GV.datobj
