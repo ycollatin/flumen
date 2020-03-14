@@ -10,7 +10,6 @@ import (
 type Nod struct {
 	mma,mmp	[]*Mot
 	nucl	*Mot
-	rangPr	int		// rang du 1er mot
 	grp		*Groupe
 }
 
@@ -185,16 +184,23 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 
 	// création du noeud de retour
 	nod := new(Nod)
-	nod.rangPr = rang - len(g.ante)
 	nod.grp = g
 	nod.nucl = m
 	// vérif des subs
 	// ante
-	for ia, sub := range g.ante {
-		r := nod.rangPr + ia
+	lante := len(g.ante)
+	// XXX procéder par régression
+	//for ia, sub := range g.ante {
+	for ia := lante; ia > 0; ia-- {
+		sub := g.ante[lante-ia]
+		r := rang - lante
 		ma := p.mots[r]
+		for ma.dejaSub() {
+			r--
+			ma = p.mots[r]
+		}
 		if !ma.estSub(sub, m) {
-			return nil
+			continue
 		}
 		nod.mma = append(nod.mma, ma)
 	}
