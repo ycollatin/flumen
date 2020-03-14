@@ -3,6 +3,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -102,11 +103,26 @@ func (m *Mot) elDe(n *Nod) bool {
 
 // teste si m peut être le noyau du groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
+	/*
+	grp:P.sv
+	pos:GV.objprep
+	morph:indic 3;subj 3
+	ag:GN;sujet;nomin;n
+	*/
+	debog := m.gr=="finxit" && g.id=="P.sv"
+	if debog {fmt.Println("   ",m.gr,"estNoyau",g.id)}
 	for _, an := range m.ans {
 		// pos
-		if !contient(g.pos, an.Lem.Pos) {
-			return false
+		if debog {fmt.Println("    oka")}
+		if m.dejaNoy() {
+			idgrp := phrase.estNuclDe(m)
+			if !contient(g.pos, idgrp) {
+				continue
+			}
+		} else if !contient(g.pos, an.Lem.Pos) {
+			continue
 		}
+		if debog {fmt.Println("   okb")}
 		// morpho
 		var va bool
 		for _, morf := range an.Morphos {
@@ -116,16 +132,18 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 			}
 		}
 		if !va {
-			return false
+			continue
 		}
+		if debog {fmt.Println("   okc")}
 		for _, ls := range(g.lexSynt) {
 			va = va && contient(m.lexsynt, ls)
 		}
 		if !va {
-			return false
+			continue
 		}
+		return true
 	}
-	return true
+	return false
 }
 
 // vrai si m est compatible avec Sub et le noyau mn
