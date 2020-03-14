@@ -16,22 +16,6 @@ type Sub struct {
 	// lexsynt ?
 }
 
-func (s *Sub) idGr() string {
-	ee := strings.Split(s.pos, ".")
-	return ee[0]
-}
-
-type Groupe struct {
-	id,idGr	string
-	pos		[]string	// pos du noyau
-	morph	[]string	// traits morpho du noyau
-	lexSynt	[]string	// étiquettes lexicosyntaxiques du noyau
-	ante	[]*Sub
-	post	[]*Sub
-}
-
-var grpTerm, grp []*Groupe
-
 func creeSub(v string, t bool) *Sub {
 	sub := new(Sub)
 	vv := strings.Split(v, ";")
@@ -50,6 +34,22 @@ func creeSub(v string, t bool) *Sub {
 	sub.terminal = t
 	return sub
 }
+
+func (s *Sub) idGr() string {
+	ee := strings.Split(s.pos, ".")
+	return ee[0]
+}
+
+type Groupe struct {
+	id,idGr	string
+	pos		[]string	// pos du noyau
+	morph	[]string	// traits morpho du noyau
+	lexSynt	[]string	// étiquettes lexicosyntaxiques du noyau
+	ante	[]*Sub
+	post	[]*Sub
+}
+
+var grpTerm, grp []*Groupe
 
 func creeGroupe(ll []string) *Groupe {
 	if len(ll) == 0 {
