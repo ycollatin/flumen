@@ -168,6 +168,8 @@ func (p *Phrase) nod(m *Mot) *Nod {
 
 // renvoie le noeud dont m peut être le noyau
 func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
+	debog := g.id == "P.sv" && m.gr=="finxit"
+	if debog {fmt.Println("noeud",m.gr, g.id)}
 	rang := p.rang(m)
 	// mot de rang trop faible
 	if rang < len(g.ante) {
@@ -177,10 +179,12 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	if p.nbm() - rang < len(g.post) {
 		return nil
 	}
+	if debog {fmt.Println("   debog",m.gr,"estNoyau",g.id)}
 	// m peut-il être noyau ?
 	if !m.estNoyau(g) {
 		return nil
 	}
+	if debog {fmt.Println("   debog okb")}
 
 	// création du noeud de retour
 	nod := new(Nod)
@@ -189,10 +193,9 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	// vérif des subs
 	// ante
 	lante := len(g.ante)
-	// XXX procéder par régression
-	//for ia, sub := range g.ante {
 	for ia := lante; ia > 0; ia-- {
 		sub := g.ante[lante-ia]
+		if debog {fmt.Println(g.id,"sub",sub.pos, sub.lien)}
 		r := rang - lante
 		ma := p.mots[r]
 		for ma.dejaSub() {
