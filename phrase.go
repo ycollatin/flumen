@@ -179,12 +179,11 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	if p.nbm() - rang < len(g.post) {
 		return nil
 	}
-	if debog {fmt.Println("   debog",m.gr,"estNoyau",g.id)}
 	// m peut-il être noyau ?
 	if !m.estNoyau(g) {
 		return nil
 	}
-	if debog {fmt.Println("   debog okb")}
+	if debog {fmt.Println("   debog oka")}
 
 	// création du noeud de retour
 	nod := new(Nod)
@@ -207,6 +206,7 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 		}
 		nod.mma = append(nod.mma, ma)
 	}
+	if debog {fmt.Println("   debog okb")}
 	// post
 	for ip, sub := range g.post {
 		r := rang + ip + 1
@@ -220,6 +220,7 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 		}
 		nod.mmp = append(nod.mmp, mp)
 	}
+	if debog {fmt.Println("   debog okc")}
 	if len(nod.mma) + len(nod.mmp) > 0 {
 		return nod
 	}
