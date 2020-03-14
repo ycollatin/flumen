@@ -152,11 +152,12 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 		for _, anmorf := range an.Morphos {
 			va := true
 			// si le mot est déjà noyau, contrôler 
-			// le nom de son groupe
+			// le nom de son groupe, (seul l'accord compte ?)
 			idgrp := phrase.estNuclDe(m)
 			if idgrp > "" {
 				va = va && sub.pos == idgrp
 			} else {
+				// sinon, on vérifie la morpho du mot
 				for _, trait := range sub.morpho {
 					va = va && strings.Contains(anmorf, trait)
 				}
@@ -164,11 +165,11 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 			if va {
 				resmorf = append(resmorf, an)
 			} else {
-				return false
+				continue
 			}
 			// accord
 			if sub.accord != "" && !mn.accord(m, sub.accord) {
-				return false
+				continue
 			}
 			if len(resmorf) > 0 {
 				return true
