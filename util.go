@@ -92,6 +92,7 @@ func ClearScreen() {
 	c.Run()
 }
 
+// vrai si s est un élément de ls
 func contient(ls []string, s string) bool {
 	for _, e := range ls {
 		if e == s {
