@@ -46,7 +46,7 @@ ag:GN;dat;dat
 ag:GN;obj;acc
 
 grp:P.sv
-pos:GV
+pos:GV.objprep
 morph:indic 3;subj 3
 ag:GN;sujet;nomin;n
 
