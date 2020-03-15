@@ -3,7 +3,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -109,11 +108,8 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 	morph:indic 3;subj 3
 	ag:GN;sujet;nomin;n
 	*/
-	debog := m.gr=="finxit" && g.id=="P.sv"
-	if debog {fmt.Println("   ",m.gr,"estNoyau",g.id)}
 	for _, an := range m.ans {
 		// pos
-		if debog {fmt.Println("    oka")}
 		if m.dejaNoy() {
 			idgrp := phrase.estNuclDe(m)
 			if !contient(g.pos, idgrp) {
@@ -122,19 +118,23 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 		} else if !contient(g.pos, an.Lem.Pos) {
 			continue
 		}
-		if debog {fmt.Println("   okb")}
 		// morpho
 		var va bool
 		for _, morf := range an.Morphos {
 			va = true
 			for _, gmorf := range g.morph {
-				va = va && strings.Contains(morf, gmorf)
+				ecl := strings.Split(gmorf, " ")
+				for _, e := range ecl {
+					va = va && strings.Contains(morf, e)
+				}
+				if va {
+					break
+				}
 			}
 		}
 		if !va {
 			continue
 		}
-		if debog {fmt.Println("   okc")}
 		for _, ls := range(g.lexSynt) {
 			va = va && contient(m.lexsynt, ls)
 		}
