@@ -46,13 +46,7 @@ var (
 )
 
 func analyse() {
-	aa := phrase.arbre()
-	ab := phrase.arbre()
-	for ab != aa {
-		aa = ab
-		ab = phrase.arbre()
-	}
-	fmt.Println(ab)
+	fmt.Println(phrase.arbre())
 }
 
 // choix du texte latin
