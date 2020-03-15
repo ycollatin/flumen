@@ -3,7 +3,8 @@
 !	    - pos:<pos>				// liste, sép " "
 !       - morph:<traits morphos>	// liste sép " " et ";"
 !		- lexSyntN:<lexicosyntaxe>		// liste, sép " "
-!		- a:pos;id-lien;morpho;accord	// sub avant le noyau; morpho sép " "
+!		// a:mots avant le noyau
+!		- a:pos;id-lien;traita traitb,traita traitb;accord
 !		- ag: "  "        "     "		// comme a, pour les groupes
 !		- p:   "     "    "      "		// sub après le noyau
 !		- pg:   "     "    "      "		// comme p, pour les groupes
