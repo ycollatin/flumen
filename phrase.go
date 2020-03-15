@@ -57,10 +57,6 @@ func (p *Phrase) arbre() string {
 	// recherche des noyaux
 	// pour chaque mot
 	for _, m := range p.mots {
-		// passer s'il est déjà noyau
-		if m.dejaNoy() {
-			continue
-		}
 		// pour chaque déf. de groupe non terminal
 		for _, g := range grp {
 			// m noyau ?
@@ -168,23 +164,20 @@ func (p *Phrase) nod(m *Mot) *Nod {
 
 // renvoie le noeud dont m peut être le noyau
 func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
-	debog := g.id == "P.sv" && m.gr=="finxit"
-	if debog {fmt.Println("noeud",m.gr, g.id)}
 	rang := p.rang(m)
+	lante := len(g.ante)
 	// mot de rang trop faible
-	if rang < len(g.ante) {
+	if rang < lante {
 		return nil
 	}
 	// ou trop élevé
 	if p.nbm() - rang < len(g.post) {
 		return nil
 	}
-	if debog {fmt.Println("   debog noeud oka")}
 	// m peut-il être noyau ?
 	if !m.estNoyau(g) {
 		return nil
 	}
-	if debog {fmt.Println("   debog noeud okb")}
 
 	// création du noeud de retour
 	nod := new(Nod)
@@ -192,20 +185,22 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	nod.nucl = m
 	// vérif des subs
 	// ante
-	lante := len(g.ante)
-	for ia := lante; ia > 0; ia-- {
-		sub := g.ante[lante-ia]
-		if debog {fmt.Println(g.id,"sub",sub.pos, sub.lien)}
-		r := rang - lante
+	r := rang - 1
+	for ia := lante-1; ia > -1; ia-- {
+		sub := g.ante[ia]
 		ma := p.mots[r]
-		for ma.dejaSub() {
+		for ma.dejaSub() && r > 0 {
 			r--
 			ma = p.mots[r]
 		}
 		if !ma.estSub(sub, m) {
-			continue
+			return nil
 		}
 		nod.mma = append(nod.mma, ma)
+		if r <= 0 {
+			break
+		}
+		r--
 	}
 	// post
 	for ip, sub := range g.post {
