@@ -22,7 +22,7 @@
 ter:GN.prepabl
 pos:n NP
 morph:abl
-a:prepabl;reg
+a:prepabl;prep
 
 ter:GN.fam
 pos:n
@@ -49,5 +49,4 @@ ag:GN;obj;acc
 grp:P.sv
 pos:GV.objprep
 morph:indic 3;subj 3
-ag:GN;sujet;nomin;n
-
+ag:GN.app;sujet;nomin;n
