@@ -87,9 +87,9 @@ func creeGroupe(ll []string) *Groupe {
 func lisGroupes(nf string) {
 	llin := gocol.Lignes(nf)
 	var ll []string
-	for i, l := range llin {
+	for _, l := range llin {
 		deb := l[:4]
-		if deb == "ter:" || deb == "grp:" || i == len(llin)-1 {
+		if deb == "ter:" || deb == "grp:" {
 			g := creeGroupe(ll)
 			if g != nil {
 				if ll[0][:4] == "grp:" {
@@ -97,9 +97,10 @@ func lisGroupes(nf string) {
 				} else {
 					grpTerm = append(grpTerm, g)
 				}
+				ll = nil
 			}
-			ll = nil
 		}
 		ll = append(ll, l)
 	}
+	grp = append(grp, creeGroupe(ll))
 }
