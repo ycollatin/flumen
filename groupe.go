@@ -26,7 +26,7 @@ func creeSub(v string, t bool) *Sub {
 			case 1:	// id-lien
 			sub.lien = e
 			case 2: // morpho
-			sub.morpho = strings.Split(e, " ")
+			sub.morpho = strings.Split(e, ",")
 			case 3: // accord
 			sub.accord = e
 		}
