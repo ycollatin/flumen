@@ -46,7 +46,11 @@ var (
 )
 
 func analyse() {
-	fmt.Println(phrase.arbre())
+	//fmt.Println(phrase.arbre())
+	lingraphe := graphe(phrase.arbre())
+	for i := len(lingraphe)-1; i > -1; i-- {
+		fmt.Println(lingraphe[i])
+	}
 }
 
 // choix du texte latin
