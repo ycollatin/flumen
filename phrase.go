@@ -18,10 +18,10 @@ func (n *Nod) graf() (string) {
 	var ll []string
 	inod := phrase.rang(n.nucl)
 	for i, m := range n.mma {
-		ll = append(ll, fmt.Sprintf("%d->%d[%s]", inod, phrase.rang(m), n.grp.ante[i].lien))
+		ll = append(ll, fmt.Sprintf("%d -> %d[%s]", inod, phrase.rang(m), n.grp.ante[i].lien))
 	}
 	for i, m := range n.mmp {
-		ll = append(ll, fmt.Sprintf("%d->%d[%s]", inod, phrase.rang(m), n.grp.post[i].lien))
+		ll = append(ll, fmt.Sprintf("%d -> %d[%s]", inod, phrase.rang(m), n.grp.post[i].lien))
 	}
 	return strings.Join(ll, "\n")
 }
@@ -38,7 +38,7 @@ func (p *Phrase) append(m *Mot) {
 	p.mots = append(p.mots, m)
 }
 
-func (p *Phrase) arbre() string {
+func (p *Phrase) arbre() []string {
 	// groupes terminaux, recherche
 	for _, m := range p.mots {
 		if m.dejaNoy() {
@@ -65,6 +65,7 @@ func (p *Phrase) arbre() string {
 				p.nods = append(p.nods, n)
 			}
 		}
+		// résolution des conflits (à écrire)
 	}
 
 	// graphe
@@ -73,7 +74,7 @@ func (p *Phrase) arbre() string {
 	for _, n := range p.nods {
 		ll = append(ll, n.graf())
 	}
-	return strings.Join(ll, "\n")
+	return ll
 }
 
 func (p *Phrase) estNuclDe(m *Mot) string {
