@@ -52,7 +52,11 @@ func CreeTexte(nf string) *Texte {
 			}
 		}
 		s := string(r)
-		tp += s
+		if s != "\n" {
+			tp += s
+		} /*else {
+			tp += " "
+		}*/
 		if unicode.IsLetter(rune(r)) {
 			mot += s
 		} else if mot > "" {
