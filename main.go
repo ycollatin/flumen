@@ -46,10 +46,18 @@ var (
 )
 
 func analyse() {
-	//fmt.Println(phrase.arbre())
-	lingraphe := graphe(phrase.arbre())
-	for i := len(lingraphe)-1; i > -1; i-- {
-		fmt.Println(lingraphe[i])
+	//laa := phrase.arbre()
+	lab := phrase.arbre()
+	/*
+	for len(laa) < len(lab) {
+		fmt.Println("   ",len(laa),len(lab))
+		laa = lab
+		lab = phrase.arbre()
+	}
+	*/
+	ling := graphe(lab)
+	for i := len(ling)-1; i > -1; i-- {
+		fmt.Println(ling[i])
 	}
 }
 
