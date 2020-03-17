@@ -18,10 +18,10 @@ func (n *Nod) graf() (string) {
 	var ll []string
 	inod := phrase.rang(n.nucl)
 	for i, m := range n.mma {
-		ll = append(ll, fmt.Sprintf("%d -> %d[%s]", inod, phrase.rang(m), n.grp.ante[i].lien))
+		ll = append(ll, fmt.Sprintf("%d -> %d [%s]", inod, phrase.rang(m), n.grp.ante[i].lien))
 	}
 	for i, m := range n.mmp {
-		ll = append(ll, fmt.Sprintf("%d -> %d[%s]", inod, phrase.rang(m), n.grp.post[i].lien))
+		ll = append(ll, fmt.Sprintf("%d -> %d [%s]", inod, phrase.rang(m), n.grp.post[i].lien))
 	}
 	return strings.Join(ll, "\n")
 }
@@ -178,7 +178,7 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	// m peut-il être noyau ?
 	if !m.estNoyau(g) {
 		return nil
-	}
+		}
 
 	// création du noeud de retour
 	nod := new(Nod)
@@ -207,7 +207,7 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	for ip, sub := range g.post {
 		r := rang + ip + 1
 		mp := p.mots[r]
-		for mp.dejaSub() {
+		for mp.dejaSub() && r < len(p.mots) - 1 {
 			r++
 			mp = p.mots[r]
 		}
