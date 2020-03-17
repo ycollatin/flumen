@@ -28,21 +28,21 @@ Prometheus Iapeti filius homines ex luto finxit
 */
 
 import (
+	//"fmt"
 	"strconv"
 	"strings"
 )
 
-type Forme struct {
+type Word struct {
 	d		int		// positions de départ et d'arrivée du mot
-	//gr		string
 	len		int
 	nba		int		// nombre d'arcs partant du mot ou y aboutissant
 	rang	int
 }
 
 type Arc struct {
-	motA	*Forme
-	motB	*Forme
+	motA	*Word
+	motB	*Word
 	dist	int  // distance abs(motA.rang - motB.rang)
 	ecrit	bool
 }
@@ -51,7 +51,7 @@ var (
 	arcs	[]*Arc
 	gabarit string
 	lignes  []string
-	mots	[]*Forme
+	mots	[]*Word
 )
 
 const (
@@ -64,37 +64,37 @@ const (
 
 func arcus(a *Arc) {
 	// première ligne : départ vv et arrivée V
-	lignes[1] = place(lignes[1], a.motA.d, vv)
-	lignes[1] = place(lignes[1], a.motB.d, V)
+	lignes[1] = place(lignes[1], vv, a.motA.d)
+	lignes[1] = place(lignes[1], V, a.motB.d)
 	// placer les verticales si nécessaire
 	i := 2
 	for !libre(i, a.motA.d, a.motB.d) {
-		lignes[i] = place(lignes[i], a.motA.d, vv)
-		lignes[i] = place(lignes[i], a.motB.d, vv)
+		lignes[i] = place(lignes[i], vv, a.motA.d)
+		lignes[i] = place(lignes[i], vv, a.motB.d)
 		i++
 	}
 	if a.motA.d < a.motB.d {
-		lignes[i] = place(lignes[i], a.motA.d, dr)
+		lignes[i] = place(lignes[i], dr, a.motA.d)
 		for j := a.motA.d+1; j < a.motB.d; j++ {
-			lignes[i] = place(lignes[i], j, hh)
+			lignes[i] = place(lignes[i], hh, j)
 		}
-		lignes[i] = place(lignes[i], a.motB.d, dl)
+		lignes[i] = place(lignes[i], dl, a.motB.d)
 		// calcul des prochains points de départ/arrivée
 		a.motA.d--
 		a.motB.d++
 	} else {
-		lignes[i] = place(lignes[i], a.motA.d, dl)
+		lignes[i] = place(lignes[i], dl, a.motA.d)
 		for j := a.motB.d+1; j < a.motA.d; j++ {
-			lignes[i] = place(lignes[i], j, hh)
+			lignes[i] = place(lignes[i], hh, j)
 		}
-		lignes[i] = place(lignes[i], a.motB.d, dr)
+		lignes[i] = place(lignes[i], dr, a.motB.d)
 		// départ/arrivée
 		a.motA.d++
 		a.motB.d--
 	}
 }
 
-func (a *Arc) dernier() *Forme {
+func (a *Arc) dernier() *Word {
 	if a.motA.rang > a.motB.rang {
 		return a.motA
 	}
@@ -123,10 +123,18 @@ func libre(nl int, a int, b int) bool {
 }
 
 // place le caractère ch à la position ou dans l
-func place(l string, ou int, ch rune) string {
-	rr := []rune(l)
-	rr[ou] = ch
-	return string(rr)
+func place(l string, ch rune, ou int) string {
+	/*
+	lg := l[:ou]
+	ld := l[ou+1:]
+	return fmt.Sprintf("%s%s%s", lg, "@", ld)
+	*/
+	lr := []rune(l)
+	lg := lr[:ou]
+	ld := lr[ou+1:]
+	lg = append(lg, ch)
+	lg = append(lg, ld...)
+	return string(lg)
 }
 
 func graphe(ll []string) []string {
@@ -145,8 +153,7 @@ func graphe(ll []string) []string {
 	// création des mots
 	var report int
 	for i, ecl := range lm {
-		nm := new(Forme)
-		//nm.gr = ecl
+		nm := new(Word)
 		nm.rang = i
 		nm.len = len(ecl)
 		// calcul de la colonne de l'initiale du mot
@@ -161,6 +168,11 @@ func graphe(ll []string) []string {
 	// création des arcs
 	for i := 1; i < len(ll); i++ {
 		l := ll[i]
+		// suppression provisoire de l'étiquette
+		pcr := strings.Index(l, " [")
+		if pcr > 4 {
+			l = l[:pcr]
+		}
 		ecl := strings.Split(l, " -> ")
 		na := new(Arc)
 		ia, _ := strconv.Atoi(ecl[0])
