@@ -28,13 +28,14 @@ Prometheus Iapeti filius homines ex luto finxit
 */
 
 import (
-	//"fmt"
+	"fmt"
 	"strconv"
 	"strings"
 )
 
 type Word struct {
 	d		int		// positions de départ et d'arrivée du mot
+	gr		string
 	len		int
 	nba		int		// nombre d'arcs partant du mot ou y aboutissant
 	rang	int
@@ -49,7 +50,7 @@ type Arc struct {
 
 var (
 	arcs	[]*Arc
-	gabarit string
+	gabarit	string
 	lignes  []string
 	mots	[]*Word
 )
@@ -124,36 +125,21 @@ func libre(nl int, a int, b int) bool {
 
 // place le caractère ch à la position ou dans l
 func place(l string, ch rune, ou int) string {
-	/*
-	lg := l[:ou]
-	ld := l[ou+1:]
-	return fmt.Sprintf("%s%s%s", lg, "@", ld)
-	*/
-	lr := []rune(l)
-	lg := lr[:ou]
-	ld := lr[ou+1:]
+	rr := []rune(l)
+	lg := rr[:ou]
+	ld := rr[ou+1:]
 	lg = append(lg, ch)
 	lg = append(lg, ld...)
 	return string(lg)
 }
 
 func graphe(ll []string) []string {
-	/*
-	ll := []string {
-		"Prometheus Iapeti filius homines ex luto finxit",
-		"0 -> 2",
-		"2 -> 1",
-		"4 -> 5",
-		"6 -> 0",
-		"6 -> 3",
-		"6 -> 4",
-	}
-	*/
 	lm := strings.Split(ll[0], " ")
 	// création des mots
 	var report int
 	for i, ecl := range lm {
 		nm := new(Word)
+		nm.gr = ecl
 		nm.rang = i
 		nm.len = len(ecl)
 		// calcul de la colonne de l'initiale du mot
@@ -184,6 +170,7 @@ func graphe(ll []string) []string {
 			dif = -dif
 		}
 		na.dist = dif
+		fmt.Println("arc",na.motA.gr, na.motB.gr)
 		arcs = append(arcs, na)
 	}
 
@@ -202,5 +189,11 @@ func graphe(ll []string) []string {
 			}
 		}
 	}
-	return lignes
+
+	// génération des lignes en commençant par le haut
+	var retour []string
+	for i := len(lignes)-1; i > -1; i-- {
+		retour = append(retour, lignes[i])
+	}
+	return retour
 }
