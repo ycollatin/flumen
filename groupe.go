@@ -104,3 +104,7 @@ func lisGroupes(nf string) {
 	}
 	grp = append(grp, creeGroupe(ll))
 }
+
+func (g *Groupe) nbSubs() int {
+	return len(g.ante) + len(g.post)
+}
