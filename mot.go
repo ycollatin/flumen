@@ -18,6 +18,7 @@ import (
 
 type Mot struct {
 	gr			string
+	rang		int
 	an			gocol.Sr	// lemmatisation choisie
 	ans			gocol.Res	// ensemble des lemmatisations
 	lexsynt		[]string
