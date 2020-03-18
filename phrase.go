@@ -26,7 +26,7 @@ func (n *Nod) doc() string {
 }
 
 // lignes graphviz du nœud
-func (n *Nod) graf() (string) {
+func (n *Nod) graf() ([]string) {
 	var ll []string
 	for _, m := range n.mma {
 		ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, m.sub.lien))
@@ -34,7 +34,7 @@ func (n *Nod) graf() (string) {
 	for _, m := range n.mmp {
 		ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, m.sub.lien))
 	}
-	return strings.Join(ll, "\n")
+	return ll
 }
 
 type Phrase struct {
@@ -84,8 +84,7 @@ func (p *Phrase) arbre() []string {
 	var ll []string
 	ll = append(ll, p.gr)
 	for _, n := range p.nods {
-		fmt.Println(n.doc())
-		ll = append(ll, n.graf())
+		ll = append(ll, n.graf()...)
 	}
 	return ll
 }
@@ -178,6 +177,12 @@ func (p *Phrase) nod(m *Mot) *Nod {
 
 // renvoie le noeud dont m peut être le noyau
 func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
+	/*
+	homines ex luto finxit.
+	2 -> 1 [prep]
+	3 -> 2 [gprep]
+	3 -> 0 [obj]
+	*/
 	rang := p.rang(m)
 	lante := len(g.ante)
 	// mot de rang trop faible
@@ -213,6 +218,8 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 			r--
 			ma = p.mots[r]
 		}
+		//debog := m.gr=="finxit" && g.id=="GV.objprep" && ma.gr=="homines"
+		//if debog {fmt.Println("noeud", m.gr, g.id,sub.lien,ma.gr)}
 		if !ma.estSub(sub, m) {
 			return nil
 		}
