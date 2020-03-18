@@ -8,18 +8,19 @@ import (
 )
 
 type Nod struct {
+	grp		*Groupe
 	mma,mmp	[]*Mot
 	nucl	*Mot
-	grp		*Groupe
+	rang	int
 }
 
 func (n *Nod) doc() string {
 	var ll []string
 	for _, m := range n.mma {
-		ll = append(ll, fmt.Sprintf("%s %s %s", n.nucl.gr, n.grp.pos, m.gr))
+		ll = append(ll, fmt.Sprintf("%s %s %s", n.nucl.gr, m.sub.pos, m.gr))
 	}
 	for _, m := range n.mmp {
-		ll = append(ll, fmt.Sprintf("%s %s %s", n.nucl.gr, n.grp.pos, m.gr))
+		ll = append(ll, fmt.Sprintf("%s %s %s", n.nucl.gr, m.sub.pos, m.gr))
 	}
 	return strings.Join(ll, "\n")
 }
@@ -27,12 +28,11 @@ func (n *Nod) doc() string {
 // lignes graphviz du nœud
 func (n *Nod) graf() (string) {
 	var ll []string
-	for i, m := range n.mma {
-		//ll = append(ll, fmt.Sprintf("%d -> %d [%s]", inod, phrase.rang(m), n.grp.ante[i].lien))
-		ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, n.grp.ante[i].lien))
+	for _, m := range n.mma {
+		ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, m.sub.lien))
 	}
-	for i, m := range n.mmp {
-		ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, n.grp.post[i].lien))
+	for _, m := range n.mmp {
+		ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, m.sub.lien))
 	}
 	return strings.Join(ll, "\n")
 }
@@ -84,6 +84,7 @@ func (p *Phrase) arbre() []string {
 	var ll []string
 	ll = append(ll, p.gr)
 	for _, n := range p.nods {
+		fmt.Println(n.doc())
 		ll = append(ll, n.graf())
 	}
 	return ll
@@ -187,31 +188,35 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	if p.nbm() - rang < len(g.post) {
 		return nil
 	}
-	// m peut-il être noyau ?
+	// m peut-il être noyau du groupe g ?
 	if !m.estNoyau(g) {
 		return nil
-		}
+	}
+
+	// si m est déjà noyau d'un groupe
+	if m.nbSubs() > g.nbSubs() {
+		return nil
+	}
 
 	// création du noeud de retour
 	nod := new(Nod)
 	nod.grp = g
 	nod.nucl = m
+	nod.rang = m.rang
 	// vérif des subs
 	// ante
 	r := rang - 1
 	for ia := lante-1; ia > -1; ia-- {
 		sub := g.ante[ia]
 		ma := p.mots[r]
-		debog := m.gr=="finxit" && g.id == "GV.objprep"
 		for ma.dejaSub() && r > 0 {
 			r--
 			ma = p.mots[r]
 		}
-		if debog {fmt.Println("noeud",g.id,"noy",m.gr,"sub",ma.gr)}
 		if !ma.estSub(sub, m) {
 			return nil
 		}
-		if debog {fmt.Println("   ok",ma.gr)}
+		ma.sub = sub
 		nod.mma = append(nod.mma, ma)
 		r--
 	}
@@ -226,6 +231,7 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 		if !mp.estSub(sub, m) {
 			return nil
 		}
+		mp.sub = sub
 		nod.mmp = append(nod.mmp, mp)
 	}
 	if len(nod.mma) + len(nod.mmp) > 0 {
