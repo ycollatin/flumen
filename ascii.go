@@ -28,7 +28,7 @@ Prometheus Iapeti filius homines ex luto finxit
 */
 
 import (
-	"fmt"
+	//"fmt"
 	"strconv"
 	"strings"
 )
@@ -134,6 +134,7 @@ func place(l string, ch rune, ou int) string {
 }
 
 func graphe(ll []string) []string {
+	//for i, l := range ll {fmt.Println("graphe",i, l)}
 	lm := strings.Split(ll[0], " ")
 	// création des mots
 	var report int
@@ -152,8 +153,10 @@ func graphe(ll []string) []string {
 		mots = append(mots, nm)
 	}
 	// création des arcs
-	for i := 1; i < len(ll); i++ {
-		l := ll[i]
+	for i, l := range ll {
+		if i == 0 {
+			continue
+		}
 		// suppression provisoire de l'étiquette
 		pcr := strings.Index(l, " [")
 		if pcr > 4 {
@@ -170,7 +173,6 @@ func graphe(ll []string) []string {
 			dif = -dif
 		}
 		na.dist = dif
-		fmt.Println("arc",na.motA.gr, na.motB.gr)
 		arcs = append(arcs, na)
 	}
 
