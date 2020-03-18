@@ -57,9 +57,6 @@ func analyse() {
 	*/
 	ar := phrase.arbre()
 
-	// debog
-	for _, b := range ar {fmt.Println(b)}
-
 	gr := graphe(ar)
 	for _, lin := range gr {
 		fmt.Println(lin)
