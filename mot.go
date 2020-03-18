@@ -22,6 +22,7 @@ type Mot struct {
 	an			gocol.Sr	// lemmatisation choisie
 	ans			gocol.Res	// ensemble des lemmatisations
 	lexsynt		[]string
+	sub			*Sub		// sub qui lie le Mot à son noyau
 }
 
 func creeMot(m string) *Mot {
@@ -213,6 +214,23 @@ func genus(sr gocol.Sr) gocol.Sr {
 		sr.Nmorph[i] += inc
 	}
 	return sr
+}
+
+// nombre de mots subs de m
+func (m *Mot) nbSubs() int {
+	if !m.dejaNoy() {
+		return 0
+	}
+	var nbm int
+	for _, mb := range phrase.mots {
+		if mb == m {
+			continue
+		}
+		if mb.subDe(m) {
+			nbm++
+		}
+	}
+	return nbm
 }
 
 // le mot m est il noyau d'un groupe d'id id ?
