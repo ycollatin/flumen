@@ -46,18 +46,23 @@ var (
 )
 
 func analyse() {
-	//laa := phrase.arbre()
-	lab := phrase.arbre()
 	/*
+	laa := phrase.arbre()
+	lab := phrase.arbre()
 	for len(laa) < len(lab) {
 		fmt.Println("   ",len(laa),len(lab))
 		laa = lab
 		lab = phrase.arbre()
 	}
 	*/
-	ling := graphe(lab)
-	for i := len(ling)-1; i > -1; i-- {
-		fmt.Println(ling[i])
+	ar := phrase.arbre()
+
+	// debog
+	for _, b := range ar {fmt.Println(b)}
+
+	gr := graphe(ar)
+	for _, lin := range gr {
+		fmt.Println(lin)
 	}
 }
 
