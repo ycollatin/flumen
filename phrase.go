@@ -13,15 +13,26 @@ type Nod struct {
 	grp		*Groupe
 }
 
+func (n *Nod) doc() string {
+	var ll []string
+	for _, m := range n.mma {
+		ll = append(ll, fmt.Sprintf("%s %s %s", n.nucl.gr, n.grp.pos, m.gr))
+	}
+	for _, m := range n.mmp {
+		ll = append(ll, fmt.Sprintf("%s %s %s", n.nucl.gr, n.grp.pos, m.gr))
+	}
+	return strings.Join(ll, "\n")
+}
+
 // lignes graphviz du nœud
 func (n *Nod) graf() (string) {
 	var ll []string
-	inod := phrase.rang(n.nucl)
 	for i, m := range n.mma {
-		ll = append(ll, fmt.Sprintf("%d -> %d [%s]", inod, phrase.rang(m), n.grp.ante[i].lien))
+		//ll = append(ll, fmt.Sprintf("%d -> %d [%s]", inod, phrase.rang(m), n.grp.ante[i].lien))
+		ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, n.grp.ante[i].lien))
 	}
 	for i, m := range n.mmp {
-		ll = append(ll, fmt.Sprintf("%d -> %d [%s]", inod, phrase.rang(m), n.grp.post[i].lien))
+		ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, n.grp.post[i].lien))
 	}
 	return strings.Join(ll, "\n")
 }
@@ -35,6 +46,7 @@ type Phrase struct {
 var phrase *Phrase
 
 func (p *Phrase) append(m *Mot) {
+	m.rang = len(p.mots)
 	p.mots = append(p.mots, m)
 }
 
@@ -190,17 +202,17 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	for ia := lante-1; ia > -1; ia-- {
 		sub := g.ante[ia]
 		ma := p.mots[r]
+		debog := m.gr=="finxit" && g.id == "GV.objprep"
 		for ma.dejaSub() && r > 0 {
 			r--
 			ma = p.mots[r]
 		}
+		if debog {fmt.Println("noeud",g.id,"noy",m.gr,"sub",ma.gr)}
 		if !ma.estSub(sub, m) {
 			return nil
 		}
+		if debog {fmt.Println("   ok",ma.gr)}
 		nod.mma = append(nod.mma, ma)
-		if r <= 0 {
-			break
-		}
 		r--
 	}
 	// post
