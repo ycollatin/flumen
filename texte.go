@@ -6,9 +6,7 @@ package main
 
 import (
 	"fmt"
-	//"io/ioutil"
 	"strings"
-	//"unicode"
 	"github.com/ycollatin/gocol"
 )
 
