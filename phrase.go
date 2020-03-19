@@ -193,13 +193,6 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 		return nil
 	}
 
-	/*
-	// si m est déjà noyau d'un groupe
-	if m.nbSubs() > g.nbSubs() {
-		return nil
-	}
-	*/
-
 	// création du noeud de retour
 	nod := new(Nod)
 	nod.grp = g

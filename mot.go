@@ -104,12 +104,6 @@ func (m *Mot) elDe(n *Nod) bool {
 
 // teste si m peut être le noyau du groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
-	/*
-	grp:P.sv
-	pos:GV.objprep
-	morph:indic 3;subj 3
-	ag:GN;sujet;nomin;n
-	*/
 	for _, an := range m.ans {
 		// pos
 		if m.dejaNoy() {
