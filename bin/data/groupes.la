@@ -16,6 +16,8 @@
 !  CAVEAT : il faut terminer par un groupe non terminal
 !
 
+! Groupes terminaux
+
 ter:GN.prepabl
 pos:n NP
 morph:abl
@@ -24,6 +26,8 @@ a:prepabl;prep
 ter:GN.fam
 pos:n
 a:NP;gen;gén
+
+! Groupes non terminaux
 
 grp:GN.app
 pos:NP
