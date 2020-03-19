@@ -12,19 +12,20 @@ package main
 	Prometheus Iapeti filius homines ex luto finxit
 	0 -> 2
 	2 -> 1
-	4 -> 5
-	6 -> 0
+	5 -> 4
 	6 -> 3
-	6 -> 4
+	6 -> 0
+	6 -> 5
 
 	doit afficher :
 
-    ┌───────────────────────────────────────┐						   
-    │                       ┌──────────────┐│ 
-    │┌───────────────┐      │    ┌────────┐││
-    ││       ┌──────┐│	    │    │┌──┐    │││
-	V│       V      │V      V    V│  V    │││
-Prometheus Iapeti filius homines ex luto finxit
+    ┌──────────────────────────────────────────┐
+    │                        ┌────────────────┐│
+    │┌────────────────┐      │    ┌───┐       ││
+    ││        ┌──────┐│      │    │   │┌─────┐││
+    V│        V      │V      V    V   │V     │││
+Prometheus Iapeti filius homines ex luto finxit.
+
 */
 
 import (
@@ -198,7 +199,6 @@ func graphe(ll []string) []string {
 			}
 		}
 	}
-
 	// génération des lignes en commençant par le haut
 	var retour []string
 	for i := len(lignes)-1; i > -1; i-- {
