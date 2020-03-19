@@ -105,14 +105,22 @@ func (m *Mot) elDe(n *Nod) bool {
 // teste si m peut être le noyau du groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
 	for _, an := range m.ans {
-		// pos
+		// pos - m est-il déjà noyau de g ?
 		if m.dejaNoy() {
 			idgrp := phrase.estNuclDe(m)
 			if !contient(g.pos, idgrp) {
 				continue
 			}
-		} else if !contient(g.pos, an.Lem.Pos) {
-			continue
+		} else {
+			if g.generique {
+				if g.idGr != an.Lem.Pos {
+					continue
+				}
+			} else {
+				if !contient(g.pos, an.Lem.Pos) {
+					continue
+				}
+			}
 		}
 		// morpho
 		var va bool
