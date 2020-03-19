@@ -1,13 +1,5 @@
 //   main.go --	Gentes
-/*
-	analyseur syntaxique du latin
-
-	Phrase de test :
-	Prometheus Iapeti filius homines ex luto finxit.
-		0		1		2		3	  4	  5		6
-*/
-
-// main.go - Publicola
+//	analyseur syntaxique du latin
 
 package main
 
