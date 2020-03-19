@@ -36,6 +36,7 @@ const (
 
 var (
 	ch, chData	string	// chemins du binaire et des données
+	chCorpus	string	// chemin du corpus
 	dat			bool	// drapeau de chargement des données
 	imot		int		// n° de mot
 	module		string
@@ -120,7 +121,9 @@ func main() {
 	// lecture des données Collatinus
 	dir, _ := os.Executable()
 	ch = path.Dir(dir)
-	chData = path.Dir(dir) + "/data/"
+	//chData = path.Dir(dir) + "/data/"
+	chData = ch + "/data/"
+	chCorpus = ch + "/corpus/"
 	go gocol.Data(chData)
 	// lecture des données syntaxiques
 	lisGroupes(chData+"groupes.la")
