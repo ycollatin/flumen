@@ -45,6 +45,16 @@ type Phrase struct {
 
 var phrase *Phrase
 
+func creePhrase(t string) *Phrase {
+	p := new(Phrase)
+	p.gr = t
+	mm := strings.Split(t, " ")
+	for _, nm := range(mm) {
+		p.append(creeMot(nm))
+	}
+	return p
+}
+
 func (p *Phrase) append(m *Mot) {
 	m.rang = len(p.mots)
 	p.mots = append(p.mots, m)
