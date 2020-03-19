@@ -18,36 +18,36 @@
 
 ! Groupes terminaux
 
-ter:GN.prepabl
+ter:n.prepabl
 pos:n NP
 morph:abl
 a:prepabl;prep
 
-ter:GN.fam
+ter:n.fam
 pos:n
 a:NP;gen;gén
 
 ! Groupes non terminaux
 
-grp:GN.app
+grp:n.app
 pos:NP
-pg:GN.fam;app;;cgn
+pg:n.fam;app;;cgn
 
-grp:GV.objprep
+grp:v.objprep
 pos:v
 morph:act
 !lexSynt:trans
 a:n;obj;acc
-ag:GN.prepabl;gprep
+ag:n.prepabl;gprep
 
-grp:GV.datobj
+grp:v.datobj
 pos:v
 morph:act
 lexSynt:trans datif
-ag:GN;dat;dat
-ag:GN;obj;acc
+ag:n;dat;dat
+ag:n;obj;acc
 
-grp:P.sv
-pos:GV.objprep
+grp:P.1
+pos:v.objprep
 morph:indic 3;subj 3
-ag:GN.app;sujet;nomin;n
+ag:n;sujet;nomin;n
