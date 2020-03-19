@@ -6,9 +6,10 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	//"io/ioutil"
 	"strings"
-	"unicode"
+	//"unicode"
+	"github.com/ycollatin/gocol"
 )
 
 type Texte  struct {
@@ -34,47 +35,31 @@ func (t Texte) affiche(aide string) {
 }
 
 // crée un texte à partir du fichier nommé nf
-func CreeTexte(nf string) *Texte {
-	t, _ := ioutil.ReadFile("./corpus/" + nf)
-	contenu := string(t)
-	var (
-		mot string
-		p	*Phrase
-		tp	string	// texte de la phrase
-	)
-	texte := new(Texte)
-	for i :=0; i < len(contenu); i++ {
-		r := contenu[i]
-		// sauter les lignes "!.*$"
-		if  r == '!' {
-			for r != '\n' {
-				i++
-				r = contenu[i]
-			}
-		}
-		s := string(r)
-		if s != "\n" {
-			tp += s
-		}
-		if unicode.IsLetter(rune(r)) {
-			mot += s
-		} else if mot > "" {
-			if p == nil {
-				p = new(Phrase)
-			}
-			p.append(creeMot(mot))
-			mot = ""
-			if strings.ContainsAny(".;?!", s) {
-				p.gr = tp
-				texte.append(p)
-				p = nil
+func CreeTexte (nf string) *Texte {
+	var tp	string	// texte de la phrase
+	fmt.Println("creeTexte", nf,"-", chCorpus+nf)
+	ll := gocol.Lignes(chCorpus+nf)
+	t := new(Texte)
+	t.nom = nf
+	for _, l := range ll {
+		for {
+			ifp := strings.IndexAny(l, ".?;!")
+			if ifp < 0 {
+				tp += l
+				fmt.Println("tp",tp)
+				break;
+			} else {
+				tp += l[:ifp] + " "
+				fmt.Println("else tp", tp)
+				// créer et ajouter la nouvelle phrase
+				p := creePhrase(tp)
+				t.phrases = append(t.phrases, p)
 				tp = ""
+				l =	l[ifp+1:]
 			}
 		}
 	}
-	texte.append(p)
-	texte.nom = nf
-	return texte
+	return t
 }
 
 func (t *Texte) majPhrase() {
