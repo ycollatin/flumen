@@ -105,34 +105,6 @@ func motsuiv() {
 	}
 }
 
-/*
-func porro() {
-	if texte == nil {
-		txtNil()
-		return
-	}
-	if ip < len(texte.phrases) {
-		ip++
-		majPhrase()
-		imot = 0
-		texte.affiche(aidePh)
-	}
-}
-
-func retro() {
-	if texte == nil {
-		txtNil()
-		return
-	}
-	if ip > 0 {
-		ip--
-		majPhrase()
-		imot = 0
-		texte.affiche(aidePh)
-	}
-}
-*/
-
 func txtNil() {
 	fmt.Println("Il faut d'abord charger un texte : commande txt")
 }
