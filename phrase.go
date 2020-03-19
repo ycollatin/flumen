@@ -88,6 +88,7 @@ func (p *Phrase) arbre() []string {
 	return ll
 }
 
+// id du Nod dont m est le noyau
 func (p *Phrase) estNuclDe(m *Mot) string {
 	for _, nod := range p.nods {
 		if nod.nucl == m {
