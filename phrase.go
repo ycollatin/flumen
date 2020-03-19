@@ -51,7 +51,8 @@ func (p *Phrase) append(m *Mot) {
 }
 
 func (p *Phrase) arbre() []string {
-	// groupes terminaux, recherche
+	// recherche des noyaux
+	// groupes terminaux
 	for _, m := range p.mots {
 		if m.dejaNoy() {
 			continue
@@ -66,8 +67,6 @@ func (p *Phrase) arbre() []string {
 	}
 
 	// groupes non terminaux
-	// recherche des noyaux
-	// pour chaque mot
 	for _, m := range p.mots {
 		// pour chaque déf. de groupe non terminal
 		for _, g := range grp {
@@ -177,16 +176,10 @@ func (p *Phrase) nod(m *Mot) *Nod {
 
 // renvoie le noeud dont m peut être le noyau
 func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
-	/*
-	homines ex luto finxit.
-	2 -> 1 [prep]
-	3 -> 2 [gprep]
-	3 -> 0 [obj]
-	*/
 	rang := p.rang(m)
 	lante := len(g.ante)
 	// mot de rang trop faible
-	if rang < lante {
+	if rang < lante - 1 {
 		return nil
 	}
 	// ou trop élevé
@@ -198,10 +191,12 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 		return nil
 	}
 
+	/*
 	// si m est déjà noyau d'un groupe
 	if m.nbSubs() > g.nbSubs() {
 		return nil
 	}
+	*/
 
 	// création du noeud de retour
 	nod := new(Nod)
@@ -218,8 +213,6 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 			r--
 			ma = p.mots[r]
 		}
-		//debog := m.gr=="finxit" && g.id=="GV.objprep" && ma.gr=="homines"
-		//if debog {fmt.Println("noeud", m.gr, g.id,sub.lien,ma.gr)}
 		if !ma.estSub(sub, m) {
 			return nil
 		}
