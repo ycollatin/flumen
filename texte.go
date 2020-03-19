@@ -35,7 +35,6 @@ func (t Texte) affiche(aide string) {
 // crée un texte à partir du fichier nommé nf
 func CreeTexte (nf string) *Texte {
 	var tp	string	// texte de la phrase
-	fmt.Println("creeTexte", nf,"-", chCorpus+nf)
 	ll := gocol.Lignes(chCorpus+nf)
 	t := new(Texte)
 	t.nom = nf
@@ -44,11 +43,9 @@ func CreeTexte (nf string) *Texte {
 			ifp := strings.IndexAny(l, ".?;!")
 			if ifp < 0 {
 				tp += l
-				fmt.Println("tp",tp)
 				break;
 			} else {
 				tp += l[:ifp] + " "
-				fmt.Println("else tp", tp)
 				// créer et ajouter la nouvelle phrase
 				p := creePhrase(tp)
 				t.phrases = append(t.phrases, p)
