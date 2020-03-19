@@ -55,9 +55,7 @@ func CreeTexte(nf string) *Texte {
 		s := string(r)
 		if s != "\n" {
 			tp += s
-		} /*else {
-			tp += " "
-		}*/
+		}
 		if unicode.IsLetter(rune(r)) {
 			mot += s
 		} else if mot > "" {
@@ -65,7 +63,7 @@ func CreeTexte(nf string) *Texte {
 				p = new(Phrase)
 			}
 			p.append(creeMot(mot))
-			mot = "";
+			mot = ""
 			if strings.ContainsAny(".;?!", s) {
 				p.gr = tp
 				texte.append(p)
