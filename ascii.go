@@ -102,6 +102,13 @@ func (a *Arc) dernier() *Word {
 	return a.motB
 }
 
+func initArcs() {
+	arcs = nil
+	gabarit = ""
+	lignes = nil
+	mots = nil
+}
+
 // vrai si aucun caractère autres que ' '
 // n'est dans nl entre ma.d et mb.d
 func libre(nl int, a int, b int) bool {
