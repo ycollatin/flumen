@@ -155,9 +155,11 @@ func (p *Phrase) enClair() (ec string) {
 	return
 }
 
+/*
 func majPhrase() {
 	phrase = texte.phrases[ip]
 }
+*/
 
 // nombre de mots
 func (p *Phrase) nbm() int {
