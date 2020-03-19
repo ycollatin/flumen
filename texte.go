@@ -12,8 +12,9 @@ import (
 )
 
 type Texte  struct {
-	nom		string
-	phrases []*Phrase
+	nom			string
+	compteur	int
+	phrases		[]*Phrase
 }
 
 func (t *Texte) append(p *Phrase) {
@@ -21,12 +22,12 @@ func (t *Texte) append(p *Phrase) {
 }
 
 func (t *Texte) phrase() *Phrase {
-	return t.phrases[ip]
+	return t.phrases[t.compteur]
 }
 
 func (t Texte) affiche(aide string) {
 	ClearScreen()
-	fmt.Printf("%s, phrase %d, mot %d\n", t.nom, ip, imot)
+	fmt.Printf("%s, phrase %d, mot %d\n", t.nom, t.compteur, imot)
 	p := t.phrase()
 	fmt.Println(p.enClair())
 	fmt.Println(aide)
@@ -76,4 +77,28 @@ func CreeTexte(nf string) *Texte {
 	texte.append(p)
 	texte.nom = nf
 	return texte
+}
+
+func (t *Texte) majPhrase() {
+	initArcs()
+	phrase = t.phrases[t.compteur]
+	t.affiche(aidePh)
+}
+
+func (t *Texte) porro() {
+	if t.compteur < len(t.phrases) {
+		t.compteur++
+		t.majPhrase()
+		imot = 0
+		t.affiche(aidePh)
+	}
+}
+
+func (t *Texte) retro() {
+	if t.compteur > 0 {
+		t.compteur--
+		t.majPhrase()
+		imot = 0
+		t.affiche(aidePh)
+	}
 }
