@@ -38,7 +38,6 @@ var (
 	ch, chData	string	// chemins du binaire et des données
 	dat			bool	// drapeau de chargement des données
 	imot		int		// n° de mot
-	ip			int		// n° de phrase
 	module		string
 	modules		[]string
 	rouge		func(...interface{}) string
@@ -81,7 +80,7 @@ func chxTexte() {
 	ftexte := textes[chx-1]
 	texte = CreeTexte(ftexte)
 	texte.affiche(aidePh)
-	majPhrase()
+	texte.majPhrase()
 }
 
 func motprec() {
@@ -106,6 +105,7 @@ func motsuiv() {
 	}
 }
 
+/*
 func porro() {
 	if texte == nil {
 		txtNil()
@@ -131,6 +131,7 @@ func retro() {
 		texte.affiche(aidePh)
 	}
 }
+*/
 
 func txtNil() {
 	fmt.Println("Il faut d'abord charger un texte : commande txt")
@@ -162,9 +163,9 @@ func main() {
 		case "h":
 			motprec()
 		case "j":
-			porro()
+			texte.porro()
 		case "k":
-			retro()
+			texte.retro()
 		case "a":
 			analyse()
 		case "x":
