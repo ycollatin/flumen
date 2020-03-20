@@ -8,10 +8,11 @@ import (
 )
 
 type Sub struct {
-	pos			string		// pos du sub
+	pos,posg	string		// pos du sub
 	lien		string		// étiquette du lien noyau -> sub
 	morpho		[]string	// traits morphos requis
 	accord		string		// accord sub - noyau
+	generique	bool		// le pos n'a pas de sousgroupe (séparé par '.')
 	terminal	bool		// le sub est un mot
 	// lexsynt ?
 }
@@ -23,6 +24,11 @@ func creeSub(v string, t bool) *Sub {
 		switch i {
 			case 0:	// pos
 			sub.pos = e
+			ecl := strings.Split(e, ".")
+			sub.generique = len(ecl) == 1
+			if sub.generique {
+				sub.posg = ecl[0]
+			}
 			case 1:	// id-lien
 			sub.lien = e
 			case 2: // morpho
@@ -42,8 +48,6 @@ func (s *Sub) idGr() string {
 
 type Groupe struct {
 	id,idGr		string
-	idg			string		// Nom générique du groupe (GN, GV, GA, etc.)
-	generique	bool	// le pos requis est uniquement générique. Pas de sousgroupe.
 	pos			[]string	// pos du noyau
 	morph		[]string	// traits morpho du noyau
 	lexSynt		[]string	// étiquettes lexicosyntaxiques du noyau
@@ -66,7 +70,6 @@ func creeGroupe(ll []string) *Groupe {
 		case "ter", "grp":
 			g.id = v
 			ee := strings.Split(v, ".")
-			g.generique = len(ee) == 1
 			g.idGr = ee[0]
 		case "pos":
 			g.pos = strings.Split(v, " ")

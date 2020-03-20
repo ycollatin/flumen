@@ -111,16 +111,8 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 			if !contient(g.pos, idgrp) {
 				continue
 			}
-		} else {
-			if g.generique {
-				if g.idGr != an.Lem.Pos {
-					continue
-				}
-			} else {
-				if !contient(g.pos, an.Lem.Pos) {
-					continue
-				}
-			}
+		} else if !contient(g.pos, an.Lem.Pos) {
+				continue
 		}
 		// morpho
 		var va bool
@@ -176,8 +168,16 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 			// si le mot est déjà noyau, contrôler 
 			// le nom de son groupe, (seul l'accord compte ?)
 			idgrp := phrase.estNuclDe(m)
+			//(idgrp = id du Nod dont m est le noyau)
 			if idgrp > "" {
-				va = va && sub.pos == idgrp
+				if sub.generique {
+					// il ne faut comparer que l'id générique du groupe
+					ee := strings.Split(idgrp, ".")
+					idgrp = ee[0]
+					va = va && sub.posg == idgrp
+				} else {
+					va = va && sub.pos == idgrp
+				}
 			} else {
 				// sinon, on vérifie la morpho du mot
 				for _, trait := range sub.morpho {
@@ -238,8 +238,20 @@ func (m *Mot) nbSubs() int {
 // le mot m est il noyau d'un groupe d'id id ?
 func (m *Mot) noyId(id string) bool {
 	for _, n := range phrase.nods {
-		if n.grp.id == id && n.nucl == m {
-			return true
+		if n.nucl == m {
+			ee := strings.Split(id, ".")
+			if len(ee) > 1 {
+				// si id contient '.', le nod doit avoir un id complet
+				if n.grp.id == id {
+					return true
+				}
+			} else {
+				// sinon, l'id générique suffit
+				eem := strings.Split(n.grp.id, "." )
+				if eem[0] == id {
+					return true
+				}
+			}
 		}
 	}
 	return false
