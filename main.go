@@ -1,6 +1,9 @@
 //   main.go --	Gentes
 //	analyseur syntaxique du latin
 
+// FIXME les codes gocol des pronoms et des prépositions sont
+//       apparemment les mêmes.
+
 package main
 
 import (
