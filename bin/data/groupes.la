@@ -2,7 +2,7 @@
 !		- ter|grp:<groupe>.<id>			// identifiant syntaxique,identifiant unique 
 !	    - pos:<pos>				// liste, sép " "
 !       - morph:<traits morphos>	// liste sép " " et ";"
-!		- lexSyntN:<lexicosyntaxe>		// liste, sép " "
+!		- lexSynt:<lexicosyntaxe>		// liste, sép " "
 !		// a:mots avant le noyau
 !		- a:pos;id-lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
 !		- ag: "  "        "     "		// comme a, pour les groupes
@@ -25,6 +25,7 @@ a:prepAbl;prep
 
 ter:n.fam
 pos:n
+lexSynt:fam
 a:NP;gen;gén
 
 ter:n.genacc
@@ -34,8 +35,8 @@ a:n;gen;gén
 
 ter:n.genabl
 pos:n
-morph:acc
-a:n;gen;gén;;;gen
+morph:abl
+a:n NP;gen;gén
 
 ! Groupes non terminaux
 
@@ -53,7 +54,7 @@ ag:n.prepAbl;gprep
 grp:v.datobj
 pos:v
 morph:act
-lexSynt:trans datif
+lexSynt:datif
 ag:n;dat;dat
 ag:n;obj;acc
 
@@ -64,9 +65,9 @@ ag:n;sujet;nomin;n
 
 grp:P.2
 pos:v
-morph:3
+morph:act
 a:d;adv
-a:n;sujet;nomin;n
+a:n NP;sujet;nomin;n
 ag:n.genabl;abl
-ag:n.prepabl;gprep
+ag:n.prepAbl;gprep
 ag:n.genacc;obj
