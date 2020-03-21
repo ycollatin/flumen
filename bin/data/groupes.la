@@ -1,10 +1,10 @@
 !	groupes.la
-!		- id:<groupe>.<id>			// identifiant syntaxique,identifiant unique 
+!		- ter|grp:<groupe>.<id>			// identifiant syntaxique,identifiant unique 
 !	    - pos:<pos>				// liste, sép " "
 !       - morph:<traits morphos>	// liste sép " " et ";"
 !		- lexSyntN:<lexicosyntaxe>		// liste, sép " "
 !		// a:mots avant le noyau
-!		- a:pos;id-lien;traita traitb,traita traitb;accord
+!		- a:pos;id-lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
 !		- ag: "  "        "     "		// comme a, pour les groupes
 !		- p:   "     "    "      "		// sub après le noyau
 !		- pg:   "     "    "      "		// comme p, pour les groupes
@@ -26,6 +26,16 @@ a:prepAbl;prep
 ter:n.fam
 pos:n
 a:NP;gen;gén
+
+ter:n.genacc
+pos:n
+morph:acc sing
+a:n;gen;gén
+
+ter:n.genabl
+pos:n
+morph:acc
+a:n;gen;gén;;;gen
 
 ! Groupes non terminaux
 
@@ -51,3 +61,12 @@ grp:P.1
 pos:v.objprep
 morph:indic 3;subj 3
 ag:n;sujet;nomin;n
+
+grp:P.2
+pos:v
+morph:3
+a:d;adv
+a:n;sujet;nomin;n
+ag:n.genabl;abl
+ag:n.prepabl;gprep
+ag:n.genacc;obj
