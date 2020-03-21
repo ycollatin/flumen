@@ -1,9 +1,6 @@
 //   main.go --	Gentes
 //	analyseur syntaxique du latin
 
-// FIXME les codes gocol des pronoms et des prépositions sont
-//       apparemment les mêmes.
-
 package main
 
 import (
@@ -122,6 +119,7 @@ func main() {
 	go gocol.Data(chData)
 	// lecture des données syntaxiques
 	lisGroupes(chData+"groupes.la")
+	lisLexsynt()
 	// choix du texte
 	chxTexte()
 	texte.affiche(aidePh)
