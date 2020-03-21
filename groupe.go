@@ -14,7 +14,7 @@ type Sub struct {
 	accord		string		// accord sub - noyau
 	generique	bool		// le pos n'a pas de sousgroupe (séparé par '.')
 	terminal	bool		// le sub est un mot
-	// lexsynt ?
+	lexsynt		[]string	// étiquettes lexicosyntaxiques 
 }
 
 func creeSub(v string, t bool) *Sub {
@@ -35,6 +35,8 @@ func creeSub(v string, t bool) *Sub {
 			sub.morpho = strings.Split(e, ",")
 			case 3: // accord
 			sub.accord = e
+			case 4: //lexsynt
+			sub.lexsynt = strings.Split(e, " ")
 		}
 	}
 	sub.terminal = t
