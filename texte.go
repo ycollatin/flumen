@@ -42,7 +42,7 @@ func CreeTexte (nf string) *Texte {
 		for {
 			ifp := strings.IndexAny(l, ".?;!")
 			if ifp < 0 {
-				tp += l
+				tp += l + " "
 				break;
 			} else {
 				tp += l[:ifp] + " "
