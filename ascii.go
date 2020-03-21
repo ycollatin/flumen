@@ -29,7 +29,6 @@ Prometheus Iapeti filius homines ex luto finxit.
 */
 
 import (
-	//"fmt"
 	"strconv"
 	"strings"
 )
@@ -45,7 +44,8 @@ type Word struct {
 type Arc struct {
 	motA	*Word
 	motB	*Word
-	dist	int  // distance abs(motA.rang - motB.rang)
+	label	string	// étiquette de l'arc
+	dist	int		// distance abs(motA.rang - motB.rang)
 	ecrit	bool
 }
 
@@ -64,6 +64,7 @@ const (
 	V  rune = 'V'
 )
 
+// trace l'arc a
 func arcus(a *Arc) {
 	// première ligne : départ vv et arrivée V
 	lignes[1] = place(lignes[1], vv, a.motA.d)
@@ -77,17 +78,29 @@ func arcus(a *Arc) {
 	}
 	if a.motA.d < a.motB.d {
 		lignes[i] = place(lignes[i], dr, a.motA.d)
+		var k int
 		for j := a.motA.d+1; j < a.motB.d; j++ {
-			lignes[i] = place(lignes[i], hh, j)
+			if k < len(a.label) {
+				lignes[i] = place(lignes[i], rune(a.label[k]), j)
+				k++
+			} else {
+				lignes[i] = place(lignes[i], hh, j)
+			}
 		}
 		lignes[i] = place(lignes[i], dl, a.motB.d)
 		// calcul des prochains points de départ/arrivée
 		a.motA.d--
 		a.motB.d++
 	} else {
+		var k int
 		lignes[i] = place(lignes[i], dl, a.motA.d)
 		for j := a.motB.d+1; j < a.motA.d; j++ {
-			lignes[i] = place(lignes[i], hh, j)
+			if k < len(a.label) {
+				lignes[i] = place(lignes[i], rune(a.label[k]), j)
+				k++
+			} else {
+				lignes[i] = place(lignes[i], hh, j)
+			}
 		}
 		lignes[i] = place(lignes[i], dr, a.motB.d)
 		// départ/arrivée
@@ -142,7 +155,6 @@ func place(l string, ch rune, ou int) string {
 }
 
 func graphe(ll []string) []string {
-	//for i, l := range ll {fmt.Println("graphe",i, l)}
 	lm := strings.Split(ll[0], " ")
 	// création des mots
 	var report int
@@ -165,13 +177,14 @@ func graphe(ll []string) []string {
 		if i == 0 {
 			continue
 		}
-		// suppression provisoire de l'étiquette
-		pcr := strings.Index(l, " [")
-		if pcr > 4 {
-			l = l[:pcr]
-		}
-		ecl := strings.Split(l, " -> ")
 		na := new(Arc)
+		// séparation arc - étiquette
+		ecl := strings.Split(l, " [")
+		if len(ecl) > 1 {
+			na.label = ecl[1][:len(ecl[1])-1]
+		}
+		l = ecl[0]
+		ecl = strings.Split(l, " -> ")
 		ia, _ := strconv.Atoi(ecl[0])
 		ib, _ := strconv.Atoi(ecl[1])
 		na.motA = mots[ia]
