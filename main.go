@@ -1,6 +1,8 @@
 //   main.go --	Gentes
 //	analyseur syntaxique du latin
 
+// FIXME iussu et jussu non analysés par gocol ?
+
 package main
 
 import (
