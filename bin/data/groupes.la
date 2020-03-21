@@ -18,10 +18,10 @@
 
 ! Groupes terminaux
 
-ter:n.prepabl
+ter:n.prepAbl
 pos:n NP
 morph:abl
-a:prepabl;prep
+a:prepAbl;prep
 
 ter:n.fam
 pos:n
@@ -38,7 +38,7 @@ pos:v
 morph:act
 !lexSynt:trans
 a:n;obj;acc
-ag:n.prepabl;gprep
+ag:n.prepAbl;gprep
 
 grp:v.datobj
 pos:v
