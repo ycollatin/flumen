@@ -193,6 +193,14 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 			if sub.accord != "" && !mn.accord(m, sub.accord) {
 				continue
 			}
+			// lexsynt
+			vals := true
+			for _, lxs := range sub.lexsynt {
+				vals = vals && lexsynt(an.Lem.Gr[0], lxs)
+			}
+			if !vals {
+				continue
+			}
 			if len(resmorf) > 0 {
 				return true
 			}
