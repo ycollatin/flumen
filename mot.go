@@ -150,7 +150,7 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 	// pos
 	if sub.terminal {
 		for _, an := range m.ans {
-			if an.Lem.Pos == an.Lem.Pos {
+			if an.Lem.Pos == sub.pos {
 				respos = append(respos, an)
 			}
 		}
