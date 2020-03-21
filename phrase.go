@@ -183,8 +183,8 @@ func (p *Phrase) nod(m *Mot) *Nod {
 
 // renvoie le noeud dont m peut être le noyau
 func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
-	debog := m.gr=="fecit" && g.id=="P.2"
-	if debog {fmt.Println("noeud",m.gr, g.id)}
+	//debog := g.id=="n.fam" && m.gr == "filius"
+	//if debog {fmt.Println("noeud", m.gr, g.id)}
 	rang := p.rang(m)
 	lante := len(g.ante)
 	// mot de rang trop faible
@@ -195,11 +195,12 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	if p.nbm() - rang < len(g.post) {
 		return nil
 	}
+	//if debog {fmt.Println("   noeud oka, estNoyau",m.gr,g.id,m.estNoyau(g))}
 	// m peut-il être noyau du groupe g ?
 	if !m.estNoyau(g) {
 		return nil
 	}
-	if debog {fmt.Println("   oka")}
+	//if debog {fmt.Println("   noeud okb")}
 
 	// création du noeud de retour
 	nod := new(Nod)
@@ -209,20 +210,25 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	// vérif des subs
 	// ante
 	r := rang - 1
+	//if debog {fmt.Println("   noeud okc")}
 	for ia := lante-1; ia > -1; ia-- {
 		sub := g.ante[ia]
+		//if debog {fmt.Println("   noeud, sub",sub.pos)}
 		ma := p.mots[r]
 		for ma.dejaSub() && r > 0 {
 			r--
 			ma = p.mots[r]
 		}
+		//if debog {fmt.Println("     ma", ma.gr,"estSub",ma.estSub(sub, m))}
 		if !ma.estSub(sub, m) {
 			return nil
 		}
 		ma.sub = sub
 		nod.mma = append(nod.mma, ma)
 		r--
+		//if debog {fmt.Println("    vu")}
 	}
+	//if debog {fmt.Println("   okb")}
 	// post
 	for ip, sub := range g.post {
 		r := rang + ip + 1
