@@ -3,7 +3,6 @@
 package main
 
 import (
-	//"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -168,17 +167,17 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 // Sub : pos string, morpho []string, accord string
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
-	//debog := m.gr=="Iovis" && mn.gr=="iussu" && sub.pos=="prepAbl"
-	//if debog {fmt.Println("    estSub",m.gr, mn.gr, "sub.pos",sub.pos,"morpho",sub.morpho)}
+	//debog := m.gr=="Postea" && mn.gr=="fecit" && sub.pos=="d"
+	//if debog {fmt.Println("    . estSub",m.gr, mn.gr, "sub.pos",sub.pos,"morpho",sub.morpho)}
 	var respos, resmorf gocol.Res
 	// pos
 	//if debog {fmt.Println("    estSub, sub.terminal",sub.terminal)}
 	if sub.terminal {
-		//if debog {fmt.Println("    oka, ans",len(m.ans))}
+		//if debog {fmt.Println("    . oka, ans",len(m.ans))}
 		// le sub a plusieurs pos, ex. "NP n"
 		ee := strings.Split(sub.pos, " ")
 		for _, an := range m.ans {
-			//if debog {fmt.Println("    an",an.Lem.Pos,"ee",ee,"|",sub.pos)}
+			//if debog {fmt.Println("    . an",an.Lem.Pos,"ee",ee,"|",sub.pos)}
 			if contient(ee, an.Lem.Pos) {
 				respos = append(respos, an)
 			}
@@ -196,9 +195,11 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 			return false
 		}
 	}
+	//if debog {fmt.Println("    . estSub, respos",len(respos))}
 	// morpho
 	for _, an := range respos {
 		for _, anmorf := range an.Morphos {
+			//if debog {fmt.Println("    . anmorf",anmorf)}
 			va := true
 			// si le mot est déjà noyau, contrôler 
 			// le nom de son groupe, (seul l'accord compte ?)
