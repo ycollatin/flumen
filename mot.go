@@ -20,7 +20,7 @@ import (
 type Mot struct {
 	gr			string
 	rang		int
-	an			gocol.Sr	// lemmatisation choisie
+	an			int			// n° de lemmatisation choisie
 	ans			gocol.Res	// ensemble des lemmatisations
 	lexsynt		[]string
 	sub			*Sub		// sub qui lie le Mot à son noyau
@@ -38,6 +38,9 @@ func creeMot(m string) *Mot {
 		for i, an := range mot.ans {
 			mot.ans[i] = genus(an)
 		}
+	}
+	if len(mot.ans) > 1 {
+		mot.an = -1
 	}
 	return mot
 }
@@ -123,7 +126,7 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 		// lexSynt
 		// morpho
 		var va bool
-		for _, morf := range an.Morphos {
+		for im, morf := range an.Morphos {
 			//if debog {fmt.Println("   morf",morf)}
 			va = true
 			//if debog {fmt.Println("    gmorf",g.morph)}
@@ -136,6 +139,7 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 					va = va && lexsynt(an.Lem.Gr[0], lexs)
 				}
 				if va {
+					m.an = im
 					break
 				}
 			}
@@ -143,6 +147,7 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 		}
 		//if debog {fmt.Println("   okc va")}
 		if !va {
+			m.an = -1
 			continue
 		}
 		//if debog {fmt.Println("   okd")}
