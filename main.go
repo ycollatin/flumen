@@ -1,7 +1,7 @@
 //   main.go --	Gentes
 //	analyseur syntaxique du latin
 
-// FIXME iussu et jussu non analysés par gocol ?
+// FIXME ex luto : luto pris pour un datif
 
 package main
 
