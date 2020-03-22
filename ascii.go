@@ -147,6 +147,9 @@ func libre(nl int, a int, b int) bool {
 // place le caractère ch à la position ou dans l
 func place(l string, ch rune, ou int) string {
 	rr := []rune(l)
+	for ou >= len(rr) {
+		rr = append(rr, ' ')
+	}
 	lg := rr[:ou]
 	ld := rr[ou+1:]
 	lg = append(lg, ch)
