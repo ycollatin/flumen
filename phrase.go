@@ -184,8 +184,8 @@ func (p *Phrase) nod(m *Mot) *Nod {
 // FIXME Iovis iussu vu comme prepAbl
 // renvoie le noeud dont m peut être le noyau
 func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
-	debog := g.id=="P.2" && m.gr == "fecit"
-	if debog {fmt.Println("noeud", m.gr, g.id)}
+	//debog := g.id=="P.2" && m.gr == "fecit"
+	//if debog {fmt.Println("noeud", m.gr, g.id)}
 	rang := p.rang(m)
 	lante := len(g.ante)
 	// mot de rang trop faible
@@ -226,7 +226,7 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 		ma.sub = sub
 		nod.mma = append(nod.mma, ma)
 		r--
-		if debog {fmt.Println("    vu",ma.gr)}
+		//if debog {fmt.Println("    vu",ma.gr)}
 	}
 	//if debog {fmt.Println("   okd")}
 	// post
