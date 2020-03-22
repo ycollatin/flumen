@@ -4,6 +4,7 @@
 package main
 
 import (
+	//"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -21,6 +22,7 @@ func lisLexsynt() {
 }
 
 func lexsynt(lem, el string) bool {
+	//fmt.Println("debog lexsynt",lem,el)
 	ls := llexs[lem]
 	if ls == nil {
 		return false
