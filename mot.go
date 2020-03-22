@@ -145,10 +145,6 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 		if !va {
 			continue
 		}
-		//if debog {fmt.Println("   okd")}
-		if !va {
-			continue
-		}
 		//if debog {fmt.Println("   oke")}
 		return true
 	}
