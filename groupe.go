@@ -8,7 +8,7 @@ import (
 )
 
 type Sub struct {
-	pos,posg	string		// pos du sub
+	pos,posg	string		// pos du sub, pos générique
 	lien		string		// étiquette du lien noyau -> sub
 	morpho		[]string	// traits morphos requis
 	accord		string		// accord sub - noyau
