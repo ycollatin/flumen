@@ -67,9 +67,8 @@ ag:n;sujet;nomin;n
 grp:P.2
 pos:v
 morph:act
-a:d;adv
+a:Adv;adv
 a:n NP;sujet;nomin;n
-!- a:pos;id-lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
 ag:n.genabl;abl
 ag:n.prepAbl;gprep
 ag:n.genacc;obj
