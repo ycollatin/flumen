@@ -1,19 +1,20 @@
 !	groupes.la
-!		- ter|grp:<groupe>.<id>			// identifiant syntaxique,identifiant unique 
-!	    - pos:<pos>				// liste, sép " "
-!       - morph:<traits morphos>	// liste sép " " et ";"
-!		- lexSynt:<lexicosyntaxe>		// liste, sép " "
-!		// a:mots avant le noyau
-!		- a:pos;id-lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
-!		- ag: "  "        "     "		// comme a, pour les groupes
-!		- p:   "     "    "      "		// sub après le noyau
-!		- pg:   "     "    "      "		// comme p, pour les groupes
+!- ter|grp:<groupe>.<id>		// identifiant syntaxique,identifiant unique 
+!- pos:<pos>					// liste, sép " "
+!- morph:<traits morphos>		// liste sép " " et ";"
+!- lexSynt:<lexicosyntaxe>		// liste, sép " "
+!// a, ag :mots et groupes avant le noyau
+!- a:pos;id-lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
+!- ag: "  "        "     "		// comme a, pour les groupes
+!// p, pg :mots et groupes après le noyau
+!- p:   "     "    "      "		// sub après le noyau
+!- pg:   "     "    "      "	// comme p, pour les groupes
 !
-!	phrases de test :
+!phrases de test :
 !  Prometheus Iapeti filius homines ex luto finxit.
 !  Aesculapius Apollinis filius Glauco Minois filio vitam reddidit.
 !
-!  CAVEAT : il faut terminer par un groupe non terminal
+!CAVEAT : il faut terminer par un groupe non terminal
 !
 
 ! Groupes terminaux
@@ -30,13 +31,13 @@ a:NP;gen;gén
 
 ter:n.genacc
 pos:n
-morph:acc sing
+morph:acc
 a:n;gen;gén
 
 ter:n.genabl
 pos:n
 morph:abl
-a:n NP;gen;gén
+a:NP n;gen;gén
 
 ! Groupes non terminaux
 
@@ -51,12 +52,12 @@ morph:act
 a:n;obj;acc
 ag:n.prepAbl;gprep
 
-grp:v.datobj
-pos:v
-morph:act
-lexSynt:datif
-ag:n;dat;dat
-ag:n;obj;acc
+!grp:v.datobj
+!pos:v
+!morph:act
+!lexSynt:datif
+!ag:n;dat;dat
+!ag:n;obj;acc
 
 grp:P.1
 pos:v.objprep
@@ -68,6 +69,7 @@ pos:v
 morph:act
 a:d;adv
 a:n NP;sujet;nomin;n
+!- a:pos;id-lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
 ag:n.genabl;abl
 ag:n.prepAbl;gprep
 ag:n.genacc;obj
