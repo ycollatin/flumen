@@ -3,6 +3,7 @@
 package main
 
 import (
+	//"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -167,10 +168,10 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 // Sub : pos string, morpho []string, accord string
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
-	//debog := m.gr=="Postea" && mn.gr=="fecit" && sub.pos=="d"
+	//debog := m.gr=="filius" && mn.gr=="homines" && sub.pos=="n"
 	//if debog {fmt.Println("    . estSub",m.gr, mn.gr, "sub.pos",sub.pos,"morpho",sub.morpho)}
 	var respos, resmorf gocol.Res
-	// pos
+	// le sub a-t-il le bon pos ?
 	//if debog {fmt.Println("    estSub, sub.terminal",sub.terminal)}
 	if sub.terminal {
 		//if debog {fmt.Println("    . oka, ans",len(m.ans))}
@@ -196,7 +197,7 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 		}
 	}
 	//if debog {fmt.Println("    . estSub, respos",len(respos))}
-	// morpho
+	// le sub a-t-il la bonne morpho ?
 	for _, an := range respos {
 		for _, anmorf := range an.Morphos {
 			//if debog {fmt.Println("    . anmorf",anmorf)}
@@ -215,12 +216,11 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 				} else {
 					va = va && sub.pos == idgrp
 				}
-			} else {
-				//if debog {fmt.Println("   estSub okb")}
-				// sinon, on vérifie la morpho du mot
-				for _, trait := range sub.morpho {
-					va = va && strings.Contains(anmorf, trait)
-				}
+			}
+			//if debog {fmt.Println("   estSub okb")}
+			// vérification de la morpho du mot
+			for _, trait := range sub.morpho {
+				va = va && strings.Contains(anmorf, trait)
 			}
 			//if debog {fmt.Println("   estSub okc")}
 			if va {
