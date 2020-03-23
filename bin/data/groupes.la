@@ -72,3 +72,12 @@ a:n NP;sujet;nomin;n
 ag:n.genabl;abl
 ag:n.prepAbl;gprep
 ag:n.genacc;obj
+
+grp:P.3
+pos:v
+morph:act
+a:n NP;sujet;nomin;n
+a:Adv;adv
+ag:n.prepAbl;gprep
+a:n;obj;acc
+
