@@ -1,8 +1,6 @@
 //   main.go --	Gentes
 //	analyseur syntaxique du latin
 
-// FIXME ex luto : luto pris pour un datif
-
 package main
 
 import (
