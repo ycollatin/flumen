@@ -106,8 +106,8 @@ func (m *Mot) elDe(n *Nod) bool {
 
 // teste si m peut être le noyau du groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
-	//debog := m.gr=="iussu" && g.id=="n.genabl"
-	//if debog {fmt.Println("   ",m.gr,"estNoyau",g.id)}
+	//debog := m.gr=="perpetuum" && g.id=="n.prepAdjAcc"
+	//if debog {fmt.Println("   estNoyau",m.gr,g.id)}
 	for _, an := range m.ans {
 		//if debog {fmt.Println("    oka",an.Lem.Gr, an.Morphos,"dejaNoy",m.dejaNoy())}
 		//if debog {fmt.Println("    contient",g.pos, an.Lem.Pos,contient(g.pos,an.Lem.Pos))}
@@ -168,7 +168,7 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 // Sub : pos string, morpho []string, accord string
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
-	//debog := m.gr=="filius" && mn.gr=="homines" && sub.pos=="n"
+	//debog := m.gr=="in" && mn.gr=="perpetuum"// && sub.pos=="n"
 	//if debog {fmt.Println("    . estSub",m.gr, mn.gr, "sub.pos",sub.pos,"morpho",sub.morpho)}
 	var respos, resmorf gocol.Res
 	// le sub a-t-il le bon pos ?
@@ -178,7 +178,7 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 		// le sub a plusieurs pos, ex. "NP n"
 		ee := strings.Split(sub.pos, " ")
 		for _, an := range m.ans {
-			//if debog {fmt.Println("    . an",an.Lem.Pos,"ee",ee,"|",sub.pos)}
+			//if debog {fmt.Println("    . an",an.Lem.Pos,"ee",ee,"|",sub.pos,contient(ee,an.Lem.Pos))}
 			if contient(ee, an.Lem.Pos) {
 				respos = append(respos, an)
 			}
@@ -192,7 +192,7 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 		if m.noyId(sub.pos) {
 			respos = m.ans
 		} else {
-			//if debog {fmt.Println("    estSub false")}
+			//if debog {fmt.Println("    . estSub false")}
 			return false
 		}
 	}
