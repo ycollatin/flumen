@@ -38,17 +38,8 @@ var (
 )
 
 func analyse() {
-	/*
-	laa := phrase.arbre()
-	lab := phrase.arbre()
-	for len(laa) < len(lab) {
-		fmt.Println("   ",len(laa),len(lab))
-		laa = lab
-		lab = phrase.arbre()
-	}
-	*/
+	texte.majPhrase()
 	ar := phrase.arbre()
-
 	gr := graphe(ar)
 	for _, lin := range gr {
 		fmt.Println(lin)
@@ -74,6 +65,11 @@ func chxTexte() {
 	texte = CreeTexte(ftexte)
 	texte.affiche(aidePh)
 	texte.majPhrase()
+}
+
+func lemmatise() {
+	texte.majPhrase()
+	fmt.Println(gocol.Restostring(phrase.mots[imot].ans))
 }
 
 func motprec() {
@@ -134,6 +130,8 @@ func main() {
 			texte.porro()
 		case "k":
 			texte.retro()
+		case "c":
+			lemmatise()
 		case "a":
 			analyse()
 		case "x":
