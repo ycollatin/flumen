@@ -188,7 +188,7 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	rang := p.rang(m)
 	lante := len(g.ante)
 	// mot de rang trop faible
-	if rang < lante - 1 {
+	if rang < lante {
 		return nil
 	}
 	// ou trop élevé
