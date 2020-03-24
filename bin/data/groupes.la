@@ -22,7 +22,18 @@
 ter:n.prepAbl
 pos:n NP
 morph:abl
-a:prepAbl;prep
+a:prepAbl prepAA;prep
+
+ter:n.prepAcc
+pos:n NP
+morph:acc
+a:prepAA prepAcc;prep
+
+ter:n.prepAdjAcc
+pos:a
+morph:acc
+!lexSynt:subst
+a:prepAA prepAcc;prep
 
 ter:n.fam
 pos:n
@@ -81,3 +92,10 @@ a:Adv;adv
 ag:n.prepAbl;gprep
 a:n;obj;acc
 
+grp:P.4
+pos:v
+morph:act
+a:neg;neg
+ag:n.prepAdjAcc;gprep
+!- a:pos;id-lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
+a:v;obj;infin
