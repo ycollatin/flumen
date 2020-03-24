@@ -97,5 +97,13 @@ pos:v
 morph:act
 a:neg;neg
 ag:n.prepAdjAcc;gprep
-!- a:pos;id-lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
 a:v;obj;infin
+
+grp:P.5
+pos:v
+morph:act
+a:p;obj;acc
+a:Adv;adv
+a:n NP;sujet;nomin;n
+ag:n.prepAbl;gprep
+pg:n.prepAcc;gprep
