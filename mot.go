@@ -1,4 +1,4 @@
-//        mot.go - Publicola
+//       mot.go - Publicola
 
 package main
 
@@ -168,7 +168,7 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 // Sub : pos string, morpho []string, accord string
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
-	//debog := m.gr=="in" && mn.gr=="perpetuum"// && sub.pos=="n"
+	//debog := m.gr=="terras" && mn.gr=="detulit"// && sub.pos=="n"
 	//if debog {fmt.Println("    . estSub",m.gr, mn.gr, "sub.pos",sub.pos,"morpho",sub.morpho)}
 	var respos, resmorf gocol.Res
 	// le sub a-t-il le bon pos ?
