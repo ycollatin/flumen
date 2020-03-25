@@ -123,5 +123,12 @@ ag:n.gprepAcc;gprep
 a:n NP;sujet;nomin;n
 ag:n.genabl;abl
 p:p n NP;obj;acc
-!pg:n.prepAbl;gprep
-!pg:n.genacc;obj
+pg:n.prepAbl;gprep
+pg:n.genacc;obj
+
+grp:P.7
+pos:v
+morph:act
+ag:n.prepAbl;gprep
+pg:n.prepAcc;gprep
+
