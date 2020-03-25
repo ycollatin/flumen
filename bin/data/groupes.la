@@ -19,6 +19,16 @@
 
 ! Groupes terminaux
 
+ter:n.det
+pos:n
+a:p;det;;cgn;det
+
+grp:P.6
+pos:v
+morph:act
+a:n NP;dat;datif
+pg:psSubj
+
 ter:n.prepAbl
 pos:n NP
 morph:abl
@@ -56,19 +66,17 @@ grp:n.app
 pos:NP
 pg:n.fam;app;;cgn
 
+grp:n.gprepAcc
+pos:n.det
+morph:acc
+a:prepAcc prepAA;prep
+
 grp:v.objprep
 pos:v
 morph:act
 !lexSynt:trans
 a:n;obj;acc
 ag:n.prepAbl;gprep
-
-!grp:v.datobj
-!pos:v
-!morph:act
-!lexSynt:datif
-!ag:n;dat;dat
-!ag:n;obj;acc
 
 grp:P.1
 pos:v.objprep
@@ -107,3 +115,13 @@ a:Adv;adv
 a:n NP;sujet;nomin;n
 ag:n.prepAbl;gprep
 pg:n.prepAcc;gprep
+
+grp:P.6
+pos:v
+morph:act
+ag:n.gprepAcc;gprep
+a:n NP;sujet;nomin;n
+ag:n.genabl;abl
+p:p n NP;obj;acc
+!pg:n.prepAbl;gprep
+!pg:n.genacc;obj
