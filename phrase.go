@@ -184,7 +184,7 @@ func (p *Phrase) nod(m *Mot) *Nod {
 
 // renvoie le noeud dont m peut être le noyau
 func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
-	//debog := g.id=="P.6" && m.gr == "deligavit"
+	//debog := g.id=="n.prepAbl" && m.gr == "timore"
 	//if debog {fmt.Println("noeud", m.gr, g.id)}
 	rang := p.rang(m)
 	lante := len(g.ante)
@@ -219,7 +219,7 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 			r--
 			ma = p.mots[r]
 		}
-		//if debog {fmt.Println("     ma", ma.gr,"estSub",m.gr,sub.pos,ma.estSub(sub, m))}
+		//if debog {fmt.Println("  ma",ma.gr,"estSub",m.gr,"sub.pos",sub.pos,ma.estSub(sub, m))}
 		if !ma.estSub(sub, m) {
 			return nil
 		}
