@@ -106,13 +106,14 @@ func (m *Mot) elDe(n *Nod) bool {
 
 // teste si m peut être le noyau du groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
-	//debog := m.gr=="perpetuum" && g.id=="n.prepAdjAcc"
+	//debog := m.gr=="rem" && g.id=="n.prepAcc2"
 	//if debog {fmt.Println("   estNoyau",m.gr,g.id)}
 	for _, an := range m.ans {
-		//if debog {fmt.Println("    oka",an.Lem.Gr, an.Morphos,"dejaNoy",m.dejaNoy())}
+		//if debog {fmt.Println("    .estNoyau 1",an.Lem.Gr, an.Morphos,"dejaNoy",m.dejaNoy())}
 		//if debog {fmt.Println("    contient",g.pos, an.Lem.Pos,contient(g.pos,an.Lem.Pos))}
 		// pos - m est-il déjà noyau de g ?
 		if m.dejaNoy() {
+			//if debog {fmt.Println("    .estNoyau idgrp",phrase.estNuclDe(m))}
 			idgrp := phrase.estNuclDe(m)
 			if !contient(g.pos, idgrp) {
 				continue
@@ -120,7 +121,7 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 		} else if !contient(g.pos, an.Lem.Pos) {
 				continue
 		}
-		//if debog {fmt.Println("   okb")}
+		//if debog {fmt.Println("    .estNoyau okb")}
 		// morpho
 		var va bool
 		for im, morf := range an.Morphos {
@@ -152,7 +153,7 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 				va = va && lexsynt(an.Lem.Gr[0], lexs)
 			}
 		}
-		//if debog {fmt.Println("   okc va")}
+		//if debog {fmt.Println("    .estNoyau okc va", va)}
 		if !va {
 			m.an = -1
 			continue
@@ -168,7 +169,7 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 // Sub : pos string, morpho []string, accord string
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
-	//debog := m.gr=="terras" && mn.gr=="detulit"// && sub.pos=="n"
+	//debog := m.gr=="rem" && mn.gr=="deligavit"// && sub.pos=="n"
 	//if debog {fmt.Println("    . estSub",m.gr, mn.gr, "sub.pos",sub.pos,"morpho",sub.morpho)}
 	var respos, resmorf gocol.Res
 	// le sub a-t-il le bon pos ?
@@ -188,7 +189,7 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 			return false
 		}
 	} else {
-		//if debog {fmt.Println("   else",m.gr,"noyId(",sub.pos)}
+		//if debog {fmt.Println("   . else",m.gr,"noyId(",sub.pos,m.noyId(sub.pos))}
 		if m.noyId(sub.pos) {
 			respos = m.ans
 		} else {
@@ -214,12 +215,14 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 					idgrp = ee[0]
 					va = va && sub.posg == idgrp
 				} else {
+					//if debog {fmt.Println("   estSub, sub.pos",sub.pos,"idgrp",idgrp)}
 					va = va && sub.pos == idgrp
 				}
 			}
-			//if debog {fmt.Println("   estSub okb")}
+			//if debog {fmt.Println("   estSub okb, va",va)}
 			// vérification de la morpho du mot
 			for _, trait := range sub.morpho {
+				//if debog {fmt.Println("   estSub anmorf",anmorf,"trait",trait)}
 				va = va && strings.Contains(anmorf, trait)
 			}
 			//if debog {fmt.Println("   estSub okc")}
@@ -228,18 +231,18 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 			} else {
 				continue
 			}
-			//if debog {fmt.Println("   estSub oke")}
+			//if debog {fmt.Println("   . estSub okd")}
 			// accord
 			if sub.accord != "" && !mn.accord(m, sub.accord) {
 				continue
 			}
 			// lexsynt
-			//if debog {fmt.Println("   estSub oke, sub.lexsynt", sub.lexsynt, an.Lem.Gr[0])}
+			//if debog {fmt.Println("   . estSub oke, sub.lexsynt",sub.lexsynt,an.Lem.Gr[0])}
 			vals := true
 			for _, lxs := range sub.lexsynt {
 				vals = vals && lexsynt(an.Lem.Gr[0], lxs)
 			}
-			//if debog {fmt.Println("   estSub okf vals", vals)}
+			//if debog {fmt.Println("   . estSub okf vals", vals)}
 			if !vals {
 				continue
 			}
@@ -288,17 +291,18 @@ func (m *Mot) nbSubs() int {
 
 // le mot m est il noyau d'un groupe d'id id ?
 func (m *Mot) noyId(id string) bool {
-	//debog := m.gr=="iussu" && id=="n.genabl"
-	//if debog {fmt.Println("   noyId",m.gr,id)}
+	//debog := m.gr=="rem" && id=="n.prepDetAcc"
+	//if debog {fmt.Println("   ..noyId",m.gr,id,"nb noeuds",len(phrase.nods))}
 	for _, n := range phrase.nods {
+		//if debog {fmt.Println("   n.nucl",n.nucl.gr,"m",m.gr)}
 		if n.nucl == m {
 			ee := strings.Split(id, ".")
-			//if debog {fmt.Println("    noyId len ee",len(ee),"n.grp.id",n.grp.id)}
+			//if debog {fmt.Println("    ..noyId len ee",len(ee),"n.grp.id",n.grp.id)}
 			if len(ee) > 1 {
-				//if debog {fmt.Println("    noyId>1 n.grp.id",n.grp.id,"id",id)}
+				//if debog {fmt.Println("    ..noyId>1 n.grp.id",n.grp.id,"id",id)}
 				// si id contient '.', le nod doit avoir un id complet
 				if n.grp.id == id {
-					//if debog {fmt.Println("   noyId true")}
+					//if debog {fmt.Println("   ..noyId true")}
 					return true
 				}
 			} else {
