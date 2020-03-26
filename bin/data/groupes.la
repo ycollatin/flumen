@@ -23,6 +23,15 @@ ter:n.det
 pos:n
 a:p;det;;cgn;det
 
+ter:n.app
+pos:n
+lexsynt:nom
+p:NP;app;;cn
+
+ter:n.appFam
+pos:NP
+p:n;app;;cgn;fam
+
 grp:P.6
 pos:v
 morph:act
@@ -35,7 +44,7 @@ morph:abl
 a:prepAbl prepAA;prep
 
 ter:n.prepAcc
-pos:n NP
+pos:n NP p n.app
 morph:acc
 a:prepAA prepAcc;prep
 
@@ -131,4 +140,17 @@ pos:v
 morph:act
 ag:n.prepAbl;gprep
 pg:n.prepAcc;gprep
+
+grp:P.8
+pos:v
+morph:act
+ag:n.prepAcc;gprep
+a:n NP;obj;acc
+
+grp:P.9
+pos:v
+morph:act
+lexsynt:infobj
+a:p n NP;sujet;nomin;n
+a:v;obj;inf
 
