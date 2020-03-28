@@ -8,6 +8,7 @@ import (
 )
 
 type Sub struct {
+	groupe		*Groupe		// groupe propriétaire du sub
 	pos,posg	string		// pos du sub, pos générique
 	lien		string		// étiquette du lien noyau -> sub
 	morpho		[]string	// traits morphos requis
@@ -17,8 +18,9 @@ type Sub struct {
 	lexsynt		[]string	// étiquettes lexicosyntaxiques 
 }
 
-func creeSub(v string, t bool) *Sub {
+func creeSub(v string, g *Groupe, t bool) *Sub {
 	sub := new(Sub)
+	sub.groupe = g
 	vv := strings.Split(v, ";")
 	for i, e := range(vv) {
 		switch i {
@@ -80,13 +82,13 @@ func creeGroupe(ll []string) *Groupe {
 		case "lexSynt":
 			g.lexSynt = strings.Split(v, " ")
 		case "a":
-			g.ante = append(g.ante, creeSub(v, true))
+			g.ante = append(g.ante, creeSub(v, g, true))
 		case "ag":
-			g.ante = append(g.ante, creeSub(v, false))
+			g.ante = append(g.ante, creeSub(v, g, false))
 		case "p":
-			g.post = append(g.post, creeSub(v, true))
+			g.post = append(g.post, creeSub(v, g, true))
 		case "pg":
-			g.post = append(g.post, creeSub(v, false))
+			g.post = append(g.post, creeSub(v, g, false))
 		}
 	}
 	return g
