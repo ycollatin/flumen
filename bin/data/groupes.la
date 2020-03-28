@@ -111,7 +111,8 @@ pos:v.sobjprep
 a:Adv;adv
 
 grp:P.1
-pos:v v.prepp v.sprepp
+pos:v v.objprep
+a:n NP;sujet;nomin;n
 
 
 grp:P.2
