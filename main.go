@@ -1,6 +1,8 @@
 //   main.go --	Gentes
 //	analyseur syntaxique du latin
 
+// TODO afficher dans l'ordre les groupes utilisés
+
 package main
 
 import (
@@ -18,6 +20,7 @@ const (
 	aidePh =
 	`l->mot suivant ; h->mot précédent ;
 	j->phrase suivante ; k->phrase précédente ;
+	c->lemmatisation du mot courant ;
 	a->arbre de la phrase ; x->quitter`
 	//s-> définir une suite morphosyntaxique ; x->Exit`
 	//aideS =
@@ -37,9 +40,9 @@ var (
 	texte		*Texte
 )
 
-func analyse() {
+func analyse(expl bool) {
 	texte.majPhrase()
-	ar := phrase.arbre()
+	ar := phrase.arbre(expl)
 	gr := graphe(ar)
 	for _, lin := range gr {
 		fmt.Println(lin)
@@ -133,7 +136,9 @@ func main() {
 		case "c":
 			lemmatise()
 		case "a":
-			analyse()
+			analyse(false)
+		case "g":
+			analyse(true)
 		case "x":
 			fmt.Println("\nVale")
 			os.Exit(0)
