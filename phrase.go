@@ -60,7 +60,11 @@ func (p *Phrase) append(m *Mot) {
 	p.mots = append(p.mots, m)
 }
 
-func (p *Phrase) arbre(expl bool) []string {
+func (p *Phrase) arbre() ([]string, []string) {
+	var lexpl []string
+	var ll []string
+	// réinitialisation des noeuds
+	p.nods = nil
 	// recherche des noyaux
 	// groupes terminaux
 	for _, m := range p.mots {
@@ -70,8 +74,8 @@ func (p *Phrase) arbre(expl bool) []string {
 		for _, g := range grpTerm {
 			n := p.noeud(m, g)
 			if n != nil {
-				if expl {fmt.Println(n.grp.id)}
 				p.nods = append(p.nods, n)
+				lexpl = append(lexpl, n.grp.id)
 			}
 		}
 		// résolution des conflits (à écrire)
@@ -84,20 +88,19 @@ func (p *Phrase) arbre(expl bool) []string {
 			// m noyau ?
 			n := p.noeud(m, g)
 			if n != nil {
-				if expl {fmt.Println(n.grp.id)}
 				p.nods = append(p.nods, n)
+				lexpl = append(lexpl, n.grp.id)
 			}
 		}
 		// résolution des conflits (à écrire)
 	}
 
 	// graphe
-	var ll []string
 	ll = append(ll, p.gr)
 	for _, n := range p.nods {
 		ll = append(ll, n.graf()...)
 	}
-	return ll
+	return ll, lexpl
 }
 
 // id du Nod dont m est le noyau
