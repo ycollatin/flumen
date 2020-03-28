@@ -60,7 +60,7 @@ func (p *Phrase) append(m *Mot) {
 	p.mots = append(p.mots, m)
 }
 
-func (p *Phrase) arbre() []string {
+func (p *Phrase) arbre(expl bool) []string {
 	// recherche des noyaux
 	// groupes terminaux
 	for _, m := range p.mots {
@@ -70,6 +70,7 @@ func (p *Phrase) arbre() []string {
 		for _, g := range grpTerm {
 			n := p.noeud(m, g)
 			if n != nil {
+				if expl {fmt.Println(n.grp.id)}
 				p.nods = append(p.nods, n)
 			}
 		}
@@ -83,6 +84,7 @@ func (p *Phrase) arbre() []string {
 			// m noyau ?
 			n := p.noeud(m, g)
 			if n != nil {
+				if expl {fmt.Println(n.grp.id)}
 				p.nods = append(p.nods, n)
 			}
 		}
