@@ -17,7 +17,9 @@
 !CAVEAT : il faut terminer par un groupe non terminal
 !
 
-! Groupes terminaux
+!!!!!!!!!!!!!!!!!!!!!
+! Groupes terminaux !
+!!!!!!!!!!!!!!!!!!!!!
 
 ter:n.det
 pos:n
@@ -31,12 +33,6 @@ p:NP;app;;cn
 ter:n.appFam
 pos:NP
 p:n;app;;cgn;fam
-
-grp:P.6
-pos:v
-morph:act
-a:n NP;dat;datif
-pg:psSubj
 
 ter:n.prepAbl
 pos:n NP
@@ -69,28 +65,54 @@ pos:n
 morph:abl
 a:NP n;gen;gén
 
-! Groupes non terminaux
+ter:v.adat
+pos:v
+morph:act
+a:n NP;dat;datif
 
-grp:n.app
-pos:NP
-pg:n.fam;app;;cgn
+!!!!!!!!!!!!!!!!!!!!!!!!!
+! Groupes non terminaux !
+!!!!!!!!!!!!!!!!!!!!!!!!!
 
 grp:n.gprepAcc
 pos:n.det
 morph:acc
 a:prepAcc prepAA;prep
 
-grp:v.objprep
+grp:v.prepa
 pos:v
 morph:act
-!lexSynt:trans
-a:n;obj;acc
 ag:n.prepAbl;gprep
 
+grp:v.prepp
+pos:v v.prepa
+morph:act
+pg:n.prepAcc;gprep
+
+grp:v.sprepp
+pos:v.prepp
+a:n NP;sujet;nomin;n
+
+grp:v.advsprepp
+pos:v.sprepp
+a:Adv;adv
+
+grp:v.padvsprepp
+pos:v.advsprepp
+a:p;obj;acc
+
+grp:v.objprep
+pos:v.prepa
+morph:act
+a:n;obj;acc
+
+grp:v.asvsobjprep
+pos:v.sobjprep
+a:Adv;adv
+
 grp:P.1
-pos:v.objprep
-morph:indic 3;subj 3
-ag:n;sujet;nomin;n
+pos:v v.prepp v.sprepp
+
 
 grp:P.2
 pos:v
