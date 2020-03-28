@@ -42,8 +42,14 @@ var (
 
 func analyse(expl bool) {
 	texte.majPhrase()
-	ar := phrase.arbre(expl)
+	var ar, lexpl []string
+	ar, lexpl = phrase.arbre()
 	gr := graphe(ar)
+	if expl {
+		for _, lin := range lexpl {
+			fmt.Println(lin)
+		}
+	}
 	for _, lin := range gr {
 		fmt.Println(lin)
 	}
