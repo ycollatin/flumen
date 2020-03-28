@@ -3,7 +3,7 @@
 package main
 
 import (
-	//"fmt"
+	"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -169,11 +169,11 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 // Sub : pos string, morpho []string, accord string
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
-	//debog := m.gr=="prae" && mn.gr=="timore" && sub.pos=="prepAbl prepAA"
-	//if debog {fmt.Println("   .estSub",m.gr, mn.gr, "sub.pos-"+sub.pos+"-morpho",sub.morpho)}
+	debog := m.gr=="Prometheus" && mn.gr=="finxit" && sub.groupe.id=="P.1"
+	if debog {fmt.Println("   .estSub",m.gr, mn.gr, "sub.pos-"+sub.pos+"-morpho",sub.morpho)}
 	var respos, resmorf gocol.Res
 	// le sub a-t-il le bon pos ?
-	//if debog {fmt.Println("    estSub, sub.terminal",sub.terminal)}
+	//if debog {fmt.Println("    . estSub, sub.terminal",sub.terminal)}
 	if sub.terminal {
 		//if debog {fmt.Println("    . oka, ans",len(m.ans))}
 		// le sub a plusieurs pos, ex. "NP n"
@@ -184,12 +184,12 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 				respos = append(respos, an)
 			}
 		}
-		//if debog {fmt.Println("    estSub oka", len(respos),"respos")}
+		//if debog {fmt.Println("    . estSub okb", len(respos),"respos")}
 		if len(respos) == 0 {
 			return false
 		}
 	} else {
-		//if debog {fmt.Println("   . else",m.gr,"noyId(",sub.pos,m.noyId(sub.pos))}
+		//if debog {fmt.Println("   . estSub else",m.gr,"noyId(",sub.pos,m.noyId(sub.pos))}
 		if m.noyId(sub.pos) {
 			respos = m.ans
 		} else {
@@ -205,8 +205,9 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 			va := true
 			// si le mot est déjà noyau, contrôler 
 			// le nom de son groupe, (seul l'accord compte ?)
-			idgrp := phrase.estNuclDe(m)
-			//if debog {fmt.Println("    estSub, idgrp", idgrp)}
+			//idgrp := phrase.estNuclDe(m)
+			idgrp := m.estNuclDuGroupe()
+			if debog {fmt.Println("    . estSub, idgrp", idgrp,"generique",sub.generique)}
 			//(idgrp = id du Nod dont m est le noyau)
 			if idgrp > "" {
 				if sub.generique {
@@ -214,12 +215,13 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 					ee := strings.Split(idgrp, ".")
 					idgrp = ee[0]
 					va = va && sub.posg == idgrp
+					if debog {fmt.Println("sub.posg",sub.posg,"==idgrp",idgrp)}
 				} else {
-					//if debog {fmt.Println("   estSub, sub.pos",sub.pos,"idgrp",idgrp)}
+					if debog {fmt.Println("   . estSub, sub.pos",sub.pos,"idgrp",idgrp)}
 					va = va && sub.pos == idgrp
 				}
 			}
-			//if debog {fmt.Println("   estSub okb, va",va)}
+			//if debog {fmt.Println("    . estSub okc, va",va)}
 			// vérification de la morpho du mot
 			for _, trait := range sub.morpho {
 				//if debog {fmt.Println("   estSub anmorf",anmorf,"trait",trait)}
@@ -253,6 +255,17 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 		}
 	}
 	return false
+}
+
+// id du groupe dont m est le noyau
+func (m *Mot) estNuclDuGroupe() string {
+	var ret string
+	for _, nod := range phrase.nods {
+		if nod.nucl == m {
+			ret = nod.grp.id
+		}
+	}
+	return ret
 }
 
 func genus(sr gocol.Sr) gocol.Sr {
