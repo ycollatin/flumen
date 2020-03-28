@@ -30,9 +30,9 @@ pos:n
 lexsynt:nom
 p:NP;app;;cn
 
-ter:n.appFam
-pos:NP
-p:n;app;;cgn;fam
+!ter:n.appFam
+!pos:NP
+!p:n;app;;cgn;fam
 
 ter:n.prepAbl
 pos:n NP
@@ -40,7 +40,7 @@ morph:abl
 a:prepAbl prepAA;prep
 
 ter:n.prepAcc
-pos:n NP p n.app
+pos:n NP p
 morph:acc
 a:prepAA prepAcc;prep
 
@@ -73,6 +73,10 @@ a:n NP;dat;datif
 !!!!!!!!!!!!!!!!!!!!!!!!!
 ! Groupes non terminaux !
 !!!!!!!!!!!!!!!!!!!!!!!!!
+
+grp:n.appFam
+pos:NP n
+pg:n.fam;app;;cn
 
 grp:n.gprepAcc
 pos:n.det
@@ -111,9 +115,8 @@ pos:v.sobjprep
 a:Adv;adv
 
 grp:P.1
-pos:v v.objprep
-a:n NP;sujet;nomin;n
-
+pos:v.objprep
+a:NP n;sujet;nomin;n
 
 grp:P.2
 pos:v
