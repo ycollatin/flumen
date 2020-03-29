@@ -8,12 +8,13 @@ import (
 )
 
 type Nod struct {
-	grp		*Groupe
-	mma,mmp	[]*Mot
-	nucl	*Mot
-	rang	int
+	grp		*Groupe		// groupe du noeud Nod
+	mma,mmp	[]*Mot		// liste des mots avant et après le noyau
+	nucl	*Mot		// noyau du Nod
+	rang	int			// 
 }
 
+/*
 func (n *Nod) doc() string {
 	var ll []string
 	for _, m := range n.mma {
@@ -24,6 +25,7 @@ func (n *Nod) doc() string {
 	}
 	return strings.Join(ll, "\n")
 }
+*/
 
 // lignes graphviz du nœud
 func (n *Nod) graf() ([]string) {
@@ -189,7 +191,7 @@ func (p *Phrase) nod(m *Mot) *Nod {
 
 // renvoie le noeud dont m peut être le noyau
 func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
-	debog := g.id=="P.1" && m.gr == "finxit"
+	debog := g.id=="n.appFam" && m.gr == "Prometheus"
 	if debog {fmt.Println("noeud", m.gr, g.id)}
 	rang := p.rang(m)
 	lante := len(g.ante)
@@ -201,12 +203,11 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	if p.nbm() - rang < len(g.post) {
 		return nil
 	}
-	//if debog {fmt.Println("   noeud oka, estNoyau",m.gr,g.id,m.estNoyau(g))}
+	if debog {fmt.Println("   noeud oka, estNoyau",m.gr,g.id,m.estNoyau(g))}
 	// m peut-il être noyau du groupe g ?
 	if !m.estNoyau(g) {
 		return nil
 	}
-	//if debog {fmt.Println("   noeud okb")}
 
 	// création du noeud de retour
 	nod := new(Nod)
@@ -224,7 +225,7 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 			r--
 			ma = p.mots[r]
 		}
-		if debog {fmt.Println("  ma",ma.gr,"estSub",m.gr,"sub.pos",sub.pos,ma.estSub(sub, m))}
+		//if debog {fmt.Println("  ma",ma.gr,"estSub",m.gr,"sub.pos",sub.pos,ma.estSub(sub, m))}
 		if !ma.estSub(sub, m) {
 			return nil
 		}
@@ -238,12 +239,12 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	for ip, sub := range g.post {
 		r := rang + ip + 1
 		mp := p.mots[r]
-		//if debog {fmt.Println("post, mp",mp.gr)}
+		if debog {fmt.Println("post, mp",mp.gr)}
 		for mp.dejaSub() && r < len(p.mots) - 1 {
 			r++
 			mp = p.mots[r]
 		}
-		//if debog {fmt.Println("     mp", mp.gr,"estSub",m.gr,sub.pos,mp.estSub(sub, m))}
+		if debog {fmt.Println("     mp", mp.gr,"estSub",m.gr,sub.groupe.id,mp.estSub(sub, m))}
 		if !mp.estSub(sub, m) {
 			return nil
 		}
@@ -251,6 +252,7 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 		nod.mmp = append(nod.mmp, mp)
 	}
 	if len(nod.mma) + len(nod.mmp) > 0 {
+		m.idgr = g.id
 		return nod
 	}
 	return nil
