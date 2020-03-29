@@ -65,10 +65,10 @@ pos:n
 morph:abl
 a:NP n;gen;gén
 
-ter:v.adat
-pos:v
-morph:act
-a:n NP;dat;datif
+!ter:v.adat
+!pos:v
+!morph:act
+!a:n NP;dat;datif
 
 !!!!!!!!!!!!!!!!!!!!!!!!!
 ! Groupes non terminaux !
