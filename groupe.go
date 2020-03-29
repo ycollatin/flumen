@@ -3,6 +3,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -37,7 +38,7 @@ type Sub struct {
 	lien		string		// étiquette du lien noyau -> sub
 	morpho		[]string	// traits morphos requis
 	accord		string		// accord sub - noyau
-	generique	bool		// le pos n'a pas de sousgroupe (séparé par '.')
+	//generique	bool		// le pos n'a pas de sousgroupe (séparé par '.')
 	terminal	bool		// le sub est un mot
 	lexsynt		[]string	// étiquettes lexicosyntaxiques 
 }
@@ -65,8 +66,16 @@ func creeSub(v string, g *Groupe, t bool) *Sub {
 }
 
 func (s *Sub) vaId(id string) bool {
+	debog := id=="n.appFam"
+	if debog {fmt.Println("   debog vaId",id)}
 	for _, n := range s.noyaux {
-		if n.idgr == id {
+		if debog{fmt.Println("   generique",n.generique,"idgr",n.idgr)}
+		if n.generique {
+			ecl := strings.Split(id, ".")
+			if n.idgr == ecl[0] {
+				return true
+			}
+		} else if n.id == id {
 			return true
 		}
 	}
