@@ -2,6 +2,8 @@
 
 package main
 
+// typegroupe (signet)
+
 import (
 	//"fmt"
 	"github.com/ycollatin/gocol"
@@ -38,7 +40,6 @@ type Sub struct {
 	lien		string		// étiquette du lien noyau -> sub
 	morpho		[]string	// traits morphos requis
 	accord		string		// accord sub - noyau
-	//generique	bool		// le pos n'a pas de sousgroupe (séparé par '.')
 	terminal	bool		// le sub est un mot
 	lexsynt		[]string	// étiquettes lexicosyntaxiques 
 }
@@ -82,7 +83,7 @@ func (s *Sub) vaId(id string) bool {
 	return false
 }
 
-func (s *Sub) vaPos(sr gocol.Sr) bool {
+func (s *Sub) aPos(sr gocol.Sr) bool {
 	for _, n := range s.noyaux {
 		if n.generique && n.id == sr.Lem.Pos {
 			return true
@@ -93,8 +94,30 @@ func (s *Sub) vaPos(sr gocol.Sr) bool {
 	return false
 }
 
+func (s *Sub) vaMorpho(m string) bool {
+	for _, sm := range s.morpho {
+		if !strings.Contains(m, sm) {
+			return false
+		}
+	}
+	return true
+}
+
+func (s *Sub) vaPos(p string) bool {
+	for _, n := range s.noyaux {
+		if n.generique && n.id == p {
+			return true
+		} else if n.idgr == p {
+			return true
+		}
+	}
+	return false
+}
+
+// typegroupe
+
 type Groupe struct {
-	id,idGr		string
+	id			string
 	pos			[]string	// pos du noyau
 	morph		[]string	// traits morpho du noyau
 	lexSynt		[]string	// étiquettes lexicosyntaxiques du noyau
@@ -116,8 +139,6 @@ func creeGroupe(ll []string) *Groupe {
 		switch k {
 		case "ter", "grp":
 			g.id = v
-			ee := strings.Split(v, ".")
-			g.idGr = ee[0]
 		case "pos":
 			g.pos = strings.Split(v, " ")
 		case "morph":
