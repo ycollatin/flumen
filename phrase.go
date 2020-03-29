@@ -191,9 +191,9 @@ func (p *Phrase) nod(m *Mot) *Nod {
 	return nil
 }
 
-// renvoie le noeud dont m peut être le noyau
+// si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
-	//debog := g.id=="P.1" && m.gr == "finxit"
+	//debog := g.id=="v.prepa" && m.gr == "finxit"
 	//if debog {fmt.Println("noeud", m.gr, g.id)}
 	rang := p.rang(m)
 	lante := len(g.ante)
