@@ -7,9 +7,33 @@ import (
 	"strings"
 )
 
+type Noy struct {
+	id, idgr	string
+	generique	bool
+}
+
+func creeNoy(s string) []*Noy {
+	var ln []*Noy
+	ecl := strings.Split(s, " ")
+	for _, e := range ecl {
+		n := new(Noy)
+		n.id = e
+		eg := strings.Split(e, ".")
+		n.generique = len(eg) == 1
+		if n.generique {
+			n.idgr = eg[0]
+		} else {
+			n.idgr = n.id
+		}
+		ln = append(ln, n)
+	}
+	return ln
+}
+
+// un Sub est un élément de Groupe
 type Sub struct {
 	groupe		*Groupe		// groupe propriétaire du sub
-	pos,posg	string		// pos du sub, pos générique
+	noyaux		[]*Noy		// Noyaux possibles du sub
 	lien		string		// étiquette du lien noyau -> sub
 	morpho		[]string	// traits morphos requis
 	accord		string		// accord sub - noyau
@@ -25,12 +49,7 @@ func creeSub(v string, g *Groupe, t bool) *Sub {
 	for i, e := range(vv) {
 		switch i {
 			case 0:	// pos
-			sub.pos = e
-			ecl := strings.Split(e, ".")
-			sub.generique = len(ecl) == 1
-			if sub.generique {
-				sub.posg = ecl[0]
-			}
+			sub.noyaux = creeNoy(e)
 			case 1:	// id-lien
 			sub.lien = e
 			case 2: // morpho
@@ -45,9 +64,24 @@ func creeSub(v string, g *Groupe, t bool) *Sub {
 	return sub
 }
 
-func (s *Sub) idGr() string {
-	ee := strings.Split(s.pos, ".")
-	return ee[0]
+func (s *Sub) vaId(id string) bool {
+	for _, n := range s.noyaux {
+		if n.idgr == id {
+			return true
+		}
+	}
+	return false
+}
+
+func (s *Sub) vaPos(sr gocol.Sr) bool {
+	for _, n := range s.noyaux {
+		if n.generique && n.id == sr.Lem.Pos {
+			return true
+		} else if n.idgr == sr.Lem.Pos {
+			return true
+		}
+	}
+	return false
 }
 
 type Groupe struct {
