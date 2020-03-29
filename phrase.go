@@ -105,6 +105,7 @@ func (p *Phrase) arbre() ([]string, []string) {
 	return ll, lexpl
 }
 
+/*
 // id du Nod dont m est le noyau
 func (p *Phrase) estNuclDe(m *Mot) string {
 	var ret string
@@ -115,6 +116,7 @@ func (p *Phrase) estNuclDe(m *Mot) string {
 	}
 	return ret
 }
+*/
 
 func (p *Phrase) estSub(m *Mot) bool {
 	for _, nod := range p.nods {
@@ -191,7 +193,7 @@ func (p *Phrase) nod(m *Mot) *Nod {
 
 // renvoie le noeud dont m peut être le noyau
 func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
-	debog := g.id=="n.appFam" && m.gr == "Prometheus"
+	debog := g.id=="P.1" && m.gr == "finxit"
 	if debog {fmt.Println("noeud", m.gr, g.id)}
 	rang := p.rang(m)
 	lante := len(g.ante)
@@ -217,7 +219,7 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	// vérif des subs
 	// ante
 	r := rang - 1
-	//if debog {fmt.Println("   noeud okc")}
+	//if debog {fmt.Println("   noeud okb")}
 	for ia := lante-1; ia > -1; ia-- {
 		sub := g.ante[ia]
 		ma := p.mots[r]
@@ -225,7 +227,7 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 			r--
 			ma = p.mots[r]
 		}
-		//if debog {fmt.Println("  ma",ma.gr,"estSub",m.gr,"sub.pos",sub.pos,ma.estSub(sub, m))}
+		//if debog {fmt.Println("  ma",ma.gr,"estSub",m.gr,"sub.pos",sub.groupe.id,ma.estSub(sub, m))}
 		if !ma.estSub(sub, m) {
 			return nil
 		}
@@ -234,17 +236,17 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 		r--
 		//if debog {fmt.Println("    vu",ma.gr)}
 	}
-	if debog {fmt.Println("   okd",len(g.post),"g.post")}
+	//if debog {fmt.Println("   okd",len(g.post),"g.post")}
 	// post
 	for ip, sub := range g.post {
 		r := rang + ip + 1
 		mp := p.mots[r]
-		if debog {fmt.Println("post, mp",mp.gr)}
+		//if debog {fmt.Println("post, mp",mp.gr)}
 		for mp.dejaSub() && r < len(p.mots) - 1 {
 			r++
 			mp = p.mots[r]
 		}
-		if debog {fmt.Println("     mp", mp.gr,"estSub",m.gr,sub.groupe.id,mp.estSub(sub, m))}
+		//if debog {fmt.Println("     mp", mp.gr,"estSub",m.gr,sub.groupe.id,mp.estSub(sub, m))}
 		if !mp.estSub(sub, m) {
 			return nil
 		}
