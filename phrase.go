@@ -193,8 +193,8 @@ func (p *Phrase) nod(m *Mot) *Nod {
 
 // renvoie le noeud dont m peut être le noyau
 func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
-	debog := g.id=="P.1" && m.gr == "finxit"
-	if debog {fmt.Println("noeud", m.gr, g.id)}
+	//debog := g.id=="P.1" && m.gr == "finxit"
+	//if debog {fmt.Println("noeud", m.gr, g.id)}
 	rang := p.rang(m)
 	lante := len(g.ante)
 	// mot de rang trop faible
@@ -205,7 +205,7 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	if p.nbm() - rang < len(g.post) {
 		return nil
 	}
-	if debog {fmt.Println("   noeud oka, estNoyau",m.gr,g.id,m.estNoyau(g))}
+	//if debog {fmt.Println("   noeud oka, estNoyau",m.gr,g.id,m.estNoyau(g))}
 	// m peut-il être noyau du groupe g ?
 	if !m.estNoyau(g) {
 		return nil
