@@ -1,8 +1,6 @@
 //   main.go --	Gentes
 //	analyseur syntaxique du latin
 
-// TODO afficher dans l'ordre les groupes utilisés
-
 package main
 
 import (
