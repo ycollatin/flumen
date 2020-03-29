@@ -20,13 +20,15 @@ import (
 type Mot struct {
 	gr			string
 	rang		int
-	an			int			// n° de lemmatisation choisie
+	nl, nm		int			// n°s de Sr et de morpho
 	ans			gocol.Res	// ensemble des lemmatisations
-	lexsynt		[]string
+	lexsynt		[]string	// propriétés lexicosyntaxiques
+	idgr		string		// id du groupe dont le mot est le noyau
 	sub			*Sub		// sub qui lie le Mot à son noyau
 }
 
 func creeMot(m string) *Mot {
+	//debog := m == "luto"
 	mot := new(Mot)
 	mot.gr = m
 	var echec bool
@@ -39,7 +41,7 @@ func creeMot(m string) *Mot {
 			mot.ans[i] = genus(an)
 		}
 	}
-	mot.an = -1
+	mot.nl = -1
 	return mot
 }
 
@@ -106,11 +108,11 @@ func (m *Mot) elDe(n *Nod) bool {
 
 // teste si m peut être le noyau du groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
-	//debog := m.gr=="rem" && g.id=="n.prepAcc2"
+	//debog := m.gr=="Prometheus" && g.id=="n.appFam"
 	//if debog {fmt.Println("   estNoyau",m.gr,g.id)}
-	for _, an := range m.ans {
-		//if debog {fmt.Println("    .estNoyau 1",an.Lem.Gr, an.Morphos,"dejaNoy",m.dejaNoy())}
-		//if debog {fmt.Println("    contient",g.pos, an.Lem.Pos,contient(g.pos,an.Lem.Pos))}
+	for nam, an := range m.ans {
+		//if debog {fmt.Println("   .estNoyau",an.Lem.Gr, an.Morphos,"dejaNoy",m.dejaNoy())}
+		//if debog{fmt.Println("   .estNoyau g.pos",g.pos,"an.Lem.Pos",an.Lem.Pos)}
 		// pos - m est-il déjà noyau de g ?
 		if m.dejaNoy() {
 			//if debog {fmt.Println("    .estNoyau idgrp",phrase.estNuclDe(m))}
@@ -125,13 +127,10 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 		// morpho
 		var va bool
 		for im, morf := range an.Morphos {
-			//if debog {fmt.Println("   morf",morf,"m.an",m.an)}
-			if m.an > -1 && im != m.an {
-				//if debog {fmt.Println("    continue")}
+			if m.nl == nam && im != m.nm {
 				// la lemmatisation mot est déjà fixée à m.an
 				continue
 			}
-			//if debog {fmt.Println("    okmorf. g.morph",g.morph)}
 			va = true
 			for _, gmorf := range g.morph {
 				//if debog {fmt.Println("   gmorf",gmorf)}
@@ -140,11 +139,11 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 					//if debog {fmt.Println("     ",morf,"contains",e,strings.Contains(morf,e))}
 					va = va && strings.Contains(morf, e)
 				}
-				//if debog {fmt.Println("    estNoyau, g.lexSynt",g.lexSynt)}
-				//if debog && va {fmt.Println("     va encore")}
 				if va {
-					//if debog {fmt.Println("    va, morf", morf, im)}
-					m.an = im
+					// XXX Mot.ans désigne le nombre de lemmes.
+					//     chaque lemme a plusieurs morphos !
+					m.nl = nam
+					m.nm = im
 					break
 				}
 			}
@@ -155,7 +154,8 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 		}
 		//if debog {fmt.Println("    .estNoyau okc va", va)}
 		if !va {
-			m.an = -1
+			m.nl = -1
+			m.nm = -1
 			continue
 		}
 		//if debog {fmt.Println("   okd, return true")}
@@ -169,18 +169,16 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 // Sub : pos string, morpho []string, accord string
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
-	debog := m.gr=="Prometheus" && mn.gr=="finxit" && sub.groupe.id=="P.1"
-	if debog {fmt.Println("   .estSub",m.gr, mn.gr, "sub.pos-"+sub.pos+"-morpho",sub.morpho)}
+	debog := m.gr=="filius" && mn.gr=="Prometheus" && sub.groupe.id=="n.appFam"
+	if debog {fmt.Println("   .estSub",m.gr, mn.gr, "sub.groupe:"+sub.groupe.id+"-morpho",sub.morpho)}
 	var respos, resmorf gocol.Res
 	// le sub a-t-il le bon pos ?
 	//if debog {fmt.Println("    . estSub, sub.terminal",sub.terminal)}
 	if sub.terminal {
 		//if debog {fmt.Println("    . oka, ans",len(m.ans))}
 		// le sub a plusieurs pos, ex. "NP n"
-		ee := strings.Split(sub.pos, " ")
 		for _, an := range m.ans {
-			//if debog {fmt.Println("    . an",an.Lem.Pos,"ee",ee,"|",sub.pos,contient(ee,an.Lem.Pos))}
-			if contient(ee, an.Lem.Pos) {
+			if sub.vaPos(an) {
 				respos = append(respos, an)
 			}
 		}
@@ -189,15 +187,17 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 			return false
 		}
 	} else {
-		//if debog {fmt.Println("   . estSub else",m.gr,"noyId(",sub.pos,m.noyId(sub.pos))}
-		if m.noyId(sub.pos) {
+		if debog {fmt.Println("   . estSub m.idgr",m.idgr,"==",sub.lien)}
+		// le mot m est il noyau d'un groupe sub
+		//if contient(sub.idgr(), m.idgr) {
+		if sub.vaId(m.idgr) {
 			respos = m.ans
 		} else {
-			//if debog {fmt.Println("    . estSub false")}
+			if debog {fmt.Println("    . estSub false")}
 			return false
 		}
 	}
-	//if debog {fmt.Println("    . estSub, respos",len(respos))}
+	if debog {fmt.Println("    . estSub, respos",len(respos))}
 	// le sub a-t-il la bonne morpho ?
 	for _, an := range respos {
 		for _, anmorf := range an.Morphos {
@@ -214,11 +214,11 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 					// il ne faut comparer que l'id générique du groupe
 					ee := strings.Split(idgrp, ".")
 					idgrp = ee[0]
-					va = va && sub.posg == idgrp
-					if debog {fmt.Println("sub.posg",sub.posg,"==idgrp",idgrp)}
+					va = va && sub.vaId(idgrp)
+					if debog {fmt.Println("   estSub, va", va)}
 				} else {
-					if debog {fmt.Println("   . estSub, sub.pos",sub.pos,"idgrp",idgrp)}
-					va = va && sub.pos == idgrp
+					va = va && sub.vaId(idgrp)
+					if debog {fmt.Println("   . estSub, va",va)}
 				}
 			}
 			//if debog {fmt.Println("    . estSub okc, va",va)}
@@ -258,14 +258,14 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 }
 
 // id du groupe dont m est le noyau
+// XXX nod.grp est-il le groupe dont nod est le noyau
 func (m *Mot) estNuclDuGroupe() string {
-	var ret string
 	for _, nod := range phrase.nods {
 		if nod.nucl == m {
-			ret = nod.grp.id
+			return nod.grp.id
 		}
 	}
-	return ret
+	return ""
 }
 
 func genus(sr gocol.Sr) gocol.Sr {
@@ -302,7 +302,22 @@ func (m *Mot) nbSubs() int {
 	return nbm
 }
 
-// le mot m est il noyau d'un groupe d'id id ?
+// le mot m est il noyau d'un groupe g
+func (m *Mot) noyId(sub *Sub) bool {
+	if m.nl < 0 {
+		return false
+	}
+	for _, n := range phrase.nods {
+		//if (n.nucl == m) {fmt.Println("debog noyId",m.gr,"len ans",len(m.ans),"nl",m.nl)}
+		if n.nucl == m {
+			return true
+		}
+	}
+	return false
+}
+
+/*
+// le mot m est il noyau d'un groupe sub
 func (m *Mot) noyId(id string) bool {
 	//debog := m.gr=="rem" && id=="n.prepDetAcc"
 	//if debog {fmt.Println("   ..noyId",m.gr,id,"nb noeuds",len(phrase.nods))}
@@ -330,6 +345,7 @@ func (m *Mot) noyId(id string) bool {
 	}
 	return false
 }
+*/
 
 func (ma *Mot) subDe(mb *Mot) bool {
 	// chercher le groupe dont mb est noyau
