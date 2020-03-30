@@ -3,6 +3,12 @@
 
 package main
 
+
+// XXX Il faudrait fixer la morpho du noyau quand tous ses subs sont 
+// validés ! Ce n'est pas encore le cas. Mot.estSub est appelé par Phrase.noeud()
+// Solution : transférer noeud() dans Mot, et l'appeler pour chaque lemmatisation
+// du mot.
+
 import (
 	"fmt"
 	"io/ioutil"
