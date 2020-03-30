@@ -108,19 +108,6 @@ func (p *Phrase) arbre() ([]string, []string) {
 	return ll, lexpl
 }
 
-/*
-// id du Nod dont m est le noyau
-func (p *Phrase) estNuclDe(m *Mot) string {
-	var ret string
-	for _, nod := range p.nods {
-		if nod.nucl == m {
-			ret = nod.grp.id
-		}
-	}
-	return ret
-}
-*/
-
 func (p *Phrase) estSub(m *Mot) bool {
 	for _, nod := range p.nods {
 		for _, el := range nod.mma {
