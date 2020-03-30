@@ -222,6 +222,7 @@ func (m *Mot) estNuclDuGroupe() string {
 	return ""
 }
 
+// ajoute le genre à la morpho d'un nom
 func genus(sr gocol.Sr) gocol.Sr {
 	if sr.Lem.Pos != "n" && sr.Lem.Pos != "NP" {
 		return sr
@@ -242,7 +243,7 @@ func genus(sr gocol.Sr) gocol.Sr {
 // morpho définitive
 func (m *Mot) morphodef() string {
 	if !m.elucide() {
-		return "morpho indéfinie"
+		return ""
 	}
 	return m.ans[m.nl].Morphos[m.nm]
 }
