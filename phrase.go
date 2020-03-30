@@ -180,7 +180,7 @@ func (p *Phrase) nod(m *Mot) *Nod {
 
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
-	//debog := g.id=="v.objprep" && m.gr == "finxit"
+	//debog := g.id=="n.fam" && m.gr == "filius"
 	//if debog {fmt.Println("noeud", m.gr, g.id)}
 	rang := p.rang(m)
 	lante := len(g.ante)
@@ -207,14 +207,16 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 	// ante
 	r := rang - 1
 	//if debog {fmt.Println("   noeud okb")}
+	// reгcherche rétrograde des subs ante
 	for ia := lante-1; ia > -1; ia-- {
 		sub := g.ante[ia]
 		ma := p.mots[r]
+		// passer les mots
 		for ma.dejaSub() && r > 0 {
 			r--
 			ma = p.mots[r]
 		}
-		//if debog {fmt.Println("  ma",ma.gr,"estSub",m.gr,"sub.pos",sub.groupe.id,ma.estSub(sub, m))}
+		//if debog {fmt.Println("  ma",ma.gr,"nl/nm",ma.nl,ma.nm,"estSub",m.gr,"id grup",sub.groupe.id,ma.estSub(sub, m))}
 		if !ma.estSub(sub, m) {
 			// réinitialiser lemme et morpho de ma
 			return nil
