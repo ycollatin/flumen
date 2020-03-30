@@ -222,6 +222,24 @@ func (m *Mot) estNuclDuGroupe() string {
 	return ""
 }
 
+func (ma *Mot) estSubDe(mb *Mot) bool {
+	for _, n := range phrase.nods {
+		if mb == n.nucl {
+			for _, sub := range n.mma {
+				if sub == ma {
+					return true
+				}
+			}
+			for _, sub := range n.mmp {
+				if sub == ma {
+					return true
+				}
+			}
+		}
+	}
+	return false
+}
+
 // ajoute le genre à la morpho d'un nom
 func genus(sr gocol.Sr) gocol.Sr {
 	if sr.Lem.Pos != "n" && sr.Lem.Pos != "NP" {
@@ -304,7 +322,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 			ma = phrase.mots[r]
 		}
 		//if debog {fmt.Println("  ma",ma.gr,"nl/nm",ma.nl,ma.nm,"estSub",m.gr,"id grup",sub.groupe.id,ma.estSub(sub, m))}
-		if !ma.estSub(sub, m) {
+		if m.estSubDe(ma) || !ma.estSub(sub, m) {
 			// réinitialiser lemme et morpho de ma
 			return nil
 		}
@@ -324,7 +342,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 			mp = phrase.mots[r]
 		}
 		//if debog {fmt.Println("     mp", mp.gr,"estSub",m.gr,sub.groupe.id,mp.estSub(sub, m))}
-		if !mp.estSub(sub, m) {
+		if m.estSubDe(mp) || !mp.estSub(sub, m) {
 			// réinitialiser lemme et morpho de mp
 			return nil
 		}
