@@ -14,19 +14,6 @@ type Nod struct {
 	rang	int			// 
 }
 
-/*
-func (n *Nod) doc() string {
-	var ll []string
-	for _, m := range n.mma {
-		ll = append(ll, fmt.Sprintf("%s %s %s", n.nucl.gr, m.sub.pos, m.gr))
-	}
-	for _, m := range n.mmp {
-		ll = append(ll, fmt.Sprintf("%s %s %s", n.nucl.gr, m.sub.pos, m.gr))
-	}
-	return strings.Join(ll, "\n")
-}
-*/
-
 // lignes graphviz du nœud
 func (n *Nod) graf() ([]string) {
 	var ll []string
@@ -193,7 +180,7 @@ func (p *Phrase) nod(m *Mot) *Nod {
 
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
-	//debog := g.id=="v.prepa" && m.gr == "finxit"
+	//debog := g.id=="v.objprep" && m.gr == "finxit"
 	//if debog {fmt.Println("noeud", m.gr, g.id)}
 	rang := p.rang(m)
 	lante := len(g.ante)
@@ -229,6 +216,7 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 		}
 		//if debog {fmt.Println("  ma",ma.gr,"estSub",m.gr,"sub.pos",sub.groupe.id,ma.estSub(sub, m))}
 		if !ma.estSub(sub, m) {
+			// réinitialiser lemme et morpho de ma
 			return nil
 		}
 		ma.sub = sub
@@ -248,13 +236,15 @@ func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
 		}
 		//if debog {fmt.Println("     mp", mp.gr,"estSub",m.gr,sub.groupe.id,mp.estSub(sub, m))}
 		if !mp.estSub(sub, m) {
+			// réinitialiser lemme et morpho de mp
 			return nil
 		}
 		mp.sub = sub
 		nod.mmp = append(nod.mmp, mp)
 	}
 	if len(nod.mma) + len(nod.mmp) > 0 {
-		m.idgr = g.id
+		m.pos = g.id
+		// fixer lemme et morpho de m, ma et mp
 		return nod
 	}
 	return nil
