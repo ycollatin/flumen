@@ -113,11 +113,11 @@ func (m *Mot) elucide() bool {
 
 // teste si m peut être le noyau du groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
-	debog := m.gr=="finxit" && g.id=="v.objprep"
-	if debog {fmt.Println("   estNoyau",m.gr,g.id)}
+	debog := m.gr=="luto" && g.id=="n.prepAbl"
+	if debog {fmt.Println("estNoyau",m.gr,g.id,"nl/nm",m.nl,m.nm)}
 	va := false
 
-	var nl,	nm	int
+	//var nl, nm int
 
 	// vérif du pos
 	mnuclde := m.estNuclDe()
@@ -126,12 +126,14 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 		if m.elucide() {
 			va = contient(g.pos, m.ans[m.nl].Lem.Pos)
 		} else {
-			for i, a := range m.ans {
+			for _, a := range m.ans {
 				va = va || contient(g.pos, a.Lem.Pos)
+				/*
 				if va {
-					nl = i
+					m.nl = i
 					m.pos = a.Lem.Pos
 				}
+				*/
 			}
 		}
 	} else {
@@ -142,26 +144,22 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 	if !va {
 		return false
 	}
+	if debog {fmt.Println(" .estNoyau, pos, nl/nm",m.nl,m.nm)}
 	// vérif de la morpho
 	if !m.elucide() {
 		for i, an:= range m.ans {
 			//if debog {fmt.Println("   .estNoyau >, morf",morf)}
-			for j, gm := range an.Morphos {
+			for _, gm := range an.Morphos {
 				va = va || g.vaMorph(gm)
 				if va {
-					nl = i
-					nm = j
+					m.nl = i
+					//m.nm = j
+					if debog {fmt.Println("   .estNoyau, true, ml mn",m.nl,m.nm)}
+					return true
 				}
 			}
 		}
-		if va {
-			if debog {fmt.Println("   .estNoyau, true")}
-			m.nl = nl
-			m.nm = nm
-			return true
-		}
 	} else {
-		// TODO écrire m.morphofixee() v 
 		return g.vaMorph(m.ans[m.nl].Morphos[m.nm])
 	}
 	return false
@@ -182,29 +180,33 @@ func (m *Mot) estNuclDe() []string {
 // Sub : pos string, morpho []string, accord string
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
-	debog := m.gr=="homines" && mn.gr == "finxit" && sub.groupe.id=="v.objprep"
-	if debog {fmt.Println("estSub m",m.gr,"mn",mn.gr,"grup",sub.groupe.id,"m.nl",m.nl)}
+	debog := m.gr=="ex" && mn.gr == "luto" && sub.groupe.id=="n.prepAbl"
+	//if debog {fmt.Println("estSub m",m.gr,"mn",mn.gr,"grup",sub.groupe.id,"m.nl",m.nl)}
 	//si le mot a déjà une lemmatisation fixée
-	if m.nl > -1 {
+	if m.elucide() {
 		a := m.ans[m.nl]
-		if debog {fmt.Println(" .estSub alempos",a.Lem.Pos,"morfo",a.Morphos[m.nm])}
+		//if debog {fmt.Println(" .estSub alempos",a.Lem.Pos,"morfo",a.Morphos[m.nm])}
 		if sub.vaPos(m.pos) && sub.vaMorpho(a.Morphos[m.nm]) {
+			if debog {fmt.Println(" .estsub, elucide", m.morphodef())}
 			return true
 		}
 	} else {
 	    // vérification de toutes les morphos	
 		va := false
 		var a gocol.Sr
-		for _, an := range m.ans {
+		for i, an := range m.ans {
 			if sub.vaPos(an.Lem.Pos) {
 				va = true
+				m.nl = i
 				a = an
 			}
 		}
 		va = false
-		for _, morf := range a.Morphos {
+		for i, morf := range a.Morphos {
 			if sub.vaMorpho(morf) {
 				va = true
+				m.nm = i
+			if debog {fmt.Println("  .estsub, elucide2", m.morphodef())}
 			}
 		}
 		if va {
@@ -242,6 +244,14 @@ func genus(sr gocol.Sr) gocol.Sr {
 	return sr
 }
 
+// morpho définitive
+func (m *Mot) morphodef() string {
+	if !m.elucide() {
+		return "morpho indéfinie"
+	}
+	return m.ans[m.nl].Morphos[m.nm]
+}
+
 // nombre de mots subs de m
 func (m *Mot) nbSubs() int {
 	if !m.dejaNoy() {
@@ -258,22 +268,6 @@ func (m *Mot) nbSubs() int {
 	}
 	return nbm
 }
-
-/*
-// Vrai si le mot m est noyau d'un groupe g
-func (m *Mot) noyId() bool {
-	if m.nl < 0 {
-		return false
-	}
-	for _, n := range phrase.nods {
-		//if (n.nucl == m) {fmt.Println("debog noyId",m.gr,"len ans",len(m.ans),"nl",m.nl)}
-		if n.nucl == m {
-			return true
-		}
-	}
-	return false
-}
-*/
 
 func (ma *Mot) subDe(mb *Mot) bool {
 	// chercher le groupe dont mb est noyau
