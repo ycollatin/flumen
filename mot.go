@@ -3,7 +3,7 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -22,6 +22,7 @@ type Mot struct {
 	rang		int
 	ans			gocol.Res	// ensemble des lemmatisations
 	nl, nm		int			// n°s de Sr et de morpho, quand ils sont fixés
+	tmpl, tmpm	int			// n°s provisoires de Sr et morpho
 	pos			string		// id du groupe dont le mot est noyau
 							// ou à défaut pos du mot, si elle est décidée
 	lexsynt		[]string	// propriétés lexicosyntaxiques
@@ -113,8 +114,8 @@ func (m *Mot) elucide() bool {
 
 // teste si m peut être le noyau du groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
-	debog := m.gr=="luto" && g.id=="n.prepAbl"
-	if debog {fmt.Println("estNoyau",m.gr,g.id,"nl/nm",m.nl,m.nm)}
+	//debog := m.gr=="luto" && g.id=="n.prepAbl"
+	//if debog {fmt.Println("estNoyau",m.gr,g.id,"nl/nm",m.nl,m.nm)}
 	va := false
 
 	//var nl, nm int
@@ -128,12 +129,6 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 		} else {
 			for _, a := range m.ans {
 				va = va || contient(g.pos, a.Lem.Pos)
-				/*
-				if va {
-					m.nl = i
-					m.pos = a.Lem.Pos
-				}
-				*/
 			}
 		}
 	} else {
@@ -144,17 +139,17 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 	if !va {
 		return false
 	}
-	if debog {fmt.Println(" .estNoyau, pos, nl/nm",m.nl,m.nm)}
+	//if debog {fmt.Println(" .estNoyau, pos, nl/nm",m.nl,m.nm)}
 	// vérif de la morpho
 	if !m.elucide() {
 		for i, an:= range m.ans {
 			//if debog {fmt.Println("   .estNoyau >, morf",morf)}
-			for _, gm := range an.Morphos {
+			for j, gm := range an.Morphos {
 				va = va || g.vaMorph(gm)
 				if va {
-					m.nl = i
-					//m.nm = j
-					if debog {fmt.Println("   .estNoyau, true, ml mn",m.nl,m.nm)}
+					m.tmpl = i
+					m.tmpm = j
+					//if debog {fmt.Println("   .estNoyau, true, ml mn",m.nl,m.nm)}
 					return true
 				}
 			}
@@ -180,14 +175,14 @@ func (m *Mot) estNuclDe() []string {
 // Sub : pos string, morpho []string, accord string
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
-	debog := m.gr=="ex" && mn.gr == "luto" && sub.groupe.id=="n.prepAbl"
+	//debog := m.gr=="ex" && mn.gr == "luto" && sub.groupe.id=="n.prepAbl"
 	//if debog {fmt.Println("estSub m",m.gr,"mn",mn.gr,"grup",sub.groupe.id,"m.nl",m.nl)}
 	//si le mot a déjà une lemmatisation fixée
 	if m.elucide() {
 		a := m.ans[m.nl]
 		//if debog {fmt.Println(" .estSub alempos",a.Lem.Pos,"morfo",a.Morphos[m.nm])}
 		if sub.vaPos(m.pos) && sub.vaMorpho(a.Morphos[m.nm]) {
-			if debog {fmt.Println(" .estsub, elucide", m.morphodef())}
+			//if debog {fmt.Println(" .estsub, elucide", m.morphodef())}
 			return true
 		}
 	} else {
@@ -197,7 +192,7 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 		for i, an := range m.ans {
 			if sub.vaPos(an.Lem.Pos) {
 				va = true
-				m.nl = i
+				m.tmpl = i
 				a = an
 			}
 		}
@@ -205,8 +200,8 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 		for i, morf := range a.Morphos {
 			if sub.vaMorpho(morf) {
 				va = true
-				m.nm = i
-			if debog {fmt.Println("  .estsub, elucide2", m.morphodef())}
+				m.tmpm = i
+			//if debog {fmt.Println("  .estsub, elucide2", m.morphodef())}
 			}
 		}
 		if va {
@@ -269,6 +264,81 @@ func (m *Mot) nbSubs() int {
 	return nbm
 }
 
+// si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
+func (m *Mot) noeud(g *Groupe) *Nod {
+	//debog := g.id=="n.fam" && m.gr == "filius"
+	//if debog {fmt.Println("noeud", m.gr, g.id)}
+	rang := m.rang
+	lante := len(g.ante)
+	// mot de rang trop faible
+	if rang < lante {
+		return nil
+	}
+	// ou trop élevé
+	if phrase.nbm() - rang < len(g.post) {
+		return nil
+	}
+	//if debog {fmt.Println("   noeud oka, estNoyau",m.gr,g.id,m.estNoyau(g))}
+	// m peut-il être noyau du groupe g ?
+	if !m.estNoyau(g) {
+		return nil
+	}
+
+	// création du noeud de retour
+	nod := new(Nod)
+	nod.grp = g
+	nod.nucl = m
+	nod.rang = m.rang
+	// vérif des subs
+	// ante
+	r := rang - 1
+	//if debog {fmt.Println("   noeud okb")}
+	// reгcherche rétrograde des subs ante
+	for ia := lante-1; ia > -1; ia-- {
+		sub := g.ante[ia]
+		ma := phrase.mots[r]
+		// passer les mots
+		for ma.dejaSub() && r > 0 {
+			r--
+			ma = phrase.mots[r]
+		}
+		//if debog {fmt.Println("  ma",ma.gr,"nl/nm",ma.nl,ma.nm,"estSub",m.gr,"id grup",sub.groupe.id,ma.estSub(sub, m))}
+		if !ma.estSub(sub, m) {
+			// réinitialiser lemme et morpho de ma
+			return nil
+		}
+		ma.sub = sub
+		nod.mma = append(nod.mma, ma)
+		r--
+		//if debog {fmt.Println("    vu",ma.gr)}
+	}
+	//if debog {fmt.Println("   okd",len(g.post),"g.post")}
+	// post
+	for ip, sub := range g.post {
+		r := rang + ip + 1
+		mp := phrase.mots[r]
+		//if debog {fmt.Println("post, mp",mp.gr)}
+		for mp.dejaSub() && r < len(phrase.mots) - 1 {
+			r++
+			mp = phrase.mots[r]
+		}
+		//if debog {fmt.Println("     mp", mp.gr,"estSub",m.gr,sub.groupe.id,mp.estSub(sub, m))}
+		if !mp.estSub(sub, m) {
+			// réinitialiser lemme et morpho de mp
+			return nil
+		}
+		mp.sub = sub
+		nod.mmp = append(nod.mmp, mp)
+	}
+	if len(nod.mma) + len(nod.mmp) > 0 {
+		m.pos = g.id
+		// fixer lemme et morpho de tous les mots du nod
+		nod.valide()
+		return nod
+	}
+	return nil
+}
+
 func (ma *Mot) subDe(mb *Mot) bool {
 	// chercher le groupe dont mb est noyau
 	for _, n := range phrase.nods {
@@ -277,4 +347,9 @@ func (ma *Mot) subDe(mb *Mot) bool {
 		}
 	}
 	return false
+}
+
+func (m *Mot) valideTmp() {
+	m.nl = m.tmpl
+	m.nm = m.tmpm
 }

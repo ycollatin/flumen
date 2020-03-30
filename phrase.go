@@ -26,6 +26,22 @@ func (n *Nod) graf() ([]string) {
 	return ll
 }
 
+func (n *Nod) valide() {
+	if !n.nucl.elucide() {
+		n.nucl.valideTmp()
+	}
+	for _, m := range n.mma {
+		if !m.elucide() {
+			m.valideTmp()
+		}
+	}
+	for _, m := range n.mmp {
+		if !m.elucide() {
+			m.valideTmp()
+		}
+	}
+}
+
 type Phrase struct {
 	gr		string
 	mots	[]*Mot
@@ -61,7 +77,7 @@ func (p *Phrase) arbre() ([]string, []string) {
 			continue
 		}
 		for _, g := range grpTerm {
-			n := p.noeud(m, g)
+			n := m.noeud(g)
 			if n != nil {
 				p.nods = append(p.nods, n)
 				lexpl = append(lexpl, n.grp.id)
@@ -75,7 +91,7 @@ func (p *Phrase) arbre() ([]string, []string) {
 		// pour chaque déf. de groupe non terminal
 		for _, g := range grp {
 			// m noyau ?
-			n := p.noeud(m, g)
+			n := m.noeud(g)
 			if n != nil {
 				p.nods = append(p.nods, n)
 				lexpl = append(lexpl, n.grp.id)
@@ -174,80 +190,6 @@ func (p *Phrase) nod(m *Mot) *Nod {
 		if n.nucl == m {
 			return n
 		}
-	}
-	return nil
-}
-
-// si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
-func (p *Phrase) noeud(m *Mot, g *Groupe) *Nod {
-	//debog := g.id=="n.fam" && m.gr == "filius"
-	//if debog {fmt.Println("noeud", m.gr, g.id)}
-	rang := p.rang(m)
-	lante := len(g.ante)
-	// mot de rang trop faible
-	if rang < lante {
-		return nil
-	}
-	// ou trop élevé
-	if p.nbm() - rang < len(g.post) {
-		return nil
-	}
-	//if debog {fmt.Println("   noeud oka, estNoyau",m.gr,g.id,m.estNoyau(g))}
-	// m peut-il être noyau du groupe g ?
-	if !m.estNoyau(g) {
-		return nil
-	}
-
-	// création du noeud de retour
-	nod := new(Nod)
-	nod.grp = g
-	nod.nucl = m
-	nod.rang = m.rang
-	// vérif des subs
-	// ante
-	r := rang - 1
-	//if debog {fmt.Println("   noeud okb")}
-	// reгcherche rétrograde des subs ante
-	for ia := lante-1; ia > -1; ia-- {
-		sub := g.ante[ia]
-		ma := p.mots[r]
-		// passer les mots
-		for ma.dejaSub() && r > 0 {
-			r--
-			ma = p.mots[r]
-		}
-		//if debog {fmt.Println("  ma",ma.gr,"nl/nm",ma.nl,ma.nm,"estSub",m.gr,"id grup",sub.groupe.id,ma.estSub(sub, m))}
-		if !ma.estSub(sub, m) {
-			// réinitialiser lemme et morpho de ma
-			return nil
-		}
-		ma.sub = sub
-		nod.mma = append(nod.mma, ma)
-		r--
-		//if debog {fmt.Println("    vu",ma.gr)}
-	}
-	//if debog {fmt.Println("   okd",len(g.post),"g.post")}
-	// post
-	for ip, sub := range g.post {
-		r := rang + ip + 1
-		mp := p.mots[r]
-		//if debog {fmt.Println("post, mp",mp.gr)}
-		for mp.dejaSub() && r < len(p.mots) - 1 {
-			r++
-			mp = p.mots[r]
-		}
-		//if debog {fmt.Println("     mp", mp.gr,"estSub",m.gr,sub.groupe.id,mp.estSub(sub, m))}
-		if !mp.estSub(sub, m) {
-			// réinitialiser lemme et morpho de mp
-			return nil
-		}
-		mp.sub = sub
-		nod.mmp = append(nod.mmp, mp)
-	}
-	if len(nod.mma) + len(nod.mmp) > 0 {
-		m.pos = g.id
-		// fixer lemme et morpho de m, ma et mp
-		return nod
 	}
 	return nil
 }
