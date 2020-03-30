@@ -3,6 +3,8 @@
 
 package main
 
+// FIXME : Clymenes filius, 2 liens réciproques
+
 import (
 	"fmt"
 	"io/ioutil"
