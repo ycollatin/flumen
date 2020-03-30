@@ -38,6 +38,7 @@ var (
 	texte		*Texte
 )
 
+// affiche les arcs syntaxique de la phrase
 func analyse(expl bool) {
 	texte.majPhrase()
 	var ar, lexpl []string
