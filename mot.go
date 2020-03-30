@@ -3,7 +3,7 @@
 package main
 
 import (
-	//"fmt"
+	"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -20,15 +20,15 @@ import (
 type Mot struct {
 	gr			string
 	rang		int
-	nl, nm		int			// n°s de Sr et de morpho
 	ans			gocol.Res	// ensemble des lemmatisations
+	nl, nm		int			// n°s de Sr et de morpho, quand ils sont fixés
+	pos			string		// id du groupe dont le mot est noyau
+							// ou à défaut pos du mot, si elle est décidée
 	lexsynt		[]string	// propriétés lexicosyntaxiques
-	idgr		string		// id du groupe dont le mot est le noyau
 	sub			*Sub		// sub qui lie le Mot à son noyau
 }
 
 func creeMot(m string) *Mot {
-	//debog := m == "luto"
 	mot := new(Mot)
 	mot.gr = m
 	var echec bool
@@ -42,6 +42,7 @@ func creeMot(m string) *Mot {
 		}
 	}
 	mot.nl = -1
+	mot.nm = -1
 	return mot
 }
 
@@ -106,71 +107,72 @@ func (m *Mot) elDe(n *Nod) bool {
 	return false
 }
 
+func (m *Mot) elucide() bool {
+	return m.nl > -1 && m.nm > -1
+}
+
 // teste si m peut être le noyau du groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
-	//debog := m.gr=="finxit" && g.id=="v.prepa"
-	//if debog {fmt.Println("   estNoyau",m.gr,g.id)}
+	debog := m.gr=="finxit" && g.id=="v.objprep"
+	if debog {fmt.Println("   estNoyau",m.gr,g.id)}
 	va := false
-	var (
-		sr	gocol.Sr
-		nl,	nm int
-	)
+
+	var nl,	nm	int
+
 	// vérif du pos
 	mnuclde := m.estNuclDe()
-	if mnuclde == "" {
-		if m.nl > -1 {
+	//if debog {fmt.Println("  .estNoyau, mnuclde",mnuclde)}
+	if len(mnuclde) == 0 {
+		if m.elucide() {
 			va = contient(g.pos, m.ans[m.nl].Lem.Pos)
-			sr = m.ans[nl]
-			nm = m.nm
 		} else {
 			for i, a := range m.ans {
 				va = va || contient(g.pos, a.Lem.Pos)
-				sr = a
-				nl = i
+				if va {
+					nl = i
+					m.pos = a.Lem.Pos
+				}
 			}
+		}
+	} else {
+		for _, mnd := range mnuclde {
+			va = va || contient(g.pos, mnd)
 		}
 	}
 	if !va {
 		return false
 	}
-	//if debog {fmt.Println("   .estNoyau, oka, sr", sr)}
 	// vérif de la morpho
-	if m.nl > -1 {
-		//sr = m.ans[nl]
-		morf := sr.Morphos[m.nm]
-		//if debog {fmt.Println("   .estNoyau, morf",morf)}
-		for _, gm := range g.morph {
-			//if debog {fmt.Println("    .estNoyau, gm",gm,"morf",morf)}
-			va = va && strings.Contains(morf, gm)
+	if !m.elucide() {
+		for i, an:= range m.ans {
+			//if debog {fmt.Println("   .estNoyau >, morf",morf)}
+			for j, gm := range an.Morphos {
+				va = va || g.vaMorph(gm)
+				if va {
+					nl = i
+					nm = j
+				}
+			}
 		}
 		if va {
-			//if debog {fmt.Println("   .estNoyau, true")}
-			return true
-		}
-	}
-	for i, morf := range sr.Morphos {
-		va = true
-		for _, gm := range g.morph {
-			//if debog {fmt.Println("   .estNoyau",morf, gm)}
-			va = va && strings.Contains(morf, gm)
-		}
-		// fixation lemme + morpho de m
-		if va {
-			nm = i
+			if debog {fmt.Println("   .estNoyau, true")}
 			m.nl = nl
 			m.nm = nm
 			return true
 		}
+	} else {
+		// TODO écrire m.morphofixee() v 
+		return g.vaMorph(m.ans[m.nl].Morphos[m.nm])
 	}
 	return false
 }
 
-// id du Nod dont m est le noyau
-func (m *Mot) estNuclDe() string {
-	var ret string
+// id des Nod dont m est déjà le noyau
+func (m *Mot) estNuclDe() []string {
+	var ret []string
 	for _, nod := range phrase.nods {
 		if nod.nucl == m {
-			ret = nod.grp.id
+			ret = append(ret, nod.grp.id)
 		}
 	}
 	return ret
@@ -180,14 +182,13 @@ func (m *Mot) estNuclDe() string {
 // Sub : pos string, morpho []string, accord string
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
-	//debog := m.gr=="luto" && mn.gr == "finxit" && sub.groupe.id=="v.prepa"
-	//if debog {fmt.Println("estSub m",m.gr,"mn",mn.gr,"grup",sub.groupe.id,"m.nl",m.nl)}
+	debog := m.gr=="homines" && mn.gr == "finxit" && sub.groupe.id=="v.objprep"
+	if debog {fmt.Println("estSub m",m.gr,"mn",mn.gr,"grup",sub.groupe.id,"m.nl",m.nl)}
 	//si le mot a déjà une lemmatisation fixée
 	if m.nl > -1 {
 		a := m.ans[m.nl]
-		//if debog {fmt.Println("   .estSub alempos",a.Lem.Pos,"morfo",a.Morphos[m.nm])}
-		//if debog {fmt.Println("vaPos",sub.vaPos(m.idgr),"vamorfo",sub.vaMorpho(a.Morphos[m.nm]))}
-		if sub.vaPos(m.idgr) && sub.vaMorpho(a.Morphos[m.nm]) {
+		if debog {fmt.Println(" .estSub alempos",a.Lem.Pos,"morfo",a.Morphos[m.nm])}
+		if sub.vaPos(m.pos) && sub.vaMorpho(a.Morphos[m.nm]) {
 			return true
 		}
 	} else {
