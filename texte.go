@@ -24,10 +24,12 @@ func (t *Texte) phrase() *Phrase {
 	return t.phrases[t.compteur]
 }
 
+// Efface l'écran, affiche un entête, la phrase, et
+// le texte du param aide.
 func (t Texte) affiche(aide string) {
 	ClearScreen()
-	fmt.Printf("%s, phrase %d, mot %d\n", t.nom, t.compteur, imot)
 	p := t.phrase()
+	fmt.Printf("%s, phrase %d, mot %d\n", t.nom, t.compteur, p.imot)
 	fmt.Println(p.enClair())
 	fmt.Println(aide)
 }
@@ -45,7 +47,11 @@ func CreeTexte (nf string) *Texte {
 				tp += l + " "
 				break;
 			} else {
-				tp += l[:ifp] + " "
+				tp += l[:ifp] //+ " "
+				// supprimer l'espace initiale
+				if tp > "" && tp[0] == ' ' {
+					tp = tp[1:]
+				}
 				// créer et ajouter la nouvelle phrase
 				p := creePhrase(tp)
 				t.phrases = append(t.phrases, p)
@@ -60,6 +66,7 @@ func CreeTexte (nf string) *Texte {
 func (t *Texte) majPhrase() {
 	initArcs()
 	phrase = t.phrases[t.compteur]
+	phrase.imot = 0
 	t.affiche(aidePh)
 }
 
@@ -67,8 +74,6 @@ func (t *Texte) porro() {
 	if t.compteur < len(t.phrases) {
 		t.compteur++
 		t.majPhrase()
-		imot = 0
-		t.affiche(aidePh)
 	}
 }
 
@@ -76,7 +81,5 @@ func (t *Texte) retro() {
 	if t.compteur > 0 {
 		t.compteur--
 		t.majPhrase()
-		imot = 0
-		t.affiche(aidePh)
 	}
 }
