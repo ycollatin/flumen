@@ -145,3 +145,8 @@ func InputString(q string) string {
 	}
 	return "err"
 }
+
+func PrimEl(s, sep string) string {
+	eclats := strings.Split(s, sep)
+	return eclats[0]
+}
