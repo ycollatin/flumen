@@ -3,6 +3,8 @@
 
 package main
 
+// TODO filtre lexsynt pour les subs
+
 import (
 	"fmt"
 	"io/ioutil"
