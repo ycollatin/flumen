@@ -93,7 +93,7 @@ func (p *Phrase) arbre() ([]string, []string) {
 
 	// groupes non terminaux
 	for _, m := range p.mots {
-		//adebog := m.gr=="finxit"
+		//debog := m.gr=="finxit"
 		//if debog {fmt.Println("  arbre, ok")}
 		// pour chaque déf. de groupe non terminal
 		for _, g := range grp {
