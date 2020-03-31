@@ -114,7 +114,7 @@ func (m *Mot) elucide() bool {
 
 // teste si m peut être le noyau du groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
-	//debog := m.gr=="luto" && g.id=="n.prepAbl"
+	//debog := m.gr=="finxit" && g.id=="v.prepa"
 	//if debog {fmt.Println("estNoyau",m.gr,g.id,"nl/nm",m.nl,m.nm)}
 	va := false
 
@@ -335,6 +335,9 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	// post
 	for ip, sub := range g.post {
 		r := rang + ip + 1
+		if r >= phrase.nbmots - 1 {
+			break
+		}
 		mp := phrase.mots[r]
 		//if debog {fmt.Println("post, mp",mp.gr)}
 		for mp.dejaSub() && r < len(phrase.mots) - 1 {
