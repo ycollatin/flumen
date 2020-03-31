@@ -3,7 +3,9 @@
 
 package main
 
-// FIXME : Clymenes filius, 2 liens réciproques
+// FIXME
+// - l'arbre de la phrase précédente ne s'affiche plus
+// - le mot 0 n'est pas toujours en rouge
 
 import (
 	"fmt"
@@ -33,7 +35,6 @@ var (
 	ch, chData	string	// chemins du binaire et des données
 	chCorpus	string	// chemin du corpus
 	dat			bool	// drapeau de chargement des données
-	imot		int		// n° de mot
 	module		string
 	modules		[]string
 	rouge		func(...interface{}) string
@@ -73,13 +74,12 @@ func chxTexte() {
 	chx := InputInt("n° du texte")
 	ftexte := textes[chx-1]
 	texte = CreeTexte(ftexte)
-	texte.affiche(aidePh)
 	texte.majPhrase()
 }
 
 func lemmatise() {
 	texte.majPhrase()
-	fmt.Println(gocol.Restostring(phrase.mots[imot].ans))
+	fmt.Println(gocol.Restostring(phrase.mots[phrase.imot].ans))
 }
 
 func motprec() {
@@ -87,8 +87,8 @@ func motprec() {
 		txtNil()
 		return
 	}
-	if imot > 0 {
-		imot--
+	if phrase.imot > 0 {
+		phrase.imot--
 		texte.affiche(aidePh)
 	}
 }
@@ -98,8 +98,8 @@ func motsuiv() {
 		txtNil()
 		return
 	}
-	if imot < len(phrase.mots)-1 {
-		imot++
+	if phrase.imot < len(phrase.mots)-1 {
+		phrase.imot++
 		texte.affiche(aidePh)
 	}
 }
