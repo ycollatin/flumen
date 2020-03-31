@@ -25,14 +25,10 @@ ter:n.det
 pos:n
 a:p;det;;cgn;det
 
-!ter:n.app
-!pos:n
-!lexsynt:nom
-!p:NP;app;;cn
-
-!ter:n.appFam
-!pos:NP
-!p:n;app;;cgn;fam
+ter:n.app
+pos:n
+lexsynt:nom
+p:NP;app;;cn
 
 ter:n.prepAbl
 pos:n NP
