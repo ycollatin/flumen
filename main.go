@@ -3,11 +3,6 @@
 
 package main
 
-// FIXME
-// - corriger dans la branche phrasegr
-// - l'arbre de la phrase précédente ne s'affiche plus
-// - le mot 0 n'est pas toujours en rouge
-
 import (
 	"fmt"
 	"io/ioutil"
