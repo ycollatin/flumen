@@ -109,6 +109,19 @@ func (p *Phrase) arbre() ([]string, []string) {
 	return ll, lexpl
 }
 
+func (p *Phrase) enClair() string {
+	var lm []string
+	for i:=0; i<len(p.mots); i++ {
+		m := p.mots[i].gr
+		if i == p.imot {
+			m = rouge(m)
+		}
+		//ec = fmt.Sprintf("%s %s", ec, m)
+		lm = append(lm, m)
+	}
+	return strings.Join(lm, " ")+"."
+}
+
 func (p *Phrase) estSub(m *Mot) bool {
 	for _, nod := range p.nods {
 		for _, el := range nod.mma {
@@ -155,19 +168,6 @@ func (p *Phrase) exr(d, n int) (e string) {
 	return
 }
 
-func (p *Phrase) enClair() string {
-	var lm []string
-	for i:=0; i<len(p.mots); i++ {
-		m := p.mots[i].gr
-		if i == p.imot {
-			m = rouge(m)
-		}
-		//ec = fmt.Sprintf("%s %s", ec, m)
-		lm = append(lm, m)
-	}
-	return strings.Join(lm, " ")+"."
-}
-
 // nombre de mots
 func (p *Phrase) nbm() int {
 	return len(p.mots)
@@ -190,4 +190,9 @@ func (p *Phrase) rang(m *Mot) int {
 		}
 	}
 	return -1
+}
+
+func (p *Phrase) reinit() {
+	p.imot = 0
+	p.nods = nil
 }

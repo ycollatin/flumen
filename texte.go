@@ -66,7 +66,7 @@ func CreeTexte (nf string) *Texte {
 func (t *Texte) majPhrase() {
 	initArcs()
 	phrase = t.phrases[t.compteur]
-	phrase.imot = 0
+	phrase.reinit()
 	t.affiche(aidePh)
 }
 
