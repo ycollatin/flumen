@@ -48,10 +48,6 @@ func CreeTexte (nf string) *Texte {
 				break;
 			} else {
 				tp += l[:ifp] //+ " "
-				// supprimer l'espace initiale
-				if tp > "" && tp[0] == ' ' {
-					tp = tp[1:]
-				}
 				// créer et ajouter la nouvelle phrase
 				p := creePhrase(tp)
 				t.phrases = append(t.phrases, p)
