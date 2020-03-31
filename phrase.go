@@ -44,6 +44,7 @@ func (n *Nod) valide() {
 
 type Phrase struct {
 	gr		string
+	imot	int
 	mots	[]*Mot
 	nods	[]*Nod
 }
@@ -154,16 +155,17 @@ func (p *Phrase) exr(d, n int) (e string) {
 	return
 }
 
-func (p *Phrase) enClair() (ec string) {
+func (p *Phrase) enClair() string {
+	var lm []string
 	for i:=0; i<len(p.mots); i++ {
 		m := p.mots[i].gr
-		if i == imot {
+		if i == p.imot {
 			m = rouge(m)
 		}
-		ec = fmt.Sprintf("%s %s", ec, m)
+		//ec = fmt.Sprintf("%s %s", ec, m)
+		lm = append(lm, m)
 	}
-	ec += "."
-	return
+	return strings.Join(lm, " ")+"."
 }
 
 // nombre de mots
