@@ -8,6 +8,9 @@ import (
 	"strings"
 )
 
+// signets
+// mot-noeud
+
 // rappel de la lemmatisation dans gocol :
 // type Sr struct {
 //	Lem     *Lemme
@@ -114,27 +117,27 @@ func (m *Mot) elucide() bool {
 
 // teste si m peut être le noyau du groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
-	//debog := m.gr=="finxit" && g.id=="P.1"
-	//if debog {fmt.Println("estNoyau",m.gr,g.id,"nl/nm",m.nl,m.nm)}
+	//debog := m.gr=="flumen" && g.id=="n.app"
+	//if debog {fmt.Println("estNoyau",m.gr,g.id,"nl/nm",m.nl,m.nm,"eluc.",m.elucide())}
 	va := false
-
-	//var nl, nm int
-
 	// vérif du pos
-	mnuclde := m.estNuclDe()
-	//if debog {fmt.Println("  .estNoyau, mnuclde",mnuclde)}
-	if len(mnuclde) == 0 {
-		if m.elucide() {
-			va = contient(g.pos, m.ans[m.nl].Lem.Pos)
-		} else {
-			for _, a := range m.ans {
-				va = va || contient(g.pos, a.Lem.Pos)
-			}
-		}
-	} else {
+	if m.elucide() {
+		va = g.vaPos(m.ans[m.nl].Lem.Pos)
+		//if debog {fmt.Println("  .estNoyau, eluc.,va",va)}
+		/*
 		for _, mnd := range mnuclde {
 			va = va || contient(g.pos, mnd)
 		}
+		mnuclde := m.estNuclDe()
+		if len(mnuclde) == 0 {
+			va = contient(g.pos, m.ans[m.nl].Lem.Pos)
+		} else {
+		}
+		*/
+	} else {
+			for _, a := range m.ans {
+				va = va || contient(g.pos, a.Lem.Pos)
+			}
 	}
 	if !va {
 		return false
@@ -155,8 +158,8 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 			}
 		}
 	} else {
-		//if debog {fmt.Println("  .estNoyau, vaMorph",m.ans[m.nl].Morphos[m.nm])}
-		return g.vaMorph(m.ans[m.nl].Morphos[m.nm])
+		//if debog {fmt.Println("  .estNoyau, vaMorph",g.vaMorph(m.morphodef()))}
+		return g.vaMorph(m.morphodef())
 	}
 	return false
 }
@@ -285,9 +288,10 @@ func (m *Mot) nbSubs() int {
 	return nbm
 }
 
+// signet mot-noeud
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
-	//debog := g.id=="P.1" && m.gr == "finxit"
+	//debog := g.id=="n.app" && m.gr == "flumen"
 	//if debog {fmt.Println("noeud", m.gr, g.id)}
 	rang := m.rang
 	lante := len(g.ante)
@@ -299,7 +303,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	if phrase.nbm() - rang < len(g.post) {
 		return nil
 	}
-	//if debog {fmt.Println("   noeud oka, estNoyau",m.gr,g.id,m.estNoyau(g))}
+	//if debog {fmt.Println("  .noeud oka, estNoyau",m.gr,g.id,m.estNoyau(g))}
 	// m peut-il être noyau du groupe g ?
 	if !m.estNoyau(g) {
 		return nil
@@ -313,7 +317,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	// vérif des subs
 	// ante
 	r := rang - 1
-	//if debog {fmt.Println("   noeud okb")}
+	//if debog {fmt.Println("  .noeud okb",lante,"lante")}
 	// reгcherche rétrograde des subs ante
 	for ia := lante-1; ia > -1; ia-- {
 		sub := g.ante[ia]
@@ -333,11 +337,11 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		r--
 		//if debog {fmt.Println("    vu",ma.gr)}
 	}
-	//if debog {fmt.Println("   okd",len(g.post),"g.post")}
+	//if debog {fmt.Println("  .noeud okd",len(g.post),"g.post, rang",rang,"nbmots",phrase.nbmots)}
 	// post
 	for ip, sub := range g.post {
 		r := rang + ip + 1
-		if r >= phrase.nbmots - 1 {
+		if r >= phrase.nbmots {
 			break
 		}
 		mp := phrase.mots[r]
