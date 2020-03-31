@@ -307,7 +307,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	nod := new(Nod)
 	nod.grp = g
 	nod.nucl = m
-	nod.rang = m.rang
+	nod.rang = rang
 	// vérif des subs
 	// ante
 	r := rang - 1
