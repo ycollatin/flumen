@@ -5,7 +5,7 @@ package main
 // typegroupe (signet)
 
 import (
-	//"fmt"
+	"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -104,8 +104,10 @@ func (s *Sub) vaMorpho(m string) bool {
 }
 
 func (s *Sub) vaPos(p string) bool {
+	debog := p == "n.appFam"
 	for _, n := range s.noyaux {
-		if n.generique && n.id == p {
+		if debog {fmt.Println("vaPos generique",n.generique,"p",p,"n.id",n.id,"n.idgr",n.idgr)}
+		if n.generique && n.id == PrimEl(p, ".") {
 			return true
 		} else if n.idgr == p {
 			return true
