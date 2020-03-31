@@ -5,6 +5,7 @@ package main
 import (
 	"fmt"
 	"strings"
+	"github.com/ycollatin/gocol"
 )
 
 type Nod struct {
@@ -45,6 +46,7 @@ func (n *Nod) valide() {
 type Phrase struct {
 	gr		string
 	imot	int
+	nbmots	int
 	mots	[]*Mot
 	nods	[]*Nod
 }
@@ -54,10 +56,12 @@ var phrase *Phrase
 func creePhrase(t string) *Phrase {
 	p := new(Phrase)
 	p.gr = t
-	mm := strings.Split(t, " ")
+	//mm := strings.Split(t, " ")
+	mm := gocol.Mots(t)
 	for _, nm := range(mm) {
 		p.append(creeMot(nm))
 	}
+	p.nbmots = len(p.mots)
 	return p
 }
 
@@ -89,8 +93,11 @@ func (p *Phrase) arbre() ([]string, []string) {
 
 	// groupes non terminaux
 	for _, m := range p.mots {
+		//adebog := m.gr=="finxit"
+		//if debog {fmt.Println("  arbre, ok")}
 		// pour chaque déf. de groupe non terminal
 		for _, g := range grp {
+			//if debog {fmt.Println("arbre, m",m.gr,"g",g.id)}
 			// m noyau ?
 			n := m.noeud(g)
 			if n != nil {
