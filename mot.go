@@ -9,7 +9,8 @@ import (
 )
 
 // signets
-// mot-noeud
+// motnoeud
+// motestnoyau
 
 // rappel de la lemmatisation dans gocol :
 // type Sr struct {
@@ -115,29 +116,20 @@ func (m *Mot) elucide() bool {
 	return m.nl > -1 && m.nm > -1
 }
 
+// signet motestnoyau
 // teste si m peut être le noyau du groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
-	//debog := m.gr=="flumen" && g.id=="n.app"
+	//debog := m.gr=="iussu" && g.id=="n.fam"
 	//if debog {fmt.Println("estNoyau",m.gr,g.id,"nl/nm",m.nl,m.nm,"eluc.",m.elucide())}
 	va := false
 	// vérif du pos
 	if m.elucide() {
 		va = g.vaPos(m.ans[m.nl].Lem.Pos)
 		//if debog {fmt.Println("  .estNoyau, eluc.,va",va)}
-		/*
-		for _, mnd := range mnuclde {
-			va = va || contient(g.pos, mnd)
-		}
-		mnuclde := m.estNuclDe()
-		if len(mnuclde) == 0 {
-			va = contient(g.pos, m.ans[m.nl].Lem.Pos)
-		} else {
-		}
-		*/
 	} else {
-			for _, a := range m.ans {
-				va = va || contient(g.pos, a.Lem.Pos)
-			}
+		for _, a := range m.ans {
+			va = va || contient(g.pos, a.Lem.Pos)
+		}
 	}
 	if !va {
 		return false
@@ -146,6 +138,16 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 	// vérif de la morpho
 	if !m.elucide() {
 		for i, an:= range m.ans {
+			// lexsynt
+			vals := true
+			for _, ls := range g.lexSynt {
+				if !lexsynt(ls, an.Lem.Gr[0]) {
+					vals = false
+				}
+			}
+			if !vals {
+				return false
+			}
 			//if debog {fmt.Println("   .estNoyau >, morf",morf)}
 			for j, gm := range an.Morphos {
 				va = va || g.vaMorph(gm)
@@ -159,6 +161,15 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 		}
 	} else {
 		//if debog {fmt.Println("  .estNoyau, vaMorph",g.vaMorph(m.morphodef()))}
+		// lexsynt
+		if len(g.lexSynt) > 0 {
+			//if debog {fmt.Println("  .estNoyau, lexsynt",g.lexSynt)}
+			for _, ls := range g.lexSynt {
+				if !lexsynt(m.ans[m.nl].Lem.Gr[0], ls) {
+					return false
+				}
+			}
+		}
 		return g.vaMorph(m.morphodef())
 	}
 	return false
@@ -288,10 +299,10 @@ func (m *Mot) nbSubs() int {
 	return nbm
 }
 
-// signet mot-noeud
+// signet motnoeud
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
-	//debog := g.id=="n.app" && m.gr == "flumen"
+	//debog := g.id=="n.appFam" && m.gr == "Vulcanus"
 	//if debog {fmt.Println("noeud", m.gr, g.id)}
 	rang := m.rang
 	lante := len(g.ante)
