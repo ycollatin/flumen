@@ -114,7 +114,7 @@ func (m *Mot) elucide() bool {
 
 // teste si m peut être le noyau du groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
-	//debog := m.gr=="finxit" && g.id=="v.prepa"
+	//debog := m.gr=="finxit" && g.id=="P.1"
 	//if debog {fmt.Println("estNoyau",m.gr,g.id,"nl/nm",m.nl,m.nm)}
 	va := false
 
@@ -155,6 +155,7 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 			}
 		}
 	} else {
+		//if debog {fmt.Println("  .estNoyau, vaMorph",m.ans[m.nl].Morphos[m.nm])}
 		return g.vaMorph(m.ans[m.nl].Morphos[m.nm])
 	}
 	return false
@@ -175,7 +176,7 @@ func (m *Mot) estNuclDe() []string {
 // Sub : pos string, morpho []string, accord string
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
-	//debog := m.gr=="ex" && mn.gr == "luto" && sub.groupe.id=="n.prepAbl"
+	//debog := m.gr=="Prometheus" && mn.gr == "finxit" //&& sub.groupe.id=="P.1"
 	//if debog {fmt.Println("estSub m",m.gr,"mn",mn.gr,"grup",sub.groupe.id,"m.nl",m.nl)}
 	//si le mot a déjà une lemmatisation fixée
 	if m.elucide() {
@@ -185,6 +186,7 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 			//if debog {fmt.Println(" .estsub, elucide", m.morphodef())}
 			return true
 		}
+		//if debog {fmt.Println(" .estSub vaPos",m.pos,sub.vaPos(m.pos),"vaMorpho",sub.vaMorpho(a.Morphos[m.nm]))}
 	} else {
 	    // vérification de toutes les morphos	
 		va := false
@@ -285,7 +287,7 @@ func (m *Mot) nbSubs() int {
 
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
-	//debog := g.id=="n.fam" && m.gr == "filius"
+	//debog := g.id=="P.1" && m.gr == "finxit"
 	//if debog {fmt.Println("noeud", m.gr, g.id)}
 	rang := m.rang
 	lante := len(g.ante)
@@ -321,7 +323,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 			r--
 			ma = phrase.mots[r]
 		}
-		//if debog {fmt.Println("  ma",ma.gr,"nl/nm",ma.nl,ma.nm,"estSub",m.gr,"id grup",sub.groupe.id,ma.estSub(sub, m))}
+		//if debog {fmt.Println(" ma",ma.gr,"nl/nm",ma.nl,ma.nm,"estSub",m.gr,"grup",sub.groupe.id,ma.estSub(sub, m))}
 		if m.estSubDe(ma) || !ma.estSub(sub, m) {
 			// réinitialiser lemme et morpho de ma
 			return nil
