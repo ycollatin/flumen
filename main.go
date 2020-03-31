@@ -1,6 +1,8 @@
 //   main.go --	Gentes
 //	analyseur syntaxique du latin
 
+// FIXME le ter v.adat désactive le grp v.prepAbl
+
 package main
 
 import (
