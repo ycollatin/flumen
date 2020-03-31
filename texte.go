@@ -47,7 +47,11 @@ func CreeTexte (nf string) *Texte {
 				tp += l + " "
 				break;
 			} else {
-				tp += l[:ifp] + " "
+				tp += l[:ifp+1] //+ " "
+				// supprimer l'espace initiale
+				if tp > "" && tp[0] == ' ' {
+					tp = tp[1:]
+				}
 				// créer et ajouter la nouvelle phrase
 				p := creePhrase(tp)
 				t.phrases = append(t.phrases, p)
@@ -62,7 +66,7 @@ func CreeTexte (nf string) *Texte {
 func (t *Texte) majPhrase() {
 	initArcs()
 	phrase = t.phrases[t.compteur]
-	phrase.imot = 0
+	phrase.reinit()
 	t.affiche(aidePh)
 }
 
