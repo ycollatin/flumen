@@ -1,8 +1,6 @@
 //   main.go --	Gentes
 //	analyseur syntaxique du latin
 
-// FIXME Vulcanus Iovis iussu vu comme appFam
-
 package main
 
 import (
