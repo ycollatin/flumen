@@ -25,11 +25,6 @@ ter:n.det
 pos:n
 a:p;det;;cgn;det
 
-ter:n.app
-pos:n
-lexsynt:nom
-p:NP;app;;cn
-
 ter:n.prepAbl
 pos:n NP
 morph:abl
@@ -70,9 +65,15 @@ a:NP n;gen;gén
 ! Groupes non terminaux !
 !!!!!!!!!!!!!!!!!!!!!!!!!
 
+!- a:pos;id-lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
 grp:n.appFam
 pos:NP n
 pg:n.fam;app;;cn
+
+grp:n.app
+pos:n
+lexSynt:nom
+p:NP;app;;cn
 
 grp:n.gprepAcc
 pos:n.det
