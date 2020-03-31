@@ -47,7 +47,7 @@ func CreeTexte (nf string) *Texte {
 				tp += l + " "
 				break;
 			} else {
-				tp += l[:ifp] //+ " "
+				tp += l[:ifp+1] //+ " "
 				// supprimer l'espace initiale
 				if tp > "" && tp[0] == ' ' {
 					tp = tp[1:]
