@@ -119,13 +119,14 @@ func (m *Mot) elucide() bool {
 // signet motestnoyau
 // teste si m peut être le noyau du groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
-	//debog := m.gr=="iussu" && g.id=="n.fam"
+	//debog := m.gr=="decidit" && g.id=="v.svprepa"
 	//if debog {fmt.Println("estNoyau",m.gr,g.id,"nl/nm",m.nl,m.nm,"eluc.",m.elucide())}
 	va := false
 	// vérif du pos
 	if m.elucide() {
-		va = g.vaPos(m.ans[m.nl].Lem.Pos)
-		//if debog {fmt.Println("  .estNoyau, eluc.,va",va)}
+		//va = g.vaPos(m.ans[m.nl].Lem.Pos)
+		va = g.vaPos(m.pos)
+		//if debog {fmt.Println("  .estNoyau, eluc.,va",va,m.ans[m.nl].Lem.Pos,"-",g.pos)}
 	} else {
 		for _, a := range m.ans {
 			va = va || contient(g.pos, a.Lem.Pos)
@@ -302,7 +303,7 @@ func (m *Mot) nbSubs() int {
 // signet motnoeud
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
-	//debog := g.id=="n.appFam" && m.gr == "Vulcanus"
+	//debog := g.id=="v.svprepa" && m.gr == "decidit"
 	//if debog {fmt.Println("noeud", m.gr, g.id)}
 	rang := m.rang
 	lante := len(g.ante)
@@ -334,6 +335,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		if r < 0 {
 			break
 		}
+		//if debog {fmt.Println("  .noeud, oka")}
 		sub := g.ante[ia]
 		ma := phrase.mots[r]
 		// passer les mots
@@ -375,7 +377,6 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	if len(nod.mma) + len(nod.mmp) > 0 {
 		m.pos = g.id
 		// fixer lemme et morpho de tous les mots du nod
-		nod.valide()
 		return nod
 	}
 	return nil
@@ -391,7 +392,7 @@ func (ma *Mot) subDe(mb *Mot) bool {
 	return false
 }
 
-func (m *Mot) valideTmp() {
+func (m *Mot) valide() {
 	m.nl = m.tmpl
 	m.nm = m.tmpm
 }
