@@ -27,18 +27,36 @@ func (n *Nod) graf() ([]string) {
 	return ll
 }
 
-func (n *Nod) valide() {
-	if !n.nucl.elucide() {
-		n.nucl.valideTmp()
+func (n *Nod) doc() string {
+	var mm []string
+	for _, m := range n.mma {
+		mm = append(mm, m.gr)
 	}
+	mm = append(mm, rouge(n.nucl.gr))
+	for _, m := range n.mmp {
+		mm = append(mm, m.gr)
+	}
+	mm = append (mm, " - " + n.grp.id)
+	return strings.Join(mm, " ")
+}
+
+// Fixe définitivement la lemmatisation de tous les éléments
+// d'un noeud
+func (n *Nod) valide() {
+	// lemmatisation du noyau
+	if !n.nucl.elucide() {
+		n.nucl.valide()
+	}
+	// lemmatisation des antéposés
 	for _, m := range n.mma {
 		if !m.elucide() {
-			m.valideTmp()
+			m.valide()
 		}
 	}
+	// lemmatisation des postposés
 	for _, m := range n.mmp {
 		if !m.elucide() {
-			m.valideTmp()
+			m.valide()
 		}
 	}
 }
@@ -84,6 +102,7 @@ func (p *Phrase) arbre() ([]string, []string) {
 		for _, g := range grpTerm {
 			n := m.noeud(g)
 			if n != nil {
+				n.valide()
 				p.nods = append(p.nods, n)
 				lexpl = append(lexpl, n.grp.id)
 			}
@@ -101,6 +120,7 @@ func (p *Phrase) arbre() ([]string, []string) {
 			// m noyau ?
 			n := m.noeud(g)
 			if n != nil {
+				n.valide()
 				p.nods = append(p.nods, n)
 				lexpl = append(lexpl, n.grp.id)
 			}
