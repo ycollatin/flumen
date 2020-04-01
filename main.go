@@ -3,6 +3,11 @@
 
 package main
 
+// TODO Omission du pos d'un sub dans groupes.la
+// TODO La lemmatisation ne peut pas toujours être fixée.
+// 		par l'adoption d'un noeud. Cette adoption
+//		peut soit éliminer quelques lemmatisations,
+//		soit n'en éliminer aucune.
 // TODO filtre lexsynt pour les subs
 
 import (
