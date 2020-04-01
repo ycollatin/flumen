@@ -21,6 +21,7 @@ func lisLexsynt() {
 	}
 }
 
+// vrai si le lemme lem a el parmi ses étiquettes
 func lexsynt(lem, el string) bool {
 	//fmt.Println("debog lexsynt",lem,el)
 	ls := llexs[lem]
