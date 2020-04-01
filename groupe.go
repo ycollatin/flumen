@@ -187,6 +187,8 @@ func (g *Groupe) nbSubs() int {
 
 // la morpho morf est-elle compatible avec le noyau du groupe g ?
 func (g *Groupe) vaMorph(morf string) bool {
+	//debog := g.id=="n.genabl"
+	//if debog {fmt.Println("vamorph",g.id,"morf",morf)}
 	va := true
 	for _, tr := range g.morph {
 		va = va && strings.Contains(morf, tr)
