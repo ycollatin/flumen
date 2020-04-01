@@ -90,10 +90,9 @@ pos:v v.prepa
 morph:act
 pg:n.prepAcc n.prepAbl;gprep
 
-! FIXME
 grp:v.svprepa
 pos:v.prepa
-ag:n;sujet;nomin;n
+ag:n NP;sujet;nomin;n
 
 grp:v.sprepp
 pos:v.prepp
