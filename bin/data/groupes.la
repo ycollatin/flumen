@@ -88,11 +88,21 @@ ag:n.prepAbl;gprep
 grp:v.prepp
 pos:v v.prepa
 morph:act
-pg:n.prepAcc;gprep
+pg:n.prepAcc n.prepAbl;gprep
+
+! FIXME
+grp:v.svprepa
+pos:v.prepa
+ag:n;sujet;nomin;n
 
 grp:v.sprepp
 pos:v.prepp
 a:n NP;sujet;nomin;n
+
+grp:v.gprepAccp
+pos:v
+morph:act
+pg:n.prepAcc;gprep
 
 grp:v.advsprepp
 pos:v.sprepp
