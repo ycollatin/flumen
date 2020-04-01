@@ -42,16 +42,9 @@ var (
 // affiche les arcs syntaxique de la phrase
 func analyse(expl bool) {
 	texte.majPhrase()
-	/*
-	var ar, lexpl []string
-	ar, lexpl = phrase.arbre()
-	*/
 	ar, _ := phrase.arbre()
 	gr := graphe(ar)
 	if expl {
-		//for _, lin := range lexpl {
-		//	fmt.Println(lin)
-		//}
 		for _, n := range phrase.nods {
 			fmt.Println(n.doc())
 		}
@@ -82,7 +75,8 @@ func chxTexte() {
 }
 
 func lemmatise() {
-	texte.majPhrase()
+	//texte.majPhrase()
+	fmt.Println("mot:",phrase.mots[phrase.imot].gr)
 	fmt.Println(gocol.Restostring(phrase.mots[phrase.imot].ans))
 }
 
