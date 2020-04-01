@@ -331,6 +331,9 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	//if debog {fmt.Println("  .noeud okb",lante,"lante")}
 	// reгcherche rétrograde des subs ante
 	for ia := lante-1; ia > -1; ia-- {
+		if r < 0 {
+			break
+		}
 		sub := g.ante[ia]
 		ma := phrase.mots[r]
 		// passer les mots
