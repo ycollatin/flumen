@@ -25,6 +25,16 @@ ter:n.det
 pos:n
 a:p;det;;cgn;det
 
+ter:n.coord
+pos:n
+p:Adv;coo;;;coord
+p:n NP;coo;;cgn
+
+ter:np.coord
+pos:NP
+p:Adv;coo;;;coord
+p:NP;coo;;cgn
+
 ter:n.prepAbl
 pos:n NP
 morph:abl
@@ -41,10 +51,11 @@ morph:acc
 !lexSynt:subst
 a:prepAA prepAcc;prep
 
+! FIXME : np.coord
 ter:n.fam
 pos:n
 lexSynt:fam
-a:NP;gen;gén
+a:NP np.coord;gen;gén
 
 ter:n.genacc
 pos:n
