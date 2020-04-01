@@ -4,6 +4,7 @@
 package main
 
 // TODO filtre lexsynt pour les subs
+// XXX débordement index mot.go 102
 
 import (
 	"fmt"
