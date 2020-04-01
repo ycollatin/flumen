@@ -3,7 +3,7 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -11,6 +11,7 @@ import (
 // signets
 // motnoeud
 // motestnoyau
+// motestSub
 
 // rappel de la lemmatisation dans gocol :
 // type Sr struct {
@@ -119,7 +120,7 @@ func (m *Mot) elucide() bool {
 // signet motestnoyau
 // teste si m peut être le noyau du groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
-	//debog := m.gr=="filius" && g.id=="n.genabl"
+	//debog := m.gr=="filius" && g.id=="n.fam"
 	//if debog {fmt.Println("estNoyau",m.gr,g.id,"nl/nm",m.nl,m.nm,"eluc.",m.elucide())}
 	va := false
 	// vérif du pos
@@ -143,7 +144,7 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 			// lexsynt
 			vals := true
 			for _, ls := range g.lexSynt {
-				if !lexsynt(ls, an.Lem.Gr[0]) {
+				if !lexsynt(an.Lem.Gr[0], ls) {
 					vals = false
 				}
 			}
@@ -193,7 +194,8 @@ func (m *Mot) estNuclDe() []string {
 // Sub : pos string, morpho []string, accord string
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
-	//debog := m.gr=="Prometheus" && mn.gr == "finxit" //&& sub.groupe.id=="P.1"
+	// signet motestSub
+	//debog := m.gr=="Clymenes" && mn.gr == "filius" && sub.groupe.id=="n.fam"
 	//if debog {fmt.Println("estSub m",m.gr,"mn",mn.gr,"grup",sub.groupe.id,"m.nl",m.nl)}
 	//si le mot a déjà une lemmatisation fixée
 	if m.elucide() {
@@ -305,7 +307,7 @@ func (m *Mot) nbSubs() int {
 // signet motnoeud
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
-	//debog := g.id=="n.genabl" && m.gr == "filius"
+	//debog := g.id=="n.fam" && m.gr == "filius"
 	//if debog {fmt.Println("noeud", m.gr, g.id)}
 	rang := m.rang
 	lante := len(g.ante)
