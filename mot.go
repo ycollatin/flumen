@@ -3,7 +3,7 @@
 package main
 
 import (
-	//"fmt"
+	"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -119,7 +119,7 @@ func (m *Mot) elucide() bool {
 // signet motestnoyau
 // teste si m peut être le noyau du groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
-	//debog := m.gr=="decidit" && g.id=="v.svprepa"
+	//debog := m.gr=="filius" && g.id=="n.genabl"
 	//if debog {fmt.Println("estNoyau",m.gr,g.id,"nl/nm",m.nl,m.nm,"eluc.",m.elucide())}
 	va := false
 	// vérif du pos
@@ -138,6 +138,7 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 	//if debog {fmt.Println(" .estNoyau, pos, nl/nm",m.nl,m.nm)}
 	// vérif de la morpho
 	if !m.elucide() {
+		va = false
 		for i, an:= range m.ans {
 			// lexsynt
 			vals := true
@@ -149,8 +150,9 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 			if !vals {
 				return false
 			}
-			//if debog {fmt.Println("   .estNoyau >, morf",morf)}
+			//if debog {fmt.Println("   .estNoyau >, lenmorphos",len(an.Morphos))}
 			for j, gm := range an.Morphos {
+				//if debog{fmt.Println("  .estNoyau, gm",gm,"g.id",g.id,"va",va)}
 				va = va || g.vaMorph(gm)
 				if va {
 					m.tmpl = i
@@ -303,7 +305,7 @@ func (m *Mot) nbSubs() int {
 // signet motnoeud
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
-	//debog := g.id=="v.svprepa" && m.gr == "decidit"
+	//debog := g.id=="n.genabl" && m.gr == "filius"
 	//if debog {fmt.Println("noeud", m.gr, g.id)}
 	rang := m.rang
 	lante := len(g.ante)
