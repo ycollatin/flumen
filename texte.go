@@ -48,7 +48,6 @@ func CreeTexte (nf string) *Texte {
 					tp = tp[1:]
 				}
 				// créer et ajouter la nouvelle phrase
-				//p := creePhrase(tp)
 				t.phrases = append(t.phrases, tp)
 				tp = ""
 				l =	l[ifp+1:]
