@@ -3,8 +3,8 @@
 
 package main
 
-// FIXME pas de lemmatisation pour la première phrase
-// TODO Omission du pos d'un sub dans groupes.la
+// FIXME la phrase est affichée en plus à chaque arbre
+// TODO Permettre l'omission du pos d'un sub dans groupes.la
 // TODO La lemmatisation ne peut pas toujours être fixée.
 // 		par l'adoption d'un noeud. Cette adoption
 //		peut soit éliminer quelques lemmatisations,
@@ -47,11 +47,12 @@ var (
 
 // affiche les arcs syntaxique de la phrase
 func analyse(expl bool) {
-	texte.majPhrase()
-	ar, _ := phrase.arbre()
+	texte.phrase.teste()
+	texte.affiche(aidePh)
+	ar, _ := texte.phrase.arbre()
 	gr := graphe(ar)
 	if expl {
-		for _, n := range phrase.nods {
+		for _, n := range texte.phrase.nods {
 			fmt.Println(n.doc())
 		}
 	}
@@ -85,12 +86,11 @@ func chxTexte() {
 }
 
 func lemmatise() {
-	// TODO : vérif à supprimer si possible
-	if len(phrase.motCourant().ans) == 0 {
-		texte.majPhrase()
-	}
-	fmt.Println("lemmatisation", rouge(phrase.motCourant().gr))
-	fmt.Println(gocol.Restostring(phrase.motCourant().ans))
+	texte.affiche(aidePh)
+	// TODO pas compris pourquoi la première phrase n'est pas lemmatisée
+	texte.phrase.teste()
+	fmt.Println("lemmatisation", rouge(texte.phrase.motCourant().gr))
+	fmt.Println(gocol.Restostring(texte.phrase.motCourant().ans))
 }
 
 func motprec() {
@@ -98,8 +98,8 @@ func motprec() {
 		txtNil()
 		return
 	}
-	if phrase.imot > 0 {
-		phrase.imot--
+	if texte.phrase.imot > 0 {
+		texte.phrase.imot--
 		texte.affiche(aidePh)
 	}
 }
@@ -109,8 +109,8 @@ func motsuiv() {
 		txtNil()
 		return
 	}
-	if phrase.imot < len(phrase.mots)-1 {
-		phrase.imot++
+	if texte.phrase.imot < len(texte.phrase.mots)-1 {
+		texte.phrase.imot++
 		texte.affiche(aidePh)
 	}
 }
@@ -123,14 +123,11 @@ func main() {
 	ClearScreen()
     fmt.Println("Suites, grammaire latine")
     fmt.Println("Yves Ouvrard, GPL3")
-
 	// couleur
 	rouge = color.New(color.FgRed, color.Bold).SprintFunc()
-
 	// lecture des données Collatinus
 	dir, _ := os.Executable()
 	ch = path.Dir(dir)
-	//chData = path.Dir(dir) + "/data/"
 	chData = ch + "/data/"
 	chCorpus = ch + "/corpus/"
 	go gocol.Data(chData)
