@@ -69,8 +69,6 @@ type Phrase struct {
 	nods	[]*Nod
 }
 
-var phrase *Phrase
-
 func creePhrase(t string) *Phrase {
 	p := new(Phrase)
 	p.gr = t
@@ -122,7 +120,7 @@ func (p *Phrase) arbre() ([]string, []string) {
 				lexpl = append(lexpl, n.grp.id)
 			}
 		}
-		// résolution des conflits (à écrire)
+		// TODO résolution des conflits (à écrire)
 	}
 
 	// graphe
@@ -223,4 +221,10 @@ func (p *Phrase) rang(m *Mot) int {
 func (p *Phrase) reinit() {
 	p.imot = 0
 	p.nods = nil
+}
+
+func (p *Phrase) teste() {
+	if len(p.motCourant().ans) == 0 {
+		texte.majPhrase()
+	}
 }
