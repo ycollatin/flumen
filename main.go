@@ -3,6 +3,7 @@
 
 package main
 
+// FIXME pas de lemmatisation pour la première phrase
 // TODO Omission du pos d'un sub dans groupes.la
 // TODO La lemmatisation ne peut pas toujours être fixée.
 // 		par l'adoption d'un noeud. Cette adoption
@@ -70,18 +71,21 @@ func chxTexte() {
 	for _, fileInfo := range files {
 		textes = append(textes, fileInfo.Name())
 	}
-	for i:= 0; i < len(files); i++ {
-		fmt.Println(i+1, textes[i])
+	nbf := len(files)
+	chx := 1
+	if nbf > 1 {
+		for i:= 0; i < len(files); i++ {
+			fmt.Println(i+1, textes[i])
+		}
+		chx = InputInt("n° du texte")
 	}
-	chx := InputInt("n° du texte")
 	ftexte := textes[chx-1]
 	texte = CreeTexte(ftexte)
 	texte.majPhrase()
 }
 
 func lemmatise() {
-	//texte.majPhrase()
-	fmt.Println("mot:",phrase.mots[phrase.imot].gr)
+	fmt.Println("lemmatisation", rouge(phrase.mots[phrase.imot].gr))
 	fmt.Println(gocol.Restostring(phrase.mots[phrase.imot].ans))
 }
 
