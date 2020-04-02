@@ -316,7 +316,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		return nil
 	}
 	// ou trop élevé
-	if texte.phrase.nbm() - rang < len(g.post) {
+	if texte.phrase.nbmots - rang < len(g.post) {
 		return nil
 	}
 	//if debog {fmt.Println("  .noeud oka, estNoyau",m.gr,g.id,m.estNoyau(g))}
