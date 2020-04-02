@@ -202,10 +202,12 @@ func graphe(ll []string) []string {
 
 	// gabarit des lignes où sont tracés les arcs
 	gabarit = strings.Repeat(" ", len(ll[0]))
-	// ajout de la phrase
-	lignes = append(lignes, ll[0])
-	// ajout de la première ligne (V ou vv)
-	lignes = append(lignes, gabarit)
+	// ajout éventuel de la phrase
+	if len(lignes) == 0 {
+		lignes = append(lignes, ll[0])
+		// ajout de la première ligne (V ou vv)
+		lignes = append(lignes, gabarit)
+	}
 	// calcul des arcs, remplissage des lignes
 	for i := 1; i <= len(mots); i++ {
 		for _, a := range arcs {
