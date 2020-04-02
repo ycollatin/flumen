@@ -8,7 +8,8 @@ import (
 	"strings"
 )
 
-// signets
+// signets :
+//
 // motnoeud
 // motestnoyau
 // motestSub
@@ -82,7 +83,7 @@ func (ma *Mot) accord(mb *Mot, cgn string) bool {
 }
 
 func (m *Mot) dejaNoy() bool {
-	for _, n := range phrase.nods {
+	for _, n := range texte.phrase.nods {
 		if n.nucl == m {
 			return true
 		}
@@ -91,7 +92,7 @@ func (m *Mot) dejaNoy() bool {
 }
 
 func (m *Mot) dejaSub() bool {
-	for _, n := range phrase.nods {
+	for _, n := range texte.phrase.nods {
 		if m.elDe(n) {
 			return true
 		}
@@ -182,7 +183,7 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 // id des Nod dont m est déjà le noyau
 func (m *Mot) estNuclDe() []string {
 	var ret []string
-	for _, nod := range phrase.nods {
+	for _, nod := range texte.phrase.nods {
 		if nod.nucl == m {
 			ret = append(ret, nod.grp.id)
 		}
@@ -233,9 +234,8 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 }
 
 // id du groupe dont m est le noyau
-// XXX nod.grp est-il le groupe dont nod est le noyau
 func (m *Mot) estNuclDuGroupe() string {
-	for _, nod := range phrase.nods {
+	for _, nod := range texte.phrase.nods {
 		if nod.nucl == m {
 			return nod.grp.id
 		}
@@ -244,7 +244,7 @@ func (m *Mot) estNuclDuGroupe() string {
 }
 
 func (ma *Mot) estSubDe(mb *Mot) bool {
-	for _, n := range phrase.nods {
+	for _, n := range texte.phrase.nods {
 		if mb == n.nucl {
 			for _, sub := range n.mma {
 				if sub == ma {
@@ -293,7 +293,7 @@ func (m *Mot) nbSubs() int {
 		return 0
 	}
 	var nbm int
-	for _, mb := range phrase.mots {
+	for _, mb := range texte.phrase.mots {
 		if mb == m {
 			continue
 		}
@@ -316,7 +316,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		return nil
 	}
 	// ou trop élevé
-	if phrase.nbm() - rang < len(g.post) {
+	if texte.phrase.nbm() - rang < len(g.post) {
 		return nil
 	}
 	//if debog {fmt.Println("  .noeud oka, estNoyau",m.gr,g.id,m.estNoyau(g))}
@@ -341,11 +341,11 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		}
 		//if debog {fmt.Println("  .noeud, oka")}
 		sub := g.ante[ia]
-		ma := phrase.mots[r]
+		ma := texte.phrase.mots[r]
 		// passer les mots
 		for ma.dejaSub() && r > 0 {
 			r--
-			ma = phrase.mots[r]
+			ma = texte.phrase.mots[r]
 		}
 		//if debog {fmt.Println(" ma",ma.gr,"nl/nm",ma.nl,ma.nm,"estSub",m.gr,"grup",sub.groupe.id,ma.estSub(sub, m))}
 		if m.estSubDe(ma) || !ma.estSub(sub, m) {
@@ -361,14 +361,14 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	// post
 	for ip, sub := range g.post {
 		r := rang + ip + 1
-		if r >= phrase.nbmots {
+		if r >= texte.phrase.nbmots {
 			break
 		}
-		mp := phrase.mots[r]
+		mp := texte.phrase.mots[r]
 		//if debog {fmt.Println("post, mp",mp.gr)}
-		for mp.dejaSub() && r < len(phrase.mots) - 1 {
+		for mp.dejaSub() && r < len(texte.phrase.mots) - 1 {
 			r++
-			mp = phrase.mots[r]
+			mp = texte.phrase.mots[r]
 		}
 		//if debog {fmt.Println("     mp", mp.gr,"estSub",m.gr,sub.groupe.id,mp.estSub(sub, m))}
 		if m.estSubDe(mp) || !mp.estSub(sub, m) {
@@ -386,9 +386,10 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	return nil
 }
 
+// vrai si ma est sub de mb
 func (ma *Mot) subDe(mb *Mot) bool {
 	// chercher le groupe dont mb est noyau
-	for _, n := range phrase.nods {
+	for _, n := range texte.phrase.nods {
 		if mb == n.nucl {
 			return ma.elDe(n)
 		}
@@ -396,6 +397,7 @@ func (ma *Mot) subDe(mb *Mot) bool {
 	return false
 }
 
+// fixe définitivement la lemmatisation du Mot m
 func (m *Mot) valide() {
 	m.nl = m.tmpl
 	m.nm = m.tmpm
