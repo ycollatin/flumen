@@ -3,7 +3,6 @@
 
 package main
 
-// FIXME la phrase est affichée en plus à chaque arbre
 // TODO Permettre l'omission du pos d'un sub dans groupes.la
 // TODO La lemmatisation ne peut pas toujours être fixée.
 // 		par l'adoption d'un noeud. Cette adoption
@@ -16,6 +15,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
+	"strings"
 
 	"github.com/fatih/color"
 	"github.com/ycollatin/gocol"
@@ -39,8 +39,8 @@ var (
 	ch, chData	string	// chemins du binaire et des données
 	chCorpus	string	// chemin du corpus
 	dat			bool	// drapeau de chargement des données
-	module		string
-	modules		[]string
+	//module		string
+	//modules		[]string
 	rouge		func(...interface{}) string
 	texte		*Texte
 )
@@ -50,15 +50,16 @@ func analyse(expl bool) {
 	texte.phrase.teste()
 	texte.affiche(aidePh)
 	ar, _ := texte.phrase.arbre()
-	gr := graphe(ar)
+	gr := texte.phrase.src
 	if expl {
 		for _, n := range texte.phrase.nods {
 			fmt.Println(n.doc())
 		}
+		fmt.Println("\n----- source ---\n",
+		strings.Join(ar,"\n"),
+		"\n----------------")
 	}
-	for _, lin := range gr {
-		fmt.Println(lin)
-	}
+	fmt.Println(strings.Join(gr, "\n"))
 }
 
 // choix du texte latin
@@ -87,7 +88,6 @@ func chxTexte() {
 
 func lemmatise() {
 	texte.affiche(aidePh)
-	// TODO pas compris pourquoi la première phrase n'est pas lemmatisée
 	texte.phrase.teste()
 	fmt.Println("lemmatisation", rouge(texte.phrase.motCourant().gr))
 	fmt.Println(gocol.Restostring(texte.phrase.motCourant().ans))
