@@ -76,16 +76,13 @@ func creePhrase(t string) *Phrase {
 	p.gr = t
 	//mm := strings.Split(t, " ")
 	mm := gocol.Mots(t)
-	for _, nm := range(mm) {
-		p.append(creeMot(nm))
+	for i, m := range(mm) {
+		nm := creeMot(m)
+		nm.rang = i
+		p.mots = append(p.mots, nm)
 	}
 	p.nbmots = len(p.mots)
 	return p
-}
-
-func (p *Phrase) append(m *Mot) {
-	m.rang = len(p.mots)
-	p.mots = append(p.mots, m)
 }
 
 func (p *Phrase) arbre() ([]string, []string) {
@@ -193,6 +190,10 @@ func (p *Phrase) exr(d, n int) (e string) {
 		}
 	}
 	return
+}
+
+func (p *Phrase) motCourant() *Mot {
+	return p.mots[p.imot]
 }
 
 // nombre de mots
