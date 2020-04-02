@@ -57,15 +57,14 @@ pos:n
 lexSynt:fam
 a:NP np.coord;gen;gén
 
-ter:n.genacc
+ter:n.gen
 pos:n
-morph:acc
-a:n;gen;gén
+a:n NP;gen;gén
 
-ter:n.genabl
-pos:n
-morph:abl
-a:NP n;gen;gén
+!ter:n.genabl
+!pos:n
+!morph:abl
+!a:NP n;gen;gén
 
 !ter:v.adat
 !pos:v
