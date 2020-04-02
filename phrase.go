@@ -67,6 +67,8 @@ type Phrase struct {
 	nbmots	int
 	mots	[]*Mot
 	nods	[]*Nod
+	ar		[]string // arbre de la phrase
+	src		[]string // source de l'arbre
 }
 
 func creePhrase(t string) *Phrase {
@@ -84,6 +86,9 @@ func creePhrase(t string) *Phrase {
 }
 
 func (p *Phrase) arbre() ([]string, []string) {
+	if len(p.ar) > 0 {
+		return p.ar, p.src
+	}
 	var lexpl []string
 	var ll []string
 	// réinitialisation des noeuds
@@ -103,7 +108,7 @@ func (p *Phrase) arbre() ([]string, []string) {
 			}
 		}
 		// résolution des conflits (à écrire)
-	}
+	 }
 
 	// groupes non terminaux
 	for _, m := range p.mots {
@@ -128,9 +133,12 @@ func (p *Phrase) arbre() ([]string, []string) {
 	for _, n := range p.nods {
 		ll = append(ll, n.graf()...)
 	}
+	p.ar = ll
+	p.src = graphe(ll)
 	return ll, lexpl
 }
 
+// texte de la phrase, le mot courant surligné en rouge
 func (p *Phrase) enClair() string {
 	var lm []string
 	for i:=0; i<len(p.mots); i++ {
@@ -138,39 +146,9 @@ func (p *Phrase) enClair() string {
 		if i == p.imot {
 			m = rouge(m)
 		}
-		//ec = fmt.Sprintf("%s %s", ec, m)
 		lm = append(lm, m)
 	}
 	return strings.Join(lm, " ")+"."
-}
-
-func (p *Phrase) estSub(m *Mot) bool {
-	for _, nod := range p.nods {
-		for _, el := range nod.mma {
-			if el == m {
-				return true
-			}
-		}
-		for _, el := range nod.mmp {
-			if el == m {
-				return true
-			}
-		}
-	}
-	return false
-}
-
-// extrait de la phrase p n mots à partir du mot
-// n° d
-func (p *Phrase) ex(d, n int) (e string) {
-	var gab string = "%s"
-	for i := 0; i<n; i++ {
-		if e != "" {
-			gab = " %s"
-		}
-		e += fmt.Sprintf(gab, p.mots[d+i].gr)
-	}
-	return
 }
 
 // affiche la phrase en colorant n mots à partir
@@ -192,35 +170,6 @@ func (p *Phrase) exr(d, n int) (e string) {
 
 func (p *Phrase) motCourant() *Mot {
 	return p.mots[p.imot]
-}
-
-// nombre de mots
-func (p *Phrase) nbm() int {
-	return len(p.mots)
-}
-
-// renvoie le noeud dont m *est* le noyau
-func (p *Phrase) nod(m *Mot) *Nod {
-	for _, n := range p.nods {
-		if n.nucl == m {
-			return n
-		}
-	}
-	return nil
-}
-
-func (p *Phrase) rang(m *Mot) int {
-	for i, mot := range p.mots {
-		if mot == m {
-			return i
-		}
-	}
-	return -1
-}
-
-func (p *Phrase) reinit() {
-	p.imot = 0
-	p.nods = nil
 }
 
 func (p *Phrase) teste() {
