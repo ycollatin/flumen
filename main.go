@@ -85,8 +85,12 @@ func chxTexte() {
 }
 
 func lemmatise() {
-	fmt.Println("lemmatisation", rouge(phrase.mots[phrase.imot].gr))
-	fmt.Println(gocol.Restostring(phrase.mots[phrase.imot].ans))
+	// TODO : vérif à supprimer si possible
+	if len(phrase.motCourant().ans) == 0 {
+		texte.majPhrase()
+	}
+	fmt.Println("lemmatisation", rouge(phrase.motCourant().gr))
+	fmt.Println(gocol.Restostring(phrase.motCourant().ans))
 }
 
 func motprec() {
