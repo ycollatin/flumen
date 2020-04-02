@@ -121,7 +121,7 @@ func (m *Mot) elucide() bool {
 // signet motestnoyau
 // teste si m peut être le noyau du groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
-	//debog := m.gr=="filius" && g.id=="n.fam"
+	//debog := m.gr=="currum" && g.id=="n.gen"
 	//if debog {fmt.Println("estNoyau",m.gr,g.id,"nl/nm",m.nl,m.nm,"eluc.",m.elucide())}
 	va := false
 	// vérif du pos
@@ -196,8 +196,8 @@ func (m *Mot) estNuclDe() []string {
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 	// signet motestSub
-	//debog := m.gr=="Clymenes" && mn.gr == "filius" && sub.groupe.id=="n.fam"
-	//if debog {fmt.Println("estSub m",m.gr,"mn",mn.gr,"grup",sub.groupe.id,"m.nl",m.nl)}
+	//debog := m.gr=="patris" && mn.gr == "currum" && sub.groupe.id=="n.gen"
+	//if debog {fmt.Println("estSub m",m.gr,"mn",mn.gr,"grup",sub.groupe.id)}
 	//si le mot a déjà une lemmatisation fixée
 	if m.elucide() {
 		a := m.ans[m.nl]
@@ -212,18 +212,24 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 		va := false
 		var a gocol.Sr
 		for i, an := range m.ans {
+			//if debog {fmt.Println("  .estSub, i",i,"an.lem.pos",an.Lem.Pos)}
 			if sub.vaPos(an.Lem.Pos) {
 				va = true
 				m.tmpl = i
 				a = an
+				// FIXME : la première solution est prise. Une autre pourrait être la bonne !
+				break
 			}
 		}
 		va = false
 		for i, morf := range a.Morphos {
+			//if debog {fmt.Println("  .estSub,i morf", i, morf)}
 			if sub.vaMorpho(morf) {
-				va = true
+				//va = true
 				m.tmpm = i
-			//if debog {fmt.Println("  .estsub, elucide2", m.morphodef())}
+				return true
+				//break
+				//if debog {fmt.Println("  .estsub, elucide2", m.morphodef())}
 			}
 		}
 		if va {
