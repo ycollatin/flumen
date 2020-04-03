@@ -61,6 +61,11 @@ ter:n.gen
 pos:n
 a:n NP;gen;gén
 
+ter:v.inf
+pos:v
+morph:act
+a:v;obj;infin
+
 !ter:v.adat
 !pos:v
 !morph:act
@@ -99,13 +104,18 @@ pos:v
 morph:act
 ag:n.prepAbl;gprep
 
+grp:v.prepadv
+pos:v
+morph:act
+a:Adv;adv
+
 grp:v.prepp
 pos:v v.prepa
 morph:act
 pg:n.prepAcc n.prepAbl;gprep
 
 grp:v.svprepa
-pos:v.prepa
+pos:v.prepa v.prepadv
 ag:n NP;sujet;nomin;n
 
 grp:v.sprepp
@@ -120,6 +130,7 @@ pg:n.prepAcc;gprep
 grp:v.advsprepp
 pos:v.sprepp
 a:Adv;adv
+
 
 grp:v.padvsprepp
 pos:v.advsprepp
@@ -136,7 +147,7 @@ a:Adv;adv
 
 grp:P.1
 pos:v.objprep
-a:NP n;sujet;nomin;n
+ag:NP n;sujet;nomin;n
 
 grp:P.2
 pos:v
@@ -154,13 +165,6 @@ a:n NP;sujet;nomin;n
 a:Adv;adv
 ag:n.prepAbl;gprep
 a:n;obj;acc
-
-grp:P.4
-pos:v
-morph:act
-a:neg;neg
-ag:n.prepAdjAcc;gprep
-a:v;obj;infin
 
 grp:P.5
 pos:v
