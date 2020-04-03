@@ -3,7 +3,7 @@
 package main
 
 import (
-	//"fmt"
+	"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -196,9 +196,15 @@ func (m *Mot) estNuclDe() []string {
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 	// signet motestSub
-	//debog := m.gr=="patris" && mn.gr == "currum" && sub.groupe.id=="n.gen"
-	//if debog {fmt.Println("estSub m",m.gr,"mn",mn.gr,"grup",sub.groupe.id)}
+	debog := m.gr=="homines" && mn.gr == "finxit" && sub.groupe.id=="v.svprepa"
+	if debog {fmt.Println("estSub m",m.gr,"mn",mn.gr,"grup",sub.groupe.id)}
 	//si le mot a déjà une lemmatisation fixée
+	// accord
+	if sub.accord > "" {
+		if !mn.accord(m, sub.accord) {
+			return false
+		}
+	}
 	if m.elucide() {
 		a := m.ans[m.nl]
 		//if debog {fmt.Println(" .estSub alempos",a.Lem.Pos,"morfo",a.Morphos[m.nm])}
@@ -209,8 +215,8 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 		//if debog {fmt.Println(" .estSub vaPos",m.pos,sub.vaPos(m.pos),"vaMorpho",sub.vaMorpho(a.Morphos[m.nm]))}
 	} else {
 	    // vérification de toutes les morphos	
-		va := false
 		var a gocol.Sr
+		va := false
 		for i, an := range m.ans {
 			//if debog {fmt.Println("  .estSub, i",i,"an.lem.pos",an.Lem.Pos)}
 			if sub.vaPos(an.Lem.Pos) {
@@ -221,19 +227,15 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 				break
 			}
 		}
-		va = false
+		if !va {
+			return false
+		}
 		for i, morf := range a.Morphos {
 			//if debog {fmt.Println("  .estSub,i morf", i, morf)}
 			if sub.vaMorpho(morf) {
-				//va = true
 				m.tmpm = i
 				return true
-				//break
-				//if debog {fmt.Println("  .estsub, elucide2", m.morphodef())}
 			}
-		}
-		if va {
-			return true
 		}
 	}
 	return false
