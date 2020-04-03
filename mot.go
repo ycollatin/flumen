@@ -3,7 +3,7 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -23,11 +23,17 @@ import (
 //
 // type Res []Sr
 
+type Lm struct {
+	l	*gocol.Lemme
+	m	string
+}
+
 type Mot struct {
 	gr			string
 	rang		int
 	ans			gocol.Res	// ensemble des lemmatisations
-	nl, nm		int			// n°s de Sr et de morpho, quand ils sont fixés
+	//nl, nm		int			// n°s de Sr et de morpho, quand ils sont fixés
+	llm			[]Lm		// liste des lemmes ٍ+ morpho possibles
 	tmpl, tmpm	int			// n°s provisoires de Sr et morpho
 	pos			string		// id du groupe dont le mot est noyau
 							// ou à défaut pos du mot, si elle est décidée
@@ -48,8 +54,6 @@ func creeMot(m string) *Mot {
 			mot.ans[i] = genus(a)
 		}
 	}
-	mot.nl = -1
-	mot.nm = -1
 	return mot
 }
 
@@ -114,70 +118,62 @@ func (m *Mot) elDe(n *Nod) bool {
 	return false
 }
 
+/*
 func (m *Mot) elucide() bool {
 	return m.nl > -1 && m.nm > -1
 }
+*/
 
 // signet motestnoyau
 // teste si m peut être le noyau du groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
+	var lemmes []*gocol.Lemme
 	//debog := m.gr=="currum" && g.id=="n.gen"
 	//if debog {fmt.Println("estNoyau",m.gr,g.id,"nl/nm",m.nl,m.nm,"eluc.",m.elucide())}
-	va := false
 	// vérif du pos
-	if m.elucide() {
-		//va = g.vaPos(m.ans[m.nl].Lem.Pos)
-		va = g.vaPos(m.pos)
-		//if debog {fmt.Println("  .estNoyau, eluc.,va",va,m.ans[m.nl].Lem.Pos,"-",g.pos)}
-	} else {
-		for _, a := range m.ans {
-			va = va || contient(g.pos, a.Lem.Pos)
+	va := false
+	for _, a := range m.ans {
+		if contient(g.pos, a.Lem.Pos) {
+			lemmes = append(lemmes, a.Lem)
 		}
-	}
-	if !va {
-		return false
-	}
-	//if debog {fmt.Println(" .estNoyau, pos, nl/nm",m.nl,m.nm)}
-	// vérif de la morpho
-	if !m.elucide() {
-		va = false
-		for i, an:= range m.ans {
-			// lexsynt
-			vals := true
+		if len(lemmes) == 0 {
+			return false
+		}
+		// vérif lexicosyntaxique
+		for i, l := range lemmes {
 			for _, ls := range g.lexSynt {
-				if !lexsynt(an.Lem.Gr[0], ls) {
-					vals = false
-				}
-			}
-			if !vals {
-				return false
-			}
-			//if debog {fmt.Println("   .estNoyau >, lenmorphos",len(an.Morphos))}
-			for j, gm := range an.Morphos {
-				//if debog{fmt.Println("  .estNoyau, gm",gm,"g.id",g.id,"va",va)}
-				va = va || g.vaMorph(gm)
-				if va {
-					m.tmpl = i
-					m.tmpm = j
-					//if debog {fmt.Println("   .estNoyau, true, ml mn",m.nl,m.nm)}
-					return true
+				if !lexsynt(l.Gr[0], ls) {
+					if len(lemmes) == 1 {
+						return false
+					}
+					lemmes[i] = lemmes[len(lemmes) - 1]
+					lemmes[len(lemmes)-1]  = nil
+					lemmes = lemmes[:len(lemmes)-1]
 				}
 			}
 		}
-	} else {
-		//if debog {fmt.Println("  .estNoyau, vaMorph",g.vaMorph(m.morphodef()))}
-		// lexsynt
-		if len(g.lexSynt) > 0 {
-			//if debog {fmt.Println("  .estNoyau, lexsynt",g.lexSynt)}
-			for _, ls := range g.lexSynt {
-				if !lexsynt(m.ans[m.nl].Lem.Gr[0], ls) {
-					return false
+		// vérif morpho
+		for i, sr := range m.ans {
+			// si le lemme de sr n'est pas dans lemmes, continuer
+			for _, l := range lemmes {
+				va = va || l == sr.Lem
+			}
+			if !va {
+				continue
+			}
+			va := false
+			for j, morf := range sr.Morphos {
+				if g.vaMorph(morf) {
+					var nlm Lm
+					nlm.l = sr.Lem
+					nlm.m = morf
+					m.llm = append(m.llm, nlm)
+					va := true
 				}
 			}
 		}
-		return g.vaMorph(m.morphodef())
 	}
-	return false
+	return va
 }
 
 // id des Nod dont m est déjà le noyau
@@ -196,9 +192,6 @@ func (m *Mot) estNuclDe() []string {
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 	// signet motestSub
-	debog := m.gr=="homines" && mn.gr == "finxit" && sub.groupe.id=="v.svprepa"
-	if debog {fmt.Println("estSub m",m.gr,"mn",mn.gr,"grup",sub.groupe.id)}
-	//si le mot a déjà une lemmatisation fixée
 	// accord
 	if sub.accord > "" {
 		if !mn.accord(m, sub.accord) {
