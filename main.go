@@ -5,6 +5,7 @@ package main
 
 // FIXME la vérif estSub choisit la première solution possible. 
 //		 Et si une autre est la bonne ? cf. TODO 2
+//		Création donc de la branche multi.
 // TODO Permettre l'omission du pos d'un sub dans groupes.la
 // TODO La lemmatisation ne peut pas toujours être fixée.
 // 		par l'adoption d'un noeud. Cette adoption
