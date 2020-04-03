@@ -3,6 +3,7 @@
 
 package main
 
+// XXX branche master
 // FIXME la vérif estSub choisit la première solution possible. 
 //		 Et si une autre est la bonne ? cf. TODO 2
 //		Création donc de la branche multi.
