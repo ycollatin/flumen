@@ -43,22 +43,7 @@ func (n *Nod) doc() string {
 // Fixe définitivement la lemmatisation de tous les éléments
 // d'un noeud
 func (n *Nod) valide() {
-	// lemmatisation du noyau
-	if !n.nucl.elucide() {
-		n.nucl.valide()
-	}
-	// lemmatisation des antéposés
-	for _, m := range n.mma {
-		if !m.elucide() {
-			m.valide()
-		}
-	}
-	// lemmatisation des postposés
-	for _, m := range n.mmp {
-		if !m.elucide() {
-			m.valide()
-		}
-	}
+	fmt.Println("valide, à supprimer")
 }
 
 type Phrase struct {
