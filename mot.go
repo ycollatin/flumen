@@ -3,7 +3,7 @@
 package main
 
 import (
-	//"fmt"
+	"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -31,43 +31,43 @@ type Lm struct {
 type Mot struct {
 	gr			string
 	rang		int
-	ans, ans2	gocol.Res	// ensemble des lemmatisations
-	llm			[]Lm		// liste des lemmes ٍ+ morpho possibles
-	tmpl, tmpm	int			// n°s provisoires de Sr et morpho
-	pos			string		// id du groupe dont le mot est noyau
-							// ou à défaut pos du mot, si elle est décidée
-	lexsynt		[]string	// propriétés lexicosyntaxiques
-	sub			*Sub		// sub qui lie le Mot à son noyau
+ans, ans2	gocol.Res	// ensemble des lemmatisations
+llm			[]Lm		// liste des lemmes ٍ+ morpho possibles
+tmpl, tmpm	int			// n°s provisoires de Sr et morpho
+pos			string		// id du groupe dont le mot est noyau
+						// ou à défaut pos du mot, si elle est décidée
+lexsynt		[]string	// propriétés lexicosyntaxiques
+sub			*Sub		// sub qui lie le Mot à son noyau
 }
 
 func creeMot(m string) *Mot {
-	mot := new(Mot)
-	mot.gr = m
-	var echec bool
-	mot.ans, echec = gocol.Lemmatise(m)
-	if echec {
-		mot.ans, echec = gocol.Lemmatise(gocol.Majminmaj(m))
+mot := new(Mot)
+mot.gr = m
+var echec bool
+mot.ans, echec = gocol.Lemmatise(m)
+if echec {
+	mot.ans, echec = gocol.Lemmatise(gocol.Majminmaj(m))
+}
+if !echec {
+	for i, a := range mot.ans {
+		mot.ans[i] = genus(a)
 	}
-	if !echec {
-		for i, a := range mot.ans {
-			mot.ans[i] = genus(a)
-		}
-	}
-	return mot
+}
+return mot
 }
 
 func accord(lma, lmb, cgn string) bool {
-	va := true
-	for i:=0; i<len(cgn); i++ {
-		switch cgn[i] {
-		case 'c':
-			k := cas(lma)
-			va = va && strings.Contains(lmb, k)
-		case 'g':
-			g := genre(lma)
-			va = va && strings.Contains(lmb, g)
-		case 'n':
-			n := nombre(lma)
+va := true
+for i:=0; i<len(cgn); i++ {
+	switch cgn[i] {
+	case 'c':
+		k := cas(lma)
+		va = va && strings.Contains(lmb, k)
+	case 'g':
+		g := genre(lma)
+		va = va && strings.Contains(lmb, g)
+	case 'n':
+		n := nombre(lma)
 			va = va && strings.Contains(lmb, n)
 		}
 	}
@@ -109,7 +109,7 @@ func (m *Mot) elDe(n *Nod) bool {
 // teste si m peut être le noyau du groupe groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
 	//signet motestnoyau
-	//debog := m.gr=="immortalibus" && g.id=="n.prepAbl"
+	//debog := m.gr=="immortalibus" && g.id=="v.prepobj"
 	//if debog {fmt.Println("estNoyau",m.gr,g.id)}
 	var ans3 gocol.Res
 	// vérif du pos
@@ -211,17 +211,27 @@ func (m *Mot) estNuclDe() []string {
 // Sub : pos string, morpho []string, accord string
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
+	debog := sub.groupe.id=="v.prepobj" && m.gr == "immortalibus" && mn.gr=="petebant"
+	if debog {fmt.Println("estSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr)}
 	// signet motestSub
 	var ans2 gocol.Res
-	// vérification de toutes les morphos	
-	for _, an := range m.ans {
-		if sub.vaPos(an.Lem.Pos) {
-			ans2 = append(ans2, an)
+	// vérification des pos
+	if m.pos != "" && !sub.vaPos(m.pos) {
+		if debog {fmt.Println("  .estSub, m.pos",m.pos,"vapos",sub.vaPos(m.pos))}
+		return false
+	} else {
+		for _, an := range m.ans {
+			//if debog {fmt.Println("  .estSub,an.Lem.Pos",an.Lem.Pos,"vapos",sub.vaPos(an.Lem.Pos))}
+			if sub.vaPos(an.Lem.Pos) {
+				ans2 = append(ans2, an)
+			}
 		}
 	}
+	if debog {fmt.Println("  .estSub, len(ans2)",len(ans2))}
 	if len(ans2) == 0 {
 		return false
 	}
+	if debog {fmt.Println("  .estSub, oka")}
 	// accord et morphologie
 	// pour toutes les morphos valides de mn
 	for _, ann := range mn.ans2 {
@@ -230,6 +240,7 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 			for i, ansub := range ans2 {
 				var lmorf []string
 				for _, morfs := range ansub.Morphos {
+					if debog {fmt.Println("  .estSub,morpho morfs",morfs,"sub",sub.morpho,sub.vaMorpho(morfs))}
 					if accord(morfn, morfs, sub.accord) && sub.vaMorpho(morfs) {
 						lmorf = append(lmorf, morfs)
 					}
@@ -380,7 +391,6 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	if !m.estNoyau(g) {
 		return nil
 	}
-
 	// création du noeud de retour
 	nod := new(Nod)
 	nod.grp = g
@@ -440,7 +450,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	}
 	if len(nod.mma) + len(nod.mmp) > 0 {
 		m.pos = g.id
-		// fixer lemme et morpho de tous les mots du nod
+		// TODO ? fixer lemme et morpho de tous les mots du nod
 		return nod
 	}
 	return nil
