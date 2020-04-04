@@ -2,10 +2,13 @@
 
 package main
 
-// typegroupe (signet)
+// signets
+// typegroupe
+// subvapos
+// grvapos
 
 import (
-	"fmt"
+	//"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -104,11 +107,20 @@ func (s *Sub) vaMorpho(m string) bool {
 }
 
 func (s *Sub) vaPos(p string) bool {
-	debog := s.groupe.id == "v.prepobj" && p == "n.prepAbl"
-	if debog {fmt.Println("sub.vaPos, id",s.groupe.id,"p",p)}
+	// signet subvapos
+	//debog := s.groupe.id=="v.prepobj" && p=="n.prepAbl"
+	//if debog {fmt.Println("Sub.vaPos g",s.groupe.id,"p",p)}
+	pgen := strings.Index(p, ".") > -1
 	for _, n := range s.noyaux {
-		if n.idgr == p {
-			return true
+		//if debog {fmt.Println("  .vaPos, n.idgr",n.idgr,"n.id",n.id)}
+		if pgen {
+			if n.id == p {
+				return true
+			}
+		} else {
+			if n.idgr == p {
+				return true
+			}
 		}
 	}
 	return false
@@ -195,6 +207,9 @@ func (g *Groupe) vaMorph(morf string) bool {
 }
 
 func (g *Groupe) vaPos(p string) bool {
+	// signet grvapos
+	//debog := g.id == "v.prepobj"
+	//if debog {fmtp.Println("Groupe.vaPos, p", p)}
 	for _, pos := range g.pos {
 		prel := PrimEl(pos, ".")
 		if prel == pos && pos == PrimEl(p, ".") {
