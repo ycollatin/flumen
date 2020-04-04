@@ -216,31 +216,39 @@ func (m *Mot) estNuclDe() []string {
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 	// signet motestSub
-	for lm := range m.llm {
-		// vérification de toutes les morphos	
-		var a gocol.Sr
-		va := false
-		for i, an := range m.ans {
-			//if debog {fmt.Println("  .estSub, i",i,"an.lem.pos",an.Lem.Pos)}
-			if sub.vaPos(an.Lem.Pos) {
-				va = true
-				m.tmpl = i
-				a = an
-				break
+	var ans2 gocol.Res
+	// vérification de toutes les morphos	
+	for _, an := range m.ans {
+		if sub.vaPos(an.Lem.Pos) {
+			ans2 = append(ans2, an)
+		}
+	}
+	if len(ans2) == 0 {
+		return false
+	}
+	// accord et morphologie
+	// pour toutes les morphos valides de mn
+	for _, ann := range mn.ans2 {
+		for _, morfn := range ann.Morphos {
+			// pour toutes les morphos valides de m
+			for i, ansub := range ans2 {
+				var lmorf []string
+				for _, morfs := range ansub.Morphos {
+					if accord(morfn, morfs, sub.accord) && sub.vaMorpho(morfs) {
+						lmorf = append(lmorf, morfs)
+					}
+				}
+				if len(lmorf) == 0 {
+					ans2 = supprSr(ans2, i)
+				} else {
+					ans2[i].Morphos = lmorf
+				}
 			}
 		}
-		if !va {
-			return false
-		}
-		for i, morf := range a.Morphos {
-			// accord
-			// XXX
-			//if debog {fmt.Println("  .estSub,i morf", i, morf)}
-			if sub.vaMorpho(morf) {
-				m.tmpm = i
-				return true
-			}
-		}
+	}
+	if len(ans2) > 0 {
+		m.ans2 = ans2
+		return true
 	}
 	return false
 }
@@ -447,4 +455,14 @@ func (ma *Mot) subDe(mb *Mot) bool {
 		}
 	}
 	return false
+}
+
+func supprSr(res gocol.Res, p int) gocol.Res {
+	var ret gocol.Res
+	for i, an := range res {
+		if i != p {
+			ret = append(ret, an)
+		}
+	}
+	return ret
 }
