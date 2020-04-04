@@ -111,6 +111,7 @@ func (p *Phrase) arbre() ([]string, []string) {
 		ll = append(ll, n.graf()...)
 	}
 	p.ar = ll
+	fmt.Println("debog phrase.arbre",strings.Join(ll,"\n"))
 	p.src = graphe(ll)
 	return ll, lexpl
 }
