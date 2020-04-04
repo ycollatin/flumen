@@ -108,40 +108,36 @@ func (m *Mot) elDe(n *Nod) bool {
 
 // teste si m peut être le noyau du groupe groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
-//signet motestnoyau
+	//signet motestnoyau
+	//debog := m.gr=="immortalibus" && g.id=="n.prepAbl"
+	//if debog {fmt.Println("estNoyau",m.gr,g.id)}
 	var ans3 gocol.Res
-	//debog := m.gr=="currum" && g.id=="n.gen"
-	//if debog {fmt.Println("estNoyau",m.gr,g.id,"nl/nm",m.nl,m.nm,"eluc.",m.elucide())}
 	// vérif du pos
 	for _, a := range m.ans {
 		if contient(g.pos, a.Lem.Pos) {
 			ans3 = append(ans3, a)
 		}
-		if len(ans3) == 0 {
-			return false
+	}
+	// vérif lexicosyntaxique
+	for i, a := range ans3 {
+		va := true
+		for _, ls := range g.lexSynt {
+			va = va && lexsynt(a.Lem.Gr[0], ls)
 		}
-		// vérif lexicosyntaxique
-		for _, an := range ans3 {
-			for _, ls := range g.lexSynt {
-				if !lexsynt(an.Lem.Gr[0], ls) {
-					continue
-				}
+		if !va {
+			ans3 = supprSr(ans3, i)
+		}
+	}
+	// vérif morpho
+	for _, sr := range ans3 {
+		var morfos []string  // morphos de sr acceptées par g
+		for _, morf := range sr.Morphos {
+			if g.vaMorph(morf) {
+				morfos = append(morfos, morf)
 			}
 		}
-		if len(ans3) == 0 {
-			return false
-		}
-		// vérif morpho
-		for _, sr := range ans3 {
-			var morfos []string  // morphos de sr acceptées par g
-			for _, morf := range sr.Morphos {
-				if g.vaMorph(morf) {
-					morfos = append(morfos, morf)
-				}
-			}
-			if len(morfos) > 0 {
-				m.ans2 = append(m.ans2, sr)
-			}
+		if len(morfos) > 0 {
+			m.ans2 = append(m.ans2, sr)
 		}
 	}
 	return len(m.ans2) > 0
@@ -367,7 +363,7 @@ func (m *Mot) nbSubs() int {
 // signet motnoeud
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
-	//debog := g.id=="n.fam" && m.gr == "filius"
+	//debog := g.id=="v.objprep" && m.gr == "petebant"
 	//if debog {fmt.Println("noeud", m.gr, g.id)}
 	rang := m.rang
 	lante := len(g.ante)
@@ -379,7 +375,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	if texte.phrase.nbmots - rang < len(g.post) {
 		return nil
 	}
-	//if debog {fmt.Println("  .noeud oka, estNoyau",m.gr,g.id,m.estNoyau(g))}
+	//if debog {fmt.Println("  .noeud oka, estNoyau",m.gr,g.id,m.estNoyau(g),"lante",lante)}
 	// m peut-il être noyau du groupe g ?
 	if !m.estNoyau(g) {
 		return nil
@@ -393,21 +389,25 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	// vérif des subs
 	// ante
 	r := rang - 1
-	//if debog {fmt.Println("  .noeud okb",lante,"lante")}
+	//if debog {fmt.Println("  .noeud okb",lante,"lante, r",r)}
 	// reгcherche rétrograde des subs ante
 	for ia := lante-1; ia > -1; ia-- {
 		if r < 0 {
 			break
 		}
-		//if debog {fmt.Println("  .noeud, oka")}
+		//if debog {fmt.Println("  .noeud, oka, ia", ia,"r",r)}
 		sub := g.ante[ia]
 		ma := texte.phrase.mots[r]
+		//if debog {fmt.Println(" .noeud ma0",ma.gr,"dejasub",ma.dejaSub(),"r",r)}
 		// passer les mots
-		for ma.dejaSub() && r > 0 {
+		for ma.dejaSub() {
 			r--
+			if r < 0 {
+				return nil
+			}
 			ma = texte.phrase.mots[r]
 		}
-		//if debog {fmt.Println(" ma",ma.gr,"nl/nm",ma.nl,ma.nm,"estSub",m.gr,"grup",sub.groupe.id,ma.estSub(sub, m))}
+		//if debog {fmt.Println(" .noeud ma",ma.gr,"estSub",m.gr,"grup",sub.groupe.id,ma.estSub(sub, m))}
 		if m.estSubDe(ma) || !ma.estSub(sub, m) {
 			// réinitialiser lemme et morpho de ma
 			return nil
@@ -417,7 +417,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		r--
 		//if debog {fmt.Println("    vu",ma.gr)}
 	}
-	//if debog {fmt.Println("  .noeud okd",len(g.post),"g.post, rang",rang,"nbmots",phrase.nbmots)}
+	//if debog {fmt.Println("  .noeud okd",len(g.post),"g.post, rang",rang,"nbmots",texte.phrase.nbmots)}
 	// post
 	for ip, sub := range g.post {
 		r := rang + ip + 1
