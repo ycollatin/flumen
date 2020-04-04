@@ -95,6 +95,10 @@ pos:v
 morph:act
 ag:n;obj;acc
 
+grp:v.prepobj
+pos:v.objv
+ag:n.prepAbl n.prepAcc;gprep
+
 grp:v.advobjv
 pos:v.objv
 a:Adv;adv
@@ -135,10 +139,6 @@ a:Adv;adv
 grp:v.padvsprepp
 pos:v.advsprepp
 a:p;obj;acc
-
-grp:v.prepobj
-pos:v.objv
-ag:n.prepAbl n.prepAcc;gprep
 
 grp:v.objprep
 pos:v.prepa
