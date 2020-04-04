@@ -5,7 +5,7 @@ package main
 // typegroupe (signet)
 
 import (
-	//"fmt"
+	"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -21,10 +21,10 @@ func creeNoy(s string) []*Noy {
 	for _, e := range ecl {
 		n := new(Noy)
 		n.id = e
-		eg := strings.Split(e, ".")
-		n.generique = len(eg) == 1
-		if n.generique {
-			n.idgr = eg[0]
+		pe := PrimEl(e, ".")
+		if pe != e {
+			n.generique = true
+			n.idgr = pe
 		} else {
 			n.idgr = n.id
 		}
@@ -104,12 +104,10 @@ func (s *Sub) vaMorpho(m string) bool {
 }
 
 func (s *Sub) vaPos(p string) bool {
-	//debog := p == "n.appFam"
+	debog := s.groupe.id == "v.prepobj" && p == "n.prepAbl"
+	if debog {fmt.Println("sub.vaPos, id",s.groupe.id,"p",p)}
 	for _, n := range s.noyaux {
-		//if debog {fmt.Println("vaPos generique",n.generique,"p",p,"n.id",n.id,"n.idgr",n.idgr)}
-		if n.generique && n.id == PrimEl(p, ".") {
-			return true
-		} else if n.idgr == p {
+		if n.idgr == p {
 			return true
 		}
 	}
