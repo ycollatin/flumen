@@ -76,6 +76,7 @@ func (s *Sub) vaMorpho(m string) bool {
 	return true
 }
 
+/*
 // Vérifie la conformité du pos du sub
 // le sub peut avoir un pos générique (n, v, NP, Adv...) ou
 // suffixé (n.fam, s.obj)
@@ -108,3 +109,4 @@ func (s *Sub) vaPos(p string) bool {
 	}
 	return false
 }
+*/

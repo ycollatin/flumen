@@ -114,9 +114,17 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 	var ans3 gocol.Res
 	// vérif du pos
 	for _, a := range m.ans {
+		for _, noy := range g.noyaux {
+			if noy.vaPos(a.Lem.Pos) {
+				ans3 = append(ans3, a)
+				break
+			}
+		}
+		/*
 		if contient(g.pos, a.Lem.Pos) {
 			ans3 = append(ans3, a)
 		}
+		*/
 	}
 	//if debog {fmt.Println("  .estNoyau, oka")}
 	// vérif lexicosyntaxique
@@ -170,14 +178,26 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 	// signet motestSub
 	var ans2 gocol.Res
 	// vérification des pos
+	/*
 	if m.pos != "" && !sub.vaPos(m.pos) {
 		if debog {fmt.Println("  .estSub 1,",sub.groupe.id, "(sub) vaPos("+m.pos+")",sub.vaPos(m.pos))}
 		return false
+	*/
+	if m.pos != "" {
+		va := false
+		for _, noy := range sub.noyaux {
+			va = va || noy.vaPos(m.pos)
+		}
+		if !va {
+			return false
+		}
 	} else {
 		for _, an := range m.ans {
-			if debog {fmt.Println("  .estSub 2,an.Lem.Pos",an.Lem.Pos,"vapos",sub.vaPos(an.Lem.Pos))}
-			if sub.vaPos(an.Lem.Pos) {
-				ans2 = append(ans2, an)
+			for _, noy := range sub.noyaux {
+				if noy.vaPos(an.Lem.Pos) {
+					ans2 = append(ans2, an)
+					break
+				}
 			}
 		}
 	}
