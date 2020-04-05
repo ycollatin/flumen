@@ -40,27 +40,6 @@ func (n *Nod) doc() string {
 	return strings.Join(mm, " ")
 }
 
-// Fixe définitivement la lemmatisation de tous les éléments
-// d'un noeud
-func (n *Nod) valide() {
-	// lemmatisation du noyau
-	if !n.nucl.elucide() {
-		n.nucl.valide()
-	}
-	// lemmatisation des antéposés
-	for _, m := range n.mma {
-		if !m.elucide() {
-			m.valide()
-		}
-	}
-	// lemmatisation des postposés
-	for _, m := range n.mmp {
-		if !m.elucide() {
-			m.valide()
-		}
-	}
-}
-
 type Phrase struct {
 	gr		string
 	imot	int
@@ -102,7 +81,6 @@ func (p *Phrase) arbre() ([]string, []string) {
 		for _, g := range grpTerm {
 			n := m.noeud(g)
 			if n != nil {
-				n.valide()
 				p.nods = append(p.nods, n)
 				lexpl = append(lexpl, n.grp.id)
 			}
@@ -120,7 +98,6 @@ func (p *Phrase) arbre() ([]string, []string) {
 			// m noyau ?
 			n := m.noeud(g)
 			if n != nil {
-				n.valide()
 				p.nods = append(p.nods, n)
 				lexpl = append(lexpl, n.grp.id)
 			}
