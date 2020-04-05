@@ -28,11 +28,17 @@ func creeNoy(s string) []*Noy {
 
 func (n *Noy) vaPos(p string) bool {
 	pel := PrimEl(p, ".")
+	pgen := pel == p
 	if n.generique {
 		if pel == n.idgr {
 			return true
 		}
 	} else {
+		if pgen {
+			if pel == n.idgr {
+				return true
+			}
+		}
 		if p == n.id {
 			return true
 		}
