@@ -3,7 +3,7 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -109,8 +109,8 @@ func (m *Mot) elDe(n *Nod) bool {
 // teste si m peut être le noyau du groupe groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
 	//signet motestnoyau
-	debog := m.gr=="iussu" && g.id=="v.suj"
-	if debog {fmt.Println(" -estNoyau",m.gr,g.id)}
+	//debog := m.gr=="effigiem" && g.id=="n.gen"
+	//if debog {fmt.Println(" -estNoyau",m.gr,g.id)}
 
 	var ans3 gocol.Res
 	// vérif du pos
@@ -133,15 +133,18 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 			ans3 = supprSr(ans3, i)
 		}
 	}
-	if debog {fmt.Println("  .estNoyau, ans3",len(ans3))}
+	//if debog {fmt.Println("  .estNoyau, ans3",len(ans3))}
 	if len(ans3) == 0 {
 		return false
 	}
-	// vérif morpho
+	// vérif morpho. Si aucune n'est requise, renvoyer true
+	if len(g.morph) == 0 {
+		return true
+	}
 	for i, sr := range ans3 {
 		var morfos []string  // morphos de sr acceptées par g
 		for _, morf := range sr.Morphos {
-			if debog {fmt.Println("  .estNoyau, morf",morf,"g.morph",g.morph)}
+			//if debog {fmt.Println("  .estNoyau, morf",morf,"g.morph",g.morph)}
 			if g.vaMorph(morf) {
 				morfos = append(morfos, morf)
 			}
@@ -175,7 +178,7 @@ func (m *Mot) estNuclDe() []string {
 // Sub : pos string, morpho []string, accord string
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
-	//debog := sub.groupe.id=="v.gprepAbl" && m.gr == "luto" && mn.gr=="finxit"
+	//debog := sub.groupe.id=="n.gen" && m.gr == "luto" && mn.gr=="mulieris"
 	//if debog {fmt.Println(" -estSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr)}
 	// signet motestSub
 	var ans2 gocol.Res
@@ -203,10 +206,10 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 	if len(ans2) == 0 {
 		return false
 	}
-	//if debog {fmt.Println("  .estSub, oka")}
+	//if debog {fmt.Println("  .estSub, oka, len mn.ans2",len(mn.ans2))}
 	// accord et morphologie
 	// pour toutes les morphos valides de mn
-	for _, ann := range mn.ans2 {
+	for _, ann := range m.ans2 {
 		for _, morfn := range ann.Morphos {
 			// pour toutes les morphos valides de m
 			for i, ansub := range ans2 {
@@ -298,8 +301,8 @@ func (m *Mot) nbSubs() int {
 // signet motnoeud
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
-	debog := g.id=="v.suj" && m.gr == "iussu"
-	if debog {fmt.Println("noeud", m.gr, g.id)}
+	//debog := g.id=="n.gen" && m.gr == "effigiem"
+	//if debog {fmt.Println("noeud", m.gr, g.id)}
 	rang := m.rang
 	lante := len(g.ante)
 	// mot de rang trop faible
@@ -310,7 +313,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	if texte.phrase.nbmots - rang < len(g.post) {
 		return nil
 	}
-	if debog {fmt.Println("  .noeud oka, estNoyau",m.gr,g.id,m.estNoyau(g),"lante",lante)}
+	//if debog {fmt.Println("  .noeud oka, estNoyau",m.gr,g.id,m.estNoyau(g),"lante",lante)}
 	// m peut-il être noyau du groupe g ?
 	if !m.estNoyau(g) {
 		return nil
