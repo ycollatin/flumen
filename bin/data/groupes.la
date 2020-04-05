@@ -115,9 +115,10 @@ pos:v
 morph:act
 a:n;obj;accus
 
+!- a:pos;id-lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
 grp:v.suj
 pos:v
-morph:act
+morph:act indic,act subj
 ag:n NP;sujet;nomin;n
 
 grp:v.svprepa
