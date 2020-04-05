@@ -76,7 +76,6 @@ a:v;obj;inf
 ! Groupes non terminaux !
 !!!!!!!!!!!!!!!!!!!!!!!!!
 
-!- a:pos;id-lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
 grp:n.appFam
 pos:NP n
 pg:n.fam;app;;cn
@@ -96,6 +95,7 @@ pos:v
 morph:act
 ag:n;obj;acc
 
+!- a:pos;id-lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
 grp:v.prepobj
 pos:v.objv
 ag:n.prepAbl n.prepAcc;gprep
