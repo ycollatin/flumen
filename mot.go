@@ -3,7 +3,7 @@
 package main
 
 import (
-	//"fmt"
+	"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -165,17 +165,17 @@ func (m *Mot) estNuclDe() []string {
 // Sub : pos string, morpho []string, accord string
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
-	//debog := sub.groupe.id=="v.prepobj" && m.gr == "immortalibus" //&& mn.gr=="petebant"
-	//if debog {fmt.Println("estSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr)}
+	debog := sub.groupe.id=="v.gprepAbl" && m.gr == "luto" && mn.gr=="finxit"
+	if debog {fmt.Println(" -estSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr)}
 	// signet motestSub
 	var ans2 gocol.Res
 	// vérification des pos
 	if m.pos != "" && !sub.vaPos(m.pos) {
-		//if debog {fmt.Println("  .estSub,",sub.groupe.id, "(sub) vaPos("+m.pos+")",sub.vaPos(m.pos))}
+		if debog {fmt.Println("  .estSub 1,",sub.groupe.id, "(sub) vaPos("+m.pos+")",sub.vaPos(m.pos))}
 		return false
 	} else {
 		for _, an := range m.ans {
-			//if debog {fmt.Println("  .estSub,an.Lem.Pos",an.Lem.Pos,"vapos",sub.vaPos(an.Lem.Pos))}
+			if debog {fmt.Println("  .estSub 2,an.Lem.Pos",an.Lem.Pos,"vapos",sub.vaPos(an.Lem.Pos))}
 			if sub.vaPos(an.Lem.Pos) {
 				ans2 = append(ans2, an)
 			}
@@ -280,8 +280,8 @@ func (m *Mot) nbSubs() int {
 // signet motnoeud
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
-	//debog := g.id=="v.prepobj" && m.gr == "ignem"
-	//if debog {fmt.Println("noeud", m.gr, g.id)}
+	debog := g.id=="v.gprepAbl" && m.gr == "finxit"
+	if debog {fmt.Println("noeud", m.gr, g.id)}
 	rang := m.rang
 	lante := len(g.ante)
 	// mot de rang trop faible
@@ -314,7 +314,6 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		//if debog {fmt.Println("  .noeud, oka, ia", ia,"r",r)}
 		sub := g.ante[ia]
 		ma := texte.phrase.mots[r]
-		//if debog {fmt.Println(" .noeud ma0",ma.gr,"dejasub",ma.dejaSub(),"r",r)}
 		// passer les mots
 		for ma.dejaSub() {
 			r--
@@ -323,7 +322,8 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 			}
 			ma = texte.phrase.mots[r]
 		}
-		//if debog {fmt.Println(" .noeud ma",ma.gr,"estSub",m.gr,"grup",sub.groupe.id,ma.estSub(sub, m))}
+		if debog {fmt.Println(" .noeud ma",ma.gr,"estSub",m.gr,"grup",sub.groupe.id,ma.estSub(sub, m))}
+		// vérification de réciprocité, puis du lien lui-même
 		if m.estSubDe(ma) || !ma.estSub(sub, m) {
 			// réinitialiser lemme et morpho de ma
 			return nil
