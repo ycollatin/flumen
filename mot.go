@@ -3,7 +3,7 @@
 package main
 
 import (
-	//"fmt"
+	"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -109,8 +109,9 @@ func (m *Mot) elDe(n *Nod) bool {
 // teste si m peut être le noyau du groupe groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
 	//signet motestnoyau
-	//debog := m.gr=="ignem" && g.id=="v.prepobj"
-	//if debog {fmt.Println("estNoyau",m.gr,g.id)}
+	debog := m.gr=="iussu" && g.id=="v.suj"
+	if debog {fmt.Println(" -estNoyau",m.gr,g.id)}
+
 	var ans3 gocol.Res
 	// vérif du pos
 	for _, a := range m.ans {
@@ -120,11 +121,6 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 				break
 			}
 		}
-		/*
-		if contient(g.pos, a.Lem.Pos) {
-			ans3 = append(ans3, a)
-		}
-		*/
 	}
 	//if debog {fmt.Println("  .estNoyau, oka")}
 	// vérif lexicosyntaxique
@@ -137,14 +133,15 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 			ans3 = supprSr(ans3, i)
 		}
 	}
-	//if debog {fmt.Println("  .estNoyau, ans3",len(ans3))}
+	if debog {fmt.Println("  .estNoyau, ans3",len(ans3))}
 	if len(ans3) == 0 {
 		return false
 	}
 	// vérif morpho
-	for _, sr := range ans3 {
+	for i, sr := range ans3 {
 		var morfos []string  // morphos de sr acceptées par g
 		for _, morf := range sr.Morphos {
+			if debog {fmt.Println("  .estNoyau, morf",morf,"g.morph",g.morph)}
 			if g.vaMorph(morf) {
 				morfos = append(morfos, morf)
 			}
@@ -152,10 +149,15 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 		//if debog {fmt.Println("  .estNoyau, morfos",len(morfos))}
 		if len(morfos) > 0 {
 			sr.Morphos = morfos
-			m.ans2 = append(m.ans2, sr)
+		} else {
+			ans3 = supprSr(ans3, i)
 		}
 	}
-	return len(m.ans2) > 0
+	if len(ans3) > 0 {
+		m.ans2 = ans3
+		return true
+	}
+	return false
 }
 
 // id des Nod dont m est déjà le noyau
@@ -296,8 +298,8 @@ func (m *Mot) nbSubs() int {
 // signet motnoeud
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
-	//debog := g.id=="v.gprepAbl" && m.gr == "finxit"
-	//if debog {fmt.Println("noeud", m.gr, g.id)}
+	debog := g.id=="v.suj" && m.gr == "iussu"
+	if debog {fmt.Println("noeud", m.gr, g.id)}
 	rang := m.rang
 	lante := len(g.ante)
 	// mot de rang trop faible
@@ -308,7 +310,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	if texte.phrase.nbmots - rang < len(g.post) {
 		return nil
 	}
-	//if debog {fmt.Println("  .noeud oka, estNoyau",m.gr,g.id,m.estNoyau(g),"lante",lante)}
+	if debog {fmt.Println("  .noeud oka, estNoyau",m.gr,g.id,m.estNoyau(g),"lante",lante)}
 	// m peut-il être noyau du groupe g ?
 	if !m.estNoyau(g) {
 		return nil
