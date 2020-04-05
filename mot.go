@@ -109,20 +109,21 @@ func (m *Mot) elDe(n *Nod) bool {
 // teste si m peut être le noyau du groupe groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
 	//signet motestnoyau
-	//debog := m.gr=="effigiem" && g.id=="n.gen"
+	//debog := m.gr=="fecit" && g.id=="v.prepobj"
 	//if debog {fmt.Println(" -estNoyau",m.gr,g.id)}
 
 	var ans3 gocol.Res
 	// vérif du pos
 	for _, a := range m.ans {
 		for _, noy := range g.noyaux {
+			//if debog {fmt.Println("  .estNoyau,noy",noy,"a.Lem.Pos",a.Lem.Pos)}
 			if noy.vaPos(a.Lem.Pos) {
 				ans3 = append(ans3, a)
 				break
 			}
 		}
 	}
-	//if debog {fmt.Println("  .estNoyau, oka")}
+	//if debog {fmt.Println("  .estNoyau, oka, len ans3", len(ans3))}
 	// vérif lexicosyntaxique
 	for i, a := range ans3 {
 		va := true
@@ -133,7 +134,7 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 			ans3 = supprSr(ans3, i)
 		}
 	}
-	//if debog {fmt.Println("  .estNoyau, ans3",len(ans3))}
+	//if debog {fmt.Println("  .estNoyau, okb, len ans3",len(ans3))}
 	if len(ans3) == 0 {
 		return false
 	}
@@ -301,7 +302,7 @@ func (m *Mot) nbSubs() int {
 // signet motnoeud
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
-	//debog := g.id=="n.gen" && m.gr == "effigiem"
+	//debog := g.id=="v.prepobj" && m.gr == "fecit"
 	//if debog {fmt.Println("noeud", m.gr, g.id)}
 	rang := m.rang
 	lante := len(g.ante)
