@@ -26,10 +26,10 @@ func creeNoy(s string) []*Noy {
 		n.id = e
 		pe := PrimEl(e, ".")
 		if pe != e {
-			n.generique = true
 			n.idgr = pe
 		} else {
-			n.idgr = n.id
+			n.generique = true
+			n.idgr = e
 		}
 		ln = append(ln, n)
 	}
@@ -106,20 +106,33 @@ func (s *Sub) vaMorpho(m string) bool {
 	return true
 }
 
+// Vérifie la conformité du pos du sub
+// le sub peut avoir un pos générique (n, v, NP, Adv...) ou
+// suffixé (n.fam, s.obj)
+// Le paramètre p est la pos du candidat. il peut être lui
+// aussi suffixé ou non
 func (s *Sub) vaPos(p string) bool {
 	// signet subvapos
-	//debog := s.groupe.id=="v.prepobj" && p=="n.prepAbl"
+	//debog := s.groupe.id=="v.suj" && p=="n.appFam"
 	//if debog {fmt.Println("Sub.vaPos g",s.groupe.id,"p",p)}
-	pgen := strings.Index(p, ".") > -1
+	pgen := strings.Index(p, ".") < 0
 	for _, n := range s.noyaux {
-		//if debog {fmt.Println("  .vaPos, n.idgr",n.idgr,"n.id",n.id)}
+		//if debog {fmt.Println("  .vaPos, pgen",pgen,"n.idgr",n.idgr,"n.id",n.id)}
 		if pgen {
-			if n.id == p {
-				return true
+			if n.generique {
+				if n.idgr == p {
+					return true
+				}
 			}
 		} else {
-			if n.idgr == p {
-				return true
+			if n.generique {
+				if n.idgr == PrimEl(p, ".") {
+					return true
+				}
+			} else {
+				if p == n.id {
+					return true
+				}
 			}
 		}
 	}
@@ -206,16 +219,48 @@ func (g *Groupe) vaMorph(morf string) bool {
 	return va
 }
 
+/*
+	pgen := strings.Index(p, ".") < 0
+	for _, n := range s.noyaux {
+		//if debog {fmt.Println("  .vaPos, pgen",pgen,"n.idgr",n.idgr,"n.id",n.id)}
+		if pgen {
+			if n.generique {
+				if n.idgr == p {
+					return true
+				}
+			}
+		} else {
+			if n.generique {
+				if n.idgr == PrimEl(p, ".") {
+					return true
+				}
+			} else {
+				if p == n.id {
+					return true
+				}
+			}
+		}
+	}
+	return false
+*/
+
 func (g *Groupe) vaPos(p string) bool {
 	// signet grvapos
-	//debog := g.id == "v.prepobj"
+	//debog := g.id == "v.prepAbl"
 	//if debog {fmtp.Println("Groupe.vaPos, p", p)}
+	pgen := strings.Index(p, ".") < 0
 	for _, pos := range g.pos {
-		prel := PrimEl(pos, ".")
-		if prel == pos && pos == PrimEl(p, ".") {
-			return true
-		} else if pos == p {
-			return true
+		primel := PrimEl(pos, ".")
+		if primel == pos {
+			// le pos est générique
+			if pgen && pos == p {
+				return true
+			}
+		} else {
+			// le pos est suffixé
+			if pos == p {
+				return true
+			}
 		}
 	}
 	return false
