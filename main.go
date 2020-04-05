@@ -7,13 +7,8 @@ package main
 // - Un groupe incomplet semble pouvoir être adopté
 // - Iovis ut omne genus ... index out of range [1] with length 1
 
-//
 // TODO
 // - Permettre l'omission du pos d'un sub dans groupes.la
-// - La lemmatisation ne peut pas toujours être fixée.
-// 	 par l'adoption d'un noeud. Cette adoption
-//	 peut soit éliminer quelques lemmatisations,
-//	 soit n'en éliminer aucune.
 // - filtre lexsynt pour les subs
 // - Le code graphviz devrait donner l'équivalence mot - rang
 
