@@ -51,7 +51,6 @@ morph:acc
 !lexSynt:subst
 a:prepAA prepAcc;prep
 
-! FIXME : np.coord
 ter:n.fam
 pos:n
 lexSynt:fam
