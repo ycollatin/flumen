@@ -3,10 +3,10 @@
 package main
 
 // signets
-// grvapos
+// vaMorph
 
 import (
-	//"fmt"
+	"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -80,35 +80,20 @@ func (g *Groupe) nbSubs() int {
 
 // la morpho morf est-elle compatible avec le noyau du groupe g ?
 func (g *Groupe) vaMorph(morf string) bool {
-	//debog := g.id=="n.genabl"
-	//if debog {fmt.Println("vamorph",g.id,"morf",morf)}
-	va := true
-	for _, tr := range g.morph {
-		va = va && strings.Contains(morf, tr)
-	}
-	return va
-}
-
-/*
-func (g *Groupe) vaPos(p string) bool {
-	// signet grvapos
-	//debog := g.id == "v.prepAbl"
-	//if debog {fmtp.Println("Groupe.vaPos, p", p)}
-	pgen := strings.Index(p, ".") < 0
-	for _, pos := range g.pos {
-		primel := PrimEl(pos, ".")
-		if primel == pos {
-			// le pos est générique
-			if pgen && pos == p {
-				return true
-			}
-		} else {
-			// le pos est suffixé
-			if pos == p {
-				return true
-			}
+	debog := g.id=="v.suj"
+	if debog {fmt.Println(" -vamorph",g.id,"morf",morf)}
+	for _, gmorf := range g.morph {
+		if debog {fmt.Println("   .vamorph, gmorf",gmorf)}
+		va := true
+		ecl := strings.Split(gmorf, " ")
+		for _, trait := range ecl {
+			va = va && strings.Contains(morf, trait)
+			if debog {fmt.Println("   .vamorph, morf",morf,"trait",trait,"va",va)}
+		}
+		if va {
+			return true
 		}
 	}
+	if debog {fmt.Println("   .vamorph, false")}
 	return false
 }
-*/
