@@ -87,11 +87,6 @@ pos:n
 lexSynt:nom
 p:NP;app;;cn
 
-grp:n.gprepAcc
-pos:n.det
-morph:acc
-a:prepAcc prepAA;prep
-
 grp:v.gprepAbl
 pos:v
 morph:act
