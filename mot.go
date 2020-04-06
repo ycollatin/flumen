@@ -3,7 +3,7 @@
 package main
 
 import (
-	//"fmt"
+	"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -48,6 +48,7 @@ func creeMot(m string) *Mot {
 	if echec {
 		mot.ans, echec = gocol.Lemmatise(gocol.Majminmaj(m))
 	}
+	// ajout du genre pour les noms
 	if !echec {
 		for i, a := range mot.ans {
 			mot.ans[i] = genus(a)
@@ -109,8 +110,8 @@ func (m *Mot) elDe(n *Nod) bool {
 // teste si m peut être le noyau du groupe groupe g
 func (m *Mot) estNoyau(g *Groupe) bool {
 	//signet motestnoyau
-	//debog := m.gr=="fecit" && g.id=="v.prepobj"
-	//if debog {fmt.Println(" -estNoyau",m.gr,g.id)}
+	debog := m.gr=="iussu" && (g.id=="n.gen" || g.id=="v.svprepa")
+	if debog {fmt.Println(" -estNoyau",m.gr,g.id,"ans2:",gocol.Restostring(m.ans2))}
 
 	var ans3 gocol.Res
 	// vérif du pos
@@ -140,6 +141,7 @@ func (m *Mot) estNoyau(g *Groupe) bool {
 	}
 	// vérif morpho. Si aucune n'est requise, renvoyer true
 	if len(g.morph) == 0 {
+		m.ans2 = ans3
 		return true
 	}
 	for i, sr := range ans3 {
@@ -185,6 +187,7 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 	var ans2 gocol.Res
 	// vérification des pos
 	if m.pos != "" {
+		// 1. La pos définitif n'est pas encore fixé
 		va := false
 		for _, noy := range sub.noyaux {
 			va = va || noy.vaPos(m.pos)
@@ -194,7 +197,8 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) bool {
 		}
 		ans2 = m.ans2
 	} else {
-		for _, an := range m.ans {
+		// 2. La pos du mot est définitive
+		for _, an := range m.ans2 {
 			for _, noy := range sub.noyaux {
 				if noy.vaPos(an.Lem.Pos) {
 					ans2 = append(ans2, an)
@@ -302,8 +306,8 @@ func (m *Mot) nbSubs() int {
 // signet motnoeud
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
-	//debog := g.id=="v.prepobj" && m.gr == "fecit"
-	//if debog {fmt.Println("noeud", m.gr, g.id)}
+	debog := g.id=="n.gen" && m.gr == "iussu"
+	if debog {fmt.Println("noeud", m.gr, g.id,len(m.ans2),"ans2")}
 	rang := m.rang
 	lante := len(g.ante)
 	// mot de rang trop faible
@@ -327,7 +331,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	// vérif des subs
 	// ante
 	r := rang - 1
-	//if debog {fmt.Println("  .noeud okb",lante,"lante, r",r)}
+	//if debog {fmt.Println("  .noeud okb",lante,"lante, r",r,gocol.Restostring(m.ans2))}
 	// reгcherche rétrograde des subs ante
 	for ia := lante-1; ia > -1; ia-- {
 		if r < 0 {
@@ -379,6 +383,8 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	if len(nod.mma) + len(nod.mmp) > 0 {
 		m.pos = g.id
 		// TODO ? fixer lemme et morpho de tous les mots du nod
+		nod.fixeRes()
+		if debog {fmt.Println("   .noeud", len(m.ans2),"ans2")}
 		return nod
 	}
 	return nil
