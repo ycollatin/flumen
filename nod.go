@@ -38,14 +38,3 @@ func (n *Nod) doc() string {
 	mm = append (mm, " - " + n.grp.id)
 	return strings.Join(mm, " ")
 }
-
-func (n *Nod) fixeRes() {
-	for _, m := range n.mma {
-		fmt.Print(m.gr, " ");
-	}
-	fmt.Print("\n")
-	for _, m := range n.mmp {
-		fmt.Print(m.gr, " ");
-	}
-	fmt.Print("\n")
-}
