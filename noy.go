@@ -1,7 +1,10 @@
 // noy.go  --  gentes
 package main
 
-import "strings"
+import (
+	//"fmt"
+	"strings"
+)
 
 type Noy struct {
 	id, idgr	string
@@ -15,11 +18,9 @@ func creeNoy(s string) []*Noy {
 		n := new(Noy)
 		n.id = e
 		pe := PrimEl(e, ".")
-		if pe != e {
+		n.generique = pe == e
+		if n.generique {
 			n.idgr = pe
-		} else {
-			n.generique = true
-			n.idgr = e
 		}
 		ln = append(ln, n)
 	}
@@ -27,21 +28,14 @@ func creeNoy(s string) []*Noy {
 }
 
 func (n *Noy) vaPos(p string) bool {
+	//debog := n.id=="n" && p=="n.gen"
 	pel := PrimEl(p, ".")
-	pgen := pel == p
+	//if debog {fmt.Println("Noy.vaPos p="+p,"n.id="+n.id,"n.idgr="+n.idgr,"pel="+pel,"n.generique",n.generique)}
 	if n.generique {
-		if pel == n.idgr {
-			return true
-		}
-	} else {
-		if pgen {
-			if pel == n.idgr {
-				return true
-			}
-		}
-		if p == n.id {
-			return true
-		}
+		return n.id == pel
 	}
-	return false
+	if pel == p {
+		return n.idgr == p
+	}
+	return p == n.id
 }
