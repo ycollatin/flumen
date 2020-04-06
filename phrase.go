@@ -8,6 +8,7 @@ import (
 	"github.com/ycollatin/gocol"
 )
 
+/*
 type Nod struct {
 	grp		*Groupe		// groupe du noeud Nod
 	mma,mmp	[]*Mot		// liste des mots avant et après le noyau
@@ -39,6 +40,7 @@ func (n *Nod) doc() string {
 	mm = append (mm, " - " + n.grp.id)
 	return strings.Join(mm, " ")
 }
+*/
 
 type Phrase struct {
 	gr		string
