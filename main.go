@@ -134,7 +134,7 @@ func main() {
 	ch = path.Dir(dir)
 	chData = ch + "/data/"
 	chCorpus = ch + "/corpus/"
-	go gocol.Data(chData)
+	gocol.Data(chData)
 	// lecture des données syntaxiques
 	lisGroupes(chData+"groupes.la")
 	lisLexsynt()
