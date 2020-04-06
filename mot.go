@@ -13,6 +13,7 @@ import (
 // motnoeud
 // motestnoyau
 // motestSub
+// motestSubde
 
 // rappel de la lemmatisation dans gocol :
 // type Sr struct {
@@ -123,21 +124,33 @@ func (m *Mot) elDe(n *Nod) bool {
 // teste si m peut être le noyau du groupe groupe g
 func (m *Mot) estNoyau(g *Groupe) gocol.Res {
 	//signet motestnoyau
-	debog := m.gr=="luto" && g.id=="n.prepAbl"
-	if debog {fmt.Println(" -estNoyau",m.gr,g.id,"ans2:",len(m.ans2))}
+	//debog := m.gr=="fecit" && g.id=="v.objv"
+	//if debog {fmt.Println(" -estNoyau",m.gr,g.id,"ans",len(m.ans),"pos",m.pos)}
 
 	var ans3 gocol.Res
 	// vérif du pos
-	for _, a := range m.ans {
+	if m.pos != "" {
+		// 1. La pos définitif n'est pas encore fixé
+		va := false
 		for _, noy := range g.noyaux {
-			//if debog {fmt.Println("  .estNoyau,noy",noy,"a.Lem.Pos",a.Lem.Pos)}
-			if noy.vaPos(a.Lem.Pos) {
-				ans3 = append(ans3, a)
-				break
+			va = va || noy.vaPos(m.pos)
+		}
+		if !va {
+			return ans3
+		}
+	} else {
+		for _, a := range m.ans {
+			for _, noy := range g.noyaux {
+				//if debog {fmt.Println("  .estNoyau,noy",noy,"a.Lem.Pos",a.Lem.Pos)}
+				if noy.vaPos(a.Lem.Pos) {
+					ans3 = append(ans3, a)
+					break
+				}
 			}
 		}
 	}
 	//if debog {fmt.Println("  .estNoyau, oka, len ans3", len(ans3))}
+
 	// vérif lexicosyntaxique
 	var ans4 gocol.Res
 	for _, a := range ans3 {
@@ -149,7 +162,8 @@ func (m *Mot) estNoyau(g *Groupe) gocol.Res {
 			ans4 = append(ans4, a)
 		}
 	}
-	//if debog {fmt.Println("  .estNoyau, okb, len ans3",len(ans3))}
+	//if debog {fmt.Println("  .estNoyau, okb, len ans4",len(ans4))}
+
 	// vérif morpho. Si aucune n'est requise, renvoyer true
 	if len(g.morph) == 0 {
 		return ans4
@@ -170,6 +184,7 @@ func (m *Mot) estNoyau(g *Groupe) gocol.Res {
 			ans5 = append(ans5, sr)
 		}
 	}
+	//if debog {fmt.Println("  .estNoyau, len ans5",len(ans5))}
 	return ans5
 }
 
@@ -188,22 +203,25 @@ func (m *Mot) estNuclDe() []string {
 // Sub : pos string, morpho []string, accord string
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
-	debog := sub.groupe.id=="n.prepAbl" && m.gr == "ex" && mn.gr=="luto"
+	debog := sub.groupe.id=="v.obj" && m.gr == "effigiem" && mn.gr=="fecit"
 	if debog {fmt.Println(" -estSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr)}
 	// signet motestSub
 	var ans2 gocol.Res
 	// vérification des pos
 	if m.pos != "" {
-		// 1. La pos définitif n'est pas encore fixé
+		// 1. La pos du mot est définitive
 		va := false
 		for _, noy := range sub.noyaux {
+			if debog {fmt.Println("  .estSub, noy",noy.id,"pos",m.pos)}
 			va = va || noy.vaPos(m.pos)
 		}
 		if !va {
 			return ans2
 		}
+		ans2 = m.ans2
+		if debog {fmt.Println("  .estSub, noy, len ans2",len(ans2))}
 	} else {
-		// 2. La pos du mot est définitive
+		// 2. La pos définitif n'est pas encore fixée
 		for _, an := range m.ans {
 			for _, noy := range sub.noyaux {
 				if noy.vaPos(an.Lem.Pos) {
@@ -213,11 +231,11 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
 			}
 		}
 	}
-	//if debog {fmt.Println("  .estSub, len(ans2)",len(ans2))}
+	if debog {fmt.Println("  .estSub, len(ans2)",len(ans2),"lemme",ans2[0].Lem.Gr)}
 	if len(ans2) == 0 {
 		return ans2
 	}
-	if debog {fmt.Println("  .estSub1, oka, len mn.ans2",len(mn.ans2))}
+
 	//morphologie
 	var ans3 gocol.Res
 	for _, an := range ans2 {
@@ -234,6 +252,7 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
 			ans3 = append(ans3, an)
 		}
 	}
+	if debog {fmt.Println("  .estSub1, oka, len ans3",len(ans3))}
 
 	// accord
 	var ans4 gocol.Res
@@ -270,15 +289,16 @@ func (m *Mot) estNuclDuGroupe() string {
 }
 
 func (ma *Mot) estSubDe(mb *Mot) bool {
+	// signet motestSubDe
 	for _, n := range texte.phrase.nods {
 		if mb == n.nucl {
-			for _, sub := range n.mma {
-				if sub == ma {
+			for _, m := range n.mma {
+				if m == mb {
 					return true
 				}
 			}
-			for _, sub := range n.mmp {
-				if sub == ma {
+			for _, m := range n.mmp {
+				if m == mb {
 					return true
 				}
 			}
@@ -322,10 +342,10 @@ func (m *Mot) nbSubs() int {
 	return nbm
 }
 
-// signet motnoeud
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
-	debog := g.id=="n.prepAbl" && m.gr == "luto"
+	// signet motnoeud
+	debog := g.id=="v.obj" && m.gr == "fecit"
 	if debog {fmt.Println("noeud", m.gr, g.id,len(m.ans2),"ans2")}
 	rang := m.rang
 	lante := len(g.ante)
@@ -369,13 +389,14 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 			}
 			ma = texte.phrase.mots[r]
 		}
-		if debog {fmt.Println(" .noeud ma",ma.gr,"estSub",m.gr,"grup",sub.groupe.id,ma.estSub(sub, m))}
+		if debog {fmt.Println(" .noeud ma",ma.gr,"estSub",m.gr,"grup",sub.groupe.id)}
 		// vérification de réciprocité, puis du lien lui-même
 		if m.estSubDe(ma) {
 			// réinitialiser lemme et morpho de ma
 			return nil
 		}
 		res3 := ma.estSub(sub, m)
+		if debog {fmt.Println("  .noeud estSub, res3",len(res3))}
 		if len(res3) == 0 {
 			return nil
 		}
