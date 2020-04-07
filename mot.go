@@ -427,6 +427,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		if len(res4) == 0 {
 			return nil
 		}
+		mp.sub2 = sub
 		nod.mmp = append(nod.mmp, mp)
 		r++
 	}
