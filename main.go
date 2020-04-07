@@ -4,7 +4,6 @@
 package main
 
 // FIXME
-// - mulieris au lieu de effigiem !
 // - Un groupe incomplet semble pouvoir être adopté
 // - Iovis ut omne genus ... index out of range [1] with length 1
 
