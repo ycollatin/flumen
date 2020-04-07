@@ -95,11 +95,16 @@ pos:v
 morph:act
 ag:n;obj;acc
 
-!- a:pos;id-lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
 grp:v.prepobj
 pos:v.objv
 ag:n.prepAbl n.prepAcc;gprep
 
+!FIXME
+grp:v.sujvprepobj
+pos:v.prepobj
+a:n NP;sujet;nomin;n
+
+!- a:pos;id-lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
 grp:v.advobjv
 pos:v.objv
 a:Adv;adv
@@ -113,12 +118,6 @@ grp:v.obj
 pos:v
 morph:act
 a:n;obj;accus
-
-!- a:pos;id-lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
-grp:v.suj
-pos:v
-morph:act indic,act subj
-ag:n NP;sujet;nomin;n
 
 grp:v.svprepa
 pos:v.gprepAbl v.prepadv
