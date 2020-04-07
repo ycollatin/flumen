@@ -99,9 +99,12 @@ grp:v.prepobj
 pos:v.objv
 ag:n.prepAbl n.prepAcc;gprep
 
-!FIXME
-grp:v.sujvprepobj
+grp:v.ablprepobj
 pos:v.prepobj
+ag:n.gen;abl;abl
+
+grp:v.sujvprepobj
+pos:v.prepobj v.ablprepobj
 a:n NP;sujet;nomin;n
 
 !- a:pos;id-lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
