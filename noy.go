@@ -2,7 +2,6 @@
 package main
 
 import (
-	//"fmt"
 	"strings"
 )
 
@@ -28,9 +27,7 @@ func creeNoy(s string) []*Noy {
 }
 
 func (n *Noy) vaPos(p string) bool {
-	//debog := n.id=="n" && p=="n.gen"
 	pel := PrimEl(p, ".")
-	//if debog {fmt.Println("Noy.vaPos p="+p,"n.id="+n.id,"n.idgr="+n.idgr,"pel="+pel,"n.generique",n.generique)}
 	if n.generique {
 		return n.id == pel
 	}
