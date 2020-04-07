@@ -121,7 +121,7 @@ func (m *Mot) elDe(n *Nod) bool {
 // teste si m peut être le noyau du groupe groupe g
 func (m *Mot) estNoyau(g *Groupe) gocol.Res {
 	//signet motestnoyau
-	//debog := m.gr=="fecit" && g.id=="v.objv"
+	//debog := m.gr=="fecit" && g.id=="v.prepobj"
 	//if debog {fmt.Println(" -estNoyau",m.gr,g.id,"ans",len(m.ans),"pos",m.pos)}
 
 	var ans3 gocol.Res
@@ -130,11 +130,13 @@ func (m *Mot) estNoyau(g *Groupe) gocol.Res {
 		// 1. La pos définitif n'est pas encore fixé
 		va := false
 		for _, noy := range g.noyaux {
+			//if debog {fmt.Println("  .estNoyau, noy.id",noy.id,"noy.vapos("+m.pos+")")}
 			va = va || noy.vaPos(m.pos)
 		}
 		if !va {
 			return ans3
 		}
+		ans3 = m.ans2
 	} else {
 		for _, a := range m.ans {
 			for _, noy := range g.noyaux {
@@ -202,7 +204,6 @@ func (m *Mot) estNuclDe() []string {
 func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
 	//debog := sub.groupe.id=="v.obj" && m.gr == "effigiem" && mn.gr=="fecit"
 	//if debog {fmt.Println(" -estSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr)}
-	//if debog {fmt.Println("   .estSub, m.ans2",m.ans2[0].Lem.Gr)}
 	// signet motestSub
 	var ans2 gocol.Res
 	// vérification des pos
@@ -343,8 +344,8 @@ func (m *Mot) nbSubs() int {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	//debog := g.id=="n.gen" && m.gr == "effigiem"
-	//if debog {fmt.Println("noeud", m.gr, g.id,len(m.ans2),"ans2")}
+	//debog := g.id=="v.prepobj" && m.gr == "fecit"
+	//if debog {fmt.Println("-noeud",g.id,m.gr)}
 	rang := m.rang
 	lante := len(g.ante)
 	// mot de rang trop faible
@@ -398,7 +399,6 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		if len(res3) == 0 {
 			return nil
 		}
-		//m.ans2 = res3
 		ma.sub2 = sub
 		nod.mma = append(nod.mma, ma)
 		r--
@@ -425,7 +425,6 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		if len(res4) == 0 {
 			return nil
 		}
-		//m.ans2 = res4
 		nod.mmp = append(nod.mmp, mp)
 		r++
 	}
