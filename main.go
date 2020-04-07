@@ -4,6 +4,7 @@
 package main
 
 // FIXME
+// - plantage Prometheus Iapeti …, phr. 6
 // - Un groupe incomplet semble pouvoir être adopté
 // - Iovis ut omne genus ... index out of range [1] with length 1
 
