@@ -202,7 +202,7 @@ func (m *Mot) estNuclDe() []string {
 // Sub : pos string, morpho []string, accord string
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
-	//debog := sub.groupe.id=="v.obj" && m.gr == "effigiem" && mn.gr=="fecit"
+	//debog := sub.groupe.id=="v.sujvprepobj" && m.gr == "Vulcanus" && mn.gr=="fecit"
 	//if debog {fmt.Println(" -estSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr)}
 	// signet motestSub
 	var ans2 gocol.Res
@@ -218,11 +218,13 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
 			return ans2
 		}
 		ans2 = m.ans2
-		// if debog {fmt.Println("   .estSub, noy, len ans2",len(ans2),ans2[0].Lem.Gr)}
+		//if debog {fmt.Println("   .estSub, noy, len ans2",len(ans2))} //,ans2[0].Lem.Gr)}
 	} else {
 		// 2. La pos définitif n'est pas encore fixée
 		for _, an := range m.ans {
+			//if debog {fmt.Println("   .estSub,lemme",an.Lem.Gr,"pos",an.Lem.Pos)}
 			for _, noy := range sub.noyaux {
+				//if debog {fmt.Println("   .estSubn,noy",noy)}
 				if noy.vaPos(an.Lem.Pos) {
 					ans2 = append(ans2, an)
 					break
@@ -230,7 +232,7 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
 			}
 		}
 	}
-	//if debog {fmt.Println("   .estSub, len(ans2)",len(ans2),"lemme",ans2[0].Lem.Gr)}
+	//if debog {fmt.Println("   .estSub, len(ans2)",len(ans2))} //,"lemme",ans2[0].Lem.Gr)}
 	if len(ans2) == 0 {
 		return ans2
 	}
@@ -344,8 +346,8 @@ func (m *Mot) nbSubs() int {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	//debog := g.id=="v.prepobj" && m.gr == "fecit"
-	//if debog {fmt.Println("-noeud",g.id,m.gr)}
+	//debog := g.id=="v.sujvprepobj" && m.gr == "fecit"
+	//if debog {fmt.Println("-noeud",g.id,m.gr,"pos",m.pos)}
 	rang := m.rang
 	lante := len(g.ante)
 	// mot de rang trop faible
@@ -395,7 +397,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 			return nil
 		}
 		res3 := ma.estSub(sub, m)
-		//if debog {fmt.Println(" .noeud estSub, res3",len(res3),res3[0].Lem.Gr)}
+		//if debog {fmt.Println(" .noeud estSub, res3",len(res3))} //,res3[0].Lem.Gr)}
 		if len(res3) == 0 {
 			return nil
 		}
@@ -428,18 +430,17 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		nod.mmp = append(nod.mmp, mp)
 		r++
 	}
+	// fixer les pos et sub des mots du noeud
 	if len(nod.mma) + len(nod.mmp) > 0 {
 		m.pos = g.id
-		//m.sub = sub2
+		//fmt.Println("   .noeud, noy",m.gr,"pos",m.pos)
 		for _, m := range nod.mma {
 			m.sub = m.sub2
 		}
 		for _, m := range nod.mmp {
 			m.sub = m.sub2
 		}
-		// TODO ? fixer lemme et morpho de tous les mots du nod
 		//if debog {fmt.Println("   .noeud m.ans2", len(m.ans2),m.ans2[0].Lem.Gr)}
-		//fmt.Println(g.id,"nod:",restostr(m.ans2))
 		return nod
 	}
 	return nil
