@@ -3,7 +3,7 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -76,6 +76,7 @@ for i:=0; i<len(cgn); i++ {
 	return va
 }
 
+/*
 func restostr(ans gocol.Res) string {
 	var ll []string
 	for _, an := range ans {
@@ -88,6 +89,7 @@ func restostr(ans gocol.Res) string {
 	}
 	return strings.Join(ll, "\n")
 }
+*/
 
 func (m *Mot) dejaNoy() bool {
 	for _, n := range texte.phrase.nods {
@@ -99,12 +101,7 @@ func (m *Mot) dejaNoy() bool {
 }
 
 func (m *Mot) dejaSub() bool {
-	for _, n := range texte.phrase.nods {
-		if m.elDe(n) {
-			return true
-		}
-	}
-	return false
+	return m.sub != nil
 }
 
 func (m *Mot) elDe(n *Nod) bool {
@@ -203,8 +200,9 @@ func (m *Mot) estNuclDe() []string {
 // Sub : pos string, morpho []string, accord string
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
-	debog := sub.groupe.id=="v.obj" && m.gr == "effigiem" && mn.gr=="fecit"
-	if debog {fmt.Println(" -estSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr)}
+	//debog := sub.groupe.id=="v.obj" && m.gr == "effigiem" && mn.gr=="fecit"
+	//if debog {fmt.Println(" -estSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr)}
+	//if debog {fmt.Println("   .estSub, m.ans2",m.ans2[0].Lem.Gr)}
 	// signet motestSub
 	var ans2 gocol.Res
 	// vérification des pos
@@ -212,14 +210,14 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
 		// 1. La pos du mot est définitive
 		va := false
 		for _, noy := range sub.noyaux {
-			if debog {fmt.Println("  .estSub, noy",noy.id,"pos",m.pos)}
+			//if debog {fmt.Println("   .estSub, noy",noy.id,"pos",m.pos)}
 			va = va || noy.vaPos(m.pos)
 		}
 		if !va {
 			return ans2
 		}
 		ans2 = m.ans2
-		if debog {fmt.Println("  .estSub, noy, len ans2",len(ans2))}
+		// if debog {fmt.Println("   .estSub, noy, len ans2",len(ans2),ans2[0].Lem.Gr)}
 	} else {
 		// 2. La pos définitif n'est pas encore fixée
 		for _, an := range m.ans {
@@ -231,7 +229,7 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
 			}
 		}
 	}
-	if debog {fmt.Println("  .estSub, len(ans2)",len(ans2),"lemme",ans2[0].Lem.Gr)}
+	//if debog {fmt.Println("   .estSub, len(ans2)",len(ans2),"lemme",ans2[0].Lem.Gr)}
 	if len(ans2) == 0 {
 		return ans2
 	}
@@ -239,7 +237,7 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
 	//morphologie
 	var ans3 gocol.Res
 	for _, an := range ans2 {
-		if debog {fmt.Println("  .estSub2",an.Lem.Gr,"morphos",len(an.Morphos))}
+		//if debog {fmt.Println("   .estSub2",an.Lem.Gr,"morphos",len(an.Morphos))}
 		var lmorf []string
 		for _, morfs := range an.Morphos {
 			// pour toutes les morphos valides de m
@@ -252,7 +250,7 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
 			ans3 = append(ans3, an)
 		}
 	}
-	if debog {fmt.Println("  .estSub1, oka, len ans3",len(ans3))}
+	//if debog {fmt.Println("   .estSub1, oka, len ans3",len(ans3))}
 
 	// accord
 	var ans4 gocol.Res
@@ -274,7 +272,7 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
 			}
 		}
 	}
-	if debog {fmt.Println("  .estSub3, sortie ans3",len(ans3))}
+	//if debog {fmt.Println("   .estSub3, sortie ans3",len(ans3))}
 	return ans4
 }
 
@@ -345,8 +343,8 @@ func (m *Mot) nbSubs() int {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	debog := g.id=="v.obj" && m.gr == "fecit"
-	if debog {fmt.Println("noeud", m.gr, g.id,len(m.ans2),"ans2")}
+	//debog := g.id=="n.gen" && m.gr == "effigiem"
+	//if debog {fmt.Println("noeud", m.gr, g.id,len(m.ans2),"ans2")}
 	rang := m.rang
 	lante := len(g.ante)
 	// mot de rang trop faible
@@ -362,7 +360,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	if len(res2) == 0 {
 		return nil
 	}
-	if debog {fmt.Println(" .noeud oka, res2", len(res2))}
+	//if debog {fmt.Println(" .noeud oka, res2", len(res2),res2[0].Lem.Gr)}
 	m.ans2 = res2
 	// création du noeud de retour
 	nod := new(Nod)
@@ -389,22 +387,22 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 			}
 			ma = texte.phrase.mots[r]
 		}
-		if debog {fmt.Println(" .noeud ma",ma.gr,"estSub",m.gr,"grup",sub.groupe.id)}
+		//if debog {fmt.Println(" .noeud ma",ma.gr,"estSub",m.gr,"grup",sub.groupe.id)}
 		// vérification de réciprocité, puis du lien lui-même
 		if m.estSubDe(ma) {
 			// réinitialiser lemme et morpho de ma
 			return nil
 		}
 		res3 := ma.estSub(sub, m)
-		if debog {fmt.Println("  .noeud estSub, res3",len(res3))}
+		//if debog {fmt.Println(" .noeud estSub, res3",len(res3),res3[0].Lem.Gr)}
 		if len(res3) == 0 {
 			return nil
 		}
-		m.ans2 = res3
+		//m.ans2 = res3
 		ma.sub2 = sub
 		nod.mma = append(nod.mma, ma)
 		r--
-		if debog {fmt.Println("    vu",ma.gr)}
+		//if debog {fmt.Println("    vu",ma.gr)}
 	}
 	//if debog {fmt.Println("  .noeud okd",len(g.post),"g.post, rang",rang,"nbmots",texte.phrase.nbmots)}
 	// post
@@ -427,13 +425,13 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		if len(res4) == 0 {
 			return nil
 		}
-		m.ans2 = res4
-		m.sub2 = sub
+		//m.ans2 = res4
 		nod.mmp = append(nod.mmp, mp)
 		r++
 	}
 	if len(nod.mma) + len(nod.mmp) > 0 {
 		m.pos = g.id
+		//m.sub = sub2
 		for _, m := range nod.mma {
 			m.sub = m.sub2
 		}
@@ -441,8 +439,8 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 			m.sub = m.sub2
 		}
 		// TODO ? fixer lemme et morpho de tous les mots du nod
-		if debog {fmt.Println("   .noeud", len(m.ans2),"ans2")}
-		fmt.Println(g.id,"nod:",restostr(m.ans2))
+		//if debog {fmt.Println("   .noeud m.ans2", len(m.ans2),m.ans2[0].Lem.Gr)}
+		//fmt.Println(g.id,"nod:",restostr(m.ans2))
 		return nod
 	}
 	return nil
