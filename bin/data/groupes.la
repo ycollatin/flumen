@@ -130,11 +130,6 @@ grp:v.sprepp
 pos:v.prepp
 a:n NP;sujet;nomin;n
 
-!grp:v.gprepAccp
-!pos:v
-!morph:act
-!pg:n.prepAcc;gprep
-
 grp:v.advsprepp
 pos:v.sprepp
 a:Adv;adv
