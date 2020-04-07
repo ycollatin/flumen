@@ -4,7 +4,9 @@ _Saluete Gentes_ est une traduction approximative de _Hello World_.
 
 Pour récupérer Gentes :
 ouvrir un terminal,
+
 $ go get github.com/ycollatin/gentes
+
 $ Make
 
 L'exécutable et les données devraient se trouver dans bin/
