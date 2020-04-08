@@ -4,16 +4,12 @@
 package main
 
 // FIXME
-// - Homines vu comme 2ème obj au lieu de sujet
-// - Un groupe incomplet semble pouvoir être adopté
-// - Iovis ut omne genus ... index out of range [1] with length 1
+// - v.svprepa admet /cum/ comme verbe
 
 // TODO
 // - Modifier la syntaxe de groupes.la 
 //   . pour réduire le noyau à un lemme précis, ex. @sum
 //   . pour réduire le noyau à une forme précise ex. "ut"
-// - Permettre l'omission du pos d'un sub dans groupes.la
-// - filtre lexsynt pour les subs
 // - Le code graphviz devrait donner l'équivalence mot - rang
 
 import (
