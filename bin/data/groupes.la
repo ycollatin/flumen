@@ -4,7 +4,7 @@
 !- morph:<traits morphos>		// liste sép " " et ";"
 !- lexSynt:<lexicosyntaxe>		// liste, sép " "
 !// a, ag :mots et groupes avant le noyau
-!- a:pos;id-lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
+!- a:pos;id-lien [id-lien [...]];traita traitb,traita traitb;accord;lexsynt lexsynt...
 !- ag: "  "        "     "		// comme a, pour les groupes
 !// p, pg :mots et groupes après le noyau
 !- p:   "     "    "      "		// sub après le noyau
@@ -80,10 +80,14 @@ grp:n.appFam
 pos:NP n
 pg:n.fam;app;;cn
 
-grp:n.app
+grp:n.appnp
 pos:n
 lexSynt:nom
 p:NP;app;;cn
+
+grp:n.epith
+pos:n
+p:a;epith;;cgn
 
 grp:v.gprepAbl
 pos:v
@@ -95,6 +99,11 @@ pos:v
 morph:act
 ag:n;obj;acc
 
+! en cas d'ambiguïté morphologique, le sujet précède l'objet
+grp:v.sujobjv
+pos:v.objv
+ag:n;sujet;nomin;n
+
 grp:v.prepobj
 pos:v.objv
 ag:n.prepAbl n.prepAcc;gprep
@@ -102,10 +111,6 @@ ag:n.prepAbl n.prepAcc;gprep
 grp:v.ablprepobj
 pos:v.prepobj
 ag:n.gen;abl;abl
-
-grp:v.sujvprepobj
-pos:v.prepobj v.ablprepobj
-a:n NP;sujet;nomin;n
 
 !- a:pos;id-lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
 grp:v.advobjv
@@ -117,10 +122,10 @@ pos:v
 morph:act
 a:Adv;adv
 
-grp:v.obj
-pos:v
-morph:act
-a:n;obj;accus
+!grp:v.obj
+!pos:v
+!morph:act
+!a:n;obj;accus
 
 grp:v.svprepa
 pos:v.gprepAbl v.prepadv
