@@ -1,5 +1,5 @@
 ! ------------------------------------------
-! Publicola, phrases de test.
+!         Gentes, phrases de test.
 ! ------------------------------------------
 
 ! PHRASES MODIFIÉES POUR TEST :
@@ -256,7 +256,7 @@ Erigone signum Virginis, quam nos Iustitiam appellamus, Icarius Arcturus
 in sideribus est dictus, canis autem Maera Canicula.
 
 
-LYCURGUS
+!LYCURGUS
 
 Lycurgus Dryantis filius Liberum de regno fugavit; quem cum negaret deum
 esse vinumque bibisset et ebrius matrem suam violare voluisset, tunc
@@ -267,7 +267,7 @@ qui mons est Thraciae, cuius imperium habuit. Hic traditur unum pedem
 sibi pro vitibus excidisse.
 
 
-TYRRHENI
+!TYRRHENI
 
 Tyrrheni, qui postea Tusci sunt dicti, cum piraticam facerent, Liber
 pater impubis in navem eorum conscendit et rogat eos, ut se Naxum
@@ -284,7 +284,7 @@ Melas Alcimedon Epopeus Dictys Simon Acoetes; hic gubernator fuit, quem
 ob clementiam Liber servavit.
 
 
-REX MIDAS
+REX MIDAS.
 
 Midas rex Mygdonius filius Matris deae a Timolo <arbiter> sumptus eo
 tempore, quo Apollo cum Marsya vel Pane fistula certavit. Quod cum
@@ -303,7 +303,7 @@ tetigisset, facta est colore aureo; quod flumen nunc Chrysorrhoas
 appellatur in Lydia.
 
 
-VENUS
+!VENUS
 
 In Euphratem flumen de caelo ovum mira magnitudine cecidisse dicitur,
 quod pisces ad ripam evolverunt, super quod columbae consederunt et
@@ -313,7 +313,7 @@ pisces in astrorum numerum relati sunt, et ob id Syri pisces et columbas
 ex deorum numero habentes non edunt.
 
 
-VULCANUS
+!VULCANUS
 
 Vulcanus cum resciit Venerem cum Marte clam concumbere et se virtuti
 eius obsistere non posse, catenam ex adamante fecit et circum lectum
@@ -327,7 +327,7 @@ scelerata exstitit. Soli autem Venus ob indicium ad progeniem eius
 semper fuit inimica.
 
 
-PHRIXUS
+!PHRIXUS
 
 
 Phrixus et Helle insania a Libero obiecta cum in silva errarent, Nebula
@@ -349,7 +349,7 @@ sustulit et ad Chalciopen matrem reportavit, cuius beneficio ad sororem
 Medeam est commendatus.
 
 
-AEETA
+!AEETA
 
 
 Aeetae Solis filio erat responsum tam diu eum regnum habiturum, quamdiu
@@ -370,7 +370,7 @@ Dracone autem venenis sopito pellem de fano sustulit, in patriamque cum
 Medea est profectus.
 
 
-ABSYRTUS
+!ABSYRTUS
 
 
 Aeeta ut resciit Medeam cum Iasone profugisse, nave comparata misit
@@ -395,7 +395,7 @@ appellarunt. Haec autem insula posita est in Histria contra Polam,
 iuncta insulae Cantae.
 
 
-IASON: PELIADES
+!IASON: PELIADES
 
 
 Iason cum Peliae patrui sui iussu tot pericula adisset, cogitare coepit,
@@ -415,7 +415,7 @@ Colchos ierat, regnum paternum tradidit; ipse cum Medea Corinthum
 profectus est.
 
 
-MEDEA
+!MEDEA
 
 
 Aeetae Medea et Idyiae filia cum ex Iasone iam filios Mermerum et
@@ -429,7 +429,7 @@ Creonte conflagravit. Medea ubi regiam ardere vidit, natos suos ex
 Iasone Mermerum et Pheretem interfecit et profugit a Corintho.
 
 
-MEDEA EXUL
+MEDEA EXUL.
 
 
 Medea Corintho exul Athenas ad Aegeum Pandionis filium devenit in
@@ -443,7 +443,7 @@ eis rogata lectas eas in tumulum fratris coniecit, quae adhuc ibi
 permanentes, si qua autem extra tumulum exit, debitum naturae persolvit.
 
 
-ALCIMENA
+!ALCIMENA
 
 
 Amphitryon cum abesset ad expugnandam Oechaliam, Alcimena aestimans
@@ -461,7 +461,7 @@ fuisse pro se, ex qua die cum ea non concubuit. Quae ex Iove compressa
 peperit Herculem.
 
 
-HERCULIS ATHLA DUODECIM AB EVRYSTHEO IMPERATA
+HERCULIS ATHLA DUODECIM AB EVRYSTHEO IMPERATA.
 
 
 Infans cum esset, dracones duos duabus manibus necavit, quos Iuno
@@ -490,7 +490,7 @@ mala attulit. Canem Cerberum Typhonis filium ab inferis regi in
 conspectum adduxit.
 
 
-PARERGA EIUSDEM
+PARERGA EIUSDEM.
 
 
 Antaeum terrae filium in Libya occidit. Hic cogebat hospites secum
@@ -517,7 +517,7 @@ occidit. Eurytionem centaurum, quod Deianiram Dexameni filiam speratam
 suam uxorem petiit, occidit.
 
 
-MEGARA
+!MEGARA
 
 
 Hercules cum ad canem tricipitem esset missus ab Eurystheo rege et Lycus
@@ -532,7 +532,7 @@ Iovis iussu reddidit et nolentem sortem dare iussit. Hercules ob id a
 Mercurio Omphalae reginae in servitutem datus est.
 
 
-CENTAURI
+!CENTAURI
 
 
 Hercules cum in hospitium ad Dexamenum regem venisset eiusque filiam
@@ -546,7 +546,7 @@ centauri conati sunt rapere uxores Lapithis; eos centauri multos
 interfecerunt, ab ipsis interierunt.
 
 
-NESSUS
+!NESSUS
 
 
 Nessus Ixionis et Nubis filius centaurus rogatus ab Deianira, ut se
@@ -559,7 +559,7 @@ se coniunx sperneret, eo iuberet vestem eius perungi. Id Deianira
 credens conditum diligenter servavit.
 
 
-IOLE
+!IOLE
 
 
 Hercules cum Iolen Euryti filiam in coniugium petiisset, ille eum
@@ -569,7 +569,7 @@ suos ante se necari est perpessa. Quos omnes cum interfecisset, Iolen
 captivam ad Deianiram praemisit.
 
 
-DEIANIRA
+!DEIANIRA
 
 
 Deianira Oenei filia Herculis uxor cum vidit Iolen virginem captivam
@@ -589,7 +589,7 @@ Hercules arcus et sagittas donavit. Deianira autem ob factum Herculis
 ipsa se interfecit.
 
 
-AETHRA
+!AETHRA
 
 
 Neptunus et Aegeus Pandionis filius in fano Minervae cum Aethra Pitthei
@@ -603,7 +603,7 @@ ostendit, ut ensem tolleret, et iubet eum Athenas ad Aegeum proficisci,
 eosque, qui itineri infestabantur, omnes occidit.
 
 
-THESEI LABORES
+!THESEI LABORES
 
 
 Corynetem Neptuni filium armis occidit; Pityocamptem, qui iter
@@ -622,7 +622,7 @@ fuit Marathone, quem Hercules a Creta ad Eurystheum adduxerat, occidit.
 Minotaurum oppido Gnosi occidit.
 
 
-DAEDALUS
+!DAEDALUS
 
 
 Daedalus Eupalami filius, qui fabricam a Minerva
@@ -632,7 +632,7 @@ summo tecto deicit. Ob id scelus in exsilium ab Athenis
 Cretam ad regem Minoem abiit.
 
 
-PASIPHAE
+!PASIPHAE
 
 
 Pasiphae Solis filia uxor Minois sacra deae Veneris per aliquot annos
@@ -650,7 +650,7 @@ insulam Siciliam. Alii dicunt: Theseus cum Minotaurum occidit, Daedalum
 Athenas in patriam suam reduxit.
 
 
-MINOS
+!MINOS
 
 
 Minos Iovis et Europae filius cum Atheniensibus belligeravit, cuius
@@ -663,7 +663,7 @@ cum mitteret, praedixit ei, ut, si victor reverteretur, vela candida in
 navem haberet; qui autem ad Minotaurum mittebantur, velis atris navigabant.
 
 
-THESEUS APUD MINOTAURUM
+!THESEUS APUD MINOTAURUM
 
 
 Theseus posteaquam Cretam venit, ab Ariadne Minois filia est adamatus
@@ -673,7 +673,7 @@ interfecisset, Ariadnes monitu licium revolvendo foras est egressus
 eamque, quod fidem ei dederat, in coniugio secum habiturus avexit.
 
 
-ARIADNE
+!ARIADNE
 
 
 Theseus in insula Dia tempestate retentus cogitans, si Ariadnen in
@@ -685,7 +685,7 @@ praecipitavit, ex quo Aegeum pelagus est dictum. Ariadnes autem sororem
 Phaedram Theseus duxit in coniugium.
 
 
-HIPPOLYTUS
+!HIPPOLYTUS
 
 
 Phaedra Minois filia Thesei uxor Hippolytum privignum suum adamavit;
@@ -697,7 +697,7 @@ Hippolytus equis iunctis veheretur, repente e mari taurus apparuit,
 cuius mugitu equi expavefacti Hippolytum distraxerunt vitaque privarunt.
 
 
-DANAE
+!DANAE
 
 
 Danae Acrisii et Aganippes filia. Huic fuit fatum, ut, quod peperisset
@@ -717,7 +717,7 @@ eum interfecit. Ita quod voluntate sua noluit, deorum factum est;
 sepulto autem eo Argos profectus est regnaque avita possedit.
 
 
-ANDROMEDA
+!ANDROMEDA
 
 
 Cassiope filiae suae Andromedae formam Nereidibus anteposuit. Ob id
@@ -732,7 +732,7 @@ interficere voluit; qua re cognita Perseus caput Gorgonis ei ostendit et
 is ab humana specie est immutatus in lapidem.
 
 
-LAIUS
+!LAIUS
 
 
 Laio Labdaci filio ab Apolline erat responsum de filii sui manu mortem
@@ -743,7 +743,7 @@ pro suo educaverunt eumque, quod pedes transiectos haberet, Oedipum
 nominaverunt.
 
 
-OEDIPUS
+!OEDIPUS
 
 
 Postquam Oedipus Laii et Iocastes filius ad puberem aetatem pervenit,
@@ -779,7 +779,7 @@ privavit, regnumque filiis suis alternis annis tradidit et a Thebis
 Antigona filia duce profugit.
 
 
-POLYNICES
+!POLYNICES
 
 
 Polynices Oedipodis filius anno peracto regnum ab Eteocle fratre
@@ -796,7 +796,7 @@ ea clade liberari. Menoeceus cum vidit se unum civium salutem posse
 redimere, muro se praecipitavit; Thebani victoria sunt potiti.
 
 
-ANTIGONA
+!ANTIGONA
 
 
 Creon Menoecei filius edixit, ne quis Polynicen aut, qui una venerunt,
@@ -814,7 +814,7 @@ Haemon se et Antigonam coniugem interfecit. At Creon Megaram filiam suam
 Herculi dedit in coniugium, ex qua nati sunt Therimachus et Ophites.
 
 
-TIRESIAS
+!TIRESIAS
 
 
 In monte Cyllenio Tiresias Eueris filius pastor dracones venerantes
@@ -828,7 +828,7 @@ manu aversa eum excaecavit; at Iovis ob id fecit, ut septem aetates
 viveret vatesque praeter ceteros mortales esset.
 
 
-LEDA
+!LEDA
 
 
 Iuppiter Ledam Thestii filiam in cygnum conversus ad flumen Eurotam
@@ -836,7 +836,7 @@ compressit et ex eo peperit Pollucem et Helenam, ex Tyndareo autem
 Castorem et Clytaemnestram.
 
 
-TYNDAREUS
+!TYNDAREUS
 
 
 Tyndareus Oebali filius ex Leda Thestii filia procreavit Clytaemnestram
@@ -849,7 +849,7 @@ ut, cui vellet nubere, coronam imponeret. Menelao imposuit, cui
 Tyndareus eam dedit uxorem regnumque moriens Menelao reliquit.
 
 
-HELENA
+!HELENA
 
 
 Theseus Aegei et Aethrae Pitthei filiae filius cum Pirithoo Ixionis
@@ -866,7 +866,7 @@ belligerarunt et Aethram Thesei matrem et Phisadiem Pirithoi sororem
 ceperunt et in servitutem sorori dederunt.
 
 
-CASTOR
+!CASTOR
 
 
 Idas et Lynceus Apharei filii ex Messenis habuerunt sponsas Phoeben et
@@ -887,7 +887,7 @@ ipsum autem et Helenam Iovis esse filios, tunc deprecatus Pollux, ut
 liceret ei munus suum cum fratre communicare; cui permisit.
 
 
-TANTALUS
+!TANTALUS
 
 
 Tantalus Iovis et Plutonis filius procreavit ex Dione Pelopem. Iuppiter
@@ -899,7 +899,7 @@ pendent, quae cum vult sumere, rami vento moti recedunt. Item saxum
 super caput eius ingens pendet, quod semper timet ne super se ruat.
 
 
-PELOPS
+!PELOPS
 
 
 Pelops Tantali et Diones Atlantis filiae filius cum esset in epulis
@@ -908,7 +908,7 @@ numine vitam recepit; cui cum cetera membra, ut fuerant, coissent, umero
 non perpetuo eburneum eius loco Ceres aptavit.
 
 
-OENOMAUS
+!OENOMAUS
 
 
 Oenomaus Martis et Asteropes Atlantis filiae filius habuit in coniugio
@@ -930,7 +930,7 @@ appellatum. Hippodamiam in patriam adduxit suam, quod Peloponnesum
 appellatur; ibi ex Hippodamia procreavit Hippalcum Atreum Thyesten.
 
 
-PELOPIDAE
+!PELOPIDAE
 
 
 Thyestes Pelopis et Hippodamiae filius, quod cum Aeropa Atrei uxore
@@ -939,7 +939,7 @@ Plisthenem, quem pro suo educaverat, ad Atreum interficiendum misit,
 quem Atreus credens fratris filium esse imprudens filium suum occidit.
 
 
-AEGISTHUS
+!AEGISTHUS
 
 
 Thyesti Pelopis et Hippodamiae filio responsum fuit, quem ex filia sua
@@ -949,7 +949,7 @@ pastores caprae subdiderunt ad nutriendum; Aegisthus est appellatus
 ideo, quod Graece capra aega appellatur.
 
 
-ATREUS
+!ATREUS
 
 
 Atreus Pelopis et Hippodamiae filius cupiens a Thyeste fratre suo
@@ -990,7 +990,7 @@ aestimans Thyesten interfectum laetabatur; quem Aegisthus in litore
 sacrificantem occidit et cum patre Thyeste in regnum avitum redit.
 
 
-NIOBE
+!NIOBE
 
 
 Amphion et Zetus Iovis et Antiopes Nyctei filii iussu Apollinis Thebas
@@ -1008,7 +1008,7 @@ autem cum templum Apollinis expugnare vellet, ab Apolline sagittis est
 interfectus.
 
 
-ALEXANDER PARIS
+!ALEXANDER PARIS
 
 
 Priamus Laomedontis filius cum complures liberos haberet ex concubitu
@@ -1030,7 +1030,7 @@ Hercei insiluit; quod cum Cassandra vaticinaretur eum fratrem esse,
 Priamus eum agnovit regiaque recepit.
 
 
-PARIDIS IUDICIUM
+PARIDIS IUDICIUM.
 
 
 Iovis cum Thetis Peleo nuberet, ad epulum dicitur omnis deos convocasse
@@ -1051,7 +1051,7 @@ cum ancillis duabus Aethra et Thisadie, quas Castor et Pollux captivas
 ei assignarant, aliquando reginas.
 
 
-CASSANDRA
+!CASSANDRA
 
 
 Cassandra Priami et Hecubae filia in Apollinis fano ludendo lassa
@@ -1060,7 +1060,7 @@ non fecit. Ob quam rem Apollo fecit, ut, cum vera vaticinaretur, fidem
 non haberet.
 
 
-ANCHISA
+!ANCHISA
 
 Venus Anchisam Assaraci filium amasse et cum eo
 concubuisse dicitur, ex quo procreavit Aeneam eique
@@ -1070,7 +1070,7 @@ Iove fulmine est ictus. Quidam dicunt eum sua morte
 obisse.
 
 
-ULIXES
+!ULIXES
 
 Agamemnon et Menelaus Atrei filii cum ad Troiam oppugnandam coniuratos
 duces ducerent, in insulam Ithacam ad Ulixem Laertis filium venerunt,
@@ -1083,7 +1083,7 @@ Telemachum filium eius cunis sublatum aratro ei subiecit et ait
 venturum; ex eo Palamedi infestus fuit.
 
 
-ACHILLES
+!ACHILLES
 
 Thetis Nereis cum sciret Achillem filium suum, quem ex Peleo habebat, si
 ad Troiam expugnandam isset, periturum, commendavit eum in insulam
@@ -1100,7 +1100,7 @@ adesse vestem muliebrem dilaniavit atque clipeum et hastam arripuit. Ex
 hoc est cognitus suasque operas Argivis promisit et milites Myrmidones.
 
 
-IPHIGENIA
+!IPHIGENIA
 
 
 Agamemnon cum Menelao fratre Achaiae delectis ducibus Helenam uxorem
@@ -1118,7 +1118,7 @@ cervamque pro ea supposuit Iphigeniamque per nubes in terram Tauricam
 detulit ibique templi sui sacerdotem fecit.
 
 
-PHILOCTETES
+!PHILOCTETES
 
 
 Philoctetes Poeantis et Demonassae filius cum in insula Lemno esset,
@@ -1135,7 +1135,7 @@ persuaserunt, ut in gratiam rediret et ad expugnandam Troiam auxilio
 esset, eumque secum sustulerunt.
 
 
-HECTORIS LYTRA
+HECTORIS LYTRA.
 
 
 Agamemnon Briseidam Brisae sacerdotis filiam ex Moesia captivam propter
@@ -1155,7 +1155,7 @@ duce Mercurio in castra Danaorum venit et filii corpus auro repensum
 accepit, quem sepulturae tradidit.
 
 
-ARMORUM IUDICIUM
+ARMORUM IUDICIUM.
 
 
 Hectore sepulto cum Achilles circa moenia Troianorum vagaretur ac
@@ -1169,7 +1169,7 @@ vulneratum occidit eo gladio, quem ab Hectore muneri accepit, dum cum eo
 in acie contendit.
 
 
-EQUUS TROIANUS
+EQUUS TROIANUS.
 
 
 Achivi cum per decem annos Troiam capere non possent,
@@ -1188,7 +1188,7 @@ et portarum custodes occiderunt sociosque signo dato
 receperunt et Troia sunt potiti.
 
 
-LAOCOON
+!LAOCOON
 
 Laocoon Capyos filius Anchisae frater Apollinis
 sacerdos contra voluntatem Apollinis cum uxorem
@@ -1201,7 +1201,7 @@ necaverunt. Quod Phryges idcirco factum putarunt, quod
 Laocoon hastam in equum Troianum miserit.
 
 
-ILIONA
+!ILIONA
 
 Priamo Polydorus filius ex Hecuba cum esset natus, Ilionae filiae suae
 dederunt eum educandum, quae Polymnestori regi Thracum erat nupta, quem
@@ -1222,7 +1222,7 @@ sortes dixissent; cui soror, quid veri esset, patefecit et eius consilio
 Polymnestorem luminibus privavit atque interfecit.
 
 
-POLYXENA
+!POLYXENA
 
 
 Danai victores cum ab Ilio classem conscenderent et vellent in patriam
@@ -1233,7 +1233,7 @@ eam peteret et ad colloquium venisset ab Alexandro et Deiphobo est
 occisus, ad sepulcrum eius eam immolaverunt.
 
 
-NAUPLIUS
+!NAUPLIUS
 
 
 Ilio capto et divisa praeda Danai cum domum redirent, ira deorum, quod
@@ -1252,7 +1252,7 @@ a Nauplio interficiebantur. At Ulixem ventus detulit ad Maronem,
 Menelaum in Aegyptum, Agamemnon cum Cassandra in patriam pervenit.
 
 
-CLYTAEMNESTRA
+!CLYTAEMNESTRA
 
 
 Clytaemnestra Tyndarei filia Agamemnonis uxor cum audisset ab Oeace
@@ -1264,7 +1264,7 @@ Agamemnonis filia Orestem fratrem infantem sustulit, quem demandavit in
 Phocide Strophio, cui fuit Astyochea Agamemnonis soror nupta.
 
 
-ORESTES
+!ORESTES
 
 
 Orestes Agamemnonis et Clytaemnestrae filius postquam in puberem aetatem
@@ -1279,7 +1279,7 @@ interficiunt. Quem Tyndareus cum accusaret, Oresti a Mycenensibus fuga
 data est propter patrem; quem postea furiae matris exagitarunt.
 
 
-IPHIGENIA TAURICA
+!IPHIGENIA TAURICA
 
 
 Orestem furiae cum exagitarent, Delphos sciscitatum est profectus, quis
@@ -1304,7 +1304,7 @@ ascendit ventoque secundo ad insulam Zminthen ad Chrysen sacerdotem
 Apollinis delati sunt.
 
 
-ODYSSEA
+!ODYSSEA
 
 
 Ulixes cum ab Ilio in patriam Ithacam rediret, tempestate ad Ciconas est
@@ -1389,7 +1389,7 @@ pedes ei lavat, ex cicatrice Ulixem esse cognovit. Postea procos Minerva
 adiutrice cum Telemacho filio et duobus servis interfecit sagittis.
 
 
-TELEGONUS
+TELEGONUS.
 
 
 Telegonus Ulixis et Circes filius missus a matre, ut genitorem
@@ -1405,7 +1405,7 @@ linguae nomen imposuit; ex Penelope et Telegono natus est Italus, qui
 Italiam ex suo nomine denominavit.
 
 
-CURA
+CURA.
 
 
 Cura cum quendam fluvium transiret, vidit cretosum lutum, sustulit
@@ -1422,7 +1422,7 @@ vixerit, Cura eum possideat; sed quoniam de nomine eius controversia
 est, homo vocetur, quoniam ex humo videtur esse factus."
 
 
-QUI INTER SE AMICITIA IUNCTISSIMI FUERUNT
+QUI INTER SE AMICITIA IUNCTISSIMI FUERUNT.
 
 
 In Sicilia Dionysius tyrannus crudelissimus cum esset suosque cives
