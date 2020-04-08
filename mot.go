@@ -103,7 +103,7 @@ func (m *Mot) elDe(n *Nod) bool {
 // teste si m peut être le noyau du groupe groupe g
 func (m *Mot) estNoyau(g *Groupe) gocol.Res {
 	//signet motestnoyau
-	//debog := m.gr=="fecit" && g.id=="v.prepobj"
+	//debog := m.gr=="dedit" && g.id=="v.sov"
 	//if debog {fmt.Println(" -estNoyau",m.gr,g.id,"ans",len(m.ans),"pos",m.pos)}
 
 	var ans3 gocol.Res
@@ -184,7 +184,7 @@ func (m *Mot) estNuclDe() []string {
 // Sub : pos string, morpho []string, accord string
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
-	//debog := sub.groupe.id=="v.sujobjv" && m.gr == "Prometheus" && mn.gr=="finxit"
+	//debog := sub.groupe.id=="v.sov" && m.gr == "animam" && mn.gr=="dedit"
 	//if debog {fmt.Println(" -estSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr)}
 	// signet motestSub
 	var ans2 gocol.Res
@@ -225,6 +225,7 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
 		//if debog {fmt.Println("   .estSub2",an.Lem.Gr,"morphos",len(an.Morphos))}
 		var lmorf []string
 		for _, morfs := range an.Morphos {
+			//if debog {fmt.Println("   .estSub3 morfs",morfs,"sub",sub.morpho,sub.lien)}
 			// pour toutes les morphos valides de m
 			if sub.vaMorpho(morfs) {
 				lmorf = append(lmorf, morfs)
@@ -328,10 +329,11 @@ func (m *Mot) nbSubs() int {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	//debog := g.id=="v.sujobjv" && m.gr == "finxit"
+	//debog := g.id=="v.sov" && m.gr == "dedit"
 	//if debog {fmt.Println("-noeud",g.id,m.gr,"pos",m.pos)}
 	rang := m.rang
 	lante := len(g.ante)
+	//if debog {fmt.Println("  .noeud, lante",len(g.ante))}
 	// mot de rang trop faible
 	if rang < lante {
 		return nil
@@ -364,6 +366,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		}
 		sub := g.ante[ia]
 		ma := texte.phrase.mots[r]
+		//if debog {fmt.Println("  .noeud, avant dejasub",ma.gr,"lien",sub.lien,"ia",ia,"r",r)}
 		// passer les mots déjà subordonnés
 		for ma.dejasub {
 			r--
@@ -375,12 +378,12 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		//if debog {fmt.Println(" .noeud ma",ma.gr,"estSub",m.gr,"grup",sub.groupe.id)}
 		// vérification de réciprocité, puis du lien lui-même
 		if m.estSubDe(ma) {
-			// réinitialiser lemme et morpho de ma
 			return nil
 		}
 		res3 := ma.estSub(sub, m)
 		//if debog {fmt.Println(" .noeud estSub, res3",len(res3))} //,res3[0].Lem.Gr)}
 		if len(res3) == 0 {
+			//if debog {fmt.Println("  .noeud ma",ma.gr,"n'est pas sub",sub.lien,"de",m.gr)}
 			return nil
 		}
 		nod.mma = append(nod.mma, ma)
