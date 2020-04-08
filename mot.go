@@ -14,6 +14,7 @@ import (
 // motestnoyau
 // motestSub
 // motestSubde
+// motdejasub
 
 // rappel de la lemmatisation dans gocol :
 // type Sr struct {
@@ -33,12 +34,12 @@ type Mot struct {
 	gr			string
 	rang		int
 	ans, ans2	gocol.Res	// ensemble des lemmatisations, ans provisoire
+	dejasub		bool		// le mot est déjà l'élément d'n nœud
 	llm			[]Lm		// liste des lemmes ٍ+ morpho possibles
 	tmpl, tmpm	int			// n°s provisoires de Sr et morpho
 	pos			string		// id du groupe dont le mot est noyau
-	// ou à défaut pos du mot, si elle est décidée
+							// ou à défaut pos du mot, si elle est décidée
 	lexsynt		[]string	// propriétés lexicosyntaxiques
-	sub, sub2	*Sub		// sub qui lie le Mot à son noyau; sub2 provisoire
 }
 
 func creeMot(m string) *Mot {
@@ -76,21 +77,6 @@ for i:=0; i<len(cgn); i++ {
 	return va
 }
 
-/*
-func restostr(ans gocol.Res) string {
-	var ll []string
-	for _, an := range ans {
-		lem := an.Lem.Gr
-		var mm []string
-		for _, m := range an.Morphos {
-			mm = append(mm, m)
-		}
-		ll = append(ll, fmt.Sprintf("%s - %s", lem, strings.Join(mm, ", ")))
-	}
-	return strings.Join(ll, "\n")
-}
-*/
-
 func (m *Mot) dejaNoy() bool {
 	for _, n := range texte.phrase.nods {
 		if n.nucl == m {
@@ -98,10 +84,6 @@ func (m *Mot) dejaNoy() bool {
 		}
 	}
 	return false
-}
-
-func (m *Mot) dejaSub() bool {
-	return m.sub != nil
 }
 
 func (m *Mot) elDe(n *Nod) bool {
@@ -202,7 +184,7 @@ func (m *Mot) estNuclDe() []string {
 // Sub : pos string, morpho []string, accord string
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
-	//debog := sub.groupe.id=="v.sujvprepobj" && m.gr == "Vulcanus" && mn.gr=="fecit"
+	//debog := sub.groupe.id=="v.sujobjv" && m.gr == "Prometheus" && mn.gr=="finxit"
 	//if debog {fmt.Println(" -estSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr)}
 	// signet motestSub
 	var ans2 gocol.Res
@@ -346,7 +328,7 @@ func (m *Mot) nbSubs() int {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	//debog := g.id=="v.sujvprepobj" && m.gr == "fecit"
+	//debog := g.id=="v.sujobjv" && m.gr == "finxit"
 	//if debog {fmt.Println("-noeud",g.id,m.gr,"pos",m.pos)}
 	rang := m.rang
 	lante := len(g.ante)
@@ -383,7 +365,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		sub := g.ante[ia]
 		ma := texte.phrase.mots[r]
 		// passer les mots déjà subordonnés
-		for ma.dejaSub() {
+		for ma.dejasub {
 			r--
 			if r < 0 {
 				return nil
@@ -401,7 +383,6 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		if len(res3) == 0 {
 			return nil
 		}
-		ma.sub2 = sub
 		nod.mma = append(nod.mma, ma)
 		r--
 		//if debog {fmt.Println("    vu",ma.gr)}
@@ -415,7 +396,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		}
 		mp := texte.phrase.mots[r]
 		//if debog {fmt.Println("post, mp",mp.gr)}
-		for mp.dejaSub() && r < len(texte.phrase.mots) - 1 {
+		for mp.dejasub && r < len(texte.phrase.mots) - 1 {
 			r++
 			mp = texte.phrase.mots[r]
 		}
@@ -427,7 +408,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		if len(res4) == 0 {
 			return nil
 		}
-		mp.sub2 = sub
+		//mp.sub2 = sub
 		nod.mmp = append(nod.mmp, mp)
 		r++
 	}
@@ -436,10 +417,10 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		m.pos = g.id
 		//fmt.Println("   .noeud, noy",m.gr,"pos",m.pos)
 		for _, m := range nod.mma {
-			m.sub = m.sub2
+			m.dejasub = true
 		}
 		for _, m := range nod.mmp {
-			m.sub = m.sub2
+			m.dejasub = true
 		}
 		//if debog {fmt.Println("   .noeud m.ans2", len(m.ans2),m.ans2[0].Lem.Gr)}
 		return nod
