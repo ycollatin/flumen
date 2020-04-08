@@ -17,11 +17,11 @@ type Nod struct {
 // lignes graphviz du nœud
 func (n *Nod) graf() ([]string) {
 	var ll []string
-	for _, m := range n.mma {
-		ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, m.sub.lien))
+	for i, m := range n.mma {
+		ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, n.grp.ante[i].lien))
 	}
-	for _, m := range n.mmp {
-		ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, m.sub.lien))
+	for i, m := range n.mmp {
+		ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, n.grp.post[i].lien))
 	}
 	return ll
 }
