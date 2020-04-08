@@ -3,11 +3,11 @@
 !- pos:<pos>					// liste, sép " "
 !- morph:<traits morphos>		// liste sép " " et ";"
 !- lexSynt:<lexicosyntaxe>		// liste, sép " "
-!// a, ag :mots et groupes avant le noyau
+!// a, ag :mots et groupes avant le noyau, dans l'ordre de la lecture
 !- a:pos;id-lien [id-lien [...]];traita traitb,traita traitb;accord;lexsynt lexsynt...
 !- ag: "  "        "     "		// comme a, pour les groupes
 !// p, pg :mots et groupes après le noyau
-!- p:   "     "    "      "		// sub après le noyau
+!- p:   "     "    "      "		// sub après le noyau, dans l'ordre de la lecture
 !- pg:   "     "    "      "	// comme p, pour les groupes
 !
 !phrases de test :
@@ -72,6 +72,12 @@ lexsynt:infobj
 a:p n NP;sujet;nomin;n
 a:v;obj;inf
 
+ter:v.sov
+pos:v
+morph:act
+a:n NP;sujet;nomin;n
+a:n NP;obj;acc
+
 !!!!!!!!!!!!!!!!!!!!!!!!!
 ! Groupes non terminaux !
 !!!!!!!!!!!!!!!!!!!!!!!!!
@@ -112,9 +118,13 @@ grp:v.ablprepobj
 pos:v.prepobj
 ag:n.gen;abl;abl
 
+grp:v.sujapo
+pos:v.ablprepobj
+a:n NP;sujet;nomin;n
+
 !- a:pos;id-lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
 grp:v.advobjv
-pos:v.objv
+pos:v.objv v.sujapo
 a:Adv;adv
 
 grp:v.prepadv
