@@ -3,6 +3,7 @@
 ! ------------------------------------------
 
 ! PHRASES MODIFIÉES POUR TEST :
+feras bestias.
 feras bestias ad currum iunxit.
 cui Minerva animam dedit.
 ceteri dii.
