@@ -109,6 +109,7 @@ func arcus(a *Arc) {
 	}
 }
 
+// renvoie le mot le plus à droite de l'arc
 func (a *Arc) dernier() *Word {
 	if a.motA.rang > a.motB.rang {
 		return a.motA
@@ -116,6 +117,7 @@ func (a *Arc) dernier() *Word {
 	return a.motB
 }
 
+// réinitialisation des arcs
 func initArcs() {
 	arcs = nil
 	gabarit = ""
@@ -157,6 +159,7 @@ func place(l string, ch rune, ou int) string {
 	return string(lg)
 }
 
+// graphe en ascii du code dot ll
 func graphe(ll []string) []string {
 	lm := strings.Split(ll[0], " ")
 	// création des mots

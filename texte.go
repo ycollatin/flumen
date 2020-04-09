@@ -64,7 +64,7 @@ func (t *Texte) majPhrase() {
 }
 
 func (t *Texte) porro() {
-	if t.compteur < len(t.phrases) {
+	if len(t.phrases) - t.compteur > 1 {
 		t.compteur++
 		t.majPhrase()
 		t.affiche(aidePh)

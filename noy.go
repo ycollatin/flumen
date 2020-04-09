@@ -5,11 +5,13 @@ import (
 	"strings"
 )
 
+// Une définition de groupe peut donner un choix de noyaux
 type Noy struct {
-	id, idgr	string
-	generique	bool
+	id, idgr	string	// identifiant
+	generique	bool	// vrai si l'id est suffixé
 }
 
+// créateur du noyau
 func creeNoy(s string) []*Noy {
 	var ln []*Noy
 	ecl := strings.Split(s, " ")
@@ -26,6 +28,7 @@ func creeNoy(s string) []*Noy {
 	return ln
 }
 
+// vérifie que p peut être un noyau du groupe
 func (n *Noy) vaPos(p string) bool {
 	pel := PrimEl(p, ".")
 	if n.generique {

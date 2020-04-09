@@ -26,6 +26,7 @@ func (n *Nod) graf() ([]string) {
 	return ll
 }
 
+// liste des éléments du noeud, noyau en rouge
 func (n *Nod) doc() string {
 	var mm []string
 	for _, m := range n.mma {

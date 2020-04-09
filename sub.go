@@ -3,7 +3,6 @@ package main
 
 import (
 	"strings"
-	"github.com/ycollatin/gocol"
 )
 
 // un Sub est un élément de Groupe
@@ -56,17 +55,6 @@ func (s *Sub) vaId(id string) bool {
 	return false
 }
 
-func (s *Sub) aPos(sr gocol.Sr) bool {
-	for _, n := range s.noyaux {
-		if n.generique && n.id == sr.Lem.Pos {
-			return true
-		} else if n.idgr == sr.Lem.Pos {
-			return true
-		}
-	}
-	return false
-}
-
 func (s *Sub) vaMorpho(m string) bool {
 	for _, sm := range s.morpho {
 		if !strings.Contains(m, sm) {
@@ -75,38 +63,3 @@ func (s *Sub) vaMorpho(m string) bool {
 	}
 	return true
 }
-
-/*
-// Vérifie la conformité du pos du sub
-// le sub peut avoir un pos générique (n, v, NP, Adv...) ou
-// suffixé (n.fam, s.obj)
-// Le paramètre p est la pos du candidat. il peut être lui
-// aussi suffixé ou non
-func (s *Sub) vaPos(p string) bool {
-	// signet subvapos
-	//debog := s.groupe.id=="v.suj" && p=="n.appFam"
-	//if debog {fmt.Println("Sub.vaPos g",s.groupe.id,"p",p)}
-	pgen := strings.Index(p, ".") < 0
-	for _, n := range s.noyaux {
-		//if debog {fmt.Println("  .vaPos, pgen",pgen,"n.idgr",n.idgr,"n.id",n.id)}
-		if pgen {
-			if n.generique {
-				if n.idgr == p {
-					return true
-				}
-			}
-		} else {
-			if n.generique {
-				if n.idgr == PrimEl(p, ".") {
-					return true
-				}
-			} else {
-				if p == n.id {
-					return true
-				}
-			}
-		}
-	}
-	return false
-}
-*/

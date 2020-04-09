@@ -11,6 +11,7 @@ import (
 
 var llexs map[string][]string
 
+// lecture des données lexicosyntaxiques
 func lisLexsynt() {
 	llexs = make(map[string][]string)
 	ll := gocol.Lignes(chData+"lexsynt.la")

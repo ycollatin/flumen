@@ -22,6 +22,7 @@ type Groupe struct {
 
 var grpTerm, grp []*Groupe
 
+// créateur de Groupe
 func creeGroupe(ll []string) *Groupe {
 	if len(ll) == 0 {
 		return nil
@@ -53,6 +54,7 @@ func creeGroupe(ll []string) *Groupe {
 	return g
 }
 
+// lecture des groupes dans le fichier nf
 func lisGroupes(nf string) {
 	llin := gocol.Lignes(nf)
 	var ll []string

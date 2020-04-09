@@ -96,10 +96,6 @@ func lemmatise() {
 }
 
 func motprec() {
-	if texte == nil {
-		txtNil()
-		return
-	}
 	if texte.phrase.imot > 0 {
 		texte.phrase.imot--
 		texte.affiche(aidePh)
@@ -107,24 +103,16 @@ func motprec() {
 }
 
 func motsuiv() {
-	if texte == nil {
-		txtNil()
-		return
-	}
 	if texte.phrase.imot < len(texte.phrase.mots)-1 {
 		texte.phrase.imot++
 		texte.affiche(aidePh)
 	}
 }
 
-func txtNil() {
-	fmt.Println("Il faut d'abord charger un texte : commande txt")
-}
-
 func main() {
 	ClearScreen()
     fmt.Println("Suites, grammaire latine")
-    fmt.Println("Yves Ouvrard, GPL3")
+    fmt.Println(" © Yves Ouvrard 2020, licence GPL3")
 	// couleur
 	rouge = color.New(color.FgRed, color.Bold).SprintFunc()
 	// lecture des données Collatinus

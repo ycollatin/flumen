@@ -31,8 +31,8 @@ type Lm struct {
 }
 
 type Mot struct {
-	gr			string
-	rang		int
+	gr			string		// graphie du mot
+	rang		int			// rang du mot dans la phrase à partir de 0
 	ans, ans2	gocol.Res	// ensemble des lemmatisations, ans provisoire
 	dejasub		bool		// le mot est déjà l'élément d'n nœud
 	llm			[]Lm		// liste des lemmes ٍ+ morpho possibles
@@ -262,16 +262,6 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
 	return ans4
 }
 
-// id du groupe dont m est le noyau
-func (m *Mot) estNuclDuGroupe() string {
-	for _, nod := range texte.phrase.nods {
-		if nod.nucl == m {
-			return nod.grp.id
-		}
-	}
-	return ""
-}
-
 func (ma *Mot) estSubDe(mb *Mot) bool {
 	// signet motestSubDe
 	for _, n := range texte.phrase.nods {
@@ -307,23 +297,6 @@ func genus(sr gocol.Sr) gocol.Sr {
 		sr.Nmorph[i] += inc
 	}
 	return sr
-}
-
-// nombre de mots subs de m
-func (m *Mot) nbSubs() int {
-	if !m.dejaNoy() {
-		return 0
-	}
-	var nbm int
-	for _, mb := range texte.phrase.mots {
-		if mb == m {
-			continue
-		}
-		if mb.subDe(m) {
-			nbm++
-		}
-	}
-	return nbm
 }
 
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
@@ -440,14 +413,4 @@ func (ma *Mot) subDe(mb *Mot) bool {
 		}
 	}
 	return false
-}
-
-func supprSr(res gocol.Res, p int) gocol.Res {
-	var ret gocol.Res
-	for i, an := range res {
-		if i != p {
-			ret = append(ret, an)
-		}
-	}
-	return ret
 }

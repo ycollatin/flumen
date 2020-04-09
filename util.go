@@ -3,46 +3,11 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"os"
 	"os/exec"
 	"strings"
 )
-
-func afflin(ll []string, h int) {
-	fmt.Println("afflin, len",len(ll), "h", h)
-	var d int
-	if h > len(ll) {
-		h = len(ll)
-	}
-	for {
-		for i:= d; i < len(ll) && i < d+h; i++ {
-			fmt.Println(ll[i])
-		}
-		fmt.Println("d page suiv., u page préc., q quitter")
-		k := GetKey()
-		switch (k) {
-		case "d":
-			ClearScreen()
-			d += h
-			if d > len(ll) {
-				d = d - h
-				if d < 0 {
-					d = 0
-				}
-			}
-		case "u":
-			ClearScreen()
-			d -= h
-			if d < 0 {
-				d = 0
-			}
-		case "q":
-			return
-		}
-	}
-}
 
 var (
 	lcas = [...]string {"nominatif","vocatif","accusatif","génitif","datif","ablatif","locatif"}
@@ -50,6 +15,7 @@ var (
 	lnombre = [...]string {"singulier", "pluriel"}
 )
 
+// renvoie le premier cas de la liste lcas contenu dans morpho
 func cas(morpho string) string {
 	for _, c := range lcas {
 		if strings.Contains(morpho, c) {
@@ -59,6 +25,7 @@ func cas(morpho string) string {
 	return ""
 }
 
+// renvoie le premier genre de la liste lgenre contenu dans morpho
 func genre(morpho string) string {
 	for _, g := range lgenre {
 		if strings.Contains(morpho, g) {
@@ -68,6 +35,7 @@ func genre(morpho string) string {
 	return ""
 }
 
+// renvoie le premier genre de la liste lnombre contenu dans morpho
 func nombre(morpho string) string {
 	for _, n := range lnombre {
 		if strings.Contains(morpho, n) {
@@ -77,15 +45,7 @@ func nombre(morpho string) string {
 	return ""
 }
 
-func chxMultiple(q string, ll []string) string {
-	fmt.Println(q)
-	for i := 0; i < len(ll); i++ {
-		fmt.Println(i, ll[i])
-	}
-	c := InputInt("N° choix ?")
-	return ll[c]
-}
-
+// efface l'écran
 func ClearScreen() {
 	c := exec.Command("clear")
 	c.Stdout = os.Stdout
@@ -102,19 +62,7 @@ func contient(ls []string, s string) bool {
 	return false
 }
 
-func sauveLignes(nf string, ll []string) {
-	f, err := os.Create(nf)
-	if err != nil {
-		fmt.Println("erreur d'écriture")
-		f.Close()
-		return
-	}
-	for _, l := range ll {
-		fmt.Fprintln(f, l)
-	}
-	f.Close()
-}
-
+// capture de la dernière touche enfoncée
 func GetKey() string {
 	exec.Command("stty", "-F", "/dev/tty", "cbreak", "min", "1").Run()
 	exec.Command("stty", "-F", "/dev/tty", "-echo").Run()
@@ -126,6 +74,7 @@ func GetKey() string {
 	return string(b)
 }
 
+// saisie d'un entier
 func InputInt(q string) int {
 	var i int
 	fmt.Printf("%s ", q)
@@ -134,16 +83,6 @@ func InputInt(q string) int {
 		return InputInt(q)
 	}
 	return i
-}
-
-func InputString(q string) string {
-	in := bufio.NewReader(os.Stdin)
-	fmt.Print(q," ")
-	s, err := in.ReadString('\n')
-	if err == nil {
-		return strings.TrimSpace(s)
-	}
-	return "err"
 }
 
 // renvoie le premier élément du split(s, sep)
