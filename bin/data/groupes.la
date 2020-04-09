@@ -25,15 +25,19 @@ ter:n.det
 pos:n
 a:p;det;;cgn;det
 
-ter:n.coord
-pos:n
-p:Adv;coo;;;coord
-p:n NP;coo;;cgn
+!ter:n.coord
+!pos:n
+!p:Adv;coo;;;coord
+!p:n NP;coo;;cgn
 
-ter:np.coord
-pos:NP
-p:Adv;coo;;;coord
-p:NP;coo;;cgn
+!ter:np.coord
+!pos:NP
+!p:Adv;coo;;;coord
+!p:NP;coo;;cgn
+
+ter:n.nadj
+pos:n NP
+a:a;epith;;cgn
 
 ter:n.prepAbl
 pos:n NP
@@ -100,6 +104,11 @@ pos:v
 morph:act
 ag:n.prepAbl;gprep
 
+grp:v.gprepAcc
+pos:v
+morph:act
+ag:n.prepAcc;gprep
+
 grp:v.objv
 pos:v
 morph:act
@@ -113,6 +122,10 @@ ag:n;sujet;nomin;n
 grp:v.prepobj
 pos:v.objv
 ag:n.prepAbl n.prepAcc;gprep
+
+grp:v.objprep
+pos:gprepAbl gprepAcc
+ag:n NP;sujet;nomin;n
 
 grp:v.ablprepobj
 pos:v.prepobj
