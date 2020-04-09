@@ -1,20 +1,7 @@
-! ------------------------------------------
-!         Gentes, phrases de test.
-! ------------------------------------------
-
-! PHRASES MODIFIÉES POUR TEST :
-feras bestias.
-feras bestias ad currum iunxit.
-cui Minerva animam dedit.
-ceteri dii.
-ceterique dii.
-omnia ardere coeperunt.
-ea data in coniugium Epimetheo fratri.
-inde nata est Pyrrha.
-
-
 !*HYGINI FABULAE*
+
 !PANDORA
+
 Prometheus Iapeti filius primus homines ex luto finxit.
 Postea Vulcanus Iovis iussu ex luto mulieris effigiem
 fecit, cui Minerva animam dedit, ceterique dii alius
