@@ -2,6 +2,7 @@
 package main
 
 import (
+	"github.com/ycollatin/gocol"
 	"strings"
 )
 
@@ -19,7 +20,7 @@ func creeNoy(s string) []*Noy {
 	for _, e := range ecl {
 		n := new(Noy)
 		if e[0] == '"' {
-			n.canon = e[1:len(e)-2]
+			n.canon = e[1:len(e)-1]
 			n.generique = true
 		} else {
 			n.id = e
@@ -32,6 +33,11 @@ func creeNoy(s string) []*Noy {
 		ln = append(ln, n)
 	}
 	return ln
+}
+
+// vérifie que le *Mot m de lemmatisation Sr peut être un noyau du groupe
+func (n *Noy) vaSr(sr gocol.Sr) bool {
+	return sr.Lem.Gr[0] == n.canon
 }
 
 // vérifie que p peut être un noyau du groupe
