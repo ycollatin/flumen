@@ -5,11 +5,10 @@ package main
 
 // FIXME
 // - v.svprepa admet /cum/ comme verbe
+// - ascii, quelques croisements dans les arcs
+// - liens réciproques
 
 // TODO
-// - Modifier la syntaxe de groupes.la 
-//   . pour réduire le noyau à un lemme précis, ex. @sum
-//   . pour réduire le noyau à une forme précise ex. "ut"
 // - Le code graphviz devrait donner l'équivalence mot - rang
 
 import (
