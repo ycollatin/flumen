@@ -25,14 +25,14 @@ ter:n.det
 pos:n
 a:p;det;;cgn;det
 
+ter:v.coordobjv
+pos:v
+a:"et";conj
+a:n;obj;acc
+
 ter:n.conj
 pos:n NP
 a:"et";conj
-
-!ter:np.coord
-!pos:NP
-!p:Adv;coo;;;coord
-!p:NP;coo;;cgn
 
 ter:n.nadj
 pos:n NP
@@ -80,6 +80,13 @@ pos:v
 morph:act
 a:n NP;sujet;nomin;n
 a:n NP;obj;acc
+
+ter:vdatobj
+pos:v
+morph:act
+lexsynt:datif
+p:n;dat;datif
+p:n NP;acc;acc
 
 !!!!!!!!!!!!!!!!!!!!!!!!!
 ! Groupes non terminaux !
