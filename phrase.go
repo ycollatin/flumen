@@ -38,6 +38,49 @@ func (p *Phrase) arbre() ([]string, []string) {
 	}
 	var lexpl []string
 	var ll []string
+	p.nods = nil
+	// recherche des noyaux
+	// groupes terminaux
+	for _, g := range grpTerm {
+		for _, m := range p.mots {
+			if m.dejaNoy() {
+				continue
+			}
+			n := m.noeud(g)
+			if n != nil {
+				p.nods = append(p.nods, n)
+				lexpl = append(lexpl, n.grp.id)
+			}
+		}
+	}
+	// groupes non terminaux
+	for _, g := range grp {
+		for _, m := range p.mots {
+			n := m.noeud(g)
+			if n != nil {
+				p.nods = append(p.nods, n)
+				lexpl = append(lexpl, n.grp.id)
+			}
+		}
+	}
+
+	// graphe
+	ll = append(ll, p.gr)
+	for _, n := range p.nods {
+		ll = append(ll, n.graf()...)
+	}
+	p.ar = ll
+	p.src = graphe(ll)
+	return ll, lexpl
+}
+
+/*
+func (p *Phrase) arbre() ([]string, []string) {
+	if len(p.ar) > 0 {
+		return p.ar, p.src
+	}
+	var lexpl []string
+	var ll []string
 	// réinitialisation des noeuds
 	p.nods = nil
 	// recherche des noyaux
@@ -82,6 +125,7 @@ func (p *Phrase) arbre() ([]string, []string) {
 	p.src = graphe(ll)
 	return ll, lexpl
 }
+*/
 
 // texte de la phrase, le mot courant surligné en rouge
 func (p *Phrase) enClair() string {
