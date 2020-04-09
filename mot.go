@@ -104,6 +104,7 @@ func (m *Mot) elDe(n *Nod) bool {
 func (m *Mot) estNoyau(g *Groupe) gocol.Res {
 	//signet motestnoyau
 	//debog := m.gr=="dedit" && g.id=="v.sov"
+	//debog := m.gr=="dedit" && g.id=="v.sov"
 	//if debog {fmt.Println(" -estNoyau",m.gr,g.id,"ans",len(m.ans),"pos",m.pos)}
 
 	var ans3 gocol.Res
@@ -112,7 +113,6 @@ func (m *Mot) estNoyau(g *Groupe) gocol.Res {
 		// 1. La pos définitif n'est pas encore fixé
 		va := false
 		for _, noy := range g.noyaux {
-			//if debog {fmt.Println("  .estNoyau, noy.id",noy.id,"noy.vapos("+m.pos+")")}
 			va = va || noy.vaPos(m.pos)
 		}
 		if !va {
@@ -122,10 +122,16 @@ func (m *Mot) estNoyau(g *Groupe) gocol.Res {
 	} else {
 		for _, a := range m.ans {
 			for _, noy := range g.noyaux {
-				//if debog {fmt.Println("  .estNoyau,noy",noy,"a.Lem.Pos",a.Lem.Pos)}
-				if noy.vaPos(a.Lem.Pos) {
-					ans3 = append(ans3, a)
-					break
+				if noy.canon > "" {
+					if noy.vaSr(a) {
+						ans3 = append(ans3, a)
+						break
+					}
+				} else {
+					if noy.vaPos(a.Lem.Pos) {
+						ans3 = append(ans3, a)
+						break
+					}
 				}
 			}
 		}
@@ -184,7 +190,7 @@ func (m *Mot) estNuclDe() []string {
 // Sub : pos string, morpho []string, accord string
 // gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
-	//debog := sub.groupe.id=="v.sov" && m.gr == "animam" && mn.gr=="dedit"
+	//debog := sub.groupe.id=="n.conj" && m.gr == "et" && mn.gr=="Minerva"
 	//if debog {fmt.Println(" -estSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr)}
 	// signet motestSub
 	var ans2 gocol.Res
@@ -206,10 +212,17 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
 		for _, an := range m.ans {
 			//if debog {fmt.Println("   .estSub,lemme",an.Lem.Gr,"pos",an.Lem.Pos)}
 			for _, noy := range sub.noyaux {
-				//if debog {fmt.Println("   .estSubn,noy",noy)}
-				if noy.vaPos(an.Lem.Pos) {
-					ans2 = append(ans2, an)
-					break
+				if noy.canon > "" {
+					//if debog {fmt.Println("   .estSub, noy.canon",noy.canon)}
+					if noy.vaSr(an) {
+						ans2 = append(ans2, an)
+						break
+					}
+				} else {
+					if noy.vaPos(an.Lem.Pos) {
+						ans2 = append(ans2, an)
+						break
+					}
 				}
 			}
 		}
@@ -299,10 +312,13 @@ func genus(sr gocol.Sr) gocol.Sr {
 	return sr
 }
 
+//grp:n.coord
+//pos:n NP
+//pg:n.conj;coord;;cgn
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	//debog := g.id=="v.sov" && m.gr == "dedit"
+	//debog := g.id=="n.coord" && m.gr == "Diana"
 	//if debog {fmt.Println("-noeud",g.id,m.gr,"pos",m.pos)}
 	rang := m.rang
 	lante := len(g.ante)
@@ -371,12 +387,12 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 			break
 		}
 		mp := texte.phrase.mots[r]
-		//if debog {fmt.Println("post, mp",mp.gr)}
-		for mp.dejasub && r < len(texte.phrase.mots) - 1 {
+		//if debog {fmt.Println("  .noeud avant dejasub, post, mp",mp.gr,"dejasub",mp.dejasub)}
+		for mp.dejasub && r < len(texte.phrase.mots) -1 {
 			r++
 			mp = texte.phrase.mots[r]
 		}
-		//if debog {fmt.Println("     mp", mp.gr,"estSub",m.gr,sub.groupe.id,mp.estSub(sub, m))}
+		//if debog {fmt.Println("  .noeud apres dejasub mp", mp.gr)}
 		if m.estSubDe(mp) {
 			return nil
 		}
