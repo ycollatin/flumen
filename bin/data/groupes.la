@@ -25,10 +25,9 @@ ter:n.det
 pos:n
 a:p;det;;cgn;det
 
-!ter:n.coord
-!pos:n
-!p:Adv;coo;;;coord
-!p:n NP;coo;;cgn
+ter:n.conj
+pos:n NP
+a:"et";conj
 
 !ter:np.coord
 !pos:NP
@@ -98,6 +97,10 @@ p:NP;app;;cn
 grp:n.epith
 pos:n
 p:a;epith;;cgn
+
+grp:n.coord
+pos:n NP
+pg:n.conj;coord;;c
 
 grp:v.gprepAbl
 pos:v
