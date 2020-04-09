@@ -8,6 +8,7 @@ import (
 // Une définition de groupe peut donner un choix de noyaux
 type Noy struct {
 	id, idgr	string	// identifiant
+	canon		string  // canon du lemme, entre " dans groupes.la
 	generique	bool	// vrai si l'id est suffixé
 }
 
@@ -17,11 +18,16 @@ func creeNoy(s string) []*Noy {
 	ecl := strings.Split(s, " ")
 	for _, e := range ecl {
 		n := new(Noy)
-		n.id = e
-		pe := PrimEl(e, ".")
-		n.generique = pe == e
-		if n.generique {
-			n.idgr = pe
+		if e[0] == '"' {
+			n.canon = e[1:len(e)-2]
+			n.generique = true
+		} else {
+			n.id = e
+			pe := PrimEl(e, ".")
+			n.generique = pe == e
+			if n.generique {
+				n.idgr = pe
+			}
 		}
 		ln = append(ln, n)
 	}
