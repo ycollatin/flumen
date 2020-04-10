@@ -9,6 +9,7 @@ import (
 type Sub struct {
 	groupe		*Groupe		// groupe propriétaire du sub
 	noyaux		[]*Noy		// Noyaux possibles du sub
+	noyexcl		[]*Noy		// Noyaux exclus
 	lien		string		// étiquette du lien noyau -> sub
 	morpho		[]string	// traits morphos requis
 	accord		string		// accord sub - noyau
@@ -22,8 +23,8 @@ func creeSub(v string, g *Groupe, t bool) *Sub {
 	vv := strings.Split(v, ";")
 	for i, e := range(vv) {
 		switch i {
-			case 0:	// pos
-			sub.noyaux = creeNoy(e)
+			case 0:	// noyaux
+				sub.noyaux, sub.noyexcl = creeNoy(e)
 			case 1:	// id-lien
 			sub.lien = e
 			case 2: // morpho
