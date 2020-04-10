@@ -14,7 +14,6 @@ import (
 // motestnoyau
 // motestSub
 // motestSubde
-// motdejasub
 
 // rappel de la lemmatisation dans gocol :
 // type Sr struct {
@@ -86,17 +85,7 @@ func (m *Mot) dejaNoy() bool {
 	return false
 }
 
-func (m *Mot) elDe(n *Nod) bool {
-	for _, ma := range n.mma {
-		if ma == m {
-			return true
-		}
-	}
-	for _, mp := range n.mmp {
-		if mp == m {
-			return true
-		}
-	}
+func domine(ma, mb *Mot) bool {
 	return false
 }
 
@@ -187,15 +176,14 @@ func (m *Mot) estNuclDe() []string {
 }
 
 // vrai si m est compatible avec Sub et le noyau mn
-// Sub : pos string, morpho []string, accord string
-// gocol.Sr : Lem, Morphos []string
 func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
-	//debog := sub.groupe.id=="n.conj" && m.gr == "et" && mn.gr=="Minerva"
+	//debog := sub.groupe.id=="v.conj" && m.gr == "imposuit" && mn.gr=="et"
 	//if debog {fmt.Println(" -estSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr)}
 	// signet motestSub
 	var ans2 gocol.Res
 	// vérification des pos
 	if m.pos != "" {
+		//if debog {fmt.Println("   .estSub, !=")}
 		// 1. La pos du mot est définitive
 		va := false
 		for _, noy := range sub.noyaux {
@@ -208,6 +196,7 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
 		ans2 = m.ans2
 		//if debog {fmt.Println("   .estSub, noy, len ans2",len(ans2))} //,ans2[0].Lem.Gr)}
 	} else {
+		//if debog {fmt.Println("   .estSub, else")}
 		// 2. La pos définitif n'est pas encore fixée
 		for _, an := range m.ans {
 			//if debog {fmt.Println("   .estSub,lemme",an.Lem.Gr,"pos",an.Lem.Pos)}
@@ -312,13 +301,22 @@ func genus(sr gocol.Sr) gocol.Sr {
 	return sr
 }
 
-//grp:n.coord
-//pos:n NP
-//pg:n.conj;coord;;cgn
+/*
+!FIXME
+grp:v.conj
+pos:v
+a:"et";conj
+
+!FIXME
+grp:v.coord
+pos:v
+pg:v;coord;;n
+*/
+
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	//debog := g.id=="n.coord" && m.gr == "Diana"
+	//debog := g.id=="n.coord" && m.gr == "Argiopes"
 	//if debog {fmt.Println("-noeud",g.id,m.gr,"pos",m.pos)}
 	rang := m.rang
 	lante := len(g.ante)
@@ -420,13 +418,25 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	return nil
 }
 
+/*
 // vrai si ma est sub de mb
-func (ma *Mot) subDe(mb *Mot) bool {
+func (ma *Mot) SubDe(mb *Mot) bool {
 	// chercher le groupe dont mb est noyau
 	for _, n := range texte.phrase.nods {
 		if mb == n.nucl {
-			return ma.elDe(n)
+			//return ma.elDe(n)
+			for _, m := range n.mma {
+				if m == ma {
+					return true
+				}
+			}
+			for _, m := range n.mmp {
+				if m == ma {
+					return true
+				}
+			}
 		}
 	}
 	return false
 }
+*/
