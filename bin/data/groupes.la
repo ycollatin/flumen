@@ -59,10 +59,6 @@ pos:n
 lexSynt:fam
 a:NP np.coord;gen;gén
 
-ter:n.gen
-pos:n
-a:n NP;gen;gén
-
 ter:v.inf
 pos:v
 morph:act
@@ -109,15 +105,32 @@ grp:n.coord
 pos:n NP
 pg:n.conj;coord;;c
 
-grp:v.gprepAbl
+grp:n.gen
+pos:n
+ag:n NP;gen;gén
+
+grp:v.prepadv
 pos:v
 morph:act
-ag:n.prepAbl;gprep
+a:Adv;adv
 
 grp:v.gprepAcc
 pos:v
 morph:act
 ag:n.prepAcc;gprep
+
+grp:v.conj
+pos:v
+a:"et";conj
+
+grp:v.coord
+pos:v
+pg:v;coord;;n
+
+grp:v.gprepAbl
+pos:v
+morph:act
+ag:n.prepAbl;gprep
 
 grp:v.objv
 pos:v
@@ -148,11 +161,6 @@ a:n NP;sujet;nomin;n
 !- a:pos;id-lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
 grp:v.advobjv
 pos:v.objv v.sujapo
-a:Adv;adv
-
-grp:v.prepadv
-pos:v
-morph:act
 a:Adv;adv
 
 !grp:v.obj
