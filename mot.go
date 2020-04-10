@@ -184,7 +184,7 @@ func (m *Mot) estNuclDe() []string {
 
 // vrai si m est compatible avec Sub et le noyau mn
 func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
-	//debog := sub.groupe.id=="v.conj" && m.gr == "imposuit" && mn.gr=="et"
+	//debog := sub.groupe.id=="v.coordobjv" && m.gr == "et" && mn.gr=="torrent"
 	//if debog {fmt.Println(" -estSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr)}
 	// signet motestSub
 	var ans2 gocol.Res
@@ -223,7 +223,7 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
 			}
 		}
 	}
-	//if debog {fmt.Println("   .estSub, len(ans2)",len(ans2))} //,"lemme",ans2[0].Lem.Gr)}
+	//if debog {fmt.Println("   .estSub, lien",sub.lien,"len(ans2)",len(ans2))} //,"lemme",ans2[0].Lem.Gr)}
 	if len(ans2) == 0 {
 		return ans2
 	}
@@ -291,7 +291,7 @@ func genus(sr gocol.Sr) gocol.Sr {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	//debog := g.id=="n.app" && m.gr == "Europa"
+	//debog := g.id=="v.coordobjv" && m.gr == "torrent"
 	//if debog {fmt.Println("-noeud",g.id,m.gr,"pos",m.pos)}
 	rang := m.rang
 	lante := len(g.ante)
