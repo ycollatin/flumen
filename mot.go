@@ -85,14 +85,20 @@ func (m *Mot) dejaNoy() bool {
 	return false
 }
 
-func domine(ma, mb *Mot) bool {
+func (ma *Mot) domine(mb *Mot) bool {
+	mnoy := noyDe(mb)
+	for mnoy != nil {
+		if mnoy == ma {
+			return true
+		}
+		mnoy = noyDe(mnoy)
+	}
 	return false
 }
 
 // teste si m peut être le noyau du groupe groupe g
 func (m *Mot) estNoyau(g *Groupe) gocol.Res {
 	//signet motestnoyau
-	//debog := m.gr=="dedit" && g.id=="v.sov"
 	//debog := m.gr=="dedit" && g.id=="v.sov"
 	//if debog {fmt.Println(" -estNoyau",m.gr,g.id,"ans",len(m.ans),"pos",m.pos)}
 
@@ -239,7 +245,6 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
 		}
 	}
 	//if debog {fmt.Println("   .estSub1, oka, len ans3",len(ans3))}
-
 	// accord
 	var ans4 gocol.Res
 	// pour toutes les morphos valides de mn
@@ -264,25 +269,6 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
 	return ans4
 }
 
-func (ma *Mot) estSubDe(mb *Mot) bool {
-	// signet motestSubDe
-	for _, n := range texte.phrase.nods {
-		if mb == n.nucl {
-			for _, m := range n.mma {
-				if m == mb {
-					return true
-				}
-			}
-			for _, m := range n.mmp {
-				if m == mb {
-					return true
-				}
-			}
-		}
-	}
-	return false
-}
-
 // ajoute le genre à la morpho d'un nom
 func genus(sr gocol.Sr) gocol.Sr {
 	if sr.Lem.Pos != "n" && sr.Lem.Pos != "NP" {
@@ -300,18 +286,6 @@ func genus(sr gocol.Sr) gocol.Sr {
 	}
 	return sr
 }
-
-/*
-!FIXME
-grp:v.conj
-pos:v
-a:"et";conj
-
-!FIXME
-grp:v.coord
-pos:v
-pg:v;coord;;n
-*/
 
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
@@ -364,7 +338,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		}
 		//if debog {fmt.Println(" .noeud ma",ma.gr,"estSub",m.gr,"grup",sub.groupe.id)}
 		// vérification de réciprocité, puis du lien lui-même
-		if m.estSubDe(ma) {
+		if ma.domine(m) {
 			return nil
 		}
 		res3 := ma.estSub(sub, m)
@@ -391,7 +365,8 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 			mp = texte.phrase.mots[r]
 		}
 		//if debog {fmt.Println("  .noeud apres dejasub mp", mp.gr)}
-		if m.estSubDe(mp) {
+		// réciprocité
+		if mp.domine(m) {
 			return nil
 		}
 		res4 := mp.estSub(sub, m)
@@ -418,25 +393,18 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	return nil
 }
 
-/*
-// vrai si ma est sub de mb
-func (ma *Mot) SubDe(mb *Mot) bool {
-	// chercher le groupe dont mb est noyau
+func noyDe(m *Mot) *Mot {
 	for _, n := range texte.phrase.nods {
-		if mb == n.nucl {
-			//return ma.elDe(n)
-			for _, m := range n.mma {
-				if m == ma {
-					return true
-				}
+		for _, msub := range n.mma {
+			if msub == m {
+				return n.nucl
 			}
-			for _, m := range n.mmp {
-				if m == ma {
-					return true
-				}
+		}
+		for _, msub := range n.mmp {
+			if msub == m {
+				return n.nucl
 			}
 		}
 	}
-	return false
+	return nil
 }
-*/
