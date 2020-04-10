@@ -99,8 +99,8 @@ func (ma *Mot) domine(mb *Mot) bool {
 // teste si m peut être le noyau du groupe groupe g
 func (m *Mot) estNoyau(g *Groupe) gocol.Res {
 	//signet motestnoyau
-	//debog := m.gr=="dedit" && g.id=="v.sov"
-	//if debog {fmt.Println(" -estNoyau",m.gr,g.id,"ans",len(m.ans),"pos",m.pos)}
+	//debog := m.gr=="Europa" && g.id=="n.app"
+	//if debog {fmt.Println(" -estNoyau",m.gr,g.id,"ans",len(m.ans),"pos=\""+m.pos+"\"")}
 
 	var ans3 gocol.Res
 	// vérif du pos
@@ -117,6 +117,7 @@ func (m *Mot) estNoyau(g *Groupe) gocol.Res {
 	} else {
 		for _, a := range m.ans {
 			for _, noy := range g.noyaux {
+				//if debog {fmt.Println("  .estNoyau, noy",noy,"a.Lem",a.Lem.Pos)}
 				if noy.canon > "" {
 					if noy.vaSr(a) {
 						ans3 = append(ans3, a)
@@ -290,11 +291,10 @@ func genus(sr gocol.Sr) gocol.Sr {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	//debog := g.id=="n.coord" && m.gr == "Argiopes"
+	//debog := g.id=="n.app" && m.gr == "Europa"
 	//if debog {fmt.Println("-noeud",g.id,m.gr,"pos",m.pos)}
 	rang := m.rang
 	lante := len(g.ante)
-	//if debog {fmt.Println("  .noeud, lante",len(g.ante))}
 	// mot de rang trop faible
 	if rang < lante {
 		return nil
