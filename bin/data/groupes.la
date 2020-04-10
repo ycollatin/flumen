@@ -25,16 +25,6 @@ ter:n.det
 pos:n
 a:p;det;;cgn;det
 
-!FIXME
-!ter:v.coordobjv
-!pos:v
-!a:"et";conj
-!a:n;obj;acc
-
-!ter:n.conj
-!pos:n NP
-!a:"et";conj
-
 ter:n.nadj
 pos:n NP
 a:a;epith;;cgn
@@ -54,11 +44,6 @@ pos:a
 morph:acc
 !lexSynt:subst
 a:prepAA prepAcc;prep
-
-!ter:n.fam
-!pos:n
-!lexSynt:fam
-!a:NP;gen;gén
 
 ter:v.inf
 pos:v
@@ -83,7 +68,7 @@ pos:v
 morph:act
 lexsynt:datif
 p:n;dat;datif
-p:n NP;acc;acc
+p:n NP;obj;acc
 
 !!!!!!!!!!!!!!!!!!!!!!!!!
 ! Groupes non terminaux !
@@ -101,6 +86,10 @@ p:NP;app;;cn
 grp:n.epith
 pos:n
 p:a;epith;;cgn
+
+grp:n.conj
+pos:n NP
+a:"et";conj
 
 grp:n.coord
 pos:n NP
@@ -129,22 +118,10 @@ pos:v
 morph:act
 ag:n;obj;acc
 
-grp:v.conj
-pos:v
-a:"et";conj
-
-grp:n.conj
-pos:n NP
-a:"et";conj
-
 grp:n.fam
 pos:n
 lexSynt:fam
 ag:NP;gen;gén
-
-grp:v.coord
-pos:v
-pg:v;coord;;n
 
 grp:v.gprepAbl
 pos:v
@@ -211,4 +188,12 @@ a:Adv;adv
 grp:v.sujobjprep
 pos:v.objprep
 ag:NP n;sujet;nomin;n
+
+grp:v.conj
+pos:v
+a:"et";conj
+
+grp:v.coord
+pos:v
+pg:v;coord;;n
 
