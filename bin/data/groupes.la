@@ -9,6 +9,9 @@
 !// p, pg :mots et groupes après le noyau
 !- p:   "     "    "      "		// sub après le noyau, dans l'ordre de la lecture
 !- pg:   "     "    "      "	// comme p, pour les groupes
+! Si un id-lien est précédé d'un point d'exclamation, le sub refusera comme sub
+! les les mots et noeuds ayant cet id. Cf. grp:v.objv.
+!
 !
 !phrases de test :
 !  Prometheus Iapeti filius homines ex luto finxit.
