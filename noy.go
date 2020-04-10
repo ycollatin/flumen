@@ -14,10 +14,13 @@ type Noy struct {
 }
 
 // créateur du noyau
-func creeNoy(s string) []*Noy {
-	var ln []*Noy
+func creeNoy(s string) (ln, lnExcl []*Noy) {
 	ecl := strings.Split(s, " ")
 	for _, e := range ecl {
+		ex := e[0] == '!'
+		if ex {
+			e = e[1:]
+		}
 		n := new(Noy)
 		if e[0] == '"' {
 			n.canon = e[1:len(e)-1]
@@ -30,9 +33,13 @@ func creeNoy(s string) []*Noy {
 				n.idgr = pe
 			}
 		}
-		ln = append(ln, n)
+		if ex {
+			lnExcl = append(lnExcl, n)
+		} else {
+			ln = append(ln, n)
+		}
 	}
-	return ln
+	return
 }
 
 // vérifie que le *Mot m de lemmatisation Sr peut être un noyau du groupe
