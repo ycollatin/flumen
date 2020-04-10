@@ -25,14 +25,15 @@ ter:n.det
 pos:n
 a:p;det;;cgn;det
 
-ter:v.coordobjv
-pos:v
-a:"et";conj
-a:n;obj;acc
+!FIXME
+!ter:v.coordobjv
+!pos:v
+!a:"et";conj
+!a:n;obj;acc
 
-ter:n.conj
-pos:n NP
-a:"et";conj
+!ter:n.conj
+!pos:n NP
+!a:"et";conj
 
 ter:n.nadj
 pos:n NP
@@ -54,10 +55,10 @@ morph:acc
 !lexSynt:subst
 a:prepAA prepAcc;prep
 
-ter:n.fam
-pos:n
-lexSynt:fam
-a:NP;gen;gén
+!ter:n.fam
+!pos:n
+!lexSynt:fam
+!a:NP;gen;gén
 
 ter:v.inf
 pos:v
@@ -123,11 +124,24 @@ pos:v
 morph:act
 ag:n.prepAcc;gprep
 
+grp:v.objv
+pos:v
+morph:act
+ag:n;obj;acc
+
 grp:v.conj
 pos:v
 a:"et";conj
 
-!FIXME
+grp:n.conj
+pos:n NP
+a:"et";conj
+
+grp:n.fam
+pos:n
+lexSynt:fam
+ag:NP;gen;gén
+
 grp:v.coord
 pos:v
 pg:v;coord;;n
@@ -136,11 +150,6 @@ grp:v.gprepAbl
 pos:v
 morph:act
 ag:n.prepAbl;gprep
-
-grp:v.objv
-pos:v
-morph:act
-ag:n;obj;acc
 
 ! en cas d'ambiguïté morphologique, le sujet précède l'objet
 grp:v.sujobjv
