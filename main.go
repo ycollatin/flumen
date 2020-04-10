@@ -4,9 +4,13 @@
 package main
 
 // FIXME
+// - un accusatif noyau d'un groupe prépositionnel ne peut être objet !
 // - v.svprepa admet /cum/ comme verbe
 // - ascii, quelques croisements dans les arcs
 // - liens réciproques
+// - /subiciunt veribus prunas et viscera torrent : 
+//   AmbiguÏté entre la coord prunas et viscera    (faux)
+//				  et la coord subiciunt et torrent (juste)
 
 // TODO
 // - commande pour le changement de texte; saisie d'une phrase.

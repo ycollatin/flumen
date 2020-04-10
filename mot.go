@@ -1,12 +1,4 @@
-//       mot.go - Publicola
-
-package main
-
-import (
-	//"fmt"
-	"github.com/ycollatin/gocol"
-	"strings"
-)
+//       mot.go - Gentes
 
 // signets :
 //
@@ -23,6 +15,14 @@ import (
 // }
 //
 // type Res []Sr
+
+package main
+
+import (
+	"fmt"
+	"github.com/ycollatin/gocol"
+	"strings"
+)
 
 type Lm struct {
 	l	*gocol.Lemme
@@ -291,8 +291,8 @@ func genus(sr gocol.Sr) gocol.Sr {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	//debog := g.id=="v.coordobjv" && m.gr == "torrent"
-	//if debog {fmt.Println("-noeud",g.id,m.gr,"pos",m.pos)}
+	debog := g.id=="v.objv" && m.gr == "imposuit"
+	if debog {fmt.Println("-noeud",g.id,m.gr,"pos",m.pos)}
 	rang := m.rang
 	lante := len(g.ante)
 	// mot de rang trop faible
@@ -327,7 +327,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		}
 		sub := g.ante[ia]
 		ma := texte.phrase.mots[r]
-		//if debog {fmt.Println("  .noeud, avant dejasub",ma.gr,"lien",sub.lien,"ia",ia,"r",r)}
+		if debog {fmt.Println("  .noeud, avant dejasub",ma.gr,"lien",sub.lien,"ia",ia,"r",r)}
 		// passer les mots déjà subordonnés
 		for ma.dejasub {
 			r--
@@ -336,7 +336,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 			}
 			ma = texte.phrase.mots[r]
 		}
-		//if debog {fmt.Println(" .noeud ma",ma.gr,"estSub",m.gr,"grup",sub.groupe.id)}
+		if debog {fmt.Println(" .noeud ma",ma.gr,"estSub",m.gr,"grup",sub.groupe.id)}
 		// vérification de réciprocité, puis du lien lui-même
 		if ma.domine(m) {
 			return nil
