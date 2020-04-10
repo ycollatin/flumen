@@ -57,7 +57,7 @@ a:prepAA prepAcc;prep
 ter:n.fam
 pos:n
 lexSynt:fam
-a:NP np.coord;gen;gén
+a:NP;gen;gén
 
 ter:v.inf
 pos:v
@@ -96,6 +96,11 @@ grp:n.appnp
 pos:n
 lexSynt:nom
 p:NP;app;;cn
+
+! FIXME
+grp:n.app
+pos:n
+pg:n;app;;cgn
 
 grp:n.epith
 pos:n
