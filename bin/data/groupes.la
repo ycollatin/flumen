@@ -97,11 +97,6 @@ pos:n
 lexSynt:nom
 p:NP;app;;cn
 
-! FIXME
-grp:n.app
-pos:n
-pg:n;app;;cgn
-
 grp:n.epith
 pos:n
 p:a;epith;;cgn
@@ -113,6 +108,10 @@ pg:n.conj;coord;;c
 grp:n.gen
 pos:n
 ag:n NP;gen;gén
+
+grp:n.app
+pos:n NP
+pg:n;app;;cgn
 
 grp:v.prepadv
 pos:v
@@ -128,6 +127,7 @@ grp:v.conj
 pos:v
 a:"et";conj
 
+!FIXME
 grp:v.coord
 pos:v
 pg:v;coord;;n
