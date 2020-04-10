@@ -12,12 +12,12 @@ import (
 )
 
 type Groupe struct {
-	id			string
-	noyaux		[]*Noy		// pos du noyau
-	morph		[]string	// traits morpho du noyau
-	lexSynt		[]string	// étiquettes lexicosyntaxiques du noyau
-	ante		[]*Sub
-	post		[]*Sub
+	id				string
+	noyaux, noyexcl	[]*Noy		// pos du noyau
+	morph			[]string	// traits morpho du noyau
+	lexSynt			[]string	// étiquettes lexicosyntaxiques du noyau
+	ante			[]*Sub
+	post			[]*Sub
 }
 
 var grpTerm, grp []*Groupe
@@ -36,7 +36,7 @@ func creeGroupe(ll []string) *Groupe {
 		case "ter", "grp":
 			g.id = v
 		case "pos":
-			g.noyaux = creeNoy(v)
+			g.noyaux, g.noyexcl = creeNoy(v)
 		case "morph":
 			g.morph = strings.Split(v, ";")
 		case "lexSynt":

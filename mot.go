@@ -3,7 +3,8 @@
 // signets :
 //
 // motnoeud
-// motestnoyau
+// motresnoyau
+// motestNoyauDeGroupe
 // motestSub
 // motestSubde
 
@@ -19,7 +20,7 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -96,81 +97,6 @@ func (ma *Mot) domine(mb *Mot) bool {
 	return false
 }
 
-// teste si m peut être le noyau du groupe groupe g
-func (m *Mot) estNoyau(g *Groupe) gocol.Res {
-	//signet motestnoyau
-	//debog := m.gr=="Europa" && g.id=="n.app"
-	//if debog {fmt.Println(" -estNoyau",m.gr,g.id,"ans",len(m.ans),"pos=\""+m.pos+"\"")}
-
-	var ans3 gocol.Res
-	// vérif du pos
-	if m.pos != "" {
-		// 1. La pos définitif n'est pas encore fixé
-		va := false
-		for _, noy := range g.noyaux {
-			va = va || noy.vaPos(m.pos)
-		}
-		if !va {
-			return ans3
-		}
-		ans3 = m.ans2
-	} else {
-		for _, a := range m.ans {
-			for _, noy := range g.noyaux {
-				//if debog {fmt.Println("  .estNoyau, noy",noy,"a.Lem",a.Lem.Pos)}
-				if noy.canon > "" {
-					if noy.vaSr(a) {
-						ans3 = append(ans3, a)
-						break
-					}
-				} else {
-					if noy.vaPos(a.Lem.Pos) {
-						ans3 = append(ans3, a)
-						break
-					}
-				}
-			}
-		}
-	}
-	//if debog {fmt.Println("  .estNoyau, oka, len ans3", len(ans3))}
-
-	// vérif lexicosyntaxique
-	var ans4 gocol.Res
-	for _, a := range ans3 {
-		va := true
-		for _, ls := range g.lexSynt {
-			va = va && lexsynt(a.Lem.Gr[0], ls)
-		}
-		if va {
-			ans4 = append(ans4, a)
-		}
-	}
-	//if debog {fmt.Println("  .estNoyau, okb, len ans4",len(ans4))}
-
-	// vérif morpho. Si aucune n'est requise, renvoyer true
-	if len(g.morph) == 0 {
-		return ans4
-	}
-
-	var ans5 gocol.Res
-	for _, sr := range ans4 {
-		var morfos []string  // morphos de sr acceptées par g
-		for _, morf := range sr.Morphos {
-			//if debog {fmt.Println("  .estNoyau, morf",morf,"g.morph",g.morph)}
-			if g.vaMorph(morf) {
-				morfos = append(morfos, morf)
-			}
-		}
-		//if debog {fmt.Println("  .estNoyau, morfos",len(morfos))}
-		if len(morfos) > 0 {
-			sr.Morphos = morfos
-			ans5 = append(ans5, sr)
-		}
-	}
-	//if debog {fmt.Println("  .estNoyau, len ans5",len(ans5))}
-	return ans5
-}
-
 // id des Nod dont m est déjà le noyau
 func (m *Mot) estNuclDe() []string {
 	var ret []string
@@ -184,14 +110,25 @@ func (m *Mot) estNuclDe() []string {
 
 // vrai si m est compatible avec Sub et le noyau mn
 func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
-	//debog := sub.groupe.id=="v.coordobjv" && m.gr == "et" && mn.gr=="torrent"
+	//debog := sub.groupe.id=="v.objv" && m.gr == "caput" && mn.gr=="imposuit"
 	//if debog {fmt.Println(" -estSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr)}
 	// signet motestSub
 	var ans2 gocol.Res
 	// vérification des pos
 	if m.pos != "" {
-		//if debog {fmt.Println("   .estSub, !=")}
 		// 1. La pos du mot est définitive
+		// noyaux exclus
+		veto := false
+		lgr := m.estNuclDe()
+		for _, noy := range sub.noyexcl {
+			//if debog {fmt.Println("   .estSub, excl",noy.id,"pos",m.pos)}
+			veto = veto || contient(lgr, noy.id)
+		}
+		//if debog {fmt.Println("   .estSub, !=, excl",len(sub.noyexcl),"veto",veto)}
+		if veto {
+			return ans2
+		}
+		// noyaux possibles
 		va := false
 		for _, noy := range sub.noyaux {
 			//if debog {fmt.Println("   .estSub, noy",noy.id,"pos",m.pos)}
@@ -291,8 +228,8 @@ func genus(sr gocol.Sr) gocol.Sr {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	debog := g.id=="v.objv" && m.gr == "imposuit"
-	if debog {fmt.Println("-noeud",g.id,m.gr,"pos",m.pos)}
+	//debog := g.id=="v.objv" && m.gr == "imposuit"
+	//if debog {fmt.Println("-noeud",g.id,m.gr,"pos",m.pos)}
 	rang := m.rang
 	lante := len(g.ante)
 	// mot de rang trop faible
@@ -304,7 +241,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		return nil
 	}
 	// m peut-il être noyau du groupe g ?
-	res2 := m.estNoyau(g)
+	res2 := m.resNoyau(g)
 	if len(res2) == 0 {
 		return nil
 	}
@@ -327,7 +264,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		}
 		sub := g.ante[ia]
 		ma := texte.phrase.mots[r]
-		if debog {fmt.Println("  .noeud, avant dejasub",ma.gr,"lien",sub.lien,"ia",ia,"r",r)}
+		//if debog {fmt.Println("  .noeud, avant dejasub",ma.gr,"lien",sub.lien,"ia",ia,"r",r)}
 		// passer les mots déjà subordonnés
 		for ma.dejasub {
 			r--
@@ -336,7 +273,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 			}
 			ma = texte.phrase.mots[r]
 		}
-		if debog {fmt.Println(" .noeud ma",ma.gr,"estSub",m.gr,"grup",sub.groupe.id)}
+		//if debog {fmt.Println(" .noeud ma",ma.gr,"estSub",m.gr,"grup",sub.groupe.id)}
 		// vérification de réciprocité, puis du lien lui-même
 		if ma.domine(m) {
 			return nil
@@ -407,4 +344,79 @@ func noyDe(m *Mot) *Mot {
 		}
 	}
 	return nil
+}
+
+// renvoie quelles lemmatisations de m lui permettent d'être le noyau du groupe g
+func (m *Mot) resNoyau(g *Groupe) gocol.Res {
+	//signet motresnoyau
+	//debog := m.gr=="Europa" && g.id=="n.app"
+	//if debog {fmt.Println(" -estNoyau",m.gr,g.id,"ans",len(m.ans),"pos=\""+m.pos+"\"")}
+
+	var ans3 gocol.Res
+	// vérif du pos
+	if m.pos != "" {
+		// 1. La pos définitif n'est pas encore fixé
+		va := false
+		for _, noy := range g.noyaux {
+			va = va || noy.vaPos(m.pos)
+		}
+		if !va {
+			return ans3
+		}
+		ans3 = m.ans2
+	} else {
+		for _, a := range m.ans {
+			for _, noy := range g.noyaux {
+				//if debog {fmt.Println("  .estNoyau, noy",noy,"a.Lem",a.Lem.Pos)}
+				if noy.canon > "" {
+					if noy.vaSr(a) {
+						ans3 = append(ans3, a)
+						break
+					}
+				} else {
+					if noy.vaPos(a.Lem.Pos) {
+						ans3 = append(ans3, a)
+						break
+					}
+				}
+			}
+		}
+	}
+	//if debog {fmt.Println("  .estNoyau, oka, len ans3", len(ans3))}
+
+	// vérif lexicosyntaxique
+	var ans4 gocol.Res
+	for _, a := range ans3 {
+		va := true
+		for _, ls := range g.lexSynt {
+			va = va && lexsynt(a.Lem.Gr[0], ls)
+		}
+		if va {
+			ans4 = append(ans4, a)
+		}
+	}
+	//if debog {fmt.Println("  .estNoyau, okb, len ans4",len(ans4))}
+
+	// vérif morpho. Si aucune n'est requise, renvoyer true
+	if len(g.morph) == 0 {
+		return ans4
+	}
+
+	var ans5 gocol.Res
+	for _, sr := range ans4 {
+		var morfos []string  // morphos de sr acceptées par g
+		for _, morf := range sr.Morphos {
+			//if debog {fmt.Println("  .estNoyau, morf",morf,"g.morph",g.morph)}
+			if g.vaMorph(morf) {
+				morfos = append(morfos, morf)
+			}
+		}
+		//if debog {fmt.Println("  .estNoyau, morfos",len(morfos))}
+		if len(morfos) > 0 {
+			sr.Morphos = morfos
+			ans5 = append(ans5, sr)
+		}
+	}
+	//if debog {fmt.Println("  .estNoyau, len ans5",len(ans5))}
+	return ans5
 }
