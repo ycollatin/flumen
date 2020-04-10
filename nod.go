@@ -16,8 +16,10 @@ type Nod struct {
 
 // lignes graphviz du nœud
 func (n *Nod) graf() ([]string) {
+	//debog := n.grp.id == "v.coordobjv"
 	var ll []string
 	for i, m := range n.mma {
+		//if debog {fmt.Println("Nod.graf",n.grp.id,"m",m.gr,"lien",n.grp.ante[i].lien)}
 		ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, n.grp.ante[i].lien))
 	}
 	for i, m := range n.mmp {
