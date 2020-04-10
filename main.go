@@ -9,6 +9,8 @@ package main
 // - liens réciproques
 
 // TODO
+// - commande pour le changement de texte; saisie d'une phrase.
+//	 Donc, pê un menu principal et un menu phrase.
 // - Le code graphviz devrait donner l'équivalence mot - rang
 
 import (
