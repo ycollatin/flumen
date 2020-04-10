@@ -116,7 +116,7 @@ ag:n.prepAcc;gprep
 grp:v.objv
 pos:v
 morph:act
-ag:n;obj;acc
+ag:n !n.prepAcc !n.prepAbl;obj;acc
 
 grp:n.fam
 pos:n
