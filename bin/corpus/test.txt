@@ -1,7 +1,7 @@
 ! Gentes -- phrases de test
 Europa Argiopes et Agenoris filia.
-ramum fregit et in caput imposuit.
 subiciunt veribus prunas et viscera torrent.
+ramum fregit et in caput imposuit.
 subiciunt veribus prunas, viscera torrent.
 Immo locuples erat.
 Marcus erat aeger.
