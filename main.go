@@ -10,7 +10,7 @@ package main
 //				  et la coord subiciunt et torrent (juste)
 
 // TODO
-// - menu : débordement de n° de texte
+// - essayer une boucle d'analyse avec arrêt quand le nombre de Nod stagne
 // - définir le parfait prériphrastique /sunt appellati, appellati sunt/
 // - donner une POS distincte aux verbes intransitifs. v. gocol.indMorph
 // - accord de personne sujet-verbe
