@@ -4,13 +4,13 @@
 package main
 
 // FIXME
-// - les conditions de n.conj et v.conj sont insuffisantes
+// - impossible de départager n.conj et v.conj
 // - subiciunt veribus prunas et viscera torrent : 
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
 //				  et la coord subiciunt et torrent (juste)
 
 // TODO
-// - menu : débordement de n° de phrase
+// - menu : débordement de n° de texte
 // - définir le parfait prériphrastique /sunt appellati, appellati sunt/
 // - donner une POS distincte aux verbes intransitifs. v. gocol.indMorph
 // - accord de personne sujet-verbe
@@ -88,6 +88,12 @@ func chxTexte() {
 			fmt.Println(i+1, textes[i])
 		}
 		chx = InputInt("n° du texte")
+	}
+	if chx < 0 {
+		main()
+	}
+	if chx > len(textes) {
+		chx = len(textes)
 	}
 	ftexte := textes[chx-1]
 	texte = CreeTexte(ftexte)
