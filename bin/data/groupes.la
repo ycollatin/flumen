@@ -32,6 +32,10 @@ ter:n.nadj
 pos:n NP
 a:a;epith;;cgn
 
+ter:n.nadjp
+pos:n
+p:"Romanus";epith;;cgn
+
 ter:n.prepAbl
 pos:n NP
 morph:abl
@@ -55,13 +59,13 @@ a:v;obj;infin
 
 ter:v.sujinf
 pos:v
-morph:act
+morph:act 3
 lexsynt:infobj
 a:p n NP;sujet;nomin;n
 a:v;obj;inf
 
 ter:v.sov
-pos:v
+pos:v 3
 morph:act
 a:n NP;sujet;nomin;n
 a:n NP;obj;acc
@@ -102,6 +106,11 @@ grp:n.gen
 pos:n
 ag:n NP;gen;gén
 
+! FIXME consul populi Romani
+grp:n.genp
+pos:n
+pg:n NP;gen;gén
+
 grp:n.app
 pos:n NP
 pg:n;app;;cgn
@@ -118,7 +127,7 @@ ag:n.prepAcc;gprep
 
 grp:v.objv
 pos:v
-morph:act
+morph:act 3
 ag:n !n.prepAcc !n.prepAbl;obj;acc
 
 grp:n.fam
@@ -192,11 +201,11 @@ grp:v.sujobjprep
 pos:v.objprep
 ag:NP n;sujet;nomin;n
 
-grp:v.conj
+grp:v.conjet
 pos:v
 a:"et";conj
 
 grp:v.coord
 pos:v
-pg:v;coord;;n
+pg:v.conjet;coord;;n
 
