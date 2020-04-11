@@ -39,29 +39,35 @@ func (p *Phrase) arbre() ([]string, []string) {
 	var lexpl []string
 	var ll []string
 	p.nods = nil
-	// recherche des noyaux
-	// groupes terminaux
-	for _, g := range grpTerm {
-		for _, m := range p.mots {
-			if m.dejaNoy() {
-				continue
-			}
-			n := m.noeud(g)
-			if n != nil {
-				p.nods = append(p.nods, n)
-				lexpl = append(lexpl, n.grp.id)
-			}
-		}
-	}
-	// groupes non terminaux
-	for _, g := range grp {
-		for _, m := range p.mots {
-			n := m.noeud(g)
-			if n != nil {
-				p.nods = append(p.nods, n)
-				lexpl = append(lexpl, n.grp.id)
+	nba := 0
+	nbn := 1
+	for nbn > nba {
+		nba = nbn
+		// recherche des noyaux
+		// groupes terminaux
+		for _, g := range grpTerm {
+			for _, m := range p.mots {
+				if m.dejaNoy() {
+					continue
+				}
+				n := m.noeud(g)
+				if n != nil {
+					p.nods = append(p.nods, n)
+					lexpl = append(lexpl, n.grp.id)
+				}
 			}
 		}
+		// groupes non terminaux
+		for _, g := range grp {
+			for _, m := range p.mots {
+				n := m.noeud(g)
+				if n != nil {
+					p.nods = append(p.nods, n)
+					lexpl = append(lexpl, n.grp.id)
+				}
+			}
+		}
+		nbn = len(p.nods)
 	}
 
 	// graphe
