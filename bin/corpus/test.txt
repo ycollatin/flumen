@@ -1,26 +1,25 @@
-! Gentes -- phrases de test
 ramum fregit et in caput imposuit.
 subiciunt veribus prunas, viscera torrent.
 subiciunt veribus prunas et viscera torrent.
 Marcus erat aeger.
+Magium fratrem reliquit.
+ea data in coniugium Epimetheo fratri.
+cui Minerva animam dedit.
+Europa Argiopes et Agenoris filia.
+! réussi
 voluptatem Epicurus ignorat.
 Legatos decernis.
 epistulam legi.
 Lentulus consul populi Romani fuit.
-Magium fratrem reliquit.
 magna turba est.
 feras bestias.
 feras bestias ad currum iunxit.
-cui Minerva animam dedit.
 ceteri dii.
 ceterique dii.
 omnia ardere coeperunt.
-ea data in coniugium Epimetheo fratri.
 inde nata est Pyrrha.
-Magium fratrem reliquit.
 populus Romanus.
 Consul populi Romani.
-Europa Argiopes et Agenoris filia.
 Immo locuples erat.
 Prometheus Iapeti filius primus homines ex luto finxit.
 mutationis spes nulla est.
