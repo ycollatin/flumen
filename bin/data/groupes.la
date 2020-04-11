@@ -2,7 +2,7 @@
 !- ter|grp:<groupe>.<id>		// identifiant syntaxique,identifiant unique 
 !- pos:<pos>					// liste, sép " "
 !- morph:<traits morphos>		// liste sép " " et ";"
-!- lexSynt:<lexicosyntaxe>		// liste, sép " "
+!- lexsynt:<lexicosyntaxe>		// liste, sép " "
 !// a, ag :mots et groupes avant le noyau, dans l'ordre de la lecture
 !- a:pos;id-lien [id-lien [...]];traita traitb,traita traitb;accord;lexsynt lexsynt...
 !- ag: "  "        "     "		// comme a, pour les groupes
@@ -49,13 +49,39 @@ a:prepAA prepAcc;prep
 ter:n.prepAdjAcc
 pos:a
 morph:acc
-!lexSynt:subst
+!lexsynt:subst
 a:prepAA prepAcc;prep
 
 ter:v.inf
 pos:v
 morph:act
+lexsynt:!attr
 a:v;obj;infin
+
+ter:v.sujv
+pos:v
+morph:3
+a:n NP;sujet;nomin;n
+
+ter:v.attrv
+pos:v
+lexsynt:attr
+a:a n NP;attr;nomin
+
+! FIXME
+ter:v.vattr
+pos:v
+lexsynt:attr
+p:a n NP;attr;nomin
+
+ter:n.app
+pos:n NP
+p:n;app;;cgn
+
+ter:v.objv
+pos:v
+lexsynt:!attr
+a:n NP !n.prepAcc;obj;acc
 
 ter:v.sujinf
 pos:v
@@ -67,12 +93,14 @@ a:v;obj;inf
 ter:v.sov
 pos:v 3
 morph:act
+lexsynt:!attr
 a:n NP;sujet;nomin;n
-a:n NP;obj;acc
+a:n NP !n.prepAcc;obj;acc
 
 ter:vdatobj
 pos:v
 morph:act
+lexsynt:!attr
 lexsynt:datif
 p:n;dat;datif
 p:n NP;obj;acc
@@ -87,7 +115,7 @@ pg:n.fam;app;;cn
 
 grp:n.appnp
 pos:n
-lexSynt:nom
+lexsynt:nom
 p:NP;app;;cn
 
 grp:n.epith
@@ -127,12 +155,13 @@ ag:n.prepAcc;gprep
 
 grp:v.objv
 pos:v
+lexsynt:!attr
 morph:act 3
 ag:n !n.prepAcc !n.prepAbl;obj;acc
 
 grp:n.fam
 pos:n
-lexSynt:fam
+lexsynt:fam
 ag:NP;gen;gén
 
 grp:v.gprepAbl
