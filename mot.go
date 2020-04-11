@@ -228,7 +228,7 @@ func genus(sr gocol.Sr) gocol.Sr {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	//debog := m.gr == "Prometheus" && g.id=="n.appFam"
+	//debog := m.gr == "fregit" && g.id=="v.coord"
 	//if debog {fmt.Println("-noeud",g.id,m.gr,"pos=\""+m.pos+"\"")}
 	rang := m.rang
 	lante := len(g.ante)
@@ -299,16 +299,10 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		}
 		mp := texte.phrase.mots[r]
 		//if debog {fmt.Println("  .noeud avant dejasub, post, mp",mp.gr,"dejasub",mp.dejasub)}
-		for mp.dejasub {  //&& r < len(texte.phrase.mots) -1 {
+		for mp.dejasub || r < texte.phrase.nbmots - 1 {
 			r++
-			if r >= texte.phrase.nbmots {
-				return nil
-			}
+			//if debog {fmt.Println("  .noeud, r++",r)}
 			mp = texte.phrase.mots[r]
-			if mp.dejasub && !m.domine(mp) {
-				return nil
-			}
-			//if debog {fmt.Println("  .noeud apres r++ mp",r, mp.gr)}
 		}
 		//if debog {fmt.Println("  .noeud apres dejasub mp", mp.gr)}
 		// réciprocité
