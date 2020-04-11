@@ -228,7 +228,7 @@ func genus(sr gocol.Sr) gocol.Sr {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	//debog := g.id=="v.objv" && m.gr == "imposuit"
+	//debog := g.id=="n.genp" && m.gr == "populi"
 	//if debog {fmt.Println("-noeud",g.id,m.gr,"pos",m.pos)}
 	rang := m.rang
 	lante := len(g.ante)
@@ -262,22 +262,24 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 			// le rang du mot est < 0 : impossible
 			return nil
 		}
-		sub := g.ante[ia]
 		ma := texte.phrase.mots[r]
 		//if debog {fmt.Println("  .noeud, avant dejasub",ma.gr,"lien",sub.lien,"ia",ia,"r",r)}
 		// passer les mots déjà subordonnés
 		for ma.dejasub {
+			//if debog {fmt.Println("  .noeud, ma1", ma.gr,"dejasub",ma.dejasub,"r",r)}
 			r--
 			if r < 0 {
 				return nil
 			}
 			ma = texte.phrase.mots[r]
+			//if debog {fmt.Println("  .noeud, ma2", ma.gr,"dejasub",ma.dejasub,"r",r)}
 		}
-		//if debog {fmt.Println(" .noeud ma",ma.gr,"estSub",m.gr,"grup",sub.groupe.id)}
+		//if debog {fmt.Println(" .noeud ma",ma.gr,"dejasub",ma.dejasub,"grup",g.ante[ia].groupe.id)}
 		// vérification de réciprocité, puis du lien lui-même
 		if ma.domine(m) {
 			return nil
 		}
+		sub := g.ante[ia]
 		res3 := ma.estSub(sub, m)
 		//if debog {fmt.Println(" .noeud estSub, res3",len(res3))} //,res3[0].Lem.Gr)}
 		if len(res3) == 0 {
@@ -297,8 +299,11 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		}
 		mp := texte.phrase.mots[r]
 		//if debog {fmt.Println("  .noeud avant dejasub, post, mp",mp.gr,"dejasub",mp.dejasub)}
-		for mp.dejasub && r < len(texte.phrase.mots) -1 {
+		for mp.dejasub {  //&& r < len(texte.phrase.mots) -1 {
 			r++
+			if r >= texte.phrase.nbmots {
+				return nil
+			}
 			mp = texte.phrase.mots[r]
 		}
 		//if debog {fmt.Println("  .noeud apres dejasub mp", mp.gr)}
@@ -310,7 +315,6 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		if len(res4) == 0 {
 			return nil
 		}
-		//mp.sub2 = sub
 		nod.mmp = append(nod.mmp, mp)
 		r++
 	}
