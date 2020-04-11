@@ -58,10 +58,10 @@ morph:act
 lexsynt:!attr
 a:v;obj;infin
 
-ter:v.sujv
-pos:v
-morph:3
-a:n NP;sujet;nomin;n
+!ter:v.sujv
+!pos:v
+!morph:3
+!a:n NP;sujet;nomin;n
 
 ter:v.attrv
 pos:v
@@ -96,14 +96,6 @@ morph:act
 lexsynt:!attr
 a:n NP;sujet;nomin;n
 a:n NP !n.prepAcc;obj;acc
-
-ter:vdatobj
-pos:v
-morph:act
-lexsynt:!attr
-lexsynt:datif
-p:n;dat;datif
-p:n NP;obj;acc
 
 !!!!!!!!!!!!!!!!!!!!!!!!!
 ! Groupes non terminaux !
@@ -158,6 +150,14 @@ pos:v
 morph:act
 ag:n.prepAcc;gprep
 
+! FIXME
+grp:vdatobj
+pos:v
+morph:act
+lexsynt:!attr datif
+p:n;dat;datif
+pg:n NP;obj;acc
+
 grp:v.objv
 pos:v
 lexsynt:!attr
@@ -194,11 +194,6 @@ a:n NP;sujet;nomin;n
 grp:v.advobjv
 pos:v.objv v.sujapo
 a:Adv;adv
-
-!grp:v.obj
-!pos:v
-!morph:act
-!a:n;obj;accus
 
 grp:v.svprepa
 pos:v.gprepAbl v.prepadv
@@ -238,5 +233,5 @@ a:"et";conj
 ! FIXME
 grp:v.coord
 pos:v
-pg:v;coord;;n
+pg:v.conjet;coord;;n
 
