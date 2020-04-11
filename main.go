@@ -10,9 +10,9 @@ package main
 //				  et la coord subiciunt et torrent (juste)
 
 // TODO
-// - définier le parfait prériphrastique /sunt appellati, appellati sunt/
-// - exclusions dans lexsynt
-// - donner une POS distincte aux verbes intransitifs et attributifs
+// - menu : débordement de n° de phrase
+// - définir le parfait prériphrastique /sunt appellati, appellati sunt/
+// - donner une POS distincte aux verbes intransitifs. v. gocol.indMorph
 // - accord de personne sujet-verbe
 // - commande pour le changement de texte; saisie d'une phrase.
 //	 Donc, pê un menu principal et un menu phrase.
