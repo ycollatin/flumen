@@ -58,26 +58,6 @@ morph:act
 lexsynt:!attr
 a:v;obj;infin
 
-!ter:v.sujv
-!pos:v
-!morph:3
-!a:n NP;sujet;nomin;n
-
-ter:v.attrv
-pos:v
-lexsynt:attr
-a:a n NP;attr;nomin
-
-! FIXME
-ter:v.vattr
-pos:v
-lexsynt:attr
-p:a n NP;attr;nomin
-
-!ter:n.app
-!pos:n NP
-!p:n;app;;cgn
-
 ter:v.objv
 pos:v
 lexsynt:!attr
@@ -221,16 +201,26 @@ grp:v.asvsobjprep
 pos:v.sobjprep
 a:Adv;adv
 
-grp:sujetv
+grp:v.sujetv
 pos:v
 morph:act 3
 ag:n NP;sujet;nomin;n
+
+grp:v.objsujv
+pos:v.sujetv
+lexsynt:!attr
+ag:n NP;obj;acc
+
+grp:v.vattr
+pos:v
+lexsynt:attr
+pg:a;attr;nomin
 
 grp:v.conjet
 pos:v
 a:"et";conj
 
-! FIXME
+! FIXME Magium fratrem reliquit
 grp:v.coord
 pos:v
 pg:v.conjet;coord;;n
