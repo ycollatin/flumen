@@ -87,12 +87,14 @@ func (m *Mot) dejaNoy() bool {
 }
 
 func (ma *Mot) domine(mb *Mot) bool {
-	mnoy := noyDe(mb)
+	//mnoy := noyDe(mb)
+	mnoy := mb.noyau()
 	for mnoy != nil {
 		if mnoy == ma {
 			return true
 		}
-		mnoy = noyDe(mnoy)
+		mnoy = mnoy.noyau()
+		//noyDe(mnoy)
 	}
 	return false
 }
@@ -299,8 +301,15 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		}
 		mp := texte.phrase.mots[r]
 		//if debog {fmt.Println("  .noeud avant dejasub, post, mp",mp.gr,"dejasub",mp.dejasub)}
-		for mp.dejasub || r < texte.phrase.nbmots - 1 {
+		for mp.dejasub { // && r < texte.phrase.nbmots - 1 {
 			r++
+			if r >= texte.phrase.nbmots - 1 {
+				return nil
+			}
+			mpn := mp.noyau()
+			if mpn != nil && mpn.rang < m.rang {
+				return nil
+			}
 			//if debog {fmt.Println("  .noeud, r++",r)}
 			mp = texte.phrase.mots[r]
 		}
@@ -332,7 +341,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	return nil
 }
 
-func noyDe(m *Mot) *Mot {
+func (m *Mot) noyau() *Mot {
 	for _, n := range texte.phrase.nods {
 		for _, msub := range n.mma {
 			if msub == m {
