@@ -15,7 +15,8 @@ type Groupe struct {
 	id				string
 	noyaux, noyexcl	[]*Noy		// pos du noyau
 	morph			[]string	// traits morpho du noyau
-	lexSynt			[]string	// étiquettes lexicosyntaxiques du noyau
+	lexsynt			[]string	// étiquettes lexicosyntaxiques du noyau
+	exclls			[]string	// propriétés lexicosyntaxiques exclues
 	ante			[]*Sub
 	post			[]*Sub
 }
@@ -39,8 +40,16 @@ func creeGroupe(ll []string) *Groupe {
 			g.noyaux, g.noyexcl = creeNoy(v)
 		case "morph":
 			g.morph = strings.Split(v, ";")
-		case "lexSynt":
-			g.lexSynt = strings.Split(v, " ")
+		case "lexsynt":
+			lecl := strings.Split(v, " ")
+			for _, ecl := range lecl {
+				if ecl[0] != '!' {
+					g.lexsynt = append(g.lexsynt, ecl)
+				} else {
+					//g.exclls = append(g.exclls, ecl[1:len(ecl)-1])
+					g.exclls = append(g.exclls, ecl[1:])
+				}
+			}
 		case "a":
 			g.ante = append(g.ante, creeSub(v, g, true))
 		case "ag":

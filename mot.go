@@ -353,7 +353,7 @@ func noyDe(m *Mot) *Mot {
 // renvoie quelles lemmatisations de m lui permettent d'être le noyau du groupe g
 func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 	//signet motresnoyau
-	//debog := m.gr=="Europa" && g.id=="n.app"
+	//debog := m.gr=="est" && g.id=="v.objv"
 	//if debog {fmt.Println(" -estNoyau",m.gr,g.id,"ans",len(m.ans),"pos=\""+m.pos+"\"")}
 
 	var ans3 gocol.Res
@@ -392,8 +392,11 @@ func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 	var ans4 gocol.Res
 	for _, a := range ans3 {
 		va := true
-		for _, ls := range g.lexSynt {
+		for _, ls := range g.lexsynt {
 			va = va && lexsynt(a.Lem.Gr[0], ls)
+		}
+		for _, ls := range g.exclls {
+			va = va && !lexsynt(a.Lem.Gr[0], ls)
 		}
 		if va {
 			ans4 = append(ans4, a)
