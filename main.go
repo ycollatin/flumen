@@ -4,12 +4,14 @@
 package main
 
 // FIXME
-// - Magium fratrem reliquit : le dejasub de fratrem n'est pas fixé
+// - les conditions de n.conj et v.conj sont insuffisantes
 // - subiciunt veribus prunas et viscera torrent : 
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
 //				  et la coord subiciunt et torrent (juste)
 
 // TODO
+// - définier le parfait prériphrastique /sunt appellati, appellati sunt/
+// - exclusions dans lexsynt
 // - donner une POS distincte aux verbes intransitifs et attributifs
 // - accord de personne sujet-verbe
 // - commande pour le changement de texte; saisie d'une phrase.
