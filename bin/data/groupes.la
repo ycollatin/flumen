@@ -129,10 +129,10 @@ pos:v
 morph:act
 a:Adv;adv
 
-grp:v.gprepAcc
-pos:v
-morph:act
-ag:n.prepAcc;gprep
+!grp:v.gprepAcc
+!pos:v
+!morph:act
+!ag:n.prepAcc;gprep
 
 ! FIXME
 grp:vdatobj
@@ -148,6 +148,7 @@ lexsynt:!attr
 morph:act 3
 ag:n !n.prepAcc !n.prepAbl;obj;acc
 
+! FIXME cum currum conscendisset
 grp:v.gprepAbl
 pos:v
 morph:act
@@ -190,7 +191,7 @@ a:Adv;adv
 
 grp:v.sujetv
 pos:v
-morph:act 3
+morph:act indic 3
 ag:n NP;sujet;nomin;n
 
 grp:v.objsujv
@@ -211,4 +212,10 @@ a:"et";conj
 grp:v.coord
 pos:v
 pg:v.conjet;coord;;n
+
+grp:vcum
+pos:v
+morph:subj
+ap:"cum";conj
+
 
