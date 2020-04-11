@@ -1,8 +1,8 @@
 ! Gentes -- phrases de test
+mutationis spes nulla est.
 ramum fregit et in caput imposuit.
 subiciunt veribus prunas, viscera torrent.
 subiciunt veribus prunas et viscera torrent.
-Immo locuples erat.
 Marcus erat aeger.
 voluptatem Epicurus ignorat.
 Legatos decernis.
@@ -10,7 +10,6 @@ epistulam legi.
 Lentulus consul populi Romani fuit.
 Magium fratrem reliquit.
 magna turba est.
-mutationis spes nulla est.
 feras bestias.
 feras bestias ad currum iunxit.
 cui Minerva animam dedit.
@@ -23,3 +22,4 @@ Magium fratrem reliquit.
 populus Romanus.
 Consul populi Romani.
 Europa Argiopes et Agenoris filia.
+Immo locuples erat.
