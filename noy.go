@@ -2,6 +2,7 @@
 package main
 
 import (
+	//"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -56,5 +57,6 @@ func (n *Noy) vaPos(p string) bool {
 	if pel == p {
 		return n.idgr == p
 	}
+	//fmt.Println("   vaPos, n.id",n.id,"p",p,"pel",pel)
 	return p == n.id
 }
