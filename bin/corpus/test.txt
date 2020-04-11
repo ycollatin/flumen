@@ -1,8 +1,4 @@
 ! Gentes -- phrases de test
-Prometheus Iapeti filius.
-Prometheus Iapeti filius primus.
-Prometheus Iapeti filius primus homines ex luto finxit.
-mutationis spes nulla est.
 ramum fregit et in caput imposuit.
 subiciunt veribus prunas, viscera torrent.
 subiciunt veribus prunas et viscera torrent.
@@ -26,3 +22,5 @@ populus Romanus.
 Consul populi Romani.
 Europa Argiopes et Agenoris filia.
 Immo locuples erat.
+Prometheus Iapeti filius primus homines ex luto finxit.
+mutationis spes nulla est.
