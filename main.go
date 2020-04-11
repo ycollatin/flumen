@@ -4,12 +4,14 @@
 package main
 
 // FIXME
-// - ascii, quelques croisements dans les arcs
-// - /subiciunt veribus prunas et viscera torrent : 
+// - Magium fratrem reliquit : le dejasub de fratrem n'est pas fixé
+// - subiciunt veribus prunas et viscera torrent : 
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
 //				  et la coord subiciunt et torrent (juste)
 
 // TODO
+// - donner une POS distincte aux verbes intransitifs et attributifs
+// - accord de personne sujet-verbe
 // - commande pour le changement de texte; saisie d'une phrase.
 //	 Donc, pê un menu principal et un menu phrase.
 // - Le code graphviz devrait donner l'équivalence mot - rang
@@ -28,10 +30,10 @@ import (
 const (
 	version = "Alpha"
 	aidePh =
-	`l->mot suivant ; h->mot précédent ;
-	j->phrase suivante ; k->phrase précédente ;
-	c->lemmatisation du mot courant ;
-	a->arbre de la phrase ; x->quitter`
+	`    l->mot suivant ; h->mot précédent ;
+    j->phrase suivante ; k->phrase précédente ;
+    c->lemmatisation du mot courant ;
+    a->arbre de la phrase ; x->quitter`
 	//s-> définir une suite morphosyntaxique ; x->Exit`
 	//aideS =
 	//`i-> id de la suite ; n-> n° du noyau ; 
