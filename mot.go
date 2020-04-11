@@ -228,8 +228,8 @@ func genus(sr gocol.Sr) gocol.Sr {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	//debog := g.id=="n.genp" && m.gr == "populi"
-	//if debog {fmt.Println("-noeud",g.id,m.gr,"pos",m.pos)}
+	//debog := m.gr == "Prometheus" && g.id=="n.appFam"
+	//if debog {fmt.Println("-noeud",g.id,m.gr,"pos=\""+m.pos+"\"")}
 	rang := m.rang
 	lante := len(g.ante)
 	// mot de rang trop faible
@@ -305,6 +305,10 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 				return nil
 			}
 			mp = texte.phrase.mots[r]
+			if mp.dejasub && !m.domine(mp) {
+				return nil
+			}
+			//if debog {fmt.Println("  .noeud apres r++ mp",r, mp.gr)}
 		}
 		//if debog {fmt.Println("  .noeud apres dejasub mp", mp.gr)}
 		// réciprocité
