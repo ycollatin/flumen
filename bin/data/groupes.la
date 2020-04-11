@@ -114,6 +114,7 @@ pos:n
 lexsynt:fam
 ag:NP;gen;gén
 
+! FIXME Magium fratrem reliquit
 grp:n.appFam
 pos:NP
 pg:n.fam;app;;cgn
@@ -139,7 +140,6 @@ grp:n.gen
 pos:n
 ag:n NP;gen;gén
 
-! FIXME consul populi Romani
 grp:n.genp
 pos:n
 pg:n NP;gen;gén
@@ -235,7 +235,8 @@ grp:v.conjet
 pos:v
 a:"et";conj
 
+! FIXME
 grp:v.coord
 pos:v
-pg:v.conjet;coord;;n
+pg:v;coord;;n
 
