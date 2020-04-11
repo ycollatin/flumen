@@ -1,8 +1,7 @@
 ! Gentes -- phrases de test
-Europa Argiopes et Agenoris filia.
-subiciunt veribus prunas et viscera torrent.
 ramum fregit et in caput imposuit.
 subiciunt veribus prunas, viscera torrent.
+subiciunt veribus prunas et viscera torrent.
 Immo locuples erat.
 Marcus erat aeger.
 voluptatem Epicurus ignorat.
@@ -20,3 +19,7 @@ ceterique dii.
 omnia ardere coeperunt.
 ea data in coniugium Epimetheo fratri.
 inde nata est Pyrrha.
+Magium fratrem reliquit.
+populus Romanus.
+Consul populi Romani.
+Europa Argiopes et Agenoris filia.
