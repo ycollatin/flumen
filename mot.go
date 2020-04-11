@@ -20,7 +20,7 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -230,8 +230,8 @@ func genus(sr gocol.Sr) gocol.Sr {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	debog := m.gr == "cum" && g.id=="v.sujobjv"
-	if debog {fmt.Println("-noeud",g.id,m.gr,"pos=\""+m.pos+"\"")}
+	//debog := m.gr == "decidit" && g.id=="v.vgprepAcc"
+	//if debog {fmt.Println("-noeud",g.id,m.gr,"pos=\""+m.pos+"\"")}
 	rang := m.rang
 	lante := len(g.ante)
 	// mot de rang trop faible
@@ -247,7 +247,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	if len(res2) == 0 {
 		return nil
 	}
-	if debog {fmt.Println(" .noeud oka, res2", len(res2),res2[0].Lem.Gr)}
+	//if debog {fmt.Println(" .noeud oka, res2", len(res2),res2[0].Lem.Gr)}
 	m.ans2 = res2
 	// création du noeud de retour
 	nod := new(Nod)
@@ -303,7 +303,8 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		//if debog {fmt.Println("  .noeud avant dejasub, post, mp",mp.gr,"dejasub",mp.dejasub)}
 		for mp.dejasub { // && r < texte.phrase.nbmots - 1 {
 			r++
-			if r >= texte.phrase.nbmots - 1 {
+			//if r >= texte.phrase.nbmots - 1 {
+			if r >= texte.phrase.nbmots {
 				return nil
 			}
 			mpn := mp.noyau()
@@ -360,7 +361,7 @@ func (m *Mot) noyau() *Mot {
 // renvoie quelles lemmatisations de m lui permettent d'être le noyau du groupe g
 func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 	//signet motresnoyau
-	debog := m.gr=="cum" && g.id=="v.sujobjv"
+	//debog := m.gr=="cum" && g.id=="v.sujobjv"
 	//if debog {fmt.Println(" -estNoyau",m.gr,g.id,"ans",len(m.ans),"pos=\""+m.pos+"\"")}
 
 	var ans3 gocol.Res
