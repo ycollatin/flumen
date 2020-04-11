@@ -80,7 +80,7 @@ func InputInt(q string) int {
 	fmt.Printf("%s ", q)
 	_, err := fmt.Scanf("%d", &i)
 	if err != nil {
-		return InputInt(q)
+		return -1
 	}
 	return i
 }
