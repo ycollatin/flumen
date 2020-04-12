@@ -169,13 +169,14 @@ func graphe(ll []string) []string {
 		nm.gr = ecl
 		nm.rang = i
 		nm.len = len(ecl)
+		nm.d = report + nm.len/2
 		// calcul de la colonne de l'initiale du mot
 		if i == 0 {
 			report = len(ecl)
 		} else {
 			report += len(ecl) + 1
 		}
-		nm.d = report - len(ecl)/2
+		//nm.d = report - len(ecl)/2
 		mots = append(mots, nm)
 	}
 	// création des arcs
