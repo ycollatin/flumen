@@ -36,7 +36,7 @@ const (
 	`    l->mot suivant ; h->mot précédent ;
     j->phrase suivante ; k->phrase précédente ;
     c->lemmatisation du mot courant ;
-    a->arbre de la phrase ; x->quitter`
+    a->arbre de la phrase ; r->retour; x->quitter`
 	//s-> définir une suite morphosyntaxique ; x->Exit`
 	//aideS =
 	//`i-> id de la suite ; n-> n° du noyau ; 
@@ -73,6 +73,10 @@ func analyse(expl bool) {
 
 // choix du texte latin
 func chxTexte() {
+	ClearScreen()
+    fmt.Println("Suites, grammaire latine")
+    fmt.Println(" © Yves Ouvrard 2020, licence GPL3")
+	texte = nil
 	files, err := ioutil.ReadDir(ch + "/corpus/")
 	if err != nil {
 		fmt.Println("Répertoire", ch+"/corpus/", "introuvable")
@@ -99,6 +103,7 @@ func chxTexte() {
 	ftexte := textes[chx-1]
 	texte = CreeTexte(ftexte)
 	texte.majPhrase()
+	texte.affiche(aidePh)
 }
 
 func lemmatise() {
@@ -123,9 +128,6 @@ func motsuiv() {
 }
 
 func main() {
-	ClearScreen()
-    fmt.Println("Suites, grammaire latine")
-    fmt.Println(" © Yves Ouvrard 2020, licence GPL3")
 	// couleur
 	rouge = color.New(color.FgRed, color.Bold).SprintFunc()
 	// lecture des données Collatinus
@@ -139,7 +141,7 @@ func main() {
 	lisLexsynt()
 	// choix du texte
 	chxTexte()
-	texte.affiche(aidePh)
+	//texte.affiche(aidePh)
 	for {
 		k := GetKey()
 		switch k {
@@ -157,6 +159,8 @@ func main() {
 			analyse(false)
 		case "g":
 			analyse(true)
+		case "r":
+			chxTexte()
 		case "x":
 			fmt.Println("\nVale")
 			os.Exit(0)
