@@ -29,6 +29,7 @@ Prometheus Iapeti filius homines ex luto finxit.
 */
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -51,7 +52,7 @@ type Arc struct {
 
 var (
 	arcs	[]*Arc
-	gabarit	string
+	gabarit	[]rune
 	lignes  []string
 	mots	[]*Word
 )
@@ -120,7 +121,7 @@ func (a *Arc) dernier() *Word {
 // réinitialisation des arcs
 func initArcs() {
 	arcs = nil
-	gabarit = ""
+	gabarit = nil
 	lignes = nil
 	mots = nil
 }
@@ -129,17 +130,18 @@ func initArcs() {
 // n'est dans nl entre ma.d et mb.d
 func libre(nl int, a int, b int) bool {
 	for len(lignes) < nl+1 {
-		lignes = append(lignes, gabarit)
+		lignes = append(lignes, string(gabarit))
 		return true
 	}
-	var seg string
+	var seg []rune
 	if a < b {
-		seg = lignes[nl][a:b]
+		seg = []rune(lignes[nl][a:b])
 	} else {
-		seg = lignes[nl][b:a]
+		seg = []rune(lignes[nl][b:a+2])
 	}
 	for i := 0; i < len(seg); i++ {
 		if seg[i] != ' ' {
+			fmt.Println("seg",seg,"i",i,"seg[i]",seg[i])
 			return false
 		}
 	}
@@ -205,12 +207,16 @@ func graphe(ll []string) []string {
 	}
 
 	// gabarit des lignes où sont tracés les arcs
-	gabarit = strings.Repeat(" ", len(ll[0]))
+	lenll := len(ll[0])
+	for i := 0; i<lenll; i++ {
+		gabarit = append(gabarit, ' ')
+	}
+	//gabarit = strings.Repeat(" ", len(ll[0]))
 	// ajout éventuel de la phrase
 	if len(lignes) == 0 {
 		lignes = append(lignes, ll[0])
 		// ajout de la première ligne (V ou vv)
-		lignes = append(lignes, gabarit)
+		lignes = append(lignes, string(gabarit))
 	}
 	// calcul des arcs, remplissage des lignes
 	for i := 1; i <= len(mots); i++ {
