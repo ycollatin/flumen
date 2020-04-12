@@ -45,27 +45,16 @@ pos:n NP
 morph:abl
 a:prepAbl prepAA;prep
 
-ter:n.prepAcc
-pos:n NP p
-morph:acc
-a:prepAA prepAcc;prep
-
-ter:n.prepAdjAcc
-pos:a
-morph:acc
-!lexsynt:subst
-a:prepAA prepAcc;prep
+ter:n.inperpetuum
+pos:"perpetuus"
+morph:acc sing
+a:"in";prep
 
 ter:v.inf
 pos:v
 morph:act
 lexsynt:!attr
 a:v;obj;infin
-
-ter:v.objv
-pos:v
-lexsynt:!attr
-a:n NP !n.prepAcc;obj;acc
 
 ter:v.sujinf
 pos:v
@@ -90,7 +79,6 @@ a:n NP !n.prepAcc;obj;acc
 !lexsynt:fam
 !ag:NP;gen;gén
 
-! FIXME Magium fratrem reliquit
 grp:n.appFam
 pos:NP
 pg:n.fam;app;;cgn
@@ -129,12 +117,22 @@ pos:v
 morph:act
 a:Adv;adv
 
-!grp:v.gprepAcc
-!pos:v
-!morph:act
-!ag:n.prepAcc;gprep
+grp:n.prepAcc
+pos:n NP p
+morph:acc
+a:prepAA prepAcc;prep
 
-! FIXME
+grp:v.gprepAcc
+pos:v
+morph:act
+ag:n.prepAcc n.inperpetuum;gprep
+
+! FIXME Phaethon decidit in flumen Eridanum
+grp:v.vgprepAcc
+pos:v
+morph:act
+pg:n.prepAcc;gprep
+
 grp:vdatobj
 pos:v
 morph:act
@@ -145,10 +143,9 @@ pg:n NP;obj;acc
 grp:v.objv
 pos:v
 lexsynt:!attr
-morph:act 3
-ag:n !n.prepAcc !n.prepAbl;obj;acc
+morph:act
+ag:n NP !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
 
-! FIXME cum currum conscendisset
 grp:v.gprepAbl
 pos:v
 morph:act
