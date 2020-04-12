@@ -4,7 +4,6 @@
 package main
 
 // FIXME
-// - !attr inopérant pour le groupe ter:v.sov
 // - recouvrement dans ascii.go pour /se in mare praecipiatvit quod mare Ionium est appellatum./
 // - impossible de départager n.conj et v.conj
 // - subiciunt veribus prunas et viscera torrent : 
@@ -13,10 +12,9 @@ package main
 
 // TODO
 // - définir le parfait prériphrastique /sunt appellati, appellati sunt/
-// - donner une POS distincte aux verbes intransitifs. v. gocol.indMorph
+// - donner une POS distinct aux verbes intransitifs. v. gocol.indMorph
 // - accord de personne sujet-verbe
-// - commande pour le changement de texte; saisie d'une phrase.
-//	 Donc, pê un menu principal et un menu phrase.
+// - saisie d'une phrase.
 // - Le code graphviz devrait donner l'équivalence mot - rang
 
 import (
