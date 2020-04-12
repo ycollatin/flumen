@@ -29,7 +29,6 @@ Prometheus Iapeti filius homines ex luto finxit.
 */
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 )
@@ -60,8 +59,12 @@ var (
 const (
 	hh rune = '─'
     vv rune = '│'
+	/*
 	dr rune = '┌'
 	dl rune = '┐'
+	*/
+	dr rune = '.'
+	dl rune = '.'
 	V  rune = 'V'
 )
 
@@ -133,15 +136,15 @@ func libre(nl int, a int, b int) bool {
 		lignes = append(lignes, string(gabarit))
 		return true
 	}
-	var seg []rune
+
+	var seg string
 	if a < b {
-		seg = []rune(lignes[nl][a:b])
+		seg = lignes[nl][a:b]
 	} else {
-		seg = []rune(lignes[nl][b:a+2])
+		seg = lignes[nl][b:a]
 	}
 	for i := 0; i < len(seg); i++ {
-		if seg[i] != ' ' {
-			fmt.Println("seg",seg,"i",i,"seg[i]",seg[i])
+		if seg[i] != ' ' { //&& !strings.Contains(seg, "┐") {
 			return false
 		}
 	}
@@ -155,8 +158,8 @@ func place(l string, ch rune, ou int) string {
 		rr = append(rr, ' ')
 	}
 	lg := rr[:ou]
-	ld := rr[ou+1:]
 	lg = append(lg, ch)
+	ld := rr[ou+1:]
 	lg = append(lg, ld...)
 	return string(lg)
 }
