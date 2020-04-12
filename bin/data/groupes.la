@@ -85,10 +85,10 @@ a:n NP !n.prepAcc;obj;acc
 ! Groupes non terminaux !
 !!!!!!!!!!!!!!!!!!!!!!!!!
 
-grp:n.fam
-pos:n
-lexsynt:fam
-ag:NP;gen;gén
+!grp:n.fam
+!pos:n
+!lexsynt:fam
+!ag:NP;gen;gén
 
 ! FIXME Magium fratrem reliquit
 grp:n.appFam
