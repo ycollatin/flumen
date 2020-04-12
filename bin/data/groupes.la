@@ -63,6 +63,7 @@ lexsynt:infobj
 a:p n NP;sujet;nomin;n
 a:v;obj;inf
 
+! FIXME mare Ionium est appellatum
 ter:v.sov
 pos:v 3
 morph:act
