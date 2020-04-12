@@ -112,7 +112,7 @@ func (m *Mot) estNuclDe() []string {
 
 // vrai si m est compatible avec Sub et le noyau mn
 func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
-	//debog := sub.groupe.id=="v.gprepAbl" && m.gr == "cum" && mn.gr=="conscendisset"
+	//debog := sub.groupe.id=="v.vgprepAcc" && m.gr == "flumen" && mn.gr=="decidit"
 	//if debog {fmt.Println(" -estSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr)}
 	// signet motestSub
 	var ans2 gocol.Res
@@ -137,6 +137,7 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
 			va = va || noy.vaPos(m.pos)
 		}
 		if !va {
+			//if debog {fmt.Println("   .estSub, vapa!")}
 			return ans2
 		}
 		ans2 = m.ans2
@@ -231,7 +232,7 @@ func genus(sr gocol.Sr) gocol.Sr {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	//debog := m.gr == "conscendisset" && g.id== "v.gprepAbl"
+	//debog := m.gr == "decidit" && g.id== "v.vgprepAcc"
 	//if debog {fmt.Println("-noeud",g.id,m.gr,"pos=\""+m.pos+"\"")}
 	rang := m.rang
 	lante := len(g.ante)
@@ -322,15 +323,17 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		}
 		res4 := mp.estSub(sub, m)
 		if len(res4) == 0 {
+			//if debog {fmt.Println("   .noeud, return res4")}
 			return nil
 		}
 		nod.mmp = append(nod.mmp, mp)
 		r++
 	}
+	//if debog {fmt.Println("   .noeud, après les subs, mma",len(nod.mma),"mmp",len(nod.mmp))}
 	// fixer les pos et sub des mots du noeud
 	if len(nod.mma) + len(nod.mmp) > 0 {
 		m.pos = g.id
-		//fmt.Println("   .noeud, noy",m.gr,"pos",m.pos)
+		//if debog {fmt.Println("   .noeud, noy",m.gr,"pos",m.pos)}
 		for _, m := range nod.mma {
 			m.dejasub = true
 		}
@@ -362,7 +365,7 @@ func (m *Mot) noyau() *Mot {
 // renvoie quelles lemmatisations de m lui permettent d'être le noyau du groupe g
 func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 	//signet motresnoyau
-	//debog := m.gr=="cum" && g.id=="v.sujobjv"
+	//debog := m.gr=="decernis" && g.id=="v.sujobjv"
 	//if debog {fmt.Println(" -estNoyau",m.gr,g.id,"ans",len(m.ans),"pos=\""+m.pos+"\"")}
 
 	var ans3 gocol.Res
