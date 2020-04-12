@@ -4,7 +4,7 @@
 package main
 
 // FIXME
-// - recouvrement dans ascii.go pour /se in mare praecipiatvit quod mare Ionium est appellatum./
+// - quelques problèmes résiduels dans ascii
 // - impossible de départager n.conj et v.conj
 // - subiciunt veribus prunas et viscera torrent : 
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
