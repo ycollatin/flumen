@@ -64,12 +64,12 @@ a:p n NP;sujet;nomin;n
 a:v;obj;inf
 
 ! FIXME mare Ionium est appellatum
-ter:v.sov
-pos:v 3
-morph:act
-lexsynt:!attr
-a:n NP;sujet;nomin;n
-a:n NP !n.prepAcc;obj;acc
+!ter:v.sov
+!pos:v 3
+!morph:act
+!lexsynt:!attr
+!a:n NP;sujet;nomin;n
+!a:n NP !n.prepAcc;obj;acc
 
 !!!!!!!!!!!!!!!!!!!!!!!!!
 ! Groupes non terminaux !
