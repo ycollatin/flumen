@@ -70,62 +70,40 @@ const (
 
 // trace l'arc a
 func arcus(a *Arc) {
+	var arrb, arra int
 	// si le dernier arc partait vers la gauche
 	//   et que le nouveau part vers la gauche
 	if a.motA.rang < a.motB.rang { // part vers la droite
 		// pointѕ de départ et d'arrivée
-		if a.motA.dirder >= 0 {
-			a.motA.Pd--
+		if a.motA.dirder > 0 {
+			a.motA.Pg--
+			arra = a.motA.Pg
+		} else {
+			arra = a.motA.Pd
 		}
 		if a.motB.dirder <= 0 {
-			a.motB.Pg++
+			a.motB.Pd++
+			arrb = a.motB.Pd
+		} else {
+			//a.motB.Pg--
+			arrb = a.motB.Pg
 		}
-		// première ligne : départ vv et arrivée V
-		lignes[1] = place(lignes[1], vv, a.motA.Pd)
-		lignes[1] = place(lignes[1], V, a.motB.Pg)
-		// placer les verticales si nécessaire
-		i := 2
-		for !libre(i, a.motA.Pd, a.motB.Pg) {
-			lignes[i] = place(lignes[i], vv, a.motA.Pd)
-			lignes[i] = place(lignes[i], vv, a.motB.Pg)
-			i++
-		}
-		lignes[i] = place(lignes[i], dr, a.motA.Pd)
-		var k int
-		for j := a.motA.Pd+1; j < a.motB.Pg; j++ {
-			if k < len(a.label) {
-				lignes[i] = place(lignes[i], rune(a.label[k]), j)
-				k++
-			} else {
-				lignes[i] = place(lignes[i], hh, j)
-			}
-		}
-		lignes[i] = place(lignes[i], dl, a.motB.Pg)
 		// calcul des prochains points de départ/arrivée
 		a.motA.dirder = 1
 		a.motB.dirder = -1
-	} else { // part vers la gauch
-		if a.motA.dirder <= 0 {
-			a.motA.Pg--
-		}
-		if a.motB.dirder >= 0 {
-			a.motB.Pg--
-		}
-		a.motA.dirder = -1
-		a.motB.dirder = 1
 		// première ligne : départ vv et arrivée V
-		lignes[1] = place(lignes[1], V, a.motB.Pd)
-		lignes[1] = place(lignes[1], vv, a.motA.Pg)
+		lignes[1] = place(lignes[1], vv, arra)
+		lignes[1] = place(lignes[1], V, arrb)
 		// placer les verticales si nécessaire
 		i := 2
-		for !libre(i, a.motA.Pg, a.motB.Pd) {
-			lignes[i] = place(lignes[i], vv, a.motA.Pg)
-			lignes[i] = place(lignes[i], vv, a.motB.Pd)
+		for !libre(i, arra, arrb) {
+			lignes[i] = place(lignes[i], vv, arra)
+			lignes[i] = place(lignes[i], vv, arrb)
 			i++
 		}
+		lignes[i] = place(lignes[i], dr, arra)
 		var k int
-		lignes[i] = place(lignes[i], dl, a.motA.Pg)
-		for j := a.motB.Pd+1; j < a.motA.Pg; j++ {
+		for j := arra+1; j < arrb; j++ {
 			if k < len(a.label) {
 				lignes[i] = place(lignes[i], rune(a.label[k]), j)
 				k++
@@ -133,8 +111,42 @@ func arcus(a *Arc) {
 				lignes[i] = place(lignes[i], hh, j)
 			}
 		}
-		lignes[i] = place(lignes[i], dr, a.motB.Pd)
-		// départ/arrivée
+		lignes[i] = place(lignes[i], dl, arrb)
+	} else { // part vers la gauch
+		if a.motA.dirder < 0 {
+			a.motA.Pd++
+			arra = a.motA.Pd
+		} else {
+			arra = a.motA.Pg
+		}
+		if a.motB.dirder >= 0 {
+			a.motB.Pg--
+			arrb = a.motB.Pg
+		} else {
+			//a.motB.Pd++
+			arrb = a.motB.Pd
+		}
+		a.motA.dirder = -1
+		a.motB.dirder = 1
+		lignes[1] = place(lignes[1], V, arrb)
+		lignes[1] = place(lignes[1], vv, arra)
+		i := 2
+		for !libre(i, arra, arrb) {
+			lignes[i] = place(lignes[i], vv, arra)
+			lignes[i] = place(lignes[i], vv, arrb)
+			i++
+		}
+		var k int
+		lignes[i] = place(lignes[i], dl, arra)
+		for j := arrb+1; j < arra; j++ {
+			if k < len(a.label) {
+				lignes[i] = place(lignes[i], rune(a.label[k]), j)
+				k++
+			} else {
+				lignes[i] = place(lignes[i], hh, j)
+			}
+		}
+		lignes[i] = place(lignes[i], dr, arrb)
 	}
 }
 
@@ -200,7 +212,7 @@ func graphe(ll []string) []string {
 		nm.rang = i
 		nm.len = len(ecl)
 		nm.Pg = report + nm.len/2
-		nm.Pd = nm.Pg
+		nm.Pd = nm.Pg + 2
 		// calcul de la colonne de l'initiale du mot
 		if i == 0 {
 			report = len(ecl)
