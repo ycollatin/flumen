@@ -23,7 +23,7 @@ package main
     │                        ┌────────────────┐│
     │┌────────────────┐      │    ┌───┐       ││
     ││        ┌──────┐│      │    │   │┌─────┐││
-    V│        V      │V      V    V   │V     │││
+    ▽│        ▽      │▽      ▽    ▽   │▽     │││
 Prometheus Iapeti filius homines ex luto finxit.
 
 */
@@ -34,16 +34,18 @@ import (
 )
 
 type Word struct {
-	d		int		// positions de départ et d'arrivée du mot
 	gr		string
 	len		int
 	nba		int		// nombre d'arcs partant du mot ou y aboutissant
 	rang	int
+	Pg		int		// pos de départ et d'arrivée gauche du mot
+	Pd		int		// et droite
+	dirder	int		// direction du dernier arc
 }
 
 type Arc struct {
-	motA	*Word
-	motB	*Word
+	motA	*Word	// mot de départ (noyau)
+	motB	*Word	// mot d'arrivée (sub)
 	label	string	// étiquette de l'arc
 	dist	int		// distance abs(motA.rang - motB.rang)
 	ecrit	bool
@@ -59,31 +61,38 @@ var (
 const (
 	hh rune = '─'
     vv rune = '│'
-	/*
 	dr rune = '┌'
 	dl rune = '┐'
-	*/
-	dr rune = '.'
-	dl rune = '.'
-	V  rune = 'V'
+	//dr rune = '.'
+	//dl rune = '.'
+	V  rune = '▽'
 )
 
 // trace l'arc a
 func arcus(a *Arc) {
-	// première ligne : départ vv et arrivée V
-	lignes[1] = place(lignes[1], vv, a.motA.d)
-	lignes[1] = place(lignes[1], V, a.motB.d)
-	// placer les verticales si nécessaire
-	i := 2
-	for !libre(i, a.motA.d, a.motB.d) {
-		lignes[i] = place(lignes[i], vv, a.motA.d)
-		lignes[i] = place(lignes[i], vv, a.motB.d)
-		i++
-	}
-	if a.motA.d < a.motB.d {
-		lignes[i] = place(lignes[i], dr, a.motA.d)
+	// si le dernier arc partait vers la gauche
+	//   et que le nouveau part vers la gauche
+	if a.motA.rang < a.motB.rang { // part vers la droite
+		// pointѕ de départ et d'arrivée
+		if a.motA.dirder >= 0 {
+			a.motA.Pd--
+		}
+		if a.motB.dirder <= 0 {
+			a.motB.Pg++
+		}
+		// première ligne : départ vv et arrivée V
+		lignes[1] = place(lignes[1], vv, a.motA.Pd)
+		lignes[1] = place(lignes[1], V, a.motB.Pg)
+		// placer les verticales si nécessaire
+		i := 2
+		for !libre(i, a.motA.Pd, a.motB.Pg) {
+			lignes[i] = place(lignes[i], vv, a.motA.Pd)
+			lignes[i] = place(lignes[i], vv, a.motB.Pg)
+			i++
+		}
+		lignes[i] = place(lignes[i], dr, a.motA.Pd)
 		var k int
-		for j := a.motA.d+1; j < a.motB.d; j++ {
+		for j := a.motA.Pd+1; j < a.motB.Pg; j++ {
 			if k < len(a.label) {
 				lignes[i] = place(lignes[i], rune(a.label[k]), j)
 				k++
@@ -91,14 +100,32 @@ func arcus(a *Arc) {
 				lignes[i] = place(lignes[i], hh, j)
 			}
 		}
-		lignes[i] = place(lignes[i], dl, a.motB.d)
+		lignes[i] = place(lignes[i], dl, a.motB.Pg)
 		// calcul des prochains points de départ/arrivée
-		a.motA.d--
-		a.motB.d++
-	} else {
+		a.motA.dirder = 1
+		a.motB.dirder = -1
+	} else { // part vers la gauch
+		if a.motA.dirder <= 0 {
+			a.motA.Pg--
+		}
+		if a.motB.dirder >= 0 {
+			a.motB.Pg--
+		}
+		a.motA.dirder = -1
+		a.motB.dirder = 1
+		// première ligne : départ vv et arrivée V
+		lignes[1] = place(lignes[1], V, a.motB.Pd)
+		lignes[1] = place(lignes[1], vv, a.motA.Pg)
+		// placer les verticales si nécessaire
+		i := 2
+		for !libre(i, a.motA.Pg, a.motB.Pd) {
+			lignes[i] = place(lignes[i], vv, a.motA.Pg)
+			lignes[i] = place(lignes[i], vv, a.motB.Pd)
+			i++
+		}
 		var k int
-		lignes[i] = place(lignes[i], dl, a.motA.d)
-		for j := a.motB.d+1; j < a.motA.d; j++ {
+		lignes[i] = place(lignes[i], dl, a.motA.Pg)
+		for j := a.motB.Pd+1; j < a.motA.Pg; j++ {
 			if k < len(a.label) {
 				lignes[i] = place(lignes[i], rune(a.label[k]), j)
 				k++
@@ -106,10 +133,8 @@ func arcus(a *Arc) {
 				lignes[i] = place(lignes[i], hh, j)
 			}
 		}
-		lignes[i] = place(lignes[i], dr, a.motB.d)
+		lignes[i] = place(lignes[i], dr, a.motB.Pd)
 		// départ/arrivée
-		a.motA.d++
-		a.motB.d--
 	}
 }
 
@@ -174,7 +199,8 @@ func graphe(ll []string) []string {
 		nm.gr = ecl
 		nm.rang = i
 		nm.len = len(ecl)
-		nm.d = report + nm.len/2
+		nm.Pg = report + nm.len/2
+		nm.Pd = nm.Pg
 		// calcul de la colonne de l'initiale du mot
 		if i == 0 {
 			report = len(ecl)
@@ -222,6 +248,7 @@ func graphe(ll []string) []string {
 		lignes = append(lignes, string(gabarit))
 	}
 	// calcul des arcs, remplissage des lignes
+	// en commençant par les plus courts
 	for i := 1; i <= len(mots); i++ {
 		for _, a := range arcs {
 			if !a.ecrit && a.dist == i {
