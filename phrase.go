@@ -21,7 +21,6 @@ type Phrase struct {
 func creePhrase(t string) *Phrase {
 	p := new(Phrase)
 	p.gr = t
-	//mm := strings.Split(t, " ")
 	mm := gocol.Mots(t)
 	for i, m := range(mm) {
 		nm := creeMot(m)
