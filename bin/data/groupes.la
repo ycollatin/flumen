@@ -51,10 +51,15 @@ morph:acc sing
 a:"in";prep
 
 ! FIXME mare Ionium est appellatum
-ter:v.indpasspp
-pos:v
-morph:part parf
-a:"sum";aux;ind pr
+ter:v.sumpp
+pos:"sum"
+morph:indic,subj
+p:v;pp;part parf
+
+ter:v.ppsum
+pos:"sum"
+morph:indic, subj
+p:v;pp;part parf
 
 ter:v.inf
 pos:v
