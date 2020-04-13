@@ -39,7 +39,7 @@ func creeGroupe(ll []string) *Groupe {
 		case "pos":
 			g.noyaux, g.noyexcl = creeNoy(v)
 		case "morph":
-			g.morph = strings.Split(v, ";")
+			g.morph = strings.Split(v, ",")
 		case "lexsynt":
 			lecl := strings.Split(v, " ")
 			for _, ecl := range lecl {
@@ -91,7 +91,7 @@ func (g *Groupe) nbSubs() int {
 
 // la morpho morf est-elle compatible avec le noyau du groupe g ?
 func (g *Groupe) vaMorph(morf string) bool {
-	//debog := g.id=="n.gen" && morf==""
+	//debog := g.id=="v.sumpp" //&& morf=="indic, subj"
 	//if debog {fmt.Println(" -vamorph",g.id,"morf",morf,"g.morph",g.morph)}
 	for _, gmorf := range g.morph {
 		//if debog {fmt.Println("   .vamorph, gmorf",gmorf)}
