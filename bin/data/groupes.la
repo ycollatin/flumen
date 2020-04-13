@@ -40,6 +40,7 @@ ter:n.nadjp
 pos:n
 p:"Romanus";epith;;cgn
 
+! FIXME ex luto
 ter:n.prepAbl
 pos:n NP
 morph:abl
@@ -50,15 +51,15 @@ pos:"perpetuus"
 morph:acc sing
 a:"in";prep
 
-! FIXME mare Ionium est appellatum
 ter:v.sumpp
 pos:"sum"
 morph:indic,subj
 p:v;pp;part parf
 
+!FIXME appellatum est
 ter:v.ppsum
 pos:"sum"
-morph:indic, subj
+morph:indic,subj
 p:v;pp;part parf
 
 ter:v.inf
