@@ -56,11 +56,10 @@ pos:"sum"
 morph:indic,subj
 p:v;pp;part parf
 
-!FIXME appellatum est
 ter:v.ppsum
 pos:"sum"
 morph:indic,subj
-p:v;pp;part parf
+a:v;pp;part parf
 
 ter:v.inf
 pos:v
