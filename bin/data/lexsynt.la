@@ -7275,7 +7275,8 @@ editum:
 editus:
 edo2:
 edoceo:
-edo:
+! provisoire, pour éviter la confusion avec sum
+edo:attr
 edomo:
 Edoni:
 Edonis:
