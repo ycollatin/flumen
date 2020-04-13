@@ -50,6 +50,12 @@ pos:"perpetuus"
 morph:acc sing
 a:"in";prep
 
+! FIXME mare Ionium est appellatum
+ter:v.indpasspp
+pos:v
+morph:part parf
+a:"sum";aux;ind pr
+
 ter:v.inf
 pos:v
 morph:act
