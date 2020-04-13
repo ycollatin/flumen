@@ -111,7 +111,7 @@ func (m *Mot) estNuclDe() []string {
 
 // vrai si m est compatible avec Sub et le noyau mn
 func (m *Mot) resSub(sub *Sub, mn *Mot) gocol.Res {
-	//debog := sub.groupe.id=="v.vgprepAcc" && m.gr == "flumen" && mn.gr=="decidit"
+	//debog := sub.groupe.id=="v.sumpp" && m.gr == "appellatum" && mn.gr=="est"
 	//if debog {fmt.Println(" -resSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr)}
 	// signet motresSub
 	var ans2 gocol.Res
@@ -231,18 +231,22 @@ func genus(sr gocol.Sr) gocol.Sr {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	//debog := m.gr == "decidit" && g.id== "v.vgprepAcc"
+	//debog := m.gr == "est" && g.id== "v.sumpp"
 	//if debog {fmt.Println("-noeud",g.id,m.gr,"pos=\""+m.pos+"\"")}
 	rang := m.rang
 	lante := len(g.ante)
 	// mot de rang trop faible
-	if rang < lante {
+	//if debog {fmt.Println("  .noeud,rang",rang,"lante",lante)}
+	if rang - lante < 0 {
 		return nil
 	}
+	//if debog {fmt.Println("  .noeud, lante ok")}
 	// ou trop élevé
-	if texte.phrase.nbmots - rang < len(g.post) {
+	//if texte.phrase.nbmots - rang < len(g.post) {
+	if rang + len(g.post) >= texte.phrase.nbmots  {
 		return nil
 	}
+	//if debog {fmt.Println("  .noeud, nmbots ok")}
 	// m peut-il être noyau du groupe g ?
 	res2 := m.resNoyau(g)
 	if len(res2) == 0 {
@@ -366,8 +370,8 @@ func (m *Mot) noyau() *Mot {
 // renvoie quelles lemmatisations de m lui permettent d'être le noyau du groupe g
 func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 	//signet motresnoyau
-	//debog := m.gr=="decernis" && g.id=="v.sujobjv"
-	//if debog {fmt.Println(" -estNoyau",m.gr,g.id,"ans",len(m.ans),"pos=\""+m.pos+"\"")}
+	//debog := m.gr=="est" && g.id=="v.sumpp"
+	//if debog {fmt.Println(" -resNoyau",m.gr,g.id,"ans",len(m.ans),"pos=\""+m.pos+"\"")}
 
 	var ans3 gocol.Res
 	// vérif du pos
@@ -415,9 +419,10 @@ func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 			ans4 = append(ans4, a)
 		}
 	}
-	//if debog {fmt.Println("  .estNoyau, okb, len ans4",len(ans4))}
+	//if debog {fmt.Println("  .estNoyau, okb, len ans4",len(ans4),"len gmorph",len(g.morph))}
 
-	// vérif morpho. Si aucune n'est requise, renvoyer true
+	// vérif morpho.
+	// Si aucune n'est requise, renvoyer true
 	if len(g.morph) == 0 {
 		return ans4
 	}
@@ -426,7 +431,7 @@ func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 	for _, sr := range ans4 {
 		var morfos []string  // morphos de sr acceptées par g
 		for _, morf := range sr.Morphos {
-			//if debog {fmt.Println("  .estNoyau, morf",morf,"g.morph",g.morph)}
+			//if debog {fmt.Println("  .estNoyau,lem",sr.Lem.Gr[0],"morf",morf,"g.morph",g.morph)}
 			if g.vaMorph(morf) {
 				morfos = append(morfos, morf)
 			}
