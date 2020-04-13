@@ -4,6 +4,7 @@
 package main
 
 // FIXME
+// - le parasitage de /sum/ par /edo/ met tout par terre. désactivé par lexsynt
 // - quelques problèmes résiduels dans ascii
 // - impossible de départager n.conj et v.conj
 // - subiciunt veribus prunas et viscera torrent : 
