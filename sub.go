@@ -56,11 +56,17 @@ func (s *Sub) vaId(id string) bool {
 	return false
 }
 
+// vrai si la morpho est acceptée par l'une des morphos du sub
 func (s *Sub) vaMorpho(m string) bool {
 	for _, sm := range s.morpho {
-		if !strings.Contains(m, sm) {
-			return false
+		lt := strings.Split(sm, " ")
+		va := true
+		for _, trait := range lt {
+			va = va && strings.Contains(m, trait)
+		}
+		if va {
+			return true
 		}
 	}
-	return true
+	return false
 }
