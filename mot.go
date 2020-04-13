@@ -5,8 +5,7 @@
 // motnoeud
 // motresnoyau
 // motestNoyauDeGroupe
-// motestSub
-// motestSubde
+// motresSub
 
 // rappel de la lemmatisation dans gocol :
 // type Sr struct {
@@ -111,10 +110,10 @@ func (m *Mot) estNuclDe() []string {
 }
 
 // vrai si m est compatible avec Sub et le noyau mn
-func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
+func (m *Mot) resSub(sub *Sub, mn *Mot) gocol.Res {
 	//debog := sub.groupe.id=="v.vgprepAcc" && m.gr == "flumen" && mn.gr=="decidit"
-	//if debog {fmt.Println(" -estSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr)}
-	// signet motestSub
+	//if debog {fmt.Println(" -resSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr)}
+	// signet motresSub
 	var ans2 gocol.Res
 	// vérification des pos
 	if m.pos != "" {
@@ -123,40 +122,40 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
 		veto := false
 		lgr := m.estNuclDe()
 		for _, noy := range sub.noyexcl {
-			//if debog {fmt.Println("   .estSub, excl",noy.id,"pos",m.pos)}
+			//if debog {fmt.Println("   .resSub, excl",noy.id,"pos",m.pos)}
 			veto = veto || contient(lgr, noy.id)
 		}
-		//if debog {fmt.Println("   .estSub, !=, excl",len(sub.noyexcl),"veto",veto)}
+		//if debog {fmt.Println("   .resSub, !=, excl",len(sub.noyexcl),"veto",veto)}
 		if veto {
 			return ans2
 		}
 		// noyaux possibles
 		va := false
 		for _, noy := range sub.noyaux {
-			//if debog {fmt.Println("   .estSub, noy",noy.id,"pos",m.pos)}
+			//if debog {fmt.Println("   .resSub, noy",noy.id,"pos",m.pos)}
 			va = va || noy.vaPos(m.pos)
 		}
 		if !va {
-			//if debog {fmt.Println("   .estSub, vapa!")}
+			//if debog {fmt.Println("   .resSub, vapa!")}
 			return ans2
 		}
 		ans2 = m.ans2
-		//if debog {fmt.Println("   .estSub, noy, len ans2",len(ans2))} //,ans2[0].Lem.Gr)}
+		//if debog {fmt.Println("   .resSub, noy, len ans2",len(ans2))} //,ans2[0].Lem.Gr)}
 	} else {
-		//if debog {fmt.Println("   .estSub, else")}
+		//if debog {fmt.Println("   .resSub, else")}
 		// 2. La pos définitif n'est pas encore fixée
 		for _, an := range m.ans {
-			//if debog {fmt.Println("   .estSub,lemme",an.Lem.Gr,"pos",an.Lem.Pos)}
+			//if debog {fmt.Println("   .resSub,lemme",an.Lem.Gr,"pos",an.Lem.Pos)}
 			for _, noy := range sub.noyaux {
 				if noy.canon > "" {
-					//if debog {fmt.Println("   .estSub, noy.canon",noy.canon)}
+					//if debog {fmt.Println("   .resSub, noy.canon",noy.canon)}
 					if noy.vaSr(an) {
 						ans2 = append(ans2, an)
 						break
 					}
 				} else {
 					if noy.vaPos(an.Lem.Pos) {
-						//if debog {fmt.Println("   .estSub, vaPos",an.Lem.Gr,an.Lem.Pos)}
+						//if debog {fmt.Println("   .resSub, vaPos",an.Lem.Gr,an.Lem.Pos)}
 						ans2 = append(ans2, an)
 						break
 					}
@@ -164,7 +163,7 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
 			}
 		}
 	}
-	//if debog {fmt.Println("   .estSub, lien",sub.lien,"len(ans2)",len(ans2))} //,"lemme",ans2[0].Lem.Gr)}
+	//if debog {fmt.Println("   .resSub, lien",sub.lien,"len(ans2)",len(ans2))} //,"lemme",ans2[0].Lem.Gr)}
 	if len(ans2) == 0 {
 		return ans2
 	}
@@ -172,10 +171,10 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
 	//morphologie
 	var ans3 gocol.Res
 	for _, an := range ans2 {
-		//if debog {fmt.Println("   .estSub2",an.Lem.Gr,"morphos",len(an.Morphos))}
+		//if debog {fmt.Println("   .resSub2",an.Lem.Gr,"morphos",len(an.Morphos))}
 		var lmorf []string
 		for _, morfs := range an.Morphos {
-			//if debog {fmt.Println("   .estSub3 morfs",morfs,"sub",sub.morpho,sub.lien)}
+			//if debog {fmt.Println("   .resSub3 morfs",morfs,"sub",sub.morpho,sub.lien)}
 			// pour toutes les morphos valides de m
 			if sub.vaMorpho(morfs) {
 				lmorf = append(lmorf, morfs)
@@ -186,7 +185,7 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
 			ans3 = append(ans3, an)
 		}
 	}
-	//if debog {fmt.Println("   .estSub1, oka, len ans3",len(ans3))}
+	//if debog {fmt.Println("   .resSub1, oka, len ans3",len(ans3))}
 	// accord
 	var ans4 gocol.Res
 	// pour toutes les morphos valides de mn
@@ -207,7 +206,7 @@ func (m *Mot) estSub(sub *Sub, mn *Mot) gocol.Res {
 			}
 		}
 	}
-	//if debog {fmt.Println("   .estSub3, sortie ans3",len(ans3))}
+	//if debog {fmt.Println("   .resSub3, sortie ans3",len(ans3))}
 	return ans4
 }
 
@@ -284,12 +283,13 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 			return nil
 		}
 		sub := g.ante[ia]
-		res3 := ma.estSub(sub, m)
-		//if debog {fmt.Println(" .noeud estSub, res3",len(res3))} //,res3[0].Lem.Gr)}
+		res3 := ma.resSub(sub, m)
+		//if debog {fmt.Println(" .noeud resSub, res3",len(res3))} //,res3[0].Lem.Gr)}
 		if len(res3) == 0 {
 			//if debog {fmt.Println("  .noeud ma",ma.gr,"n'est pas sub",sub.lien,"de",m.gr)}
 			return nil
 		}
+		ma.ans2 = res3
 		nod.mma = append(nod.mma, ma)
 		r--
 		//iif debog {fmt.Println("    vu",ma.gr)}
@@ -321,11 +321,12 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		if mp.domine(m) {
 			return nil
 		}
-		res4 := mp.estSub(sub, m)
+		res4 := mp.resSub(sub, m)
 		if len(res4) == 0 {
 			//if debog {fmt.Println("   .noeud, return res4")}
 			return nil
 		}
+		mp.ans2 = res4
 		nod.mmp = append(nod.mmp, mp)
 		r++
 	}
