@@ -58,6 +58,9 @@ func (s *Sub) vaId(id string) bool {
 
 // vrai si la morpho est acceptée par l'une des morphos du sub
 func (s *Sub) vaMorpho(m string) bool {
+	if len(s.morpho) == 0 {
+		return true
+	}
 	for _, sm := range s.morpho {
 		lt := strings.Split(sm, " ")
 		va := true
