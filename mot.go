@@ -111,7 +111,7 @@ func (m *Mot) estNuclDe() []string {
 
 // vrai si m est compatible avec Sub et le noyau mn
 func (m *Mot) resSub(sub *Sub, mn *Mot) gocol.Res {
-	//debog := sub.groupe.id=="v.sumpp" && m.gr == "appellatum" && mn.gr=="est"
+	//debog := sub.groupe.id=="n.prepAbl" && m.gr == "ex" && mn.gr=="luto"
 	//if debog {fmt.Println(" -resSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr)}
 	// signet motresSub
 	var ans2 gocol.Res
@@ -154,8 +154,9 @@ func (m *Mot) resSub(sub *Sub, mn *Mot) gocol.Res {
 						break
 					}
 				} else {
+					//if debog {fmt.Println("   .resSub, noy.vaPos",an.Lem.Pos)}
 					if noy.vaPos(an.Lem.Pos) {
-						//if debog {fmt.Println("   .resSub, vaPos",an.Lem.Gr,an.Lem.Pos)}
+						////if debog {fmt.Println("   .resSub, vaPos",an.Lem.Gr,an.Lem.Pos)}
 						ans2 = append(ans2, an)
 						break
 					}
@@ -176,7 +177,7 @@ func (m *Mot) resSub(sub *Sub, mn *Mot) gocol.Res {
 		for _, morfs := range an.Morphos {
 			//if debog {fmt.Println("   .resSub3 morfs",morfs,"sub",sub.morpho,sub.lien)}
 			// pour toutes les morphos valides de m
-			if sub.vaMorpho(morfs) {
+			if strings.Contains(morfs, "inv.") || sub.vaMorpho(morfs) {
 				lmorf = append(lmorf, morfs)
 			}
 		}
@@ -231,7 +232,7 @@ func genus(sr gocol.Sr) gocol.Sr {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	//debog := m.gr == "est" && g.id== "v.sumpp"
+	//debog := m.gr == "luto" && g.id== "n.prepAbl"
 	//if debog {fmt.Println("-noeud",g.id,m.gr,"pos=\""+m.pos+"\"")}
 	rang := m.rang
 	lante := len(g.ante)
@@ -262,7 +263,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	// vérif des subs
 	// ante
 	r := rang - 1
-	//if debog {fmt.Println("  .noeud okb",lante,"lante, r",r,nod.doc())}
+	//if debog {fmt.Println(" .noeud okb",lante,"lante, r",r,nod.doc())}
 	// reгcherche rétrograde des subs ante
 	for ia := lante-1; ia > -1; ia-- {
 		if r < 0 {
