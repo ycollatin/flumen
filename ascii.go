@@ -29,6 +29,7 @@ Prometheus Iapeti filius homines ex luto finxit.
 */
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -64,10 +65,13 @@ const (
     vv rune = '│'
 	dr rune = '┌'
 	dl rune = '┐'
-	//dr rune = '.'
-	//dl rune = '.'
 	V  rune = '▽'
 )
+
+// TODO À commenter ou supprimer après debog
+func (w *Word) doc() string {
+	return fmt.Sprintf("%s, d=%d f=%d Pg=%d Pd=%d",w.gr,w.d,w.f,w.Pg,w.Pd)
+}
 
 // décrémente, incrémente les points de départ/arrivée
 func (w *Word) decg() {
@@ -175,14 +179,6 @@ func arcus(a *Arc) {
 	}
 }
 
-// renvoie le mot le plus à droite de l'arc
-func (a *Arc) dernier() *Word {
-	if a.motA.rang > a.motB.rang {
-		return a.motA
-	}
-	return a.motB
-}
-
 // réinitialisation des arcs
 func initArcs() {
 	arcs = nil
@@ -239,16 +235,22 @@ func graphe(ll []string) []string {
 		nm.gr = ecl
 		nm.rang = i
 		nm.len = len(ecl)
-		nm.Pg = report + nm.len/4
-		nm.Pd = nm.Pg + nm.len/2
 		// calcul de la colonne de l'initiale du mot
-		nm.d = report
+		nm.d = report + 1
+		nm.Pg = nm.d + nm.len/2
+		nm.Pd = nm.Pg + 1
 		if i == 0 {
 			report = nm.len
 		} else {
 			report += nm.len + 1
 		}
 		nm.f = nm.d + nm.len
+		// le point de départ des liens
+		// doit rester au dessus du mot
+		if nm.Pg < nm.d {
+			nm.Pg = nm.d
+		}
+		//fmt.Println(nm.doc())
 		mots = append(mots, nm)
 	}
 	// création des arcs
