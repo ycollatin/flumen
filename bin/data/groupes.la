@@ -1,4 +1,5 @@
 !	groupes.la
+!
 !- ter|grp:<groupe>.<id>		// identifiant syntaxique,identifiant unique 
 !- pos:<pos>					// liste, sép " "
 !- morph:<traits morphos>		// liste sép " " et ";"
@@ -12,6 +13,9 @@
 ! Si un id-lien est précédé d'un point d'exclamation, le sub refusera comme sub
 ! les les mots et noeuds ayant cet id. Cf. grp:v.objv.
 !
+! code de pos
+! n=nom, NP=nom propre, p=pronom 
+! a=adjectif Adv = adverbe
 !
 !phrases de test :
 !  Prometheus Iapeti filius homines ex luto finxit.
@@ -40,16 +44,15 @@ ter:n.nadjp
 pos:n
 p:"Romanus";epith;;cgn
 
-! FIXME ex luto
-ter:n.prepAbl
-pos:n NP
-morph:abl
-a:prepAbl prepAA;prep
-
 ter:n.inperpetuum
 pos:"perpetuus"
 morph:acc sing
 a:"in";prep
+
+ter:n.prepAcc
+pos:n
+morph:acc
+a:prepAcc prepAA;prep
 
 ter:v.sumpp
 pos:"sum"
@@ -73,14 +76,6 @@ morph:act 3
 lexsynt:infobj
 a:p n NP;sujet;nomin;n
 a:v;obj;inf
-
-! FIXME mare Ionium est appellatum
-!ter:v.sov
-!pos:v 3
-!morph:act
-!lexsynt:!attr
-!a:n NP;sujet;nomin;n
-!a:n NP !n.prepAcc;obj;acc
 
 !!!!!!!!!!!!!!!!!!!!!!!!!
 ! Groupes non terminaux !
@@ -134,16 +129,15 @@ pos:n NP p
 morph:acc
 a:prepAA prepAcc;prep
 
-grp:v.gprepAcc
-pos:v
-morph:act
-ag:n.prepAcc n.inperpetuum;gprep
+grp:n.prepAbl
+pos:n NP p
+morph:abl
+a:prepAbl prepAA;prep
 
-! FIXME Phaethon decidit in flumen Eridanum
-grp:v.vgprepAcc
+!FIXME se in mare praecipitavit
+grp:v.gprep
 pos:v
-morph:act
-pg:n.prepAcc;gprep
+ag:n.prepAbl n.prepAcc n.inperpetuum;gprep
 
 grp:vdatobj
 pos:v
@@ -156,46 +150,10 @@ grp:v.objv
 pos:v
 lexsynt:!attr
 morph:act
-ag:n NP !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
+ag:n NP p !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
 
-grp:v.gprepAbl
-pos:v
-morph:act
-ag:n.prepAbl;gprep
-
-grp:v.prepobj
-pos:v.objv
-ag:n.prepAbl n.prepAcc;gprep
-
-grp:v.objprep
-pos:gprepAbl gprepAcc
-ag:n NP;sujet;nomin;n
-
-grp:v.ablprepobj
-pos:v.prepobj
-ag:n.gen;abl;abl
-
-!- a:pos;id-lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
 grp:v.advobjv
-pos:v.objv v.sujapo
-a:Adv;adv
-
-grp:v.advsprepp
-pos:v.sprepp
-a:Adv;adv
-
-
-grp:v.padvsprepp
-pos:v.advsprepp
-a:p;obj;acc
-
-! FIXME decidit in flumen
-grp:v.vgprepAcc
 pos:v
-pg:n.prepAcc;gprep
-
-grp:v.asvsobjprep
-pos:v.sobjprep
 a:Adv;adv
 
 grp:v.sujetv
@@ -217,7 +175,6 @@ grp:v.conjet
 pos:v
 a:"et";conj
 
-! FIXME Magium fratrem reliquit
 grp:v.coord
 pos:v
 pg:v.conjet;coord;;n
