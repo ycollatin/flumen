@@ -38,9 +38,10 @@ type Word struct {
 	len		int
 	nba		int		// nombre d'arcs partant du mot ou y aboutissant
 	rang	int
+	d, f	int		// pos de début et fin de mot
 	Pg		int		// pos de départ et d'arrivée gauche du mot
 	Pd		int		// et droite
-	dirder	int		// direction du dernier arc
+	dirder	int		// le dernier arc arrive de ou part vers la g.(-1) ou la dr(1)
 }
 
 type Arc struct {
@@ -68,6 +69,31 @@ const (
 	V  rune = '▽'
 )
 
+// décrémente, incrémente les points de départ/arrivée
+func (w *Word) decg() {
+	if w.Pg > w.d {
+		w.Pg--
+	}
+}
+
+func (w *Word) incg() {
+	if w.Pg < w.f {
+		w.Pg++
+	}
+}
+
+func (w *Word) decd() {
+	if w.Pd > w.d {
+		w.Pd--
+	}
+}
+
+func (w *Word) incd() {
+	if w.Pd < w.f {
+		w.Pd++
+	}
+}
+
 // trace l'arc a
 func arcus(a *Arc) {
 	var arrb, arra int
@@ -76,16 +102,15 @@ func arcus(a *Arc) {
 	if a.motA.rang < a.motB.rang { // part vers la droite
 		// pointѕ de départ et d'arrivée
 		if a.motA.dirder > 0 {
-			a.motA.Pg--
+			a.motA.decg()
 			arra = a.motA.Pg
 		} else {
 			arra = a.motA.Pd
 		}
 		if a.motB.dirder <= 0 {
-			a.motB.Pd++
+			a.motB.incd()
 			arrb = a.motB.Pd
 		} else {
-			//a.motB.Pg--
 			arrb = a.motB.Pg
 		}
 		// calcul des prochains points de départ/arrivée
@@ -190,6 +215,9 @@ func libre(nl int, a int, b int) bool {
 
 // place le caractère ch à la position ou dans l
 func place(l string, ch rune, ou int) string {
+	if ou < 0 {
+		ou = 0
+	}
 	rr := []rune(l)
 	for ou >= len(rr) {
 		rr = append(rr, ' ')
@@ -211,15 +239,16 @@ func graphe(ll []string) []string {
 		nm.gr = ecl
 		nm.rang = i
 		nm.len = len(ecl)
-		nm.Pg = report + nm.len/2
-		nm.Pd = nm.Pg + 2
+		nm.Pg = report + nm.len/4
+		nm.Pd = nm.Pg + nm.len/2
 		// calcul de la colonne de l'initiale du mot
+		nm.d = report
 		if i == 0 {
-			report = len(ecl)
+			report = nm.len
 		} else {
-			report += len(ecl) + 1
+			report += nm.len + 1
 		}
-		//nm.d = report - len(ecl)/2
+		nm.f = nm.d + nm.len
 		mots = append(mots, nm)
 	}
 	// création des arcs
