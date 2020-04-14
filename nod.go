@@ -18,10 +18,18 @@ type Nod struct {
 func (n *Nod) graf() ([]string) {
 	var ll []string
 	for i, m := range n.mma {
-		ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, n.grp.ante[i].lien))
+		lien := n.grp.ante[i].lien
+		// si le lien du sub est vide, c'est que c'est un élément étranger, appartenant à un autre groupe
+		// (hyperbate). Il ne faut donc pas l'inclure dans le noeud.
+		if lien > "" {
+			ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, n.grp.ante[i].lien))
+		}
 	}
 	for i, m := range n.mmp {
-		ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, n.grp.post[i].lien))
+		lien := n.grp.post[i].lien
+		if lien > "" {
+			ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, n.grp.post[i].lien))
+		}
 	}
 	return ll
 }
