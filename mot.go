@@ -392,6 +392,15 @@ func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 		if !va {
 			return ans3
 		}
+		va = false
+		for _, noy := range g.noyaux {
+			for _, an := range m.ans2 {
+				va = va || noy.vaPos(an.Lem.Pos)
+			}
+		}
+		if !va {
+			return ans3
+		}
 		ans3 = m.ans2
 	} else {
 		for _, a := range m.ans {
