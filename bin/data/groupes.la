@@ -179,7 +179,7 @@ pos:v
 morph:subj
 a:"cum";conj
 
-grp:subconjv
+grp:v.subconjv
 pos:v
 morph:indic
 ag:v.vcum;subconj
