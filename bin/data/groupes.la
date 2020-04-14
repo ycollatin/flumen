@@ -49,11 +49,6 @@ pos:"perpetuus"
 morph:acc sing
 a:"in";prep
 
-ter:n.prepAcc
-pos:n
-morph:acc
-a:prepAcc prepAA;prep
-
 ter:v.sumpp
 pos:"sum"
 morph:indic,subj
@@ -80,11 +75,6 @@ a:v;obj;inf
 !!!!!!!!!!!!!!!!!!!!!!!!!
 ! Groupes non terminaux !
 !!!!!!!!!!!!!!!!!!!!!!!!!
-
-!grp:n.fam
-!pos:n
-!lexsynt:fam
-!ag:NP;gen;gén
 
 grp:n.appFam
 pos:NP
@@ -134,10 +124,18 @@ pos:n NP p
 morph:abl
 a:prepAbl prepAA;prep
 
-!FIXME se in mare praecipitavit
+grp:n.prepAcc
+pos:n NP p
+morph:acc
+a:prepAcc prepAA;prep
+
 grp:v.gprep
 pos:v
 ag:n.prepAbl n.prepAcc n.inperpetuum;gprep
+
+grp:v.vgprep
+pos:v
+pg:n.prepAbl n.prepAcc n.inperpetuum;gprep
 
 grp:vdatobj
 pos:v
