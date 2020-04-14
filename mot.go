@@ -19,7 +19,7 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -58,11 +58,13 @@ func creeMot(m string) *Mot {
 	return mot
 }
 
+/*
 // TODO À commenter avant déploiement
 func (m *Mot) doc() string {
 	return fmt.Sprintf("%d. %s %s\n---\n%s", m.rang, m.gr,
 	gocol.Restostring(m.ans), gocol.Restostring(m.ans2))
 }
+*/
 
 func accord(lma, lmb, cgn string) bool {
 va := true
@@ -117,7 +119,7 @@ func (m *Mot) estNuclDe() []string {
 
 // vrai si m est compatible avec Sub et le noyau mn
 func (m *Mot) resSub(sub *Sub, mn *Mot) gocol.Res {
-	//debog := sub.groupe.id=="v.gprep" && m.gr == "mare" && mn.gr=="praecipitavit"
+	//debog := sub.groupe.id=="v.cui" && m.gr == "cui" && mn.gr=="dedit"
 	//if debog {fmt.Println(" -resSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr,"pos",m.pos)}
 	// signet motresSub
 	var ans2 gocol.Res
@@ -154,7 +156,7 @@ func (m *Mot) resSub(sub *Sub, mn *Mot) gocol.Res {
 			//if debog {fmt.Println("   .resSub,lemme",an.Lem.Gr,"pos",an.Lem.Pos)}
 			for _, noy := range sub.noyaux {
 				if noy.canon > "" {
-					//if debog {fmt.Println("   .resSub, noy.canon",noy.canon)}
+					//if debog {fmt.Println("   .resSub, noy.canon",noy.canon,"sr.Lem",an.Lem.Gr[0])}
 					if noy.vaSr(an) {
 						ans2 = append(ans2, an)
 						break
@@ -162,7 +164,7 @@ func (m *Mot) resSub(sub *Sub, mn *Mot) gocol.Res {
 				} else {
 					//if debog {fmt.Println("   .resSub, noy.vaPos",an.Lem.Pos)}
 					if noy.vaPos(an.Lem.Pos) {
-						////if debog {fmt.Println("   .resSub, vaPos",an.Lem.Gr,an.Lem.Pos)}
+						//if debog {fmt.Println("   .resSub, vaPos",an.Lem.Gr,an.Lem.Pos)}
 						ans2 = append(ans2, an)
 						break
 					}
@@ -238,7 +240,7 @@ func genus(sr gocol.Sr) gocol.Sr {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	//debog := m.gr == "decidit" && g.id== "v.sujetv"
+	//debog := m.gr == "dedit" && g.id== "v.cui"
 	//if debog {fmt.Println("-noeud",g.id,m.rang,m.gr,"pos=\""+m.pos+"\"")}
 	rang := m.rang
 	lante := len(g.ante)
@@ -304,10 +306,11 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		r--
 		//if debog {fmt.Println("    vu",ma.gr)}
 	}
-	//if debog {fmt.Println("  .noeud okd",len(g.post),"g.post, rang",rang,"nbmots",texte.phrase.nbmots)}
+	//if debog {fmt.Println(" .noeud okd",len(g.post),"g.post, rang",rang,"nbmots",texte.phrase.nbmots)}
 	// post
 	for ip, sub := range g.post {
 		r := rang + ip + 1
+		//if debog {fmt.Println(" .noeud, r",r,", nbmots",texte.phrase.nbmots)}
 		if r >= texte.phrase.nbmots {
 			break
 		}
@@ -315,7 +318,6 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		//if debog {fmt.Println("  .noeud avant dejasub, post, mp",mp.gr,"dejasub",mp.dejasub)}
 		for mp.dejasub {
 			r++
-			//if r >= texte.phrase.nbmots - 1 {
 			if r >= texte.phrase.nbmots {
 				return nil
 			}
@@ -326,7 +328,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 			//if debog {fmt.Println("  .noeud, r++",r)}
 			mp = texte.phrase.mots[r]
 		}
-		//if debog {fmt.Println("  .noeud apres dejasub mp", mp.gr)}
+		//if debog {fmt.Println("  .noeud après dejasub mp", mp.gr)}
 		// réciprocité
 		if mp.domine(m) {
 			return nil
@@ -376,8 +378,8 @@ func (m *Mot) noyau() *Mot {
 // renvoie quelles lemmatisations de m lui permettent d'être le noyau du groupe g
 func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 	//signet motresnoyau
-	debog := m.gr=="decidit" && g.id=="v.sujetv"
-	if debog {fmt.Println(" -resNoyau",m.gr,g.id,"ans",len(m.ans),"pos=\""+m.pos+"\"")}
+	//debog := m.gr=="decidit" && g.id=="v.sujetv"
+	//if debog {fmt.Println(" -resNoyau",m.gr,g.id,"ans",len(m.ans),"pos=\""+m.pos+"\"")}
 
 	var ans3 gocol.Res
 	// vérif du pos
@@ -409,7 +411,7 @@ func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 			}
 		}
 	}
-	if debog {fmt.Println("  .estNoyau, oka, len ans3", len(ans3))}
+	//if debog {fmt.Println("  .estNoyau, oka, len ans3", len(ans3))}
 
 	// vérif lexicosyntaxique
 	var ans4 gocol.Res
