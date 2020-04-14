@@ -4,7 +4,8 @@
 package main
 
 // FIXME
-// - quelques problèmes résiduels dans ascii, en part libre().
+// - hyginus.txt, phr. 73, Admeto vu comme n au lieu de NP
+// - quelques problèmes résiduels dans ascii.
 // - impossible de départager n.conj et v.conj
 // - subiciunt veribus prunas et viscera torrent : 
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
@@ -14,10 +15,9 @@ package main
 // - mettre en place le groupe antécédent-relative
 //   - un champ groupe.anrel : analyses du relatif
 //   - hyperbates : le lien n'est pas indiqué : ;;
-// - définir le parfait prériphrastique /sunt appellati, appellati sunt/
-// - donner une POS distinct aux verbes intransitifs. v. gocol.indMorph
+// - donner une POS distincte aux verbes intransitifs. v. gocol.indMorph
 // - accord de personne sujet-verbe
-// - saisie d'une phrase.
+// - saisie d'une phrase ?
 // - Le code graphviz devrait donner l'équivalence mot - rang
 // - parasitage de /sum/ par /edo/ : comment réactiver edo dans lexsynt ?
 
