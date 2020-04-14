@@ -378,7 +378,7 @@ func (m *Mot) noyau() *Mot {
 // renvoie quelles lemmatisations de m lui permettent d'être le noyau du groupe g
 func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 	//signet motresnoyau
-	//debog := m.gr=="decidit" && g.id=="v.sujetv"
+	//debog := m.gr=="Admeto" && g.id=="n.genp"
 	//if debog {fmt.Println(" -resNoyau",m.gr,g.id,"ans",len(m.ans),"pos=\""+m.pos+"\"")}
 
 	var ans3 gocol.Res
@@ -403,6 +403,7 @@ func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 						break
 					}
 				} else {
+					//if debog {fmt.Println("  .resnoyau, a.Lem",a.Lem.Gr[0],"pos",a.Lem.Pos,"Noy",noy.id)}
 					if noy.vaPos(a.Lem.Pos) {
 						ans3 = append(ans3, a)
 						break
