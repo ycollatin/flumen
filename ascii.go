@@ -209,16 +209,24 @@ func graphe(ll []string) []string {
 		nm.rang = i
 		nm.len = len(ecl)
 		// calcul de la colonne de l'initiale du mot
-		nm.d = report + 1
-		if i == 0 {
-			report = nm.len
-		} else {
-			report += nm.len + 1
-		}
+		nm.d = report
 		nm.f = nm.d + nm.len
+		report += nm.len + 1
 		// points de départ et d'arrivée des arcs
-		nm.Pg = nm.d + nm.len/2
-		nm.Pd = nm.Pg + 1
+		switch nm.len {
+		case 1, 2:
+			nm.Pg = nm.d
+			nm.Pd = nm.d
+		case 3:
+			nm.Pg = nm.d
+			nm.Pd = nm.f
+		case 4:
+			nm.Pg = nm.d + 1
+			nm.Pd = nm.d + 2
+		default:
+			nm.Pg = nm.d + nm.len/4
+			nm.Pd = nm.Pg + nm.len/2
+		}
 		mots = append(mots, nm)
 	}
 	// création des arcs
