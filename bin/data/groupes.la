@@ -156,11 +156,6 @@ grp:v.advobjv
 pos:v
 a:Adv;adv
 
-grp:v.sujetv
-pos:v
-morph:act indic 3
-ag:n NP;sujet;nomin;n
-
 grp:v.objsujv
 pos:v.sujetv
 lexsynt:!attr
@@ -189,4 +184,8 @@ pos:v
 morph:indic
 ag:v.vcum;subconj
 
+grp:v.sujetv
+pos:v
+morph:act indic 3
+ag:n NP;sujet;nomin;n
 
