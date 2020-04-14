@@ -182,8 +182,13 @@ pos:v
 morph:indic
 ag:v.vcum;subconj
 
+grp:v.cui
+pos:v
+lexsynt:datif
+morph:indic,subj
+a:"qui2";dat;dat sing
+
 grp:v.sujetv
 pos:v
 morph:act indic 3
 ag:n NP;sujet;nomin;n
-
