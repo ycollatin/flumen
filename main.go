@@ -12,6 +12,10 @@ package main
 //				  et la coord subiciunt et torrent (juste)
 
 // TODO
+// - magna turba est. inde nata est Pyrra : sujet non reconnu
+// - objet : voluptatem Epicurus ignorat.
+//   -> tenir compte de la morpho unique de voluptatem.
+// - mettre en place les impossibilités de cumuler des subs de même fonction
 // - mettre en place le groupe antécédent-relative
 //   - un champ groupe.anrel : analyses du relatif
 //   - hyperbates : le lien n'est pas indiqué : ;;
