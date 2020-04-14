@@ -19,7 +19,7 @@
 package main
 
 import (
-	//"fmt"
+	"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -58,13 +58,11 @@ func creeMot(m string) *Mot {
 	return mot
 }
 
-/*
 // TODO À commenter avant déploiement
 func (m *Mot) doc() string {
 	return fmt.Sprintf("%d. %s %s\n---\n%s", m.rang, m.gr,
 	gocol.Restostring(m.ans), gocol.Restostring(m.ans2))
 }
-*/
 
 func accord(lma, lmb, cgn string) bool {
 va := true
@@ -240,7 +238,7 @@ func genus(sr gocol.Sr) gocol.Sr {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	//debog := m.gr == "praecipitavit" && g.id== "v.gprep"
+	//debog := m.gr == "decidit" && g.id== "v.sujetv"
 	//if debog {fmt.Println("-noeud",g.id,m.rang,m.gr,"pos=\""+m.pos+"\"")}
 	rang := m.rang
 	lante := len(g.ante)
@@ -249,7 +247,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	if rang - lante < 0 {
 		return nil
 	}
-	//if debog {fmt.Println("  .noeud, lante ok",m.doc())}
+	//if debog {fmt.Println("  .noeud, lante ok")}
 	// ou trop élevé
 	//if texte.phrase.nbmots - rang < len(g.post) {
 	if rang + len(g.post) - 1 >= texte.phrase.nbmots {
@@ -378,8 +376,8 @@ func (m *Mot) noyau() *Mot {
 // renvoie quelles lemmatisations de m lui permettent d'être le noyau du groupe g
 func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 	//signet motresnoyau
-	//debog := m.gr=="est" && g.id=="v.sumpp"
-	//if debog {fmt.Println(" -resNoyau",m.gr,g.id,"ans",len(m.ans),"pos=\""+m.pos+"\"")}
+	debog := m.gr=="decidit" && g.id=="v.sujetv"
+	if debog {fmt.Println(" -resNoyau",m.gr,g.id,"ans",len(m.ans),"pos=\""+m.pos+"\"")}
 
 	var ans3 gocol.Res
 	// vérif du pos
@@ -411,7 +409,7 @@ func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 			}
 		}
 	}
-	//if debog {fmt.Println("  .estNoyau, oka, len ans3", len(ans3))}
+	if debog {fmt.Println("  .estNoyau, oka, len ans3", len(ans3))}
 
 	// vérif lexicosyntaxique
 	var ans4 gocol.Res
