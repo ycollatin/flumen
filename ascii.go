@@ -29,7 +29,7 @@ Prometheus Iapeti filius homines ex luto finxit.
 */
 
 import (
-	"fmt"
+	//"fmt"
 	"strconv"
 	"strings"
 )
@@ -68,10 +68,12 @@ const (
 	V  rune = '▽'
 )
 
+/*
 // TODO À commenter ou supprimer après debog
 func (w *Word) doc() string {
 	return fmt.Sprintf("%s, d=%d f=%d Pg=%d Pd=%d",w.gr,w.d,w.f,w.Pg,w.Pd)
 }
+*/
 
 // décrémente, incrémente les points de départ/arrivée
 func (w *Word) decg() {
@@ -190,16 +192,15 @@ func initArcs() {
 // vrai si aucun caractère autres que ' '
 // n'est dans nl entre ma.d et mb.d
 func libre(nl int, a int, b int) bool {
-	for len(lignes) < nl+1 {
+	for nl > len(lignes)-1 {
 		lignes = append(lignes, string(gabarit))
-		return true
 	}
-
-	var seg string
+	var seg []rune
+	runes := []rune(lignes[nl])
 	if a < b {
-		seg = lignes[nl][a:b]
+		seg = runes[a+1:b-1]
 	} else {
-		seg = lignes[nl][b:a]
+		seg = runes[b+1:a-1]
 	}
 	for i := 0; i < len(seg); i++ {
 		if seg[i] != ' ' { //&& !strings.Contains(seg, "┐") {
