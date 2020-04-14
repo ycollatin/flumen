@@ -37,12 +37,10 @@ import (
 type Word struct {
 	gr		string
 	len		int
-	nba		int		// nombre d'arcs partant du mot ou y aboutissant
 	rang	int
 	d, f	int		// pos de début et fin de mot
 	Pg		int		// pos de départ et d'arrivée gauche du mot
 	Pd		int		// et droite
-	dirder	int		// le dernier arc arrive de ou part vers la g.(-1) ou la dr(1)
 }
 
 type Arc struct {
@@ -67,13 +65,6 @@ const (
 	dl rune = '┐'
 	V  rune = '▽'
 )
-
-/*
-// TODO À commenter ou supprimer après debog
-func (w *Word) doc() string {
-	return fmt.Sprintf("%s, d=%d f=%d Pg=%d Pd=%d",w.gr,w.d,w.f,w.Pg,w.Pd)
-}
-*/
 
 // décrémente, incrémente les points de départ/arrivée
 func (w *Word) decg() {
@@ -107,22 +98,10 @@ func arcus(a *Arc) {
 	//   et que le nouveau part vers la gauche
 	if a.motA.rang < a.motB.rang { // part vers la droite
 		// pointѕ de départ et d'arrivée
-		if a.motA.dirder > 0 {
-			a.motA.decg()
-			arra = a.motA.Pg
-		} else {
-			arra = a.motA.Pd
-		}
-		if a.motB.dirder <= 0 {
-			a.motB.incd()
-			arrb = a.motB.Pd
-		} else {
-			arrb = a.motB.Pg
-		}
-		// calcul des prochains points de départ/arrivée
-		a.motA.dirder = 1
-		a.motB.dirder = -1
-		// première ligne : départ vv et arrivée V
+		arra = a.motA.Pd
+		a.motA.decd()
+		arrb = a.motB.Pg
+		a.motB.incg()
 		lignes[1] = place(lignes[1], vv, arra)
 		lignes[1] = place(lignes[1], V, arrb)
 		// placer les verticales si nécessaire
@@ -143,22 +122,11 @@ func arcus(a *Arc) {
 			}
 		}
 		lignes[i] = place(lignes[i], dl, arrb)
-	} else { // part vers la gauch
-		if a.motA.dirder < 0 {
-			a.motA.Pd++
-			arra = a.motA.Pd
-		} else {
-			arra = a.motA.Pg
-		}
-		if a.motB.dirder >= 0 {
-			a.motB.Pg--
-			arrb = a.motB.Pg
-		} else {
-			//a.motB.Pd++
-			arrb = a.motB.Pd
-		}
-		a.motA.dirder = -1
-		a.motB.dirder = 1
+	} else { // part vers la gauche
+		arra = a.motA.Pg
+		a.motA.incg()
+		arrb = a.motB.Pd
+		a.motB.decd()
 		lignes[1] = place(lignes[1], V, arrb)
 		lignes[1] = place(lignes[1], vv, arra)
 		i := 2
@@ -200,10 +168,14 @@ func libre(nl int, a int, b int) bool {
 	if a < b {
 		seg = runes[a+1:b-1]
 	} else {
-		seg = runes[b+1:a-1]
+		if a - b > 1 {
+			seg = runes[b+1:a-1]
+		} else {
+			return true
+		}
 	}
 	for i := 0; i < len(seg); i++ {
-		if seg[i] != ' ' { //&& !strings.Contains(seg, "┐") {
+		if seg[i] != ' ' {
 			return false
 		}
 	}
@@ -238,20 +210,15 @@ func graphe(ll []string) []string {
 		nm.len = len(ecl)
 		// calcul de la colonne de l'initiale du mot
 		nm.d = report + 1
-		nm.Pg = nm.d + nm.len/2
-		nm.Pd = nm.Pg + 1
 		if i == 0 {
 			report = nm.len
 		} else {
 			report += nm.len + 1
 		}
 		nm.f = nm.d + nm.len
-		// le point de départ des liens
-		// doit rester au dessus du mot
-		if nm.Pg < nm.d {
-			nm.Pg = nm.d
-		}
-		//fmt.Println(nm.doc())
+		// points de départ et d'arrivée des arcs
+		nm.Pg = nm.d + nm.len/2
+		nm.Pd = nm.Pg + 1
 		mots = append(mots, nm)
 	}
 	// création des arcs
@@ -284,7 +251,6 @@ func graphe(ll []string) []string {
 	for i := 0; i<lenll; i++ {
 		gabarit = append(gabarit, ' ')
 	}
-	//gabarit = strings.Repeat(" ", len(ll[0]))
 	// ajout éventuel de la phrase
 	if len(lignes) == 0 {
 		lignes = append(lignes, ll[0])
