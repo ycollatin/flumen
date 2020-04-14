@@ -384,7 +384,7 @@ func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 	var ans3 gocol.Res
 	// vérif du pos
 	if m.pos != "" {
-		// 1. La pos définitif n'est pas encore fixé
+		// 1. La pos définitif est fixée
 		va := false
 		for _, noy := range g.noyaux {
 			va = va || noy.vaPos(m.pos)
@@ -392,6 +392,7 @@ func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 		if !va {
 			return ans3
 		}
+		// vérification du Pos des lemmatisations sélectionnées
 		va = false
 		for _, noy := range g.noyaux {
 			for _, an := range m.ans2 {
@@ -403,6 +404,7 @@ func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 		}
 		ans3 = m.ans2
 	} else {
+		// Le mot est encore isolé
 		for _, a := range m.ans {
 			for _, noy := range g.noyaux {
 				//if debog {fmt.Println("  .estNoyau, noy",noy,"a.Lem",a.Lem.Pos)}
