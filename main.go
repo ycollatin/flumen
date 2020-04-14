@@ -4,9 +4,6 @@
 package main
 
 // FIXME
-// - Admetus rex Thessaliae : le changement de pos
-//   en n.npappfam empêche de voir qu'un NP ne peut avoir de sub au génitif.
-//   -> séparer le Pos du noyau et celui du groupe
 // - hyginus.txt, phr. 73, Admeto vu comme n au lieu de NP
 // - quelques problèmes résiduels dans ascii.
 // - impossible de départager n.conj et v.conj
