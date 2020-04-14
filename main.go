@@ -11,6 +11,9 @@ package main
 //				  et la coord subiciunt et torrent (juste)
 
 // TODO
+// - mettre en place le groupe antécédent-relative
+//   - un champ groupe.anrel : analyses du relatif
+//   - hyperbates : le lien n'est pas indiqué : ;;
 // - définir le parfait prériphrastique /sunt appellati, appellati sunt/
 // - donner une POS distinct aux verbes intransitifs. v. gocol.indMorph
 // - accord de personne sujet-verbe
