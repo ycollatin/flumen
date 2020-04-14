@@ -4,8 +4,7 @@
 package main
 
 // FIXME
-// - le parasitage de /sum/ par /edo/ met tout par terre. désactivé par lexsynt
-// - quelques problèmes résiduels dans ascii
+// - quelques problèmes résiduels dans ascii, en part libre().
 // - impossible de départager n.conj et v.conj
 // - subiciunt veribus prunas et viscera torrent : 
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
@@ -17,6 +16,7 @@ package main
 // - accord de personne sujet-verbe
 // - saisie d'une phrase.
 // - Le code graphviz devrait donner l'équivalence mot - rang
+// - parasitage de /sum/ par /edo/ : comment réactiver edo dans lexsynt ?
 
 import (
 	"fmt"
