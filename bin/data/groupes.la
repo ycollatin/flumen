@@ -182,7 +182,8 @@ pos:v
 morph:indic
 ag:v.vcum;subconj
 
-grp:v.cui
+! sr = subordonnée relative
+grp:sr.cui
 pos:v
 lexsynt:datif
 morph:indic,subj
