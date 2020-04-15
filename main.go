@@ -114,10 +114,18 @@ func lemmatise() {
 	texte.phrase.teste()
 	fmt.Println("lemmatisation", rouge(texte.phrase.motCourant().gr))
 	mc := texte.phrase.motCourant()
-	if len(mc.ans2) == 0 {
-		fmt.Println(gocol.Restostring(texte.phrase.motCourant().ans))
+	if len(mc.ans2) > 0 {
+		ll2 := gocol.Restostring(texte.phrase.motCourant().ans2)
+		fmt.Println(rouge(ll2))
+		ll3 := strings.Split(ll2, "\n")
+		ll := strings.Split(gocol.Restostring(texte.phrase.motCourant().ans), "\n")
+		for _, l := range ll {
+			if !contient(ll3, l) {
+				fmt.Println(l)
+			}
+		}
 	} else {
-		fmt.Println(gocol.Restostring(texte.phrase.motCourant().ans2))
+		fmt.Println(gocol.Restostring(texte.phrase.motCourant().ans))
 	}
 }
 
