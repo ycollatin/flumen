@@ -109,10 +109,10 @@ grp:n.app
 pos:n NP
 pg:n;app;;cgn
 
-grp:v.prepadv
-pos:v
-morph:act
-a:Adv;adv
+!grp:v.prepadv
+!pos:v
+!morph:act
+!a:Adv;adv
 
 grp:n.prepAcc
 pos:n NP p
@@ -159,10 +159,19 @@ pos:v.sujetv
 lexsynt:!attr
 ag:n NP;obj;acc
 
+grp:v.attr
+pos:v
+lexsynt:attr
+ag:a n;attr;nomin
+
 grp:v.vattr
 pos:v
 lexsynt:attr
 pg:a;attr;nomin
+
+grp:v.adv
+pos:v
+a:Adv;adv
 
 grp:v.conjet
 pos:v
