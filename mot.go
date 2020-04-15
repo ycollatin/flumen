@@ -240,16 +240,14 @@ func genus(sr gocol.Sr) gocol.Sr {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	//debog := m.gr == "dedit" && g.id== "v.cui"
+	//debog := m.gr == "effigiem" && g.id== "n.sr"
 	//if debog {fmt.Println("-noeud",g.id,m.rang,m.gr,"pos=\""+m.pos+"\"")}
 	rang := m.rang
 	lante := len(g.ante)
 	// mot de rang trop faible
-	//if debog {fmt.Println("  .noeud,rang",rang,"lante",lante)}
 	if rang - lante < 0 {
 		return nil
 	}
-	//if debog {fmt.Println("  .noeud, lante ok")}
 	// ou trop élevé
 	//if texte.phrase.nbmots - rang < len(g.post) {
 	if rang + len(g.post) - 1 >= texte.phrase.nbmots {
@@ -261,7 +259,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	if len(res2) == 0 {
 		return nil
 	}
-	//if debog {fmt.Println(" .noeud oka, res2", len(res2),res2[0].Lem.Gr)}
+	// if debog { fmt.Println(" .noeud noyau, res2", len(res2),res2[0].Lem.Gr)}
 	m.ans2 = res2
 	// création du noeud de retour
 	nod := new(Nod)
@@ -271,7 +269,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	// vérif des subs
 	// ante
 	r := rang - 1
-	//if debog {fmt.Println(" .noeud okb",lante,"lante, r",r,nod.doc())}
+	// if debog { fmt.Println(" .noeud okb",lante,"lante, r",r,nod.doc())}
 	// reгcherche rétrograde des subs ante
 	for ia := lante-1; ia > -1; ia-- {
 		if r < 0 {
@@ -306,13 +304,16 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		r--
 		//if debog {fmt.Println("    vu",ma.gr)}
 	}
-	//if debog {fmt.Println(" .noeud okd",len(g.post),"g.post, rang",rang,"nbmots",texte.phrase.nbmots)}
+	//if debog {fmt.Println(" .noeud ante ok",len(g.post),"g.post, rang",rang,"nbmots",texte.phrase.nbmots)}
 	// post
 	for ip, sub := range g.post {
 		r := rang + ip + 1
-		//if debog {fmt.Println(" .noeud, r",r,", nbmots",texte.phrase.nbmots)}
+		//if debog {fmt.Println(" .noeud, sub",sub.lien,"r",r,", nbmots",texte.phrase.nbmots)}
 		if r >= texte.phrase.nbmots {
 			break
+		}
+		if sub.lien == "" {
+			continue
 		}
 		mp := texte.phrase.mots[r]
 		//if debog {fmt.Println("  .noeud avant dejasub, post, mp",mp.gr,"dejasub",mp.dejasub)}
@@ -353,7 +354,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		for _, m := range nod.mmp {
 			m.dejasub = true
 		}
-		//if debog {fmt.Println("   .noeud m.ans2", len(m.ans2),m.ans2[0].Lem.Gr)}
+		//if debog {fmt.Println("   .noeud m.ans2", len(m.ans2),m.ans2[0].Lem.Gr,"graf",nod.graf())}
 		return nod
 	}
 	return nil
@@ -378,7 +379,7 @@ func (m *Mot) noyau() *Mot {
 // renvoie quelles lemmatisations de m lui permettent d'être le noyau du groupe g
 func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 	//signet motresnoyau
-	//debog := m.gr=="Admeto" && g.id=="n.genp"
+	//debog := m.gr=="effigiem" && g.id=="n.sr"
 	//if debog {fmt.Println(" -resNoyau",m.gr,g.id,"ans",len(m.ans),"pos=\""+m.pos+"\"")}
 
 	var ans3 gocol.Res
