@@ -25,11 +25,14 @@ func (n *Nod) graf() ([]string) {
 			ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, n.grp.ante[i].lien))
 		}
 	}
+	diff := 0;
 	for i, m := range n.mmp {
-		lien := n.grp.post[i].lien
-		if lien > "" {
-			ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, n.grp.post[i].lien))
+		lien := n.grp.post[i+diff].lien
+		if lien == "" {
+			diff++
+			lien = n.grp.post[i+diff].lien
 		}
+		ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, lien))
 	}
 	return ll
 }
