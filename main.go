@@ -6,7 +6,7 @@ package main
 // FIXME
 // - magna turba est : ans2 perd le nominatif en route
 // - impossible de départager n.conj et v.conj
-// - subiciunt veribus prunas et viscera torrent : 
+// - subiciunt veribus prunas et viscera torrent :
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
 //				  et la coord subiciunt et torrent (juste)
 
@@ -36,26 +36,25 @@ import (
 
 const (
 	version = "Alpha"
-	aidePh =
-	`    l->mot suivant ; h->mot précédent ;
+	aidePh  = `    l->mot suivant ; h->mot précédent ;
     j->phrase suivante ; k->phrase précédente ;
     c->lemmatisation du mot courant ;
     a->arbre de la phrase ; r->retour; x->quitter`
 	//s-> définir une suite morphosyntaxique ; x->Exit`
 	//aideS =
-	//`i-> id de la suite ; n-> n° du noyau ; 
+	//`i-> id de la suite ; n-> n° du noyau ;
 	// l-> liens (n°départ.fonction.n°sub,n°etc.);
 	// v-> valider ; r-> retour`
 )
 
 var (
-	ch, chData	string	// chemins du binaire et des données
-	chCorpus	string	// chemin du corpus
-	dat			bool	// drapeau de chargement des données
+	ch, chData string // chemins du binaire et des données
+	chCorpus   string // chemin du corpus
+	dat        bool   // drapeau de chargement des données
 	//module		string
 	//modules		[]string
-	rouge		func(...interface{}) string
-	texte		*Texte
+	rouge func(...interface{}) string
+	texte *Texte
 )
 
 // affiche les arcs syntaxique de la phrase
@@ -69,8 +68,8 @@ func analyse(expl bool) {
 			fmt.Println(n.doc())
 		}
 		fmt.Println("\n----- source ---\n",
-		strings.Join(ar,"\n"),
-		"\n----------------")
+			strings.Join(ar, "\n"),
+			"\n----------------")
 	}
 	fmt.Println(strings.Join(gr, "\n"))
 }
@@ -78,8 +77,8 @@ func analyse(expl bool) {
 // choix du texte latin
 func chxTexte() {
 	ClearScreen()
-    fmt.Println("Suites, grammaire latine")
-    fmt.Println(" © Yves Ouvrard 2020, licence GPL3")
+	fmt.Println("Suites, grammaire latine")
+	fmt.Println(" © Yves Ouvrard 2020, licence GPL3")
 	texte = nil
 	files, err := ioutil.ReadDir(ch + "/corpus/")
 	if err != nil {
@@ -93,7 +92,7 @@ func chxTexte() {
 	nbf := len(files)
 	chx := 1
 	if nbf > 1 {
-		for i:= 0; i < len(files); i++ {
+		for i := 0; i < len(files); i++ {
 			fmt.Println(i+1, textes[i])
 		}
 		chx = InputInt("n° du texte")
@@ -114,7 +113,12 @@ func lemmatise() {
 	texte.affiche(aidePh)
 	texte.phrase.teste()
 	fmt.Println("lemmatisation", rouge(texte.phrase.motCourant().gr))
-	fmt.Println(gocol.Restostring(texte.phrase.motCourant().ans))
+	mc := texte.phrase.motCourant()
+	if len(mc.ans2) == 0 {
+		fmt.Println(gocol.Restostring(texte.phrase.motCourant().ans))
+	} else {
+		fmt.Println(gocol.Restostring(texte.phrase.motCourant().ans2))
+	}
 }
 
 func motprec() {
@@ -141,7 +145,7 @@ func main() {
 	chCorpus = ch + "/corpus/"
 	gocol.Data(chData)
 	// lecture des données syntaxiques
-	lisGroupes(chData+"groupes.la")
+	lisGroupes(chData + "groupes.la")
 	lisLexsynt()
 	// choix du texte
 	chxTexte()
