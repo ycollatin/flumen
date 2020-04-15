@@ -19,7 +19,7 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -58,6 +58,7 @@ func creeMot(m string) *Mot {
 	return mot
 }
 
+/*
 // TODO À commenter avant déploiement
 func (m *Mot) doc() string {
 	//return fmt.Sprintf("===\n%d. %s\n--ans--\n%s\n---ans2---\n%s", m.rang, m.gr,
@@ -66,6 +67,7 @@ func (m *Mot) doc() string {
 		return fmt.Sprintf("===\n%d. %s\n--ans2--\n%s", m.rang, m.gr, gocol.Restostring(m.ans2))
 	} else {return "-"}
 }
+*/
 
 func accord(lma, lmb, cgn string) bool {
 	va := true
@@ -120,9 +122,9 @@ func (m *Mot) estNuclDe() []string {
 
 // vrai si m est compatible avec Sub et le noyau mn
 func (m *Mot) resSub(sub *Sub, mn *Mot) gocol.Res {
-	debog := sub.groupe.id=="v.sujetv" && m.gr == "turba" && mn.gr=="est"
+	//debog := sub.groupe.id=="v.sujetv" && m.gr == "turba" && mn.gr=="est"
 	//if debog {fmt.Println(" -resSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr,"pos",m.pos)}
-	if debog {fmt.Println("  .resSub, mot",m.doc())}
+	//if debog {fmt.Println("  .resSub, mot",m.doc())}
 	// signet motresSub
 	var ans2 gocol.Res
 	// vérification des pos
@@ -149,7 +151,7 @@ func (m *Mot) resSub(sub *Sub, mn *Mot) gocol.Res {
 			//if debog {fmt.Println("   .resSub, vapa!")}
 			return ans2
 		}
-		ans2 = m.ans2
+		ans2 = m.ans
 		//if debog {fmt.Println("   .resSub, noy, len ans2",len(ans2))} //,ans2[0].Lem.Gr)}
 	} else {
 		//if debog {fmt.Println("   .resSub, else")}
@@ -241,6 +243,7 @@ func genus(sr gocol.Sr) gocol.Sr {
 
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
+	//debog := m.gr=="turba" && g.id=="n.prepAbl"
 	// signet motnoeud
 	rang := m.rang
 	lante := len(g.ante)
