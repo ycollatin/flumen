@@ -189,6 +189,11 @@ lexsynt:datif
 morph:indic,subj
 a:"qui2";dat;dat sing
 
+grp:n.sr
+pos:n NP
+p:v;;act
+pg:sr;rel
+
 grp:v.sujetv
 pos:v
 morph:act indic 3
