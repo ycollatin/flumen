@@ -4,6 +4,7 @@
 package main
 
 // FIXME
+// - magna turba est : ans2 perd le nominatif en route
 // - impossible de départager n.conj et v.conj
 // - subiciunt veribus prunas et viscera torrent : 
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
