@@ -36,10 +36,6 @@ ter:n.npappfam
 pos:NP
 p:n;app;;cgn;fam
 
-ter:n.nadj
-pos:n NP
-a:a;epith;;cgn
-
 ter:n.nadjp
 pos:n
 p:"Romanus";epith;;cgn
@@ -86,6 +82,10 @@ lexsynt:nom
 p:NP;app;;cn
 
 grp:n.epith
+pos:n
+a:a;epith;;cgn
+
+grp:n.nepith
 pos:n
 p:a;epith;;cgn
 
