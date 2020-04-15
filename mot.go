@@ -19,26 +19,26 @@
 package main
 
 import (
-	//"fmt"
+	"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
 
 type Lm struct {
-	l	*gocol.Lemme
-	m	string
+	l *gocol.Lemme
+	m string
 }
 
 type Mot struct {
-	gr			string		// graphie du mot
-	rang		int			// rang du mot dans la phrase à partir de 0
-	ans, ans2	gocol.Res	// ensemble des lemmatisations, ans provisoire
-	dejasub		bool		// le mot est déjà l'élément d'n nœud
-	llm			[]Lm		// liste des lemmes ٍ+ morpho possibles
-	tmpl, tmpm	int			// n°s provisoires de Sr et morpho
-	pos			string		// id du groupe dont le mot est noyau
-							// ou à défaut pos du mot, si elle est décidée
-	lexsynt		[]string	// propriétés lexicosyntaxiques
+	gr         string    // graphie du mot
+	rang       int       // rang du mot dans la phrase à partir de 0
+	ans, ans2  gocol.Res // ensemble des lemmatisations, ans provisoire
+	dejasub    bool      // le mot est déjà l'élément d'n nœud
+	llm        []Lm      // liste des lemmes ٍ+ morpho possibles
+	tmpl, tmpm int       // n°s provisoires de Sr et morpho
+	pos        string    // id du groupe dont le mot est noyau
+	// ou à défaut pos du mot, si elle est décidée
+	lexsynt []string // propriétés lexicosyntaxiques
 }
 
 func creeMot(m string) *Mot {
@@ -58,26 +58,27 @@ func creeMot(m string) *Mot {
 	return mot
 }
 
-/*
 // TODO À commenter avant déploiement
 func (m *Mot) doc() string {
-	return fmt.Sprintf("%d. %s %s\n---\n%s", m.rang, m.gr,
-	gocol.Restostring(m.ans), gocol.Restostring(m.ans2))
+	//return fmt.Sprintf("===\n%d. %s\n--ans--\n%s\n---ans2---\n%s", m.rang, m.gr,
+	//	gocol.Restostring(m.ans), gocol.Restostring(m.ans2))
+	if m.ans2 != nil {
+		return fmt.Sprintf("===\n%d. %s\n--ans2--\n%s", m.rang, m.gr, gocol.Restostring(m.ans2))
+	} else {return "-"}
 }
-*/
 
 func accord(lma, lmb, cgn string) bool {
-va := true
-for i:=0; i<len(cgn); i++ {
-	switch cgn[i] {
-	case 'c':
-		k := cas(lma)
-		va = va && strings.Contains(lmb, k)
-	case 'g':
-		g := genre(lma)
-		va = va && strings.Contains(lmb, g)
-	case 'n':
-		n := nombre(lma)
+	va := true
+	for i := 0; i < len(cgn); i++ {
+		switch cgn[i] {
+		case 'c':
+			k := cas(lma)
+			va = va && strings.Contains(lmb, k)
+		case 'g':
+			g := genre(lma)
+			va = va && strings.Contains(lmb, g)
+		case 'n':
+			n := nombre(lma)
 			va = va && strings.Contains(lmb, n)
 		}
 	}
@@ -119,8 +120,9 @@ func (m *Mot) estNuclDe() []string {
 
 // vrai si m est compatible avec Sub et le noyau mn
 func (m *Mot) resSub(sub *Sub, mn *Mot) gocol.Res {
-	//debog := sub.groupe.id=="v.cui" && m.gr == "cui" && mn.gr=="dedit"
+	debog := sub.groupe.id=="v.sujetv" && m.gr == "turba" && mn.gr=="est"
 	//if debog {fmt.Println(" -resSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr,"pos",m.pos)}
+	if debog {fmt.Println("  .resSub, mot",m.doc())}
 	// signet motresSub
 	var ans2 gocol.Res
 	// vérification des pos
@@ -240,17 +242,14 @@ func genus(sr gocol.Sr) gocol.Sr {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	//debog := m.gr == "effigiem" && g.id== "n.sr"
-	//if debog {fmt.Println("-noeud",g.id,m.rang,m.gr,"pos=\""+m.pos+"\"")}
 	rang := m.rang
 	lante := len(g.ante)
 	// mot de rang trop faible
-	if rang - lante < 0 {
+	if rang-lante < 0 {
 		return nil
 	}
 	// ou trop élevé
-	//if texte.phrase.nbmots - rang < len(g.post) {
-	if rang + len(g.post) - 1 >= texte.phrase.nbmots {
+	if rang+len(g.post)-1 >= texte.phrase.nbmots {
 		return nil
 	}
 	//if debog {fmt.Println("  .noeud, nmbots ok")}
@@ -269,9 +268,9 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	// vérif des subs
 	// ante
 	r := rang - 1
-	// if debog { fmt.Println(" .noeud okb",lante,"lante, r",r,nod.doc())}
+	//if debog { fmt.Println(" .noeud okb",lante,"lante, r",r,nod.doc())}
 	// reгcherche rétrograde des subs ante
-	for ia := lante-1; ia > -1; ia-- {
+	for ia := lante - 1; ia > -1; ia-- {
 		if r < 0 {
 			// le rang du mot est < 0 : impossible
 			return nil
@@ -345,16 +344,17 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	}
 	//if debog {fmt.Println("   .noeud, après les subs, mma",len(nod.mma),"mmp",len(nod.mmp))}
 	// fixer les pos et sub des mots du noeud
-	if len(nod.mma) + len(nod.mmp) > 0 {
+	if len(nod.mma)+len(nod.mmp) > 0 {
 		m.pos = g.id
-		//if debog {fmt.Println("   .noeud, noy",m.gr,"pos",m.pos)}
+		//if debog {fmt.Println("   .noeud, noy",m.doc())}
 		for _, m := range nod.mma {
 			m.dejasub = true
 		}
 		for _, m := range nod.mmp {
 			m.dejasub = true
 		}
-		//if debog {fmt.Println("   .noeud m.ans2", len(m.ans2),m.ans2[0].Lem.Gr,"graf",nod.graf())}
+		//if debog {fmt.Println("  .noeud m.ans2", len(m.ans2),m.ans2[0].Lem.Gr,"graf",nod.graf())}
+		//if debog {fmt.Println("  .noeud FIN", texte.phrase.mots[1].doc())}
 		return nod
 	}
 	return nil
@@ -450,7 +450,7 @@ func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 
 	var ans5 gocol.Res
 	for _, sr := range ans4 {
-		var morfos []string  // morphos de sr acceptées par g
+		var morfos []string // morphos de sr acceptées par g
 		for _, morf := range sr.Morphos {
 			//if debog {fmt.Println("  .estNoyau,lem",sr.Lem.Gr[0],"morf",morf,"g.morph",g.morph)}
 			if g.vaMorph(morf) {
