@@ -19,7 +19,7 @@
 package main
 
 import (
-	//"fmt"
+	"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -243,8 +243,9 @@ func genus(sr gocol.Sr) gocol.Sr {
 
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
-	//debog := m.gr=="turba" && g.id=="n.prepAbl"
 	// signet motnoeud
+	debog := m.gr=="ignorat" && g.id=="v.objsujv"
+	if debog {fmt.Println("NOEUD, m",m.gr,"id",g.id)}
 	rang := m.rang
 	lante := len(g.ante)
 	// mot de rang trop faible
@@ -255,13 +256,13 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	if rang+len(g.post)-1 >= texte.phrase.nbmots {
 		return nil
 	}
-	//if debog {fmt.Println("  .noeud, nmbots ok")}
+	if debog {fmt.Println("  .noeud, nmbots ok")}
 	// m peut-il être noyau du groupe g ?
 	res2 := m.resNoyau(g)
 	if len(res2) == 0 {
 		return nil
 	}
-	// if debog { fmt.Println(" .noeud noyau, res2", len(res2),res2[0].Lem.Gr)}
+	if debog { fmt.Println(" .noeud noyau, res2", len(res2),res2[0].Lem.Gr)}
 	m.ans2 = res2
 	// création du noeud de retour
 	nod := new(Nod)
@@ -290,7 +291,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 			ma = texte.phrase.mots[r]
 			//if debog {fmt.Println("  .noeud, ma2", ma.gr,"dejasub",ma.dejasub,"r",r)}
 		}
-		//if debog {fmt.Println("  .noeud ma",ma.gr,"dejasub",ma.dejasub,"pos",ma.pos,"grup",g.ante[ia].groupe.id)}
+		if debog {fmt.Println("  .noeud ma",ma.gr,"dejasub",ma.dejasub,"pos",ma.pos,"grup",g.ante[ia].groupe.id)}
 		// vérification de réciprocité, puis du lien lui-même
 		if ma.domine(m) {
 			return nil
