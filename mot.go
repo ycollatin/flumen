@@ -244,8 +244,8 @@ func genus(sr gocol.Sr) gocol.Sr {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	debog := m.gr=="ignorat" && g.id=="v.objsujv"
-	if debog {fmt.Println("NOEUD, m",m.gr,"id",g.id)}
+	//debog := m.gr=="ignorat" && g.id=="v.objsujv"
+	//if debog {fmt.Println("NOEUD, m",m.gr,"id",g.id)}
 	rang := m.rang
 	lante := len(g.ante)
 	// mot de rang trop faible
@@ -256,13 +256,13 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	if rang+len(g.post)-1 >= texte.phrase.nbmots {
 		return nil
 	}
-	if debog {fmt.Println("  .noeud, nmbots ok")}
+	//if debog {fmt.Println("  .noeud, nbmots ok")}
 	// m peut-il être noyau du groupe g ?
 	res2 := m.resNoyau(g)
 	if len(res2) == 0 {
 		return nil
 	}
-	if debog { fmt.Println(" .noeud noyau, res2", len(res2),res2[0].Lem.Gr)}
+	//if debog { fmt.Println(" .noeud noyau, res2", len(res2),res2[0].Lem.Gr)}
 	m.ans2 = res2
 	// création du noeud de retour
 	nod := new(Nod)
@@ -291,7 +291,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 			ma = texte.phrase.mots[r]
 			//if debog {fmt.Println("  .noeud, ma2", ma.gr,"dejasub",ma.dejasub,"r",r)}
 		}
-		if debog {fmt.Println("  .noeud ma",ma.gr,"dejasub",ma.dejasub,"pos",ma.pos,"grup",g.ante[ia].groupe.id)}
+		//if debog {fmt.Println("  .noeud ma",ma.gr,"dejasub",ma.dejasub,"pos",ma.pos,"grup",g.ante[ia].groupe.id)}
 		// vérification de réciprocité, puis du lien lui-même
 		if ma.domine(m) {
 			return nil
@@ -383,28 +383,32 @@ func (m *Mot) noyau() *Mot {
 // renvoie quelles lemmatisations de m lui permettent d'être le noyau du groupe g
 func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 	//signet motresnoyau
-	//debog := m.gr=="effigiem" && g.id=="n.sr"
-	//if debog {fmt.Println(" -resNoyau",m.gr,g.id,"ans",len(m.ans),"pos=\""+m.pos+"\"")}
+	debog := m.gr=="ignorat" && g.id=="v.objsujv"
+	if debog {fmt.Println(" -resNoyau",m.gr,g.id,"ans",len(m.ans),"pos=\""+m.pos+"\"")}
 
 	var ans3 gocol.Res
 	// vérif du pos
 	if m.pos != "" {
+		if debog {fmt.Println("  .resNoyau, pos=",m.pos)}
 		// 1. La pos définitif est fixée
 		va := false
 		for _, noy := range g.noyaux {
 			va = va || noy.vaPos(m.pos)
 		}
 		if !va {
+			//if debog{fmt.Println("  .resNoyau, échec g.noyaux")}
 			return ans3
 		}
 		// vérification du Pos des lemmatisations sélectionnées
 		va = false
 		for _, noy := range g.noyaux {
 			for _, an := range m.ans2 {
+				if debog {fmt.Println("  .resNoyau, an.Lem",an.Lem.Gr,"-"+an.Lem.Pos+"-noy",noy)}
 				va = va || noy.vaPos(an.Lem.Pos)
 			}
 		}
 		if !va {
+			if debog {fmt.Println("  .resNoyau, echec ans2")}
 			return ans3
 		}
 		ans3 = m.ans2
@@ -428,7 +432,7 @@ func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 			}
 		}
 	}
-	//if debog {fmt.Println("  .estNoyau, oka, len ans3", len(ans3))}
+	if debog {fmt.Println("  .estNoyau, oka, len ans3", len(ans3))}
 
 	// vérif lexicosyntaxique
 	var ans4 gocol.Res
