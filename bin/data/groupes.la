@@ -154,11 +154,6 @@ grp:v.advobjv
 pos:v
 a:Adv;adv
 
-grp:v.objsujv
-pos:v.sujetv
-lexsynt:!attr
-ag:n NP;obj;acc
-
 grp:v.attr
 pos:v
 lexsynt:attr
@@ -207,3 +202,13 @@ grp:v.sujetv
 pos:v
 morph:act indic 3
 ag:n NP;sujet;nomin;n
+
+! FIXME voluptatem Epicurus ignorat
+grp:v.objsujv
+pos:v.sujetv
+ag:n NP;obj;acc
+
+grp:v.vsujet
+pos:v
+morph:3
+p:n NP;sujet;nomin;n
