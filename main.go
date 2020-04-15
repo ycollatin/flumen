@@ -4,18 +4,16 @@
 package main
 
 // FIXME
-// - hyginus.txt, phr. 73, Admeto vu comme n au lieu de NP
-// - quelques problèmes résiduels dans ascii.
 // - impossible de départager n.conj et v.conj
 // - subiciunt veribus prunas et viscera torrent : 
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
 //				  et la coord subiciunt et torrent (juste)
 
 // TODO
+// - mettre en place les impossibilités de cumuler des subs de même fonction
 // - magna turba est. inde nata est Pyrra : sujet non reconnu
 // - objet : voluptatem Epicurus ignorat.
 //   -> tenir compte de la morpho unique de voluptatem.
-// - mettre en place les impossibilités de cumuler des subs de même fonction
 // - mettre en place le groupe antécédent-relative
 //   - un champ groupe.anrel : analyses du relatif
 //   - hyperbates : le lien n'est pas indiqué : ;;
