@@ -203,9 +203,9 @@ pos:v
 morph:act indic 3
 ag:n NP;sujet;nomin;n
 
-! FIXME voluptatem Epicurus ignorat
-grp:v.objsujv
-pos:v.sujetv
+grp:v.obj
+pos:v
+lexsynt:!attr
 ag:n NP;obj;acc
 
 grp:v.vsujet
