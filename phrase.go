@@ -79,59 +79,6 @@ func (p *Phrase) arbre() ([]string, []string) {
 	return ll, lexpl
 }
 
-/*
-func (p *Phrase) arbre() ([]string, []string) {
-	if len(p.ar) > 0 {
-		return p.ar, p.src
-	}
-	var lexpl []string
-	var ll []string
-	// réinitialisation des noeuds
-	p.nods = nil
-	// recherche des noyaux
-	// groupes terminaux
-	for _, m := range p.mots {
-		if m.dejaNoy() {
-			continue
-		}
-		for _, g := range grpTerm {
-			n := m.noeud(g)
-			if n != nil {
-				p.nods = append(p.nods, n)
-				lexpl = append(lexpl, n.grp.id)
-			}
-		}
-		// résolution des conflits (à écrire)
-	 }
-
-	// groupes non terminaux
-	for _, m := range p.mots {
-		//debog := m.gr=="finxit"
-		//if debog {fmt.Println("  arbre, ok")}
-		// pour chaque déf. de groupe non terminal
-		for _, g := range grp {
-			//if debog {fmt.Println("arbre, m",m.gr,"g",g.id)}
-			// m noyau ?
-			n := m.noeud(g)
-			if n != nil {
-				p.nods = append(p.nods, n)
-				lexpl = append(lexpl, n.grp.id)
-			}
-		}
-		// TODO résolution des conflits (à écrire)
-	}
-
-	// graphe
-	ll = append(ll, p.gr)
-	for _, n := range p.nods {
-		ll = append(ll, n.graf()...)
-	}
-	p.ar = ll
-	p.src = graphe(ll)
-	return ll, lexpl
-}
-*/
-
 // texte de la phrase, le mot courant surligné en rouge
 func (p *Phrase) enClair() string {
 	var lm []string
