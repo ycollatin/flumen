@@ -16,11 +16,10 @@ package main
 //   -> tenir compte de la morpho unique de voluptatem.
 // - mettre en place le groupe antécédent-relative
 //   - un champ groupe.anrel : analyses du relatif
-//   - hyperbates : le lien n'est pas indiqué : ;;
 // - donner une POS distincte aux verbes intransitifs. v. gocol.indMorph
-// - accord de personne sujet-verbe
+// - accord de personne sujet-verbe ?
 // - saisie d'une phrase ?
-// - Le code graphviz devrait donner l'équivalence mot - rang
+// - fonction de sortie au format GraphViz
 // - parasitage de /sum/ par /edo/ : comment réactiver edo dans lexsynt ?
 
 import (
