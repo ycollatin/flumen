@@ -161,10 +161,6 @@ lexsynt:!attr
 morph:act
 pg:n NP p !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
 
-grp:v.advobjv
-pos:v
-a:Adv;adv
-
 grp:v.attr
 pos:v
 lexsynt:attr
@@ -180,15 +176,15 @@ grp:v.attrPass
 pos:v
 morph:pass indic,pass subj
 lexsynt:attrp
-pg:a;attr;nomin
-
-grp:v.adv
-pos:v
-a:Adv;adv
+ag:a;attr;nomin
 
 grp:v.conjet
 pos:v
 a:"et";conj
+
+grp:v.adv
+pos:v
+a:Adv;adv
 
 grp:v.coord
 pos:v
