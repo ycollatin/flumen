@@ -1,5 +1,7 @@
 defaut:
 	go build -o bin/gentes
+fmt:
+	go fmt ./
 edit:
 	vim -c ":b main.go" *.go bin/data/groupes.la bin/data/lexsynt.la
 darwin:
