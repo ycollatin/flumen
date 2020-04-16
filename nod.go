@@ -8,14 +8,14 @@ import (
 )
 
 type Nod struct {
-	grp		*Groupe		// groupe du noeud Nod
-	mma,mmp	[]*Mot		// liste des mots avant et après le noyau
-	nucl	*Mot		// noyau du Nod
-	rang	int			// 
+	grp      *Groupe // groupe du noeud Nod
+	mma, mmp []*Mot  // liste des mots avant et après le noyau
+	nucl     *Mot    // noyau du Nod
+	rang     int     //
 }
 
 // lignes graphviz du nœud
-func (n *Nod) graf() ([]string) {
+func (n *Nod) graf() []string {
 	var ll []string
 	for i, m := range n.mma {
 		lien := n.grp.ante[i].lien
@@ -25,7 +25,7 @@ func (n *Nod) graf() ([]string) {
 			ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, n.grp.ante[i].lien))
 		}
 	}
-	diff := 0;
+	diff := 0
 	for i, m := range n.mmp {
 		lien := n.grp.post[i+diff].lien
 		if lien == "" {
@@ -47,6 +47,6 @@ func (n *Nod) doc() string {
 	for _, m := range n.mmp {
 		mm = append(mm, m.gr)
 	}
-	mm = append (mm, " - " + n.grp.id)
+	mm = append(mm, " - "+n.grp.id)
 	return strings.Join(mm, " ")
 }

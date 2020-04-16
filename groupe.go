@@ -12,13 +12,13 @@ import (
 )
 
 type Groupe struct {
-	id				string
-	noyaux, noyexcl	[]*Noy		// pos du noyau
-	morph			[]string	// traits morpho du noyau
-	lexsynt			[]string	// étiquettes lexicosyntaxiques du noyau
-	exclls			[]string	// propriétés lexicosyntaxiques exclues
-	ante			[]*Sub		// éléments précédant le noyau
-	post			[]*Sub		// éléments suivant le noyau
+	id              string
+	noyaux, noyexcl []*Noy   // pos du noyau
+	morph           []string // traits morpho du noyau
+	lexsynt         []string // étiquettes lexicosyntaxiques du noyau
+	exclls          []string // propriétés lexicosyntaxiques exclues
+	ante            []*Sub   // éléments précédant le noyau
+	post            []*Sub   // éléments suivant le noyau
 }
 
 var grpTerm, grp []*Groupe

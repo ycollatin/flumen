@@ -35,32 +35,32 @@ import (
 )
 
 type Word struct {
-	gr		string
-	len		int
-	rang	int
-	d, f	int		// pos de début et fin de mot
-	Pg		int		// pos de départ et d'arrivée gauche du mot
-	Pd		int		// et droite
+	gr   string
+	len  int
+	rang int
+	d, f int // pos de début et fin de mot
+	Pg   int // pos de départ et d'arrivée gauche du mot
+	Pd   int // et droite
 }
 
 type Arc struct {
-	motA	*Word	// mot de départ (noyau)
-	motB	*Word	// mot d'arrivée (sub)
-	label	string	// étiquette de l'arc
-	dist	int		// distance abs(motA.rang - motB.rang)
-	ecrit	bool
+	motA  *Word  // mot de départ (noyau)
+	motB  *Word  // mot d'arrivée (sub)
+	label string // étiquette de l'arc
+	dist  int    // distance abs(motA.rang - motB.rang)
+	ecrit bool
 }
 
 var (
-	arcs	[]*Arc
-	gabarit	[]rune
+	arcs    []*Arc
+	gabarit []rune
 	lignes  []string
-	mots	[]*Word
+	mots    []*Word
 )
 
 const (
 	hh rune = '─'
-    vv rune = '│'
+	vv rune = '│'
 	dr rune = '┌'
 	dl rune = '┐'
 	V  rune = '▽'
@@ -113,7 +113,7 @@ func arcus(a *Arc) {
 		}
 		lignes[i] = place(lignes[i], dr, arra)
 		var k int
-		for j := arra+1; j < arrb; j++ {
+		for j := arra + 1; j < arrb; j++ {
 			if k < len(a.label) {
 				lignes[i] = place(lignes[i], rune(a.label[k]), j)
 				k++
@@ -137,7 +137,7 @@ func arcus(a *Arc) {
 		}
 		var k int
 		lignes[i] = place(lignes[i], dl, arra)
-		for j := arrb+1; j < arra; j++ {
+		for j := arrb + 1; j < arra; j++ {
 			if k < len(a.label) {
 				lignes[i] = place(lignes[i], rune(a.label[k]), j)
 				k++
@@ -166,10 +166,10 @@ func libre(nl int, a int, b int) bool {
 	var seg []rune
 	runes := []rune(lignes[nl])
 	if a < b {
-		seg = runes[a+1:b-1]
+		seg = runes[a+1 : b-1]
 	} else {
-		if a - b > 1 {
-			seg = runes[b+1:a-1]
+		if a-b > 1 {
+			seg = runes[b+1 : a-1]
 		} else {
 			return true
 		}
@@ -256,7 +256,7 @@ func graphe(ll []string) []string {
 
 	// gabarit des lignes où sont tracés les arcs
 	lenll := len(ll[0])
-	for i := 0; i<lenll; i++ {
+	for i := 0; i < lenll; i++ {
 		gabarit = append(gabarit, ' ')
 	}
 	// ajout éventuel de la phrase
@@ -277,7 +277,7 @@ func graphe(ll []string) []string {
 	}
 	// génération des lignes en commençant par le haut
 	var retour []string
-	for i := len(lignes)-1; i > -1; i-- {
+	for i := len(lignes) - 1; i > -1; i-- {
 		retour = append(retour, lignes[i])
 	}
 	return retour

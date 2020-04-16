@@ -9,9 +9,9 @@ import (
 
 // Une définition de groupe peut donner un choix de noyaux
 type Noy struct {
-	id, idgr	string	// identifiant
-	canon		string  // canon du lemme, entre " dans groupes.la
-	generique	bool	// vrai si l'id est suffixé
+	id, idgr  string // identifiant
+	canon     string // canon du lemme, entre " dans groupes.la
+	generique bool   // vrai si l'id est suffixé
 }
 
 // créateur du noyau
@@ -24,7 +24,7 @@ func creeNoy(s string) (ln, lnExcl []*Noy) {
 		}
 		n := new(Noy)
 		if e[0] == '"' {
-			n.canon = e[1:len(e)-1]
+			n.canon = e[1 : len(e)-1]
 			n.generique = true
 		} else {
 			n.id = e

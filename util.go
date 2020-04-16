@@ -10,9 +10,9 @@ import (
 )
 
 var (
-	lcas = [...]string {"nominatif","vocatif","accusatif","génitif","datif","ablatif","locatif"}
-	lgenre = [...]string {"masculin","féminin","neutre"}
-	lnombre = [...]string {"singulier", "pluriel"}
+	lcas    = [...]string{"nominatif", "vocatif", "accusatif", "génitif", "datif", "ablatif", "locatif"}
+	lgenre  = [...]string{"masculin", "féminin", "neutre"}
+	lnombre = [...]string{"singulier", "pluriel"}
 )
 
 // renvoie le premier cas de la liste lcas contenu dans morpho

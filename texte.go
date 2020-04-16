@@ -1,4 +1,4 @@
-//  texte.go - Publicola 
+//  texte.go - Publicola
 
 // Partage d'un texte en []Phrase
 
@@ -6,19 +6,19 @@ package main
 
 import (
 	"fmt"
-	"strings"
 	"github.com/ycollatin/gocol"
+	"strings"
 )
 
-type Texte  struct {
-	nom			string
-	compteur	int
-	phrases		[]string
-	phrase		*Phrase
+type Texte struct {
+	nom      string
+	compteur int
+	phrases  []string
+	phrase   *Phrase
 }
 
 func (t *Texte) append(p string) {
-  t.phrases = append(t.phrases, p)
+	t.phrases = append(t.phrases, p)
 }
 
 // Efface l'écran, affiche un entête, la phrase, et
@@ -31,9 +31,9 @@ func (t Texte) affiche(aide string) {
 }
 
 // crée un texte à partir du fichier nommé nf
-func CreeTexte (nf string) *Texte {
-	var tp	string	// texte de la phrase
-	ll := gocol.Lignes(chCorpus+nf)
+func CreeTexte(nf string) *Texte {
+	var tp string // texte de la phrase
+	ll := gocol.Lignes(chCorpus + nf)
 	t := new(Texte)
 	t.nom = nf
 	for _, l := range ll {
@@ -41,7 +41,7 @@ func CreeTexte (nf string) *Texte {
 			ifp := strings.IndexAny(l, ".?;!")
 			if ifp < 0 {
 				tp += l + " "
-				break;
+				break
 			} else {
 				tp += l[:ifp+1] //+ " "
 				// supprimer l'espace initiale
@@ -51,7 +51,7 @@ func CreeTexte (nf string) *Texte {
 				// créer et ajouter la nouvelle phrase
 				t.phrases = append(t.phrases, tp)
 				tp = ""
-				l =	l[ifp+1:]
+				l = l[ifp+1:]
 			}
 		}
 	}
@@ -64,7 +64,7 @@ func (t *Texte) majPhrase() {
 }
 
 func (t *Texte) porro() {
-	if len(t.phrases) - t.compteur > 1 {
+	if len(t.phrases)-t.compteur > 1 {
 		t.compteur++
 		t.majPhrase()
 		t.affiche(aidePh)

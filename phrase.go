@@ -4,25 +4,25 @@ package main
 
 import (
 	"fmt"
-	"strings"
 	"github.com/ycollatin/gocol"
+	"strings"
 )
 
 type Phrase struct {
-	gr		string
-	imot	int
-	nbmots	int
-	mots	[]*Mot
-	nods	[]*Nod
-	ar		[]string // arbre de la phrase
-	src		[]string // source de l'arbre
+	gr     string
+	imot   int
+	nbmots int
+	mots   []*Mot
+	nods   []*Nod
+	ar     []string // arbre de la phrase
+	src    []string // source de l'arbre
 }
 
 func creePhrase(t string) *Phrase {
 	p := new(Phrase)
 	p.gr = t
 	mm := gocol.Mots(t)
-	for i, m := range(mm) {
+	for i, m := range mm {
 		nm := creeMot(m)
 		nm.rang = i
 		p.mots = append(p.mots, nm)
@@ -82,25 +82,25 @@ func (p *Phrase) arbre() ([]string, []string) {
 // texte de la phrase, le mot courant surligné en rouge
 func (p *Phrase) enClair() string {
 	var lm []string
-	for i:=0; i<len(p.mots); i++ {
+	for i := 0; i < len(p.mots); i++ {
 		m := p.mots[i].gr
 		if i == p.imot {
 			m = rouge(m)
 		}
 		lm = append(lm, m)
 	}
-	return strings.Join(lm, " ")+"."
+	return strings.Join(lm, " ") + "."
 }
 
 // affiche la phrase en colorant n mots à partir
 // du mot n° d
 func (p *Phrase) exr(d, n int) (e string) {
 	var gab string = "%s"
-	for i := 0; i<len(p.mots); i++ {
+	for i := 0; i < len(p.mots); i++ {
 		if e != "" {
 			gab = " %s"
 		}
-		if i >= d && i<d+n {
+		if i >= d && i < d+n {
 			e += fmt.Sprintf(gab, rouge(p.mots[i].gr))
 		} else {
 			e += fmt.Sprintf(gab, p.mots[i].gr)

@@ -1,5 +1,5 @@
 //      lexsynt.go -- gentes
-// 		samedi 21 mars 2020 
+// 		samedi 21 mars 2020
 
 package main
 
@@ -14,7 +14,7 @@ var llexs map[string][]string
 // lecture des données lexicosyntaxiques
 func lisLexsynt() {
 	llexs = make(map[string][]string)
-	ll := gocol.Lignes(chData+"lexsynt.la")
+	ll := gocol.Lignes(chData + "lexsynt.la")
 	for _, l := range ll {
 		ecl := strings.Split(l, ":")
 		ecls := strings.Split(ecl[1], ",")
