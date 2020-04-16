@@ -22,10 +22,11 @@
 !  Format
 ! lemme:propriété1,propriété2,… propriétén,…
 !
-!  Propriétés :
+! Descripteurs syntaxiques 
 ! - abl : le lemme peut avoir comme sub un ablatif seul
 ! - attr : le verbe peut avoir un attribut du sujet
 ! - attro : le verbe peut avoir comme sub un attribut de l'objet
+! - attrp : s'il est au passif, le verbe peut avoir un attribut du sujet
 ! - datif : le verbe peut avoir comme sub un datif seul
 ! - datp : le verbe au passif peut avoir comme sub un datif seul
 ! - dblacc : le verbe peut avoir deux accusatifs comme subs (double accusatif)
@@ -43,7 +44,7 @@
 ! - prepacc  : la préposition gouverne l'accusatif
 ! - propinf : le verbe peut avoir comme sub une proposition infinitive
 ! - subst : l'adjectif est substantivable
-! D'autres descripteurs ontologiques sont ajoutés 
+! Descripteurs ontologiques sont ajoutés 
 ! - fam : nom désignant des relations familiales (filius, pater, soror)
 !
 a:prepabl
@@ -6619,7 +6620,7 @@ dica:
 dicatio:
 dicax:
 dicio:
-dico2:abl,datif,infobj,propinf
+dico2:abl,datif,infobj,propinf,attrp
 dico:
 dicrota:
 Dictaeus:
@@ -9599,7 +9600,7 @@ gyro:
 gyrus:
 Gytheum:
 habena:
-habeo:datif
+habeo:datif,attrp
 habilis:
 habiliter:
 habitabilis:
@@ -18582,7 +18583,7 @@ quisquam:
 quisque:
 quisquilia:
 quisquiliae:
-quis:det,subint
+quis:subint
 quisquis:
 quiuis:
 quoad:
