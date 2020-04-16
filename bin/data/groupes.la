@@ -40,6 +40,10 @@ ter:n.nadjp
 pos:n
 p:"Romanus";epith;;cgn
 
+ter:n.eius
+pos:n
+p:"is";gen;gén
+
 ter:n.inperpetuum
 pos:"perpetuus"
 morph:acc sing
@@ -137,12 +141,18 @@ grp:v.vgprep
 pos:v
 pg:n.prepAbl n.prepAcc n.inperpetuum;gprep
 
-grp:vdatobj
+!grp:vdatobj
+!pos:v
+!morph:act
+!lexsynt:!attr datif
+!p:n;dat;datif
+!pg:n NP;obj;acc
+
+grp:dat
 pos:v
-morph:act
-lexsynt:!attr datif
-p:n;dat;datif
-pg:n NP;obj;acc
+morph:indic,subj,part act
+lexsynt:datif
+ag:n NP p;dat;datif
 
 grp:v.abl
 pos:v
@@ -207,7 +217,7 @@ lexsynt:datif
 morph:indic,subj
 a:"qui2";dat;dat sing
 
-! FIXME quae mortalis dicitur...
+! FIXME aquilam apposuit quae cor eius exesset
 grp:sr.sujet
 pos:v
 morph:indic,subj
