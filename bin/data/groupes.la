@@ -164,6 +164,12 @@ pos:v
 lexsynt:attr
 pg:a;attr;nomin
 
+grp:v.vattrPass
+pos:v
+morph:pass indic,pass subj
+lexsynt:attrp
+pg:a;attr;nomin
+
 grp:v.adv
 pos:v
 a:Adv;adv
@@ -193,6 +199,12 @@ lexsynt:datif
 morph:indic,subj
 a:"qui2";dat;dat sing
 
+! FIXME quae mortalis dicitur... v. grp:v.obj
+grp:sr.sujet
+pos:v
+morph:indic,subj
+a:"qui2";sujet;nomin;n
+
 grp:n.sr
 pos:n NP
 p:v;;act
@@ -203,8 +215,10 @@ pos:v
 morph:act indic 3
 ag:n NP;sujet;nomin;n
 
+! FIXME champ morph:act
 grp:v.obj
 pos:v
+!morph:act
 lexsynt:!attr
 ag:n NP;obj;acc
 
