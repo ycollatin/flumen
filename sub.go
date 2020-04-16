@@ -40,10 +40,7 @@ func creeSub(v string, g *Groupe, t bool) *Sub {
 }
 
 func (s *Sub) vaId(id string) bool {
-	//debog := id=="n.appFam"
-	//if debog {fmt.Println("   debog vaId",id)}
 	for _, n := range s.noyaux {
-		//if debog{fmt.Println("   generique",n.generique,"idgr",n.idgr)}
 		if n.generique {
 			ecl := strings.Split(id, ".")
 			if n.idgr == ecl[0] {
