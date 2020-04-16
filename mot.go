@@ -19,7 +19,7 @@
 package main
 
 import (
-	//"fmt"
+	"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -250,8 +250,8 @@ func genus(sr gocol.Sr) gocol.Sr {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
-	//debog := m.gr=="ignorat" && g.id=="v.objsujv"
-	//if debog {fmt.Println("NOEUD, m",m.gr,"id",g.id)}
+	debog := m.gr=="deligavit" && g.id=="v.objv"
+	if debog {fmt.Println("NOEUD, m",m.gr,"id",g.id)}
 	rang := m.rang
 	lante := len(g.ante)
 	// mot de rang trop faible
@@ -262,13 +262,13 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	if rang+len(g.post)-1 >= texte.phrase.nbmots {
 		return nil
 	}
-	//if debog {fmt.Println("  .noeud, nbmots ok")}
+	if debog {fmt.Println("  .noeud, nbmots ok")}
 	// m peut-il être noyau du groupe g ?
 	res2 := m.resNoyau(g)
 	if len(res2) == 0 {
 		return nil
 	}
-	//if debog { fmt.Println(" .noeud noyau, res2", len(res2),res2[0].Lem.Gr)}
+	if debog { fmt.Println(" .noeud noyau, res2", len(res2),res2[0].Lem.Gr)}
 	m.ans2 = res2
 	// création du noeud de retour
 	nod := new(Nod)
@@ -389,8 +389,8 @@ func (m *Mot) noyau() *Mot {
 // renvoie quelles lemmatisations de m lui permettent d'être le noyau du groupe g
 func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 	//signet motresnoyau
-	//debog := m.gr=="ignorat" && g.id=="v.objsujv"
-	//if debog {fmt.Println(" -resNoyau",m.gr,g.id,"ans",len(m.ans),"pos=\""+m.pos+"\"")}
+	debog := m.gr=="deligavit" && g.id=="v.abl"
+	if debog {fmt.Println(" -resNoyau",m.gr,g.id,"ans",len(m.ans),"pos=\""+m.pos+"\"")}
 
 	var ans3 gocol.Res
 	// vérif du pos
@@ -419,6 +419,7 @@ func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 		}
 		ans3 = m.ans2
 	} else {
+		//if debog{fmt.Println("  .resNoyau, else")}
 		// Le mot est encore isolé
 		for _, a := range m.ans {
 			for _, noy := range g.noyaux {
@@ -438,15 +439,17 @@ func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 			}
 		}
 	}
-	//if debog {fmt.Println("  .estNoyau, oka, len ans3", len(ans3))}
+	if debog {fmt.Println("  .estNoyau, oka, len ans3", len(ans3))}
 
 	// vérif lexicosyntaxique
 	var ans4 gocol.Res
 	for _, a := range ans3 {
 		va := true
 		for _, ls := range g.lexsynt {
+			if debog {fmt.Println("  .estNoyau, lexsynt=",lexsynt(a.Lem.Gr[0],ls))} //lem=",a.Lem.Gr[0],"ls=",ls)}
 			va = va && lexsynt(a.Lem.Gr[0], ls)
 		}
+		if debog{fmt.Println("  .estNoyau, lexsynt va", va)}
 		for _, ls := range g.exclls {
 			va = va && !lexsynt(a.Lem.Gr[0], ls)
 		}
@@ -454,7 +457,7 @@ func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 			ans4 = append(ans4, a)
 		}
 	}
-	//if debog {fmt.Println("  .estNoyau, okb, len ans4",len(ans4),"len gmorph",len(g.morph))}
+	if debog {fmt.Println("  .estNoyau, okb, len ans4",len(ans4),"len gmorph",len(g.morph))}
 
 	// vérif morpho.
 	// Si aucune n'est requise, renvoyer true
