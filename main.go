@@ -4,7 +4,6 @@
 package main
 
 // FIXME
-// - magna turba est : ans2 perd le nominatif en route
 // - impossible de départager n.conj et v.conj
 // - subiciunt veribus prunas et viscera torrent :
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
@@ -12,11 +11,8 @@ package main
 
 // TODO
 // - mettre en place les impossibilités de cumuler des subs de même fonction
-// - magna turba est. inde nata est Pyrra : sujet non reconnu
-// - objet : voluptatem Epicurus ignorat.
-//   -> tenir compte de la morpho unique de voluptatem.
-// - mettre en place le groupe antécédent-relative
-//   - un champ groupe.anrel : analyses du relatif
+//   tenir compte de la morpho unique (voluptatem. acc. sing.)
+// - un champ groupe.anrel - analyses du relatif ?
 // - donner une POS distincte aux verbes intransitifs. v. gocol.indMorph
 // - accord de personne sujet-verbe ?
 // - saisie d'une phrase ?
