@@ -251,10 +251,10 @@ func genus(sr gocol.Sr) gocol.Sr {
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
 	/*
-	debog := m.gr == "deligavit" && g.id == "v.objv"
-	if debog {
-		fmt.Println("NOEUD, m", m.gr, "id", g.id)
-	}
+		debog := m.gr == "deligavit" && g.id == "v.objv"
+		if debog {
+			fmt.Println("NOEUD, m", m.gr, "id", g.id)
+		}
 	*/
 	rang := m.rang
 	lante := len(g.ante)
@@ -450,7 +450,7 @@ func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 	for _, a := range ans3 {
 		va := true
 		for _, ls := range g.lexsynt {
-		//	if debog { fmt.Println("  .estNoyau, lexsynt=", lexsynt(a.Lem.Gr[0], ls)) } //lem=",a.Lem.Gr[0],"ls=",ls)}
+			//	if debog { fmt.Println("  .estNoyau, lexsynt=", lexsynt(a.Lem.Gr[0], ls)) } //lem=",a.Lem.Gr[0],"ls=",ls)}
 			va = va && lexsynt(a.Lem.Gr[0], ls)
 		}
 		//if debog { fmt.Println("  .estNoyau, lexsynt va", va) }
