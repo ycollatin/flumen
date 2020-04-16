@@ -6,7 +6,6 @@ package main
 // vaMorph
 
 import (
-	//"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -90,20 +89,15 @@ func (g *Groupe) nbSubs() int {
 
 // la morpho morf est-elle compatible avec le noyau du groupe g ?
 func (g *Groupe) vaMorph(morf string) bool {
-	//debog := g.id=="v.sumpp" //&& morf=="indic, subj"
-	//if debog {fmt.Println(" -vamorph",g.id,"morf",morf,"g.morph",g.morph)}
 	for _, gmorf := range g.morph {
-		//if debog {fmt.Println("   .vamorph, gmorf",gmorf)}
 		va := true
 		ecl := strings.Split(gmorf, " ")
 		for _, trait := range ecl {
 			va = va && strings.Contains(morf, trait)
-			//if debog {fmt.Println("   .vamorph, morf",morf,"trait",trait,"va",va)}
 		}
 		if va {
 			return true
 		}
 	}
-	//if debog {fmt.Println("   .vamorph, false")}
 	return false
 }
