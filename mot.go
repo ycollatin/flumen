@@ -19,7 +19,7 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -122,8 +122,8 @@ func (m *Mot) estNuclDe() []string {
 
 // vrai si m est compatible avec Sub et le noyau mn
 func (m *Mot) resSub(sub *Sub, mn *Mot) gocol.Res {
-	debog := sub.groupe.id=="n.det" && m.gr == "quae" && mn.gr=="mortalis"
-	if debog {fmt.Println(" -resSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr,"pos",m.pos)}
+	//debog := sub.groupe.id=="n.det" && m.gr == "quae" && mn.gr=="mortalis"
+	//if debog {fmt.Println(" -resSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr,"pos",m.pos)}
 	//if debog {fmt.Println("  .resSub, mot",m.doc())}
 	// signet motresSub
 	var ans2 gocol.Res
@@ -154,13 +154,13 @@ func (m *Mot) resSub(sub *Sub, mn *Mot) gocol.Res {
 		ans2 = m.ans
 		//if debog {fmt.Println("   .resSub, noy, len ans2",len(ans2))} //,ans2[0].Lem.Gr)}
 	} else {
-		if debog {fmt.Println("   .resSub, else")}
+		//if debog {fmt.Println("   .resSub, else")}
 		// 2. La pos définitif n'est pas encore fixée
 		for _, an := range m.ans {
 			// lexicosyntaxe
 			va := true
 			for _, ls := range sub.lexsynt {
-				if debog {fmt.Println("   .resSub, ls",ls,"lem",an.Lem.Gr[0],lexsynt(an.Lem.Gr[0],ls))}
+				//if debog {fmt.Println("   .resSub, ls",ls,"lem",an.Lem.Gr[0],lexsynt(an.Lem.Gr[0],ls))}
 				va = va && lexsynt(an.Lem.Gr[0], ls)
 			}
 			if !va {
@@ -389,13 +389,13 @@ func (m *Mot) noyau() *Mot {
 // renvoie quelles lemmatisations de m lui permettent d'être le noyau du groupe g
 func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 	//signet motresnoyau
-	debog := m.gr=="ignorat" && g.id=="v.objsujv"
-	if debog {fmt.Println(" -resNoyau",m.gr,g.id,"ans",len(m.ans),"pos=\""+m.pos+"\"")}
+	//debog := m.gr=="ignorat" && g.id=="v.objsujv"
+	//if debog {fmt.Println(" -resNoyau",m.gr,g.id,"ans",len(m.ans),"pos=\""+m.pos+"\"")}
 
 	var ans3 gocol.Res
 	// vérif du pos
 	if m.pos != "" {
-		if debog {fmt.Println("  .resNoyau, pos=",m.pos)}
+		//if debog {fmt.Println("  .resNoyau, pos=",m.pos)}
 		// 1. La pos définitif est fixée
 		va := false
 		for _, noy := range g.noyaux {
@@ -409,12 +409,12 @@ func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 		va = false
 		for _, noy := range g.noyaux {
 			for _, an := range m.ans2 {
-				if debog {fmt.Println("  .resNoyau, an.Lem",an.Lem.Gr,"-"+an.Lem.Pos+"-noy",noy)}
+				//if debog {fmt.Println("  .resNoyau, an.Lem",an.Lem.Gr,"-"+an.Lem.Pos+"-noy",noy)}
 				va = va || noy.vaPos(an.Lem.Pos)
 			}
 		}
 		if !va {
-			if debog {fmt.Println("  .resNoyau, echec ans2")}
+			//if debog {fmt.Println("  .resNoyau, echec ans2")}
 			return ans3
 		}
 		ans3 = m.ans2
@@ -438,7 +438,7 @@ func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 			}
 		}
 	}
-	if debog {fmt.Println("  .estNoyau, oka, len ans3", len(ans3))}
+	//if debog {fmt.Println("  .estNoyau, oka, len ans3", len(ans3))}
 
 	// vérif lexicosyntaxique
 	var ans4 gocol.Res
