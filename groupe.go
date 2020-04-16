@@ -46,7 +46,6 @@ func creeGroupe(ll []string) *Groupe {
 				if ecl[0] != '!' {
 					g.lexsynt = append(g.lexsynt, ecl)
 				} else {
-					//g.exclls = append(g.exclls, ecl[1:len(ecl)-1])
 					g.exclls = append(g.exclls, ecl[1:])
 				}
 			}
