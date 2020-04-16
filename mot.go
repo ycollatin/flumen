@@ -122,8 +122,8 @@ func (m *Mot) estNuclDe() []string {
 
 // vrai si m est compatible avec Sub et le noyau mn
 func (m *Mot) resSub(sub *Sub, mn *Mot) gocol.Res {
-	//debog := sub.groupe.id=="v.sujetv" && m.gr == "turba" && mn.gr=="est"
-	//if debog {fmt.Println(" -resSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr,"pos",m.pos)}
+	debog := sub.groupe.id=="n.det" && m.gr == "quae" && mn.gr=="mortalis"
+	if debog {fmt.Println(" -resSub m",m.gr,"pos",m.pos,"sub",sub.groupe.id,"mn",mn.gr,"pos",m.pos)}
 	//if debog {fmt.Println("  .resSub, mot",m.doc())}
 	// signet motresSub
 	var ans2 gocol.Res
@@ -154,21 +154,27 @@ func (m *Mot) resSub(sub *Sub, mn *Mot) gocol.Res {
 		ans2 = m.ans
 		//if debog {fmt.Println("   .resSub, noy, len ans2",len(ans2))} //,ans2[0].Lem.Gr)}
 	} else {
-		//if debog {fmt.Println("   .resSub, else")}
+		if debog {fmt.Println("   .resSub, else")}
 		// 2. La pos définitif n'est pas encore fixée
 		for _, an := range m.ans {
-			//if debog {fmt.Println("   .resSub,lemme",an.Lem.Gr,"pos",an.Lem.Pos)}
+			// lexicosyntaxe
+			va := true
+			for _, ls := range sub.lexsynt {
+				if debog {fmt.Println("   .resSub, ls",ls,"lem",an.Lem.Gr[0],lexsynt(an.Lem.Gr[0],ls))}
+				va = va && lexsynt(an.Lem.Gr[0], ls)
+			}
+			if !va {
+				continue
+			}
+			// canon et POS
 			for _, noy := range sub.noyaux {
 				if noy.canon > "" {
-					//if debog {fmt.Println("   .resSub, noy.canon",noy.canon,"sr.Lem",an.Lem.Gr[0])}
 					if noy.vaSr(an) {
 						ans2 = append(ans2, an)
 						break
 					}
 				} else {
-					//if debog {fmt.Println("   .resSub, noy.vaPos",an.Lem.Pos)}
 					if noy.vaPos(an.Lem.Pos) {
-						//if debog {fmt.Println("   .resSub, vaPos",an.Lem.Gr,an.Lem.Pos)}
 						ans2 = append(ans2, an)
 						break
 					}
