@@ -175,7 +175,8 @@ pos:v
 lexsynt:attr
 pg:a;attr;nomin
 
-grp:v.vattrPass
+! FIXME : mortalis dicitur prima esse creata
+grp:v.attrPass
 pos:v
 morph:pass indic,pass subj
 lexsynt:attrp
