@@ -4,6 +4,8 @@
 package main
 
 // FIXME
+// - défaut de restriction des lemmatisations quand un nod est validé : incohérences de morpho.
+//   ex. Ob hanc rem Mercurius... ad saxum. saxum est acc (régime prép) et nomin (sujet deligavit)
 // - impossible de départager n.conj et v.conj
 // - subiciunt veribus prunas et viscera torrent :
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
@@ -11,6 +13,7 @@ package main
 
 // TODO
 // - mettre en place les impossibilités de cumuler des subs de même fonction
+//   ex. Apollo datus est ... Admeto.. Admeto devient 2ème sujet de datus est.
 //   tenir compte de la morpho unique (voluptatem. acc. sing.)
 // - un champ groupe.anrel - analyses du relatif ?
 // - donner une POS distincte aux verbes intransitifs. v. gocol.indMorph
