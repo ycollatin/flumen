@@ -3,9 +3,10 @@
 // signets :
 //
 // motnoeud
-// motresnoyau
+// motestnoyau
 // motestNoyauDeGroupe
 // motresSub
+// fotesr
 
 // rappel de la lemmatisation dans gocol :
 // type Sr struct {
@@ -31,7 +32,8 @@ type Lm struct {
 type Mot struct {
 	gr         string    // graphie du mot
 	rang       int       // rang du mot dans la phrase à partir de 0
-	ans, ans2  gocol.Res // ensemble des lemmatisations, ans provisoire
+	ans, ans2  gocol.Res // ensemble des lemmatisations, ans2 réduite par la syntaxe
+	restmp     gocol.Res // analyses temporaires du mot pendand le calcul d'un noeud
 	dejasub    bool      // le mot est déjà l'élément d'n nœud
 	llm        []Lm      // liste des lemmes ٍ+ morpho possibles
 	tmpl, tmpm int       // n°s provisoires de Sr et morpho
@@ -48,6 +50,7 @@ func creeMot(m string) *Mot {
 	if echec {
 		mot.ans, echec = gocol.Lemmatise(gocol.Majminmaj(m))
 	}
+	mot.ans2 = mot.ans
 	// ajout du genre pour les noms
 	if !echec {
 		for i, a := range mot.ans {
@@ -109,9 +112,8 @@ func (m *Mot) estNuclDe() []string {
 }
 
 // vrai si m est compatible avec Sub et le noyau mn
-func (m *Mot) resSub(sub *Sub, mn *Mot) gocol.Res {
+func (m *Mot) resSub(sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 	// signet motresSub
-	var ans2 gocol.Res
 	// vérification des pos
 	if m.pos != "" {
 		// 1. La pos du mot est définitive
@@ -122,7 +124,7 @@ func (m *Mot) resSub(sub *Sub, mn *Mot) gocol.Res {
 			veto = veto || contient(lgr, noy.id)
 		}
 		if veto {
-			return ans2
+			return nil
 		}
 		// noyaux possibles
 		va := false
@@ -130,12 +132,12 @@ func (m *Mot) resSub(sub *Sub, mn *Mot) gocol.Res {
 			va = va || noy.vaPos(m.pos)
 		}
 		if !va {
-			return ans2
+			return nil
 		}
-		ans2 = m.ans
 	} else {
 		// 2. La pos définitif n'est pas encore fixée
-		for _, an := range m.ans {
+		var aoter []int
+		for i, an := range res {
 			// lexicosyntaxe
 			va := true
 			for _, ls := range sub.lexsynt {
@@ -145,47 +147,56 @@ func (m *Mot) resSub(sub *Sub, mn *Mot) gocol.Res {
 				continue
 			}
 			// canon et POS
+			va = false
 			for _, noy := range sub.noyaux {
 				if noy.canon > "" {
-					if noy.vaSr(an) {
-						ans2 = append(ans2, an)
-						break
-					}
+					va = va || noy.vaSr(an)
 				} else {
-					if noy.vaPos(an.Lem.Pos) {
-						ans2 = append(ans2, an)
-						break
-					}
+					va = va || noy.vaPos(an.Lem.Pos)
 				}
 			}
+			if !va {
+				aoter = append(aoter, i)
+				//res = oteSr(res, i)
+			}
+		}
+		for i := len(aoter)-1; i > -1; i-- {
+			res = oteSr(res, i)
 		}
 	}
-	if len(ans2) == 0 {
-		return ans2
+	if len(res) == 0 {
+		return nil
 	}
 
 	//morphologie
-	var ans3 gocol.Res
-	for _, an := range ans2 {
-		var lmorf []string
-		for _, morfs := range an.Morphos {
-			// pour toutes les morphos valides de m
-			if strings.Contains(morfs, "inv.") || sub.vaMorpho(morfs) {
-				lmorf = append(lmorf, morfs)
+	// si aucune morpho n'est requise, passer
+	if len(sub.morpho) > 0 {
+		var aoter []int
+		for i, an := range res {
+			var lmorf []string
+			for _, morfs := range an.Morphos {
+				// pour toutes les morphos valides de m
+				if strings.Contains(morfs, "inv.") || sub.vaMorpho(morfs) {
+					lmorf = append(lmorf, morfs)
+				}
+			}
+			if len(lmorf) == 0 {
+				aoter = append(aoter, i)
+			} else {
+				res[i].Morphos = lmorf
 			}
 		}
-		if len(lmorf) > 0 {
-			an.Morphos = lmorf
-			ans3 = append(ans3, an)
+		for i := len(aoter)-1; i > -1; i-- {
+			res = oteSr(res, i)
 		}
 	}
 	// accord
-	var ans4 gocol.Res
 	// pour toutes les morphos valides de mn
-	for _, ann := range mn.ans2 {
-		for _, morfn := range ann.Morphos {
-			// pour toutes les morphos valides de m
-			for _, an := range ans3 {
+	if sub.accord > "" {
+		var aoter []int
+		for _, an := range res {
+			for i, morfn := range an.Morphos {
+				// pour toutes les morphos valides de m
 				var lmorf []string
 				for _, morfs := range an.Morphos {
 					if accord(morfn, morfs, sub.accord) {
@@ -194,12 +205,17 @@ func (m *Mot) resSub(sub *Sub, mn *Mot) gocol.Res {
 				}
 				if len(lmorf) > 0 {
 					an.Morphos = lmorf
-					ans4 = append(ans4, an)
+					res[i] = an
+				} else {
+					aoter = append(aoter, i)
 				}
 			}
 		}
+		for i := len(aoter)-1; i > -1; i-- {
+			res = oteSr(res, i)
+		}
 	}
-	return ans4
+	return res
 }
 
 // ajoute le genre à la morpho d'un nom
@@ -234,13 +250,14 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		return nil
 	}
 	// m peut-il être noyau du groupe g ?
-	res2 := m.resNoyau(g)
-	if len(res2) == 0 {
+	m.restmp = m.ans2
+	res := m.resNoyau(g, m.restmp)
+	if res == nil {
 		return nil
 	}
+	// XXX à changer, si resNoyau devient bool
 	// initialisation de la lemmatisation de test
 	// création du noeud de retour
-	m.ans2 = res2
 	nod := new(Nod)
 	nod.grp = g
 	nod.nucl = m
@@ -268,11 +285,11 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 			return nil
 		}
 		sub := g.ante[ia]
-		res3 := ma.resSub(sub, m)
-		if len(res3) == 0 {
+		res := ma.resSub(sub, m, ma.restmp)
+		if res == nil {
 			return nil
 		}
-		ma.ans2 = res3
+		ma.restmp = res
 		nod.mma = append(nod.mma, ma)
 		r--
 	}
@@ -301,11 +318,11 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		if mp.domine(m) {
 			return nil
 		}
-		res4 := mp.resSub(sub, m)
-		if len(res4) == 0 {
+		res := mp.resSub(sub, m, mp.restmp)
+		if res == nil {
 			return nil
 		}
-		mp.ans2 = res4
+		mp.restmp = res
 		nod.mmp = append(nod.mmp, mp)
 		r++
 	}
@@ -314,9 +331,13 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		m.pos = g.id
 		for _, ms := range nod.mma {
 			ms.dejasub = true
+			ms.ans2 = ms.restmp
+			ms.restmp = nil
 		}
 		for _, ms := range nod.mmp {
 			ms.dejasub = true
+			ms.ans2 = ms.restmp
+			ms.restmp = nil
 		}
 		return nod
 	}
@@ -339,11 +360,20 @@ func (m *Mot) noyau() *Mot {
 	return nil
 }
 
-// renvoie quelles lemmatisations de m lui permettent d'être le noyau du groupe g
-func (m *Mot) resNoyau(g *Groupe) gocol.Res {
-	//signet motresnoyau
+func oteSr(res gocol.Res, n int) gocol.Res {
+	// signet foteSr
+	var restmp gocol.Res
+	for i, sr := range res {
+		if i != n {
+			restmp = append(restmp, sr)
+		}
+	}
+	return restmp
+}
 
-	var ans3 gocol.Res
+// renvoie quelles lemmatisations de m lui permettent d'être le noyau du groupe g
+func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
+	//signet motestnoyau
 	// vérif du pos
 	if m.pos != "" {
 		// 1. La pos définitif est fixée
@@ -352,41 +382,40 @@ func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 			va = va || noy.vaPos(m.pos)
 		}
 		if !va {
-			return ans3
+			return nil
 		}
 		// vérification du Pos des lemmatisations sélectionnées
 		va = false
 		for _, noy := range g.noyaux {
-			for _, an := range m.ans2 {
+			for _, an := range m.restmp {
 				va = va || noy.vaPos(an.Lem.Pos)
 			}
 		}
 		if !va {
-			return ans3
+			return nil
 		}
-		ans3 = m.ans2
 	} else {
 		// Le mot est encore isolé
-		for _, a := range m.ans {
+		va := false
+		for i, a := range res {
 			for _, noy := range g.noyaux {
 				if noy.canon > "" {
-					if noy.vaSr(a) {
-						ans3 = append(ans3, a)
-						break
-					}
+					va = va || noy.vaSr(a)
 				} else {
-					if noy.vaPos(a.Lem.Pos) {
-						ans3 = append(ans3, a)
-						break
-					}
+					va = va || noy.vaPos(a.Lem.Pos)
 				}
+			}
+			if !va {
+				res = oteSr(res, i)
 			}
 		}
 	}
+	if len(res) == 0 {
+		return nil
+	}
 
 	// vérif lexicosyntaxique
-	var ans4 gocol.Res
-	for _, a := range ans3 {
+	for i, a := range res {
 		va := true
 		for _, ls := range g.lexsynt {
 			va = va && lexsynt(a.Lem.Gr[0], ls)
@@ -394,29 +423,28 @@ func (m *Mot) resNoyau(g *Groupe) gocol.Res {
 		for _, ls := range g.exclls {
 			va = va && !lexsynt(a.Lem.Gr[0], ls)
 		}
-		if va {
-			ans4 = append(ans4, a)
+		if !va {
+			res = oteSr(res, i)
 		}
 	}
 
 	// vérif morpho.
 	// Si aucune n'est requise, renvoyer true
 	if len(g.morph) == 0 {
-		return ans4
+		return nil
 	}
 
-	var ans5 gocol.Res
-	for _, sr := range ans4 {
+	for i, sr := range res {
 		var morfos []string // morphos de sr acceptées par g
 		for _, morf := range sr.Morphos {
 			if g.vaMorph(morf) {
 				morfos = append(morfos, morf)
 			}
 		}
-		if len(morfos) > 0 {
-			sr.Morphos = morfos
-			ans5 = append(ans5, sr)
+		if len(morfos) == 0 {
+			res = oteSr(res, i)
 		}
+		sr.Morphos = morfos
 	}
-	return ans5
+	return res
 }
