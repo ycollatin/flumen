@@ -32,7 +32,6 @@ type Mot struct {
 	gr         string    // graphie du mot
 	rang       int       // rang du mot dans la phrase à partir de 0
 	ans, ans2  gocol.Res // ensemble des lemmatisations, ans provisoire
-	ans3       gocol.Res // lemmatisation de test pour un groupe
 	dejasub    bool      // le mot est déjà l'élément d'n nœud
 	llm        []Lm      // liste des lemmes ٍ+ morpho possibles
 	tmpl, tmpm int       // n°s provisoires de Sr et morpho
@@ -112,17 +111,7 @@ func (m *Mot) estNuclDe() []string {
 // vrai si m est compatible avec Sub et le noyau mn
 func (m *Mot) resSub(sub *Sub, mn *Mot) gocol.Res {
 	// signet motresSub
-	// initialisation de la lemmatisation de test ans2
-	// Si l'analyse a déjà restreint la lemmatisation 
-	// intiale, il faut partir de celle-ci
-	// La lemmatisation restreinte est dans m.ans2
-	// Sinon, on part de l'initiale m.ans
 	var ans2 gocol.Res
-	if m.ans2 == nil {
-		ans2 = m.ans
-	} else {
-		ans2 = m.ans2
-	}
 	// vérification des pos
 	if m.pos != "" {
 		// 1. La pos du mot est définitive
@@ -250,12 +239,8 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		return nil
 	}
 	// initialisation de la lemmatisation de test
-	if m.ans2 == nil {
-		m.ans3 = m.ans2
-	} else {
-		m.ans3 = m.ans
-	}
 	// création du noeud de retour
+	m.ans2 = res2
 	nod := new(Nod)
 	nod.grp = g
 	nod.nucl = m
@@ -287,7 +272,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		if len(res3) == 0 {
 			return nil
 		}
-		ma.ans3 = res3
+		ma.ans2 = res3
 		nod.mma = append(nod.mma, ma)
 		r--
 	}
@@ -320,20 +305,17 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		if len(res4) == 0 {
 			return nil
 		}
-		mp.ans3 = res4
+		mp.ans2 = res4
 		nod.mmp = append(nod.mmp, mp)
 		r++
 	}
 	// fixer les pos et sub des mots du noeud
 	if len(nod.mma)+len(nod.mmp) > 0 {
 		m.pos = g.id
-		m.ans2 = m.ans3
 		for _, ms := range nod.mma {
-			ms.ans2 = ms.ans3
 			ms.dejasub = true
 		}
 		for _, ms := range nod.mmp {
-			ms.ans2 = ms.ans3
 			ms.dejasub = true
 		}
 		return nod
