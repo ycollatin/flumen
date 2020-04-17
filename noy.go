@@ -51,11 +51,12 @@ func (n *Noy) vaSr(sr gocol.Sr) bool {
 // vérifie que p peut être un noyau du groupe
 func (n *Noy) vaPos(p string) bool {
 	pel := PrimEl(p, ".")
+	pgen := pel == p
+	if pel == p || pgen {
+		return n.idgr == p
+	}
 	if n.generique {
 		return n.id == pel
-	}
-	if pel == p {
-		return n.idgr == p
 	}
 	//fmt.Println("   vaPos, n.id",n.id,"p",p,"pel",pel)
 	return p == n.id
