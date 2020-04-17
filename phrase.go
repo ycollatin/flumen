@@ -41,21 +41,23 @@ func (p *Phrase) arbre() ([]string, []string) {
 	nba := 0
 	nbn := 1
 	for nbn > nba {
-		nba = nbn
 		// recherche des noyaux
-		// groupes terminaux
-		for _, g := range grpTerm {
-			for _, m := range p.mots {
-				if m.dejaNoy() {
-					continue
-				}
-				n := m.noeud(g)
-				if n != nil {
-					p.nods = append(p.nods, n)
-					lexpl = append(lexpl, n.grp.id)
+		// groupes terminaux, à n'essayer qu'à la première passe
+		if nba == 0 {
+			for _, g := range grpTerm {
+				for _, m := range p.mots {
+					if m.dejaNoy() {
+						continue
+					}
+					n := m.noeud(g)
+					if n != nil {
+						p.nods = append(p.nods, n)
+						lexpl = append(lexpl, n.grp.id)
+					}
 				}
 			}
 		}
+		nba = nbn
 		// groupes non terminaux
 		for _, g := range grp {
 			for _, m := range p.mots {
