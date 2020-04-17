@@ -154,7 +154,7 @@ pos:v
 lexsynt:abl
 ag:n;abl;ab
 
-grp:v.objv
+grp:v.obj
 pos:v
 lexsynt:!attr
 morph:act
@@ -223,10 +223,15 @@ pos:n NP
 p:v;;act
 pg:sr;rel
 
-grp:v.sujetv
+grp:v.sujet
 pos:v
 morph:act indic 3
 ag:n NP;sujet;nomin;n
+
+grp:v.objsuj
+pos:v.sujet
+lexsynt:!attr
+ag:n NP p;objet;acc
 
 grp:v.vsujet
 pos:v
