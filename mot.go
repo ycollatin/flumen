@@ -3,7 +3,7 @@
 // signets :
 //
 // motnoeud
-// motestnoyau
+// motresnoyau
 // motestNoyauDeGroupe
 // motresSub
 // fotesr
@@ -109,113 +109,6 @@ func (m *Mot) estNuclDe() []string {
 		}
 	}
 	return ret
-}
-
-// vrai si m est compatible avec Sub et le noyau mn
-func (m *Mot) resSub(sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
-	// signet motresSub
-	// vérification des pos
-	if m.pos != "" {
-		// 1. La pos du mot est définitive
-		// noyaux exclus
-		veto := false
-		lgr := m.estNuclDe()
-		for _, noy := range sub.noyexcl {
-			veto = veto || contient(lgr, noy.id)
-		}
-		if veto {
-			return nil
-		}
-		// noyaux possibles
-		va := false
-		for _, noy := range sub.noyaux {
-			va = va || noy.vaPos(m.pos)
-		}
-		if !va {
-			return nil
-		}
-	} else {
-		// 2. La pos définitif n'est pas encore fixée
-		var aoter []int
-		for i, an := range res {
-			// lexicosyntaxe
-			va := true
-			for _, ls := range sub.lexsynt {
-				va = va && lexsynt(an.Lem.Gr[0], ls)
-			}
-			if !va {
-				continue
-			}
-			// canon et POS
-			va = false
-			for _, noy := range sub.noyaux {
-				if noy.canon > "" {
-					va = va || noy.vaSr(an)
-				} else {
-					va = va || noy.vaPos(an.Lem.Pos)
-				}
-			}
-			if !va {
-				aoter = append(aoter, i)
-				//res = oteSr(res, i)
-			}
-		}
-		for i := len(aoter)-1; i > -1; i-- {
-			res = oteSr(res, i)
-		}
-	}
-	if len(res) == 0 {
-		return nil
-	}
-
-	//morphologie
-	// si aucune morpho n'est requise, passer
-	if len(sub.morpho) > 0 {
-		var aoter []int
-		for i, an := range res {
-			var lmorf []string
-			for _, morfs := range an.Morphos {
-				// pour toutes les morphos valides de m
-				if strings.Contains(morfs, "inv.") || sub.vaMorpho(morfs) {
-					lmorf = append(lmorf, morfs)
-				}
-			}
-			if len(lmorf) == 0 {
-				aoter = append(aoter, i)
-			} else {
-				res[i].Morphos = lmorf
-			}
-		}
-		for i := len(aoter)-1; i > -1; i-- {
-			res = oteSr(res, i)
-		}
-	}
-	// accord
-	// pour toutes les morphos valides de mn
-	if sub.accord > "" {
-		var aoter []int
-		for _, an := range res {
-			for i, morfn := range an.Morphos {
-				// pour toutes les morphos valides de m
-				var lmorf []string
-				for _, morfs := range an.Morphos {
-					if accord(morfn, morfs, sub.accord) {
-						lmorf = append(lmorf, morfs)
-					}
-				}
-				if len(lmorf) > 0 {
-					an.Morphos = lmorf
-					res[i] = an
-				} else {
-					aoter = append(aoter, i)
-				}
-			}
-		}
-		for i := len(aoter)-1; i > -1; i-- {
-			res = oteSr(res, i)
-		}
-	}
-	return res
 }
 
 // ajoute le genre à la morpho d'un nom
@@ -329,6 +222,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	// fixer les pos et sub des mots du noeud
 	if len(nod.mma)+len(nod.mmp) > 0 {
 		m.pos = g.id
+		m.ans2 = m.restmp
 		for _, ms := range nod.mma {
 			ms.dejasub = true
 			ms.ans2 = ms.restmp
@@ -373,7 +267,7 @@ func oteSr(res gocol.Res, n int) gocol.Res {
 
 // renvoie quelles lemmatisations de m lui permettent d'être le noyau du groupe g
 func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
-	//signet motestnoyau
+	//signet motresnoyau
 	// vérif du pos
 	if m.pos != "" {
 		// 1. La pos définitif est fixée
@@ -385,19 +279,25 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 			return nil
 		}
 		// vérification du Pos des lemmatisations sélectionnées
-		va = false
+		var aoter []int
 		for _, noy := range g.noyaux {
-			for _, an := range m.restmp {
-				va = va || noy.vaPos(an.Lem.Pos)
+			for i, an := range res {
+				if !noy.vaPos(an.Lem.Pos) {
+					aoter = append(aoter, i)
+				}
 			}
 		}
-		if !va {
+		for ao := len(aoter) -1; ao > -1; ao-- {
+			res = oteSr(res, aoter[ao])
+		}
+		if len(res) == 0 {
 			return nil
 		}
 	} else {
 		// Le mot est encore isolé
-		va := false
+		var aoter []int
 		for i, a := range res {
+			va := false
 			for _, noy := range g.noyaux {
 				if noy.canon > "" {
 					va = va || noy.vaSr(a)
@@ -406,8 +306,12 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 				}
 			}
 			if !va {
-				res = oteSr(res, i)
+				//res = oteSr(res, i)
+				aoter = append(aoter, i)
 			}
+		}
+		for ao := len(aoter) -1; ao > -1; ao-- {
+			res = oteSr(res, aoter[ao])
 		}
 	}
 	if len(res) == 0 {
@@ -415,6 +319,7 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 	}
 
 	// vérif lexicosyntaxique
+	var aoter []int
 	for i, a := range res {
 		va := true
 		for _, ls := range g.lexsynt {
@@ -424,16 +329,24 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 			va = va && !lexsynt(a.Lem.Gr[0], ls)
 		}
 		if !va {
-			res = oteSr(res, i)
+			//res = oteSr(res, i)
+			aoter = append(aoter, i)
 		}
+	}
+	for ao := len(aoter) -1; ao > -1; ao-- {
+		res = oteSr(res, aoter[ao])
+	}
+	if len(res) == 0 {
+		return nil
 	}
 
 	// vérif morpho.
 	// Si aucune n'est requise, renvoyer true
 	if len(g.morph) == 0 {
-		return nil
+		return res
 	}
 
+	aoter = nil
 	for i, sr := range res {
 		var morfos []string // morphos de sr acceptées par g
 		for _, morf := range sr.Morphos {
@@ -442,9 +355,131 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 			}
 		}
 		if len(morfos) == 0 {
-			res = oteSr(res, i)
+			aoter = append(aoter, i)
+			//res = oteSr(res, i)
 		}
 		sr.Morphos = morfos
+	}
+	for ao := len(aoter) -1; ao > -1; ao-- {
+		res = oteSr(res, aoter[ao])
+	}
+	return res
+}
+
+// vrai si m est compatible avec Sub et le noyau mn
+func (m *Mot) resSub(sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
+	// signet motresSub
+	// vérification des pos
+	if m.pos != "" {
+		// 1. La pos du mot est définitive
+		// noyaux exclus
+		veto := false
+		lgr := m.estNuclDe()
+		for _, noy := range sub.noyexcl {
+			veto = veto || contient(lgr, noy.id)
+		}
+		if veto {
+			return nil
+		}
+		// noyaux possibles
+		va := false
+		for _, noy := range sub.noyaux {
+			va = va || noy.vaPos(m.pos)
+		}
+		if !va {
+			return nil
+		}
+	} else {
+		// 2. La pos définitif n'est pas encore fixée
+		var aoter []int
+		for i, an := range res {
+			// lexicosyntaxe
+			va := true
+			for _, ls := range sub.lexsynt {
+				va = va && lexsynt(an.Lem.Gr[0], ls)
+			}
+			if !va {
+				aoter = append(aoter, i)
+			}
+		}
+		for i := len(aoter)-1; i > -1; i-- {
+			res = oteSr(res, i)
+		}
+		if len(res) == 0 {
+			return nil
+		}
+
+		// canon et POS
+		aoter = nil
+		va := false
+		for i, an := range res {
+			for _, noy := range sub.noyaux {
+				if noy.canon > "" {
+					va = va || noy.vaSr(an)
+				} else {
+					va = va || noy.vaPos(an.Lem.Pos)
+				}
+			}
+			if !va {
+				aoter = append(aoter, i)
+				//res = oteSr(res, i)
+			}
+		}
+		for i := len(aoter)-1; i > -1; i-- {
+			res = oteSr(res, i)
+		}
+	}
+	if len(res) == 0 {
+		return nil
+	}
+
+	//morphologie
+	// si aucune morpho n'est requise, passer
+	if len(sub.morpho) > 0 {
+		var aoter []int
+		for i, an := range res {
+			var lmorf []string
+			for _, morfs := range an.Morphos {
+				// pour toutes les morphos valides de m
+				if strings.Contains(morfs, "inv.") || sub.vaMorpho(morfs) {
+					lmorf = append(lmorf, morfs)
+				}
+			}
+			if len(lmorf) == 0 {
+				aoter = append(aoter, i)
+			} else {
+				res[i].Morphos = lmorf
+			}
+		}
+		for i := len(aoter)-1; i > -1; i-- {
+			res = oteSr(res, i)
+		}
+	}
+	// accord
+	// pour toutes les morphos valides de mn
+	if sub.accord > "" {
+		var aoter []int
+		for i, an := range res {
+			for _, morfn := range an.Morphos {
+				// pour toutes les morphos valides de m
+				var lmorf []string
+				for _, morfs := range an.Morphos {
+					if accord(morfn, morfs, sub.accord) {
+						lmorf = append(lmorf, morfs)
+					}
+				}
+				if len(lmorf) > 0 {
+					an.Morphos = lmorf
+					// XXX à vérifier : à placer + bas ?
+					res[i] = an
+				} else {
+					aoter = append(aoter, i)
+				}
+			}
+		}
+		for i := len(aoter)-1; i > -1; i-- {
+			res = oteSr(res, i)
+		}
 	}
 	return res
 }
