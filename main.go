@@ -4,9 +4,7 @@
 package main
 
 // FIXME
-// - n.app, l'accord n'est pas respecté : subiciunt veribus prunas
-//   ex. Ob hanc rem Mercurius... ad saxum. saxum est acc (régime prép) et nomin (sujet deligavit)
-// - impossible de départager n.conj et v.conj. : subiciunt** veribus prunas* et viscera* torrent**.
+// - le surlignage des lemmatisations choisies ne marche plus
 // - subiciunt veribus prunas et viscera torrent :
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
 //				  et la coord subiciunt et torrent (juste)
