@@ -4,7 +4,7 @@
 package main
 
 // FIXME
-// - défaut de restriction des lemmatisations quand un nod est validé : incohérences de morpho.
+// - n.app, l'accord n'est pas respecté : subiciunt veribus prunas
 //   ex. Ob hanc rem Mercurius... ad saxum. saxum est acc (régime prép) et nomin (sujet deligavit)
 // - impossible de départager n.conj et v.conj
 // - subiciunt veribus prunas et viscera torrent :
@@ -12,6 +12,8 @@ package main
 //				  et la coord subiciunt et torrent (juste)
 
 // TODO
+// - traiter de la même manière le noyau et les subs, aussi bien dans le code
+//   que dans les données ?
 // - mettre en place les impossibilités de cumuler des subs de même fonction
 //   ex. Apollo datus est ... Admeto.. Admeto devient 2ème sujet de datus est.
 //   tenir compte de la morpho unique (voluptatem. acc. sing.)
@@ -20,7 +22,8 @@ package main
 // - accord de personne sujet-verbe ?
 // - saisie d'une phrase ?
 // - fonction de sortie au format GraphViz
-// - parasitage de /sum/ par /edo/ : comment réactiver edo dans lexsynt ?
+// - parasitage de /sum/ par /edo/ : comment supprimer "excl" dans lexsynt
+// - parasitage de /do/ par /dato/ :   "
 
 import (
 	"fmt"
