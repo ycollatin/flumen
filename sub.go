@@ -35,6 +35,9 @@ func creeSub(v string, g *Groupe, t bool) *Sub {
 			}
 		case 2: // morpho
 			sub.morpho = strings.Split(e, ",")
+			if len(sub.morpho) == 1 && sub.morpho[0] == "" {
+				sub.morpho = nil
+			}
 		case 3: // accord
 			sub.accord = e
 		case 4: //lexsynt
