@@ -46,6 +46,7 @@
 ! - subst : l'adjectif est substantivable
 ! Descripteurs ontologiques sont ajoutés 
 ! - fam : nom désignant des relations familiales (filius, pater, soror)
+! - excl : lemmes exclus à cause de l'insuffisance de l'algo actuel
 !
 a:prepabl
 abactus2:
@@ -5994,7 +5995,7 @@ Darius:
 datast:
 datatim:
 datio:
-dato:
+dato:excl
 dator:
 datum:
 Daucius:
@@ -7277,7 +7278,7 @@ editus:
 edo2:
 edoceo:
 ! provisoire, pour éviter la confusion avec sum
-edo:attr
+edo:excl
 edomo:
 Edoni:
 Edonis:

@@ -136,18 +136,17 @@ grp:v.vgprep
 pos:v
 pg:n.prepAbl n.prepAcc n.inperpetuum;gprep
 
-!grp:vdatobj
-!pos:v
-!morph:act
-!lexsynt:!attr datif
-!p:n;dat;datif
-!pg:n NP;obj;acc
-
 grp:dat
 pos:v
-morph:indic,subj,part act
+morph:indic,subj,part
 lexsynt:datif
 ag:n NP p;dat;datif
+
+grp:vdat
+pos:v
+morph:indic,subj,part
+lexsynt:datif
+pg:n NP p;dat;datif
 
 grp:v.abl
 pos:v
@@ -156,13 +155,13 @@ ag:n;abl;ab
 
 grp:v.obj
 pos:v
-lexsynt:!attr
 morph:act
+lexsynt:!attr !excl
 ag:n NP p !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
 
 grp:v.vobj
 pos:v
-lexsynt:!attr
+lexsynt:!attr !excl
 morph:act
 pg:n NP p !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
 
