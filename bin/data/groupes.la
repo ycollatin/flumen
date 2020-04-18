@@ -142,7 +142,7 @@ morph:indic,subj,part
 lexsynt:datif
 ag:n NP p;dat;datif
 
-grp:vdat
+grp:v.dat
 pos:v
 morph:indic,subj,part
 lexsynt:datif
