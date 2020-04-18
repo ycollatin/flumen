@@ -78,6 +78,25 @@ func accord(lma, lmb, cgn string) bool {
 	return va
 }
 
+func (m *Mot) adeja(sub *Sub) bool {
+	sublien := sub.lien
+	for _, nod := range texte.phrase.nods {
+		if nod.nucl == m {
+			for i, _ := range nod.mma {
+				if nod.grp.ante[i].lien == sublien {
+					return true
+				}
+			}
+			for i, _ := range nod.mmp {
+				if nod.grp.post[i].lien == sublien {
+					return true
+				}
+			}
+		}
+	}
+	return false
+}
+
 func (m *Mot) dejaNoy() bool {
 	for _, n := range texte.phrase.nods {
 		if n.nucl == m {
@@ -88,7 +107,6 @@ func (m *Mot) dejaNoy() bool {
 }
 
 func (ma *Mot) domine(mb *Mot) bool {
-	//mnoy := noyDe(mb)
 	mnoy := mb.noyau()
 	for mnoy != nil {
 		if mnoy == ma {
@@ -369,6 +387,10 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 // vrai si m est compatible avec Sub et le noyau mn
 func (m *Mot) resSub(sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 	// signet motresSub
+	// si la fonction est déjà prise, renvoyer nil
+	if mn.adeja(sub) {
+		return nil
+	}
 	// vérification des pos
 	if m.pos != "" {
 		// 1. La pos du mot est définitive
