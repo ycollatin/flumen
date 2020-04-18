@@ -110,21 +110,23 @@ func chxTexte() {
 
 func lemmatise() {
 	texte.affiche(aidePh)
+	im := texte.phrase.imot
 	texte.phrase.teste()
-	fmt.Println("lemmatisation", rouge(texte.phrase.motCourant().gr))
+	texte.phrase.imot = im
 	mc := texte.phrase.motCourant()
+	fmt.Println("lemmatisation", rouge(mc.gr))
 	if len(mc.ans2) > 0 {
-		ll2 := gocol.Restostring(texte.phrase.motCourant().ans2)
+		ll2 := gocol.Restostring(mc.ans2)
 		fmt.Println(rouge(ll2))
 		ll3 := strings.Split(ll2, "\n")
-		ll := strings.Split(gocol.Restostring(texte.phrase.motCourant().ans), "\n")
+		ll := strings.Split(gocol.Restostring(mc.ans), "\n")
 		for _, l := range ll {
 			if !contient(ll3, l) {
 				fmt.Println(l)
 			}
 		}
 	} else {
-		fmt.Println(gocol.Restostring(texte.phrase.motCourant().ans))
+		fmt.Println(gocol.Restostring(mc.ans))
 	}
 }
 
