@@ -197,6 +197,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 			return nil
 		}
 		sub := g.ante[ia]
+		//ma.restmp = ma.ans2
 		res := ma.resSub(sub, m, ma.restmp)
 		if res == nil {
 			return nil
@@ -230,6 +231,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		if mp.domine(m) {
 			return nil
 		}
+		//mp.restmp = mp.ans2
 		res := mp.resSub(sub, m, mp.restmp)
 		if res == nil {
 			return nil
