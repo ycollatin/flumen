@@ -34,9 +34,9 @@ ter:n.det
 pos:n
 a:p;det;;cgn;det
 
-ter:n.npappfam
-pos:NP
-p:n;app;;cgn;fam
+!ter:n.npappfam
+!pos:NP
+!p:n;app;;cgn;fam
 
 ter:n.nadjp
 pos:n
@@ -82,17 +82,14 @@ grp:n.appFam
 pos:NP
 pg:n.fam;app;;cgn
 
-! FIXME ... quod mare Ionium est appellatum
 grp:n.appnp
 pos:n
 lexsynt:nom
 p:NP;app;;cn
 
-! FIXME Apollo datus est in servitutem Admeto regi Thessaliae
 grp:n.npapp
 pos:NP
 pg:n;app;;cgn;nom
-!pg:pos [pos pos...];[+]lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
 
 grp:n.epith
 pos:n
@@ -102,13 +99,13 @@ grp:n.nepith
 pos:n
 p:a;epith;;cgn
 
-grp:n.conj
+grp:n.conjet
 pos:n NP
 a:"et";conj
 
 grp:n.coord
 pos:n NP
-pg:n.conj;coord;;c
+pg:n.conjet;coord;;c
 
 grp:n.gen
 pos:n
