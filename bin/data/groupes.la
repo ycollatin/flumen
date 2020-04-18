@@ -1,28 +1,29 @@
 !	groupes.la
 !
+! NOYAU :
 !- ter|grp:<groupe>.<id>		// identifiant syntaxique,identifiant unique 
-!- pos:<pos>					// liste, sép " "
+!  ter : noyau et subs sont des mots
+!  grp : il y a au moins un composant groupe
+!- pos:<pos>					// liste, séparateur " "
 !- morph:<traits morphos>		// liste sép " " et ";"
 !- lexsynt:<lexicosyntaxe>		// liste, sép " "
-!// a, ag :mots et groupes sub, avant le noyau, dans l'ordre de la lecture
-!- a:pos [pos pos...];[+]lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
-!- ag: "  "        "     "		// comme a, pour les groupes
-!  si lien commence par le signe ُ+, il pourra être utilisé plusieurs fois dans le groupe
-!// p, pg :mots et groupes sub, après le noyau
-!- p:   "     "    "      "		// sub après le noyau, dans l'ordre de la lecture
-!- pg:   "     "    "      "	// comme p, pour les groupes
-! Si un id-lien est précédé d'un point d'exclamation, le sub refusera cette id 
-! les les mots et noeuds ayant cet id. Cf. grp:v.objv.
 !
-! code de pos
-! n=nom, NP=nom propre, p=pronom 
-! a=adjectif Adv = adverbe
+! SUBORDONNÉS
+!- a|ag|p|pg:pos [pos pos...];[+]lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
+! a : mot antéposé
+! ag : groupe antéposé
+! p : mot postposé
+! pg : groupe postposé
+! pos : Pos du mot, ou id du groupe. Pour les groupes, on peut donner l'id complet (v.vobj) ou
+!       seulement la première partie (v). Dans ce cas, tous les groupes commençant par "v." seront
+!		acceptés. Si un pos est précédé d'un point d'exclamation, le sub refusera cet id/pos
+! lien: affiché dans les arcs. Si lien commence par le signe ُ+, il pourra
+!       être utilisé plusieurs fois dans le groupe
 !
-!phrases de test :
-!  Prometheus Iapeti filius homines ex luto finxit.
-!  Aesculapius Apollinis filius Glauco Minois filio vitam reddidit.
+! code des pos
+! n=nom, NP=nom propre, p=pronom a=adjectif Adv = adverbe
 !
-!CAVEAT : il faut terminer par un groupe non terminal
+! CAVEAT : il faut terminer par un groupe non terminal
 !
 
 !!!!!!!!!!!!!!!!!!!!!
