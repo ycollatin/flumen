@@ -10,10 +10,9 @@ package main
 //				  et la coord subiciunt et torrent (juste)
 
 // TODO
+// - traiter la coordination par -que
 // - traiter de la même manière le noyau et les subs, aussi bien dans le code
 //   que dans les données ?
-// - mettre en place les impossibilités de cumuler des subs de même fonction
-//   ex. Apollo datus est ... Admeto.. Admeto devient 2ème sujet de datus est.
 //   tenir compte de la morpho unique (voluptatem. acc. sing.)
 // - un champ groupe.anrel - analyses du relatif ?
 // - donner une POS distincte aux verbes intransitifs. v. gocol.indMorph
