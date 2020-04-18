@@ -150,6 +150,9 @@ func genus(sr gocol.Sr) gocol.Sr {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
+
+	// FIXME
+	//grp:n.appnp
 	rang := m.rang
 	lante := len(g.ante)
 	// mot de rang trop faible
@@ -166,8 +169,6 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	if res == nil {
 		return nil
 	}
-	// XXX à changer, si resNoyau devient bool
-	// initialisation de la lemmatisation de test
 	// création du noeud de retour
 	nod := new(Nod)
 	nod.grp = g
