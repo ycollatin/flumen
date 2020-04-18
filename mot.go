@@ -460,12 +460,14 @@ func (m *Mot) resSub(sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 	if sub.accord > "" {
 		var aoter []int
 		for i, an := range res {
-			for _, morfn := range an.Morphos {
+			for _, anoy := range mn.ans2 {
 				// pour toutes les morphos valides de m
 				var lmorf []string
-				for _, morfs := range an.Morphos {
-					if accord(morfn, morfs, sub.accord) {
-						lmorf = append(lmorf, morfs)
+				for _, morfn := range anoy.Morphos {
+					for _, morfs := range an.Morphos {
+						if accord(morfn, morfs, sub.accord) {
+							lmorf = append(lmorf, morfs)
+						}
 					}
 				}
 				if len(lmorf) > 0 {
