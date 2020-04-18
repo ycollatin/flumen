@@ -86,7 +86,7 @@ pg:n.fam;app;;cgn
 grp:n.appnp
 pos:n
 lexsynt:nom
-p:NP a;app;;cn
+p:NP;app;;cn
 
 ! FIXME Apollo datus est in servitutem Admeto regi Thessaliae
 grp:n.npapp
