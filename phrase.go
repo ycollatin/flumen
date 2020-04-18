@@ -38,11 +38,13 @@ func (p *Phrase) arbre() ([]string, []string) {
 	var lexpl []string
 	var ll []string
 	p.nods = nil
-	nba := 0
-	nbn := 1
-	for nbn > nba {
+	nba := 0 // 
+	nbn := 0 // pour permettre le départ de boucle
+	debut := true
+	for nbn > nba || debut {
 		// recherche des noyaux
 		// groupes terminaux, à n'essayer qu'à la première passe
+		nba = nbn
 		if nba == 0 {
 			for _, g := range grpTerm {
 				for _, m := range p.mots {
@@ -57,7 +59,6 @@ func (p *Phrase) arbre() ([]string, []string) {
 				}
 			}
 		}
-		nba = nbn
 		// groupes non terminaux
 		for _, g := range grp {
 			for _, m := range p.mots {
@@ -69,6 +70,7 @@ func (p *Phrase) arbre() ([]string, []string) {
 			}
 		}
 		nbn = len(p.nods)
+		debut = false
 	}
 
 	// graphe
