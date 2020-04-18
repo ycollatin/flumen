@@ -11,6 +11,7 @@ type Sub struct {
 	noyaux   []*Noy   // Noyaux possibles du sub
 	noyexcl  []*Noy   // Noyaux exclus
 	lien     string   // étiquette du lien noyau -> sub
+	multi    bool     // armé : le lien peut être utilisé plusieurs fois
 	morpho   []string // traits morphos requis
 	accord   string   // accord sub - noyau
 	terminal bool     // le sub est un mot
@@ -26,7 +27,12 @@ func creeSub(v string, g *Groupe, t bool) *Sub {
 		case 0: // noyaux
 			sub.noyaux, sub.noyexcl = creeNoy(e)
 		case 1: // id-lien
-			sub.lien = e
+			if e > "" && e[0] == '+' {
+				sub.lien = e[1:]
+				sub.multi = true
+			} else {
+				sub.lien = e
+			}
 		case 2: // morpho
 			sub.morpho = strings.Split(e, ",")
 		case 3: // accord

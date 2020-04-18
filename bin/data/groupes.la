@@ -4,13 +4,14 @@
 !- pos:<pos>					// liste, sép " "
 !- morph:<traits morphos>		// liste sép " " et ";"
 !- lexsynt:<lexicosyntaxe>		// liste, sép " "
-!// a, ag :mots et groupes avant le noyau, dans l'ordre de la lecture
-!- a:pos;id-lien [id-lien [...]];traita traitb,traita traitb;accord;lexsynt lexsynt...
+!// a, ag :mots et groupes sub, avant le noyau, dans l'ordre de la lecture
+!- a:pos [pos pos...];[+]lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
 !- ag: "  "        "     "		// comme a, pour les groupes
-!// p, pg :mots et groupes après le noyau
+!  si lien commence par le signe ُ+, il pourra être utilisé plusieurs fois dans le groupe
+!// p, pg :mots et groupes sub, après le noyau
 !- p:   "     "    "      "		// sub après le noyau, dans l'ordre de la lecture
 !- pg:   "     "    "      "	// comme p, pour les groupes
-! Si un id-lien est précédé d'un point d'exclamation, le sub refusera comme sub
+! Si un id-lien est précédé d'un point d'exclamation, le sub refusera cette id 
 ! les les mots et noeuds ayant cet id. Cf. grp:v.objv.
 !
 ! code de pos
@@ -111,12 +112,7 @@ pg:n NP;gen;gén
 
 grp:n.app
 pos:n NP
-pg:n;app;;cgn
-
-grp:p.prepAcc
-pos:p !det
-morph:acc
-a:prepAA prepAcc;prep
+pg:n;+app;;cgn
 
 grp:n.prepAbl
 pos:n NP p
@@ -130,19 +126,21 @@ a:prepAcc prepAA !n.det;prep
 
 grp:v.gprep
 pos:v
-ag:n.prepAbl n.prepAcc n.inperpetuum;gprep
+rem:multi
+ag:n.prepAbl n.prepAcc n.inperpetuum;+gprep
 
 grp:v.vgprep
 pos:v
-pg:n.prepAbl n.prepAcc n.inperpetuum;gprep
+rem:multi
+pg:n.prepAbl n.prepAcc n.inperpetuum;+gprep
 
-grp:dat
+grp:v.dat
 pos:v
 morph:indic,subj,part
 lexsynt:datif
 ag:n NP p;dat;datif
 
-grp:v.dat
+grp:v.vdat
 pos:v
 morph:indic,subj,part
 lexsynt:datif
@@ -188,7 +186,7 @@ a:"et";conj
 
 grp:v.adv
 pos:v
-a:Adv;adv
+a:Adv;+adv
 
 grp:v.coord
 pos:v
