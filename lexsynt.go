@@ -23,6 +23,7 @@ func lisLexsynt() {
 
 // vrai si le lemme lem a el parmi ses étiquettes
 func lexsynt(lem, el string) bool {
+	lem = gocol.Deramise(lem)
 	ls := llexs[lem]
 	if ls == nil {
 		return false
