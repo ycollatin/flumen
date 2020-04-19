@@ -30,14 +30,6 @@
 ! Groupes terminaux !
 !!!!!!!!!!!!!!!!!!!!!
 
-ter:n.det
-pos:n
-a:p;det;;cgn;det
-
-!ter:n.npappfam
-!pos:NP
-!p:n;app;;cgn;fam
-
 ter:n.nadjp
 pos:n
 p:"Romanus";epith;;cgn
@@ -67,6 +59,7 @@ morph:act
 lexsynt:!attr
 a:v;obj;infin
 
+! XXX nécessaire ?
 ter:v.sujinf
 pos:v
 morph:act 3
@@ -129,6 +122,10 @@ grp:n.prepAcc
 pos:n NP p
 morph:acc
 a:prepAcc prepAA !n.det;prep
+
+grp:n.det
+pos:n
+a:p;det;;cgn;det
 
 grp:v.gprep
 pos:v
