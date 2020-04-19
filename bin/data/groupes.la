@@ -155,7 +155,7 @@ pg:n NP p;dat;datif
 grp:v.abl
 pos:v
 lexsynt:abl
-ag:n;abl;ab
+ag:n;abl;abl
 
 grp:v.obj
 pos:v
