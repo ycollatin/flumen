@@ -3,7 +3,7 @@ defaut:
 fmt:
 	go fmt ./
 edit:
-	vim -c ":b main.go" *.go bin/data/groupes.la bin/data/lexsynt.la
+	vim -c ":b main.go" *.go bin/data/groupes.la bin/data/lexsynt.la bin/corpus/test.txt
 darwin:
 	env GOOS=darwin GOARCH=amd64 go build -o mac/gentes
 w:
