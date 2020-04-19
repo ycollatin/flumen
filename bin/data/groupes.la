@@ -72,6 +72,11 @@ pos:v
 morph:indic,subj
 a:"non";neg
 
+ter:n.prepDet
+pos:n
+a:prepAcc prepAA;prep
+a:p;det;acc;n
+
 !!!!!!!!!!!!!!!!!!!!!!!!!
 ! Groupes non terminaux !
 !!!!!!!!!!!!!!!!!!!!!!!!!
@@ -135,7 +140,7 @@ a:p;det;;cgn;det
 grp:v.gprep
 pos:v
 rem:multi
-ag:n.prepAbl n.prepAcc n.inperpetuum;+gprep
+ag:n.prepAbl n.prepAcc n.prepDet n.inperpetuum;+gprep
 
 grp:v.vgprep
 pos:v
