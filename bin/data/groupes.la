@@ -139,13 +139,12 @@ a:p;det;;cgn;det
 
 grp:v.gprep
 pos:v
-rem:multi
 ag:n.prepAbl n.prepAcc n.prepDet n.inperpetuum;+gprep
 
 grp:v.vgprep
 pos:v
 rem:multi
-pg:n.prepAbl n.prepAcc n.inperpetuum;+gprep
+pg:n.prepAbl n.prepAcc n.inperpetuum n.prepDet;+gprep
 
 grp:v.dat
 pos:v
@@ -205,15 +204,20 @@ grp:v.coord
 pos:v
 pg:v.conjet;coord;;n
 
-grp:v.vcum
+grp:v.conjv
 pos:v
 morph:subj
-a:"cum";conj
+a:"cum" "ut";conj
+
+grp:v.subconj
+pos:v
+morph:indic
+ag:v.conjv;subconj
 
 grp:v.subconjv
 pos:v
 morph:indic
-ag:v.vcum;subconj
+pg:v.conjv;subconj
 
 ! sr = subordonnée relative
 grp:sr.cui
@@ -241,7 +245,7 @@ ag:n NP;sujet;nomin;n
 grp:v.objsuj
 pos:v.sujet
 lexsynt:!attr
-ag:n NP p;objet;acc
+ag:n NP p !n.prepDet;objet;acc
 
 grp:v.vsujet
 pos:v
