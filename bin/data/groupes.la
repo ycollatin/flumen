@@ -67,6 +67,11 @@ lexsynt:infobj
 a:p n NP;sujet;nomin;n
 a:v;obj;inf
 
+ter:v.neg
+pos:v
+morph:indic,subj
+a:"non";neg
+
 !!!!!!!!!!!!!!!!!!!!!!!!!
 ! Groupes non terminaux !
 !!!!!!!!!!!!!!!!!!!!!!!!!
@@ -225,7 +230,7 @@ pg:sr;rel
 
 grp:v.sujet
 pos:v
-morph:act indic 3
+morph:indic 3,subj 3
 ag:n NP;sujet;nomin;n
 
 grp:v.objsuj
