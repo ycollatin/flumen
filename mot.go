@@ -151,8 +151,6 @@ func genus(sr gocol.Sr) gocol.Sr {
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
 
-	// FIXME
-	//grp:n.appnp
 	rang := m.rang
 	lante := len(g.ante)
 	// mot de rang trop faible
@@ -299,6 +297,7 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 		if !va {
 			return nil
 		}
+		/*
 		// vérification du Pos des lemmatisations sélectionnées
 		var aoter []int
 		for _, noy := range g.noyaux {
@@ -314,6 +313,7 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 		if len(res) == 0 {
 			return nil
 		}
+		*/
 	} else {
 		// Le mot est encore isolé
 		var aoter []int
@@ -341,17 +341,26 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 
 	// vérif lexicosyntaxique
 	var aoter []int
-	for i, a := range res {
-		va := true
-		for _, ls := range g.lexsynt {
-			va = va && lexsynt(a.Lem.Gr[0], ls)
+	for _, ls := range g.lexsynt {
+		for i, a := range res {
+			if !lexsynt(a.Lem.Gr[0], ls) {
+				aoter = append(aoter, i)
+			}
 		}
-		for _, ls := range g.exclls {
-			va = va && !lexsynt(a.Lem.Gr[0], ls)
-		}
-		if !va {
-			//res = oteSr(res, i)
-			aoter = append(aoter, i)
+	}
+	for ao := len(aoter) -1; ao > -1; ao-- {
+		res = oteSr(res, aoter[ao])
+	}
+	if len(res) == 0 {
+		return nil
+	}
+	// verif des exclusions lexicosyntaxiques
+	aoter = nil
+	for _, ls := range g.exclls {
+		for i, a := range res {
+			if lexsynt(a.Lem.Gr[0], ls) {
+				aoter = append(aoter, i)
+			}
 		}
 	}
 	for ao := len(aoter) -1; ao > -1; ao-- {
