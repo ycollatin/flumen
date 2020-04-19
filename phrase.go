@@ -38,7 +38,7 @@ func (p *Phrase) arbre() ([]string, []string) {
 	var lexpl []string
 	var ll []string
 	p.nods = nil
-	nba := 0 // 
+	nba := 0 //
 	nbn := 0 // pour permettre le départ de boucle
 	debut := true
 	for nbn > nba || debut {

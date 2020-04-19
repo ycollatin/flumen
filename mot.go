@@ -298,21 +298,21 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 			return nil
 		}
 		/*
-		// vérification du Pos des lemmatisations sélectionnées
-		var aoter []int
-		for _, noy := range g.noyaux {
-			for i, an := range res {
-				if !noy.vaPos(an.Lem.Pos) {
-					aoter = append(aoter, i)
+			// vérification du Pos des lemmatisations sélectionnées
+			var aoter []int
+			for _, noy := range g.noyaux {
+				for i, an := range res {
+					if !noy.vaPos(an.Lem.Pos) {
+						aoter = append(aoter, i)
+					}
 				}
 			}
-		}
-		for ao := len(aoter) -1; ao > -1; ao-- {
-			res = oteSr(res, aoter[ao])
-		}
-		if len(res) == 0 {
-			return nil
-		}
+			for ao := len(aoter) -1; ao > -1; ao-- {
+				res = oteSr(res, aoter[ao])
+			}
+			if len(res) == 0 {
+				return nil
+			}
 		*/
 	} else {
 		// Le mot est encore isolé
@@ -331,7 +331,7 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 				aoter = append(aoter, i)
 			}
 		}
-		for ao := len(aoter) -1; ao > -1; ao-- {
+		for ao := len(aoter) - 1; ao > -1; ao-- {
 			res = oteSr(res, aoter[ao])
 		}
 	}
@@ -348,7 +348,7 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 			}
 		}
 	}
-	for ao := len(aoter) -1; ao > -1; ao-- {
+	for ao := len(aoter) - 1; ao > -1; ao-- {
 		res = oteSr(res, aoter[ao])
 	}
 	if len(res) == 0 {
@@ -363,7 +363,7 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 			}
 		}
 	}
-	for ao := len(aoter) -1; ao > -1; ao-- {
+	for ao := len(aoter) - 1; ao > -1; ao-- {
 		res = oteSr(res, aoter[ao])
 	}
 	if len(res) == 0 {
@@ -390,7 +390,7 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 		}
 		sr.Morphos = morfos
 	}
-	for ao := len(aoter) -1; ao > -1; ao-- {
+	for ao := len(aoter) - 1; ao > -1; ao-- {
 		res = oteSr(res, aoter[ao])
 	}
 	return res
@@ -436,7 +436,7 @@ func (m *Mot) resSub(sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 				aoter = append(aoter, i)
 			}
 		}
-		for i := len(aoter)-1; i > -1; i-- {
+		for i := len(aoter) - 1; i > -1; i-- {
 			res = oteSr(res, i)
 		}
 		if len(res) == 0 {
@@ -459,7 +459,7 @@ func (m *Mot) resSub(sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 				//res = oteSr(res, i)
 			}
 		}
-		for i := len(aoter)-1; i > -1; i-- {
+		for i := len(aoter) - 1; i > -1; i-- {
 			res = oteSr(res, i)
 		}
 	}
@@ -485,7 +485,7 @@ func (m *Mot) resSub(sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 				res[i].Morphos = lmorf
 			}
 		}
-		for i := len(aoter)-1; i > -1; i-- {
+		for i := len(aoter) - 1; i > -1; i-- {
 			res = oteSr(res, i)
 		}
 	}
@@ -516,7 +516,7 @@ func (m *Mot) resSub(sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 				aoter = append(aoter, i)
 			}
 		}
-		for i := len(aoter)-1; i > -1; i-- {
+		for i := len(aoter) - 1; i > -1; i-- {
 			res = oteSr(res, i)
 		}
 	}
