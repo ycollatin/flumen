@@ -6,6 +6,7 @@
 // motresnoyau
 // motestNoyauDeGroupe
 // motresSub
+// motadeja
 // fotesr
 
 // rappel de la lemmatisation dans gocol :
@@ -79,6 +80,7 @@ func accord(lma, lmb, cgn string) bool {
 }
 
 func (m *Mot) adeja(sub *Sub) bool {
+	// signet motadeja
 	sublien := sub.lien
 	for _, nod := range texte.phrase.nods {
 		if nod.nucl == m {
@@ -400,7 +402,7 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 func (m *Mot) resSub(sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 	// signet motresSub
 	// si la fonction est déjà prise, renvoyer nil
-	if mn.adeja(sub) {
+	if !sub.multi && mn.adeja(sub) {
 		return nil
 	}
 	// vérification des pos
