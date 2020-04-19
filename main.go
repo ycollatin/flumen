@@ -4,7 +4,7 @@
 package main
 
 // FIXME
-// - le surlignage des lemmatisations choisies ne marche plus
+// - nata est Pyrrha, quae *mortalis dicitur prima esse creata: 'mortalis' empêche le lien sr
 // - subiciunt veribus prunas et viscera torrent :
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
 //				  et la coord subiciunt et torrent (juste)

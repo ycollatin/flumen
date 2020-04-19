@@ -152,6 +152,9 @@ func genus(sr gocol.Sr) gocol.Sr {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
+
+	// FIXME grp:v.dat
+	// effigiem fecit cui Minerve animam dedit
 	rang := m.rang
 	lante := len(g.ante)
 	// mot de rang trop faible

@@ -90,6 +90,7 @@ pos:n NP
 lexsynt:nom
 p:NP;app;;cn
 
+! FIXME accord ea *data in coniugium *Epimetheo fratri.
 grp:n.npapp
 pos:NP
 pg:n;app;;cgn;nom
@@ -143,8 +144,14 @@ ag:n.prepAbl n.prepAcc n.prepDet n.inperpetuum;+gprep
 
 grp:v.vgprep
 pos:v
-rem:multi
 pg:n.prepAbl n.prepAcc n.inperpetuum n.prepDet;+gprep
+
+!sr = subordonnée relative
+grp:sr.cui
+pos:v
+lexsynt:datif
+morph:indic,subj
+a:"qui2";dat;dat sing
 
 grp:v.dat
 pos:v
@@ -156,7 +163,8 @@ grp:v.vdat
 pos:v
 morph:indic,subj,part
 lexsynt:datif
-pg:n NP p;dat;datif
+!pg:!"qui2" n NP p;dat;datif
+pg:n NP;dat;datif
 
 grp:v.abl
 pos:v
@@ -219,19 +227,13 @@ pos:v
 morph:indic
 pg:v.conjv;subconj
 
-! sr = subordonnée relative
-grp:sr.cui
-pos:v
-lexsynt:datif
-morph:indic,subj
-a:"qui2";dat;dat sing
-
 ! FIXME aquilam apposuit quae cor eius exesset
 grp:sr.sujet
 pos:v
 morph:indic,subj
 a:"qui2";sujet;nomin;n
 
+! FIXME effigiem fecit, cui Minerva animam dedit.
 grp:n.sr
 pos:n NP
 p:v;;act
