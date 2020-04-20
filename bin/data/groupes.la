@@ -77,6 +77,14 @@ pos:n
 a:prepAcc prepAA;prep
 a:p;det;acc;n
 
+ter:v.sujAblObj
+pos:v
+morph:3
+lexsynt:abl
+a:n NP;sujet;nomin;n
+a:n;abl;abl
+a:n p;obj;acc
+
 !!!!!!!!!!!!!!!!!!!!!!!!!
 ! Groupes non terminaux !
 !!!!!!!!!!!!!!!!!!!!!!!!!
