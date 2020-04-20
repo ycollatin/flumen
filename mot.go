@@ -68,6 +68,9 @@ func creeMot(m string) *Mot {
 }
 
 func accord(lma, lmb, cgn string) bool {
+	if strings.Contains(lmb, "inv.") {
+		return false
+	}
 	va := true
 	for i := 0; i < len(cgn); i++ {
 		switch cgn[i] {
@@ -257,6 +260,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 			ms.ans2 = ms.restmp
 			ms.restmp = nil
 		}
+		m.ans2 = m.restmp
 		for _, ms := range nod.mmp {
 			ms.dejasub = true
 			ms.ans2 = ms.restmp
@@ -343,7 +347,6 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 				}
 			}
 			if !va {
-				//res = oteSr(res, i)
 				aoter = append(aoter, i)
 			}
 		}
@@ -403,7 +406,6 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 		}
 		if len(morfos) == 0 {
 			aoter = append(aoter, i)
-			//res = oteSr(res, i)
 		}
 		sr.Morphos = morfos
 	}
@@ -443,8 +445,8 @@ func (m *Mot) resSub(sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 	} else {
 		// 2. La pos définitif n'est pas encore fixée
 		var aoter []int
+		// lexicosyntaxe
 		for i, an := range res {
-			// lexicosyntaxe
 			va := true
 			for _, ls := range sub.lexsynt {
 				va = va && lexsynt(an.Lem, ls)
@@ -462,8 +464,8 @@ func (m *Mot) resSub(sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 
 		// canon et POS
 		aoter = nil
-		va := false
 		for i, an := range res {
+			va := false
 			for _, noy := range sub.noyaux {
 				if noy.canon > "" {
 					va = va || noy.vaSr(an)
@@ -473,7 +475,6 @@ func (m *Mot) resSub(sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 			}
 			if !va {
 				aoter = append(aoter, i)
-				//res = oteSr(res, i)
 			}
 		}
 		for i := len(aoter) - 1; i > -1; i-- {
@@ -508,11 +509,13 @@ func (m *Mot) resSub(sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 	}
 	// accord
 	// pour toutes les morphos valides de mn
+	// il faudrait pouvoir ôter des lemmes et morphos
+	// pour chaque an.
 	if sub.accord > "" {
 		var aoter []int
 		for i, an := range res {
 			va := false
-			for _, anoy := range mn.ans2 {
+			for _, anoy := range mn.restmp {
 				// pour toutes les morphos valides de m
 				var lmorf []string
 				for _, morfn := range anoy.Morphos {
