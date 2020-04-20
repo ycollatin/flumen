@@ -12,6 +12,8 @@ package main
 // XXX
 // - Trouver une solution pour la construction personnelle de l'infinitive
 //   Homerus dicitur caecus fuisse. (ou caecum)
+// - CONSTRUCTIONS LEXICALES
+// 		* pietate erga te
 
 // TODO
 // - traiter la coordination par -que
