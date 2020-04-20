@@ -21,8 +21,9 @@ func (n *Nod) graf() []string {
 		lien := n.grp.ante[i].lien
 		// si le lien du sub est vide, c'est que c'est un élément étranger, appartenant à un autre groupe
 		// (hyperbate). Il ne faut donc pas l'inclure dans le noeud.
+		j := len(n.mma) - i - 1
 		if lien > "" {
-			ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, n.grp.ante[i].lien))
+			ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, n.grp.ante[j].lien))
 		}
 	}
 	diff := 0
