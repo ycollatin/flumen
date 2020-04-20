@@ -119,6 +119,10 @@ grp:n.coord
 pos:n NP
 pg:n.conjet;coord;;c
 
+grp:v.dienocte
+pos:v
+ag:"dies" "nox" "hora";abl;abl
+
 grp:n.gen
 pos:n
 ag:n NP;gen;gén
