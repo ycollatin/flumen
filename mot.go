@@ -40,7 +40,6 @@ type Mot struct {
 	tmpl, tmpm int       // n°s provisoires de Sr et morpho
 	pos        string    // id du groupe dont le mot est noyau
 	// ou à défaut pos du mot, si elle est décidée
-	lexsynt []string // propriétés lexicosyntaxiques
 }
 
 func creeMot(m string) *Mot {
@@ -296,7 +295,13 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 		// 1. La pos définitif est fixée
 		va := false
 		for _, noy := range g.noyaux {
-			va = va || noy.vaPos(m.pos)
+			if noy.canon > "" {
+				for _, a := range res {
+					va = va || noy.vaSr(a)
+				}
+			} else {
+				va = va || noy.vaPos(m.pos)
+			}
 		}
 		if !va {
 			return nil
@@ -347,7 +352,7 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 	var aoter []int
 	for _, ls := range g.lexsynt {
 		for i, a := range res {
-			if !lexsynt(a.Lem.Gr[0], ls) {
+			if !lexsynt(a.Lem, ls) {
 				aoter = append(aoter, i)
 			}
 		}
@@ -362,7 +367,7 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 	aoter = nil
 	for _, ls := range g.exclls {
 		for i, a := range res {
-			if lexsynt(a.Lem.Gr[0], ls) {
+			if lexsynt(a.Lem, ls) {
 				aoter = append(aoter, i)
 			}
 		}
@@ -434,7 +439,7 @@ func (m *Mot) resSub(sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 			// lexicosyntaxe
 			va := true
 			for _, ls := range sub.lexsynt {
-				va = va && lexsynt(an.Lem.Gr[0], ls)
+				va = va && lexsynt(an.Lem, ls)
 			}
 			if !va {
 				aoter = append(aoter, i)
