@@ -142,6 +142,12 @@ pos:n NP p
 morph:acc
 a:prepAcc prepAA !n.det;prep
 
+! pour Hygin, FRAGILE
+grp:n.eadata
+pos:"is"
+morph:nomin fém sing
+p:"do";epith;part pass nomin fém sing
+
 grp:n.det
 pos:n
 a:p;det;;cgn;det
@@ -169,9 +175,8 @@ ag:n NP p;dat;datif
 
 grp:v.vdat
 pos:v
-morph:indic,subj,part
+morph:indic,subj,part,inf
 lexsynt:datif
-!pg:!"qui2" n NP p;dat;datif
 pg:n NP;dat;datif
 
 grp:v.abl
