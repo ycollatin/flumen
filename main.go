@@ -4,6 +4,9 @@
 package main
 
 // FIXME
+// - tantum nocte crescebat : tantum nocte n.epith, nocte crescebat, v.obj.
+// - Marcellinum *tibi esse* iratum scis : tibi devrait fixer esse à sum.
+// - gocol, /ederat/ non lemmatisé.
 // - la distinction lemmatisation avant/après analyse synt. n'est pas complète.
 // - subiciunt veribus prunas et viscera torrent :
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
