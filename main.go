@@ -4,10 +4,14 @@
 package main
 
 // FIXME
-// - nata est Pyrrha, quae *mortalis dicitur prima esse creata: 'mortalis' empêche le lien sr
+// - la distinction lemmatisation avant/après analyse synt. n'est pas complète.
 // - subiciunt veribus prunas et viscera torrent :
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
 //				  et la coord subiciunt et torrent (juste)
+//
+// XXX
+// - Trouver une solution pour la construction personnelle de l'infinitive
+//   Homerus dicitur caecus fuisse. (ou caecum)
 
 // TODO
 // - traiter la coordination par -que
