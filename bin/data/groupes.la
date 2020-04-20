@@ -115,6 +115,12 @@ grp:n.gen
 pos:n
 ag:n NP;gen;gén
 
+grp:v.attrPass
+pos:v
+morph:pass indic,pass subj
+lexsynt:attrp
+ag:a NP n;attr;nomin
+
 grp:n.genp
 pos:n
 pg:n NP;gen;gén
@@ -177,6 +183,12 @@ morph:act
 lexsynt:!attr !excl
 ag:n NP p !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
 
+grp:v.attrObj
+pos:v
+morph:act
+lexsynt:attro
+ag:n a;attro;acc
+
 grp:v.vobj
 pos:v
 lexsynt:!attr !excl
@@ -192,13 +204,6 @@ grp:v.vattr
 pos:v
 lexsynt:attr
 pg:a;attr;nomin;n
-
-! FIXME : mortalis dicitur prima esse creata
-grp:v.attrPass
-pos:v
-morph:pass indic,pass subj
-lexsynt:attrp
-ag:a;attr;nomin
 
 grp:v.conjet
 pos:v
@@ -217,6 +222,18 @@ pos:v
 morph:subj
 a:"cum" "ut";conj
 
+grp:v.infobj
+pos:v
+morph:act indic,act subj
+lexsynt:infobj
+ag:v;infobj;inf
+
+grp:v.vinfobj
+pos:v
+morph:act indic,act subj
+lexsynt:infobj
+pg:v;infobj;inf
+
 grp:v.subconj
 pos:v
 morph:indic
@@ -233,7 +250,6 @@ pos:v
 morph:indic,subj
 a:"qui2";sujet;nomin;n
 
-! FIXME effigiem fecit, cui Minerva animam dedit.
 grp:n.sr
 pos:n NP
 p:v;;act
@@ -253,3 +269,10 @@ grp:v.vsujet
 pos:v
 morph:3
 p:n NP;sujet;nomin;n
+
+grp:v.propinfPass
+pos:"dico" "habeo"
+morph:indic pass,subj pass
+pg:v;propinf;inf
+
+! a|ag|p|pg:pos [pos pos...];[+]lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
