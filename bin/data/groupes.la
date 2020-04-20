@@ -56,7 +56,7 @@ a:v;pp;part parf
 ter:v.inf
 pos:v
 morph:act
-lexsynt:!attr
+lexsynt:!intr
 a:v;obj;infin
 
 ! XXX nécessaire ?
@@ -114,12 +114,6 @@ pg:n.conjet;coord;;c
 grp:n.gen
 pos:n
 ag:n NP;gen;gén
-
-grp:v.attrPass
-pos:v
-morph:pass indic,pass subj
-lexsynt:attrp
-ag:a NP n;attr;nomin
 
 grp:n.genp
 pos:n
@@ -180,7 +174,7 @@ ag:n;abl;abl
 grp:v.obj
 pos:v
 morph:act
-lexsynt:!attr !excl
+lexsynt:!intr !attr !excl
 ag:n NP p !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
 
 grp:v.attrObj
@@ -191,7 +185,7 @@ ag:n a;attro;acc
 
 grp:v.vobj
 pos:v
-lexsynt:!attr !excl
+lexsynt:!intr !attr !excl
 morph:act
 pg:n NP p !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
 
@@ -260,9 +254,15 @@ pos:v
 morph:indic 3,subj 3
 ag:n NP;sujet;nomin;n
 
+grp:v.attrPass
+pos:v
+morph:pass indic,pass subj
+lexsynt:attrp
+ag:a NP n;attr;nomin
+
 grp:v.objsuj
 pos:v.sujet
-lexsynt:!attr
+lexsynt:!attr !intr
 ag:n NP p !n.prepDet;objet;acc
 
 grp:v.vsujet
@@ -270,8 +270,15 @@ pos:v
 morph:3
 p:n NP;sujet;nomin;n
 
+grp:v.propinf
+pos:v
+morph:actif
+lexsynt:propinf
+ag:n NP p;suj;acc
+ag:v;propinf;inf
+
 grp:v.propinfPass
-pos:"dico" "habeo"
+pos:"dico2" "habeo"
 morph:indic pass,subj pass
 pg:v;propinf;inf
 
