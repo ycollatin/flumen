@@ -50,6 +50,13 @@ func creeMot(m string) *Mot {
 	if echec {
 		mot.ans, echec = gocol.Lemmatise(gocol.Majminmaj(m))
 	}
+	// exclusions de mots rares faisant obstacle à des analyses importantes
+	for i:= len(mot.ans)-1;i>-1;i-- {
+		an := mot.ans[i]
+		if lexsynt(an.Lem, "excl") {
+			mot.ans = oteSr(mot.ans, i)
+		}
+	}
 	mot.ans2 = mot.ans
 	// ajout du genre pour les noms
 	if !echec {
@@ -363,6 +370,7 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 	if len(res) == 0 {
 		return nil
 	}
+
 	// verif des exclusions lexicosyntaxiques
 	aoter = nil
 	for _, ls := range g.exclls {
