@@ -1683,7 +1683,7 @@ apparo:
 appellatio:
 appellator:
 appellito:
-appello2:attro
+appello2:attro,attrp
 appello:
 appendicula:
 appendo:
@@ -14740,7 +14740,7 @@ numquidnam:
 nunciam:
 nunc:
 nuncupatio:
-nuncupo:
+nuncupo:attrp
 nundinae:
 nundinatio:
 nundinor:
@@ -18806,7 +18806,7 @@ redamo:
 redardesco:
 redarguo:
 redauspico:
-reddo:datif
+reddo:datif,attro
 redemptio:
 redemptito:
 redempto:
