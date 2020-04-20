@@ -16,7 +16,7 @@ package main
 // 		* pietate erga te
 
 // TODO
-// - traiter la coordination par -que
+// - traiter la coordination par -que := et -
 // - traiter de la même manière le noyau et les subs, aussi bien dans le code
 //   que dans les données ?
 //   tenir compte de la morpho unique (voluptatem. acc. sing.)
