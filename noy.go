@@ -58,6 +58,5 @@ func (n *Noy) vaPos(p string) bool {
 	if n.generique {
 		return n.id == pel
 	}
-	//fmt.Println("   vaPos, n.id",n.id,"p",p,"pel",pel)
 	return p == n.id
 }
