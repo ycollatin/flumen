@@ -162,6 +162,7 @@ func genus(sr gocol.Sr) gocol.Sr {
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
 
+	// vérification de rang
 	rang := m.rang
 	lante := len(g.ante)
 	// mot de rang trop faible
@@ -172,21 +173,22 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	if rang+len(g.post)-1 >= texte.phrase.nbmots {
 		return nil
 	}
+
 	// m peut-il être noyau du groupe g ?
 	m.restmp = m.ans2
 	res := m.resNoyau(g, m.restmp)
 	if res == nil {
 		return nil
 	}
+
 	// création du noeud de retour
 	nod := new(Nod)
 	nod.grp = g
 	nod.nucl = m
 	nod.rang = rang
-	// vérif des subs
-	// ante
-	r := rang - 1
+
 	// reгcherche rétrograde des subs ante
+	r := rang - 1
 	for ia := lante - 1; ia > -1; ia-- {
 		if r < 0 {
 			// le rang du mot est < 0 : impossible
@@ -214,7 +216,8 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		nod.mma = append(nod.mma, ma)
 		r--
 	}
-	// post
+
+	// reгcherche des subs post
 	for ip, sub := range g.post {
 		r := rang + ip + 1
 		if r >= texte.phrase.nbmots {
@@ -247,16 +250,20 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		nod.mmp = append(nod.mmp, mp)
 		r++
 	}
+
 	// fixer les pos et sub des mots du noeud
 	if len(nod.mma)+len(nod.mmp) > 0 {
+		// la pos du noyau devient celle du groupe 
 		m.pos = g.id
-		m.ans2 = m.restmp
+		// restriction des lemmatisations des antéposés
 		for _, ms := range nod.mma {
 			ms.dejasub = true
 			ms.ans2 = ms.restmp
 			ms.restmp = nil
 		}
+		//restriction des lemmatisations du noyau
 		m.ans2 = m.restmp
+		// restriction des lemmatisations des postposés
 		for _, ms := range nod.mmp {
 			ms.dejasub = true
 			ms.ans2 = ms.restmp
