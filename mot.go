@@ -357,36 +357,36 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 	}
 
 	// vérif lexicosyntaxique
-	var aoter []int
-	for _, ls := range g.lexsynt {
-		for i, a := range res {
-			if !lexsynt(a.Lem, ls) {
-				aoter = append(aoter, i)
-			}
+	var nres gocol.Res
+	for _, a := range res {
+		va := true
+		for _, ls := range g.lexsynt {
+			va = va && lexsynt(a.Lem, ls)
+		}
+		if va {
+			nres = append(nres, a)
 		}
 	}
-	for ao := len(aoter) - 1; ao > -1; ao-- {
-		res = oteSr(res, aoter[ao])
-	}
-	if len(res) == 0 {
+	if len(nres) == 0 {
 		return nil
 	}
+	res = nres
 
 	// verif des exclusions lexicosyntaxiques
-	aoter = nil
-	for _, ls := range g.exclls {
-		for i, a := range res {
-			if lexsynt(a.Lem, ls) {
-				aoter = append(aoter, i)
-			}
+	nres = nil
+	for _, a := range res {
+		va := true
+		for _, ls := range g.exclls {
+			va = va && !lexsynt(a.Lem, ls)
+		}
+		if va {
+			nres = append(nres, a)
 		}
 	}
-	for ao := len(aoter) - 1; ao > -1; ao-- {
-		res = oteSr(res, aoter[ao])
-	}
-	if len(res) == 0 {
+	if len(nres) == 0 {
 		return nil
 	}
+	res = nres
 
 	// vérif morpho.
 	// Si aucune n'est requise, renvoyer true
@@ -394,7 +394,7 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 		return res
 	}
 
-	aoter = nil
+	var aoter []int
 	for i, sr := range res {
 		var morfos []string // morphos de sr acceptées par g
 		for _, morf := range sr.Morphos {
