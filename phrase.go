@@ -49,11 +49,9 @@ func (p *Phrase) arbre() []string {
 		if nba == 0 {
 			for _, g := range grpTerm {
 				for _, m := range p.mots {
-					/*
 					if m.dejaNoy() {
 						continue
 					}
-					*/
 					n := m.noeud(g)
 					if n != nil {
 						p.nods = append(p.nods, n)
