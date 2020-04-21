@@ -317,23 +317,6 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 		if !va {
 			return nil
 		}
-		/*
-			// vérification du Pos des lemmatisations sélectionnées
-			var aoter []int
-			for _, noy := range g.noyaux {
-				for i, an := range res {
-					if !noy.vaPos(an.Lem.Pos) {
-						aoter = append(aoter, i)
-					}
-				}
-			}
-			for ao := len(aoter) -1; ao > -1; ao-- {
-				res = oteSr(res, aoter[ao])
-			}
-			if len(res) == 0 {
-				return nil
-			}
-		*/
 	} else {
 		// Le mot est encore isolé
 		var nres gocol.Res
@@ -441,27 +424,25 @@ func (m *Mot) resSub(sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 		}
 	} else {
 		// 2. La pos définitif n'est pas encore fixée
-		var aoter []int
+		var nres gocol.Res
 		// lexicosyntaxe
-		for i, an := range res {
+		for _, an := range res {
 			va := true
 			for _, ls := range sub.lexsynt {
 				va = va && lexsynt(an.Lem, ls)
 			}
-			if !va {
-				aoter = append(aoter, i)
+			if va {
+				nres = append(nres, an)
 			}
 		}
-		for i := len(aoter) - 1; i > -1; i-- {
-			res = oteSr(res, i)
-		}
-		if len(res) == 0 {
+		if len(nres) == 0 {
 			return nil
 		}
+		res = nres
 
 		// canon et POS
-		aoter = nil
-		for i, an := range res {
+		nres = nil
+		for _, an := range res {
 			va := false
 			for _, noy := range sub.noyaux {
 				if noy.canon > "" {
@@ -470,23 +451,22 @@ func (m *Mot) resSub(sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 					va = va || noy.vaPos(an.Lem.Pos)
 				}
 			}
-			if !va {
-				aoter = append(aoter, i)
+			if va {
+				nres = append(nres, an)
 			}
 		}
-		for i := len(aoter) - 1; i > -1; i-- {
-			res = oteSr(res, i)
+		if len(nres) == 0 {
+			return nil
 		}
-	}
-	if len(res) == 0 {
-		return nil
+		res = nres
 	}
 
 	//morphologie
 	// si aucune morpho n'est requise, passer
 	if len(sub.morpho) > 0 {
-		var aoter []int
-		for i, an := range res {
+		//var aoter []int
+		var nres gocol.Res
+		for _, an := range res {
 			var lmorf []string
 			for _, morfs := range an.Morphos {
 				// pour toutes les morphos valides de m
@@ -494,15 +474,15 @@ func (m *Mot) resSub(sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 					lmorf = append(lmorf, morfs)
 				}
 			}
-			if len(lmorf) == 0 {
-				aoter = append(aoter, i)
-			} else {
-				res[i].Morphos = lmorf
+			if len(lmorf) > 0 {
+				an.Morphos = lmorf
+				nres = append(nres, an)
 			}
 		}
-		for i := len(aoter) - 1; i > -1; i-- {
-			res = oteSr(res, i)
+		if len(nres) == 0 {
+			return nil
 		}
+		res = nres
 	}
 	// accord
 	// pour toutes les morphos valides de mn
