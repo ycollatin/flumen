@@ -34,6 +34,7 @@
 ! - gen : le verbe, l'adjectif ou le nom peut avoir comme sub un génitif (memini)
 ! - infobj : le verbe peut avoir un infinitif objet
 ! - loc : peut être fléchi au locatif
+! - nogen : le nom ne peut avoir de génitif (ex. dea)
 ! - nom : tout nom qui peut être accompagné d'une apposition à initiale majuscule (rex, flumen, etc.)
 ! - posn,posc,posa : le lemme peut avoir aussi le pos a, c, n, etc.
 ! - ppr : le participe présent du verbe est substantivable
@@ -8321,7 +8322,7 @@ facilitas:
 facinerosus:
 facinorosus:
 facinus:
-facio:datif,abl,prepex
+facio:abl,datif,prepex
 factio:
 factiosus:
 factito:
