@@ -394,22 +394,21 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 		return res
 	}
 
-	var aoter []int
-	for i, sr := range res {
+	nres = nil
+	for _, sr := range res {
 		var morfos []string // morphos de sr acceptées par g
 		for _, morf := range sr.Morphos {
 			if g.vaMorph(morf) {
 				morfos = append(morfos, morf)
 			}
 		}
-		if len(morfos) == 0 {
-			aoter = append(aoter, i)
+		if len(morfos) > 0 {
+			sr.Morphos = morfos
+			nres = append(nres, sr)
 		}
-		sr.Morphos = morfos
 	}
-	for ao := len(aoter) - 1; ao > -1; ao-- {
-		res = oteSr(res, aoter[ao])
-	}
+	// pour faire comme pour les autres vérifs :
+	res = nres
 	return res
 }
 
