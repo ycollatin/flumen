@@ -119,6 +119,12 @@ grp:n.coord
 pos:n NP
 pg:n.conjet;coord;;c
 
+grp:v.obj
+pos:v
+morph:act
+lexsynt:!intr
+ag:n NP p !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
+
 grp:v.dienocte
 pos:v
 ag:"dies" "nox" "hora";abl;abl
@@ -187,12 +193,6 @@ grp:v.abl
 pos:v
 lexsynt:abl
 ag:n;abl;abl
-
-grp:v.obj
-pos:v
-morph:act
-lexsynt:!intr
-ag:n NP p !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
 
 grp:v.attrObj
 pos:v
