@@ -31,13 +31,12 @@ func creePhrase(t string) *Phrase {
 	return p
 }
 
-func (p *Phrase) arbre() ([]string, []string) {
+//func (p *Phrase) arbre() ([]string, []string) {
+func (p *Phrase) arbre() []string {
 	if len(p.ar) > 0 {
-		return p.ar, p.src
+		return p.ar
 	}
-	var lexpl []string
 	var ll []string
-	p.nods = nil
 	nba := 0 //
 	nbn := 0 // pour permettre le départ de boucle
 	debut := true
@@ -48,16 +47,20 @@ func (p *Phrase) arbre() ([]string, []string) {
 		if nba == 0 {
 			for _, g := range grpTerm {
 				for _, m := range p.mots {
+					/*
 					if m.dejaNoy() {
 						continue
 					}
+					*/
 					n := m.noeud(g)
 					if n != nil {
 						p.nods = append(p.nods, n)
-						lexpl = append(lexpl, n.grp.id)
 					}
 				}
 			}
+			// détection des conflits :
+			// plusieurs noeuds, même noyau
+			// un mot, plusieurs noyaux
 		}
 		// groupes non terminaux
 		for _, g := range grp {
@@ -65,7 +68,6 @@ func (p *Phrase) arbre() ([]string, []string) {
 				n := m.noeud(g)
 				if n != nil {
 					p.nods = append(p.nods, n)
-					lexpl = append(lexpl, n.grp.id)
 				}
 			}
 		}
@@ -80,7 +82,7 @@ func (p *Phrase) arbre() ([]string, []string) {
 	}
 	p.ar = ll
 	p.src = graphe(ll)
-	return ll, lexpl
+	return ll
 }
 
 // texte de la phrase, le mot courant surligné en rouge

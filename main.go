@@ -74,7 +74,7 @@ var (
 func analyse(expl bool) {
 	texte.phrase.teste()
 	texte.affiche(aidePh)
-	ar, _ := texte.phrase.arbre()
+	ar := texte.phrase.arbre()
 	gr := texte.phrase.src
 	if expl {
 		for _, n := range texte.phrase.nods {
