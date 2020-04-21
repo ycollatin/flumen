@@ -4,6 +4,7 @@
 package main
 
 // FIXME
+// - esse inf a un objet !
 // - tibiis facere : dat au lieu d'abl. quod Marsya tibii facere non potuit.
 // - in certamen provocavit : certamen objet au lieu de gprep
 // - consul populi Romani : Romani gén au lieu d'épith
