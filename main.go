@@ -6,7 +6,6 @@ package main
 // FIXME
 // - tantum nocte crescebat : tantum nocte n.epith, nocte crescebat, v.obj.
 // - Marcellinum *tibi esse* iratum scis : tibi devrait fixer esse à sum.
-// - gocol, /ederat/ non lemmatisé.
 // - la distinction lemmatisation avant/après analyse synt. n'est pas complète.
 // - subiciunt veribus prunas et viscera torrent :
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
@@ -156,18 +155,19 @@ func motsuiv() {
 func main() {
 	// couleur
 	rouge = color.New(color.FgRed, color.Bold).SprintFunc()
-	// lecture des données Collatinus
+	// chemins
 	dir, _ := os.Executable()
 	ch = path.Dir(dir)
 	chData = ch + "/data/"
 	chCorpus = ch + "/corpus/"
+	// lecture des données Collatinus
 	gocol.Data(chData)
 	// lecture des données syntaxiques
 	lisGroupes(chData + "groupes.la")
 	lisLexsynt()
 	// choix du texte
 	chxTexte()
-	//texte.affiche(aidePh)
+	// capture des touches
 	for {
 		k := GetKey()
 		switch k {
