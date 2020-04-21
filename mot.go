@@ -336,8 +336,8 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 		*/
 	} else {
 		// Le mot est encore isolé
-		var aoter []int
-		for i, a := range res {
+		var nres gocol.Res
+		for _, a := range res {
 			va := false
 			for _, noy := range g.noyaux {
 				if noy.canon > "" {
@@ -346,16 +346,14 @@ func (m *Mot) resNoyau(g *Groupe, res gocol.Res) gocol.Res {
 					va = va || noy.vaPos(a.Lem.Pos)
 				}
 			}
-			if !va {
-				aoter = append(aoter, i)
+			if va {
+				nres = append(nres, a)
 			}
 		}
-		for ao := len(aoter) - 1; ao > -1; ao-- {
-			res = oteSr(res, aoter[ao])
+		if len(nres) == 0 {
+			return nil
 		}
-	}
-	if len(res) == 0 {
-		return nil
+		res = nres
 	}
 
 	// vérif lexicosyntaxique
