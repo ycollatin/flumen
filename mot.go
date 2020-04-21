@@ -7,7 +7,6 @@
 // motestNoyauDeGroupe
 // motresSub
 // motadeja
-// fotesr
 
 // rappel de la lemmatisation dans gocol :
 // type Sr struct {
@@ -50,20 +49,21 @@ func creeMot(m string) *Mot {
 	if echec {
 		mot.ans, echec = gocol.Lemmatise(gocol.Majminmaj(m))
 	}
-	// exclusions de mots rares faisant obstacle à des analyses importantes
-	for i:= len(mot.ans)-1;i>-1;i-- {
-		an := mot.ans[i]
-		if lexsynt(an.Lem, "excl") {
-			mot.ans = oteSr(mot.ans, i)
-		}
-	}
-	mot.ans2 = mot.ans
 	// ajout du genre pour les noms
 	if !echec {
 		for i, a := range mot.ans {
 			mot.ans[i] = genus(a)
 		}
 	}
+
+	// exclusions de mots rares faisant obstacle à des analyses importantes
+	var nres gocol.Res
+	for _, an := range mot.ans {
+		if !lexsynt(an.Lem, "excl") {
+			nres = append(nres, an)
+		}
+	}
+	mot.ans2 = nres
 	return mot
 }
 
@@ -124,7 +124,6 @@ func (ma *Mot) domine(mb *Mot) bool {
 			return true
 		}
 		mnoy = mnoy.noyau()
-		//noyDe(mnoy)
 	}
 	return false
 }
@@ -162,8 +161,6 @@ func genus(sr gocol.Sr) gocol.Sr {
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
 
-	// FIXME grp:v.dat
-	// effigiem fecit cui Minerve animam dedit
 	rang := m.rang
 	lante := len(g.ante)
 	// mot de rang trop faible
@@ -208,7 +205,6 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 			return nil
 		}
 		sub := g.ante[ia]
-		//ma.restmp = ma.ans2
 		res := ma.resSub(sub, m, ma.restmp)
 		if res == nil {
 			return nil
@@ -242,7 +238,6 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		if mp.domine(m) {
 			return nil
 		}
-		//mp.restmp = mp.ans2
 		res := mp.resSub(sub, m, mp.restmp)
 		if res == nil {
 			return nil
@@ -285,17 +280,6 @@ func (m *Mot) noyau() *Mot {
 		}
 	}
 	return nil
-}
-
-func oteSr(res gocol.Res, n int) gocol.Res {
-	// signet foteSr
-	var restmp gocol.Res
-	for i, sr := range res {
-		if i != n {
-			restmp = append(restmp, sr)
-		}
-	}
-	return restmp
 }
 
 // renvoie quelles lemmatisations de m lui permettent d'être le noyau du groupe g
@@ -464,7 +448,6 @@ func (m *Mot) resSub(sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 	//morphologie
 	// si aucune morpho n'est requise, passer
 	if len(sub.morpho) > 0 {
-		//var aoter []int
 		var nres gocol.Res
 		for _, an := range res {
 			var lmorf []string
@@ -484,13 +467,12 @@ func (m *Mot) resSub(sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 		}
 		res = nres
 	}
+
 	// accord
-	// pour toutes les morphos valides de mn
-	// il faudrait pouvoir ôter des lemmes et morphos
 	// pour chaque an.
 	if sub.accord > "" {
-		var aoter []int
-		for i, an := range res {
+		var nres gocol.Res
+		for _, an := range res {
 			va := false
 			for _, anoy := range mn.restmp {
 				// pour toutes les morphos valides de m
@@ -505,17 +487,16 @@ func (m *Mot) resSub(sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 				}
 				if len(lmorf) > 0 {
 					an.Morphos = lmorf
-					// XXX à vérifier : à placer + bas ?
-					res[i] = an
 				}
 			}
-			if !va {
-				aoter = append(aoter, i)
+			if va {
+				nres = append(nres, an)
 			}
 		}
-		for i := len(aoter) - 1; i > -1; i-- {
-			res = oteSr(res, i)
+		if len(nres) == 0 {
+			return nil
 		}
+		res = nres
 	}
 	return res
 }
