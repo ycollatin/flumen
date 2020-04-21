@@ -36,6 +36,8 @@ func (p *Phrase) arbre() []string {
 	if len(p.ar) > 0 {
 		return p.ar
 	}
+	// recalcul de la phrase : il faut éliminer les noeuds
+	p.nods = nil
 	var ll []string
 	nba := 0 //
 	nbn := 0 // pour permettre le départ de boucle
