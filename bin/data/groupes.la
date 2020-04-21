@@ -133,6 +133,18 @@ grp:n.gen
 pos:n
 ag:n NP;gen;gén
 
+grp:v.attrPass
+pos:v
+morph:pass indic,pass subj
+lexsynt:attrp
+ag:NP n a;attr;nomin
+
+grp:v.vattrPass
+pos:v
+morph:pass indic,pass subj
+lexsynt:attrp
+pg:NP n a;attr;nomin
+
 grp:n.genp
 pos:n
 pg:n NP;gen;gén
@@ -141,7 +153,6 @@ grp:n.app
 pos:n NP
 pg:n;+app;;cgn
 
-! FIXME in Monte Parnasso
 grp:n.prepAbl
 pos:n NP p
 morph:abl
@@ -177,27 +188,28 @@ lexsynt:datif
 morph:indic,subj
 a:"qui2";dat;dat sing
 
+grp:v.abl
+pos:v
+lexsynt:abl
+ag:n;abl;abl
+
 grp:v.dat
 pos:v
 morph:indic,subj,part,inf
 lexsynt:datif
 ag:n NP p;dat;datif
 
+! XXX morph est-il utile ?
 grp:v.vdat
 pos:v
 morph:indic,subj,part,inf
 lexsynt:datif
 pg:n NP;dat;datif
 
-grp:v.abl
-pos:v
-lexsynt:abl
-ag:n;abl;abl
-
 grp:v.attrObj
 pos:v
 morph:act
-lexsynt:attro
+lexsynt:attro !propinf
 ag:n a;attro;acc
 
 grp:v.vobj
@@ -277,12 +289,6 @@ pos:v
 morph:indic 3,subj 3
 ag:n NP;sujet;nomin;n
 
-grp:v.attrPass
-pos:v
-morph:pass indic,pass subj
-lexsynt:attrp
-ag:a NP n;attr;nomin
-
 grp:v.objsuj
 pos:v.sujet
 lexsynt:!attr !intr
@@ -293,12 +299,16 @@ pos:v
 morph:3
 p:n NP;sujet;nomin;n
 
+grp:v.vPropinf
+pos:v
+morph:inf
+ag:n NP p;suj;acc
+
 grp:v.propinf
 pos:v
 morph:actif
 lexsynt:propinf
-ag:n NP p;suj;acc
-ag:v;propinf;inf
+ag:v.vPropinf;prinf
 
 grp:v.propinfPass
 pos:"dico2" "habeo"
