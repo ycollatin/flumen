@@ -4,6 +4,9 @@
 package main
 
 // FIXME
+// - tibiis facere : dat au lieu d'abl. quod Marsya tibii facere non potuit.
+// - in certamen provocavit : certamen objet au lieu de gprep
+// - consul populi Romani : Romani gén au lieu d'épith
 // - tantum nocte crescebat : tantum nocte n.epith, nocte crescebat, v.obj.
 // - Marcellinum *tibi esse* iratum scis : tibi devrait fixer esse à sum.
 // - la distinction lemmatisation avant/après analyse synt. n'est pas complète.
@@ -12,6 +15,7 @@ package main
 //				  et la coord subiciunt et torrent (juste)
 //
 // XXX
+// - beaucoup de confusions entre n+app et n+gén.
 // - Trouver une solution pour la construction personnelle de l'infinitive
 //   Homerus dicitur caecus fuisse. (ou caecum)
 // - CONSTRUCTIONS LEXICALES
@@ -21,7 +25,9 @@ package main
 // - traiter la coordination par -que := et -
 // - traiter de la même manière le noyau et les subs, aussi bien dans le code
 //   que dans les données ?
-//   tenir compte de la morpho unique (voluptatem. acc. sing.)
+// - tenir compte de la morpho unique (voluptatem. acc. sing.)
+// - une version qui explore toutes les possibilités de groupes.
+//   en privilégiant les groupes qui ont le plus de mots
 // - un champ groupe.anrel - analyses du relatif ?
 // - donner une POS distincte aux verbes intransitifs. v. gocol.indMorph
 // - accord de personne sujet-verbe ?
