@@ -180,6 +180,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	if res == nil {
 		return nil
 	}
+	m.restmp = res
 
 	// création du noeud de retour
 	nod := new(Nod)
