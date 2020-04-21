@@ -56,6 +56,7 @@ func creeMot(m string) *Mot {
 		}
 	}
 
+	// provisoire XXX
 	// exclusions de mots rares faisant obstacle à des analyses importantes
 	var nres gocol.Res
 	for _, an := range mot.ans {
