@@ -32,7 +32,7 @@ type Lm struct {
 type Mot struct {
 	gr         string    // graphie du mot
 	rang       int       // rang du mot dans la phrase à partir de 0
-	ans, ans2  gocol.Res // ensemble des lemmatisations, ans2 réduite par la syntaxe
+	ans, ans2  gocol.Res // ensemble des lemmatisations, ans2 réduit par chaque noeud créé.
 	restmp     gocol.Res // analyses temporaires du mot pendand le calcul d'un noeud
 	dejasub    bool      // le mot est déjà l'élément d'n nœud
 	llm        []Lm      // liste des lemmes ٍ+ morpho possibles
@@ -254,7 +254,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 
 	// fixer les pos et sub des mots du noeud
 	if len(nod.mma)+len(nod.mmp) > 0 {
-		// la pos du noyau devient celle du groupe 
+		// la pos du noyau devient celle du groupe
 		m.pos = g.id
 		// restriction des lemmatisations des antéposés
 		for _, ms := range nod.mma {
@@ -264,6 +264,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		}
 		//restriction des lemmatisations du noyau
 		m.ans2 = m.restmp
+		m.restmp = nil
 		// restriction des lemmatisations des postposés
 		for _, ms := range nod.mmp {
 			ms.dejasub = true
@@ -396,6 +397,7 @@ func (m *Mot) resSub(sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 		return nil
 	}
 	// vérification des pos
+	// FIXME legatos decernis : avec v.obj, seul legagos pp est sélectionné par vaPos
 	if m.pos != "" {
 		// 1. La pos du mot est définitive
 		// noyaux exclus
