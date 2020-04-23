@@ -42,7 +42,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
-	"strings"
+	//"strings"
 
 	"github.com/fatih/color"
 	"github.com/ycollatin/gocol"
@@ -73,12 +73,12 @@ var (
 
 // affiche les arcs syntaxique de la phrase
 func analyse(expl bool) {
-	texte.phrase.teste()
+	texte.tronc.teste()
 	texte.affiche(aidePh)
-	ar := texte.phrase.arbre()
-	gr := texte.phrase.src
+	texte.tronc.explore()
+	/*
 	if expl {
-		for _, n := range texte.phrase.nods {
+		for _, n := range texte.tronc.nods {
 			fmt.Println(n.doc())
 		}
 		fmt.Println("\n----- source ---\n",
@@ -86,6 +86,7 @@ func analyse(expl bool) {
 			"\n----------------")
 	}
 	fmt.Println(strings.Join(gr, "\n"))
+	*/
 }
 
 // choix du texte latin
@@ -125,11 +126,12 @@ func chxTexte() {
 
 func lemmatise() {
 	texte.affiche(aidePh)
-	im := texte.phrase.imot
-	texte.phrase.teste()
-	texte.phrase.imot = im
-	mc := texte.phrase.motCourant()
+	im := texte.tronc.imot
+	texte.tronc.teste()
+	texte.tronc.imot = im
+	mc := texte.tronc.motCourant()
 	fmt.Println("lemmatisation", rouge(mc.gr))
+	/*
 	if len(mc.ans2) > 0 {
 		ll2 := gocol.Restostring(mc.ans2)
 		fmt.Println(rouge(ll2))
@@ -140,21 +142,21 @@ func lemmatise() {
 				fmt.Println(l)
 			}
 		}
-	} else {
+	} else {*/
 		fmt.Println(gocol.Restostring(mc.ans))
-	}
+	//}
 }
 
 func motprec() {
-	if texte.phrase.imot > 0 {
-		texte.phrase.imot--
+	if texte.tronc.imot > 0 {
+		texte.tronc.imot--
 		texte.affiche(aidePh)
 	}
 }
 
 func motsuiv() {
-	if texte.phrase.imot < len(texte.phrase.mots)-1 {
-		texte.phrase.imot++
+	if texte.tronc.imot < len(texte.tronc.mots)-1 {
+		texte.tronc.imot++
 		texte.affiche(aidePh)
 	}
 }

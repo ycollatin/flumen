@@ -1,6 +1,6 @@
 //  texte.go - Publicola
 
-// Partage d'un texte en []Phrase
+// Partage d'un texte en []Branche
 
 package main
 
@@ -14,25 +14,25 @@ type Texte struct {
 	nom      string
 	compteur int
 	phrases  []string
-	phrase   *Phrase
+	tronc   *Branche
 }
 
 func (t *Texte) append(p string) {
 	t.phrases = append(t.phrases, p)
 }
 
-// Efface l'écran, affiche un entête, la phrase, et
+// Efface l'écran, affiche un entête, la Branche, et
 // le texte du param aide.
 func (t Texte) affiche(aide string) {
 	ClearScreen()
-	fmt.Printf("%s, phrase %d, mot %d\n", t.nom, t.compteur, texte.phrase.imot)
-	fmt.Println(t.phrase.enClair())
+	fmt.Printf("%s, Branche %d, mot %d\n", t.nom, t.compteur, texte.tronc.imot)
+	fmt.Println(t.tronc.enClair())
 	fmt.Println(aide)
 }
 
 // crée un texte à partir du fichier nommé nf
 func CreeTexte(nf string) *Texte {
-	var tp string // texte de la phrase
+	var tp string // texte de la Branche
 	ll := gocol.Lignes(chCorpus + nf)
 	t := new(Texte)
 	t.nom = nf
@@ -48,8 +48,8 @@ func CreeTexte(nf string) *Texte {
 				if tp > "" && tp[0] == ' ' {
 					tp = tp[1:]
 				}
-				// créer et ajouter la nouvelle phrase
-				t.phrases = append(t.phrases, tp)
+				// ajouter la nouvelle phrase
+				t.append(tp)
 				tp = ""
 				l = l[ifp+1:]
 			}
@@ -60,7 +60,7 @@ func CreeTexte(nf string) *Texte {
 
 func (t *Texte) majPhrase() {
 	initArcs()
-	t.phrase = creePhrase(t.phrases[t.compteur])
+	t.tronc = creeBranche(t.phrases[t.compteur])
 }
 
 func (t *Texte) porro() {

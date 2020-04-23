@@ -32,11 +32,10 @@ type Lm struct {
 type Mot struct {
 	gr         string    // graphie du mot
 	rang       int       // rang du mot dans la phrase à partir de 0
-	ans, ans2  gocol.Res // ensemble des lemmatisations, ans2 réduit par chaque noeud créé.
-	restmp     gocol.Res // analyses temporaires du mot pendand le calcul d'un noeud
-	dejasub    bool      // le mot est déjà l'élément d'n nœud
-	llm        []Lm      // liste des lemmes ٍ+ morpho possibles
-	tmpl, tmpm int       // n°s provisoires de Sr et morpho
+	//ans, ans2  gocol.Res // ensemble des lemmatisations, ans2 réduit par chaque noeud créé.
+	ans        gocol.Res // ensemble des lemmatisations, ans2 réduit par chaque noeud créé.
+	restmp	   gocol.Res // lemmatisation de test d'un noeud
+	dejasub    bool      // le mot est déjà l'élément d'un nœud
 	pos        string    // id du groupe dont le mot est noyau
 	// ou à défaut pos du mot, si elle est décidée
 }
@@ -64,7 +63,7 @@ func creeMot(m string) *Mot {
 			nres = append(nres, an)
 		}
 	}
-	mot.ans2 = nres
+	mot.ans = nres
 	return mot
 }
 
@@ -92,7 +91,7 @@ func accord(lma, lmb, cgn string) bool {
 func (m *Mot) adeja(sub *Sub) bool {
 	// signet motadeja
 	sublien := sub.lien
-	for _, nod := range texte.phrase.nods {
+	for _, nod := range texte.tronc.nods {
 		if nod.nucl == m {
 			for i, _ := range nod.mma {
 				if nod.grp.ante[i].lien == sublien {
@@ -109,8 +108,27 @@ func (m *Mot) adeja(sub *Sub) bool {
 	return false
 }
 
+// TODO essayer un simple copy sur Mot.ans
+func (m *Mot) copie() *Mot {
+	nm := new(Mot)
+	nm.gr = m.gr
+	nm.rang = m.rang
+	for _, aan := range m.ans {
+		var nan gocol.Sr
+		nan.Lem = aan.Lem
+		nan.Nmorph = make([]int, len(aan.Nmorph))
+		copy(nan.Nmorph, aan.Nmorph)
+		nan.Morphos = make([]string, len(aan.Morphos))
+		copy(nan.Morphos, aan.Morphos)
+		nm.ans = append(nm.ans, nan)
+	}
+	nm.dejasub = m.dejasub
+	nm.pos = m.pos
+	return nm
+}
+
 func (m *Mot) dejaNoy() bool {
-	for _, n := range texte.phrase.nods {
+	for _, n := range texte.tronc.nods {
 		if n.nucl == m {
 			return true
 		}
@@ -132,7 +150,7 @@ func (ma *Mot) domine(mb *Mot) bool {
 // id des Nod dont m est déjà le noyau
 func (m *Mot) estNuclDe() []string {
 	var ret []string
-	for _, nod := range texte.phrase.nods {
+	for _, nod := range texte.tronc.nods {
 		if nod.nucl == m {
 			ret = append(ret, nod.grp.id)
 		}
@@ -170,12 +188,12 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		return nil
 	}
 	// ou trop élevé
-	if rang+len(g.post)-1 >= texte.phrase.nbmots {
+	if rang+len(g.post)-1 >= texte.tronc.nbmots {
 		return nil
 	}
 
 	// m peut-il être noyau du groupe g ?
-	m.restmp = m.ans2
+	m.restmp = m.ans
 	res := m.resNoyau(g, m.restmp)
 	if res == nil {
 		return nil
@@ -195,14 +213,14 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 			// le rang du mot est < 0 : impossible
 			return nil
 		}
-		ma := texte.phrase.mots[r]
+		ma := texte.tronc.mots[r]
 		// passer les mots déjà subordonnés
 		for ma.dejasub {
 			r--
 			if r < 0 {
 				return nil
 			}
-			ma = texte.phrase.mots[r]
+			ma = texte.tronc.mots[r]
 		}
 		// vérification de réciprocité, puis du lien lui-même
 		if ma.domine(m) {
@@ -221,23 +239,23 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 	// reгcherche des subs post
 	for ip, sub := range g.post {
 		r := rang + ip + 1
-		if r >= texte.phrase.nbmots {
+		if r >= texte.tronc.nbmots {
 			break
 		}
 		if sub.lien == "" {
 			continue
 		}
-		mp := texte.phrase.mots[r]
+		mp := texte.tronc.mots[r]
 		for mp.dejasub {
 			r++
-			if r >= texte.phrase.nbmots {
+			if r >= texte.tronc.nbmots {
 				return nil
 			}
 			mpn := mp.noyau()
 			if mpn != nil && mpn.rang < m.rang {
 				return nil
 			}
-			mp = texte.phrase.mots[r]
+			mp = texte.tronc.mots[r]
 		}
 		// réciprocité
 		if mp.domine(m) {
@@ -259,16 +277,16 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 		// restriction des lemmatisations des antéposés
 		for _, ms := range nod.mma {
 			ms.dejasub = true
-			ms.ans2 = ms.restmp
+			ms.ans = ms.restmp
 			ms.restmp = nil
 		}
 		//restriction des lemmatisations du noyau
-		m.ans2 = m.restmp
+		m.ans = m.restmp
 		m.restmp = nil
 		// restriction des lemmatisations des postposés
 		for _, ms := range nod.mmp {
 			ms.dejasub = true
-			ms.ans2 = ms.restmp
+			ms.ans = ms.restmp
 			ms.restmp = nil
 		}
 		return nod
@@ -277,7 +295,7 @@ func (m *Mot) noeud(g *Groupe) *Nod {
 }
 
 func (m *Mot) noyau() *Mot {
-	for _, n := range texte.phrase.nods {
+	for _, n := range texte.tronc.nods {
 		for _, msub := range n.mma {
 			if msub == m {
 				return n.nucl
