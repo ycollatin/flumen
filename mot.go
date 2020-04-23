@@ -24,11 +24,6 @@ import (
 	"strings"
 )
 
-type Lm struct {
-	l *gocol.Lemme
-	m string
-}
-
 type Mot struct {
 	gr   string // graphie du mot
 	rang int    // rang du mot dans la phrase à partir de 0
