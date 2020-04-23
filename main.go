@@ -73,7 +73,6 @@ var (
 
 // affiche les arcs syntaxique de la phrase
 func analyse(expl bool) {
-	texte.tronc.teste()
 	texte.affiche(aidePh)
 	texte.tronc.explore()
 	/*
@@ -127,7 +126,6 @@ func chxTexte() {
 func lemmatise() {
 	texte.affiche(aidePh)
 	im := texte.tronc.imot
-	texte.tronc.teste()
 	texte.tronc.imot = im
 	mc := texte.tronc.motCourant()
 	fmt.Println("lemmatisation", rouge(mc.gr))
