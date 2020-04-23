@@ -14,7 +14,7 @@ type Texte struct {
 	nom      string
 	compteur int
 	phrases  []string
-	tronc   *Branche
+	tronc    *Branche
 }
 
 func (t *Texte) append(p string) {

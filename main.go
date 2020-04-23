@@ -77,15 +77,15 @@ func analyse(expl bool) {
 	texte.affiche(aidePh)
 	texte.tronc.explore()
 	/*
-	if expl {
-		for _, n := range texte.tronc.nods {
-			fmt.Println(n.doc())
+		if expl {
+			for _, n := range texte.tronc.nods {
+				fmt.Println(n.doc())
+			}
+			fmt.Println("\n----- source ---\n",
+				strings.Join(ar, "\n"),
+				"\n----------------")
 		}
-		fmt.Println("\n----- source ---\n",
-			strings.Join(ar, "\n"),
-			"\n----------------")
-	}
-	fmt.Println(strings.Join(gr, "\n"))
+		fmt.Println(strings.Join(gr, "\n"))
 	*/
 }
 
@@ -132,18 +132,18 @@ func lemmatise() {
 	mc := texte.tronc.motCourant()
 	fmt.Println("lemmatisation", rouge(mc.gr))
 	/*
-	if len(mc.ans2) > 0 {
-		ll2 := gocol.Restostring(mc.ans2)
-		fmt.Println(rouge(ll2))
-		ll3 := strings.Split(ll2, "\n")
-		ll := strings.Split(gocol.Restostring(mc.ans), "\n")
-		for _, l := range ll {
-			if !contient(ll3, l) {
-				fmt.Println(l)
+		if len(mc.ans2) > 0 {
+			ll2 := gocol.Restostring(mc.ans2)
+			fmt.Println(rouge(ll2))
+			ll3 := strings.Split(ll2, "\n")
+			ll := strings.Split(gocol.Restostring(mc.ans), "\n")
+			for _, l := range ll {
+				if !contient(ll3, l) {
+					fmt.Println(l)
+				}
 			}
-		}
-	} else {*/
-		fmt.Println(gocol.Restostring(mc.ans))
+		} else {*/
+	fmt.Println(gocol.Restostring(mc.ans))
 	//}
 }
 

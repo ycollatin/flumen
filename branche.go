@@ -14,8 +14,7 @@ type Branche struct {
 	nbmots int
 	mots   []*Mot
 	nods   []*Nod
-	//ar     []string // arbre de la Branche
-	//src    []string // source de l'arbre
+	niveau int
 	mere   *Branche
 	filles []*Branche
 }
@@ -42,16 +41,18 @@ func (b *Branche) copie() *Branche {
 		nm := am.copie()
 		nb.mots = append(nb.mots, nm)
 	}
-	copy(b.nods, nb.nods)
-	nb.mere = b.mere
+	copy(nb.nods, b.nods)
+	nb.mere = b
+	nb.niveau = b.niveau + 1
 	copy(b.filles, nb.filles)
 	return nb
 }
 
 //func (p *Branche) arbre() ([]string, []string) {
 func (bm *Branche) explore() {
+	// on copie la branche mère pour la rendre
+	// indépendante et en faire une fille possible
 	bf := bm.copie()
-	diff := false
 	// recherche des noyaux
 	// groupes terminaux
 	for _, g := range grpTerm {
@@ -62,7 +63,8 @@ func (bm *Branche) explore() {
 			n := m.noeud(g)
 			if n != nil {
 				bf.nods = append(bf.nods, n)
-				diff = true
+				nbf := bf.copie()
+				bm.filles = append(bm.filles, nbf)
 			}
 		}
 	}
@@ -72,12 +74,11 @@ func (bm *Branche) explore() {
 			n := m.noeud(g)
 			if n != nil {
 				bf.nods = append(bf.nods, n)
-				diff = true
+				nbf := bf.copie()
+				nbf.mere = bm
+				bm.filles = append(bm.filles, nbf)
 			}
 		}
-	}
-	if diff {
-		bm.filles = append(bm.filles, bf)
 	}
 	if len(bm.filles) > 0 {
 		for _, f := range bm.filles {
