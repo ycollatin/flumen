@@ -93,8 +93,8 @@ grp:n.appFam
 pos:NP
 pg:n.fam;app;;cgn
 
-grp:n.appnp
-pos:n NP
+grp:n.app
+pos:n
 lexsynt:nom
 p:NP;app;;cn
 
@@ -144,14 +144,6 @@ pos:v
 morph:pass indic,pass subj
 lexsynt:attrp
 pg:NP n a;attr;nomin
-
-grp:n.genp
-pos:n
-pg:n NP;gen;gén
-
-grp:n.app
-pos:n NP
-pg:n;+app;;cgn
 
 grp:n.prepAbl
 pos:n NP p
