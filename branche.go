@@ -66,7 +66,8 @@ func (b *Branche) domine(ma, mb *Mot) bool {
 	return false
 }
 
-//func (p *Branche) arbre() ([]string, []string) {
+// FIXME : la photo de dea devrait avoir un pos
+// et la photo de Isis devrait être dejasub
 func (bm *Branche) explore() {
 	// on copie la branche mère pour la rendre
 	// indépendante et en faire une fille possible
@@ -78,6 +79,7 @@ func (bm *Branche) explore() {
 			if m.dejaNoy() {
 				continue
 			}
+			// XXX b.photos[m] n'existe pas
 			n := bm.noeud(m, g)
 			if n != nil {
 				bf.nods = append(bf.nods, n)
@@ -160,12 +162,6 @@ func (b *Branche) initTronc() {
 
 func (b *Branche) motCourant() *Mot {
 	return b.mots[b.imot]
-}
-
-func (b *Branche) teste() {
-	if len(b.motCourant().ans) == 0 {
-		texte.majPhrase()
-	}
 }
 
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
@@ -312,7 +308,6 @@ func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
 	// valeurs variable de m pour la branche
 	photom := b.photos[m]
 	// vérif du pos
-	//if m.pos != "" {
 	if photom.pos != "" {
 		// 1. La pos définitif est fixée
 		va := false
