@@ -1,11 +1,6 @@
 //       mot.go - Gentes
 
 // signets :
-//
-// motnoeud
-// motresnoyau
-// motestNoyauDeGroupe
-// motresSub
 // motadeja
 
 // rappel de la lemmatisation dans gocol :
@@ -30,9 +25,17 @@ type Mot struct {
 	//ans, ans2  gocol.Res // ensemble des lemmatisations, ans2 réduit par chaque noeud créé.
 	ans     gocol.Res // ensemble des lemmatisations, ans2 réduit par chaque noeud créé.
 	restmp  gocol.Res // lemmatisation de test d'un noeud
-	dejasub bool      // le mot est déjà l'élément d'un nœud
-	pos     string    // id du groupe dont le mot est noyau
+	//dejasub bool      // le mot est déjà l'élément d'un nœud
+	//pos     string    // id du groupe dont le mot est noyau
 	// ou à défaut pos du mot, si elle est décidée
+}
+
+// caractéristiques variables du mot, qui diffère à chaque branche
+type PhotoMot struct {
+	mot     *Mot
+	res	    gocol.Res
+	dejasub bool
+	pos     string
 }
 
 func cloneRes(res gocol.Res) gocol.Res {
@@ -114,8 +117,6 @@ func (m *Mot) copie() *Mot {
 	nm.gr = m.gr
 	nm.rang = m.rang
 	nm.ans = cloneRes(m.ans)
-	nm.dejasub = m.dejasub
-	nm.pos = m.pos
 	return nm
 }
 
@@ -124,17 +125,6 @@ func (m *Mot) dejaNoy() bool {
 		if n.nucl == m {
 			return true
 		}
-	}
-	return false
-}
-
-func (ma *Mot) domine(mb *Mot) bool {
-	mnoy := mb.noyau()
-	for mnoy != nil {
-		if mnoy == ma {
-			return true
-		}
-		mnoy = mnoy.noyau()
 	}
 	return false
 }
@@ -168,6 +158,7 @@ func genus(sr gocol.Sr) gocol.Sr {
 	return sr
 }
 
+/*
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (m *Mot) noeud(g *Groupe) *Nod {
 	// signet motnoeud
@@ -522,3 +513,4 @@ func (m *Mot) resSub(sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 	}
 	return res
 }
+*/

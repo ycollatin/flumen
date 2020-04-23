@@ -61,6 +61,7 @@ func CreeTexte(nf string) *Texte {
 func (t *Texte) majPhrase() {
 	initArcs()
 	t.tronc = creeBranche(t.phrases[t.compteur])
+	t.tronc.initTronc()
 }
 
 func (t *Texte) porro() {

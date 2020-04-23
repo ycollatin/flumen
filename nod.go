@@ -51,3 +51,20 @@ func (n *Nod) doc() string {
 	mm = append(mm, " - "+n.grp.id)
 	return strings.Join(mm, " ")
 }
+
+func (n *Nod) inclut(m *Mot) bool {
+	for _, el := range n.mma {
+		if el == m {
+			return true
+		}
+	}
+	if m == n.nucl {
+		return true
+	}
+	for _, el := range n.mmp {
+		if el == m {
+			return true
+		}
+	}
+	return false
+}
