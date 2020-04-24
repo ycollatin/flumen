@@ -80,15 +80,18 @@ func analyse(expl bool) {
 		fmt.Println("échec de l'analyse")
 		return
 	}
+	if ibr < 0 {
+		ibr = 0
+	}
 	if ibr >= len(recolte) {
 		ibr = len(recolte) - 1
 	}
 	nods := recolte[ibr]
+	// graphe
 	var src []string
 	src = append(src, texte.tronc.gr)
 	for _, n := range nods {
-		ll := n.graf()
-		src = append(src, ll...)
+		src = append(src, n.graf()...)
 	}
 	if expl {
 		for _, n := range nods {
@@ -212,9 +215,7 @@ func main() {
 			analyse(true)
 			modeA = true
 		case "p":
-			if ibr > 0 {
-				ibr--
-			}
+			ibr--
 			analyse(modeA)
 		case "s":
 			ibr++
