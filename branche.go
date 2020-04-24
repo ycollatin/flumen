@@ -1,5 +1,14 @@
 //     Branche.go - Publicola
 
+/*
+Signets
+sexplore
+snoeud
+snoyau
+sresub
+
+*/
+
 package main
 
 import (
@@ -7,6 +16,16 @@ import (
 	"github.com/ycollatin/gocol"
 	"strings"
 )
+
+// Chaque branche modifie trois propriétés attachées
+// au mot. Leur liste est donc enregistrée dans
+// Branche.photos.
+type PhotoMot struct {
+	mot     *Mot      // liaison avec le mot
+	res     gocol.Res // lemmatisations réduites du mot
+	dejasub bool      // appartenance du mot à un groupe
+	pos     string    // nom du groupe dont le mot est noyau
+}
 
 type Branche struct {
 	gr     string
@@ -20,18 +39,26 @@ type Branche struct {
 	filles []*Branche
 }
 
-func creeBranche(t string) *Branche {
-	p := new(Branche)
-	p.gr = t
+func creeTronc(t string) *Branche {
+	br := new(Branche)
+	br.gr = t
 	mm := gocol.Mots(t)
 	for i, m := range mm {
 		nm := creeMot(m)
 		nm.rang = i
-		p.mots = append(p.mots, nm)
+		br.mots = append(br.mots, nm)
 	}
-	p.nbmots = len(p.mots)
-	p.photos = make(map[*Mot]*PhotoMot)
-	return p
+	br.nbmots = len(br.mots)
+	br.photos = make(map[*Mot]*PhotoMot)
+	// peuplement des photos
+	for _, m := range br.mots {
+		phm := new(PhotoMot)
+		phm.mot = m
+		phm.res = m.ans
+		phm.dejasub = false
+		br.photos[m] = phm
+	}
+	return br
 }
 
 func (b *Branche) copie() *Branche {
@@ -55,7 +82,7 @@ func (b *Branche) dejasub(m *Mot) bool {
 }
 
 func (b *Branche) domine(ma, mb *Mot) bool {
-//func (b *Branche) noyau(m *Mot) *Mot {
+	//func (b *Branche) noyau(m *Mot) *Mot {
 	mnoy := b.noyau(mb)
 	for mnoy != nil {
 		if mnoy == ma {
@@ -66,57 +93,53 @@ func (b *Branche) domine(ma, mb *Mot) bool {
 	return false
 }
 
+func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
+	for _, g := range grpTerm {
+		// XXX b.photos[m] n'existe pas
+		n := bm.noeud(m, g)
+		if n != nil {
+			bf := bm.copie()
+			for _, mph := range bm.mots {
+				photo := new(PhotoMot)
+				photo.dejasub = true
+				photo.mot = mph
+				if n.inclut(mph) {
+					photo.res = mph.restmp
+					if mph == n.nucl {
+						photo.pos = n.grp.id
+					}
+				} else {
+					photo.res = bm.photos[mph].res
+				}
+				bf.photos[photo.mot] = photo
+			}
+			bf.nods = append(bm.nods, n)
+			bf.explore()
+		}
+	}
+}
+
 // FIXME : la photo de dea devrait avoir un pos
 // et la photo de Isis devrait être dejasub
 func (bm *Branche) explore() {
+	// signet sexplore
 	// on copie la branche mère pour la rendre
 	// indépendante et en faire une fille possible
-	bf := bm.copie()
 	// recherche des noyaux
 	// groupes terminaux
-	for _, g := range grpTerm {
-		for _, m := range bf.mots {
-			if m.dejaNoy() {
-				continue
-			}
-			// XXX b.photos[m] n'existe pas
-			n := bm.noeud(m, g)
-			if n != nil {
-				bf.nods = append(bf.nods, n)
-				nbf := bf.copie()
-				// calcul des photos pour nbf
-				for _, mph := range bm.mots {
-					photo := new(PhotoMot)
-					photo.mot = mph
-					if n.inclut(mph) {
-						photo.res = mph.restmp
-						if mph == n.nucl {
-							photo.pos = n.grp.id
-						}
-					} else {
-						photo.res = bm.photos[mph].res
-					}
-				}
-				bm.filles = append(bm.filles, nbf)
-			}
+	for _, m := range bm.mots {
+		// les groupes de grpTerm sont des
+		// liens de mot à mot. un noyau de
+		// grpTerm ne peut donc avoir de 
+		// sub supplémentaire.
+		if m.dejaNoy() {
+			continue
 		}
+		bm.explGrps(m, grpTerm)
 	}
 	// groupes non terminaux
-	for _, g := range grp {
-		for _, m := range bf.mots {
-			n := bm.noeud(m, g)
-			if n != nil {
-				bf.nods = append(bf.nods, n)
-				nbf := bf.copie()
-				nbf.mere = bm
-				bm.filles = append(bm.filles, nbf)
-			}
-		}
-	}
-	if len(bm.filles) > 0 {
-		for _, f := range bm.filles {
-			f.explore()
-		}
+	for _, m := range bm.mots {
+		bm.explGrps(m, grp)
 	}
 }
 
@@ -150,23 +173,13 @@ func (b *Branche) exr(d, n int) (e string) {
 	return
 }
 
-func (b *Branche) initTronc() {
-	for _, m := range b.mots {
-		p := new(PhotoMot)
-		p.mot = m
-		p.res = m.ans
-		p.dejasub = false
-		b.photos[m] = p
-	}
-}
-
 func (b *Branche) motCourant() *Mot {
 	return b.mots[b.imot]
 }
 
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
-	// signet motnoeud
+	// signet snoeud
 
 	// vérification de rang
 	rang := m.rang
@@ -176,7 +189,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 		return nil
 	}
 	// ou trop élevé
-	if rang+len(g.post)-1 >= texte.tronc.nbmots {
+	if rang+len(g.post)-1 >= b.nbmots {
 		return nil
 	}
 
@@ -201,14 +214,14 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 			// le rang du mot est < 0 : impossible
 			return nil
 		}
-		ma := texte.tronc.mots[r]
+		ma := b.mots[r]
 		// passer les mots déjà subordonnés
 		for b.dejasub(ma) {
 			r--
 			if r < 0 {
 				return nil
 			}
-			ma = texte.tronc.mots[r]
+			ma = b.mots[r]
 		}
 		// vérification de réciprocité, puis du lien lui-même
 		if b.domine(ma, m) {
@@ -227,23 +240,23 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	// reгcherche des subs post
 	for ip, sub := range g.post {
 		r := rang + ip + 1
-		if r >= texte.tronc.nbmots {
+		if r >= b.nbmots {
 			break
 		}
 		if sub.lien == "" {
 			continue
 		}
-		mp := texte.tronc.mots[r]
+		mp := b.mots[r]
 		for b.dejasub(mp) {
 			r++
-			if r >= texte.tronc.nbmots {
+			if r >= b.nbmots {
 				return nil
 			}
 			mpn := b.noyau(mp)
 			if mpn != nil && mpn.rang < m.rang {
 				return nil
 			}
-			mp = texte.tronc.mots[r]
+			mp = b.mots[r]
 		}
 		// réciprocité
 		if b.domine(mp, m) {
@@ -288,7 +301,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 }
 
 func (b *Branche) noyau(m *Mot) *Mot {
-	for _, n := range texte.tronc.nods {
+	for _, n := range b.nods {
 		for _, msub := range n.mma {
 			if msub == m {
 				return n.nucl
@@ -305,6 +318,7 @@ func (b *Branche) noyau(m *Mot) *Mot {
 
 // renvoie quelles lemmatisations de m lui permettent d'être le noyau du groupe g
 func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
+	// signet snoyau
 	// valeurs variable de m pour la branche
 	photom := b.photos[m]
 	// vérif du pos
@@ -403,7 +417,7 @@ func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
 
 // vrai si m est compatible avec Sub et le noyau mn
 func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
-	// signet motresSub
+	// signet sresub
 	// si la fonction est déjà prise, renvoyer nil
 	if !sub.multi && mn.adeja(sub) {
 		return nil
