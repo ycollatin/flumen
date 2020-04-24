@@ -8,3 +8,5 @@ darwin:
 	env GOOS=darwin GOARCH=amd64 go build -o mac/gentes
 w:
 	env GOOS=windows GOARCH=amd64 go build -o win/gentes.exe
+dlv:
+	dlv --headless debug
