@@ -74,6 +74,7 @@ var (
 func analyse(expl bool) {
 	texte.affiche(aidePh)
 	texte.tronc.explore()
+	fmt.Println("exploration terminée")
 	/*
 		if expl {
 			for _, n := range texte.tronc.nods {
