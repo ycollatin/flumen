@@ -94,7 +94,7 @@ func (b *Branche) domine(ma, mb *Mot) bool {
 }
 
 func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
-	for _, g := range grs {
+	for _, g := range grps {
 		n := bm.noeud(m, g)
 		if n != nil {
 			bf := bm.copie()
