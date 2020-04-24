@@ -28,15 +28,15 @@ type PhotoMot struct {
 }
 
 type Branche struct {
-	gr     string
-	imot   int
-	nbmots int
-	mots   []*Mot
-	nods   []*Nod
-	niveau int
-	photos map[*Mot]*PhotoMot
-	mere   *Branche
-	filles []*Branche
+	gr     string				// texte de la phrase
+	imot   int					// rang du mot courant
+	nbmots int					// nomb de mots de la phrase
+	mots   []*Mot				// mots de la phrase XXX inutile ?
+	nods   []*Nod				// noeuds validés 
+	niveau int					// n° de la branche par rapport au tronc
+	photos map[int]*PhotoMot	// lemmatisations et appartenance de groupe propres à la branche
+	mere   *Branche				// pointeur branche mère
+	filles []*Branche			// liste des branches filles
 }
 
 func creeTronc(t string) *Branche {
@@ -99,18 +99,43 @@ func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
 		if n != nil {
 			bf := bm.copie()
 			for _, mph := range bm.mots {
-				photo := new(PhotoMot)
-				photo.dejasub = true
-				photo.mot = mph
 				if n.inclut(mph) {
-					photo.res = mph.restmp
 					if mph == n.nucl {
-						photo.pos = n.grp.id
+						// noyau
+						ph := new(PhotoMot)
+						ph.mot = mph
+						ph.res = mph.restmp
+						ph.pos = n.grp.id
+						bf.photos[mph] = ph
+					}
+					for _, ma := range n.mma {
+						// ante
+						ph := new(PhotoMot)
+						ph.mot = ma
+						ph.res = ma.restmp
+						ph.dejasub = true
+						ph.pos = bm.photos[ma].pos
+						bf.photos[ma] = ph
+					}
+					for _, mp := range n.mmp {
+						// post
+						ph := new(PhotoMot)
+						ph.mot = mp
+						ph.res = mp.restmp
+						ph.dejasub = true
+						ph.pos = bm.photos[mp].pos
+						bf.photos[mp] = ph
 					}
 				} else {
-					photo.res = bm.photos[mph].res
+					bf.photos[mph] = bm.photos[mph]
+					/*
+					ph := new(PhotoMot)
+					ph.mot = mph
+					ph.res = bm.photos[mph].res
+					ph.pos = 
+					bf.photos[mph] = ph
+					*/
 				}
-				bf.photos[photo.mot] = photo
 			}
 			bf.nods = append(bm.nods, n)
 			bf.explore()
