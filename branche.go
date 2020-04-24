@@ -49,14 +49,14 @@ func creeTronc(t string) *Branche {
 		br.mots = append(br.mots, nm)
 	}
 	br.nbmots = len(br.mots)
-	br.photos = make(map[*Mot]*PhotoMot)
+	br.photos = make(map[int]*PhotoMot)
 	// peuplement des photos
 	for _, m := range br.mots {
 		phm := new(PhotoMot)
 		phm.mot = m
 		phm.res = m.ans
 		phm.dejasub = false
-		br.photos[m] = phm
+		br.photos[m.rang] = phm
 	}
 	return br
 }
@@ -73,12 +73,12 @@ func (b *Branche) copie() *Branche {
 	nb.mere = b
 	nb.niveau = b.niveau + 1
 	copy(b.filles, nb.filles)
-	nb.photos = make(map[*Mot]*PhotoMot)
+	nb.photos = make(map[int]*PhotoMot)
 	return nb
 }
 
 func (b *Branche) dejasub(m *Mot) bool {
-	return b.photos[m].dejasub
+	return b.photos[m.rang].dejasub
 }
 
 func (b *Branche) domine(ma, mb *Mot) bool {
@@ -106,7 +106,7 @@ func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
 						ph.mot = mph
 						ph.res = mph.restmp
 						ph.pos = n.grp.id
-						bf.photos[mph] = ph
+						bf.photos[mph.rang] = ph
 					}
 					for _, ma := range n.mma {
 						// ante
@@ -114,8 +114,8 @@ func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
 						ph.mot = ma
 						ph.res = ma.restmp
 						ph.dejasub = true
-						ph.pos = bm.photos[ma].pos
-						bf.photos[ma] = ph
+						ph.pos = bm.photos[ma.rang].pos
+						bf.photos[ma.rang] = ph
 					}
 					for _, mp := range n.mmp {
 						// post
@@ -123,11 +123,11 @@ func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
 						ph.mot = mp
 						ph.res = mp.restmp
 						ph.dejasub = true
-						ph.pos = bm.photos[mp].pos
-						bf.photos[mp] = ph
+						ph.pos = bm.photos[mp.rang].pos
+						bf.photos[mp.rang] = ph
 					}
 				} else {
-					bf.photos[mph] = bm.photos[mph]
+					bf.photos[mph.rang] = bm.photos[mph.rang]
 					/*
 					ph := new(PhotoMot)
 					ph.mot = mph
@@ -294,14 +294,14 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	// fixer les pos et sub des mots du noeud
 	if len(nod.mma)+len(nod.mmp) > 0 {
 		// la pos du noyau devient celle du groupe
-		photo := b.photos[m]
+		photo := b.photos[m.rang]
 		photo.pos = g.id
-		b.photos[m] = photo
+		b.photos[m.rang] = photo
 		// restriction des lemmatisations des antéposés
 		for _, ms := range nod.mma {
-			photo := b.photos[ms]
-			photo.dejasub = true
-			photo.res = cloneRes(ms.restmp)
+			//photo := b.photos[ms]
+			b.photos[ms.rang].dejasub = true
+			b.photos[ms.rang].res = cloneRes(ms.restmp)
 			ms.restmp = nil
 		}
 		//restriction des lemmatisations du noyau
@@ -309,9 +309,9 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 		m.restmp = nil
 		// restriction des lemmatisations des postposés
 		for _, ms := range nod.mmp {
-			photo := b.photos[ms]
-			photo.dejasub = true
-			photo.res = cloneRes(ms.restmp)
+			//photo := b.photos[ms]
+			b.photos[ms.rang].dejasub = true
+			b.photos[ms.rang].res = cloneRes(ms.restmp)
 			ms.restmp = nil
 		}
 		return nod
@@ -339,7 +339,7 @@ func (b *Branche) noyau(m *Mot) *Mot {
 func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
 	// signet snoyau
 	// valeurs variable de m pour la branche
-	photom := b.photos[m]
+	photom := b.photos[m.rang]
 	// vérif du pos
 	if photom.pos != "" {
 		// 1. La pos définitif est fixée
@@ -443,7 +443,7 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (vares gocol.
 	}
 
 	// photo m et mn pour la branche
-	photom := b.photos[m]
+	photom := b.photos[m.rang]
 	// vérification des pos
 	// FIXME legatos decernis : avec v.obj, seul legagos pp est sélectionné par vaPos
 	if photom.pos != "" {
