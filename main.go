@@ -27,7 +27,6 @@ package main
 // - traiter de la même manière le noyau et les subs, aussi bien dans le code
 //   que dans les données ?
 // - tenir compte de la morpho unique (voluptatem. acc. sing.)
-// - une version qui explore toutes les possibilités de groupes.
 //   en privilégiant les groupes qui ont le plus de mots
 // - un champ groupe.anrel - analyses du relatif ?
 // - donner une POS distincte aux verbes intransitifs. v. gocol.indMorph
