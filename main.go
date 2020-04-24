@@ -101,7 +101,7 @@ func analyse(expl bool) {
 		fmt.Println(strings.Join(src, "\n"))
 		fmt.Println("----------------")
 	}
-	fmt.Println(graphe(src))
+	fmt.Println(strings.Join(graphe(src), "\n"))
 	initArcs()
 }
 
