@@ -41,7 +41,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
-	//"strings"
+	"strings"
 
 	"github.com/fatih/color"
 	"github.com/ycollatin/gocol"
@@ -66,6 +66,7 @@ var (
 	dat        bool   // drapeau de chargement des données
 	//module		string
 	//modules		[]string
+	ibr   int
 	rouge func(...interface{}) string
 	texte *Texte
 )
@@ -74,18 +75,31 @@ var (
 func analyse(expl bool) {
 	texte.affiche(aidePh)
 	texte.tronc.explore()
-	fmt.Println("exploration terminée")
-	/*
-		if expl {
-			for _, n := range texte.tronc.nods {
-				fmt.Println(n.doc())
-			}
-			fmt.Println("\n----- source ---\n",
-				strings.Join(ar, "\n"),
-				"\n----------------")
+	recolte := texte.tronc.recolte()
+	if recolte == nil {
+		fmt.Println("échec de l'analyse")
+		return
+	}
+	if ibr >= len(recolte) {
+		ibr = len(recolte) - 1
+	}
+	nods := recolte[ibr]
+	var src []string
+	src = append(src, texte.tronc.gr)
+	for _, n := range nods {
+		ll := n.graf()
+		src = append(src, ll...)
+	}
+	if expl {
+		for _, n := range nods {
+			fmt.Println(n.doc())
 		}
-		fmt.Println(strings.Join(gr, "\n"))
-	*/
+		fmt.Println("\n----- source ---\n")
+		fmt.Println(strings.Join(src, "\n"))
+		fmt.Println("----------------")
+	}
+	fmt.Println(graphe(src))
+	initArcs()
 }
 
 // choix du texte latin
@@ -174,6 +188,7 @@ func main() {
 	lisLexsynt()
 	// choix du texte
 	chxTexte()
+	var modeA bool
 	// capture des touches
 	for {
 		k := GetKey()
@@ -184,14 +199,26 @@ func main() {
 			motprec()
 		case "j":
 			texte.porro()
+			ibr = 0
 		case "k":
 			texte.retro()
+			ibr = 0
 		case "c":
 			lemmatise()
 		case "a":
 			analyse(false)
+			modeA = false
 		case "g":
 			analyse(true)
+			modeA = true
+		case "p":
+			if ibr > 0 {
+				ibr--
+			}
+			analyse(modeA)
+		case "s":
+			ibr++
+			analyse(modeA)
 		case "r":
 			chxTexte()
 		case "x":
