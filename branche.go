@@ -5,6 +5,7 @@ Signets
 sexplore
 snoeud
 snoyau
+srecolte
 sresub
 
 */
@@ -28,15 +29,16 @@ type PhotoMot struct {
 }
 
 type Branche struct {
-	gr     string				// texte de la phrase
-	imot   int					// rang du mot courant
-	nbmots int					// nomb de mots de la phrase
-	mots   []*Mot				// mots de la phrase XXX inutile ?
-	nods   []*Nod				// noeuds validés 
-	niveau int					// n° de la branche par rapport au tronc
-	photos map[int]*PhotoMot	// lemmatisations et appartenance de groupe propres à la branche
-	mere   *Branche				// pointeur branche mère
-	filles []*Branche			// liste des branches filles
+	gr     string            // texte de la phrase
+	imot   int               // rang du mot courant
+	nbmots int               // nomb de mots de la phrase
+	mots   []*Mot            // mots de la phrase XXX inutile ?
+	nods   []*Nod            // noeuds validés
+	niveau int               // n° de la branche par rapport au tronc
+	veto   map[int][]*Groupe // index : rang du mot; valeur : liste des groupes interdits
+	photos map[int]*PhotoMot // lemmatisations et appartenance de groupe propres à la branche
+	mere   *Branche          // pointeur branche mère
+	filles []*Branche        // liste des branches filles
 }
 
 func creeTronc(t string) *Branche {
@@ -50,6 +52,7 @@ func creeTronc(t string) *Branche {
 	}
 	br.nbmots = len(br.mots)
 	br.photos = make(map[int]*PhotoMot)
+	br.veto = make(map[int][]*Groupe)
 	// peuplement des photos
 	for _, m := range br.mots {
 		phm := new(PhotoMot)
@@ -65,15 +68,14 @@ func (b *Branche) copie() *Branche {
 	nb := new(Branche)
 	nb.gr = b.gr
 	nb.nbmots = b.nbmots
-	for _, am := range b.mots {
-		nm := am.copie()
-		nb.mots = append(nb.mots, nm)
-	}
+	nb.mots = b.mots
 	copy(nb.nods, b.nods)
 	nb.mere = b
 	nb.niveau = b.niveau + 1
 	copy(b.filles, nb.filles)
-	nb.photos = make(map[int]*PhotoMot)
+	//nb.photos = make(map[int]*PhotoMot)
+	nb.photos = b.photos
+	nb.veto = b.veto
 	return nb
 }
 
@@ -95,6 +97,18 @@ func (b *Branche) domine(ma, mb *Mot) bool {
 
 func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
 	for _, g := range grps {
+		cont := false
+		// Si le groupe a été exploré pour m dans une
+		// autre branche, passer
+		for _, gv := range bm.veto[m.rang] {
+			if g == gv {
+				cont = true
+				break
+			}
+		}
+		if cont {
+			continue
+		}
 		n := bm.noeud(m, g)
 		if n != nil {
 			bf := bm.copie()
@@ -107,6 +121,8 @@ func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
 						ph.res = mph.restmp
 						ph.pos = n.grp.id
 						bf.photos[mph.rang] = ph
+						// interdire le groupe au noyau
+						bm.veto[mph.rang] = append(bm.veto[mph.rang], g)
 					}
 					for _, ma := range n.mma {
 						// ante
@@ -129,15 +145,16 @@ func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
 				} else {
 					bf.photos[mph.rang] = bm.photos[mph.rang]
 					/*
-					ph := new(PhotoMot)
-					ph.mot = mph
-					ph.res = bm.photos[mph].res
-					ph.pos = 
-					bf.photos[mph] = ph
+						ph := new(PhotoMot)
+						ph.mot = mph
+						ph.res = bm.photos[mph].res
+						ph.pos =
+						bf.photos[mph] = ph
 					*/
 				}
 			}
 			bf.nods = append(bm.nods, n)
+			bm.filles = append(bm.filles, bf)
 			bf.explore()
 		}
 	}
@@ -145,20 +162,26 @@ func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
 
 func (bm *Branche) explore() {
 	// signet sexplore
-	// 1. groupes terminaux
-	for _, m := range bm.mots {
-		if m.dejaNoy() {
-			// les groupes de grpTerm sont des
-			// liens de mot à mot. un noyau de
-			// grpTerm ne peut donc avoir de 
-			// sub supplémentaire.
-			continue
+	var  nbf, nnbf int
+	debut := true
+	for debut ||  nnbf > nbf {
+		debut = false
+		nbf = len(bm.filles)
+		for _, m := range bm.mots {
+			if m.dejaNoy() {
+				// les groupes de grpTerm sont des
+				// liens de mot à mot. un noyau de
+				// grpTerm ne peut donc avoir de
+				// sub supplémentaire.
+				continue
+			}
+			bm.explGrps(m, grpTerm)
 		}
-		bm.explGrps(m, grpTerm)
-	}
-	// 2. groupes non terminaux
-	for _, m := range bm.mots {
-		bm.explGrps(m, grp)
+		// 2. groupes non terminaux
+		for _, m := range bm.mots {
+			bm.explGrps(m, grp)
+		}
+		nnbf = len(bm.filles)
 	}
 }
 
@@ -432,6 +455,19 @@ func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
 	// pour faire comme pour les autres vérifs :
 	res = nres
 	return res
+}
+
+// récolte tous les noeuds terminaux d'un arbre
+func (b *Branche) recolte() (rec [][]*Nod) {
+	// signet srecolte
+	if len(b.filles) == 0 {
+		rec = append(rec, b.nods)
+		return rec
+	}
+	for _, f := range b.filles {
+		rec = append(f.recolte())
+	}
+	return rec
 }
 
 // vrai si m est compatible avec Sub et le noyau mn
