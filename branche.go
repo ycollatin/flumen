@@ -94,8 +94,7 @@ func (b *Branche) domine(ma, mb *Mot) bool {
 }
 
 func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
-	for _, g := range grpTerm {
-		// XXX b.photos[m] n'existe pas
+	for _, g := range grs {
 		n := bm.noeud(m, g)
 		if n != nil {
 			bf := bm.copie()
@@ -119,25 +118,20 @@ func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
 	}
 }
 
-// FIXME : la photo de dea devrait avoir un pos
-// et la photo de Isis devrait être dejasub
 func (bm *Branche) explore() {
 	// signet sexplore
-	// on copie la branche mère pour la rendre
-	// indépendante et en faire une fille possible
-	// recherche des noyaux
-	// groupes terminaux
+	// 1. groupes terminaux
 	for _, m := range bm.mots {
-		// les groupes de grpTerm sont des
-		// liens de mot à mot. un noyau de
-		// grpTerm ne peut donc avoir de 
-		// sub supplémentaire.
 		if m.dejaNoy() {
+			// les groupes de grpTerm sont des
+			// liens de mot à mot. un noyau de
+			// grpTerm ne peut donc avoir de 
+			// sub supplémentaire.
 			continue
 		}
 		bm.explGrps(m, grpTerm)
 	}
-	// groupes non terminaux
+	// 2. groupes non terminaux
 	for _, m := range bm.mots {
 		bm.explGrps(m, grp)
 	}
