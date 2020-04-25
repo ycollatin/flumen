@@ -102,9 +102,11 @@ func analyse(expl bool) {
 		fmt.Println(strings.Join(src, "\n"))
 		fmt.Println("----------------")
 	}
+	// numérotation de la solution
 	fmt.Printf("%d/%d\n", ibr+1, len(recolte))
-	fmt.Println(strings.Join(graphe(src), "\n"))
+	// graphe en arcs
 	initArcs()
+	fmt.Println(strings.Join(graphe(src), "\n"))
 }
 
 // choix du texte latin
