@@ -2,6 +2,8 @@
 
 /*
 Signets
+sexplgrps
+scopie
 sexplore
 snoeud
 snoyau
@@ -65,6 +67,7 @@ func creeTronc(t string) *Branche {
 }
 
 func (b *Branche) copie() *Branche {
+	// signet scopie
 	nb := new(Branche)
 	nb.gr = b.gr
 	nb.nbmots = b.nbmots
@@ -72,7 +75,8 @@ func (b *Branche) copie() *Branche {
 	copy(nb.nods, b.nods)
 	nb.mere = b
 	nb.niveau = b.niveau + 1
-	//nb.photos = b.photos
+	// les noeuds et les photos sont copiées
+	// après création du noeud à l'origine de la copie
 	nb.photos = make(map[int]*PhotoMot)
 	nb.veto = b.veto
 	return nb
@@ -95,6 +99,7 @@ func (b *Branche) domine(ma, mb *Mot) bool {
 }
 
 func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
+	// signet sexplgrps
 	for _, g := range grps {
 		cont := false
 		// Si le groupe a été exploré pour m dans une
@@ -121,7 +126,7 @@ func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
 						ph.pos = n.grp.id
 						bf.photos[mph.rang] = ph
 						// interdire le groupe au noyau
-						bm.veto[mph.rang] = append(bm.veto[mph.rang], g)
+						bf.veto[mph.rang] = append(bm.veto[mph.rang], g)
 					}
 					for _, ma := range n.mma {
 						// éléments ante
