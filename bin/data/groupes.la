@@ -119,12 +119,6 @@ grp:n.coord
 pos:n NP
 pg:n.conjet;coord;;c
 
-grp:v.obj
-pos:v
-morph:act
-lexsynt:!intr
-ag:n NP p !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
-
 grp:v.dienocte
 pos:v
 ag:"dies" "nox" "hora";abl;abl
@@ -158,6 +152,12 @@ grp:n.prepAcc
 pos:n NP p
 morph:acc
 a:prepAcc prepAA !n.det;prep
+
+grp:v.obj
+pos:v
+morph:act
+lexsynt:!intr
+ag:n NP p !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
 
 ! pour Hygin, FRAGILE
 grp:n.eadata
