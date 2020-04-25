@@ -21404,7 +21404,7 @@ Sulpicius:
 sulpureus:
 sultis:
 sumen:
-sum:attr,gen,datif
+sum:intr,attr,datif,gen
 summa:
 summano:
 Summanus:
