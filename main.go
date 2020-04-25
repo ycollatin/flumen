@@ -5,12 +5,11 @@ package main
 
 // FIXME
 // - esse inf a un objet !
-// - tibiis facere : dat au lieu d'abl. quod Marsya tibii facere non potuit.
 // - in certamen provocavit : certamen objet au lieu de gprep
 // - consul populi Romani : Romani gén au lieu d'épith
 // - tantum nocte crescebat : tantum nocte n.epith, nocte crescebat, v.obj.
 // - Marcellinum *tibi esse* iratum scis : tibi devrait fixer esse à sum.
-// - la distinction lemmatisation avant/après analyse synt. n'est pas complète.
+// - main : la distinction lemmatisation avant/après analyse synt. n'est pas complète.
 // - subiciunt veribus prunas et viscera torrent :
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
 //				  et la coord subiciunt et torrent (juste)
