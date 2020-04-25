@@ -4,8 +4,9 @@
 package main
 
 // FIXME
-// - esse inf a un objet !
-// - in certamen provocavit : certamen objet au lieu de gprep
+// - nata est Pyrrha quae... le lien est>nata pp incompatible avec est>quae obj
+// - in certamen provocavit : certamen objet au lieu de gprep. L'exclusion ag ne marche pas
+//   conflit n.prepAcc et v.obj
 // - consul populi Romani : Romani gén au lieu d'épith
 // - tantum nocte crescebat : tantum nocte n.epith, nocte crescebat, v.obj.
 // - Marcellinum *tibi esse* iratum scis : tibi devrait fixer esse à sum.
@@ -28,7 +29,6 @@ package main
 // - tenir compte de la morpho unique (voluptatem. acc. sing.)
 //   en privilégiant les groupes qui ont le plus de mots
 // - un champ groupe.anrel - analyses du relatif ?
-// - donner une POS distincte aux verbes intransitifs. v. gocol.indMorph
 // - accord de personne sujet-verbe ?
 // - saisie d'une phrase ?
 // - fonction de sortie au format GraphViz
