@@ -4,9 +4,13 @@
 package main
 
 // FIXME
-// - nata est Pyrrha quae... le lien est>nata pp incompatible avec est>quae obj
-// - in certamen provocavit : certamen objet au lieu de gprep. L'exclusion ag ne marche pas
-//   conflit n.prepAcc et v.obj
+// - pas sûr que les solutions suivantes gardent
+//   les bonnes données par rapport aux  précédentes.
+// - lacte divino alebat : incomp. lacte acc objet et lacte abl, épith divino
+// - Marsyas Apollinem ad citharae cantum in certamen provocavit :
+//   incompatibilité Apollinem app cantum et cantum prep ad
+// 	 idem pour se in mare praecipitavit : obj/prepAcc
+// - Ex Inacho et Argia Ino : 2 solutions exactement identiques
 // - consul populi Romani : Romani gén au lieu d'épith
 // - tantum nocte crescebat : tantum nocte n.epith, nocte crescebat, v.obj.
 // - Marcellinum *tibi esse* iratum scis : tibi devrait fixer esse à sum.
