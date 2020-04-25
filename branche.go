@@ -75,7 +75,8 @@ func (b *Branche) copie() *Branche {
 	copy(nb.nods, b.nods)
 	nb.mere = b
 	nb.niveau = b.niveau + 1
-	// les noeuds et les photos sont copiées
+	nb.nods = b.nods
+	// les photos seront copiées
 	// après création du noeud à l'origine de la copie
 	nb.photos = make(map[int]*PhotoMot)
 	nb.veto = b.veto
@@ -152,7 +153,7 @@ func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
 			}
 			//bm.nods = append(bm.nods, n)
 			bf.nods = append(bf.nods, n)
-			bm.nods = append(bm.nods, n)
+			//bm.nods = append(bm.nods, n)
 			bm.filles = append(bm.filles, bf)
 			bf.explore()
 		}
