@@ -167,19 +167,12 @@ func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
 
 func (bm *Branche) explore() {
 	// signet sexplore
-	var nbf, nnbf int
-	debut := true
-	for debut || nnbf > nbf {
-		nbf = len(bm.filles)
-		for _, m := range bm.mots {
-			bm.explGrps(m, grpTerm)
-		}
-		// 2. groupes non terminaux
-		for _, m := range bm.mots {
-			bm.explGrps(m, grp)
-		}
-		nnbf = len(bm.filles)
-		debut = false
+	for _, m := range bm.mots {
+		bm.explGrps(m, grpTerm)
+	}
+	// 2. groupes non terminaux
+	for _, m := range bm.mots {
+		bm.explGrps(m, grp)
 	}
 }
 
