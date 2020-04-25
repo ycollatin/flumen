@@ -34,12 +34,12 @@ type Branche struct {
 	gr     string            // texte de la phrase
 	imot   int               // rang du mot courant
 	nbmots int               // nomb de mots de la phrase
-	mots   []*Mot            // mots de la phrase XXX inutile ?
+	mots   []*Mot            // mots de la phrase
 	nods   []*Nod            // noeuds validés
 	niveau int               // n° de la branche par rapport au tronc
 	veto   map[int][]*Groupe // index : rang du mot; valeur : liste des groupes interdits
 	photos map[int]*PhotoMot // lemmatisations et appartenance de groupe propres à la branche
-	mere   *Branche          // pointeur branche mère
+	//mere   *Branche          // pointeur branche mère
 	filles []*Branche        // liste des branches filles
 }
 
@@ -66,14 +66,21 @@ func creeTronc(t string) *Branche {
 	return br
 }
 
+/*
+func (b *Branche) copie() *Branche {
+	nb := b
+	nb.niveau = b.niveau + 1
+	nb.photos = make(map[int]*PhotoMot)
+	return nb
+}
+*/
+
 func (b *Branche) copie() *Branche {
 	// signet scopie
 	nb := new(Branche)
 	nb.gr = b.gr
 	nb.nbmots = b.nbmots
 	nb.mots = b.mots
-	copy(nb.nods, b.nods)
-	nb.mere = b
 	nb.niveau = b.niveau + 1
 	nb.nods = b.nods
 	// les photos seront copiées
@@ -151,9 +158,7 @@ func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
 					bf.photos[mph.rang] = bm.photos[mph.rang]
 				}
 			}
-			//bm.nods = append(bm.nods, n)
 			bf.nods = append(bf.nods, n)
-			//bm.nods = append(bm.nods, n)
 			bm.filles = append(bm.filles, bf)
 			bf.explore()
 		}
@@ -229,12 +234,12 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	}
 
 	// m peut-il être noyau du groupe g ?
-	m.restmp = cloneRes(m.ans)
+	m.restmp = m.ans
 	res := b.resNoyau(m, g, m.restmp)
 	if res == nil {
 		return nil
 	}
-	res = cloneRes(m.restmp)
+	res = m.restmp
 
 	// création du noeud de retour
 	nod := new(Nod)
@@ -267,7 +272,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 		if res == nil {
 			return nil
 		}
-		ma.restmp = cloneRes(res)
+		ma.restmp = res
 		nod.mma = append(nod.mma, ma)
 		r--
 	}
@@ -297,12 +302,12 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 		if b.domine(mp, m) {
 			return nil
 		}
-		mp.restmp = cloneRes(mp.ans)
+		mp.restmp = mp.ans
 		res := b.resSub(mp, sub, m, mp.restmp)
 		if res == nil {
 			return nil
 		}
-		mp.restmp = cloneRes(res)
+		mp.restmp = res
 		nod.mmp = append(nod.mmp, mp)
 		r++
 	}
