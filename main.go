@@ -52,7 +52,9 @@ const (
 	aidePh  = `    l->mot suivant ; h->mot précédent ;
     j->phrase suivante ; k->phrase précédente ;
     c->lemmatisation du mot courant ;
-    a->arbre de la phrase ; r->retour; x->quitter`
+    a->arbre de la phrase ; g->arbre ٍ& sa source ;
+	s->solution suivante ; p->solution précédente ;
+	r->retour; x->quitter.`
 	//s-> définir une suite morphosyntaxique ; x->Exit`
 	//aideS =
 	//`i-> id de la suite ; n-> n° du noyau ;
