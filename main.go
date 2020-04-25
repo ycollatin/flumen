@@ -4,6 +4,7 @@
 package main
 
 // FIXME
+// - facere non potuit : double objet.
 // - nata est Pyrrha quae... le lien est>nata pp incompatible avec est>quae obj
 // - in certamen provocavit : certamen objet au lieu de gprep. L'exclusion ag ne marche pas
 //   conflit n.prepAcc et v.obj
