@@ -26,23 +26,6 @@ type Mot struct {
 	restmp gocol.Res // lemmatisation de test d'un noeud
 }
 
-/*
-// pour info
-// PhotoMot, caractéristiques variables du mot, qui diffère à chaque branche
-type PhotoMot struct {
-	mot     *Mot      // liaison avec le mot
-	res     gocol.Res // lemmatisations réduites du mot
-	dejasub bool      // appartenance du mot à un groupe
-	pos     string    // nom du groupe dont le mot est noyau
-}
-*/
-
-func cloneRes(res gocol.Res) gocol.Res {
-	nres := make(gocol.Res, len(res))
-	copy(nres, res)
-	return nres
-}
-
 func creeMot(m string) *Mot {
 	mot := new(Mot)
 	mot.gr = m
@@ -109,14 +92,6 @@ func (m *Mot) adeja(sub *Sub) bool {
 		}
 	}
 	return false
-}
-
-func (m *Mot) copie() *Mot {
-	nm := new(Mot)
-	nm.gr = m.gr
-	nm.rang = m.rang
-	nm.ans = cloneRes(m.ans)
-	return nm
 }
 
 func (m *Mot) dejaNoy() bool {
