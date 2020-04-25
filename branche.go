@@ -435,7 +435,7 @@ func (b *Branche) recolte() (rec [][]*Nod) {
 		return rec
 	}
 	for _, f := range b.filles {
-		rec = append(rec, b.nods)
+		//rec = append(rec, b.nods)
 		nrec := f.recolte()
 		rec = append(rec, nrec...)
 	}
