@@ -54,12 +54,12 @@ morph:indic,subj
 a:v;pp;part parf
 
 ! XXX nécessaire ?
-ter:v.sujinf
-pos:v
-morph:act 3
-lexsynt:infobj
-a:p n NP;sujet;nomin;n
-a:v;obj;inf
+!ter:v.sujinf
+!pos:v
+!morph:act 3
+!lexsynt:infobj
+!a:p n NP;sujet;nomin;n
+!a:v;obj;inf
 
 ter:v.neg
 pos:v
@@ -245,7 +245,7 @@ grp:v.infobj
 pos:v
 morph:act indic,act subj
 lexsynt:infobj
-ag:v;infobj;inf
+ag:v;obj;inf
 
 grp:v.vinfobj
 pos:v
