@@ -72,9 +72,8 @@ func (b *Branche) copie() *Branche {
 	copy(nb.nods, b.nods)
 	nb.mere = b
 	nb.niveau = b.niveau + 1
-	copy(b.filles, nb.filles)
-	//nb.photos = make(map[int]*PhotoMot)
-	nb.photos = b.photos
+	//nb.photos = b.photos
+	nb.photos = make(map[int]*PhotoMot)
 	nb.veto = b.veto
 	return nb
 }
@@ -125,7 +124,7 @@ func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
 						bm.veto[mph.rang] = append(bm.veto[mph.rang], g)
 					}
 					for _, ma := range n.mma {
-						// ante
+						// éléments ante
 						ph := new(PhotoMot)
 						ph.mot = ma
 						ph.res = ma.restmp
@@ -134,7 +133,7 @@ func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
 						bf.photos[ma.rang] = ph
 					}
 					for _, mp := range n.mmp {
-						// post
+						// éléments post
 						ph := new(PhotoMot)
 						ph.mot = mp
 						ph.res = mp.restmp
@@ -144,16 +143,11 @@ func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
 					}
 				} else {
 					bf.photos[mph.rang] = bm.photos[mph.rang]
-					/*
-						ph := new(PhotoMot)
-						ph.mot = mph
-						ph.res = bm.photos[mph].res
-						ph.pos =
-						bf.photos[mph] = ph
-					*/
 				}
 			}
-			bf.nods = append(bm.nods, n)
+			//bm.nods = append(bm.nods, n)
+			bf.nods = append(bf.nods, n)
+			bm.nods = append(bm.nods, n)
 			bm.filles = append(bm.filles, bf)
 			bf.explore()
 		}
@@ -162,19 +156,11 @@ func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
 
 func (bm *Branche) explore() {
 	// signet sexplore
-	var  nbf, nnbf int
+	var nbf, nnbf int
 	debut := true
-	for debut ||  nnbf > nbf {
-		debut = false
+	for debut || nnbf > nbf {
 		nbf = len(bm.filles)
 		for _, m := range bm.mots {
-			if m.dejaNoy() {
-				// les groupes de grpTerm sont des
-				// liens de mot à mot. un noyau de
-				// grpTerm ne peut donc avoir de
-				// sub supplémentaire.
-				continue
-			}
 			bm.explGrps(m, grpTerm)
 		}
 		// 2. groupes non terminaux
@@ -182,6 +168,7 @@ func (bm *Branche) explore() {
 			bm.explGrps(m, grp)
 		}
 		nnbf = len(bm.filles)
+		debut = false
 	}
 }
 
@@ -314,29 +301,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 		r++
 	}
 
-	// fixer les pos et sub des mots du noeud
 	if len(nod.mma)+len(nod.mmp) > 0 {
-		// la pos du noyau devient celle du groupe
-		photo := b.photos[m.rang]
-		photo.pos = g.id
-		b.photos[m.rang] = photo
-		// restriction des lemmatisations des antéposés
-		for _, ms := range nod.mma {
-			//photo := b.photos[ms]
-			b.photos[ms.rang].dejasub = true
-			b.photos[ms.rang].res = cloneRes(ms.restmp)
-			ms.restmp = nil
-		}
-		//restriction des lemmatisations du noyau
-		m.ans = m.restmp
-		m.restmp = nil
-		// restriction des lemmatisations des postposés
-		for _, ms := range nod.mmp {
-			//photo := b.photos[ms]
-			b.photos[ms.rang].dejasub = true
-			b.photos[ms.rang].res = cloneRes(ms.restmp)
-			ms.restmp = nil
-		}
 		return nod
 	}
 	return nil
@@ -465,7 +430,9 @@ func (b *Branche) recolte() (rec [][]*Nod) {
 		return rec
 	}
 	for _, f := range b.filles {
-		rec = append(f.recolte())
+		rec = append(rec, b.nods)
+		nrec := f.recolte()
+		rec = append(rec, nrec...)
 	}
 	return rec
 }
@@ -481,7 +448,7 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (vares gocol.
 	// photo m et mn pour la branche
 	photom := b.photos[m.rang]
 	// vérification des pos
-	// FIXME legatos decernis : avec v.obj, seul legagos pp est sélectionné par vaPos
+	// FIXME legatos decernis : avec v.obj, seul legatos pp est sélectionné par vaPos
 	if photom.pos != "" {
 		// 1. La pos du mot est définitive
 		// noyaux exclus
