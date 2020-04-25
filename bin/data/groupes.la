@@ -133,6 +133,10 @@ grp:n.gen
 pos:n
 ag:n NP;gen;gén
 
+grp:n.ngen
+pos:n
+pg:n NP;gen;gén
+
 grp:v.attrPass
 pos:v
 morph:pass indic,pass subj
