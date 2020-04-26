@@ -17,6 +17,7 @@ package main
 import (
 	"fmt"
 	"github.com/ycollatin/gocol"
+	"sort"
 	"strings"
 )
 
@@ -29,19 +30,19 @@ type PhotoMot struct {
 	pos     string    // nom du groupe dont le mot est noyau
 }
 
-var mots []*Mot
+var (
+	mots	[]*Mot
+	nbmots	int
+)
 
 type Branche struct {
-	gr     string // texte de la phrase
-	imot   int    // rang du mot courant
-	nbmots int    // nomb de mots de la phrase
-	//mots   []*Mot            // mots de la phrase
+	gr     string            // texte de la phrase
+	imot   int               // rang du mot courant
 	nods   []*Nod            // noeuds validés
 	niveau int               // n° de la branche par rapport au tronc
 	veto   map[int][]*Groupe // index : rang du mot; valeur : liste des groupes interdits
 	photos map[int]*PhotoMot // lemmatisations et appartenance de groupe propres à la branche
-	//mere   *Branche          // pointeur branche mère
-	filles []*Branche // liste des branches filles
+	filles []*Branche        // liste des branches filles
 }
 
 // le tronc est la branche de départ. Il
@@ -57,8 +58,8 @@ func creeTronc(t string) *Branche {
 		nm.rang = i
 		mots = append(mots, nm)
 	}
-	br.nbmots = len(mots)
-	br.photos = make(map[int]*PhotoMot)
+	nbmots = len(mots)
+	br.photos = make(map[int]*PhotoMot)	// l'index de la map est le numéro des mots
 	br.veto = make(map[int][]*Groupe)
 	// peuplement des photos
 	for _, m := range mots {
@@ -92,7 +93,6 @@ func (b *Branche) copie() *Branche {
 	// signet scopie
 	nb := new(Branche)
 	nb.gr = b.gr
-	nb.nbmots = b.nbmots
 	nb.niveau = b.niveau + 1
 	nb.nods = b.nods
 	// les photos seront copiées après création
@@ -168,8 +168,8 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 				}
 			}
 			bf.nods = append(bf.nods, n)
-			bm.filles = append(bm.filles, bf)
 			bf.explore()
+			bm.filles = append(bm.filles, bf)
 		}
 	}
 }
@@ -250,7 +250,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 		return nil
 	}
 	// ou trop élevé
-	if rang+len(g.post)-1 >= b.nbmots {
+	if rang+len(g.post)-1 >= nbmots {
 		return nil
 	}
 
@@ -303,7 +303,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	// reгcherche des subs post
 	for ip, sub := range g.post {
 		r := rang + ip + 1
-		if r >= b.nbmots {
+		if r >= nbmots {
 			break
 		}
 		if sub.lien == "" {
@@ -312,7 +312,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 		mp := mots[r]
 		for b.dejasub(mp) {
 			r++
-			if r >= b.nbmots {
+			if r >= nbmots {
 				return nil
 			}
 			mpn := b.noyau(mp)
@@ -456,10 +456,12 @@ func (b *Branche) recolte() (rec [][]*Nod) {
 		return rec
 	}
 	for _, f := range b.filles {
-		//rec = append(rec, b.nods)
 		nrec := f.recolte()
 		rec = append(rec, nrec...)
 	}
+	sort.Slice(rec, func(i, j int) bool {
+		return len(rec[i]) > len(rec[j])
+	})
 	return rec
 }
 
