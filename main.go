@@ -80,8 +80,8 @@ var (
 // affiche les arcs syntaxique de la phrase
 func analyse(expl bool) {
 	texte.affiche(aidePh)
-	texte.tronc.explore()
-	recolte := texte.tronc.recolte()
+	tronc.explore()
+	recolte := tronc.recolte()
 	if recolte == nil {
 		fmt.Println("échec de l'analyse")
 		return
@@ -95,7 +95,7 @@ func analyse(expl bool) {
 	nods := recolte[ibr]
 	// graphe
 	var src []string
-	src = append(src, texte.tronc.gr)
+	src = append(src, tronc.gr)
 	for _, n := range nods {
 		src = append(src, n.graf()...)
 	}
@@ -151,9 +151,9 @@ func chxTexte() {
 
 func lemmatise() {
 	texte.affiche(aidePh)
-	im := texte.tronc.imot
-	texte.tronc.imot = im
-	mc := texte.tronc.motCourant()
+	im := tronc.imot
+	tronc.imot = im
+	mc := tronc.motCourant()
 	fmt.Println("lemmatisation", rouge(mc.gr))
 	/*
 		if len(mc.ans2) > 0 {
@@ -172,15 +172,15 @@ func lemmatise() {
 }
 
 func motprec() {
-	if texte.tronc.imot > 0 {
-		texte.tronc.imot--
+	if tronc.imot > 0 {
+		tronc.imot--
 		texte.affiche(aidePh)
 	}
 }
 
 func motsuiv() {
-	if texte.tronc.imot < len(texte.tronc.mots)-1 {
-		texte.tronc.imot++
+	if tronc.imot < len(mots)-1 {
+		tronc.imot++
 		texte.affiche(aidePh)
 	}
 }
