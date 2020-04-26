@@ -369,10 +369,19 @@ func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
 		dejasub bool      // appartenance du mot à un groupe
 		pos     string    // nom du groupe dont le mot est noyau
 	*/
+	// FIXME v.vobj est admis malgré un pos v.ppsum
 	photom := b.photos[m.rang]
 	// vérif du pos
 	if photom.pos != "" {
 		// 1. La pos définitif est fixée
+		// noyaux exclus
+		ids := b.ids(m)
+		for _, id := range ids {
+			if g.estExclu(id) {
+				return nil
+			}
+		}
+		// noyaux admis
 		va := false
 		for _, noy := range g.noyaux {
 			if noy.canon > "" {
