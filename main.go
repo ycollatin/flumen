@@ -26,12 +26,10 @@ package main
 // 		* pietate erga te
 
 // TODO
-// - ordonner les solutions : nb de mots liés, nb d'arcs.
+// - vérifier l'exclusion des lexsynt
 // - traiter la coordination par -que := et -
 // - traiter de la même manière le noyau et les subs, aussi bien dans le code
 //   que dans les données ?
-// - tenir compte de la morpho unique (voluptatem. acc. sing.)
-//   en privilégiant les groupes qui ont le plus de mots
 // - un champ groupe.anrel - analyses du relatif ?
 // - accord de personne sujet-verbe ?
 // - saisie d'une phrase ?
