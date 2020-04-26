@@ -4,8 +4,8 @@
 package main
 
 // FIXME
-// - pas sûr que les solutions suivantes gardent
-//   les bonnes données par rapport aux  précédentes.
+// - Les dernières solutions deviennent de + en + pauvres : pas sûr qu'une
+//   solution garde les bonnes données par rapport à la précédente.
 // - le surlignage des lemmatisations est complètement perdu
 // - lacte divino alebat : incomp. lacte acc objet et lacte abl, épith divino
 // - Marsyas Apollinem ad citharae cantum in certamen provocavit :
