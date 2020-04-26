@@ -4,6 +4,7 @@
 package main
 
 // FIXME
+// - Ceres alumnum : des liens évidents manquent.
 // - Les dernières solutions deviennent de + en + pauvres : pas sûr qu'une
 //   solution garde les bonnes données par rapport à la précédente.
 // - le surlignage des lemmatisations est complètement perdu
