@@ -55,7 +55,7 @@ var (
 	arcs    []*Arc
 	gabarit []rune
 	lignes  []string
-	mots    []*Word
+	words   []*Word
 )
 
 const (
@@ -154,7 +154,7 @@ func initArcs() {
 	arcs = nil
 	gabarit = nil
 	lignes = nil
-	mots = nil
+	words = nil
 }
 
 // vrai si aucun caractère autres que ' '
@@ -227,7 +227,7 @@ func graphe(ll []string) []string {
 			nm.Pg = nm.d + nm.len/4
 			nm.Pd = nm.Pg + nm.len/2
 		}
-		mots = append(mots, nm)
+		words = append(words, nm)
 	}
 	// création des arcs
 	for i, l := range ll {
@@ -244,8 +244,8 @@ func graphe(ll []string) []string {
 		ecl = strings.Split(l, " -> ")
 		ia, _ := strconv.Atoi(ecl[0])
 		ib, _ := strconv.Atoi(ecl[1])
-		na.motA = mots[ia]
-		na.motB = mots[ib]
+		na.motA = words[ia]
+		na.motB = words[ib]
 		dif := na.motA.rang - na.motB.rang
 		if dif < 0 {
 			dif = -dif
@@ -267,7 +267,7 @@ func graphe(ll []string) []string {
 	}
 	// calcul des arcs, remplissage des lignes
 	// en commençant par les plus courts
-	for i := 1; i <= len(mots); i++ {
+	for i := 1; i <= len(words); i++ {
 		for _, a := range arcs {
 			if !a.ecrit && a.dist == i {
 				arcus(a)
