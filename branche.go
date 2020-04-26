@@ -2,7 +2,7 @@
 
 /*
 Signets
-sexplgrps
+exploregrou
 scopie
 sexplore
 snoeud
@@ -90,8 +90,8 @@ func (b *Branche) copie() *Branche {
 	nb.mots = b.mots
 	nb.niveau = b.niveau + 1
 	nb.nods = b.nods
-	// les photos seront copiées
-	// après création du noeud à l'origine de la copie
+	// les photos seront copiées après création
+	// du noeud à l'origine de la copie
 	nb.photos = make(map[int]*PhotoMot)
 	nb.veto = b.veto
 	return nb
@@ -112,8 +112,8 @@ func (b *Branche) domine(ma, mb *Mot) bool {
 	return false
 }
 
-func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
-	// signet sexplgrps
+func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
+	// signet exploregrou
 	for _, g := range grps {
 		cont := false
 		// Si le groupe a été exploré pour m dans une
@@ -172,11 +172,11 @@ func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
 func (bm *Branche) explore() {
 	// signet sexplore
 	for _, m := range bm.mots {
-		bm.explGrps(m, grpTerm)
+		bm.exploreGroupes(m, grpTerm)
 	}
 	// 2. groupes non terminaux
 	for _, m := range bm.mots {
-		bm.explGrps(m, grp)
+		bm.exploreGroupes(m, grp)
 	}
 }
 
