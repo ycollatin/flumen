@@ -42,6 +42,9 @@ type Branche struct {
 	filles []*Branche // liste des branches filles
 }
 
+// le tronc est la branche de départ. Il
+// est initialisé avec les mots lemmatisés
+// par Collatinus
 func creeTronc(t string) *Branche {
 	br := new(Branche)
 	br.gr = t
