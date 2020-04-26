@@ -6,12 +6,12 @@ package main
 // FIXME
 // - pas sûr que les solutions suivantes gardent
 //   les bonnes données par rapport aux  précédentes.
+// - le surlignage des lemmatisations est complètement perdu
 // - lacte divino alebat : incomp. lacte acc objet et lacte abl, épith divino
 // - Marsyas Apollinem ad citharae cantum in certamen provocavit :
 //   incompatibilité Apollinem app cantum et cantum prep ad
 // 	 idem pour se in mare praecipitavit : obj/prepAcc
 // - Ex Inacho et Argia Ino : 2 solutions exactement identiques
-// - consul populi Romani : Romani gén au lieu d'épith
 // - tantum nocte crescebat : tantum nocte n.epith, nocte crescebat, v.obj.
 // - Marcellinum *tibi esse* iratum scis : tibi devrait fixer esse à sum.
 // - main : la distinction lemmatisation avant/après analyse synt. n'est pas complète.
@@ -27,6 +27,7 @@ package main
 // 		* pietate erga te
 
 // TODO
+// - ordonner les solutions : nb de mots liés, nb d'arcs.
 // - traiter la coordination par -que := et -
 // - traiter de la même manière le noyau et les subs, aussi bien dans le code
 //   que dans les données ?
