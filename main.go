@@ -14,7 +14,6 @@ package main
 // - Ex Inacho et Argia Ino : 2 solutions exactement identiques
 // - tantum nocte crescebat : tantum nocte n.epith, nocte crescebat, v.obj.
 // - Marcellinum *tibi esse* iratum scis : tibi devrait fixer esse à sum.
-// - main : la distinction lemmatisation avant/après analyse synt. n'est pas complète.
 // - subiciunt veribus prunas et viscera torrent :
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
 //				  et la coord subiciunt et torrent (juste)
