@@ -74,46 +74,6 @@ func accord(lma, lmb, cgn string) bool {
 	return va
 }
 
-func (m *Mot) adeja(sub *Sub) bool {
-	// signet motadeja
-	sublien := sub.lien
-	for _, nod := range texte.tronc.nods {
-		if nod.nucl == m {
-			for i, _ := range nod.mma {
-				if nod.grp.ante[i].lien == sublien {
-					return true
-				}
-			}
-			for i, _ := range nod.mmp {
-				if nod.grp.post[i].lien == sublien {
-					return true
-				}
-			}
-		}
-	}
-	return false
-}
-
-func (m *Mot) dejaNoy() bool {
-	for _, n := range texte.tronc.nods {
-		if n.nucl == m {
-			return true
-		}
-	}
-	return false
-}
-
-// id des Nod dont m est déjà le noyau
-func (m *Mot) estNuclDe() []string {
-	var ret []string
-	for _, nod := range texte.tronc.nods {
-		if nod.nucl == m {
-			ret = append(ret, nod.grp.id)
-		}
-	}
-	return ret
-}
-
 // ajoute le genre à la morpho d'un nom
 func genus(sr gocol.Sr) gocol.Sr {
 	if sr.Lem.Pos != "n" && sr.Lem.Pos != "NP" {
