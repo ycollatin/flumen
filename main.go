@@ -4,11 +4,9 @@
 package main
 
 // FIXME
-// - Ceres alumnum : des liens évidents manquent.
 // - Les dernières solutions deviennent de + en + pauvres : pas sûr qu'une
 //   solution garde les bonnes données par rapport à la précédente.
 // - le surlignage des lemmatisations est complètement perdu
-// - lacte divino alebat : incomp. lacte acc objet et lacte abl, épith divino
 // - Marsyas Apollinem ad citharae cantum in certamen provocavit :
 //   incompatibilité Apollinem app cantum et cantum prep ad
 // 	 idem pour se in mare praecipitavit : obj/prepAcc
