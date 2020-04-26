@@ -25,7 +25,7 @@ func (t *Texte) append(p string) {
 // le texte du param aide.
 func (t Texte) affiche(aide string) {
 	ClearScreen()
-	fmt.Printf("%s, phrase %d, mot %d\n", t.nom, t.compteur, texte.tronc.imot)
+	fmt.Printf("%s, phrase %d, mot %d\n", t.nom, t.compteur+1, texte.tronc.imot)
 	fmt.Println(t.tronc.enClair())
 	fmt.Println(aide)
 }
