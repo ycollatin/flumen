@@ -125,10 +125,10 @@ grp:n.ngen
 pos:n
 pg:n NP;gen;gén
 
-grp:v.sujet
-pos:v
-morph:indic 3,subj 3
-ag:n NP;sujet;nomin;n
+!grp:v.sujet
+!pos:v
+!morph:indic 3,subj 3
+!ag:n NP;sujet;nomin;n
 
 grp:v.attrPass
 pos:v
@@ -193,6 +193,15 @@ pos:v
 morph:indic,subj,part,inf
 lexsynt:datif
 ag:n NP p;dat;datif
+
+grp:v.objabl
+pos:v.abl
+morph:act
+ag:n NP p !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
+
+grp:v.sujobjabl
+pos:v.objabl
+ag:n NP;sujet;nomin;n
 
 ! XXX morph est-il utile ?
 grp:v.vdat
