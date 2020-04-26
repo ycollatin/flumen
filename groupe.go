@@ -64,6 +64,15 @@ func creeGroupe(ll []string) *Groupe {
 	return g
 }
 
+func (g *Groupe) estExclu(id string) bool {
+	for _, ne := range g.noyexcl {
+		if ne.id == id {
+			return true
+		}
+	}
+	return false
+}
+
 // lecture des groupes dans le fichier nf
 func lisGroupes(nf string) {
 	llin := gocol.Lignes(nf)
