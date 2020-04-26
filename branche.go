@@ -39,7 +39,7 @@ type Branche struct {
 	veto   map[int][]*Groupe // index : rang du mot; valeur : liste des groupes interdits
 	photos map[int]*PhotoMot // lemmatisations et appartenance de groupe propres à la branche
 	//mere   *Branche          // pointeur branche mère
-	filles []*Branche        // liste des branches filles
+	filles []*Branche // liste des branches filles
 }
 
 func creeTronc(t string) *Branche {
@@ -229,11 +229,11 @@ func (b *Branche) motCourant() *Mot {
 func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	// signet snoeud
 	/*
-	// utilistation des photos
-	mot     *Mot      // liaison avec le mot
-	res     gocol.Res // lemmatisations réduites du mot
-	dejasub bool      // appartenance du mot à un groupe
-	pos     string    // nom du groupe dont le mot est noyau
+		// utilistation des photos
+		mot     *Mot      // liaison avec le mot
+		res     gocol.Res // lemmatisations réduites du mot
+		dejasub bool      // appartenance du mot à un groupe
+		pos     string    // nom du groupe dont le mot est noyau
 	*/
 	photo := b.photos[m.rang]
 
@@ -358,11 +358,11 @@ func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
 	// signet snoyau
 	// valeurs variable de m pour la branche
 	/*
-	// utilistation des photos
-	mot     *Mot      // liaison avec le mot
-	res     gocol.Res // lemmatisations réduites du mot
-	dejasub bool      // appartenance du mot à un groupe
-	pos     string    // nom du groupe dont le mot est noyau
+		// utilistation des photos
+		mot     *Mot      // liaison avec le mot
+		res     gocol.Res // lemmatisations réduites du mot
+		dejasub bool      // appartenance du mot à un groupe
+		pos     string    // nom du groupe dont le mot est noyau
 	*/
 	photom := b.photos[m.rang]
 	// vérif du pos

@@ -16,8 +16,8 @@ type Groupe struct {
 	morph           []string // traits morpho du noyau
 	lexsynt         []string // étiquettes lexicosyntaxiques du noyau
 	//exclls          []string // propriétés lexicosyntaxiques exclues
-	ante            []*Sub   // éléments précédant le noyau
-	post            []*Sub   // éléments suivant le noyau
+	ante []*Sub // éléments précédant le noyau
+	post []*Sub // éléments suivant le noyau
 }
 
 var grpTerm, grp []*Groupe
@@ -44,11 +44,11 @@ func creeGroupe(ll []string) *Groupe {
 			for _, ecl := range lecl {
 				g.lexsynt = append(g.lexsynt, ecl)
 				/*
-				if ecl[0] != '!' {
-					g.lexsynt = append(g.lexsynt, ecl)
-				} else {
-					g.exclls = append(g.exclls, ecl[1:])
-				}
+					if ecl[0] != '!' {
+						g.lexsynt = append(g.lexsynt, ecl)
+					} else {
+						g.exclls = append(g.exclls, ecl[1:])
+					}
 				*/
 			}
 		case "a":

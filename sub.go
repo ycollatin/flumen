@@ -18,7 +18,7 @@ type Sub struct {
 	lexsynt  []string // étiquettes lexicosyntaxiques
 }
 
-// crée un sub du groupe g à partir de la ligne v, terminal si v armé 
+// crée un sub du groupe g à partir de la ligne v, terminal si v armé
 func creeSub(v string, g *Groupe, t bool) *Sub {
 	sub := new(Sub)
 	sub.groupe = g
