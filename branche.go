@@ -454,12 +454,12 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (vares gocol.
 	if photom.pos != "" {
 		// 1. La pos du mot est définitive
 		// noyaux exclus
-		veto := false
+		excl := false
 		lgr := m.estNuclDe()
 		for _, noy := range sub.noyexcl {
-			veto = veto || contient(lgr, noy.id)
+			excl = excl || contient(lgr, noy.id)
 		}
-		if veto {
+		if excl {
 			return nil
 		}
 		// noyaux possibles
