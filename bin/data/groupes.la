@@ -125,6 +125,11 @@ grp:n.ngen
 pos:n
 pg:n NP;gen;gén
 
+grp:v.sujet
+pos:v
+morph:indic 3,subj 3
+ag:n NP;sujet;nomin;n
+
 grp:v.attrPass
 pos:v
 morph:pass indic,pass subj
@@ -273,11 +278,6 @@ grp:n.sr
 pos:n NP
 p:v;;act
 pg:sr;rel
-
-grp:v.sujet
-pos:v
-morph:indic 3,subj 3
-ag:n NP;sujet;nomin;n
 
 grp:v.objsuj
 pos:v.sujet
