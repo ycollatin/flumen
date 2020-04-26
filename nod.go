@@ -14,6 +14,49 @@ type Nod struct {
 	rang     int     //
 }
 
+// liste des éléments du noeud, noyau en rouge
+func (n *Nod) doc() string {
+	var mm []string
+	for _, m := range n.mma {
+		mm = append(mm, m.gr)
+	}
+	mm = append(mm, rouge(n.nucl.gr))
+	for _, m := range n.mmp {
+		mm = append(mm, m.gr)
+	}
+	mm = append(mm, " - "+n.grp.id)
+	return strings.Join(mm, " ")
+}
+
+func (na *Nod) egale(nb *Nod) bool {
+	if na.grp.id != nb.grp.id {
+		return false
+	}
+	if na.nucl != nb.nucl {
+		return false
+	}
+	va := true
+	for _, ma := range na.mma {
+		va = false
+		for _, mb := range nb.mma {
+			va = va || ma == mb
+		}
+		if !va {
+			return false
+		}
+	}
+	for _, ma := range na.mmp {
+		va = false
+		for _, mb := range nb.mmp {
+			va = va || ma == mb
+		}
+		if !va {
+			return false
+		}
+	}
+	return true
+}
+
 // lignes graphviz du nœud
 func (n *Nod) graf() []string {
 	var ll []string
@@ -36,20 +79,6 @@ func (n *Nod) graf() []string {
 		ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, lien))
 	}
 	return ll
-}
-
-// liste des éléments du noeud, noyau en rouge
-func (n *Nod) doc() string {
-	var mm []string
-	for _, m := range n.mma {
-		mm = append(mm, m.gr)
-	}
-	mm = append(mm, rouge(n.nucl.gr))
-	for _, m := range n.mmp {
-		mm = append(mm, m.gr)
-	}
-	mm = append(mm, " - "+n.grp.id)
-	return strings.Join(mm, " ")
 }
 
 func (n *Nod) inclut(m *Mot) bool {

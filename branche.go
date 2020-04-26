@@ -40,7 +40,7 @@ type Branche struct {
 	imot   int               // rang du mot courant
 	nods   []*Nod            // noeuds validés
 	niveau int               // n° de la branche par rapport au tronc
-	veto   map[int][]*Groupe // index : rang du mot; valeur : liste des groupes interdits
+	veto   map[int][]*Nod    // index : rang du mot; valeur : liste des liens interdits
 	photos map[int]*PhotoMot // lemmatisations et appartenance de groupe propres à la branche
 	filles []*Branche        // liste des branches filles
 }
@@ -60,7 +60,7 @@ func creeTronc(t string) *Branche {
 	}
 	nbmots = len(mots)
 	br.photos = make(map[int]*PhotoMot)	// l'index de la map est le numéro des mots
-	br.veto = make(map[int][]*Groupe)
+	br.veto = make(map[int][]*Nod)
 	// peuplement des photos
 	for _, m := range mots {
 		phm := new(PhotoMot)
@@ -121,19 +121,19 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 	// signet exploregrou
 	for _, g := range grps {
 		cont := false
-		// Si le groupe a été exploré pour m dans une
-		// autre branche, passer
-		for _, gv := range bm.veto[m.rang] {
-			if g == gv {
-				cont = true
-				break
-			}
-		}
-		if cont {
-			continue
-		}
 		n := bm.noeud(m, g)
 		if n != nil {
+			// Si le groupe a été exploré pour m dans une
+			// autre branche, passer
+			for _, lv := range bm.veto[m.rang] {
+				if n.egale(lv) {
+					cont = true
+					break
+				}
+			}
+			if cont {
+				continue
+			}
 			// le noeud est accepté. créer une branche fille (bf)
 			bf := bm.copie()
 			for _, mph := range mots {
@@ -145,7 +145,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 						ph.pos = n.grp.id
 						bf.photos[mph.rang] = ph
 						// interdire le groupe au noyau
-						bm.veto[mph.rang] = append(bm.veto[mph.rang], g)
+						bm.veto[mph.rang] = append(bm.veto[mph.rang], n)
 					}
 					for _, ma := range n.mma {
 						// éléments ante
