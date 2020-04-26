@@ -53,14 +53,6 @@ pos:"sum"
 morph:indic,subj
 a:v;pp;part parf
 
-! XXX nécessaire ?
-!ter:v.sujinf
-!pos:v
-!morph:act 3
-!lexsynt:infobj
-!a:p n NP;sujet;nomin;n
-!a:v;obj;inf
-
 ter:v.neg
 pos:v
 morph:indic,subj
@@ -125,10 +117,10 @@ grp:n.ngen
 pos:n
 pg:n NP;gen;gén
 
-!grp:v.sujet
-!pos:v
-!morph:indic 3,subj 3
-!ag:n NP;sujet;nomin;n
+grp:v.sujet
+pos:v
+morph:indic 3,subj 3
+ag:n NP;sujet;nomin;n
 
 grp:v.attrPass
 pos:v
