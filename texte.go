@@ -14,8 +14,9 @@ type Texte struct {
 	nom      string
 	compteur int
 	phrases  []string
-	tronc    *Branche
 }
+
+var tronc *Branche
 
 func (t *Texte) append(p string) {
 	t.phrases = append(t.phrases, p)
@@ -25,8 +26,8 @@ func (t *Texte) append(p string) {
 // le texte du param aide.
 func (t Texte) affiche(aide string) {
 	ClearScreen()
-	fmt.Printf("%s, phrase %d, mot %d\n", t.nom, t.compteur+1, texte.tronc.imot)
-	fmt.Println(t.tronc.enClair())
+	fmt.Printf("%s, phrase %d, mot %d\n", t.nom, t.compteur+1, tronc.imot)
+	fmt.Println(tronc.enClair())
 	fmt.Println(aide)
 }
 
@@ -60,7 +61,7 @@ func CreeTexte(nf string) *Texte {
 
 func (t *Texte) majPhrase() {
 	initArcs()
-	t.tronc = creeTronc(t.phrases[t.compteur])
+	tronc = creeTronc(t.phrases[t.compteur])
 }
 
 func (t *Texte) porro() {

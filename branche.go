@@ -29,11 +29,13 @@ type PhotoMot struct {
 	pos     string    // nom du groupe dont le mot est noyau
 }
 
+var mots []*Mot
+
 type Branche struct {
-	gr     string            // texte de la phrase
-	imot   int               // rang du mot courant
-	nbmots int               // nomb de mots de la phrase
-	mots   []*Mot            // mots de la phrase
+	gr     string // texte de la phrase
+	imot   int    // rang du mot courant
+	nbmots int    // nomb de mots de la phrase
+	//mots   []*Mot            // mots de la phrase
 	nods   []*Nod            // noeuds validés
 	niveau int               // n° de la branche par rapport au tronc
 	veto   map[int][]*Groupe // index : rang du mot; valeur : liste des groupes interdits
@@ -46,19 +48,20 @@ type Branche struct {
 // est initialisé avec les mots lemmatisés
 // par Collatinus
 func creeTronc(t string) *Branche {
+	mots = nil
 	br := new(Branche)
 	br.gr = t
 	mm := gocol.Mots(t)
 	for i, m := range mm {
 		nm := creeMot(m)
 		nm.rang = i
-		br.mots = append(br.mots, nm)
+		mots = append(mots, nm)
 	}
-	br.nbmots = len(br.mots)
+	br.nbmots = len(mots)
 	br.photos = make(map[int]*PhotoMot)
 	br.veto = make(map[int][]*Groupe)
 	// peuplement des photos
-	for _, m := range br.mots {
+	for _, m := range mots {
 		phm := new(PhotoMot)
 		phm.res = m.ans
 		phm.dejasub = false
@@ -90,7 +93,6 @@ func (b *Branche) copie() *Branche {
 	nb := new(Branche)
 	nb.gr = b.gr
 	nb.nbmots = b.nbmots
-	nb.mots = b.mots
 	nb.niveau = b.niveau + 1
 	nb.nods = b.nods
 	// les photos seront copiées après création
@@ -134,7 +136,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 		if n != nil {
 			// le noeud est accepté. créer une branche fille (bf)
 			bf := bm.copie()
-			for _, mph := range bm.mots {
+			for _, mph := range mots {
 				if n.inclut(mph) {
 					if mph == n.nucl {
 						// noyau
@@ -174,11 +176,11 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 
 func (bm *Branche) explore() {
 	// signet sexplore
-	for _, m := range bm.mots {
+	for _, m := range mots {
 		bm.exploreGroupes(m, grpTerm)
 	}
 	// 2. groupes non terminaux
-	for _, m := range bm.mots {
+	for _, m := range mots {
 		bm.exploreGroupes(m, grp)
 	}
 }
@@ -186,8 +188,8 @@ func (bm *Branche) explore() {
 // texte de la Branche, le mot courant surligné en rouge
 func (b *Branche) enClair() string {
 	var lm []string
-	for i := 0; i < len(b.mots); i++ {
-		m := b.mots[i].gr
+	for i := 0; i < len(mots); i++ {
+		m := mots[i].gr
 		if i == b.imot {
 			m = rouge(m)
 		}
@@ -200,14 +202,14 @@ func (b *Branche) enClair() string {
 // du mot n° d
 func (b *Branche) exr(d, n int) (e string) {
 	var gab string = "%s"
-	for i := 0; i < len(b.mots); i++ {
+	for i := 0; i < len(mots); i++ {
 		if e != "" {
 			gab = " %s"
 		}
 		if i >= d && i < d+n {
-			e += fmt.Sprintf(gab, rouge(b.mots[i].gr))
+			e += fmt.Sprintf(gab, rouge(mots[i].gr))
 		} else {
-			e += fmt.Sprintf(gab, b.mots[i].gr)
+			e += fmt.Sprintf(gab, mots[i].gr)
 		}
 	}
 	return
@@ -225,7 +227,7 @@ func (b *Branche) ids(m *Mot) []string {
 }
 
 func (b *Branche) motCourant() *Mot {
-	return b.mots[b.imot]
+	return mots[b.imot]
 }
 
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
@@ -273,14 +275,14 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 			// le rang du mot est < 0 : impossible
 			return nil
 		}
-		ma := b.mots[r]
+		ma := mots[r]
 		// passer les mots déjà subordonnés
 		for b.dejasub(ma) {
 			r--
 			if r < 0 {
 				return nil
 			}
-			ma = b.mots[r]
+			ma = mots[r]
 		}
 		// vérification de réciprocité, puis du lien lui-même
 		if b.domine(ma, m) {
@@ -307,7 +309,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 		if sub.lien == "" {
 			continue
 		}
-		mp := b.mots[r]
+		mp := mots[r]
 		for b.dejasub(mp) {
 			r++
 			if r >= b.nbmots {
@@ -317,7 +319,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 			if mpn != nil && mpn.rang < m.rang {
 				return nil
 			}
-			mp = b.mots[r]
+			mp = mots[r]
 		}
 		// réciprocité
 		if b.domine(mp, m) {
