@@ -208,8 +208,8 @@ lexsynt:attro !propinf
 ag:n a;attro;acc
 
 grp:v.vobj
-pos:v
-lexsynt:!intr !v.sumpp !v.ppsum
+pos:v !v.sumpp !v.ppsum
+lexsynt:!intr
 morph:act
 pg:n NP p !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
 
