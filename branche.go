@@ -64,14 +64,23 @@ func creeTronc(t string) *Branche {
 	return br
 }
 
-/*
-func (b *Branche) copie() *Branche {
-	nb := b
-	nb.niveau = b.niveau + 1
-	nb.photos = make(map[int]*PhotoMot)
-	return nb
+func (b *Branche) adeja(noyau *Mot, lien string) bool {
+	for _, nod := range b.nods {
+		if nod.nucl == noyau {
+			for i, _ := range nod.mma {
+				if nod.grp.ante[i].lien == lien {
+					return true
+				}
+			}
+			for i, _ := range nod.mmp {
+				if nod.grp.post[i].lien == lien {
+					return true
+				}
+			}
+		}
+	}
+	return false
 }
-*/
 
 func (b *Branche) copie() *Branche {
 	// signet scopie
@@ -131,7 +140,7 @@ func (bm *Branche) explGrps(m *Mot, grps []*Groupe) {
 						ph.pos = n.grp.id
 						bf.photos[mph.rang] = ph
 						// interdire le groupe au noyau
-						bf.veto[mph.rang] = append(bm.veto[mph.rang], g)
+						bm.veto[mph.rang] = append(bm.veto[mph.rang], g)
 					}
 					for _, ma := range n.mma {
 						// éléments ante
@@ -201,6 +210,17 @@ func (b *Branche) exr(d, n int) (e string) {
 	return
 }
 
+// id des Nod dont m est déjà le noyau
+func (b *Branche) ids(m *Mot) []string {
+	var ret []string
+	for _, nod := range b.nods {
+		if nod.nucl.rang == m.rang {
+			ret = append(ret, nod.grp.id)
+		}
+	}
+	return ret
+}
+
 func (b *Branche) motCourant() *Mot {
 	return b.mots[b.imot]
 }
@@ -208,7 +228,6 @@ func (b *Branche) motCourant() *Mot {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	// signet snoeud
-
 	/*
 	// utilistation des photos
 	mot     *Mot      // liaison avec le mot
@@ -443,7 +462,7 @@ func (b *Branche) recolte() (rec [][]*Nod) {
 func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 	// signet sresub
 	// si la fonction est déjà prise, renvoyer nil
-	if !sub.multi && mn.adeja(sub) {
+	if !sub.multi && b.adeja(mn, sub.lien) {
 		return nil
 	}
 
@@ -455,7 +474,7 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (vares gocol.
 		// 1. La pos du mot est définitive
 		// noyaux exclus
 		excl := false
-		lgr := m.estNuclDe()
+		lgr := b.ids(m)
 		for _, noy := range sub.noyexcl {
 			excl = excl || contient(lgr, noy.id)
 		}
