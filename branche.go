@@ -120,8 +120,8 @@ func (b *Branche) domine(ma, mb *Mot) bool {
 func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 	// signet exploregrou
 	for _, g := range grps {
-		cont := false
 		n := bm.noeud(m, g)
+		cont := false
 		if n != nil {
 			// Si le groupe a été exploré pour m dans une
 			// autre branche, passer
@@ -176,6 +176,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 
 func (bm *Branche) explore() {
 	// signet sexplore
+	// 1. groupes terminaux
 	for _, m := range mots {
 		bm.exploreGroupes(m, grpTerm)
 	}
