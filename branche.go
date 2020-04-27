@@ -126,7 +126,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 			// Si le groupe a été exploré pour m dans une
 			// autre branche, passer
 			for _, lv := range bm.veto[m.rang] {
-				if n.egale(lv) {
+				if m == lv.nucl && lv.grp.id == g.id {
 					cont = true
 					break
 				}
@@ -261,7 +261,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 		return nil
 	}
 	// XXX lundi 27 avril 2020 
-	m.restmp = res
+	res = m.restmp
 
 	// création du noeud de retour
 	nod := new(Nod)
@@ -290,10 +290,11 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 			return nil
 		}
 		sub := g.ante[ia]
-		ph := b.photos[ma.rang]
-		ma.restmp = ph.res
-		res := b.resSub(ma, sub, m, ma.restmp)
-		if res == nil {
+		//ph := b.photos[ma.rang]
+		resma := b.photos[ma.rang].res
+		//ma.restmp = ph.res
+		resma = b.resSub(ma, sub, m, resma)
+		if resma == nil {
 			return nil
 		}
 		ma.restmp = res
@@ -326,13 +327,15 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 		if b.domine(mp, m) {
 			return nil
 		}
-		ph := b.photos[mp.rang]
-		mp.restmp = ph.res
-		res := b.resSub(mp, sub, m, mp.restmp)
-		if res == nil {
+		//ph := b.photos[mp.rang]
+		//mp.restmp = ph.res
+		//resmp := b.resSub(mp, sub, m, mp.restmp)
+		resmp := b.photos[mp.rang].res
+		resmp = b.resSub(mp, sub, m, resmp)
+		if resmp == nil {
 			return nil
 		}
-		mp.restmp = res
+		mp.restmp = resmp
 		nod.mmp = append(nod.mmp, mp)
 		r++
 	}
@@ -406,26 +409,24 @@ func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
 			return nil
 		}
 		res = nres
-	} else {
-		// Le mot est encore isolé
+	} else { // Le mot est encore isolé
+		// vérif des pos
 		var nres gocol.Res
 		for _, a := range res {
-			for _, morf := range a.Morphos {
-				for _, noy := range g.noyaux {
-					if noy.canon > "" && noy.vaSr(a) {
-						nres = gocol.AddRes(nres, a.Lem, morf, 0)
-					} else {
-						if noy.vaPos(a.Lem.Pos) {
-							nres = gocol.AddRes(nres, a.Lem, morf, 0)
-						}
+			for _, noy := range g.noyaux {
+				if noy.canon > "" && noy.vaSr(a) {
+					nres = append(nres, a)
+				} else {
+					if noy.vaPos(a.Lem.Pos) {
+						nres = append(nres, a)
 					}
 				}
 			}
-			if len(nres) == 0 {
-				return nil
-			}
-			res = nres
 		}
+		if len(nres) == 0 {
+			return nil
+		}
+		res = nres
 	}
 
 	// vérif lexicosyntaxique
