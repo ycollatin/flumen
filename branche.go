@@ -240,8 +240,6 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	//dejasub bool      // appartenance du mot à un groupe
 	//pos     string    // nom du groupe dont le mot est noyau
 
-	photo := b.photos[m.rang]
-
 	// vérification de rang
 	rang := m.rang
 	lante := len(g.ante)
@@ -255,12 +253,14 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	}
 
 	// m peut-il être noyau du groupe g ?
+	photo := b.photos[m.rang]
 	m.restmp = photo.res
 	res := b.resNoyau(m, g, m.restmp)
 	if res == nil {
 		return nil
 	}
-	res = m.restmp
+	// XXX lundi 27 avril 2020 
+	m.restmp = res
 
 	// création du noeud de retour
 	nod := new(Nod)
@@ -301,8 +301,8 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	}
 
 	// reгcherche des subs post
-	for ip, sub := range g.post {
-		r := rang + ip + 1
+	r = rang + 1
+	for _, sub := range g.post {
 		if r >= nbmots {
 			break
 		}
@@ -440,15 +440,10 @@ func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
 
 	nres = nil
 	for _, sr := range res {
-		var morfos []string // morphos de sr acceptées par g
-		for _, morf := range sr.Morphos {
+		for i, morf := range sr.Morphos {
 			if g.vaMorph(morf) {
-				morfos = append(morfos, morf)
+				nres = gocol.AddRes(nres, sr.Lem, morf, sr.Nmorph[i])
 			}
-		}
-		if len(morfos) > 0 {
-			sr.Morphos = morfos
-			nres = append(nres, sr)
 		}
 	}
 	// pour faire comme pour les autres vérifs :
@@ -474,6 +469,7 @@ func (b *Branche) recolte() (rec [][]*Nod) {
 }
 
 // vrai si m est compatible avec Sub et le noyau mn
+// FIXME il semble que res n'élimine pas les Lemme incompatibles
 func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 	// signet sresub
 	// si la fonction est déjà prise, renvoyer nil
