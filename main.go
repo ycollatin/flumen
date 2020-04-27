@@ -4,18 +4,14 @@
 package main
 
 // FIXME
-// - se in mare praecipitavit : 1 seule solution, mare abl est qdmeme sujet.
-//		confusion in mare acc. et in mare abl de mas, maris !
-// - le surlignage des lemmatisations est complètement perdu
 // - Ex Inacho et Argia Ino : 2 solutions exactement identiques
-// - tantum nocte crescebat : tantum nocte n.epith, nocte crescebat, v.obj.
-// - Marcellinum *tibi esse* iratum scis : tibi devrait fixer esse à sum.
+// - le surlignage des lemmatisations est complètement perdu
 // - subiciunt veribus prunas et viscera torrent :
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
 //				  et la coord subiciunt et torrent (juste)
+//	 prunas 2 fois objet
 //
 // XXX
-// - beaucoup de confusions entre n+app et n+gén.
 // - Trouver une solution pour la construction personnelle de l'infinitive
 //   Homerus dicitur caecus fuisse. (ou caecum)
 // - CONSTRUCTIONS LEXICALES
@@ -24,8 +20,6 @@ package main
 // TODO
 // - vérifier l'exclusion des lexsynt
 // - traiter la coordination par -que := et -
-// - traiter de la même manière le noyau et les subs, aussi bien dans le code
-//   que dans les données ?
 // - un champ groupe.anrel - analyses du relatif ?
 // - accord de personne sujet-verbe ?
 // - saisie d'une phrase ?
