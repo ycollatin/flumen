@@ -87,7 +87,7 @@ p:NP;app;;cn
 ! FIXME accord ea *data in coniugium *Epimetheo fratri.
 grp:n.npapp
 pos:NP
-pg:n;app;;cgn;nom
+pg:n;+app;;cgn;nom
 
 grp:n.epith
 pos:n
