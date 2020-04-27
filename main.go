@@ -4,6 +4,13 @@
 package main
 
 // FIXME
+// - Pluton quadrigiis uenit : plantage
+// - dicitur prima mortalis : l'attr dicitur mortalis
+//   + épith prima mortalis non reconnue
+//   mais reconnue si dicitur a un sujet
+// - neque in perpetuum servare sciebant : 
+//	 servare infobj de sciebant est reconnu, mais
+//   sans ses subs.
 // - Ex Inacho et Argia Ino : 2 solutions exactement identiques
 // - le surlignage des lemmatisations est complètement perdu
 // - subiciunt veribus prunas et viscera torrent :
