@@ -4,12 +4,9 @@
 package main
 
 // FIXME
-// - Les dernières solutions deviennent de + en + pauvres : pas sûr qu'une
-//   solution garde les bonnes données par rapport à la précédente.
+// - se in mare praecipitavit : 1 seule solution, mare abl est qdmeme sujet.
+//		confusion in mare acc. et in mare abl de mas, maris !
 // - le surlignage des lemmatisations est complètement perdu
-// - Marsyas Apollinem ad citharae cantum in certamen provocavit :
-//   incompatibilité Apollinem app cantum et cantum prep ad
-// 	 idem pour se in mare praecipitavit : obj/prepAcc
 // - Ex Inacho et Argia Ino : 2 solutions exactement identiques
 // - tantum nocte crescebat : tantum nocte n.epith, nocte crescebat, v.obj.
 // - Marcellinum *tibi esse* iratum scis : tibi devrait fixer esse à sum.
