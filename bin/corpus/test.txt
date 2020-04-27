@@ -1,4 +1,3 @@
-dea Isis.
 ceterique dii.
 dea Isis nuncupatur.
 dicitur prima mortalis.
@@ -11,6 +10,7 @@ Ceres cum vellet alumnum suum immortalem reddere, interdiu lacte divino alebat.
 Quod cum Python eam non invenisset, Parnassum redit.
 Europa Argiopes et Agenoris filia Sidonia.
 ! réussi (ou ambigu mais mauvais choix)
+dea Isis.
 mare Ionium.
 est appellatum.
 epistulam legi.
