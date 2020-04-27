@@ -29,9 +29,6 @@ func (n *Nod) doc() string {
 }
 
 func (na *Nod) egale(nb *Nod) bool {
-	if na.grp.id != nb.grp.id {
-		return false
-	}
 	if na.nucl != nb.nucl {
 		return false
 	}
