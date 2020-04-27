@@ -380,40 +380,51 @@ func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
 				return nil
 			}
 		}
+		var nres gocol.Res
 		// noyaux admis
-		va := false
 		for _, noy := range g.noyaux {
 			if noy.canon > "" {
 				for _, a := range res {
-					va = va || noy.vaSr(a)
+					for _, morf := range a.Morphos {
+						if noy.vaSr(a) {
+							nres = gocol.AddRes(nres, a.Lem, morf, 0)
+						}
+					}
 				}
 			} else {
-				va = va || noy.vaPos(photom.pos)
-			}
-		}
-		if !va {
-			return nil
-		}
-	} else {
-		// Le mot est encore isolé
-		var nres gocol.Res
-		for _, a := range res {
-			va := false
-			for _, noy := range g.noyaux {
-				if noy.canon > "" {
-					va = va || noy.vaSr(a)
-				} else {
-					va = va || noy.vaPos(a.Lem.Pos)
+				for _, a := range res {
+					for _, morf := range a.Morphos {
+						if noy.vaPos(photom.pos) {
+							nres = gocol.AddRes(nres, a.Lem, morf, 0)
+						}
+					}
 				}
-			}
-			if va {
-				nres = append(nres, a)
 			}
 		}
 		if len(nres) == 0 {
 			return nil
 		}
 		res = nres
+	} else {
+		// Le mot est encore isolé
+		var nres gocol.Res
+		for _, a := range res {
+			for _, morf := range a.Morphos {
+				for _, noy := range g.noyaux {
+					if noy.canon > "" && noy.vaSr(a) {
+						nres = gocol.AddRes(nres, a.Lem, morf, 0)
+					} else {
+						if noy.vaPos(a.Lem.Pos) {
+							nres = gocol.AddRes(nres, a.Lem, morf, 0)
+						}
+					}
+				}
+			}
+			if len(nres) == 0 {
+				return nil
+			}
+			res = nres
+		}
 	}
 
 	// vérif lexicosyntaxique
@@ -440,9 +451,9 @@ func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
 
 	nres = nil
 	for _, sr := range res {
-		for i, morf := range sr.Morphos {
+		for _, morf := range sr.Morphos {
 			if g.vaMorph(morf) {
-				nres = gocol.AddRes(nres, sr.Lem, morf, sr.Nmorph[i])
+				nres = gocol.AddRes(nres, sr.Lem, morf, 0)
 			}
 		}
 	}
@@ -543,16 +554,11 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (vares gocol.
 	if len(sub.morpho) > 0 {
 		var nres gocol.Res
 		for _, an := range res {
-			var lmorf []string
 			for _, morfs := range an.Morphos {
 				// pour toutes les morphos valides de m
 				if strings.Contains(morfs, "inv.") || sub.vaMorpho(morfs) {
-					lmorf = append(lmorf, morfs)
+					nres = gocol.AddRes(nres, an.Lem, morfs, 0)
 				}
-			}
-			if len(lmorf) > 0 {
-				an.Morphos = lmorf
-				nres = append(nres, an)
 			}
 		}
 		if len(nres) == 0 {
@@ -566,24 +572,16 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (vares gocol.
 	if sub.accord > "" {
 		var nres gocol.Res
 		for _, an := range res {
-			va := false
+			//va := false
 			for _, anoy := range mn.restmp {
 				// pour toutes les morphos valides de m
-				var lmorf []string
 				for _, morfn := range anoy.Morphos {
 					for _, morfs := range an.Morphos {
 						if accord(morfn, morfs, sub.accord) {
-							lmorf = append(lmorf, morfs)
-							va = true
+							nres = gocol.AddRes(nres, anoy.Lem, morfn, 0)
 						}
 					}
 				}
-				if len(lmorf) > 0 {
-					an.Morphos = lmorf
-				}
-			}
-			if va {
-				nres = append(nres, an)
 			}
 		}
 		if len(nres) == 0 {
