@@ -1,4 +1,4 @@
-//     util.go - Publicola
+//     util.go - Gentes
 
 package main
 

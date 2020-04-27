@@ -1,4 +1,4 @@
-//  texte.go - Publicola
+//  texte.go - Gentes
 
 // Partage d'un texte en []Branche
 
