@@ -1,4 +1,4 @@
-//     Branche.go - Publicola
+//     Branche.go - Gentes
 
 /*
 Signets
@@ -31,8 +31,8 @@ type PhotoMot struct {
 }
 
 var (
-	mots	[]*Mot
-	nbmots	int
+	mots   []*Mot
+	nbmots int
 )
 
 type Branche struct {
@@ -59,7 +59,7 @@ func creeTronc(t string) *Branche {
 		mots = append(mots, nm)
 	}
 	nbmots = len(mots)
-	br.photos = make(map[int]*PhotoMot)	// l'index de la map est le numéro des mots
+	br.photos = make(map[int]*PhotoMot) // l'index de la map est le numéro des mots
 	br.veto = make(map[int][]*Nod)
 	// peuplement des photos
 	for _, m := range mots {
@@ -233,13 +233,13 @@ func (b *Branche) motCourant() *Mot {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	// signet snoeud
-	/*
-		// utilistation des photos
-		mot     *Mot      // liaison avec le mot
-		res     gocol.Res // lemmatisations réduites du mot
-		dejasub bool      // appartenance du mot à un groupe
-		pos     string    // nom du groupe dont le mot est noyau
-	*/
+
+	// utilistation des photos
+	//mot     *Mot      // liaison avec le mot
+	//res     gocol.Res // lemmatisations réduites du mot
+	//dejasub bool      // appartenance du mot à un groupe
+	//pos     string    // nom du groupe dont le mot est noyau
+
 	photo := b.photos[m.rang]
 
 	// vérification de rang
@@ -361,7 +361,7 @@ func (b *Branche) noyau(m *Mot) *Mot {
 // renvoie quelles lemmatisations de m lui permettent d'être le noyau du groupe g
 func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
 	// signet snoyau
-	// valeurs variable de m pour la branche
+	// valeurs variables de m pour la branche
 	/*
 		// utilistation des photos
 		mot     *Mot      // liaison avec le mot
@@ -369,7 +369,6 @@ func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
 		dejasub bool      // appartenance du mot à un groupe
 		pos     string    // nom du groupe dont le mot est noyau
 	*/
-	// FIXME v.vobj est admis malgré un pos v.ppsum
 	photom := b.photos[m.rang]
 	// vérif du pos
 	if photom.pos != "" {
@@ -485,7 +484,6 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (vares gocol.
 	// photo m et mn pour la branche
 	photom := b.photos[m.rang]
 	// vérification des pos
-	// FIXME legatos decernis : avec v.obj, seul legatos pp est sélectionné par vaPos
 	if photom.pos != "" {
 		// 1. La pos du mot est définitive
 		// noyaux exclus
