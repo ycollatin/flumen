@@ -170,37 +170,6 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 				if !vu {
 					bf.photos[mph.rang] = bm.photos[mph.rang]
 				}
-				/*
-				if n.inclut(mph) {
-					if mph == n.nucl {
-						// noyau
-						ph := new(PhotoMot)
-						ph.res = mph.restmp
-						ph.pos = n.grp.id
-						bf.photos[mph.rang] = ph
-						// interdire le groupe au noyau
-						bm.veto[mph.rang] = append(bm.veto[mph.rang], n)
-					}
-					for _, ma := range n.mma {
-						// éléments ante
-						ph := new(PhotoMot)
-						ph.res = ma.restmp
-						ph.dejasub = true
-						ph.pos = bm.photos[ma.rang].pos
-						bf.photos[ma.rang] = ph
-					}
-					for _, mp := range n.mmp {
-						// éléments post
-						ph := new(PhotoMot)
-						ph.res = mp.restmp
-						ph.dejasub = true
-						ph.pos = bm.photos[mp.rang].pos
-						bf.photos[mp.rang] = ph
-					}
-				} else {
-					bf.photos[mph.rang] = bm.photos[mph.rang]
-				}
-				*/
 			}
 			bf.nods = append(bf.nods, n)
 			bf.explore()
@@ -289,7 +258,6 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	}
 
 	// m peut-il être noyau du groupe g ?
-	// XXX Lentulus consul fuit, consul a pris la res de fuit
 	photo := b.photos[m.rang]
 	m.restmp = photo.res
 	res := b.resNoyau(m, g, m.restmp)
@@ -325,9 +293,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 			return nil
 		}
 		sub := g.ante[ia]
-		//ph := b.photos[ma.rang]
 		resma := b.photos[ma.rang].res
-		//ma.restmp = ph.res
 		resma = b.resSub(ma, sub, m, resma)
 		if resma == nil {
 			return nil
@@ -362,9 +328,6 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 		if b.domine(mp, m) {
 			return nil
 		}
-		//ph := b.photos[mp.rang]
-		//mp.restmp = ph.res
-		//resmp := b.resSub(mp, sub, m, mp.restmp)
 		resmp := b.photos[mp.rang].res
 		resmp = b.resSub(mp, sub, m, resmp)
 		if resmp == nil {
@@ -606,16 +569,12 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (vares gocol.
 	// accord
 	if sub.accord > "" {
 		var nres gocol.Res
-		//va := false
 		for _, an := range res {
-			//for _, anoy := range mn.restmp {
 			for _, anoy := range mn.restmp {
 				for _, morfs := range an.Morphos {
-					// pour toutes les morphos valides de m
 					for _, morfn := range anoy.Morphos {
 						if accord(morfn, morfs, sub.accord) {
 							nres = gocol.AddRes(nres, anoy.Lem, morfs, 0)
-							//va = true
 						}
 					}
 				}
@@ -624,7 +583,6 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (vares gocol.
 		if len(nres) == 0 {
 			return nil
 		}
-		//m.restmp = nres
 	}
 	return res
 }
