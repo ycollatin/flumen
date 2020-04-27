@@ -120,23 +120,57 @@ func (b *Branche) domine(ma, mb *Mot) bool {
 func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 	// signet exploregrou
 	for _, g := range grps {
-		n := bm.noeud(m, g)
+		// Si le groupe a été exploré pour m dans une
+		// autre branche, passer
 		cont := false
+		for _, lv := range bm.veto[m.rang] {
+			if m == lv.nucl && lv.grp.id == g.id {
+				cont = true
+				break
+			}
+		}
+		if cont {
+			continue
+		}
+		n := bm.noeud(m, g)
 		if n != nil {
-			// Si le groupe a été exploré pour m dans une
-			// autre branche, passer
-			for _, lv := range bm.veto[m.rang] {
-				if m == lv.nucl && lv.grp.id == g.id {
-					cont = true
-					break
-				}
-			}
-			if cont {
-				continue
-			}
 			// le noeud est accepté. créer une branche fille (bf)
 			bf := bm.copie()
 			for _, mph := range mots {
+				vu := false
+				if mph == n.nucl {
+					ph := new(PhotoMot)
+					ph.res = mph.restmp
+					ph.pos = n.grp.id
+					bf.photos[mph.rang] = ph
+					// interdire le groupe au noyau
+					bm.veto[mph.rang] = append(bm.veto[mph.rang], n)
+					vu = true
+				}
+				for _, ma := range n.mma {
+					if mph == ma {
+						ph := new(PhotoMot)
+						ph.res = ma.restmp
+						ph.dejasub = true
+						ph.pos = bm.photos[ma.rang].pos
+						bf.photos[mph.rang] = ph
+						vu = true
+					}
+				}
+				for _, mp := range n.mmp {
+					if mph == mp {
+						ph := new(PhotoMot)
+						ph.res = mp.restmp
+						ph.dejasub = true
+						ph.pos = bm.photos[mp.rang].pos
+						bf.photos[mph.rang] = ph
+						vu = true
+					}
+				}
+				if !vu {
+					bf.photos[mph.rang] = bm.photos[mph.rang]
+				}
+				/*
 				if n.inclut(mph) {
 					if mph == n.nucl {
 						// noyau
@@ -166,6 +200,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 				} else {
 					bf.photos[mph.rang] = bm.photos[mph.rang]
 				}
+				*/
 			}
 			bf.nods = append(bf.nods, n)
 			bf.explore()
@@ -254,13 +289,13 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	}
 
 	// m peut-il être noyau du groupe g ?
+	// XXX Lentulus consul fuit, consul a pris la res de fuit
 	photo := b.photos[m.rang]
 	m.restmp = photo.res
 	res := b.resNoyau(m, g, m.restmp)
 	if res == nil {
 		return nil
 	}
-	// XXX lundi 27 avril 2020 
 	res = m.restmp
 
 	// création du noeud de retour
@@ -297,7 +332,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 		if resma == nil {
 			return nil
 		}
-		ma.restmp = res
+		ma.restmp = resma
 		nod.mma = append(nod.mma, ma)
 		r--
 	}
@@ -482,7 +517,6 @@ func (b *Branche) recolte() (rec [][]*Nod) {
 }
 
 // vrai si m est compatible avec Sub et le noyau mn
-// FIXME il semble que res n'élimine pas les Lemme incompatibles
 func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
 	// signet sresub
 	// si la fonction est déjà prise, renvoyer nil
@@ -570,17 +604,18 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (vares gocol.
 	}
 
 	// accord
-	// pour chaque an.
 	if sub.accord > "" {
 		var nres gocol.Res
+		//va := false
 		for _, an := range res {
-			//va := false
+			//for _, anoy := range mn.restmp {
 			for _, anoy := range mn.restmp {
-				// pour toutes les morphos valides de m
-				for _, morfn := range anoy.Morphos {
-					for _, morfs := range an.Morphos {
+				for _, morfs := range an.Morphos {
+					// pour toutes les morphos valides de m
+					for _, morfn := range anoy.Morphos {
 						if accord(morfn, morfs, sub.accord) {
-							nres = gocol.AddRes(nres, anoy.Lem, morfn, 0)
+							nres = gocol.AddRes(nres, anoy.Lem, morfs, 0)
+							//va = true
 						}
 					}
 				}
@@ -589,7 +624,7 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (vares gocol.
 		if len(nres) == 0 {
 			return nil
 		}
-		res = nres
+		//m.restmp = nres
 	}
 	return res
 }
