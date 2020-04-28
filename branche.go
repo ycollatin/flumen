@@ -124,7 +124,8 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 		// autre branche, passer
 		cont := false
 		for _, lv := range bm.veto[m.rang] {
-			if m == lv.nucl && lv.grp.id == g.id {
+			// FIXME : cas des subs multi
+			if m == lv.nucl && lv.grp.id == g.id && !lv.grp.multi() {
 				cont = true
 				break
 			}
