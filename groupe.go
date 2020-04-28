@@ -43,13 +43,6 @@ func creeGroupe(ll []string) *Groupe {
 			lecl := strings.Split(v, " ")
 			for _, ecl := range lecl {
 				g.lexsynt = append(g.lexsynt, ecl)
-				/*
-					if ecl[0] != '!' {
-						g.lexsynt = append(g.lexsynt, ecl)
-					} else {
-						g.exclls = append(g.exclls, ecl[1:])
-					}
-				*/
 			}
 		case "a":
 			g.ante = append(g.ante, creeSub(v, g, true))
