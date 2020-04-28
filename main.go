@@ -4,6 +4,8 @@
 package main
 
 // FIXME
+// - Marsyas Apollinem : v.gprep n'accepte pas plusieurs ag malgré +gprep
+//   la res n'est pas réduité à l'acc, ou est mal transmise aux photos
 // - Lentulus consul fuit : Lentulus sujet absent.
 // - Ceres cum vellet : alumnum 2 fois sub.
 // - dicitur prima mortalis : l'attr dicitur mortalis
