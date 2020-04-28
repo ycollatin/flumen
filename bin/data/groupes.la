@@ -63,6 +63,10 @@ pos:n
 a:prepAcc prepAA;prep
 a:p;det;acc;n
 
+ter:n.epith
+pos:n
+a:a;epith;;cgn
+
 ter:a.prepAcc
 pos:a
 lexsynt:subst
@@ -82,12 +86,19 @@ a:n NP;sujet;nomin;n
 a:n;abl;abl
 a:n p;obj;acc
 
-!ter:v.sujAttr
-!pos:v
-!morph:3
-!lexsynt:attr
-!a:NP n;sujet;nomin;n
-!a:n a;attr;nomin;n
+ter:v.sujNpAttrP
+pos:v
+morph:3
+lexsynt:attrp
+a:n;sujet;nomin;n
+a:NP;attr;nomin;n
+
+ter:v.NPsujAttr
+pos:v
+morph:3
+lexsynt:attr
+a:NP;sujet;nomin;n
+a:n;attr;nomin;n
 
 !!!!!!!!!!!!!!!!!!!!!!!!!
 ! Groupes non terminaux !
@@ -102,14 +113,16 @@ pos:n
 lexsynt:nom
 p:NP;app;;cn
 
-! FIXME accord ea *data in coniugium *Epimetheo fratri.
 grp:n.npapp
 pos:NP
 pg:n !n.prepAcc !n.prepAbl;+app;;cgn;nom
 
-grp:n.epith
-pos:n
-a:a;epith;;cgn
+! FIXME dicitur prima mortalis
+grp:v.vEpithSuj
+pos:v
+morph:3 pass
+lexsynt:attrp
+gp:n.epith;attr;nomin;;n
 
 grp:n.nepith
 pos:n
@@ -322,7 +335,7 @@ morph:3
 p:n NP;sujet;nomin;n
 
 grp:v.vPropinf
-pos:v
+pos:v !n.prepAcc !n.prepAbl !n.inperpetuum
 morph:inf
 ag:n NP p;suj;acc
 
