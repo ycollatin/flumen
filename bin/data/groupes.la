@@ -76,6 +76,13 @@ a:n NP;sujet;nomin;n
 a:n;abl;abl
 a:n p;obj;acc
 
+ter:v.sujAttr
+pos:v
+morph:3
+lexsynt:attr
+a:NP n;sujet;nomin;n
+a:n a;attr;nomin;n
+
 !!!!!!!!!!!!!!!!!!!!!!!!!
 ! Groupes non terminaux !
 !!!!!!!!!!!!!!!!!!!!!!!!!
