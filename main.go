@@ -26,7 +26,6 @@ package main
 // 		* pietate erga te
 
 // TODO
-// - vérifier l'exclusion des lexsynt
 // - traiter la coordination par -que := et -
 // - un champ groupe.anrel - analyses du relatif ?
 // - accord de personne sujet-verbe ?
