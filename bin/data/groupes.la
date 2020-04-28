@@ -63,6 +63,11 @@ pos:n
 a:prepAcc prepAA;prep
 a:p;det;acc;n
 
+ter:a.prepAcc
+pos:a
+lexsynt:subst
+a:prepAcc prepAA;prep
+
 ter:v.sujAblObj
 pos:v
 morph:3
@@ -162,7 +167,7 @@ a:p;det;;cgn;det
 
 grp:v.gprep
 pos:v
-ag:n.prepAbl n.prepAcc n.prepDet n.inperpetuum;+gprep
+ag:n.prepAbl n.prepAcc a.prepAcc n.prepDet n.inperpetuum;+gprep
 
 grp:v.vgprep
 pos:v
@@ -185,6 +190,12 @@ pos:v
 morph:indic,subj,part,inf
 lexsynt:datif
 ag:n NP p;dat;datif
+
+grp:v.vdat
+pos:v
+morph:indic,subj,part,inf
+lexsynt:datif
+pg:n NP p;dat;datif
 
 grp:v.objabl
 pos:v.abl
