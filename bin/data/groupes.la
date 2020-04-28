@@ -66,6 +66,12 @@ a:p;det;acc;n
 ter:a.prepAcc
 pos:a
 lexsynt:subst
+morph:acc
+a:prepAcc prepAA;prep
+
+ter:a.prepAcc
+pos:"hic"
+morph:acc
 a:prepAcc prepAA;prep
 
 ter:v.sujAblObj
@@ -76,12 +82,12 @@ a:n NP;sujet;nomin;n
 a:n;abl;abl
 a:n p;obj;acc
 
-ter:v.sujAttr
-pos:v
-morph:3
-lexsynt:attr
-a:NP n;sujet;nomin;n
-a:n a;attr;nomin;n
+!ter:v.sujAttr
+!pos:v
+!morph:3
+!lexsynt:attr
+!a:NP n;sujet;nomin;n
+!a:n a;attr;nomin;n
 
 !!!!!!!!!!!!!!!!!!!!!!!!!
 ! Groupes non terminaux !
@@ -232,10 +238,17 @@ lexsynt:!intr
 morph:act
 pg:n NP p !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
 
-grp:v.attr
+grp:v.sujAttr
 pos:v
+morph:3
 lexsynt:attr
-ag:a n;attr;nomin
+ag:NP n;sujet;nomin;n
+ag:n a;attr;nomin;n
+
+!grp:v.attr
+!pos:v
+!lexsynt:attr
+!ag:a n;attr;nomin
 
 grp:v.vattr
 pos:v
