@@ -18,6 +18,7 @@ type Groupe struct {
 	//exclls          []string // propriétés lexicosyntaxiques exclues
 	ante []*Sub // éléments précédant le noyau
 	post []*Sub // éléments suivant le noyau
+	multi			bool	// le groupe possède au moins un sub multi
 }
 
 var grpTerm, grp []*Groupe
@@ -54,6 +55,17 @@ func creeGroupe(ll []string) *Groupe {
 			g.post = append(g.post, creeSub(v, g, false))
 		}
 	}
+	// multi
+	for _, sa := range g.ante {
+		if sa.multi {
+			g.multi = true
+		}
+	}
+	for _, sp := range g.post {
+		if sp.multi {
+			g.multi = true
+		}
+	}
 	return g
 }
 
@@ -88,6 +100,7 @@ func lisGroupes(nf string) {
 	grp = append(grp, creeGroupe(ll))
 }
 
+/*
 func (g *Groupe) multi() bool {
 	for _, sa := range g.ante {
 		if sa.multi {
@@ -101,6 +114,7 @@ func (g *Groupe) multi() bool {
 	}
 	return false
 }
+*/
 
 // la morpho morf est-elle compatible avec le noyau du groupe g ?
 func (g *Groupe) vaMorph(morf string) bool {
