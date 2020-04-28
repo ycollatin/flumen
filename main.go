@@ -4,6 +4,8 @@
 package main
 
 // FIXME
+// - Immo locuples erat, muet.
+// - dea Isis nuncupatur : attr non trouvé.
 // - Lentulus consul fuit : Lentulus sujet absent.
 // - Ceres cum vellet : alumnum 2 fois sub.
 // - dicitur prima mortalis : l'attr dicitur mortalis
@@ -26,6 +28,7 @@ package main
 // 		* pietate erga te
 
 // TODO
+// - éviter une réanalyse ?
 // - traiter la coordination par -que := et -
 // - un champ groupe.anrel - analyses du relatif ?
 // - accord de personne sujet-verbe ?
@@ -73,6 +76,7 @@ var (
 
 // affiche les arcs syntaxique de la phrase
 func analyse(expl bool) {
+	texte.majPhrase()
 	texte.affiche(aidePh)
 	tronc.explore()
 	recolte := tronc.recolte()
