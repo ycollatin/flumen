@@ -4,7 +4,7 @@
 package main
 
 // FIXME
-// - Lentulus consul fuit : Lentulus sujet omis.
+// - Lentulus consul fuit : Lentulus sujet absent.
 // - Ceres cum vellet : alumnum 2 fois sub.
 // - dicitur prima mortalis : l'attr dicitur mortalis
 //   + épith prima mortalis non reconnue
