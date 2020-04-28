@@ -95,8 +95,18 @@ func lisGroupes(nf string) {
 	grp = append(grp, creeGroupe(ll))
 }
 
-func (g *Groupe) nbSubs() int {
-	return len(g.ante) + len(g.post)
+func (g *Groupe) multi() bool {
+	for _, sa := range g.ante {
+		if sa.multi {
+			return true
+		}
+	}
+	for _, sp := range g.post {
+		if sp.multi {
+			return true
+		}
+	}
+	return false
 }
 
 // la morpho morf est-elle compatible avec le noyau du groupe g ?
