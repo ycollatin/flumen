@@ -4,8 +4,6 @@
 package main
 
 // FIXME
-// - Marsyas Apollinem : v.gprep n'accepte pas plusieurs ag malgré +gprep
-//	 raison : interdit dans le passage de niveau ?
 // - Lentulus consul fuit : Lentulus sujet absent.
 // - Ceres cum vellet : alumnum 2 fois sub.
 // - dicitur prima mortalis : l'attr dicitur mortalis
