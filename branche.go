@@ -264,7 +264,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	if res == nil {
 		return nil
 	}
-	res = m.restmp
+	m.restmp = res
 
 	// création du noeud de retour
 	nod := new(Nod)
