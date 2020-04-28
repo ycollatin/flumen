@@ -37,6 +37,7 @@
 ! - nogen : le nom ne peut avoir de génitif (ex. dea)
 ! - nom : tout nom qui peut être accompagné d'une apposition à initiale majuscule (rex, flumen, etc.)
 ! - posn,posc,posa : le lemme peut avoir aussi le pos a, c, n, etc.
+! - subst : l'adjectif est substantivable
 ! - ppr : le participe présent du verbe est substantivable
 ! - ppp : le participe parfait du verbe est substantivable
 ! - prep : bien que n'étant pas verbe, le mot peut avoir un complément prépositionnel
@@ -6975,7 +6976,7 @@ diuerto:
 diues:
 diuexo:
 Diuiciacus:
-diuido:
+diuido:datif
 diuiduus:
 diuina:
 diuinatio:
@@ -17724,7 +17725,7 @@ primulus:
 primum:
 primumdum:
 Primus2:
-primus:
+primus:subst
 princeps3:
 princeps:
 principalis:
@@ -17745,7 +17746,7 @@ prius:
 priusquam:
 priuatim:
 priuato:
-priuatus:
+priuatus:subst
 Priuernas:
 Priuernum:
 Priuernus:
