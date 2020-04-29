@@ -4,7 +4,6 @@
 package main
 
 // FIXME
-// - glop
 // - neque servare sciebant : neque sciebant non essayé.
 //   c'est neque dejasub de servare qui bloque.
 // - Immo locuples erat, muet.
