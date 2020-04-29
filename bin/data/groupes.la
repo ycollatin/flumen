@@ -301,7 +301,7 @@ grp:v.vinfobj
 pos:v
 morph:act indic,act subj
 lexsynt:infobj
-pg:v;infobj;inf
+pg:v !v.sujInf;infobj;inf
 
 grp:v.subconj
 pos:v
