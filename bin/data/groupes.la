@@ -280,7 +280,7 @@ a:"et";conj
 
 grp:v.adv
 pos:v
-a:Adv;+adv
+a:!"non" !"neque" Adv;+adv
 
 grp:v.coord
 pos:v
@@ -334,11 +334,13 @@ pos:v
 morph:3
 p:n NP;sujet;nomin;n
 
-grp:v.vPropinf
-pos:v !n.prepAcc !n.prepAbl !n.inperpetuum
+! verbe d'une prop inf
+grp:v.sujInf
+pos:v
 morph:inf
-ag:n NP p;suj;acc
+ag:n NP p !n.prepAcc;sujet;acc
 
+! verbe précédé d'une prop.inf
 grp:v.propinf
 pos:v
 morph:actif
