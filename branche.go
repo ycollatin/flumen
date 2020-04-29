@@ -479,15 +479,14 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (vares gocol.
 		return nil
 	}
 
+	g := sub.groupe
 	// photo m et mn pour la branche
 	photom := b.photos[m.rang]
-	// vérification des pos
+	// vérification du pos : id du noyau, ou pos du mot
 	if photom.idGr != "" {
 		// 1. La pos du mot est définitive
-		// noyaux exclus
-		//excl := false
 		id := b.id(m)
-		if !sub.vaId(id) {
+		if g.estExclu(id) {
 			return nil
 		}
 		va := false
@@ -498,7 +497,7 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (vares gocol.
 			return nil
 		}
 	} else {
-		// 2. La pos définitif n'est pas encore fixée
+		// 2. m n'est pas encore noyau : on vérifie lexicosyntaxe canon et pos 
 		var nres gocol.Res
 		// lexicosyntaxe
 		for _, an := range res {
