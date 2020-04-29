@@ -28,7 +28,6 @@ func (n *Nod) doc() string {
 	return strings.Join(mm, " ")
 }
 
-/*
 func (na *Nod) egale(nb *Nod) bool {
 	if na.nucl != nb.nucl {
 		return false
@@ -54,7 +53,6 @@ func (na *Nod) egale(nb *Nod) bool {
 	}
 	return true
 }
-*/
 
 // lignes graphviz du nœud
 func (n *Nod) graf() []string {

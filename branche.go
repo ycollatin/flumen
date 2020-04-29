@@ -120,21 +120,19 @@ func (b *Branche) domine(ma, mb *Mot) bool {
 func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 	// signet exploregrou
 	for _, g := range grps {
-		// Si le groupe a été exploré pour m dans une
-		// autre branche, passer
-		cont := false
-		//Branche.veto map[int][]*Nod // index : rang du mot; valeur : liste des liens interdits
-		for _, veto := range bm.veto[m.rang] {
-			if m == veto.nucl && veto.grp.id == g.id && !veto.grp.multi {
-				cont = true
-				break
-			}
-		}
-		if cont {
-			continue
-		}
 		n := bm.noeud(m, g)
 		if n != nil {
+			// Si le groupe a été exploré pour m dans une
+			// autre branche, passer
+			va := true
+			for _, veto := range bm.veto[m.rang] {
+				if n.egale(veto) {
+					va = false
+				}
+			}
+			if !va {
+				continue
+			}
 			// le noeud est accepté. créer une branche fille (bf)
 			bf := bm.copie()
 			for _, mph := range mots {
@@ -144,8 +142,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 					ph.res = mph.restmp
 					ph.idGr = n.grp.id
 					bf.photos[mph.rang] = ph
-					// interdire le groupe au noyau
-					bm.veto[mph.rang] = append(bm.veto[mph.rang], n)
+					//bm.veto[mph.rang] = append(bm.veto[mph.rang], n)
 					vu = true
 				}
 				for _, ma := range n.mma {
@@ -168,7 +165,10 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 						vu = true
 					}
 				}
-				if !vu {
+				if vu {
+					// interdire le groupe au noyau
+					bm.veto[mph.rang] = append(bm.veto[mph.rang], n)
+				} else {
 					bf.photos[mph.rang] = bm.photos[mph.rang]
 				}
 			}
