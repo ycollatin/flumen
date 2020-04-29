@@ -143,7 +143,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 					ph.res = mph.restmp
 					ph.idGr = n.grp.id
 					bf.photos[mph.rang] = ph
-					bm.veto[mph.rang] = append(bm.veto[mph.rang], n)
+					//bm.veto[mph.rang] = append(bm.veto[mph.rang], n)
 					vu = true
 				}
 				for _, ma := range n.mma {
