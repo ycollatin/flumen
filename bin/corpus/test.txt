@@ -1,18 +1,15 @@
-! servare infobj de sciebant est reconnu, mais
-! sans ses subs.
-neque servare sciebant.
-neque in perpetuum servare sciebant.
-! rien :
+dea Isis.
+est appellatum.
 Immo locuples erat.
 inde nata est Pyrrha, quae mortalis dicitur prima esse creata.
 At sorores Phaethontis, quod equos iniussu patris iunxerant, in arbores populos commutatae sunt.
 Quod cum Python eam non invenisset, Parnassum redit.
 Europa Argiopes et Agenoris filia Sidonia.
 ! réussi (ou ambigu mais mauvais choix)
-dea Isis.
+!dea Isis.
 mare Ionium.
 ceterique dii.
-est appellatum.
+!est appellatum.
 epistulam legi.
 magna turba est.
 Legatos decernis.

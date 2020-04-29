@@ -126,8 +126,9 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 			// autre branche, passer
 			va := true
 			for _, veto := range bm.veto[m.rang] {
-				if n.egale(veto) {
-					va = false
+				va = va && !n.egale(veto)
+				if !va {
+					break
 				}
 			}
 			if !va {
@@ -142,7 +143,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 					ph.res = mph.restmp
 					ph.idGr = n.grp.id
 					bf.photos[mph.rang] = ph
-					//bm.veto[mph.rang] = append(bm.veto[mph.rang], n)
+					bm.veto[mph.rang] = append(bm.veto[mph.rang], n)
 					vu = true
 				}
 				for _, ma := range n.mma {
@@ -165,16 +166,14 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 						vu = true
 					}
 				}
-				if vu {
-					// interdire le groupe au noyau
-					bm.veto[mph.rang] = append(bm.veto[mph.rang], n)
-				} else {
+				if !vu {
 					bf.photos[mph.rang] = bm.photos[mph.rang]
 				}
 			}
 			bf.nods = append(bf.nods, n)
 			bf.explore()
 			bm.filles = append(bm.filles, bf)
+			bm.veto[m.rang] = append(bm.veto[m.rang], n)
 		}
 	}
 }
