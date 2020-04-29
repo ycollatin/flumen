@@ -27,7 +27,7 @@ import (
 type PhotoMot struct {
 	res     gocol.Res // lemmatisations réduites du mot
 	dejasub bool      // appartenance du mot à un groupe
-	pos     string    // nom du groupe dont le mot est noyau
+	idGr    string    // nom du groupe dont le mot est noyau
 }
 
 var (
@@ -142,7 +142,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 				if mph == n.nucl {
 					ph := new(PhotoMot)
 					ph.res = mph.restmp
-					ph.pos = n.grp.id
+					ph.idGr = n.grp.id
 					bf.photos[mph.rang] = ph
 					// interdire le groupe au noyau
 					bm.veto[mph.rang] = append(bm.veto[mph.rang], n)
@@ -153,7 +153,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 						ph := new(PhotoMot)
 						ph.res = ma.restmp
 						ph.dejasub = true
-						ph.pos = bm.photos[ma.rang].pos
+						ph.idGr = bm.photos[ma.rang].idGr
 						bf.photos[mph.rang] = ph
 						vu = true
 					}
@@ -163,7 +163,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 						ph := new(PhotoMot)
 						ph.res = mp.restmp
 						ph.dejasub = true
-						ph.pos = bm.photos[mp.rang].pos
+						ph.idGr = bm.photos[mp.rang].idGr
 						bf.photos[mph.rang] = ph
 						vu = true
 					}
@@ -221,15 +221,14 @@ func (b *Branche) exr(d, n int) (e string) {
 	return
 }
 
-// id des Nod dont m est déjà le noyau
-func (b *Branche) ids(m *Mot) []string {
-	var ret []string
+// id du Nod dont m est déjà le noyau
+func (b *Branche) id(m *Mot) string {
 	for _, nod := range b.nods {
 		if nod.nucl.rang == m.rang {
-			ret = append(ret, nod.grp.id)
+			return nod.grp.id
 		}
 	}
-	return ret
+	return ""
 }
 
 func (b *Branche) motCourant() *Mot {
@@ -374,25 +373,15 @@ func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
 	*/
 	photom := b.photos[m.rang]
 	// vérif du pos
-	if photom.pos != "" {
+	if photom.idGr != "" {
 		// 1. La pos définitif est fixée
 		// noyaux exclus
-		ids := b.ids(m)
-		for _, id := range ids {
-			if g.estExclu(id) {
-				return nil
-			}
+		id := b.id(m)
+		if g.estExclu(id) {
+			return nil
 		}
 		var nres gocol.Res
 		// noyaux admis
-		excl := false
-		lgr := b.ids(m)
-		for _, noy := range g.noyexcl {
-			excl = excl || contient(lgr, noy.id)
-		}
-		if excl {
-			return nil
-		}
 		for _, noy := range g.noyaux {
 			if noy.canon > "" {
 				for _, a := range res {
@@ -405,7 +394,7 @@ func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
 			} else {
 				for _, a := range res {
 					for _, morf := range a.Morphos {
-						if noy.vaPos(photom.pos) {
+						if noy.vaPos(photom.idGr) {
 							nres = gocol.AddRes(nres, a.Lem, morf, 0)
 						}
 					}
@@ -493,33 +482,21 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (vares gocol.
 	// photo m et mn pour la branche
 	photom := b.photos[m.rang]
 	// vérification des pos
-	if photom.pos != "" {
+	if photom.idGr != "" {
 		// 1. La pos du mot est définitive
 		// noyaux exclus
-		excl := false
-		lids := b.ids(m)
-		for _, id := range lids {
-			if !sub.vaId(id) {
-				return nil
-			}
-		}
-		/*
-		lgr := b.ids(m)
-		for _, noy := range sub.noyexcl {
-			excl = excl || contient(lgr, noy.id)
-		}
-		if excl {
+		//excl := false
+		id := b.id(m)
+		if !sub.vaId(id) {
 			return nil
 		}
-		// noyaux possibles
 		va := false
 		for _, noy := range sub.noyaux {
-			va = va || noy.vaPos(photom.pos)
+			va = va || noy.vaPos(photom.idGr)
 		}
 		if !va {
 			return nil
 		}
-		*/
 	} else {
 		// 2. La pos définitif n'est pas encore fixée
 		var nres gocol.Res
