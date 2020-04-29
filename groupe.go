@@ -16,9 +16,9 @@ type Groupe struct {
 	morph           []string // traits morpho du noyau
 	lexsynt         []string // étiquettes lexicosyntaxiques du noyau
 	//exclls          []string // propriétés lexicosyntaxiques exclues
-	ante []*Sub // éléments précédant le noyau
-	post []*Sub // éléments suivant le noyau
-	multi			bool	// le groupe possède au moins un sub multi
+	ante  []*Sub // éléments précédant le noyau
+	post  []*Sub // éléments suivant le noyau
+	multi bool   // le groupe possède au moins un sub multi
 }
 
 var grpTerm, grp []*Groupe
