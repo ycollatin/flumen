@@ -95,9 +95,8 @@ func (b *Branche) copie() *Branche {
 	nb.gr = b.gr
 	nb.niveau = b.niveau + 1
 	nb.nods = b.nods
-	// les photos seront copiées après création
-	// du noeud à l'origine de la copie
 	nb.photos = make(map[int]*PhotoMot)
+	nb.photos = b.photos
 	nb.veto = b.veto
 	return nb
 }
@@ -137,14 +136,11 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 			// le noeud est accepté. créer une branche fille (bf)
 			bf := bm.copie()
 			for _, mph := range mots {
-				var vu bool
-				if mph == n.nucl {
+				if mph == m {
 					ph := new(PhotoMot)
-					ph.res = mph.restmp
+					ph.res = m.restmp
 					ph.idGr = n.grp.id
-					bf.photos[mph.rang] = ph
-					//bm.veto[mph.rang] = append(bm.veto[mph.rang], n)
-					vu = true
+					bf.photos[m.rang] = ph
 				}
 				for _, ma := range n.mma {
 					if mph == ma {
@@ -152,8 +148,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 						ph.res = ma.restmp
 						ph.dejasub = true
 						ph.idGr = bm.photos[ma.rang].idGr
-						bf.photos[mph.rang] = ph
-						vu = true
+						bf.photos[ma.rang] = ph
 					}
 				}
 				for _, mp := range n.mmp {
@@ -162,12 +157,8 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 						ph.res = mp.restmp
 						ph.dejasub = true
 						ph.idGr = bm.photos[mp.rang].idGr
-						bf.photos[mph.rang] = ph
-						vu = true
+						bf.photos[mp.rang] = ph
 					}
-				}
-				if !vu {
-					bf.photos[mph.rang] = bm.photos[mph.rang]
 				}
 			}
 			bf.nods = append(bf.nods, n)
@@ -180,12 +171,10 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 
 func (bm *Branche) explore() {
 	// signet sexplore
-	// 1. groupes terminaux
 	for _, m := range mots {
+		// 1. groupes terminaux
 		bm.exploreGroupes(m, grpTerm)
-	}
-	// 2. groupes non terminaux
-	for _, m := range mots {
+		// 2. groupes non terminaux
 		bm.exploreGroupes(m, grp)
 	}
 }
