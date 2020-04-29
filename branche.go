@@ -123,8 +123,9 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 		// Si le groupe a été exploré pour m dans une
 		// autre branche, passer
 		cont := false
-		for _, lv := range bm.veto[m.rang] {
-			if m == lv.nucl && lv.grp.id == g.id && !lv.grp.multi {
+		//Branche.veto map[int][]*Nod // index : rang du mot; valeur : liste des liens interdits
+		for _, veto := range bm.veto[m.rang] {
+			if m == veto.nucl && veto.grp.id == g.id && !veto.grp.multi {
 				cont = true
 				break
 			}
@@ -137,7 +138,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 			// le noeud est accepté. créer une branche fille (bf)
 			bf := bm.copie()
 			for _, mph := range mots {
-				vu := false
+				var vu bool
 				if mph == n.nucl {
 					ph := new(PhotoMot)
 					ph.res = mph.restmp
@@ -384,6 +385,14 @@ func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
 		}
 		var nres gocol.Res
 		// noyaux admis
+		excl := false
+		lgr := b.ids(m)
+		for _, noy := range g.noyexcl {
+			excl = excl || contient(lgr, noy.id)
+		}
+		if excl {
+			return nil
+		}
 		for _, noy := range g.noyaux {
 			if noy.canon > "" {
 				for _, a := range res {
@@ -411,14 +420,8 @@ func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
 		// vérif des pos
 		var nres gocol.Res
 		for _, a := range res {
-			for _, noy := range g.noyaux {
-				if noy.canon > "" && noy.vaSr(a) {
-					nres = append(nres, a)
-				} else {
-					if noy.vaPos(a.Lem.Pos) {
-						nres = append(nres, a)
-					}
-				}
+			if g.vaPos(a.Lem.Pos) {
+				nres = append(nres, a)
 			}
 		}
 		if len(nres) == 0 {
@@ -494,6 +497,13 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (vares gocol.
 		// 1. La pos du mot est définitive
 		// noyaux exclus
 		excl := false
+		lids := b.ids(m)
+		for _, id := range lids {
+			if !sub.vaId(id) {
+				return nil
+			}
+		}
+		/*
 		lgr := b.ids(m)
 		for _, noy := range sub.noyexcl {
 			excl = excl || contient(lgr, noy.id)
@@ -509,6 +519,7 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (vares gocol.
 		if !va {
 			return nil
 		}
+		*/
 	} else {
 		// 2. La pos définitif n'est pas encore fixée
 		var nres gocol.Res

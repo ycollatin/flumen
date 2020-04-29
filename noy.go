@@ -23,7 +23,7 @@ func creeNoy(s string) (ln, lnExcl []*Noy) {
 		}
 		n := new(Noy)
 		if e[0] == '"' {
-			n.canon = e[1 : len(e)-1]
+			n.canon = e[1:len(e)-1]
 			n.generique = true
 		} else {
 			n.id = e

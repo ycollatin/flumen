@@ -18,6 +18,7 @@ type Groupe struct {
 	ante            []*Sub   // éléments précédant le noyau
 	post            []*Sub   // éléments suivant le noyau
 	multi           bool     // le groupe possède au moins un sub multi
+	nbsubs			int		 // nombre de subs
 }
 
 var grpTerm, grp []*Groupe
@@ -65,6 +66,7 @@ func creeGroupe(ll []string) *Groupe {
 			g.multi = true
 		}
 	}
+	g.nbsubs = len(g.ante) + len(g.post)
 	return g
 }
 
@@ -97,6 +99,21 @@ func lisGroupes(nf string) {
 		ll = append(ll, l)
 	}
 	grp = append(grp, creeGroupe(ll))
+}
+
+// le pos pos est-il compatible avec le noyau du groupe g ?
+func (g *Groupe) vaPos(pos string) bool {
+	for _, ne := range g.noyexcl {
+		if ne.vaPos(pos) {
+			return false
+		}
+	}
+	for _, noy := range g.noyaux {
+		if noy.vaPos(pos) {
+			return true
+		}
+	}
+	return false
 }
 
 // la morpho morf est-elle compatible avec le noyau du groupe g ?

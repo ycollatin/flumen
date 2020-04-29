@@ -1,5 +1,6 @@
 ! servare infobj de sciebant est reconnu, mais
 ! sans ses subs.
+neque servare sciebant.
 neque in perpetuum servare sciebant.
 ! rien :
 Immo locuples erat.

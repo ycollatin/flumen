@@ -50,6 +50,11 @@ func creeSub(v string, g *Groupe, t bool) *Sub {
 }
 
 func (s *Sub) vaId(id string) bool {
+	for _, ne := range s.noyexcl {
+		if ne.id == id {
+			return false
+		}
+	}
 	for _, n := range s.noyaux {
 		if n.generique {
 			ecl := strings.Split(id, ".")
