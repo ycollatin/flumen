@@ -98,12 +98,34 @@ func (b *Branche) copie() *Branche {
 	nb.photos = make(map[int]*PhotoMot)
 	nb.photos = b.photos
 	nb.veto = b.veto
+	// créer une lemmatisation temporaire pour chaque mot
+	for _, m := range mots {
+		m.restmp = nb.photos[m.rang].res
+	}
 	return nb
 }
 
 func (b *Branche) dejasub(m *Mot) bool {
+	for _, n := range b.nods {
+		for _, ma := range n.mma {
+			if ma == m {
+				return true
+			}
+		}
+		for _, mp := range n.mmp {
+			if mp == m {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+/*
+func (b *Branche) dejasub(m *Mot) bool {
 	return b.photos[m.rang].dejasub
 }
+*/
 
 func (b *Branche) domine(ma, mb *Mot) bool {
 	mnoy := b.noyau(mb)
@@ -136,11 +158,13 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 			// le noeud est accepté. créer une branche fille (bf)
 			bf := bm.copie()
 			for _, mph := range mots {
+				motvu := false
 				if mph == m {
 					ph := new(PhotoMot)
 					ph.res = m.restmp
 					ph.idGr = n.grp.id
 					bf.photos[m.rang] = ph
+					motvu = true
 				}
 				for _, ma := range n.mma {
 					if mph == ma {
@@ -149,6 +173,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 						ph.dejasub = true
 						ph.idGr = bm.photos[ma.rang].idGr
 						bf.photos[ma.rang] = ph
+						motvu = true
 					}
 				}
 				for _, mp := range n.mmp {
@@ -158,7 +183,12 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 						ph.dejasub = true
 						ph.idGr = bm.photos[mp.rang].idGr
 						bf.photos[mp.rang] = ph
+						motvu = true
 					}
+				}
+				if !motvu {
+					//rétablir les lemmatisations temporaires
+					m.restmp = bm.photos[m.rang].res
 				}
 			}
 			bf.nods = append(bf.nods, n)
