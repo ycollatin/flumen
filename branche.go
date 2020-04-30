@@ -182,8 +182,17 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 			bf.explore()
 			bm.veto[m.rang] = append(bm.veto[m.rang], n)
 			// rétablir toutes les lemmatisations temporaires
+			bm.reinitRestmp(m)
+			/*
+			for _, ma := range n.mma {
+				bm.reinitRestmp(ma)
+			}
+			for _, mp := range n.mmp {
+				bm.reinitRestmp(mp)
+			}
+			*/
 		}
-		bm.reinitRestmp(m)
+		//bm.reinitRestmp(m)
 	}
 }
 
@@ -263,8 +272,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	}
 
 	// m peut-il être noyau du groupe g ?
-	//photo := b.photos[m.rang]
-	//m.restmp = photo.res
+	// FIXME ter:v.sujNpAttrP
 	res := b.resNoyau(m, g, m.restmp)
 	if res == nil {
 		return nil
@@ -466,7 +474,7 @@ func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
 // récolte tous les noeuds terminaux d'un arbre
 func (b *Branche) recolte() (rec [][]*Nod) {
 	// signet srecolte
-	if len(b.filles) == 0 {
+	if b.terminale() {
 		rec = append(rec, b.nods)
 		return rec
 	}
@@ -580,4 +588,8 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) gocol.Res {
 		}
 	}
 	return res
+}
+
+func (b *Branche) terminale() bool {
+	return len(b.filles) == 0
 }
