@@ -26,7 +26,6 @@ import (
 // Branche.photos.
 type PhotoMot struct {
 	res     gocol.Res // lemmatisations réduites du mot
-	dejasub bool      // appartenance du mot à un groupe
 	idGr    string    // nom du groupe dont le mot est noyau
 }
 
@@ -65,7 +64,6 @@ func creeTronc(t string) *Branche {
 	for _, m := range mots {
 		phm := new(PhotoMot)
 		phm.res = m.ans
-		phm.dejasub = false
 		br.photos[m.rang] = phm
 	}
 	return br
@@ -121,12 +119,6 @@ func (b *Branche) dejasub(m *Mot) bool {
 	return false
 }
 
-/*
-func (b *Branche) dejasub(m *Mot) bool {
-	return b.photos[m.rang].dejasub
-}
-*/
-
 func (b *Branche) domine(ma, mb *Mot) bool {
 	mnoy := b.noyau(mb)
 	for mnoy != nil {
@@ -158,43 +150,37 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 			// le noeud est accepté. créer une branche fille (bf)
 			bf := bm.copie()
 			for _, mph := range mots {
-				motvu := false
 				if mph == m {
 					ph := new(PhotoMot)
 					ph.res = m.restmp
 					ph.idGr = n.grp.id
 					bf.photos[m.rang] = ph
-					motvu = true
 				}
 				for _, ma := range n.mma {
 					if mph == ma {
 						ph := new(PhotoMot)
 						ph.res = ma.restmp
-						ph.dejasub = true
 						ph.idGr = bm.photos[ma.rang].idGr
 						bf.photos[ma.rang] = ph
-						motvu = true
 					}
 				}
 				for _, mp := range n.mmp {
 					if mph == mp {
 						ph := new(PhotoMot)
 						ph.res = mp.restmp
-						ph.dejasub = true
 						ph.idGr = bm.photos[mp.rang].idGr
 						bf.photos[mp.rang] = ph
-						motvu = true
 					}
-				}
-				if !motvu {
-					//rétablir les lemmatisations temporaires
-					m.restmp = bm.photos[m.rang].res
 				}
 			}
 			bf.nods = append(bf.nods, n)
 			bf.explore()
 			bm.filles = append(bm.filles, bf)
 			bm.veto[m.rang] = append(bm.veto[m.rang], n)
+		}
+		// rétablir toutes les lemmatisations temporaires
+		for _, m := range mots {
+			m.restmp = bm.photos[m.rang].res
 		}
 	}
 }
@@ -260,7 +246,6 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	// utilistation des photos
 	//mot     *Mot      // liaison avec le mot
 	//res     gocol.Res // lemmatisations réduites du mot
-	//dejasub bool      // appartenance du mot à un groupe
 	//pos     string    // nom du groupe dont le mot est noyau
 
 	// vérification de rang
@@ -276,8 +261,8 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	}
 
 	// m peut-il être noyau du groupe g ?
-	photo := b.photos[m.rang]
-	m.restmp = photo.res
+	//photo := b.photos[m.rang]
+	//m.restmp = photo.res
 	res := b.resNoyau(m, g, m.restmp)
 	if res == nil {
 		return nil
@@ -311,7 +296,8 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 			return nil
 		}
 		sub := g.ante[ia]
-		resma := b.photos[ma.rang].res
+		//resma := b.photos[ma.rang].res
+		resma := ma.restmp
 		resma = b.resSub(ma, sub, m, resma)
 		if resma == nil {
 			return nil
@@ -346,7 +332,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 		if b.domine(mp, m) {
 			return nil
 		}
-		resmp := b.photos[mp.rang].res
+		resmp := mp.restmp
 		resmp = b.resSub(mp, sub, m, resmp)
 		if resmp == nil {
 			return nil
@@ -386,7 +372,6 @@ func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
 		// utilistation des photos
 		mot     *Mot      // liaison avec le mot
 		res     gocol.Res // lemmatisations réduites du mot
-		dejasub bool      // appartenance du mot à un groupe
 		pos     string    // nom du groupe dont le mot est noyau
 	*/
 	photom := b.photos[m.rang]
@@ -490,7 +475,7 @@ func (b *Branche) recolte() (rec [][]*Nod) {
 }
 
 // vrai si m est compatible avec Sub et le noyau mn
-func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (vares gocol.Res) {
+func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (gocol.Res) {
 	// signet sresub
 	// si la fonction est déjà prise, renvoyer nil
 	if !sub.multi && b.adeja(mn, sub.lien) {
