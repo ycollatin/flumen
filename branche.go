@@ -25,8 +25,8 @@ import (
 // au mot. Leur liste est donc enregistrée dans
 // Branche.photos.
 type PhotoMot struct {
-	res     gocol.Res // lemmatisations réduites du mot
-	idGr    string    // nom du groupe dont le mot est noyau
+	res  gocol.Res // lemmatisations réduites du mot
+	idGr string    // nom du groupe dont le mot est noyau
 }
 
 var (
@@ -182,10 +182,8 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 			bf.explore()
 			bm.veto[m.rang] = append(bm.veto[m.rang], n)
 			// rétablir toutes les lemmatisations temporaires
-			for _, m := range mots {
-				m.restmp = bm.photos[m.rang].res
-			}
 		}
+		bm.reinitRestmp(m)
 	}
 }
 
@@ -349,7 +347,6 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	if len(nod.mma)+len(nod.mmp) > 0 {
 		return nod
 	}
-	m.restmp = b.photos[m.rang].res
 	return nil
 }
 
@@ -367,6 +364,10 @@ func (b *Branche) noyau(m *Mot) *Mot {
 		}
 	}
 	return nil
+}
+
+func (b *Branche) reinitRestmp(m *Mot) {
+	m.restmp = b.photos[m.rang].res
 }
 
 // renvoie quelles lemmatisations de m lui permettent d'être le noyau du groupe g
@@ -480,7 +481,7 @@ func (b *Branche) recolte() (rec [][]*Nod) {
 }
 
 // vrai si m est compatible avec Sub et le noyau mn
-func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (gocol.Res) {
+func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) gocol.Res {
 	// signet sresub
 	// si la fonction est déjà prise, renvoyer nil
 	if !sub.multi && b.adeja(mn, sub.lien) {
@@ -504,7 +505,7 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (gocol.Res) {
 			return nil
 		}
 	} else {
-		// 2. m n'est pas encore noyau : on vérifie lexicosyntaxe canon et pos 
+		// 2. m n'est pas encore noyau : on vérifie lexicosyntaxe canon et pos
 		var nres gocol.Res
 		// lexicosyntaxe
 		for _, an := range res {
