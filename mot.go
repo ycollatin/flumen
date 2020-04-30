@@ -15,6 +15,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/ycollatin/gocol"
 	"strings"
 )
@@ -90,4 +91,25 @@ func genus(sr gocol.Sr) gocol.Sr {
 		sr.Nmorph[i] += inc
 	}
 	return sr
+}
+
+func restostring(res gocol.Res) string {
+	var lr []string
+	for _, rl := range res {
+		if rl.Lem == nil {
+			continue
+		}
+		l := fmt.Sprintf("   %s, %s [%s]: %s",
+		strings.Join(rl.Lem.Grq, " "),
+		rl.Lem.Indmorph,
+		rl.Lem.Pos,
+		rl.Lem.Traduction)
+		lr = append(lr, l)
+		for _, m := range rl.Morphos {
+			//l = l + ("\n      " + m)
+			lr = append(lr, "      " + m)
+		}
+		//lr = append(lr, l)
+	}
+	return strings.Join(lr, "\n")
 }
