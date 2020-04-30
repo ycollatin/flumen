@@ -5,7 +5,7 @@ package main
 
 // FIXME
 // - toutes les possibilités ne sont pas encore exploitées.
-// - magna turba est
+// - magna turba est : adj attr ?
 // - eo Romam : une étiquette lexsynt ? pour les 2 membres ?
 // - Immo locuples erat, muet.
 // - Lentulus consul fuit : Lentulus sujet absent.
