@@ -4,7 +4,6 @@
 package main
 
 // FIXME
-// - At sorores... : in arbores sujet ? l'acc. devrait être fixé.
 // - neque servare sciebant : neque sciebant non essayé.
 //   c'est neque dejasub de servare qui bloque.
 // - Immo locuples erat, muet.
