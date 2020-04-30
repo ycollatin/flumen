@@ -4,8 +4,11 @@
 package main
 
 // FIXME
+// - epistulam legi
 // - neque servare sciebant : neque sciebant non essayé.
+// - magna turba est
 //   c'est neque dejasub de servare qui bloque.
+// - eo Romam : une étiquette lexsynt ? pour les 2 membres ?
 // - Immo locuples erat, muet.
 // - Lentulus consul fuit : Lentulus sujet absent.
 // - Ceres cum vellet : alumnum 2 fois sub.
@@ -166,7 +169,8 @@ func lemmatise() {
 				}
 			}
 		} else {*/
-	fmt.Println(gocol.Restostring(mc.ans))
+	//fmt.Println(gocol.Restostring(mc.ans))
+	fmt.Println(restostring(mc.ans))
 	//}
 }
 
