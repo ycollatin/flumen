@@ -32,6 +32,9 @@ func (na *Nod) egale(nb *Nod) bool {
 	if na.nucl != nb.nucl {
 		return false
 	}
+	if na.grp.id != nb.grp.id {
+		return false
+	}
 	va := true
 	for _, ma := range na.mma {
 		va = false
