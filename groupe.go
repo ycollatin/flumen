@@ -18,7 +18,7 @@ type Groupe struct {
 	ante            []*Sub   // éléments précédant le noyau
 	post            []*Sub   // éléments suivant le noyau
 	multi           bool     // le groupe possède au moins un sub multi
-	nbsubs			int		 // nombre de subs
+	nbsubs          int      // nombre de subs
 }
 
 var grpTerm, grp []*Groupe

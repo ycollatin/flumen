@@ -4,7 +4,6 @@
 package main
 
 // FIXME
-// - epistulam legi
 // - neque servare sciebant : neque sciebant non essayé.
 // - magna turba est
 //   c'est neque dejasub de servare qui bloque.

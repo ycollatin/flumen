@@ -100,14 +100,14 @@ func restostring(res gocol.Res) string {
 			continue
 		}
 		l := fmt.Sprintf("   %s, %s [%s]: %s",
-		strings.Join(rl.Lem.Grq, " "),
-		rl.Lem.Indmorph,
-		rl.Lem.Pos,
-		rl.Lem.Traduction)
+			strings.Join(rl.Lem.Grq, " "),
+			rl.Lem.Indmorph,
+			rl.Lem.Pos,
+			rl.Lem.Traduction)
 		lr = append(lr, l)
 		for _, m := range rl.Morphos {
 			//l = l + ("\n      " + m)
-			lr = append(lr, "      " + m)
+			lr = append(lr, "      "+m)
 		}
 		//lr = append(lr, l)
 	}

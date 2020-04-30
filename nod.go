@@ -8,10 +8,10 @@ import (
 )
 
 type Nod struct {
-	grp			*Groupe // groupe du noeud Nod
-	mma, mmp	[]*Mot  // liste des mots avant et après le noyau
-	nucl		*Mot    // noyau du Nod
-	rang		int     //
+	grp      *Groupe // groupe du noeud Nod
+	mma, mmp []*Mot  // liste des mots avant et après le noyau
+	nucl     *Mot    // noyau du Nod
+	rang     int     //
 }
 
 // liste des éléments du noeud, noyau en rouge
