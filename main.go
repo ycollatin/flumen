@@ -7,7 +7,6 @@ package main
 // - neque servare sciebant : neque sciebant non essayé.
 //   c'est neque dejasub de servare qui bloque.
 // - Immo locuples erat, muet.
-// - dea Isis nuncupatur : attr non trouvé.
 // - Lentulus consul fuit : Lentulus sujet absent.
 // - Ceres cum vellet : alumnum 2 fois sub.
 // - dicitur prima mortalis : l'attr dicitur mortalis
