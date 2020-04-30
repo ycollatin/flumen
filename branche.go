@@ -349,6 +349,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	if len(nod.mma)+len(nod.mmp) > 0 {
 		return nod
 	}
+	m.restmp = b.photos[m.rang].res
 	return nil
 }
 
