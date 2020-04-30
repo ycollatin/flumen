@@ -95,6 +95,11 @@ lexsynt:attr
 a:NP;sujet;nomin;n
 a:n;attr;nomin;n
 
+ter:v.attr
+pos:v
+lexsynt:attr
+a:n NP a;attr;nomin;n
+
 !!!!!!!!!!!!!!!!!!!!!!!!!
 ! Groupes non terminaux !
 !!!!!!!!!!!!!!!!!!!!!!!!!
@@ -245,12 +250,6 @@ morph:act
 lexsynt:attro !propinf
 ag:n a;attro;acc
 
-grp:v.vobj
-pos:v !v.sumpp !v.ppsum
-lexsynt:!intr
-morph:act
-pg:n NP p !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
-
 grp:v.sujAttr
 pos:v
 morph:3
@@ -286,10 +285,15 @@ grp:v.coord
 pos:v
 pg:v.conjet;coord;;n
 
-grp:v.conjv
+grp:v.conjvsubj
 pos:v
 morph:subj
 a:"cum" "ut";conj
+
+grp:v.conjvind
+pos:v
+morph:indic
+a:"quod" "quia" "quando";conj
 
 grp:v.infobj
 pos:v
@@ -306,7 +310,7 @@ pg:v !v.sujInf;infobj;inf
 grp:v.subconj
 pos:v
 morph:indic
-ag:v.conjv;subconj
+ag:v.conjvsubj v.conjvind;subconj
 
 grp:v.subconjv
 pos:v
@@ -329,11 +333,6 @@ pos:v.sujet
 lexsynt:!attr !intr
 ag:n NP p !n.prepDet;objet;acc
 
-grp:v.vsujet
-pos:v
-morph:3
-p:n NP;sujet;nomin;n
-
 ! verbe d'une prop inf
 grp:v.sujInf
 pos:v
@@ -351,5 +350,16 @@ grp:v.propinfPass
 pos:"dico2" "habeo"
 morph:indic pass,subj pass
 pg:v;propinf;inf
+
+grp:v.vobj
+pos:v !v.sumpp !v.ppsum
+lexsynt:!intr
+morph:act
+pg:n NP p !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
+
+grp:v.vsujet
+pos:v
+morph:3
+p:n NP !n.prepAcc;sujet;nomin;n
 
 ! a|ag|p|pg:pos [pos pos...];[+]lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
