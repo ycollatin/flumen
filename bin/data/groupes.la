@@ -362,4 +362,9 @@ pos:v
 morph:3
 p:n NP !n.prepAcc;sujet;nomin;n
 
+! appostion, fragile
+grp:n.app
+pos:n
+p:n;app;;cgn
+
 ! a|ag|p|pg:pos [pos pos...];[+]lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
