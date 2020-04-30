@@ -486,14 +486,13 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) (gocol.Res) {
 		return nil
 	}
 
-	g := sub.groupe
 	// photo m et mn pour la branche
 	photom := b.photos[m.rang]
 	// vérification du pos : id du noyau, ou pos du mot
 	if photom.idGr != "" {
 		// 1. La pos du mot est définitive
 		id := b.id(m)
-		if g.estExclu(id) {
+		if !sub.vaId(id) {
 			return nil
 		}
 		va := false
