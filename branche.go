@@ -65,7 +65,6 @@ func creeTronc(t string) *Branche {
 		phm := new(PhotoMot)
 		phm.res = m.ans
 		br.photos[m.rang] = phm
-		m.restmp = m.ans
 	}
 	return br
 }
@@ -97,11 +96,13 @@ func (b *Branche) copie() *Branche {
 	nb.photos = make(map[int]*PhotoMot)
 	nb.photos = b.photos
 	nb.veto = b.veto
-	// créer une lemmatisation temporaire pour chaque mot
-	for _, m := range mots {
-		m.restmp = nb.photos[m.rang].res
-	}
 	return nb
+}
+
+func (b *Branche) copieRestmp() {
+	for _, m := range mots {
+		b.initRestmp(m)
+	}
 }
 
 func (b *Branche) dejasub(m *Mot) bool {
@@ -134,6 +135,7 @@ func (b *Branche) domine(ma, mb *Mot) bool {
 func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 	// signet exploregrou
 	for _, g := range grps {
+		bm.copieRestmp()
 		n := bm.noeud(m, g)
 		if n != nil {
 			// Si le groupe a été exploré pour m dans une
@@ -154,45 +156,32 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 			for _, mph := range mots {
 				if mph == m {
 					ph := new(PhotoMot)
-					ph.res = m.restmp
 					ph.idGr = n.grp.id
+					ph.res = m.restmp
 					bf.photos[m.rang] = ph
-					mph.restmp = ph.res
 				}
 				for _, ma := range n.mma {
 					if mph == ma {
 						ph := new(PhotoMot)
-						ph.res = ma.restmp
 						ph.idGr = bm.photos[ma.rang].idGr
+						ph.res = ma.restmp
 						bf.photos[ma.rang] = ph
-						mph.restmp = ph.res
 					}
 				}
 				for _, mp := range n.mmp {
 					if mph == mp {
 						ph := new(PhotoMot)
-						ph.res = mp.restmp
 						ph.idGr = bm.photos[mp.rang].idGr
+						ph.res = mp.restmp
 						bf.photos[mp.rang] = ph
-						mph.restmp = ph.res
 					}
 				}
 			}
 			bm.filles = append(bm.filles, bf)
 			bf.explore()
 			bm.veto[m.rang] = append(bm.veto[m.rang], n)
-			// rétablir toutes les lemmatisations temporaires
-			bm.reinitRestmp(m)
-			/*
-			for _, ma := range n.mma {
-				bm.reinitRestmp(ma)
-			}
-			for _, mp := range n.mmp {
-				bm.reinitRestmp(mp)
-			}
-			*/
 		}
-		//bm.reinitRestmp(m)
+		bm.copieRestmp()
 	}
 }
 
@@ -273,11 +262,10 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 
 	// m peut-il être noyau du groupe g ?
 	// FIXME ter:v.sujNpAttrP
-	res := b.resNoyau(m, g, m.restmp)
-	if res == nil {
+	m.restmp = b.resNoyau(m, g, m.restmp)
+	if m.restmp == nil {
 		return nil
 	}
-	m.restmp = res
 
 	// création du noeud de retour
 	nod := new(Nod)
@@ -307,12 +295,10 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 		}
 		sub := g.ante[ia]
 		//resma := b.photos[ma.rang].res
-		resma := ma.restmp
-		resma = b.resSub(ma, sub, m, resma)
-		if resma == nil {
+		ma.restmp = b.resSub(ma, sub, m, ma.restmp)
+		if ma.restmp == nil {
 			return nil
 		}
-		ma.restmp = resma
 		nod.mma = append(nod.mma, ma)
 		r--
 	}
@@ -342,12 +328,10 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 		if b.domine(mp, m) {
 			return nil
 		}
-		resmp := mp.restmp
-		resmp = b.resSub(mp, sub, m, resmp)
-		if resmp == nil {
+		mp.restmp = b.resSub(mp, sub, m, mp.restmp)
+		if mp.restmp == nil {
 			return nil
 		}
-		mp.restmp = resmp
 		nod.mmp = append(nod.mmp, mp)
 		r++
 	}
@@ -374,7 +358,7 @@ func (b *Branche) noyau(m *Mot) *Mot {
 	return nil
 }
 
-func (b *Branche) reinitRestmp(m *Mot) {
+func (b *Branche) initRestmp(m *Mot) {
 	m.restmp = b.photos[m.rang].res
 }
 
