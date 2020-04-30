@@ -4,9 +4,8 @@
 package main
 
 // FIXME
-// - neque servare sciebant : neque sciebant non essayé.
+// - toutes les possibilités ne sont pas encore exploitées.
 // - magna turba est
-//   c'est neque dejasub de servare qui bloque.
 // - eo Romam : une étiquette lexsynt ? pour les 2 membres ?
 // - Immo locuples erat, muet.
 // - Lentulus consul fuit : Lentulus sujet absent.
@@ -18,7 +17,6 @@ package main
 //	 servare infobj de sciebant est reconnu, mais
 //   sans ses subs.
 // - Ex Inacho et Argia Ino : 2 solutions exactement identiques
-// - le surlignage des lemmatisations est complètement perdu
 // - subiciunt veribus prunas et viscera torrent :
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
 //				  et la coord subiciunt et torrent (juste)
@@ -31,6 +29,8 @@ package main
 // 		* pietate erga te
 
 // TODO
+// - surlignage des lemmatisations : la récolte doit aussi rapporter les nods 
+//   des branches terminales
 // - éviter une réanalyse ?
 // - traiter la coordination par -que := et -
 // - un champ groupe.anrel - analyses du relatif ?
@@ -156,21 +156,7 @@ func lemmatise() {
 	tronc.imot = im
 	mc := tronc.motCourant()
 	fmt.Println("lemmatisation", rouge(mc.gr))
-	/*
-		if len(mc.ans2) > 0 {
-			ll2 := gocol.Restostring(mc.ans2)
-			fmt.Println(rouge(ll2))
-			ll3 := strings.Split(ll2, "\n")
-			ll := strings.Split(gocol.Restostring(mc.ans), "\n")
-			for _, l := range ll {
-				if !contient(ll3, l) {
-					fmt.Println(l)
-				}
-			}
-		} else {*/
-	//fmt.Println(gocol.Restostring(mc.ans))
 	fmt.Println(restostring(mc.ans))
-	//}
 }
 
 func motprec() {
