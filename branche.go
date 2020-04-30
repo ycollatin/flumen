@@ -65,6 +65,7 @@ func creeTronc(t string) *Branche {
 		phm := new(PhotoMot)
 		phm.res = m.ans
 		br.photos[m.rang] = phm
+		m.restmp = m.ans
 	}
 	return br
 }
@@ -149,12 +150,14 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 			}
 			// le noeud est accepté. créer une branche fille (bf)
 			bf := bm.copie()
+			bf.nods = append(bf.nods, n)
 			for _, mph := range mots {
 				if mph == m {
 					ph := new(PhotoMot)
 					ph.res = m.restmp
 					ph.idGr = n.grp.id
 					bf.photos[m.rang] = ph
+					mph.restmp = ph.res
 				}
 				for _, ma := range n.mma {
 					if mph == ma {
@@ -162,6 +165,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 						ph.res = ma.restmp
 						ph.idGr = bm.photos[ma.rang].idGr
 						bf.photos[ma.rang] = ph
+						mph.restmp = ph.res
 					}
 				}
 				for _, mp := range n.mmp {
@@ -170,17 +174,17 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 						ph.res = mp.restmp
 						ph.idGr = bm.photos[mp.rang].idGr
 						bf.photos[mp.rang] = ph
+						mph.restmp = ph.res
 					}
 				}
 			}
-			bf.nods = append(bf.nods, n)
-			bf.explore()
 			bm.filles = append(bm.filles, bf)
+			bf.explore()
 			bm.veto[m.rang] = append(bm.veto[m.rang], n)
-		}
-		// rétablir toutes les lemmatisations temporaires
-		for _, m := range mots {
-			m.restmp = bm.photos[m.rang].res
+			// rétablir toutes les lemmatisations temporaires
+			for _, m := range mots {
+				m.restmp = bm.photos[m.rang].res
+			}
 		}
 	}
 }
