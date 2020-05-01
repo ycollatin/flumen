@@ -81,6 +81,12 @@ a:n NP;sujet;nomin;n
 a:n;abl;abl
 a:n p;obj;acc
 
+ter:v.sujInfobj
+pos:v
+morph:3
+a:n NP p;sujet;nomin;n
+a:v;obj;inf
+
 ter:v.sujNpAttrP
 pos:v
 morph:3
