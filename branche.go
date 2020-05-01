@@ -30,8 +30,8 @@ type PhotoMot struct {
 }
 
 var (
-	mots   []*Mot
-	nbmots int
+	mots    []*Mot
+	nbmots  int
 	journal []string
 )
 
@@ -141,7 +141,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 	for _, g := range grps {
 		// créer des lemmatisations provisoires à partir des photos
 		bm.copieRestmp()
-		// tester la possibilité de création noeud de type g 
+		// tester la possibilité de création noeud de type g
 		// dont le noyau est m
 		n := bm.noeud(m, g)
 		if n != nil {
@@ -158,24 +158,24 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 			if !va {
 				continue
 			}
-			// le noeud est accepté. 
+			// le noeud est accepté.
 			// màj journal
 			journal = append(journal, fmt.Sprintf("%d. %s", bm.niveau, n.doc()))
 			/*
-			// si le noeud termine l'analyse de toute la phrase, c'est à
-			// bm qu'il faut l'ajouter, et non à une fille.
-			var nbml int // nombre de mots liés
-			for _, m := range mots {
-				for _, nod := range bm.nods {
-					if nod.inclut(m) || n.inclut(m) {
-						nbml++
+				// si le noeud termine l'analyse de toute la phrase, c'est à
+				// bm qu'il faut l'ajouter, et non à une fille.
+				var nbml int // nombre de mots liés
+				for _, m := range mots {
+					for _, nod := range bm.nods {
+						if nod.inclut(m) || n.inclut(m) {
+							nbml++
+						}
 					}
 				}
-			}
-			if nbml == nbmots {
-				bm.nods = append(bm.nods, n)
-				return
-			}
+				if nbml == nbmots {
+					bm.nods = append(bm.nods, n)
+					return
+				}
 			*/
 			//créer une branche fille (bf)
 			// copiée de la mère (bm)
@@ -528,7 +528,7 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) gocol.Res {
 	}
 
 	// subs exclus
-	for  _, ne := range sub.noyexcl {
+	for _, ne := range sub.noyexcl {
 		if ne.vaPos(m.gr) {
 			return nil
 		}

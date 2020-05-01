@@ -29,7 +29,7 @@ package main
 
 // TODO
 // - eo Romam : une étiquette lexsynt ? pour les 2 membres ?
-// - surlignage des lemmatisations : la récolte doit aussi rapporter les nods 
+// - surlignage des lemmatisations : la récolte doit aussi rapporter les nods
 //   des branches terminales
 // - éviter une réanalyse ?
 // - traiter la coordination par -que := et -
