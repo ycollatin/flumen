@@ -5,8 +5,7 @@ package main
 
 // FIXME
 // - encore des solutions manquantes
-// - l'exclusion des subs ne marche pas
-// - se in mare praecipitauit : conflit sujet-prepAcc
+// - Pluton venit et eam rapuit : coord venit-rapuit ?
 // - eo Romam : une étiquette lexsynt ? pour les 2 membres ?
 // - Immo locuples erat, muet.
 // - Lentulus consul fuit : Lentulus sujet absent.

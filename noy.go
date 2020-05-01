@@ -15,7 +15,6 @@ type Noy struct {
 
 // créateur du noyau
 func creeNoy(s string) (ln, lnExcl []*Noy) {
-//!n.prepAcc
 	ecl := strings.Split(s, " ")
 	for _, e := range ecl {
 		ex := e[0] == '!'
