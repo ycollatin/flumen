@@ -5,6 +5,7 @@ package main
 import (
 	"fmt"
 	"strings"
+	"github.com/ycollatin/gocol"
 )
 
 type Nod struct {
