@@ -134,16 +134,6 @@ func (b *Branche) domine(ma, mb *Mot) bool {
 	return false
 }
 
-// vrai si m est noyau d'un groupe d'id id
-func (b *Branche) estNuclGroupe(m *Mot, id string) bool {
-	for _, nod := range b.nods {
-		if nod.grp.id == id && nod.nucl == m {
-			return true
-		}
-	}
-	return false
-}
-
 // essaye toutes les règles de groupes de grps où m pourrait
 // être noyau
 func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
@@ -537,12 +527,12 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) gocol.Res {
 		return nil
 	}
 
+	// subs exclus
 	for  _, ne := range sub.noyexcl {
-		if b.estNuclGroupe(m, ne.id) {
+		if ne.vaPos(m.gr) {
 			return nil
 		}
 	}
-
 	// photo m et mn pour la branche
 	photom := b.photos[m.rang]
 	// vérification du pos : id du noyau, ou pos du mot
