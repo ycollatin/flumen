@@ -4,9 +4,8 @@
 package main
 
 // FIXME
-// - encore des solutions manquantes
+// - encore des solutions manquantes, redondantes
 // - Pluton venit et eam rapuit : coord venit-rapuit ?
-// - eo Romam : une étiquette lexsynt ? pour les 2 membres ?
 // - Immo locuples erat, muet.
 // - Lentulus consul fuit : Lentulus sujet absent.
 // - Ceres cum vellet : alumnum 2 fois sub.
@@ -29,7 +28,7 @@ package main
 // 		* pietate erga te
 
 // TODO
-// - un journal d'analyse : niveau, nœud avec mots
+// - eo Romam : une étiquette lexsynt ? pour les 2 membres ?
 // - surlignage des lemmatisations : la récolte doit aussi rapporter les nods 
 //   des branches terminales
 // - éviter une réanalyse ?
