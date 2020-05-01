@@ -274,7 +274,7 @@ a:"et";conj
 
 grp:v.adv
 pos:v
-a:!"non" !"neque" Adv;+adv
+a:Adv !"non" !"neque" !"et" Adv;+adv
 
 grp:v.coord
 pos:v
