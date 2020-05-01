@@ -4,6 +4,7 @@
 package main
 
 // FIXME
+// - encore des solutions manquantes
 // - l'exclusion des subs ne marche pas
 // - se in mare praecipitauit : conflit sujet-prepAcc
 // - eo Romam : une étiquette lexsynt ? pour les 2 membres ?
