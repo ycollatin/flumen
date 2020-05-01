@@ -49,15 +49,6 @@ func creeSub(v string, g *Groupe, t bool) *Sub {
 	return sub
 }
 
-func (s *Sub) estExclu(id string) bool {
-	for _, n := range s.noyexcl {
-		if id == n.id {
-			return true
-		}
-	}
-	return false
-}
-
 func (s *Sub) vaId(id string) bool {
 	for _, ne := range s.noyexcl {
 		if ne.id == id {
