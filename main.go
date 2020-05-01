@@ -4,7 +4,7 @@
 package main
 
 // FIXME
-// - in mare praecipitauit : conflit sujet-prepAcc
+// - se in mare praecipitauit : conflit sujet-prepAcc
 // - toutes les possibilités ne sont pas encore exploitées.
 //   . omnia ardere coeperunt
 // - magna turba est : adj attr ?
