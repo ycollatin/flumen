@@ -132,14 +132,20 @@ func (b *Branche) domine(ma, mb *Mot) bool {
 	return false
 }
 
+// essaye toutes les règles de groupes de grps où m pourrait
+// être noyau
 func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 	// signet exploregrou
 	for _, g := range grps {
+		// créer des lemmatisations provisoires à partir des photos
 		bm.copieRestmp()
+		// tester la possibilité de création noeud de type g 
+		// dont le noyau est m
 		n := bm.noeud(m, g)
 		if n != nil {
 			// Si le groupe a été exploré pour m dans une
 			// autre branche, passer
+			// XXX Pourrait être fait dans noeud(m, g) avant calcul.
 			va := true
 			for _, veto := range bm.veto[m.rang] {
 				va = va && !n.egale(veto)
@@ -151,16 +157,21 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 				continue
 			}
 			// le noeud est accepté. créer une branche fille (bf)
+			// copiée de la mère (bm)
+			// où le noeud sera obligatoire. Dans la branche mère,
+			// il sera interdit.
 			bf := bm.copie()
 			bf.nods = append(bf.nods, n)
 			for _, mph := range mots {
 				if mph == m {
+					// photo du noyau
 					ph := new(PhotoMot)
 					ph.idGr = n.grp.id
 					ph.res = m.restmp
 					bf.photos[m.rang] = ph
 				}
 				for _, ma := range n.mma {
+					// photos des éléments antéposés
 					if mph == ma {
 						ph := new(PhotoMot)
 						ph.idGr = bm.photos[ma.rang].idGr
@@ -169,6 +180,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 					}
 				}
 				for _, mp := range n.mmp {
+					// photos des éléments postposés
 					if mph == mp {
 						ph := new(PhotoMot)
 						ph.idGr = bm.photos[mp.rang].idGr
@@ -177,11 +189,14 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 					}
 				}
 			}
+			// ajout à la liste des filles
 			bm.filles = append(bm.filles, bf)
+			// la fille est explorée récursivement
 			bf.explore()
+			// le noeud est désormais interdit chez
+			// la mère et ses autres filles
 			bm.veto[m.rang] = append(bm.veto[m.rang], n)
 		}
-		bm.copieRestmp()
 	}
 }
 
@@ -192,6 +207,12 @@ func (bm *Branche) explore() {
 		bm.exploreGroupes(m, grpTerm)
 		// 2. groupes non terminaux
 		bm.exploreGroupes(m, grp)
+		// réinitialisation des photos
+		for _, m := range mots {
+			phm := new(PhotoMot)
+			phm.res = m.ans
+			bm.photos[m.rang] = phm
+		}
 	}
 }
 
