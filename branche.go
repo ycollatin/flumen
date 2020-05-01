@@ -32,6 +32,7 @@ type PhotoMot struct {
 var (
 	mots   []*Mot
 	nbmots int
+	journal []string
 )
 
 type Branche struct {
@@ -66,6 +67,7 @@ func creeTronc(t string) *Branche {
 		phm.res = m.ans
 		br.photos[m.rang] = phm
 	}
+	journal = nil
 	return br
 }
 
@@ -132,6 +134,16 @@ func (b *Branche) domine(ma, mb *Mot) bool {
 	return false
 }
 
+// vrai si m est noyau d'un groupe d'id id
+func (b *Branche) estNuclGroupe(m *Mot, id string) bool {
+	for _, nod := range b.nods {
+		if nod.grp.id == id && nod.nucl == m {
+			return true
+		}
+	}
+	return false
+}
+
 // essaye toutes les règles de groupes de grps où m pourrait
 // être noyau
 func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
@@ -156,7 +168,26 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 			if !va {
 				continue
 			}
-			// le noeud est accepté. créer une branche fille (bf)
+			// le noeud est accepté. 
+			// màj journal
+			journal = append(journal, fmt.Sprintf("%d. %s", bm.niveau, n.doc()))
+			/*
+			// si le noeud termine l'analyse de toute la phrase, c'est à
+			// bm qu'il faut l'ajouter, et non à une fille.
+			var nbml int // nombre de mots liés
+			for _, m := range mots {
+				for _, nod := range bm.nods {
+					if nod.inclut(m) || n.inclut(m) {
+						nbml++
+					}
+				}
+			}
+			if nbml == nbmots {
+				bm.nods = append(bm.nods, n)
+				return
+			}
+			*/
+			//créer une branche fille (bf)
 			// copiée de la mère (bm)
 			// où le noeud sera obligatoire. Dans la branche mère,
 			// il sera interdit.
@@ -168,33 +199,36 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 					ph := new(PhotoMot)
 					ph.idGr = n.grp.id
 					ph.res = m.restmp
-					bf.photos[m.rang] = ph
+					bf.photos[mph.rang] = ph
+					n.rnucl = mph.restmp
 				}
 				for _, ma := range n.mma {
 					// photos des éléments antéposés
 					if mph == ma {
 						ph := new(PhotoMot)
-						ph.idGr = bm.photos[ma.rang].idGr
+						//ph.idGr = bm.photos[ma.rang].idGr
 						ph.res = ma.restmp
 						bf.photos[ma.rang] = ph
+						n.rra[ma.rang] = mph.restmp
 					}
 				}
 				for _, mp := range n.mmp {
 					// photos des éléments postposés
 					if mph == mp {
 						ph := new(PhotoMot)
-						ph.idGr = bm.photos[mp.rang].idGr
+						//ph.idGr = bm.photos[mp.rang].idGr
 						ph.res = mp.restmp
 						bf.photos[mp.rang] = ph
+						n.rrp[mp.rang] = mph.restmp
 					}
 				}
 			}
-			// ajout à la liste des filles
-			bm.filles = append(bm.filles, bf)
 			// la fille est explorée récursivement
 			bf.explore()
+			// ajout à la liste des filles
+			bm.filles = append(bm.filles, bf)
 			// le noeud est désormais interdit chez
-			// la mère et ses autres filles
+			// la mère et ses futures filles
 			bm.veto[m.rang] = append(bm.veto[m.rang], n)
 		}
 	}
@@ -207,12 +241,12 @@ func (bm *Branche) explore() {
 		bm.exploreGroupes(m, grpTerm)
 		// 2. groupes non terminaux
 		bm.exploreGroupes(m, grp)
-		// réinitialisation des photos
-		for _, m := range mots {
-			phm := new(PhotoMot)
-			phm.res = m.ans
-			bm.photos[m.rang] = phm
-		}
+	}
+	// réinitialisation des photos
+	for _, m := range mots {
+		phm := new(PhotoMot)
+		phm.res = m.ans
+		bm.photos[m.rang] = phm
 	}
 }
 
@@ -290,6 +324,8 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 
 	// création du noeud de retour
 	nod := new(Nod)
+	nod.rra = make(map[int]gocol.Res)
+	nod.rrp = make(map[int]gocol.Res)
 	nod.grp = g
 	nod.nucl = m
 	nod.rang = rang
@@ -499,6 +535,12 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) gocol.Res {
 	// si la fonction est déjà prise, renvoyer nil
 	if !sub.multi && b.adeja(mn, sub.lien) {
 		return nil
+	}
+
+	for  _, ne := range sub.noyexcl {
+		if b.estNuclGroupe(m, ne.id) {
+			return nil
+		}
 	}
 
 	// photo m et mn pour la branche
