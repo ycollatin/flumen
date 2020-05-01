@@ -4,10 +4,8 @@
 package main
 
 // FIXME
+// - l'exclusion des subs ne marche pas
 // - se in mare praecipitauit : conflit sujet-prepAcc
-// - toutes les possibilités ne sont pas encore exploitées.
-//   . omnia ardere coeperunt
-// - magna turba est : adj attr ?
 // - eo Romam : une étiquette lexsynt ? pour les 2 membres ?
 // - Immo locuples erat, muet.
 // - Lentulus consul fuit : Lentulus sujet absent.
@@ -31,6 +29,7 @@ package main
 // 		* pietate erga te
 
 // TODO
+// - un journal d'analyse : niveau, nœud avec mots
 // - surlignage des lemmatisations : la récolte doit aussi rapporter les nods 
 //   des branches terminales
 // - éviter une réanalyse ?
@@ -80,7 +79,7 @@ var (
 )
 
 // affiche les arcs syntaxique de la phrase
-func analyse(expl bool) {
+func analyse(expl bool, j bool) {
 	texte.majPhrase()
 	texte.affiche(aidePh)
 	tronc.explore()
@@ -106,10 +105,14 @@ func analyse(expl bool) {
 		for _, n := range nods {
 			fmt.Println(n.doc())
 		}
-		fmt.Println("\n----- source ---\n")
+		fmt.Println("\n---- source ----\n")
 		fmt.Println(strings.Join(src, "\n"))
-		fmt.Println("----------------")
 	}
+	if j {
+		fmt.Println("--- journal ----")
+		fmt.Println(strings.Join(journal, "\n"))
+	}
+	fmt.Println("----------------")
 	// numérotation de la solution
 	fmt.Printf("%d/%d\n", ibr+1, len(recolte))
 	// graphe en arcs
@@ -191,6 +194,7 @@ func main() {
 	// choix du texte
 	chxTexte()
 	var modeA bool
+	var modeJ bool
 	// capture des touches
 	for {
 		k := GetKey()
@@ -208,17 +212,22 @@ func main() {
 		case "c":
 			lemmatise()
 		case "a":
-			analyse(false)
+			analyse(false, false)
 			modeA = false
+			modeJ = false
 		case "g":
-			analyse(true)
+			analyse(true, false)
 			modeA = true
+			modeJ = false
+		case "d":
+			analyse(true, true)
+			modeJ = true
 		case "p":
 			ibr--
-			analyse(modeA)
+			analyse(modeA, modeJ)
 		case "s":
 			ibr++
-			analyse(modeA)
+			analyse(modeA, modeJ)
 		case "r":
 			chxTexte()
 		case "x":
