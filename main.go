@@ -4,7 +4,9 @@
 package main
 
 // FIXME
+// - in mare praecipitauit : conflit sujet-prepAcc
 // - toutes les possibilités ne sont pas encore exploitées.
+//   . omnia ardere coeperunt
 // - magna turba est : adj attr ?
 // - eo Romam : une étiquette lexsynt ? pour les 2 membres ?
 // - Immo locuples erat, muet.
@@ -16,7 +18,7 @@ package main
 // - neque in perpetuum servare sciebant :
 //	 servare infobj de sciebant est reconnu, mais
 //   sans ses subs.
-// - Ex Inacho et Argia Ino : 2 solutions exactement identiques
+// - Solutions redondantes : sans doute règles redondantes.
 // - subiciunt veribus prunas et viscera torrent :
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
 //				  et la coord subiciunt et torrent (juste)
