@@ -70,6 +70,7 @@ func creeGroupe(ll []string) *Groupe {
 	return g
 }
 
+// vrai si l'élément de pos ou id id est exclu par le groupe
 func (g *Groupe) estExclu(id string) bool {
 	for _, ne := range g.noyexcl {
 		if ne.id == id {
