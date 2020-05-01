@@ -44,11 +44,14 @@ func creeNoy(s string) (ln, lnExcl []*Noy) {
 
 // vérifie que le *Mot m de lemmatisation Sr peut être un noyau du groupe
 func (n *Noy) vaSr(sr gocol.Sr) bool {
-	return sr.Lem.Gr[0] == n.canon
+	return sr.Lem.Cle == n.canon
 }
 
 // vérifie que p peut être un noyau du groupe
 func (n *Noy) vaPos(p string) bool {
+	if n.canon == p {
+		return true
+	}
 	pel := PrimEl(p, ".")
 	pgen := pel == p
 	if pel == p || pgen {
