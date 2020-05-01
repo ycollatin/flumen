@@ -11,9 +11,9 @@ import (
 type Nod struct {
 	grp      *Groupe		// groupe du noeud Nod
 	mma, mmp []*Mot			// liste des mots avant et après le noyau
-	rra, rrp []*gocol.Res	// liste des lemmatisations de chaque mot
+	rra, rrp map[int]gocol.Res	// liste des lemmatisations de chaque mot
 	nucl     *Mot			// noyau du Nod
-	rnucl	 []*gocol.Res	// lemmatisations du noyau
+	rnucl	 gocol.Res	// lemmatisations du noyau
 	rang     int
 }
 
@@ -32,7 +32,7 @@ func (n *Nod) doc() string {
 }
 
 func (na *Nod) egale(nb *Nod) bool {
-	if na.nucl != nb.nucl {
+	if na.nucl != nb.nucl && egaleRes(na.rnucl, nb.rnucl) {
 		return false
 	}
 	if na.grp.id != nb.grp.id {
@@ -42,7 +42,7 @@ func (na *Nod) egale(nb *Nod) bool {
 	for _, ma := range na.mma {
 		va = false
 		for _, mb := range nb.mma {
-			va = va || ma == mb
+			va = va || (ma == mb && egaleRes(na.rra[ma.rang], nb.rra[mb.rang]))
 		}
 		if !va {
 			return false
@@ -51,10 +51,31 @@ func (na *Nod) egale(nb *Nod) bool {
 	for _, ma := range na.mmp {
 		va = false
 		for _, mb := range nb.mmp {
-			va = va || ma == mb
+			va = va || (ma == mb && egaleRes(na.rrp[ma.rang], nb.rrp[mb.rang]))
 		}
 		if !va {
 			return false
+		}
+	}
+	return true
+}
+
+func egaleRes(resa, resb gocol.Res) bool {
+	va := true
+	for _, sra := range resa {
+		for _, srb := range resb {
+			va = va && sra.Lem.Cle == srb.Lem.Cle
+			if !va {
+				return false
+			}
+			for _, morfa := range sra.Morphos {
+				for _, morfb := range srb.Morphos {
+					va = va && morfa == morfb
+					if !va {
+						return false
+					}
+				}
+			}
 		}
 	}
 	return true
