@@ -4,16 +4,16 @@ package main
 
 import (
 	"fmt"
-	"strings"
 	"github.com/ycollatin/gocol"
+	"strings"
 )
 
 type Nod struct {
-	grp      *Groupe		// groupe du noeud Nod
-	mma, mmp []*Mot			// liste des mots avant et après le noyau
-	rra, rrp map[int]gocol.Res	// liste des lemmatisations de chaque mot
-	nucl     *Mot			// noyau du Nod
-	rnucl	 gocol.Res	// lemmatisations du noyau
+	grp      *Groupe           // groupe du noeud Nod
+	mma, mmp []*Mot            // liste des mots avant et après le noyau
+	rra, rrp map[int]gocol.Res // liste des lemmatisations de chaque mot
+	nucl     *Mot              // noyau du Nod
+	rnucl    gocol.Res         // lemmatisations du noyau
 	rang     int
 }
 
