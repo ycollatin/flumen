@@ -101,6 +101,13 @@ lexsynt:attr
 a:NP;sujet;nomin;n
 a:n;attr;nomin;n
 
+ter:v.attrsuj
+pos:v
+morph:3
+lexsynt:attr
+a:a;attr;nomin;n
+a:n NP p;sujet;nomin;n
+
 ter:v.attr
 pos:v
 lexsynt:attr
@@ -159,11 +166,6 @@ pos:v
 morph:indic,subj
 a:"non" "neque" "haud";neg
 
-grp:v.sujet
-pos:v
-morph:indic 3,subj 3
-ag:n NP;sujet;nomin;n
-
 grp:v.attrPass
 pos:v
 morph:pass indic,pass subj
@@ -202,6 +204,7 @@ grp:n.det
 pos:n
 a:p;det;;cgn;det
 
+! 	FIXME in mare praecipitavit
 grp:v.gprep
 pos:v
 ag:n.prepAbl n.prepAcc a.prepAcc n.prepDet n.inperpetuum;+gprep
@@ -217,11 +220,6 @@ lexsynt:datif
 morph:indic,subj
 a:"qui2";dat;dat sing
 
-grp:v.abl
-pos:v
-lexsynt:abl
-ag:n;abl;abl
-
 grp:v.dat
 pos:v
 morph:indic,subj,part,inf
@@ -233,15 +231,6 @@ pos:v
 morph:indic,subj,part,inf
 lexsynt:datif
 pg:n NP p;dat;datif
-
-grp:v.objabl
-pos:v.abl
-morph:act
-ag:n NP p !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
-
-grp:v.sujobjabl
-pos:v.objabl
-ag:n NP;sujet;nomin;n
 
 ! XXX morph est-il utile ?
 grp:v.vdat
@@ -339,6 +328,13 @@ pos:v.sujet
 lexsynt:!attr !intr
 ag:n NP p !n.prepDet;objet;acc
 
+! FIXME se in mare praecipitavit cf. v.gprep
+grp:v.objGprep
+pos:v.gprep
+morph:act
+lexsynt:!intr
+ag:n NP p;objet;acc
+
 ! verbe d'une prop inf
 grp:v.sujInf
 pos:v
@@ -362,6 +358,11 @@ pos:v !v.sumpp !v.ppsum
 lexsynt:!intr
 morph:act
 pg:n NP p !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
+
+grp:v.sujet
+pos:v
+morph:indic 3,subj 3
+ag:n NP !n.prepAbl !n.prepAcc;sujet;nomin;n
 
 grp:v.vsujet
 pos:v
