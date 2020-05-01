@@ -234,9 +234,8 @@ func (bm *Branche) explore() {
 	}
 	// réinitialisation des photos
 	for _, m := range mots {
-		phm := new(PhotoMot)
-		phm.res = m.ans
-		bm.photos[m.rang] = phm
+		bm.photos[m.rang].res = m.ans
+		bm.photos[m.rang].idGr = ""
 	}
 }
 
