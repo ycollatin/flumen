@@ -5,9 +5,7 @@ package main
 
 // FIXME
 // - encore des solutions manquantes, redondantes
-// - Pluton venit et eam rapuit : coord venit-rapuit ?
 // - Immo locuples erat, muet.
-// - Lentulus consul fuit : Lentulus sujet absent.
 // - Ceres cum vellet : alumnum 2 fois sub.
 // - dicitur prima mortalis : l'attr dicitur mortalis
 //   + épith prima mortalis non reconnue
