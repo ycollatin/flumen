@@ -357,7 +357,7 @@ grp:v.vobj
 pos:v !v.sumpp !v.ppsum
 lexsynt:!intr
 morph:act
-pg:n NP p !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
+pg:n NP p !n.prepAcc !n.prepAbl !n.inperpetuum !n.conjet;obj;acc
 
 grp:v.sujet
 pos:v
