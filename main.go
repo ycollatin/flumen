@@ -10,10 +10,11 @@ package main
 // - Trouver une solution pour la construction personnelle de l'infinitive
 //   Homerus dicitur caecus fuisse. (ou caecum)
 //
-// - CONSTRUCTIONS LEXICALES chez Cic
+// - CONSTRUCTIONS LEXICALES chez Cic.
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
+// - impossibilité de décrire les arcs en cas d'hyperbate : Antoni exhausit domus.
 // - surlignage des lemmatisations : la récolte doit aussi rapporter les nods
 //   des branches terminales
 // - éviter une réanalyse ?
@@ -31,7 +32,6 @@ import (
 	"os"
 	"path"
 	"strings"
-
 	"github.com/fatih/color"
 	"github.com/ycollatin/gocol"
 )
