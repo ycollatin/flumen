@@ -113,6 +113,11 @@ pos:v
 lexsynt:attr
 a:n NP a;attr;nomin;n
 
+ter:v.accMvmt
+pos:v
+lexsynt:mvm
+a:NP n;accl;acc;;topo
+
 !!!!!!!!!!!!!!!!!!!!!!!!!
 ! Groupes non terminaux !
 !!!!!!!!!!!!!!!!!!!!!!!!!
@@ -182,6 +187,12 @@ grp:n.prepAbl
 pos:n NP p
 morph:abl
 a:prepAbl prepAA;prep
+
+grp:v.objAbl
+pos:v
+lexsynt:abl
+ag:n;obj;acc
+ag:n;abl;abl
 
 grp:n.prepAcc
 pos:n NP p
@@ -346,7 +357,7 @@ grp:v.propinf
 pos:v
 morph:actif
 lexsynt:propinf
-ag:v.vPropinf;prinf
+ag:v.sujInf;subInf
 
 grp:v.propinfPass
 pos:"dico2" "habeo"
