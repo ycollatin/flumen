@@ -150,16 +150,21 @@ func (b *Branche) enClair() string {
 // explore toutes les possibilités d'une branche
 func (bm *Branche) explore() {
 	// signet sexplore
+	// mise en tampon des photos
+	var lres []gocol.Res
+	var lidGr []string
 	for _, m := range mots {
+		lres = append(lres, bm.photos[m.rang].res)
+		lidGr = append(lidGr, bm.photos[m.rang].idGr)
 		// 1. groupes terminaux
 		bm.exploreGroupes(m, grpTerm)
 		// 2. groupes non terminaux
 		bm.exploreGroupes(m, grp)
 	}
-	// réinitialisation des photos
-	for _, m := range mots {
-		bm.photos[m.rang].res = m.ans
-		bm.photos[m.rang].idGr = ""
+	// retour aux photos initiales
+	for i, m := range mots {
+		bm.photos[m.rang].res = lres[i]
+		bm.photos[m.rang].idGr = lidGr[i]
 	}
 }
 
