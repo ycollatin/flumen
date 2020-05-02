@@ -47,7 +47,7 @@ type Branche struct {
 
 // le tronc est la branche de départ. Il
 // est initialisé avec les mots lemmatisés
-// par Collatinus
+// par Collatinus. var tronc est déclarée dans texte.go
 func creeTronc(t string) *Branche {
 	mots = nil
 	br := new(Branche)
@@ -150,6 +150,19 @@ func (b *Branche) enClair() string {
 // explore toutes les possibilités d'une branche
 func (bm *Branche) explore() {
 	// signet sexplore
+	for _, m := range mots {
+		photo := bm.photos[m.rang]
+		// 1. groupes terminaux
+		bm.exploreGroupes(m, grpTerm)
+		// 2. groupes non terminaux
+		bm.exploreGroupes(m, grp)
+		bm.photos[m.rang] = photo
+	}
+}
+
+/*
+func (bm *Branche) explore() {
+	// signet sexplore
 	// mise en tampon des photos
 	var lres []gocol.Res
 	var lidGr []string
@@ -167,6 +180,7 @@ func (bm *Branche) explore() {
 		bm.photos[m.rang].idGr = lidGr[i]
 	}
 }
+*/
 
 // essaye toutes les règles de groupes de grps où m pourrait
 // être noyau
@@ -541,6 +555,7 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) gocol.Res {
 			return nil
 		}
 	}
+
 	// photo m et mn pour la branche
 	photom := b.photos[m.rang]
 	// vérification du pos : id du noyau, ou pos du mot
@@ -635,6 +650,7 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) gocol.Res {
 		if len(nres) == 0 {
 			return nil
 		}
+		//res = nres
 	}
 	return res
 }
