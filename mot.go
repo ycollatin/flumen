@@ -106,10 +106,8 @@ func restostring(res gocol.Res) string {
 			rl.Lem.Traduction)
 		lr = append(lr, l)
 		for _, m := range rl.Morphos {
-			//l = l + ("\n      " + m)
 			lr = append(lr, "      "+m)
 		}
-		//lr = append(lr, l)
 	}
 	return strings.Join(lr, "\n")
 }

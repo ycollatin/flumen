@@ -28,12 +28,12 @@ package main
 
 import (
 	"fmt"
+	"github.com/fatih/color"
+	"github.com/ycollatin/gocol"
 	"io/ioutil"
 	"os"
 	"path"
 	"strings"
-	"github.com/fatih/color"
-	"github.com/ycollatin/gocol"
 )
 
 const (

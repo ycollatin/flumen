@@ -165,12 +165,12 @@ func libre(nl int, a int, b int) bool {
 	}
 	var seg []rune
 	runes := []rune(lignes[nl])
-	if b - a > 1 {
+	if b-a > 1 {
 		seg = runes[a+1 : b-1]
-	} else if a - b > 1 {
-			seg = runes[b+1 : a-1]
+	} else if a-b > 1 {
+		seg = runes[b+1 : a-1]
 	} else {
-			return true
+		return true
 	}
 	for i := 0; i < len(seg); i++ {
 		if seg[i] != ' ' {
