@@ -7064,7 +7064,7 @@ domitrix:
 domo:
 domuitio:
 domusio:
-domus:
+domus:topo
 donaria:
 donaticus:
 donatio:
@@ -7599,7 +7599,7 @@ enuntio:
 enuptio:
 en:
 Enyo:
-eo2:
+eo2:mvm
 eo:abl
 eodem:
 Eous:
@@ -15764,6 +15764,7 @@ Parmensis:
 parmula:
 Parnasos:
 Parnassius:
+Parnassus:topo
 parochus:
 paronychium:
 paro:datif,infobj
@@ -18812,7 +18813,7 @@ redemptio:
 redemptito:
 redempto:
 redemptor:
-redeo:
+redeo:mvm
 redhalo:
 redhibeo:
 redigo:
