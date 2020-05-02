@@ -192,7 +192,7 @@ grp:v.obj
 pos:v
 morph:act
 lexsynt:!intr
-ag:n NP p !n.conjet !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
+ag:n NP p !v.coord !n.conjet !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
 
 ! pour Hygin, FRAGILE
 grp:n.eadata

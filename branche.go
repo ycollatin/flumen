@@ -134,6 +134,35 @@ func (b *Branche) domine(ma, mb *Mot) bool {
 	return false
 }
 
+// texte de la Branche, le mot courant surligné en rouge
+func (b *Branche) enClair() string {
+	var lm []string
+	for i := 0; i < len(mots); i++ {
+		m := mots[i].gr
+		if i == b.imot {
+			m = rouge(m)
+		}
+		lm = append(lm, m)
+	}
+	return strings.Join(lm, " ") + "."
+}
+
+// explore toutes les possibilités d'une branche
+func (bm *Branche) explore() {
+	// signet sexplore
+	for _, m := range mots {
+		// 1. groupes terminaux
+		bm.exploreGroupes(m, grpTerm)
+		// 2. groupes non terminaux
+		bm.exploreGroupes(m, grp)
+	}
+	// réinitialisation des photos
+	for _, m := range mots {
+		bm.photos[m.rang].res = m.ans
+		bm.photos[m.rang].idGr = ""
+	}
+}
+
 // essaye toutes les règles de groupes de grps où m pourrait
 // être noyau
 func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
@@ -212,9 +241,17 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 				}
 			}
 			// màj journal
-			journal = append(journal, fmt.Sprintf("%d. %s", bm.niveau, n.doc()))
+			indent := strings.Repeat("  ", bm.niveau)
+			journal = append(journal, fmt.Sprintf("%s %d. %s", indent, bm.niveau, n.doc()))
 			// la fille est explorée récursivement
+			journal = append(journal, fmt.Sprintf("%s %d montée au niveau %d", indent, bm.niveau, bf.niveau))
 			bf.explore()
+			if len(bf.filles) == 0 {
+				journal = append(journal, fmt.Sprintf("%s   %d branche terminale, %d arc(s)",
+					indent, bf.niveau, len(bf.nods)))
+			}
+			journal = append(journal, fmt.Sprintf("%s retour niveau %d. niveau %d, %d fille(s)",
+				indent, bm.niveau, bf.niveau, len(bf.filles)))
 			// ajout à la liste des filles
 			bm.filles = append(bm.filles, bf)
 			// le noeud est désormais interdit chez
@@ -222,34 +259,6 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 			bm.veto[m.rang] = append(bm.veto[m.rang], n)
 		}
 	}
-}
-
-func (bm *Branche) explore() {
-	// signet sexplore
-	for _, m := range mots {
-		// 1. groupes terminaux
-		bm.exploreGroupes(m, grpTerm)
-		// 2. groupes non terminaux
-		bm.exploreGroupes(m, grp)
-	}
-	// réinitialisation des photos
-	for _, m := range mots {
-		bm.photos[m.rang].res = m.ans
-		bm.photos[m.rang].idGr = ""
-	}
-}
-
-// texte de la Branche, le mot courant surligné en rouge
-func (b *Branche) enClair() string {
-	var lm []string
-	for i := 0; i < len(mots); i++ {
-		m := mots[i].gr
-		if i == b.imot {
-			m = rouge(m)
-		}
-		lm = append(lm, m)
-	}
-	return strings.Join(lm, " ") + "."
 }
 
 // affiche la Branche en colorant n mots à partir
@@ -628,3 +637,13 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) gocol.Res {
 func (b *Branche) terminale() bool {
 	return len(b.filles) == 0
 }
+
+/*
+delve
+
+func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) gocol.Res {
+
+b branche.go:533
+cond 1 m.gr=="rapuit" && sub.groupe.id=="v.obj" && mn.
+
+*/
