@@ -10,12 +10,14 @@ package main
 // - subiciunt veribus prunas et viscera torrent :
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
 //				  et la coord subiciunt et torrent (juste)
+// - Plantage : nos tamen nihil quod ad eam rem pertinent praetermittimus.
 //
 // XXX
 // - Trouver une solution pour la construction personnelle de l'infinitive
 //   Homerus dicitur caecus fuisse. (ou caecum)
-// - CONSTRUCTIONS LEXICALES
+// - CONSTRUCTIONS LEXICALES chez Cic
 // 		* pietate erga te
+//      * tempus agendi et cogitandi
 
 // TODO
 // - eo Romam : une étiquette lexsynt ? pour les 2 membres ?
@@ -24,7 +26,7 @@ package main
 // - éviter une réanalyse ?
 // - traiter la coordination par -que := et -
 // - un champ groupe.anrel - analyses du relatif ?
-// - accord de personne sujet-verbe ?
+// - accord :de personne sujet-verbe et verbe-verbe coord; de mode v-v, etc.
 // - saisie d'une phrase ?
 // - fonction de sortie au format GraphViz
 // - parasitage de /sum/ par /edo/ : comment supprimer "excl" dans lexsynt
@@ -49,11 +51,6 @@ const (
     a->arbre de la phrase ; g->arbre ٍ& sa source ;
 	s->solution suivante ; p->solution précédente ;
 	r->retour; x->quitter.`
-	//s-> définir une suite morphosyntaxique ; x->Exit`
-	//aideS =
-	//`i-> id de la suite ; n-> n° du noyau ;
-	// l-> liens (n°départ.fonction.n°sub,n°etc.);
-	// v-> valider ; r-> retour`
 )
 
 var (
