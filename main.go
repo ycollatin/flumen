@@ -16,7 +16,6 @@ package main
 // - subiciunt veribus prunas et viscera torrent :
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
 //				  et la coord subiciunt et torrent (juste)
-//	 prunas 2 fois objet
 //
 // XXX
 // - Trouver une solution pour la construction personnelle de l'infinitive
