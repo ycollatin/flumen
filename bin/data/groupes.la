@@ -362,7 +362,7 @@ pg:n NP p !n.prepAcc !n.prepAbl !n.inperpetuum !n.conjet;obj;acc
 grp:v.sujet
 pos:v
 morph:indic 3,subj 3
-ag:n NP !n.prepAbl !n.prepAcc;sujet;nomin;n
+ag:n NP;sujet;nomin;n
 
 grp:v.vsujet
 pos:v
