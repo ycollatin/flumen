@@ -43,6 +43,12 @@ pos:"perpetuus"
 morph:acc sing
 a:"in";prep
 
+ter:n.etiamSuj
+pos:n
+morph:3
+p:"etiam";Adv
+p:NP n p;sujet;nomin;n
+
 ter:v.sumpp
 pos:"sum"
 morph:indic,subj
@@ -52,6 +58,12 @@ ter:v.ppsum
 pos:"sum"
 morph:indic,subj
 a:v;pp;part parf
+
+ter:v.vAdvObj
+pos:v
+morph:indic,subj
+p:Adv;adv
+p:n NP p;objet;acc
 
 ter:n.prepDet
 pos:n
@@ -352,17 +364,28 @@ pos:v
 morph:inf
 ag:n NP p !n.prepAcc;sujet;acc
 
+grp:v.infSuj
+pos:v
+morph:inf
+pg:n NP p !n.prepAcc;sujet;acc
+
 ! verbe précédé d'une prop.inf
 grp:v.propinf
 pos:v
 morph:actif
 lexsynt:propinf
-ag:v.sujInf;subInf
+ag:v.sujInf v.infSuj;subInf
 
-grp:v.propinfPass
+grp:v.vpropinfPass
 pos:"dico2" "habeo"
 morph:indic pass,subj pass
 pg:v;propinf;inf
+
+grp:v.abl
+pos:v
+morpḧ:act
+lexsynt:abl
+ag:n p;abl;abl
 
 grp:v.vobj
 pos:v !v.sumpp !v.ppsum
@@ -375,12 +398,24 @@ pos:v
 morph:indic 3,subj 3
 ag:n NP;sujet;nomin;n
 
+!FIXME At ego suasi
+!grp:v.sujetEgo
+!pos:v
+!morph:1
+!ag:"ego" "nos";sujet;nomin;n
+
+
 grp:v.vsujet
 pos:v
 morph:3
 p:n NP !n.prepAcc;sujet;nomin;n
 
-! appostion, fragile
+grp:v.conj
+pos:v
+morph:indic,subj
+a:conj;conj
+
+! APPOSTION, FRAGILE
 grp:n.app
 pos:n
 p:n;app;;cgn
