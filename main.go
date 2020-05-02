@@ -4,13 +4,8 @@
 package main
 
 // FIXME
-// - encore des solutions manquantes, redondantes
-//   . Pluton venit et eam rapuit
-// - Solutions redondantes : sans doute règles redondantes.
-// - subiciunt veribus prunas et viscera torrent :
-//   AmbiguÏté entre la coord prunas et viscera    (faux)
-//				  et la coord subiciunt et torrent (juste)
-// - Plantage : nos tamen nihil quod ad eam rem pertinent praetermittimus.
+// - encore des solutions manquantes
+// - Solutions redondantes : règles redondantes ?
 // XXX
 // - Trouver une solution pour la construction personnelle de l'infinitive
 //   Homerus dicitur caecus fuisse. (ou caecum)
@@ -21,7 +16,6 @@ package main
 // TODO
 // - surlignage des lemmatisations : la récolte doit aussi rapporter les nods
 //   des branches terminales
-// - eo Romam : une étiquette lexsynt ? pour les 2 membres ?
 // - éviter une réanalyse ?
 // - traiter la coordination par -que := et -
 // - un champ groupe.anrel - analyses du relatif ?
@@ -30,8 +24,6 @@ package main
 // - fonction de sortie au format GraphViz
 // - parasitage de /sum/ par /edo/ : comment supprimer "excl" dans lexsynt
 // - parasitage de /do/ par /dato/ :   "
-// - Constructions lexicales
-// 		* pietate erga te
 
 import (
 	"fmt"
