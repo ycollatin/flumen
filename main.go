@@ -5,13 +5,7 @@ package main
 
 // FIXME
 // - encore des solutions manquantes, redondantes
-// - Ceres cum vellet : alumnum 2 fois sub.
-// - dicitur prima mortalis : l'attr dicitur mortalis
-//   + épith prima mortalis non reconnue
-//   mais reconnue si dicitur a un sujet
-// - neque in perpetuum servare sciebant :
-//	 servare infobj de sciebant est reconnu, mais
-//   sans ses subs.
+//   . Pluton venit et eam rapuit
 // - Solutions redondantes : sans doute règles redondantes.
 // - subiciunt veribus prunas et viscera torrent :
 //   AmbiguÏté entre la coord prunas et viscera    (faux)
