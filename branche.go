@@ -159,8 +159,6 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 				continue
 			}
 			// le noeud est accepté.
-			// màj journal
-			journal = append(journal, fmt.Sprintf("%d. %s", bm.niveau, n.doc()))
 			/*
 				// si le noeud termine l'analyse de toute la phrase, c'est à
 				// bm qu'il faut l'ajouter, et non à une fille.
@@ -213,6 +211,8 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 					}
 				}
 			}
+			// màj journal
+			journal = append(journal, fmt.Sprintf("%d. %s", bm.niveau, n.doc()))
 			// la fille est explorée récursivement
 			bf.explore()
 			// ajout à la liste des filles
@@ -270,13 +270,13 @@ func (b *Branche) exr(d, n int) (e string) {
 }
 
 // id du Nod dont m est déjà le noyau
-func (b *Branche) id(m *Mot) string {
+func (b *Branche) ids(m *Mot) (ii []string) {
 	for _, nod := range b.nods {
 		if nod.nucl.rang == m.rang {
-			return nod.grp.id
+			ii = append(ii, nod.grp.id)
 		}
 	}
-	return ""
+	return
 }
 
 func (b *Branche) motCourant() *Mot {
@@ -327,7 +327,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 			return nil
 		}
 		ma := mots[r]
-		// passer les mots déjà subordonnés
+		// passer les mots déjà subordonnés | b branche.go:336 cond 2 m.gr=="rapuit" && g.id=="v.conjet"
 		for b.dejasub(ma) {
 			r--
 			if r < 0 {
@@ -340,7 +340,6 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 			return nil
 		}
 		sub := g.ante[ia]
-		//resma := b.photos[ma.rang].res
 		ma.restmp = b.resSub(ma, sub, m, ma.restmp)
 		if ma.restmp == nil {
 			return nil
@@ -412,20 +411,16 @@ func (b *Branche) initRestmp(m *Mot) {
 func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
 	// signet snoyau
 	// valeurs variables de m pour la branche
-	/*
-		// utilistation des photos
-		mot     *Mot      // liaison avec le mot
-		res     gocol.Res // lemmatisations réduites du mot
-		pos     string    // nom du groupe dont le mot est noyau
-	*/
 	photom := b.photos[m.rang]
 	// vérif du pos
 	if photom.idGr != "" {
 		// 1. La pos définitif est fixée
 		// noyaux exclus
-		id := b.id(m)
-		if g.estExclu(id) {
-			return nil
+		ids := b.ids(m)
+		for _, id := range ids {
+			if g.estExclu(id) {
+				return nil
+			}
 		}
 		var nres gocol.Res
 		// noyaux admis
@@ -537,11 +532,15 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) gocol.Res {
 	// vérification du pos : id du noyau, ou pos du mot
 	if photom.idGr != "" {
 		// 1. La pos du mot est définitive
-		id := b.id(m)
-		if !sub.vaId(id) {
+		ids := b.ids(m)
+		va := false
+		for _, id := range ids {
+			va = va || sub.vaId(id)
+		}
+		if !va {
 			return nil
 		}
-		va := false
+		va = false
 		for _, noy := range sub.noyaux {
 			va = va || noy.vaPos(photom.idGr)
 		}
