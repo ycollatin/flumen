@@ -33,7 +33,8 @@
 ! - det : le pronom peut servir de déterminant
 ! - gen : le verbe, l'adjectif ou le nom peut avoir comme sub un génitif (memini)
 ! - infobj : le verbe peut avoir un infinitif objet
-! - loc : peut être fléchi au locatif
+! - loc : peut être fléchi au locatif; se construit sans préposition
+! - mvm : (pour les verbes) mouvement, accepte l'acc.seul
 ! - nogen : le nom ne peut avoir de génitif (ex. dea)
 ! - nom : tout nom qui peut être accompagné d'une apposition à initiale majuscule (rex, flumen, etc.)
 ! - posn,posc,posa : le lemme peut avoir aussi le pos a, c, n, etc.
@@ -3429,7 +3430,7 @@ captiuus2:
 captiuus:
 capto:
 captus3:
-Capua:
+Capua:loc
 capularis:
 capulus:
 caput:
@@ -3704,7 +3705,7 @@ Cecropides:
 Cecropis:
 Cecropius:
 Cecrops:
-cedo:
+cedo:datif
 cedo2:
 cedrus:
 Celadus:
@@ -5086,7 +5087,7 @@ conserua:
 conseruatio:
 conseruator:
 conseruitium:
-conseruo:
+conseruo:datif
 conseruus2:
 conseruus:
 consessor:
@@ -11824,7 +11825,7 @@ iuba2:
 iuba:
 iubar:
 iubatus:
-iubeo:
+iubeo:propinf
 iucunde:
 iucunditas:
 iucundus:
@@ -17863,7 +17864,7 @@ professor:
 professorius:
 profestus:
 proficio:
-proficiscor:
+proficiscor:mvm
 profiteor:
 profligator:
 profligatus:
