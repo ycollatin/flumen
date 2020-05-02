@@ -168,7 +168,7 @@ func libre(nl int, a int, b int) bool {
 	if a < b {
 		seg = runes[a+1 : b-1]
 	} else {
-		if a-b > 1 {
+		if a-b > 0 {
 			seg = runes[b+1 : a-1]
 		} else {
 			return true
