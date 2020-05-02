@@ -160,28 +160,6 @@ func (bm *Branche) explore() {
 	}
 }
 
-/*
-func (bm *Branche) explore() {
-	// signet sexplore
-	// mise en tampon des photos
-	var lres []gocol.Res
-	var lidGr []string
-	for _, m := range mots {
-		lres = append(lres, bm.photos[m.rang].res)
-		lidGr = append(lidGr, bm.photos[m.rang].idGr)
-		// 1. groupes terminaux
-		bm.exploreGroupes(m, grpTerm)
-		// 2. groupes non terminaux
-		bm.exploreGroupes(m, grp)
-	}
-	// retour aux photos initiales
-	for i, m := range mots {
-		bm.photos[m.rang].res = lres[i]
-		bm.photos[m.rang].idGr = lidGr[i]
-	}
-}
-*/
-
 // essaye toutes les règles de groupes de grps où m pourrait
 // être noyau
 func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
@@ -658,13 +636,3 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) gocol.Res {
 func (b *Branche) terminale() bool {
 	return len(b.filles) == 0
 }
-
-/*
-delve
-
-func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) gocol.Res {
-
-b branche.go:533
-cond 1 m.gr=="rapuit" && sub.groupe.id=="v.obj" && mn.
-
-*/
