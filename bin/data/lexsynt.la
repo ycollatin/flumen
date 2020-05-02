@@ -1865,7 +1865,7 @@ Ardeates:
 Ardeatinus:
 ardens:
 ardenter:
-ardeo:intr
+ardeo:
 ardesco:
 ardor:
 Arduenna:
@@ -21405,7 +21405,7 @@ Sulpicius:
 sulpureus:
 sultis:
 sumen:
-sum:intr,attr,datif,gen
+sum:attr,datif,gen
 summa:
 summano:
 Summanus:
