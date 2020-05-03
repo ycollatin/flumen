@@ -28,8 +28,7 @@ type An struct {
 type Mot struct {
 	gr     string    // graphie du mot
 	rang   int       // rang du mot dans la phrase à partir de 0
-	//ans    gocol.Res // ensemble des lemmatisations, ans2 réduit par chaque noeud créé.
-	ans		An
+	ans		An		 // lemmatisations et id du groupe si le mot devient noyau
 	restmp gocol.Res // lemmatisation de test d'un noeud
 }
 
@@ -37,7 +36,6 @@ func creeMot(m string) *Mot {
 	mot := new(Mot)
 	mot.gr = m
 	var echec bool
-	//mot.ans, echec = gocol.Lemmatise(m)
 	mot.ans.res, echec = gocol.Lemmatise(m)
 	if echec {
 		mot.ans.res, echec = gocol.Lemmatise(gocol.Majminmaj(m))
@@ -100,7 +98,6 @@ func genus(sr gocol.Sr) gocol.Sr {
 	return sr
 }
 
-//func restostring(res gocol.Res) string {
 func restostring(an An) string {
 	var lr []string
 	for _, rl := range an.res {
