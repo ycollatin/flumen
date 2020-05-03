@@ -138,7 +138,7 @@ grp:n.appFam
 pos:NP
 pg:n.fam;app;;cgn
 
-grp:n.app
+grp:n.npapp
 pos:n
 lexsynt:nom
 p:NP;app;;cn
@@ -254,13 +254,6 @@ pos:v
 morph:indic,subj,part,inf
 lexsynt:datif
 pg:n NP p;dat;datif
-
-! XXX morph est-il utile ?
-grp:v.vdat
-pos:v
-morph:indic,subj,part,inf
-lexsynt:datif
-pg:n NP;dat;datif
 
 grp:v.attrObj
 pos:v
