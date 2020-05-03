@@ -21,14 +21,6 @@ import (
 	"strings"
 )
 
-// Chaque branche modifie trois propriétés attachées
-// au mot. Leur liste est donc enregistrée dans
-// Branche.photos.
-type PhotoMot struct {
-	res  gocol.Res // lemmatisations réduites du mot
-	idGr string    // nom du groupe dont le mot est noyau
-}
-
 var (
 	mots    []*Mot
 	nbmots  int
@@ -41,7 +33,7 @@ type Branche struct {
 	nods   []*Nod            // noeuds validés
 	niveau int               // n° de la branche par rapport au tronc
 	veto   map[int][]*Nod    // index : rang du mot; valeur : liste des liens interdits
-	photos map[int]*PhotoMot // lemmatisations et appartenance de groupe propres à la branche
+	photos map[int]*An		 // lemmatisations et appartenance de groupe propres à la branche
 	filles []*Branche        // liste des branches filles
 }
 
@@ -59,12 +51,13 @@ func creeTronc(t string) *Branche {
 		mots = append(mots, nm)
 	}
 	nbmots = len(mots)
-	br.photos = make(map[int]*PhotoMot) // l'index de la map est le numéro des mots
+	br.photos = make(map[int]*An) // l'index de la map est le numéro des mots
 	br.veto = make(map[int][]*Nod)
 	// peuplement des photos
 	for _, m := range mots {
-		phm := new(PhotoMot)
-		phm.res = m.ans
+		phm := new(An)
+		//phm.res = m.ans
+		phm = &m.ans
 		br.photos[m.rang] = phm
 	}
 	journal = nil
@@ -95,7 +88,7 @@ func (b *Branche) copie() *Branche {
 	nb.gr = b.gr
 	nb.niveau = b.niveau + 1
 	nb.nods = b.nods
-	nb.photos = make(map[int]*PhotoMot)
+	nb.photos = make(map[int]*An)
 	nb.photos = b.photos
 	nb.veto = b.veto
 	return nb
@@ -210,7 +203,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 			for _, mph := range mots {
 				if mph == m {
 					// photo du noyau
-					ph := new(PhotoMot)
+					ph := new(An)
 					ph.idGr = n.grp.id
 					ph.res = m.restmp
 					bf.photos[mph.rang] = ph
@@ -219,7 +212,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 				for _, ma := range n.mma {
 					// photos des éléments antéposés
 					if mph == ma {
-						ph := new(PhotoMot)
+						ph := new(An)
 						//ph.idGr = bm.photos[ma.rang].idGr
 						ph.res = ma.restmp
 						bf.photos[ma.rang] = ph
@@ -229,7 +222,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 				for _, mp := range n.mmp {
 					// photos des éléments postposés
 					if mph == mp {
-						ph := new(PhotoMot)
+						ph := new(An)
 						//ph.idGr = bm.photos[mp.rang].idGr
 						ph.res = mp.restmp
 						bf.photos[mp.rang] = ph

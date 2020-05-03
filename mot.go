@@ -20,10 +20,16 @@ import (
 	"strings"
 )
 
+type An struct {
+	res  gocol.Res // lemmatisations réduites du mot
+	idGr string    // nom du groupe dont le mot est noyau
+}
+
 type Mot struct {
 	gr     string    // graphie du mot
 	rang   int       // rang du mot dans la phrase à partir de 0
-	ans    gocol.Res // ensemble des lemmatisations, ans2 réduit par chaque noeud créé.
+	//ans    gocol.Res // ensemble des lemmatisations, ans2 réduit par chaque noeud créé.
+	ans		An
 	restmp gocol.Res // lemmatisation de test d'un noeud
 }
 
@@ -31,26 +37,27 @@ func creeMot(m string) *Mot {
 	mot := new(Mot)
 	mot.gr = m
 	var echec bool
-	mot.ans, echec = gocol.Lemmatise(m)
+	//mot.ans, echec = gocol.Lemmatise(m)
+	mot.ans.res, echec = gocol.Lemmatise(m)
 	if echec {
-		mot.ans, echec = gocol.Lemmatise(gocol.Majminmaj(m))
+		mot.ans.res, echec = gocol.Lemmatise(gocol.Majminmaj(m))
 	}
 	// ajout du genre pour les noms
 	if !echec {
-		for i, a := range mot.ans {
-			mot.ans[i] = genus(a)
+		for i, a := range mot.ans.res {
+			mot.ans.res[i] = genus(a)
 		}
 	}
 
 	// provisoire XXX
 	// exclusions de mots rares faisant obstacle à des analyses importantes
 	var nres gocol.Res
-	for _, an := range mot.ans {
+	for _, an := range mot.ans.res {
 		if !lexsynt(an.Lem, "excl") {
 			nres = append(nres, an)
 		}
 	}
-	mot.ans = nres
+	mot.ans.res = nres
 	return mot
 }
 
@@ -93,9 +100,10 @@ func genus(sr gocol.Sr) gocol.Sr {
 	return sr
 }
 
-func restostring(res gocol.Res) string {
+//func restostring(res gocol.Res) string {
+func restostring(an An) string {
 	var lr []string
-	for _, rl := range res {
+	for _, rl := range an.res {
 		if rl.Lem == nil {
 			continue
 		}
