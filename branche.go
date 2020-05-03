@@ -418,6 +418,46 @@ func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
 	// signet snoyau
 	// valeurs variables de m pour la branche
 	photom := b.photos[m.rang]
+
+	if photom.idGr != "" {
+		// 1. La pos définitif est fixée
+		// noyaux exclus
+		ids := b.ids(m)
+		var va bool
+		for _, id := range ids {
+			if g.estExclu(id) {
+				return nil
+			}
+			for _, noy := range g.noyaux {
+				va = va || noy.vaPos(id)
+			}
+		}
+	} else { // Le mot est encore isolé
+		var nres gocol.Res
+		// noyaux admis
+		for _, noy := range g.noyaux {
+			if noy.canon > "" {
+				for _, a := range res {
+					if a.Lem.Cle == noy.canon {
+						nres = append(nres, a)
+					}
+				}
+			} else {
+				for _, a := range res {
+					if noy.vaPos(a.Lem.Pos) {
+						nres = append(nres, a)
+					}
+				}
+			}
+		}
+		if len(nres) == 0 {
+			return nil
+		}
+		res = nres
+	}
+
+
+	/*
 	// vérif du pos
 	if photom.idGr != "" {
 		// 1. La pos définitif est fixée
@@ -457,7 +497,7 @@ func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
 		// vérif des pos
 		var nres gocol.Res
 		for _, a := range res {
-			if g.vaPos(a.Lem.Pos) {
+			if g.vaPos(a.Lem.Pos) || g.vaPos(a.Lem.Cle) {
 				nres = append(nres, a)
 			}
 		}
@@ -466,6 +506,7 @@ func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
 		}
 		res = nres
 	}
+	*/
 
 	// vérif lexicosyntaxique
 	var nres gocol.Res
@@ -636,3 +677,10 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) gocol.Res {
 func (b *Branche) terminale() bool {
 	return len(b.filles) == 0
 }
+/*
+b branche.go:315
+cond 1 m.gr=="sunt" && g.id=="v.ppsum"
+
+b branche.go:349
+cond 2 m.gr=="sunt" && g.id=="v.ppsum"
+*/
