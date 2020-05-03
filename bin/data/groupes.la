@@ -51,12 +51,12 @@ p:NP n p;sujet;nomin;n
 
 ter:v.sumpp
 pos:"sum"
-morph:indic,subj
+morph:indic,subj,inf
 p:v;pp;part parf
 
 ter:v.ppsum
 pos:"sum"
-morph:indic,subj
+morph:indic,subj,inf
 a:v;pp;part parf
 
 ter:v.vAdvObj
@@ -340,6 +340,11 @@ grp:sr.sujet
 pos:v
 morph:indic,subj
 a:"qui2";sujet;nomin;n
+
+grp:sr.objet
+pos:v
+morph:indic,subj
+a:"qui2";objet;acc
 
 grp:n.sr
 pos:n NP
