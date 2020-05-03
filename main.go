@@ -4,6 +4,7 @@
 package main
 
 // FIXME
+// - contrôle de Pos-id défaillant
 // - encore des solutions manquantes
 // - Solutions redondantes : règles redondantes ?
 // XXX
@@ -14,6 +15,7 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
+// - récrire le groupe en ensemble d'éléments ? 
 // - impossibilité de décrire les arcs en cas d'hyperbate : Antoni exhausit domus.
 // - surlignage des lemmatisations : la récolte doit aussi rapporter les nods
 //   des branches terminales
