@@ -31,242 +31,196 @@
 !!!!!!!!!!!!!!!!!!!!!
 
 ter:n.nadjp
-pos:n
+n:@n
 p:"Romanus";epith;;cgn
 
 ter:n.eius
-pos:n
+n:@n
 p:"is";gen;gén
 
 ter:n.inperpetuum
-pos:"perpetuus"
-morph:acc sing
+n:"perpetuus";;acc neut sing
 a:"in";prep
 
 ter:n.etiamSuj
-pos:n
-morph:3
+n:@n;;3
 p:"etiam";Adv
-p:NP n p;sujet;nomin;n
+p:@NP @n @p;sujet;nomin;n
 
 ter:v.sumpp
-pos:"sum"
-morph:indic,subj,inf
-p:v;pp;part parf
+n:"sum";;indic,subj,inf
+p:@v;pp;part parf
 
 ter:v.ppsum
-pos:"sum"
-morph:indic,subj,inf
-a:v;pp;part parf
+n:"sum";;indic,subj,inf
+a:@v;pp;part parf
 
 ter:v.vAdvObj
-pos:v
-morph:indic,subj
-p:Adv;adv
-p:n NP p;objet;acc
+n:@v;;indic,subj
+p:@Adv;adv
+p:@n @NP @p;objet;acc
 
 ter:n.prepDet
 pos:n
-a:prepAcc prepAA;prep
-a:p;det;acc;n
+n:@n
+a:@prepAcc @prepAA;prep
+a:@p;det;acc;n
 
 ter:n.epith
-pos:n
-a:a;epith;;cgn
+n:@n
+a:@a;epith;;cgn
 
 ter:a.prepAcc
-pos:a
-lexsynt:subst
-morph:acc
-a:prepAcc prepAA;prep
+n:@a;;acc;;subst
+a:@prepAcc @prepAA;prep
 
 ter:a.prepAcc
-pos:"hic"
-morph:acc
-a:prepAcc prepAA;prep
+n:"hic";;acc
+a:@prepAcc @prepAA;prep
 
 ter:v.sujAblObj
-pos:v
-morph:3
-lexsynt:abl
-a:n NP;sujet;nomin;n
-a:n;abl;abl
-a:n p;obj;acc
+n:@v;;3;;abl
+a:@n @NP;sujet;nomin;n
+a:@n;abl;abl
+a:@n @p;obj;acc
 
 ter:v.sujInfobj
-pos:v
-morph:3
-a:n NP p;sujet;nomin;n
-a:v;obj;inf
+n:@v;;3
+a:@n @NP @p;sujet;nomin;n
+a:@v;obj;inf
 
 ter:v.sujNpAttrP
-pos:v
-morph:3
-lexsynt:attrp
-a:n;sujet;nomin;n
-a:NP;attr;nomin;n
+n:@v;;3;;attrp
+a:@n;sujet;nomin;n
+a:@NP;attr;nomin;n
 
 ter:v.NPsujAttr
-pos:v
-morph:3
-lexsynt:attr
-a:NP;sujet;nomin;n
-a:n;attr;nomin;n
+n:@v;;3;;attr
+a:@NP;sujet;nomin;n
+a:@n;attr;nomin;n
 
 ter:v.attrsuj
-pos:v
-morph:3
-lexsynt:attr
-a:a;attr;nomin;n
-a:n NP p;sujet;nomin;n
+n:@v;;3;;attr
+a:@a;attr;nomin;n
+a:@n @NP @p;sujet;nomin;n
 
 ter:v.attr
-pos:v
-lexsynt:attr
-a:n NP a;attr;nomin;n
+n:@v;;;;attr
+a:@n @NP @a;attr;nomin;n
 
 ter:v.accMvmt
-pos:v
-lexsynt:mvm
-a:NP n;accl;acc;;topo
+n:@v;;;;mvm
+a:@NP @n;accl;acc;;topo
 
 !!!!!!!!!!!!!!!!!!!!!!!!!
 ! Groupes non terminaux !
 !!!!!!!!!!!!!!!!!!!!!!!!!
 
 grp:n.appFam
-pos:NP
+n:@NP
 pg:n.fam;app;;cgn
 
-grp:n.npapp
-pos:n
-lexsynt:nom
-p:NP;app;;cn
-
-grp:n.npapp
-pos:NP
-pg:n !n.prepAcc !n.prepAbl;+app;;cgn;nom
+!grp:n.npapp
+!n:@n;app;;;nom
+!p:@NP;app;;cn
 
 ! FIXME dicitur prima mortalis
 grp:v.vEpithSuj
-pos:v
-morph:3 pass
-lexsynt:attrp
+n:@v;;3 pass;;attrp
 gp:n.epith;attr;nomin;;n
 
 grp:n.nepith
-pos:n
-p:a;epith;;cgn
+n:@n
+p:@a;epith;;cgn
 
 grp:n.conjet
-pos:n NP
+n:@n @NP
 a:"et";conj
 
 grp:n.coord
-pos:n NP
+n:@n @NP
 pg:n.conjet;coord;;c
 
 grp:v.dienocte
-pos:v
+n:@v
 ag:"dies" "nox" "hora";abl;abl
 
 grp:n.gen
-pos:n
-ag:n NP;gen;gén
+n:@n
+ag:@n @NP;gen;gén
 
 grp:n.ngen
-pos:n
-pg:n NP;gen;gén
+n:@n
+pg:@n @NP;gen;gén
 
 grp:v.neg
-pos:v
-morph:indic,subj
+n:@v;;indic,subj
 a:"non" "neque" "haud";neg
 
 grp:v.attrPass
-pos:v
-morph:pass indic,pass subj
-lexsynt:attrp
-ag:NP n a;attr;nomin
+n:@v;;pass indic,pass subj
+ag:@NP @n @a;attr;nomin
 
 grp:v.vattrPass
-pos:v
-morph:pass indic,pass subj
-lexsynt:attrp
-pg:NP n a;attr;nomin
+n:@v;;pass indic,pass subj;;attrp
+pg:@NP @n @a;attr;nomin
 
 grp:n.prepAbl
-pos:n NP p
-morph:abl
-a:prepAbl prepAA;prep
+n:@n @NP @p;;abl
+a:@prepAbl @prepAA;prep
 
 grp:v.objAbl
-pos:v
-lexsynt:abl
-ag:n;obj;acc
-ag:n;abl;abl
+n:@v;;;;abl
+ag:@n;obj;acc
+ag:@n;abl;abl
 
 grp:n.prepAcc
-pos:n NP p
-morph:acc
-a:prepAcc prepAA !n.det;prep
+n:@n @NP @p;;acc
+a:@prepAcc @prepAA !n.det;prep
 
 grp:v.obj
-pos:v
-morph:act
-lexsynt:!intr
-ag:n NP p !v.coord !n.conjet !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
+n:@v;;act;;!intr
+ag:@n @NP @p !v.coord !n.conjet !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
 
 ! pour Hygin, FRAGILE
 grp:n.eadata
-pos:"is"
-morph:nomin fém sing
+n:"is";;nomin fém sing
 p:"do";epith;part pass nomin fém sing
 
 grp:n.det
-pos:n
-a:p;det;;cgn;det
+n:@n
+a:@p;det;;cgn;det
 
 ! 	FIXME in mare praecipitavit
 grp:v.gprep
-pos:v
+n:@v
 ag:n.prepAbl n.prepAcc a.prepAcc n.prepDet n.inperpetuum;+gprep
 
 grp:v.vgprep
-pos:v
+n:@v
 pg:n.prepAbl n.prepAcc n.inperpetuum n.prepDet;+gprep
 
 !sr = subordonnée relative
 grp:sr.cui
-pos:v
-lexsynt:datif
-morph:indic,subj
+n:@v;;indic,subj;;datif
 a:"qui2";dat;dat sing
 
 grp:v.dat
-pos:v
-morph:indic,subj,part,inf
-lexsynt:datif
-ag:n NP p;dat;datif
+n:@v;;indic,subj,part,inf;;datif
+ag:@n @NP @p;dat;datif
 
 grp:v.vdat
-pos:v
-morph:indic,subj,part,inf
-lexsynt:datif
-pg:n NP p;dat;datif
+n:@v;;indic,subj,part,inf;;datif
+pg:@n @NP @p;dat;datif
 
 grp:v.attrObj
-pos:v
-morph:act
-lexsynt:attro !propinf
-ag:n a;attro;acc
+n:@v;;act;;attrà !propinf
+ag:@n @a;attro;acc
 
 grp:v.sujAttr
-pos:v
-morph:3
-lexsynt:attr
-ag:NP n;sujet;nomin;n
-ag:n a;attr;nomin;n
+n:@v;;3;;attr
+ag:@NP @n;sujet;nomin;n
+ag:@n @a;attr;nomin;n
 
 !grp:v.attr
 !pos:v
@@ -274,148 +228,123 @@ ag:n a;attr;nomin;n
 !ag:a n;attr;nomin
 
 grp:v.vattr
-pos:v
-lexsynt:attr
-pg:a;attr;nomin;n
+n:@v;;;;attr
+pg:@a;attr;nomin;n
 
 grp:v.infattr
-pos:v
-morph:inf
-lexsynt:attr
-p:a;attr;acc
+n:@v;;inf;;attr
+p:@a;attr;acc
 
 grp:v.conjet
-pos:v
+n:@v
 a:"et";conj
 
 grp:v.adv
-pos:v
-a:Adv !"non" !"neque" !"et" Adv;+adv
+n:@v
+a:@Adv !"non" !"neque" !"et" Adv;+adv
 
 grp:v.coord
-pos:v
+n:@v
 pg:v.conjet;coord;;n
 
 grp:v.conjvsubj
-pos:v
-morph:subj
+n:@v;;subj
 a:"cum" "ut";conj
 
 grp:v.conjvind
-pos:v
-morph:indic
+n:@v;;indic
 a:"quod" "quia" "quando";conj
 
 grp:v.infobj
-pos:v
-morph:act indic,act subj
-lexsynt:infobj
-ag:v;obj;inf
+n:@v;;act indic,act subj;;infobj
+ag:@v;obj;inf
 
 grp:v.vinfobj
-pos:v
-morph:act indic,act subj
-lexsynt:infobj
-pg:v !v.sujInf;infobj;inf
+n:@v;;act indic,act subj;;infobj
+pg:@v !v.sujInf;infobj;inf
 
 grp:v.subconj
-pos:v
-morph:indic
+n:@v;;indic
 ag:v.conjvsubj v.conjvind;subconj
 
 grp:v.subconjv
-pos:v
-morph:indic
+n:@v;;indic
 pg:v.conjv;subconj
 
 ! FIXME aquilam apposuit quae cor eius exesset
 grp:sr.sujet
-pos:v
-morph:indic,subj
+n:@v;;indic,subj
 a:"qui2";sujet;nomin;n
 
 grp:sr.objet
-pos:v
-morph:indic,subj
+n:@v;;indic,subj
 a:"qui2";objet;acc
 
 grp:n.sr
-pos:n NP
-p:v;;act
-pg:sr;rel
+n:@n @NP
+pg:sr;subrel
 
 grp:v.objsuj
-pos:v.sujet
-lexsynt:!attr !intr
-ag:n NP p !n.prepDet;objet;acc
+n:v.sujet;;;;!attr !intr
+ag:@n @NP @p !n.prepDet;objet;acc
+
+!grp:v.objsuj
+!pos:v.sujet
+!lexsynt:!attr !intr
+!n:v.sujet;;;;!attr !intr
+!ag:@n @NP @p !n.prepDet;objet;acc
 
 ! FIXME se in mare praecipitavit cf. v.gprep
 grp:v.objGprep
-pos:v.gprep
-morph:act
-lexsynt:!intr
-ag:n NP p;objet;acc
+n:v.gprep;;act;;!intr
+ag:@n @NP @p;objet;acc
 
 ! verbe d'une prop inf
 grp:v.sujInf
-pos:v
-morph:inf
-ag:n NP p !n.prepAcc;sujet;acc
+n:@v;;inf
+ag:@n @NP @p !n.prepAcc;sujet;acc
 
 grp:v.infSuj
-pos:v
-morph:inf
-pg:n NP p !n.prepAcc;sujet;acc
+n:@v;;inf
+pg:@n @NP @p !n.prepAcc;sujet;acc
 
 ! verbe précédé d'une prop.inf
 grp:v.propinf
-pos:v
-morph:actif
-lexsynt:propinf
+n:@v;;act;;propinf
 ag:v.sujInf v.infSuj;subInf
 
 grp:v.vpropinfPass
-pos:"dico2" "habeo"
-morph:indic pass,subj pass
-pg:v;propinf;inf
+n:"dico2" "habeo";;indic pass,subj pass
+pg:@v;propinf;inf
 
 grp:v.abl
-pos:v
-morpḧ:act
-lexsynt:abl
-ag:n p;abl;abl
+n:@v;;act;;abl
+ag:@n @p;abl;abl
 
 grp:v.vobj
-pos:v !v.sumpp !v.ppsum
-lexsynt:!intr
-morph:act
-pg:n NP p !n.prepAcc !n.prepAbl !n.inperpetuum !n.conjet;obj;acc
+n:@v !v.sumpp !v.ppsum;;act;;!intr
+pg:@n @NP @p !n.prepAcc !n.prepAbl !n.inperpetuum !n.conjet;obj;acc
 
 grp:v.sujet
-pos:v
-morph:indic 3,subj 3
-ag:n NP;sujet;nomin;n
+n:@v;;3
+ag:@n @NP;sujet;nomin;n
 
 !FIXME At ego suasi
 !grp:v.sujetEgo
-!pos:v
-!morph:1
+!n:@v;;1
 !ag:"ego" "nos";sujet;nomin;n
 
 
 grp:v.vsujet
-pos:v
-morph:3
-p:n NP !n.prepAcc;sujet;nomin;n
+n:^v;;3
+p:@n @NP !n.prepAcc;sujet;nomin;n
 
 grp:v.conj
-pos:v
-morph:indic,subj
-a:conj;conj
+n:@v;;indic,subj
+a:@conj;conj
 
-! APPOSTION, FRAGILE
 grp:n.app
-pos:n
-p:n;app;;cgn
+n:@n
+p:@n !n.prepAcc !n.prepAbl;app;;cgn
 
 ! a|ag|p|pg:pos [pos pos...];[+]lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
