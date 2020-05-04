@@ -13,6 +13,7 @@ import (
 type Groupe struct {
 	id              string
 	noyaux, noyexcl []*Noy   // pos du noyau
+	nucl, nuclexcl  *Sub
 	morph           []string // traits morpho du noyau
 	lexsynt         []string // étiquettes lexicosyntaxiques du noyau
 	ante            []*Sub   // éléments précédant le noyau
@@ -36,8 +37,11 @@ func creeGroupe(ll []string) *Groupe {
 		switch k {
 		case "ter", "grp":
 			g.id = v
-		case "pos":
-			g.noyaux, g.noyexcl = creeNoy(v)
+		case "n":
+			// test sur v.objsuj et n.sr
+			g.nucl = creeSub(v, g, false)
+		//case "pos":
+		//	g.noyaux, g.noyexcl = creeNoy(v)
 		case "morph":
 			g.morph = strings.Split(v, ",")
 		case "lexsynt":
