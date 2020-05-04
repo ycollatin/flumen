@@ -33,7 +33,7 @@ type Branche struct {
 	nods   []*Nod            // noeuds validés
 	niveau int               // n° de la branche par rapport au tronc
 	veto   map[int][]*Nod    // index : rang du mot; valeur : liste des liens interdits
-	photos map[int]*An		 // lemmatisations et appartenance de groupe propres à la branche
+	photos map[int]gocol.Res // lemmatisations et appartenance de groupe propres à la branche
 	filles []*Branche        // liste des branches filles
 }
 
@@ -51,13 +51,11 @@ func creeTronc(t string) *Branche {
 		mots = append(mots, nm)
 	}
 	nbmots = len(mots)
-	br.photos = make(map[int]*An) // l'index de la map est le numéro des mots
+	br.photos = make(map[int]gocol.Res) // l'index de la map est le numéro des mots
 	br.veto = make(map[int][]*Nod)
 	// peuplement des photos
 	for _, m := range mots {
-		phm := new(An)
-		//phm.res = m.ans
-		phm = &m.ans
+		phm := m.ans
 		br.photos[m.rang] = phm
 	}
 	journal = nil
@@ -88,7 +86,7 @@ func (b *Branche) copie() *Branche {
 	nb.gr = b.gr
 	nb.niveau = b.niveau + 1
 	nb.nods = b.nods
-	nb.photos = make(map[int]*An)
+	nb.photos = make(map[int]gocol.Res)
 	nb.photos = b.photos
 	nb.veto = b.veto
 	return nb
@@ -203,29 +201,22 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 			for _, mph := range mots {
 				if mph == m {
 					// photo du noyau
-					ph := new(An)
-					ph.idGr = n.grp.id
-					ph.res = m.restmp
-					bf.photos[mph.rang] = ph
+					//ph := m.restmp
+					//bf.photos[mph.rang] = ph
+					bf.photos[mph.rang] = m.restmp
 					n.rnucl = mph.restmp
 				}
 				for _, ma := range n.mma {
 					// photos des éléments antéposés
 					if mph == ma {
-						ph := new(An)
-						//ph.idGr = bm.photos[ma.rang].idGr
-						ph.res = ma.restmp
-						bf.photos[ma.rang] = ph
+						bf.photos[ma.rang] = ma.restmp
 						n.rra[ma.rang] = mph.restmp
 					}
 				}
 				for _, mp := range n.mmp {
 					// photos des éléments postposés
 					if mph == mp {
-						ph := new(An)
-						//ph.idGr = bm.photos[mp.rang].idGr
-						ph.res = mp.restmp
-						bf.photos[mp.rang] = ph
+						bf.photos[mp.rang] = mp.restmp
 						n.rrp[mp.rang] = mph.restmp
 					}
 				}
@@ -403,19 +394,18 @@ func (b *Branche) noyau(m *Mot) *Mot {
 }
 
 func (b *Branche) initRestmp(m *Mot) {
-	m.restmp = b.photos[m.rang].res
+	m.restmp = b.photos[m.rang]
 }
 
 // renvoie quelles lemmatisations de m lui permettent d'être le noyau du groupe g
 func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
 	// signet snoyau
 	// valeurs variables de m pour la branche
-	photom := b.photos[m.rang]
+	ids := b.ids(m)
 
-	if photom.idGr != "" {
+	if len(ids) > 0 {
 		// 1. La pos définitif est fixée
 		// noyaux exclus
-		ids := b.ids(m)
 		var va bool
 		for _, id := range ids {
 			if g.estExclu(id) {
@@ -568,12 +558,11 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) gocol.Res {
 		}
 	}
 
-	// photo m et mn pour la branche
-	photom := b.photos[m.rang]
+	ids := b.ids(m)
+
 	// vérification du pos : id du noyau, ou pos du mot
-	if photom.idGr != "" {
+	if len(ids) > 0 {
 		// 1. La pos du mot est définitive
-		ids := b.ids(m)
 		va := false
 		for _, id := range ids {
 			va = va || sub.vaId(id)
@@ -583,7 +572,9 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) gocol.Res {
 		}
 		va = false
 		for _, noy := range sub.noyaux {
-			va = va || noy.vaPos(photom.idGr)
+			for _, id := range ids {
+				va = va || noy.vaPos(id)
+			}
 		}
 		if !va {
 			return nil
