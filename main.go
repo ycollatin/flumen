@@ -15,7 +15,6 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
-// - unifier PhotoMot et An (remplace Mot.res) ?
 // - impossibilité de décrire les arcs en cas d'hyperbate : Antoni exhausit domus.
 // - surlignage des lemmatisations : la récolte doit aussi rapporter les nods
 //   des branches terminales
