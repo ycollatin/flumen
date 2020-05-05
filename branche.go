@@ -64,12 +64,12 @@ func (b *Branche) adeja(noyau *Mot, lien string) bool {
 	for _, nod := range b.nods {
 		if nod.nucl == noyau {
 			for i, _ := range nod.mma {
-				if nod.grp.ante[i].lien == lien {
+				if nod.groupe.ante[i].lien == lien {
 					return true
 				}
 			}
 			for i, _ := range nod.mmp {
-				if nod.grp.post[i].lien == lien {
+				if nod.groupe.post[i].lien == lien {
 					return true
 				}
 			}
@@ -244,7 +244,7 @@ func (b *Branche) idgr(m *Mot) (id string) {
 	for _, nod := range b.nods {
 		nbe := nod.nbEl()
 		if nod.nucl == m && nbe > max {
-			id = nod.grp.id
+			id = nod.groupe.id
 		}
 	}
 	return
@@ -280,7 +280,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	nod := new(Nod)
 	nod.rra = make(map[int]gocol.Res)
 	nod.rrp = make(map[int]gocol.Res)
-	nod.grp = g
+	nod.groupe = g
 	nod.nucl = m
 	nod.rang = rang
 
