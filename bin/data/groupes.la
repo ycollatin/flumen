@@ -101,7 +101,7 @@ a:@n @NP @p;sujet;nomin;n
 a:@v;obj;inf
 
 ter:v.sujNpAttrP
-n:@v;;3;;attrp
+n:@v;;3 pass;;attrp
 a:@n;sujet;nomin;n
 a:@NP;attr;nomin;n
 
@@ -116,7 +116,7 @@ a:@a;attr;nomin;n
 a:@n @NP @p;sujet;nomin;n
 
 ter:v.attr
-n:@v;;;;attr
+n:@v;;act;;attr
 a:@n @NP @a;attr;nomin;n
 
 ter:v.accMvmt
@@ -296,7 +296,7 @@ n:@n @NP
 pg:sr;subrel
 
 grp:v.objsuj
-n:v.sujet;;;;!attr !intr
+n:v.sujet;;act;;!attr !intr
 ag:@n @NP @p !n.prepDet;objet;acc
 
 !grp:v.objsuj
