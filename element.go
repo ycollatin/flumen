@@ -65,7 +65,7 @@ func creeEl(v string, g *Groupe, t bool) *El {
 						el.idsexcl = append(el.idsexcl, part[1:])
 					} else {
 						// ids
-						el.ids = append(el.ids, part)
+						el.ids = append(el.ids, ecl)
 					}
 				} else if strings.Contains(ecl, "\"") {
 					// clés
@@ -75,6 +75,7 @@ func creeEl(v string, g *Groupe, t bool) *El {
 						el.cles = append(el.clesexcl, ecl[1:len(ecl)-1])
 					}
 				} else if strings.Contains(ecl, "@") {
+					// n:v.sujet;;;;!attr !intr
 					if ecl[0] == '!' {
 						el.posexcl = append(el.posexcl, ecl[2:len(ecl)-1])
 					} else {
