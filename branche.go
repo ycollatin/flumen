@@ -237,6 +237,8 @@ func (b *Branche) exr(d, n int) (e string) {
 	return
 }
 
+// renvoie, parmi les groupes dont m est noyau,
+// celui qui a le plus de mots.
 func (b *Branche) idgr(m *Mot) (id string) {
 	var max int
 	for _, nod := range b.nods {
@@ -247,18 +249,6 @@ func (b *Branche) idgr(m *Mot) (id string) {
 	}
 	return
 }
-
-/*
-// id du Nod dont m est déjà le noyau
-func (b *Branche) ids(m *Mot) (ii []string) {
-	for _, nod := range b.nods {
-		if nod.nucl.rang == m.rang {
-			ii = append(ii, nod.grp.id)
-		}
-	}
-	return
-}
-*/
 
 func (b *Branche) motCourant() *Mot {
 	return mots[b.imot]
