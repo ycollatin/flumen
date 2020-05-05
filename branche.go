@@ -390,7 +390,7 @@ func (b *Branche) recolte() (rec [][]*Nod) {
 // vrai si m est compatible avec Sub et le noyau mn
 func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 	// signet sresEl
-	// si la fonction est déjà prise, renvoyer nil
+	// contraintes de groupe
 	if !el.multi && b.adeja(mn, el.lien) {
 		return nil
 	}
@@ -414,7 +414,7 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		}
 	}
 	var nres gocol.Res
-	// 2. m n'est pas encore noyau : on vérifie lexicosyntaxe canon et pos
+	// contraintes de lemmatisation
 	// lexicosyntaxe, exclus
 	if len(el.lsexcl) > 0 {
 		nres = nil
@@ -428,7 +428,7 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		res = nres
 	}
 
-	// possibles
+	// lexicosyntaxe, possibles
 	if len(el.lexsynt) > 0 {
 		nres = nil
 		for _, an := range res {
@@ -447,23 +447,23 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 	}
 
 
-	// canons
+	// canons exclus et possibles
 	if len(el.cles) > 0 {
 		nres = nil
 		for _, an := range res {
 			if contient(el.clesexcl, an.Lem.Cle) {
-				return nil
+				continue
 			}
 			for _, cle := range el.cles {
 				if an.Lem.Cle == cle {
 					nres = append(nres, an)
 				}
 			}
-			if len(nres) == 0 {
-				return nil
-			}
-			res = nres
 		}
+		if len(nres) == 0 {
+			return nil
+		}
+		res = nres
 	}
 
 	if len(el.poss) > 0 {
@@ -484,7 +484,6 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 	}
 
 	//morphologie
-	// si aucune morpho n'est requise, passer
 	if len(el.morpho) > 0 {
 		var nres gocol.Res
 		for _, an := range res {
