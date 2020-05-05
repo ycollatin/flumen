@@ -138,15 +138,15 @@ func (b *Branche) enClair() string {
 }
 
 // explore toutes les possibilités d'une branche
-func (bm *Branche) explore() {
+func (b *Branche) explore() {
 	// signet sexplore
 	for _, m := range mots {
-		photo := bm.photos[m.rang]
+		photo := b.photos[m.rang]
 		// 1. groupes terminaux
-		bm.exploreGroupes(m, grpTerm)
+		b.exploreGroupes(m, grpTerm)
 		// 2. groupes non terminaux
-		bm.exploreGroupes(m, grp)
-		bm.photos[m.rang] = photo
+		b.exploreGroupes(m, grp)
+		b.photos[m.rang] = photo
 	}
 }
 
