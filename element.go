@@ -8,11 +8,10 @@ import (
 // un Sub est un élément de Groupe
 type Sub struct {
 	groupe   *Groupe  // groupe propriétaire du sub
-	noyaux   []*Noy   // Noyaux possibles du sub
-	noyexcl  []*Noy   // Noyaux exclus
 	ids		 []string // identifiants des groupes possibles pour le noyau
 	idsexcl  []string // ids exclus
 	familles []string // le préfixe seulement des ces ids est requis
+	famexcl  []string // préfixes exclus
 	cles	 []string // clés des lemmes possibles
 	clesexcl []string // clés exclues
 	poss	 []string // pos des lemmes
@@ -34,7 +33,6 @@ func creeSub(v string, g *Groupe, t bool) *Sub {
 	for i, e := range vv {
 		switch i {
 		case 0: // noyaux
-			sub.noyaux, sub.noyexcl = creeNoy(e)
 			// partage des éléments 
 			els := strings.Split(e, " ")
 			for _, el := range els {
@@ -61,8 +59,12 @@ func creeSub(v string, g *Groupe, t bool) *Sub {
 						sub.poss = append(sub.poss, el[1:])
 					}
 				} else {
-				// familles
-					sub.familles = append(sub.familles, el)
+					// familles
+					if el[0] == '!' {
+						sub.famexcl = append(sub.famexcl, el[1:])
+					} else {
+						sub.familles = append(sub.familles, el)
+					}
 				}
 			}
 		case 1: // id-lien
@@ -92,25 +94,6 @@ func creeSub(v string, g *Groupe, t bool) *Sub {
 	}
 	sub.terminal = t
 	return sub
-}
-
-func (s *Sub) vaId(id string) bool {
-	for _, ne := range s.noyexcl {
-		if ne.id == id {
-			return false
-		}
-	}
-	for _, n := range s.noyaux {
-		if n.generique {
-			ecl := strings.Split(id, ".")
-			if n.idgr == ecl[0] {
-				return true
-			}
-		} else if n.id == id {
-			return true
-		}
-	}
-	return false
 }
 
 // vrai si la morpho est acceptée par l'une des morphos du sub
