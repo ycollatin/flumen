@@ -9,7 +9,7 @@ import (
 )
 
 type Nod struct {
-	grp      *Groupe           // groupe du noeud Nod
+	groupe      *Groupe           // groupe du noeud Nod
 	mma, mmp []*Mot            // liste des mots avant et après le noyau
 	rra, rrp map[int]gocol.Res // liste des lemmatisations de chaque mot
 	nucl     *Mot              // noyau du Nod
@@ -27,7 +27,7 @@ func (n *Nod) doc() string {
 	for _, m := range n.mmp {
 		mm = append(mm, m.gr)
 	}
-	mm = append(mm, " - "+n.grp.id)
+	mm = append(mm, " - "+n.groupe.id)
 	return strings.Join(mm, " ")
 }
 
@@ -35,7 +35,7 @@ func (na *Nod) egale(nb *Nod) bool {
 	if na.nucl != nb.nucl && egaleRes(na.rnucl, nb.rnucl) {
 		return false
 	}
-	if na.grp.id != nb.grp.id {
+	if na.groupe.id != nb.groupe.id {
 		return false
 	}
 	va := true
@@ -85,20 +85,20 @@ func egaleRes(resa, resb gocol.Res) bool {
 func (n *Nod) graf() []string {
 	var ll []string
 	for i, m := range n.mma {
-		lien := n.grp.ante[i].lien
+		lien := n.groupe.ante[i].lien
 		// si le lien du sub est vide, c'est que c'est un élément étranger, appartenant à un autre groupe
 		// (hyperbate). Il ne faut donc pas l'inclure dans le noeud.
 		j := len(n.mma) - i - 1
 		if lien > "" {
-			ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, n.grp.ante[j].lien))
+			ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, n.groupe.ante[j].lien))
 		}
 	}
 	diff := 0
 	for i, m := range n.mmp {
-		lien := n.grp.post[i+diff].lien
+		lien := n.groupe.post[i+diff].lien
 		if lien == "" {
 			diff++
-			lien = n.grp.post[i+diff].lien
+			lien = n.groupe.post[i+diff].lien
 		}
 		ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, lien))
 	}
