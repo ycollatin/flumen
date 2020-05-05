@@ -20,13 +20,6 @@ import (
 	"strings"
 )
 
-/*
-type An struct {
-	res  gocol.Res // lemmatisations réduites du mot
-	idGr string    // nom du groupe dont le mot est noyau
-}
-*/
-
 type Mot struct {
 	gr     string    // graphie du mot
 	rang   int       // rang du mot dans la phrase à partir de 0

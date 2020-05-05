@@ -26,6 +26,27 @@ type El struct {
 }
 
 // crée un el du groupe g à partir de la ligne v, terminal si v armé
+// type_groupe;identifiant;lien;morpho;accord;lexsynt
+// type_groupe: n|a|p|ag|pg
+// 		n noyau
+// 		a mot antéposé
+// 		p mot postposé
+// 		ag groupe antéposé
+// 		pg groupe postposé
+// identifiant: @pos|"lemme"|famille_groupe|groupe
+// 		plusieurs identifiants possibles séparés par un espace
+// 		@pos : pos du lemme du mot ou du mot-noyau
+// 		"lemme" : clé du lemme d'une lemmatisation (gocol.Sr) du mot
+// 		famille_groupe : la partie précédant le point '.' dans l'identifiant du groupe
+// 		groupe : l'identifiant complet du groupe
+// lien: identifiant du lien qui sera affiché dans le graphe
+// morpho : morpho d'une lemmatisation (gocol.Sr.Morphos[i])
+// accord : accord entre l'élément du groupe et son noyau : 'c' 'g' 'n' ou une combinaison des 3
+// lexsynt : propriétés requises du lemme (lexsynt.la)
+//
+// identifiant, lemme, famille_groupe et groupe peuvent être préfixés en '!' pour 
+// en faire des propriétés interdites.
+//
 func creeEl(v string, g *Groupe, t bool) *El {
 	el := new(El)
 	el.groupe = g

@@ -8,17 +8,28 @@
 !- morph:<traits morphos>		// liste sép " " et ";"
 !- lexsynt:<lexicosyntaxe>		// liste, sép " "
 !
-! SUBORDONNÉS
-!- a|ag|p|pg:pos [pos pos...];[+]lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
-! a : mot antéposé
-! ag : groupe antéposé
-! p : mot postposé
-! pg : groupe postposé
-! pos : Pos du mot, ou id du groupe. Pour les groupes, on peut donner l'id complet (v.vobj) ou
-!       seulement la première partie (v). Dans ce cas, tous les groupes commençant par "v." seront
-!		acceptés. Si un pos est précédé d'un point d'exclamation, le sub refusera cet id/pos
-! lien: affiché dans les arcs. Si lien commence par le signe ُ+, il pourra
-!       être utilisé plusieurs fois dans le groupe
+! éléments d'un groupe :
+! type_groupe;identifiant;lien;morpho;accord;lexsynt
+! type_groupe: n|a|p|ag|pg
+! 		n noyau
+! 		a mot antéposé
+! 		p mot postposé
+! 		ag groupe antéposé
+! 		pg groupe postposé
+! identifiant: @pos|"lemme"|famille_groupe|groupe
+! 		plusieurs identifiants possibles séparés par un espace
+! 		@pos : pos du lemme du mot ou du mot-noyau
+! 		"lemme" : clé du lemme d'une lemmatisation (gocol.Sr) du mot
+! 		famille_groupe : la partie précédant le point '.' dans l'identifiant du groupe
+! 		groupe : l'identifiant complet du groupe
+! lien: identifiant du lien qui sera affiché dans le graphe. S'il est préfixé en '+', 
+!	    plusieurs éléments subordonnés du groupe pourront avoir ce lien	
+! morpho : morpho d'une lemmatisation (gocol.Sr.Morphos[i])
+! accord : accord entre l'élément du groupe et son noyau : 'c' 'g' 'n' ou une combinaison des 3
+! lexsynt : propriétés requises du lemme (lexsynt.la)
+!
+! identifiant, lemme, famille_groupe et groupe peuvent être préfixés en '!' pour 
+! en faire des propriétés interdites.
 !
 ! code des pos
 ! n=nom, NP=nom propre, p=pronom a=adjectif Adv = adverbe
