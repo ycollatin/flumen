@@ -6,7 +6,6 @@ exploregrou
 scopie
 sexplore
 snoeud
-snoyau
 srecolte
 sresub
 
