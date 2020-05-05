@@ -4,8 +4,7 @@
 package main
 
 // FIXME
-// - in arbores commutatae sunt : le nominatif arbores devrait avoir été
-//   éliminé, mais arbores sujet.
+// - subrel à toutes les sauces.
 // - encore des solutions manquantes
 // - Solutions redondantes <= règles redondantes ?
 // XXX
