@@ -4,7 +4,8 @@
 package main
 
 // FIXME
-// - contrôle de Pos-id défaillant
+// - in arbores commutatae sunt : le nominatif arbores devrait avoir été
+//   éliminé, mais arbores sujet.
 // - encore des solutions manquantes
 // - Solutions redondantes : règles redondantes ?
 // XXX
