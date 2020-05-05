@@ -397,19 +397,23 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 
 	// vérification du pos : id du noyau, ou pos du mot
 	id := b.idgr(m)
-	if id > "" {
-		// familles
-		pel := PrimEl(id, ".")
-		if len(el.famexcl) > 0 && contient(el.famexcl, pel) {
-			return nil
-		}
-		if len(el.idsexcl) > 0 && contient(el.idsexcl, id) {
-			return nil
-		}
-		if len(el.familles) > 0 && !contient(el.familles, pel) {
-			return nil
-		}
-		if len(el.ids) > 0 && !contient(el.ids, id) {
+	if len(el.ids) > 0 {
+		if id > "" {
+			// familles
+			pel := PrimEl(id, ".")
+			if len(el.famexcl) > 0 && contient(el.famexcl, pel) {
+				return nil
+			}
+			if len(el.idsexcl) > 0 && contient(el.idsexcl, id) {
+				return nil
+			}
+			if len(el.familles) > 0 && !contient(el.familles, pel) {
+				return nil
+			}
+			if len(el.ids) > 0 && !contient(el.ids, id) {
+				return nil
+			}
+		} else {
 			return nil
 		}
 	}
@@ -519,7 +523,7 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		}
 		res = nres
 	}
-	res = nres
+	//res = nres
 	return res
 }
 
