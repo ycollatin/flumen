@@ -12,12 +12,11 @@ import (
 
 type Groupe struct {
 	id              string
-	noyaux, noyexcl []*Noy   // pos du noyau
-	nucl, nuclexcl  *Sub
+	nucl, nuclexcl  *El
 	morph           []string // traits morpho du noyau
 	lexsynt         []string // étiquettes lexicosyntaxiques du noyau
-	ante            []*Sub   // éléments précédant le noyau
-	post            []*Sub   // éléments suivant le noyau
+	ante            []*El   // éléments précédant le noyau
+	post            []*El   // éléments suivant le noyau
 	multi           bool     // le groupe possède au moins un sub multi
 	nbsubs          int      // nombre de subs
 }
@@ -39,7 +38,7 @@ func creeGroupe(ll []string) *Groupe {
 			g.id = v
 		case "n":
 			// test sur v.objsuj et n.sr
-			g.nucl = creeSub(v, g, false)
+			g.nucl = creeEl(v, g, false)
 		//case "pos":
 		//	g.noyaux, g.noyexcl = creeNoy(v)
 		case "morph":
@@ -50,13 +49,13 @@ func creeGroupe(ll []string) *Groupe {
 				g.lexsynt = append(g.lexsynt, ecl)
 			}
 		case "a":
-			g.ante = append(g.ante, creeSub(v, g, true))
+			g.ante = append(g.ante, creeEl(v, g, true))
 		case "ag":
-			g.ante = append(g.ante, creeSub(v, g, false))
+			g.ante = append(g.ante, creeEl(v, g, false))
 		case "p":
-			g.post = append(g.post, creeSub(v, g, true))
+			g.post = append(g.post, creeEl(v, g, true))
 		case "pg":
-			g.post = append(g.post, creeSub(v, g, false))
+			g.post = append(g.post, creeEl(v, g, false))
 		}
 	}
 	// multi
@@ -74,6 +73,7 @@ func creeGroupe(ll []string) *Groupe {
 	return g
 }
 
+/*
 // vrai si l'élément de pos ou id id est exclu par le groupe
 func (g *Groupe) estExclu(id string) bool {
 	for _, ne := range g.noyexcl {
@@ -83,6 +83,7 @@ func (g *Groupe) estExclu(id string) bool {
 	}
 	return false
 }
+*/
 
 // lecture des groupes dans le fichier nf
 func lisGroupes(nf string) {
@@ -106,6 +107,7 @@ func lisGroupes(nf string) {
 	grp = append(grp, creeGroupe(ll))
 }
 
+/*
 // le pos pos est-il compatible avec le noyau du groupe g ?
 func (g *Groupe) vaPos(pos string) bool {
 	for _, ne := range g.noyexcl {
@@ -120,6 +122,7 @@ func (g *Groupe) vaPos(pos string) bool {
 	}
 	return false
 }
+*/
 
 // la morpho morf est-elle compatible avec le noyau du groupe g ?
 func (g *Groupe) vaMorph(morf string) bool {
