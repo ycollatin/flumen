@@ -7,7 +7,7 @@ scopie
 sexplore
 snoeud
 srecolte
-sresub
+sresEl
 
 */
 
@@ -182,14 +182,14 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 			for _, mph := range mots {
 				if mph == m {
 					// photo du noyau
-					bf.photos[m.rang] = m.restmp
-					n.rnucl = m.restmp
+					bf.photos[mph.rang] = m.restmp
+					n.rnucl = mph.restmp
 				}
 				for _, ma := range n.mma {
 					// photos des éléments antéposés
 					if mph == ma {
 						bf.photos[ma.rang] = ma.restmp
-						n.rra[ma.rang] = ma.restmp
+						n.rra[ma.rang] = mph.restmp
 					}
 				}
 				for _, mp := range n.mmp {
@@ -282,7 +282,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	}
 	m.restmp = b.photos[m.rang]
 
-	m.restmp = b.resSub(m, g.nucl, m, m.restmp)
+	m.restmp = b.resEl(m, g.nucl, m, m.restmp)
 	if m.restmp == nil {
 		return nil
 	}
@@ -317,7 +317,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 		}
 		sub := g.ante[ia]
 		ma.restmp = b.photos[ma.rang]
-		ma.restmp = b.resSub(ma, sub, m, ma.restmp)
+		ma.restmp = b.resEl(ma, sub, m, ma.restmp)
 		if ma.restmp == nil {
 			return nil
 		}
@@ -351,7 +351,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 			return nil
 		}
 		mp.restmp = b.photos[mp.rang]
-		mp.restmp = b.resSub(mp, sub, m, mp.restmp)
+		mp.restmp = b.resEl(mp, sub, m, mp.restmp)
 		if mp.restmp == nil {
 			return nil
 		}
@@ -399,10 +399,10 @@ func (b *Branche) recolte() (rec [][]*Nod) {
 }
 
 // vrai si m est compatible avec Sub et le noyau mn
-func (b *Branche) resSub(m *Mot, sub *El, mn *Mot, res gocol.Res) gocol.Res {
-	// signet sresub
+func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
+	// signet sresEl
 	// si la fonction est déjà prise, renvoyer nil
-	if !sub.multi && b.adeja(mn, sub.lien) {
+	if !el.multi && b.adeja(mn, el.lien) {
 		return nil
 	}
 
@@ -411,19 +411,19 @@ func (b *Branche) resSub(m *Mot, sub *El, mn *Mot, res gocol.Res) gocol.Res {
 	if id > "" {
 		// familles
 		pel := PrimEl(id, ".")
-		if contient(sub.famexcl, pel) {
+		if contient(el.famexcl, pel) {
 			return nil
 		}
-		if contient(sub.idsexcl, id) {
+		if contient(el.idsexcl, id) {
 			return nil
 		}
 	}
 	var nres gocol.Res
 	// 2. m n'est pas encore noyau : on vérifie lexicosyntaxe canon et pos
 	// lexicosyntaxe, exclus
-	if len(sub.lsexcl) > 0 {
+	if len(el.lsexcl) > 0 {
 		nres = nil
-		for _, excl := range sub.lsexcl {
+		for _, excl := range el.lsexcl {
 			for _, an := range res {
 				if !lexsynt(an.Lem, excl) {
 					nres = append(nres, an)
@@ -434,11 +434,11 @@ func (b *Branche) resSub(m *Mot, sub *El, mn *Mot, res gocol.Res) gocol.Res {
 	}
 
 	// possibles
-	if len(sub.lexsynt) > 0 {
+	if len(el.lexsynt) > 0 {
 		nres = nil
 		for _, an := range res {
 			va := true
-			for _, ls := range sub.lexsynt {
+			for _, ls := range el.lexsynt {
 				va = va && lexsynt(an.Lem, ls)
 			}
 			if va {
@@ -453,13 +453,13 @@ func (b *Branche) resSub(m *Mot, sub *El, mn *Mot, res gocol.Res) gocol.Res {
 
 
 	// canons
-	if len(sub.cles) > 0 {
+	if len(el.cles) > 0 {
 		nres = nil
 		for _, an := range res {
-			if contient(sub.clesexcl, an.Lem.Cle) {
+			if contient(el.clesexcl, an.Lem.Cle) {
 				return nil
 			}
-			for _, cle := range sub.cles {
+			for _, cle := range el.cles {
 				if an.Lem.Cle == cle {
 					nres = append(nres, an)
 				}
@@ -471,14 +471,14 @@ func (b *Branche) resSub(m *Mot, sub *El, mn *Mot, res gocol.Res) gocol.Res {
 		}
 	}
 
-	if len(sub.poss) > 0 {
+	if len(el.poss) > 0 {
 		// pos
 		nres = nil
 		for  _, an := range res {
-			if contient(sub.posexcl, an.Lem.Pos) {
+			if contient(el.posexcl, an.Lem.Pos) {
 				continue
 			}
-			if contient(sub.poss, an.Lem.Pos) {
+			if contient(el.poss, an.Lem.Pos) {
 				nres = append(nres, an)
 			}
 		}
@@ -490,12 +490,12 @@ func (b *Branche) resSub(m *Mot, sub *El, mn *Mot, res gocol.Res) gocol.Res {
 
 	//morphologie
 	// si aucune morpho n'est requise, passer
-	if len(sub.morpho) > 0 {
+	if len(el.morpho) > 0 {
 		var nres gocol.Res
 		for _, an := range res {
 			for _, morfs := range an.Morphos {
 				// pour toutes les morphos valides de m
-				if strings.Contains(morfs, "inv.") || sub.vaMorpho(morfs) {
+				if strings.Contains(morfs, "inv.") || el.vaMorpho(morfs) {
 					nres = gocol.AddRes(nres, an.Lem, morfs, 0)
 				}
 			}
@@ -507,13 +507,13 @@ func (b *Branche) resSub(m *Mot, sub *El, mn *Mot, res gocol.Res) gocol.Res {
 	}
 
 	// accord
-	if sub.accord > "" {
+	if el.accord > "" {
 		var nres gocol.Res
 		for _, an := range res {
 			for _, anoy := range mn.restmp {
 				for _, morfs := range an.Morphos {
 					for _, morfn := range anoy.Morphos {
-						if accord(morfn, morfs, sub.accord) {
+						if accord(morfn, morfs, el.accord) {
 							nres = gocol.AddRes(nres, anoy.Lem, morfs, 0)
 						}
 					}
