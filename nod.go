@@ -121,3 +121,7 @@ func (n *Nod) inclut(m *Mot) bool {
 	}
 	return false
 }
+
+func (n *Nod) nbEl()  int {
+	return len(n.mma) + len(n.mmp) + 1
+}

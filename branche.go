@@ -88,13 +88,14 @@ func (b *Branche) copie() *Branche {
 	nb.nods = b.nods
 	nb.photos = make(map[int]gocol.Res)
 	nb.photos = b.photos
+	nb.veto = make(map[int][]*Nod)
 	nb.veto = b.veto
 	return nb
 }
 
 func (b *Branche) copieRestmp() {
 	for _, m := range mots {
-		b.initRestmp(m)
+	    m.restmp = b.photos[m.rang]
 	}
 }
 
@@ -156,8 +157,6 @@ func (bm *Branche) explore() {
 func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 	// signet exploregrou
 	for _, g := range grps {
-		// créer des lemmatisations provisoires à partir des photos
-		bm.copieRestmp()
 		// tester la possibilité de création noeud de type g
 		// dont le noyau est m
 		n := bm.noeud(m, g)
@@ -175,23 +174,6 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 			if !va {
 				continue
 			}
-			// le noeud est accepté.
-			/*
-				// si le noeud termine l'analyse de toute la phrase, c'est à
-				// bm qu'il faut l'ajouter, et non à une fille.
-				var nbml int // nombre de mots liés
-				for _, m := range mots {
-					for _, nod := range bm.nods {
-						if nod.inclut(m) || n.inclut(m) {
-							nbml++
-						}
-					}
-				}
-				if nbml == nbmots {
-					bm.nods = append(bm.nods, n)
-					return
-				}
-			*/
 			//créer une branche fille (bf)
 			// copiée de la mère (bm)
 			// où le noeud sera obligatoire. Dans la branche mère,
@@ -201,16 +183,14 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 			for _, mph := range mots {
 				if mph == m {
 					// photo du noyau
-					//ph := m.restmp
-					//bf.photos[mph.rang] = ph
-					bf.photos[mph.rang] = m.restmp
-					n.rnucl = mph.restmp
+					bf.photos[m.rang] = m.restmp
+					n.rnucl = m.restmp
 				}
 				for _, ma := range n.mma {
 					// photos des éléments antéposés
 					if mph == ma {
 						bf.photos[ma.rang] = ma.restmp
-						n.rra[ma.rang] = mph.restmp
+						n.rra[ma.rang] = ma.restmp
 					}
 				}
 				for _, mp := range n.mmp {
@@ -259,6 +239,18 @@ func (b *Branche) exr(d, n int) (e string) {
 	return
 }
 
+func (b *Branche) idgr(m *Mot) (id string) {
+	var max int
+	for _, nod := range b.nods {
+		nbe := nod.nbEl()
+		if nod.nucl == m && nbe > max {
+			id = nod.grp.id
+		}
+	}
+	return
+}
+
+/*
 // id du Nod dont m est déjà le noyau
 func (b *Branche) ids(m *Mot) (ii []string) {
 	for _, nod := range b.nods {
@@ -268,6 +260,7 @@ func (b *Branche) ids(m *Mot) (ii []string) {
 	}
 	return
 }
+*/
 
 func (b *Branche) motCourant() *Mot {
 	return mots[b.imot]
@@ -276,11 +269,6 @@ func (b *Branche) motCourant() *Mot {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	// signet snoeud
-
-	// utilistation des photos
-	//mot     *Mot      // liaison avec le mot
-	//res     gocol.Res // lemmatisations réduites du mot
-	//pos     string    // nom du groupe dont le mot est noyau
 
 	// vérification de rang
 	rang := m.rang
@@ -293,10 +281,9 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	if rang+len(g.post)-1 >= nbmots {
 		return nil
 	}
+	m.restmp = b.photos[m.rang]
 
-	// m peut-il être noyau du groupe g ?
-	// FIXME ter:v.sujNpAttrP
-	m.restmp = b.resNoyau(m, g, m.restmp)
+	m.restmp = b.resSub(m, g.nucl, m, m.restmp)
 	if m.restmp == nil {
 		return nil
 	}
@@ -330,6 +317,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 			return nil
 		}
 		sub := g.ante[ia]
+		ma.restmp = b.photos[ma.rang]
 		ma.restmp = b.resSub(ma, sub, m, ma.restmp)
 		if ma.restmp == nil {
 			return nil
@@ -363,6 +351,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 		if b.domine(mp, m) {
 			return nil
 		}
+		mp.restmp = b.photos[mp.rang]
 		mp.restmp = b.resSub(mp, sub, m, mp.restmp)
 		if mp.restmp == nil {
 			return nil
@@ -393,139 +382,6 @@ func (b *Branche) noyau(m *Mot) *Mot {
 	return nil
 }
 
-func (b *Branche) initRestmp(m *Mot) {
-	m.restmp = b.photos[m.rang]
-}
-
-// renvoie quelles lemmatisations de m lui permettent d'être le noyau du groupe g
-func (b *Branche) resNoyau(m *Mot, g *Groupe, res gocol.Res) gocol.Res {
-	// signet snoyau
-	// valeurs variables de m pour la branche
-	ids := b.ids(m)
-
-	if len(ids) > 0 {
-		// 1. La pos définitif est fixée
-		// noyaux exclus
-		var va bool
-		for _, id := range ids {
-			if g.estExclu(id) {
-				return nil
-			}
-			for _, noy := range g.noyaux {
-				va = va || noy.vaPos(id)
-			}
-		}
-	} else { // Le mot est encore isolé
-		var nres gocol.Res
-		// noyaux admis
-		for _, noy := range g.noyaux {
-			if noy.canon > "" {
-				for _, a := range res {
-					if a.Lem.Cle == noy.canon {
-						nres = append(nres, a)
-					}
-				}
-			} else {
-				for _, a := range res {
-					if noy.vaPos(a.Lem.Pos) {
-						nres = append(nres, a)
-					}
-				}
-			}
-		}
-		if len(nres) == 0 {
-			return nil
-		}
-		res = nres
-	}
-
-
-	/*
-	// vérif du pos
-	if photom.idGr != "" {
-		// 1. La pos définitif est fixée
-		// noyaux exclus
-		ids := b.ids(m)
-		for _, id := range ids {
-			if g.estExclu(id) {
-				return nil
-			}
-		}
-		var nres gocol.Res
-		// noyaux admis
-		for _, noy := range g.noyaux {
-			if noy.canon > "" {
-				for _, a := range res {
-					for _, morf := range a.Morphos {
-						if noy.vaSr(a) {
-							nres = gocol.AddRes(nres, a.Lem, morf, 0)
-						}
-					}
-				}
-			} else {
-				for _, a := range res {
-					for _, morf := range a.Morphos {
-						if noy.vaPos(photom.idGr) {
-							nres = gocol.AddRes(nres, a.Lem, morf, 0)
-						}
-					}
-				}
-			}
-		}
-		if len(nres) == 0 {
-			return nil
-		}
-		res = nres
-	} else { // Le mot est encore isolé
-		// vérif des pos
-		var nres gocol.Res
-		for _, a := range res {
-			if g.vaPos(a.Lem.Pos) || g.vaPos(a.Lem.Cle) {
-				nres = append(nres, a)
-			}
-		}
-		if len(nres) == 0 {
-			return nil
-		}
-		res = nres
-	}
-	*/
-
-	// vérif lexicosyntaxique
-	var nres gocol.Res
-	for _, a := range res {
-		va := true
-		for _, ls := range g.lexsynt {
-			va = va && lexsynt(a.Lem, ls)
-		}
-		if va {
-			nres = append(nres, a)
-		}
-	}
-	if len(nres) == 0 {
-		return nil
-	}
-	res = nres
-
-	// vérif morpho.
-	// Si aucune n'est requise, renvoyer true
-	if len(g.morph) == 0 {
-		return res
-	}
-
-	nres = nil
-	for _, sr := range res {
-		for _, morf := range sr.Morphos {
-			if g.vaMorph(morf) {
-				nres = gocol.AddRes(nres, sr.Lem, morf, 0)
-			}
-		}
-	}
-	// pour faire comme pour les autres vérifs :
-	res = nres
-	return res
-}
-
 // récolte tous les noeuds terminaux d'un arbre
 func (b *Branche) recolte() (rec [][]*Nod) {
 	// signet srecolte
@@ -544,45 +400,43 @@ func (b *Branche) recolte() (rec [][]*Nod) {
 }
 
 // vrai si m est compatible avec Sub et le noyau mn
-func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) gocol.Res {
+func (b *Branche) resSub(m *Mot, sub *El, mn *Mot, res gocol.Res) gocol.Res {
 	// signet sresub
 	// si la fonction est déjà prise, renvoyer nil
 	if !sub.multi && b.adeja(mn, sub.lien) {
 		return nil
 	}
 
-	// subs exclus
-	for _, ne := range sub.noyexcl {
-		if ne.vaPos(m.gr) {
+	// vérification du pos : id du noyau, ou pos du mot
+	id := b.idgr(m)
+	if id > "" {
+		// familles
+		pel := PrimEl(id, ".")
+		if contient(sub.famexcl, pel) {
+			return nil
+		}
+		if contient(sub.idsexcl, id) {
 			return nil
 		}
 	}
-
-	ids := b.ids(m)
-
-	// vérification du pos : id du noyau, ou pos du mot
-	if len(ids) > 0 {
-		// 1. La pos du mot est définitive
-		va := false
-		for _, id := range ids {
-			va = va || sub.vaId(id)
-		}
-		if !va {
-			return nil
-		}
-		va = false
-		for _, noy := range sub.noyaux {
-			for _, id := range ids {
-				va = va || noy.vaPos(id)
+	var nres gocol.Res
+	// 2. m n'est pas encore noyau : on vérifie lexicosyntaxe canon et pos
+	// lexicosyntaxe, exclus
+	if len(sub.lsexcl) > 0 {
+		nres = nil
+		for _, excl := range sub.lsexcl {
+			for _, an := range res {
+				if !lexsynt(an.Lem, excl) {
+					nres = append(nres, an)
+				}
 			}
 		}
-		if !va {
-			return nil
-		}
-	} else {
-		// 2. m n'est pas encore noyau : on vérifie lexicosyntaxe canon et pos
-		var nres gocol.Res
-		// lexicosyntaxe
+		res = nres
+	}
+
+	// possibles
+	if len(sub.lexsynt) > 0 {
+		nres = nil
 		for _, an := range res {
 			va := true
 			for _, ls := range sub.lexsynt {
@@ -596,19 +450,36 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) gocol.Res {
 			return nil
 		}
 		res = nres
+	}
 
-		// canon et POS
+
+	// canons
+	if len(sub.cles) > 0 {
 		nres = nil
 		for _, an := range res {
-			va := false
-			for _, noy := range sub.noyaux {
-				if noy.canon > "" {
-					va = va || noy.vaSr(an)
-				} else {
-					va = va || noy.vaPos(an.Lem.Pos)
+			if contient(sub.clesexcl, an.Lem.Cle) {
+				return nil
+			}
+			for _, cle := range sub.cles {
+				if an.Lem.Cle == cle {
+					nres = append(nres, an)
 				}
 			}
-			if va {
+			if len(nres) == 0 {
+				return nil
+			}
+			res = nres
+		}
+	}
+
+	if len(sub.poss) > 0 {
+		// pos
+		nres = nil
+		for  _, an := range res {
+			if contient(sub.posexcl, an.Lem.Pos) {
+				continue
+			}
+			if contient(sub.poss, an.Lem.Pos) {
 				nres = append(nres, an)
 			}
 		}
@@ -653,7 +524,7 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) gocol.Res {
 		if len(nres) == 0 {
 			return nil
 		}
-		//res = nres
+		res = nres
 	}
 	return res
 }
@@ -661,10 +532,3 @@ func (b *Branche) resSub(m *Mot, sub *Sub, mn *Mot, res gocol.Res) gocol.Res {
 func (b *Branche) terminale() bool {
 	return len(b.filles) == 0
 }
-/*
-b branche.go:315
-cond 1 m.gr=="sunt" && g.id=="v.ppsum"
-
-b branche.go:349
-cond 2 m.gr=="sunt" && g.id=="v.ppsum"
-*/

@@ -1,13 +1,13 @@
-//    sub.go   -- gentes
+//    element.go   -- gentes
 package main
 
 import (
 	"strings"
 )
 
-// un Sub est un élément de Groupe
-type Sub struct {
-	groupe   *Groupe  // groupe propriétaire du sub
+// un el est un élément de Groupe
+type El struct {
+	groupe   *Groupe  // groupe propriétaire du el
 	ids		 []string // identifiants des groupes possibles pour le noyau
 	idsexcl  []string // ids exclus
 	familles []string // le préfixe seulement des ces ids est requis
@@ -16,88 +16,89 @@ type Sub struct {
 	clesexcl []string // clés exclues
 	poss	 []string // pos des lemmes
 	posexcl  []string // pos exclus
-	lien     string   // étiquette du lien noyau -> sub
+	lien     string   // étiquette du lien noyau -> el
 	multi    bool     // armé : le lien peut être utilisé plusieurs fois
 	morpho   []string // traits morphos requis
-	accord   string   // accord sub - noyau
-	terminal bool     // le sub est un mot
+	accord   string   // accord el - noyau
+	terminal bool     // le el est un mot
 	lexsynt  []string // étiquettes lexicosyntaxiques
-	exclls   []string // exclusions lexicosyntaxiques
+	lsexcl   []string // exclusions lexicosyntaxiques
 }
 
-// crée un sub du groupe g à partir de la ligne v, terminal si v armé
-func creeSub(v string, g *Groupe, t bool) *Sub {
-	sub := new(Sub)
-	sub.groupe = g
+// crée un el du groupe g à partir de la ligne v, terminal si v armé
+func creeEl(v string, g *Groupe, t bool) *El {
+	el := new(El)
+	el.groupe = g
 	vv := strings.Split(v, ";")
 	for i, e := range vv {
 		switch i {
 		case 0: // noyaux
 			// partage des éléments 
-			els := strings.Split(e, " ")
-			for _, el := range els {
-				parts := strings.Split(el, ".")
+			ee := strings.Split(e, " ")
+			for _, ecl := range ee {
+				parts := strings.Split(ecl, ".")
 				if len(parts) == 2 {
-					if el[0] == '!' {
+					part := parts[0]
+					if part[0] == '!' {
 						// idsexcl
-						sub.idsexcl = append(sub.idsexcl, el[1:])
+						el.idsexcl = append(el.idsexcl, part[1:])
 					} else {
 						// ids
-						sub.ids = append(sub.ids, el)
+						el.ids = append(el.ids, part)
 					}
-				} else if strings.Contains(el, "\"") {
+				} else if strings.Contains(ecl, "\"") {
 					// clés
-					if el[0] == '!' {
-						sub.clesexcl = append(sub.clesexcl, el[2:len(el)-1])
+					if ecl[0] == '!' {
+						el.clesexcl = append(el.clesexcl, ecl[2:len(ecl)-1])
 					} else {
-						sub.cles = append(sub.clesexcl, el[1:len(el)-1])
+						el.cles = append(el.clesexcl, ecl[1:len(ecl)-1])
 					}
-				} else if strings.Contains(el, "@") {
-					if el[0] == '!' {
-						sub.posexcl = append(sub.posexcl, el[2:len(el)-1])
+				} else if strings.Contains(ecl, "@") {
+					if ecl[0] == '!' {
+						el.posexcl = append(el.posexcl, ecl[2:len(ecl)-1])
 					} else {
-						sub.poss = append(sub.poss, el[1:])
+						el.poss = append(el.poss, ecl[1:])
 					}
 				} else {
 					// familles
-					if el[0] == '!' {
-						sub.famexcl = append(sub.famexcl, el[1:])
+					if ecl[0] == '!' {
+						el.famexcl = append(el.famexcl, ecl[1:])
 					} else {
-						sub.familles = append(sub.familles, el)
+						el.familles = append(el.familles, ecl)
 					}
 				}
 			}
 		case 1: // id-lien
 			if e > "" && e[0] == '+' {
-				sub.lien = e[1:]
-				sub.multi = true
+				el.lien = e[1:]
+				el.multi = true
 			} else {
-				sub.lien = e
+				el.lien = e
 			}
 		case 2: // morpho
-			sub.morpho = strings.Split(e, ",")
-			if len(sub.morpho) == 1 && sub.morpho[0] == "" {
-				sub.morpho = nil
+			el.morpho = strings.Split(e, ",")
+			if len(el.morpho) == 1 && el.morpho[0] == "" {
+				el.morpho = nil
 			}
 		case 3: // accord
-			sub.accord = e
+			el.accord = e
 		case 4: //lexsynt
 			els := strings.Split(e, " ")
-			for _, el := range els {
-				if el[0] == '!' {
-					sub.exclls = append(sub.exclls, el[1:])
+			for _, ecl := range els {
+				if ecl[0] == '!' {
+					el.lsexcl = append(el.lsexcl, ecl[1:])
 				} else {
-					sub.lexsynt = append(sub.lexsynt, el)
+					el.lexsynt = append(el.lexsynt, ecl)
 				}
 			}
 		}
 	}
-	sub.terminal = t
-	return sub
+	el.terminal = t
+	return el
 }
 
-// vrai si la morpho est acceptée par l'une des morphos du sub
-func (s *Sub) vaMorpho(m string) bool {
+// vrai si la morpho est acceptée par l'une des morphos du el
+func (s *El) vaMorpho(m string) bool {
 	if len(s.morpho) == 0 {
 		return true
 	}
