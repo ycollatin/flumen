@@ -347,7 +347,7 @@ ag:@n @NP;sujet;nomin;n
 
 
 grp:v.vsujet
-n:^v;;3
+n:@v;;3
 p:@n @NP !n.prepAcc;sujet;nomin;n
 
 grp:v.conj
