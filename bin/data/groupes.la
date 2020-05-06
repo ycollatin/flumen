@@ -246,8 +246,8 @@ n:@v
 a:"et";conj
 
 grp:v.adv
-n:@v
-a:@Adv !"non" !"neque" !"et" Adv;+adv
+n:v;;indic,subj,impér
+a:@Adv !"non" !"neque" !"et";+adv
 
 grp:v.coord
 n:@v
