@@ -116,7 +116,7 @@ a:@a;attr;nomin;n
 a:@n @NP @p;sujet;nomin;n
 
 ter:v.attr
-n:@v;;act;;attr
+n:@v !v.ppsum;;act;;attr
 a:@n @NP @a;attr;nomin;n
 
 ter:v.accMvmt
