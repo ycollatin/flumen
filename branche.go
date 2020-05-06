@@ -399,6 +399,7 @@ func (b *Branche) recolte() (rec [][]Nod) {
 // vrai si m est compatible avec Sub et le noyau mn
 func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 	// signet sresEl
+	// 3. sorores *sunt*  - v.attr
 	// contraintes de groupe
 	if !el.multi && b.adeja(mn, el.lien) {
 		return nil
@@ -416,16 +417,12 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 			return nil
 		}
 		if len(el.familles) > 0 {
-			if contient(el.familles, pel) {
-				return res
-			} else {
+			if !contient(el.familles, pel) {
 				return nil
 			}
 		}
 		if len(el.ids) > 0 {
-			if contient(el.ids, id) {
-				return res
-			} else {
+			if !contient(el.ids, id) {
 				return nil
 			}
 		}
@@ -502,6 +499,8 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		}
 		res = nres
 	}
+
+    //2. sorores commutatae  - v.objGprep
 
 	//morphologie
 	if len(el.morpho) > 0 {
