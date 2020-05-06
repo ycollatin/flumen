@@ -85,7 +85,10 @@ func (b *Branche) copie() *Branche {
 	nb.niveau = b.niveau + 1
 	nb.nods = b.nods
 	nb.photos = make(map[int]gocol.Res)
-	nb.photos = b.photos
+	for i, r := range b.photos {
+		nb.photos[i] = r
+	}
+	//nb.photos = b.photos
 	nb.veto = make(map[int][]Nod)
 	nb.veto = b.veto
 	return nb
