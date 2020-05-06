@@ -262,6 +262,7 @@ func (b *Branche) motCourant() *Mot {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 	// signet snoeud
+	// sorores in  - v.objsuj
 
 	// variable non valide pour le retour
 	var nnul Nod
@@ -508,7 +509,7 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		for _, an := range res {
 			for _, morfs := range an.Morphos {
 				// pour toutes les morphos valides de m
-				if strings.Contains(morfs, "inv.") || el.vaMorpho(morfs) {
+				if el.vaMorpho(morfs) {
 					nres = gocol.AddRes(nres, an.Lem, morfs, 0)
 				}
 			}
