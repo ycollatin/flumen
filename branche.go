@@ -91,11 +91,13 @@ func (b *Branche) copie() *Branche {
 	return nb
 }
 
+/*
 func (b *Branche) copieRestmp() {
 	for _, m := range mots {
 	    m.restmp = b.photos[m.rang]
 	}
 }
+*/
 
 func (b *Branche) dejasub(m *Mot) bool {
 	for _, n := range b.nods {
@@ -141,12 +143,10 @@ func (b *Branche) enClair() string {
 func (b *Branche) explore() {
 	// signet sexplore
 	for _, m := range mots {
-		photo := b.photos[m.rang]
 		// 1. groupes terminaux
 		b.exploreGroupes(m, grpTerm)
 		// 2. groupes non terminaux
 		b.exploreGroupes(m, grp)
-		b.photos[m.rang] = photo
 	}
 }
 
@@ -217,6 +217,10 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 			// le noeud est désormais interdit chez
 			// la mère et ses futures filles
 			bm.veto[m.rang] = append(bm.veto[m.rang], n)
+			// réinitialiser les photos
+			for _, mot := range mots {
+				mot.restmp = bm.photos[mot.rang]
+			}
 		}
 	}
 }
@@ -274,7 +278,6 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 		return nnul
 	}
 	m.restmp = b.photos[m.rang]
-
 	m.restmp = b.resEl(m, g.nucl, m, m.restmp)
 	if m.restmp == nil {
 		return nnul
@@ -402,25 +405,32 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 
 	// vérification du pos : id du noyau, ou pos du mot
 	id := b.idgr(m)
-	if len(el.ids) > 0 {
-		if id > "" {
-			// familles
-			pel := PrimEl(id, ".")
-			if len(el.famexcl) > 0 && contient(el.famexcl, pel) {
-				return nil
-			}
-			if len(el.idsexcl) > 0 && contient(el.idsexcl, id) {
-				return nil
-			}
-			if len(el.familles) > 0 && !contient(el.familles, pel) {
-				return nil
-			}
-			if len(el.ids) > 0 && !contient(el.ids, id) {
-				return nil
-			}
-		} else {
+	if id > "" {
+		// familles
+		pel := PrimEl(id, ".")
+		if len(el.famexcl) > 0 && contient(el.famexcl, pel) {
 			return nil
 		}
+		if len(el.idsexcl) > 0 && contient(el.idsexcl, id) {
+			return nil
+		}
+		if len(el.familles) > 0 {
+			if contient(el.familles, pel) {
+				return res
+			} else {
+				return nil
+			}
+		}
+		if len(el.ids) > 0 {
+			if contient(el.ids, id) {
+				return res
+			} else {
+				return nil
+			}
+		}
+	}
+	if len(el.poss) + len(el.morpho) + len(el.lexsynt) == 0 {
+		return nil
 	}
 	var nres gocol.Res
 	// contraintes de lemmatisation
