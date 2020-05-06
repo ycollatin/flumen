@@ -28,9 +28,9 @@ var (
 type Branche struct {
 	gr     string            // texte de la phrase
 	imot   int               // rang du mot courant
-	nods   []*Nod            // noeuds validés
+	nods   []Nod            // noeuds validés
 	niveau int               // n° de la branche par rapport au tronc
-	veto   map[int][]*Nod    // index : rang du mot; valeur : liste des liens interdits
+	veto   map[int][]Nod    // index : rang du mot; valeur : liste des liens interdits
 	photos map[int]gocol.Res // lemmatisations et appartenance de groupe propres à la branche
 	filles []*Branche        // liste des branches filles
 }
@@ -50,7 +50,7 @@ func creeTronc(t string) *Branche {
 	}
 	nbmots = len(mots)
 	br.photos = make(map[int]gocol.Res) // l'index de la map est le numéro des mots
-	br.veto = make(map[int][]*Nod)
+	br.veto = make(map[int][]Nod)
 	// peuplement des photos
 	for _, m := range mots {
 		phm := m.ans
@@ -86,7 +86,7 @@ func (b *Branche) copie() *Branche {
 	nb.nods = b.nods
 	nb.photos = make(map[int]gocol.Res)
 	nb.photos = b.photos
-	nb.veto = make(map[int][]*Nod)
+	nb.veto = make(map[int][]Nod)
 	nb.veto = b.veto
 	return nb
 }
@@ -158,7 +158,8 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 		// tester la possibilité de création noeud de type g
 		// dont le noyau est m
 		n := bm.noeud(m, g)
-		if n != nil {
+		//if n != nil {
+		if n.valide {
 			// Si le groupe a été exploré pour m dans une
 			// autre branche, passer
 			// XXX Pourrait être fait dans noeud(m, g) avant calcul.
@@ -255,29 +256,32 @@ func (b *Branche) motCourant() *Mot {
 }
 
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
-func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
+func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 	// signet snoeud
+
+	// variable non valide pour le retour
+	var nnul Nod
 
 	// vérification de rang
 	rang := m.rang
 	lante := len(g.ante)
 	// mot de rang trop faible
 	if rang-lante < 0 {
-		return nil
+		return nnul
 	}
 	// ou trop élevé
 	if rang+len(g.post)-1 >= nbmots {
-		return nil
+		return nnul
 	}
 	m.restmp = b.photos[m.rang]
 
 	m.restmp = b.resEl(m, g.nucl, m, m.restmp)
 	if m.restmp == nil {
-		return nil
+		return nnul
 	}
 
 	// création du noeud de retour
-	nod := new(Nod)
+	var nod Nod
 	nod.rra = make(map[int]gocol.Res)
 	nod.rrp = make(map[int]gocol.Res)
 	nod.groupe = g
@@ -289,26 +293,26 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	for ia := lante - 1; ia > -1; ia-- {
 		if r < 0 {
 			// le rang du mot est < 0 : impossible
-			return nil
+			return nnul
 		}
 		ma := mots[r]
 		// passer les mots déjà subordonnés | b branche.go:336 cond 2 m.gr=="rapuit" && g.id=="v.conjet"
 		for b.dejasub(ma) {
 			r--
 			if r < 0 {
-				return nil
+				return nnul
 			}
 			ma = mots[r]
 		}
 		// vérification de réciprocité, puis du lien lui-même
 		if b.domine(ma, m) {
-			return nil
+			return nnul
 		}
 		sub := g.ante[ia]
 		ma.restmp = b.photos[ma.rang]
 		ma.restmp = b.resEl(ma, sub, m, ma.restmp)
 		if ma.restmp == nil {
-			return nil
+			return nnul
 		}
 		nod.mma = append(nod.mma, ma)
 		r--
@@ -327,31 +331,32 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 		for b.dejasub(mp) {
 			r++
 			if r >= nbmots {
-				return nil
+				return nnul
 			}
 			mpn := b.noyau(mp)
 			if mpn != nil && mpn.rang < m.rang {
-				return nil
+				return nnul
 			}
 			mp = mots[r]
 		}
 		// réciprocité
 		if b.domine(mp, m) {
-			return nil
+			return nnul
 		}
 		mp.restmp = b.photos[mp.rang]
 		mp.restmp = b.resEl(mp, sub, m, mp.restmp)
 		if mp.restmp == nil {
-			return nil
+			return nnul
 		}
 		nod.mmp = append(nod.mmp, mp)
 		r++
 	}
 
 	if len(nod.mma)+len(nod.mmp) > 0 {
+		nod.valide = true
 		return nod
 	}
-	return nil
+	return nnul
 }
 
 func (b *Branche) noyau(m *Mot) *Mot {
@@ -371,7 +376,7 @@ func (b *Branche) noyau(m *Mot) *Mot {
 }
 
 // récolte tous les noeuds terminaux d'un arbre
-func (b *Branche) recolte() (rec [][]*Nod) {
+func (b *Branche) recolte() (rec [][]Nod) {
 	// signet srecolte
 	if b.terminale() {
 		rec = append(rec, b.nods)

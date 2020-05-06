@@ -15,6 +15,7 @@ type Nod struct {
 	nucl     *Mot              // noyau du Nod
 	rnucl    gocol.Res         // lemmatisations du noyau
 	rang     int
+	valide	bool
 }
 
 // liste des éléments du noeud, noyau en rouge
@@ -31,7 +32,7 @@ func (n *Nod) doc() string {
 	return strings.Join(mm, " ")
 }
 
-func (na *Nod) egale(nb *Nod) bool {
+func (na Nod) egale(nb Nod) bool {
 	if na.nucl != nb.nucl && egaleRes(na.rnucl, nb.rnucl) {
 		return false
 	}
