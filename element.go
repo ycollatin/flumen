@@ -62,7 +62,7 @@ func creeEl(v string, g *Groupe, t bool) *El {
 					part := parts[0]
 					if part[0] == '!' {
 						// idsexcl
-						el.idsexcl = append(el.idsexcl, part[1:])
+						el.idsexcl = append(el.idsexcl, ecl[1:])
 					} else {
 						// ids
 						el.ids = append(el.ids, ecl)
