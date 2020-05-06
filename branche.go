@@ -88,19 +88,10 @@ func (b *Branche) copie() *Branche {
 	for i, r := range b.photos {
 		nb.photos[i] = r
 	}
-	//nb.photos = b.photos
 	nb.veto = make(map[int][]Nod)
 	nb.veto = b.veto
 	return nb
 }
-
-/*
-func (b *Branche) copieRestmp() {
-	for _, m := range mots {
-	    m.restmp = b.photos[m.rang]
-	}
-}
-*/
 
 func (b *Branche) dejasub(m *Mot) bool {
 	for _, n := range b.nods {
