@@ -399,7 +399,7 @@ func (b *Branche) recolte() (rec [][]Nod) {
 // vrai si m est compatible avec Sub et le noyau mn
 func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 	// signet sresEl
-	// 3. sorores *sunt*  - v.attr
+
 	// contraintes de groupe
 	if !el.multi && b.adeja(mn, el.lien) {
 		return nil
@@ -407,6 +407,7 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 
 	// vérification du pos : id du noyau, ou pos du mot
 	id := b.idgr(m)
+	var va bool
 	if id > "" {
 		// familles
 		pel := PrimEl(id, ".")
@@ -426,8 +427,9 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 				return nil
 			}
 		}
+		va = true
 	}
-	if len(el.poss) + len(el.morpho) + len(el.lexsynt) == 0 {
+	if  !va && len(el.poss) + len(el.morpho) + len(el.lexsynt) == 0 {
 		return nil
 	}
 	var nres gocol.Res
