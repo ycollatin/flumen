@@ -4,9 +4,6 @@
 !- ter|grp:<groupe>.<id>		// identifiant syntaxique,identifiant unique 
 !  ter : noyau et subs sont des mots
 !  grp : il y a au moins un composant groupe
-!- pos:<pos>					// liste, séparateur " "
-!- morph:<traits morphos>		// liste sép " " et ";"
-!- lexsynt:<lexicosyntaxe>		// liste, sép " "
 !
 ! éléments d'un groupe :
 ! type_groupe;identifiant;lien;morpho;accord;lexsynt
@@ -123,6 +120,16 @@ ter:v.accMvmt
 n:@v;;;;mvm
 a:@NP @n;accl;acc;;topo
 
+ter:n.nepith
+n:@n
+p:@a;epith;;cgn
+
+! FIXME
+ter:n.nvepith
+n:@n;;nomin
+p:@v;;3;n
+p:@a;epith;nomin;gn
+
 !!!!!!!!!!!!!!!!!!!!!!!!!
 ! Groupes non terminaux !
 !!!!!!!!!!!!!!!!!!!!!!!!!
@@ -139,10 +146,6 @@ pg:n.fam;app;;cgn
 grp:v.vEpithSuj
 n:@v;;3 pass;;attrp
 gp:n.epith;attr;nomin;;n
-
-grp:n.nepith
-n:@n
-p:@a;epith;;cgn
 
 grp:n.conjet
 n:@n @NP
