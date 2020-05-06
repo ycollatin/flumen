@@ -233,11 +233,6 @@ n:@v;;3;;attr
 ag:@NP @n;sujet;nomin;n
 ag:@n @a;attr;nomin;n
 
-!grp:v.attr
-!pos:v
-!lexsynt:attr
-!ag:a n;attr;nomin
-
 grp:v.vattr
 n:@v;;;;attr
 pg:@a;attr;nomin;n
