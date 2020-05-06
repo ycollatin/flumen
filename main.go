@@ -26,6 +26,7 @@ package main
 // - parasitage de /do/ par /dato/ :   "
 
 import (
+	"bufio"
 	"fmt"
 	"github.com/fatih/color"
 	"github.com/ycollatin/gocol"
@@ -156,6 +157,18 @@ func motsuiv() {
 	}
 }
 
+func saisie() {
+	ClearScreen()
+	fmt.Println("Phrase à analyser :")
+	reader := bufio.NewReader(os.Stdin)
+	p, _ := reader.ReadString('\n')
+	texte.phrases = append([]string{p}, texte.phrases...)
+	texte.compteur = 0
+	texte.majPhrase()
+	texte.affiche(aidePh)
+	initArcs()
+}
+
 func main() {
 	// couleur
 	rouge = color.New(color.FgRed, color.Bold).SprintFunc()
@@ -208,6 +221,8 @@ func main() {
 			analyse(modeA, modeJ)
 		case "r":
 			chxTexte()
+		case "i":
+			saisie()
 		case "x":
 			fmt.Println("\nVale")
 			os.Exit(0)
