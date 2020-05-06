@@ -4,7 +4,6 @@
 package main
 
 // FIXME
-// - subrel à toutes les sauces.
 // - encore des solutions manquantes
 // - Solutions redondantes <= règles redondantes ?
 // XXX
