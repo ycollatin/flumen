@@ -85,7 +85,10 @@ func (b *Branche) copie() *Branche {
 	nb.niveau = b.niveau + 1
 	nb.nods = b.nods
 	nb.photos = make(map[int]gocol.Res)
-	nb.photos = b.photos
+	for i, r := range b.photos {
+		nb.photos[i] = r
+	}
+	//nb.photos = b.photos
 	nb.veto = make(map[int][]Nod)
 	nb.veto = b.veto
 	return nb
@@ -237,6 +240,15 @@ func (b *Branche) exr(d, n int) (e string) {
 			e += fmt.Sprintf(gab, rouge(mots[i].gr))
 		} else {
 			e += fmt.Sprintf(gab, mots[i].gr)
+		}
+	}
+	return
+}
+
+func (b *Branche) ids(m *Mot) (lids []string) {
+	for _, nod := range b.nods {
+		if nod.nucl == m {
+			lids = append(lids, nod.groupe.id)
 		}
 	}
 	return
@@ -406,24 +418,44 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 	}
 
 	// vérification du pos : id du noyau, ou pos du mot
-	id := b.idgr(m)
+	//id := b.idgr(m)
+	ids := b.ids(m)
 	var va bool
-	if id > "" {
-		// familles
-		pel := PrimEl(id, ".")
-		if len(el.famexcl) > 0 && contient(el.famexcl, pel) {
-			return nil
-		}
-		if len(el.idsexcl) > 0 && contient(el.idsexcl, id) {
-			return nil
+	//if id > "" {
+	if len(ids) > 0 {
+		for _, id := range ids {
+			// familles
+			pel := PrimEl(id, ".")
+			if len(el.famexcl) > 0 && contient(el.famexcl, pel) {
+				return nil
+			}
+			if len(el.idsexcl) > 0 && contient(el.idsexcl, id) {
+				return nil
+			}
 		}
 		if len(el.familles) > 0 {
-			if !contient(el.familles, pel) {
+			var vafam bool
+			for _, id := range ids {
+				for _, elf := range el.familles {
+					if elf == PrimEl(id, ".") {
+						vafam = true
+					}
+				}
+			}
+			if !vafam {
 				return nil
 			}
 		}
 		if len(el.ids) > 0 {
-			if !contient(el.ids, id) {
+			var vaids bool
+			for _, id := range ids {
+				for _, idel := range el.ids {
+					if idel == id {
+						vaids = true
+					}
+				}
+			}
+			if !vaids {
 				return nil
 			}
 		}
