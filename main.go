@@ -5,7 +5,6 @@ package main
 
 // FIXME
 // - encore des solutions manquantes
-// - Solutions redondantes <= règles redondantes ?
 // XXX
 // - Trouver une solution pour la construction personnelle de l'infinitive
 //   Homerus dicitur caecus fuisse. (ou caecum)
