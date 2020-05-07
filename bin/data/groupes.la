@@ -353,7 +353,7 @@ n:@v;;indic,subj
 a:@conj;conj
 
 grp:n.app
-n:n;-
+n:n
 p:@n @NP !n.prepAcc !n.prepAbl;app;;cgn
 
 ! a|ag|p|pg:pos [pos pos...];[+]lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
