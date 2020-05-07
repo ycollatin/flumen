@@ -264,12 +264,6 @@ func (b *Branche) motCourant() *Mot {
 
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
-	// signet snoeud
-	//ter:n.nvepith
-	//n:@n;;nomin
-	//p:@v;;3;n
-	//p:@a;epith;nomin;gn
-
 	// noeud nnul pour le retour d'échec
 	var nnul Nod
 
