@@ -4,6 +4,7 @@
 package main
 
 // FIXME
+// - ambitus redit immanis : le lemme de redit est mal copié : il a celui de ambitus.
 // - encore des solutions manquantes ou redondantes
 // XXX
 // - Trouver une solution pour la construction personnelle de l'infinitive

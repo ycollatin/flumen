@@ -86,8 +86,14 @@ func (b *Branche) copie() *Branche {
 	nb.nods = b.nods
 	nb.photos = make(map[int]gocol.Res)
 	for i, r := range b.photos {
-		nb.photos[i] = r
+		for _, sr := range r {
+			var nr gocol.Sr
+			nr.Lem = sr.Lem
+			copy(sr.Morphos, nr.Morphos)
+			nb.photos[i] = append(nb.photos[i], nr)
+		}
 	}
+	//nb.photos[i] = r
 	nb.veto = make(map[int][]Nod)
 	nb.veto = b.veto
 	return nb
@@ -152,7 +158,6 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 		// tester la possibilité de création noeud de type g
 		// dont le noyau est m
 		n := bm.noeud(m, g)
-		//if n != nil {
 		if n.valide {
 			// Si le groupe a été exploré pour m dans une
 			// autre branche, passer
@@ -264,6 +269,14 @@ func (b *Branche) motCourant() *Mot {
 
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
+	// snoeud, signet
+
+	/*
+	grp:v.sujet
+	n:@v;;3
+	ag:@n @NP;sujet;nomin;n
+	*/
+
 	// noeud nnul pour le retour d'échec
 	var nnul Nod
 
@@ -502,8 +515,8 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		res = nres
 	}
 
+	// pos
 	if len(el.poss) > 0 {
-		// pos
 		nres = nil
 		for  _, an := range res {
 			if contient(el.posexcl, an.Lem.Pos) {
