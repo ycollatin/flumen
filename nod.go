@@ -97,11 +97,9 @@ func (n *Nod) graf() []string {
 	diff := 0
 	for i, m := range n.mmp {
 		lien := n.groupe.post[i+diff].lien
-		if lien == "" {
-			diff++
-			lien = n.groupe.post[i+diff].lien
+		if lien != "" {
+			ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, lien))
 		}
-		ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, lien))
 	}
 	return ll
 }

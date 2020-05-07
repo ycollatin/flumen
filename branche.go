@@ -265,9 +265,12 @@ func (b *Branche) motCourant() *Mot {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 	// signet snoeud
-	// sorores in  - v.objsuj
+	//ter:n.nvepith
+	//n:@n;;nomin
+	//p:@v;;3;n
+	//p:@a;epith;nomin;gn
 
-	// variable non valide pour le retour
+	// noeud nnul pour le retour d'échec
 	var nnul Nod
 
 	// vérification de rang
@@ -330,9 +333,6 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 	for _, sub := range g.post {
 		if r >= nbmots {
 			break
-		}
-		if sub.lien == "" {
-			continue
 		}
 		mp := mots[r]
 		for b.dejasub(mp) {
