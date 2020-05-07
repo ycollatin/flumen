@@ -271,12 +271,6 @@ func (b *Branche) motCourant() *Mot {
 func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 	// snoeud, signet
 
-	/*
-	grp:v.sujet
-	n:@v;;3
-	ag:@n @NP;sujet;nomin;n
-	*/
-
 	// noeud nnul pour le retour d'échec
 	var nnul Nod
 
@@ -322,6 +316,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 			ma = mots[r]
 		}
 		// vérification de réciprocité, puis du lien lui-même
+		// FIXME : si l'élément ma->m n'a pas de lien nommé, domine = false
 		if b.domine(ma, m) {
 			return nnul
 		}
@@ -375,13 +370,13 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 
 func (b *Branche) noyau(m *Mot) *Mot {
 	for _, n := range b.nods {
-		for _, msub := range n.mma {
-			if msub == m {
+		for i, msub := range n.mma {
+			if n.groupe.ante[i].lien > "" && msub == m {
 				return n.nucl
 			}
 		}
-		for _, msub := range n.mmp {
-			if msub == m {
+		for i, msub := range n.mmp {
+			if n.groupe.post[i].lien > "" && msub == m {
 				return n.nucl
 			}
 		}
@@ -416,7 +411,6 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 	}
 
 	// vérification du pos : id du noyau, ou pos du mot
-	//id := b.idgr(m)
 	ids := b.ids(m)
 	var va bool
 	//if id > "" {
@@ -532,8 +526,6 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		res = nres
 	}
 
-    //2. sorores commutatae  - v.objGprep
-
 	//morphologie
 	if len(el.morpho) > 0 {
 		var nres gocol.Res
@@ -559,7 +551,8 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 				for _, morfs := range an.Morphos {
 					for _, morfn := range anoy.Morphos {
 						if accord(morfn, morfs, el.accord) {
-							nres = gocol.AddRes(nres, anoy.Lem, morfs, 0)
+							//nres = append(nres, an)
+							nres = gocol.AddRes(nres, an.Lem, morfs, 0)
 						}
 					}
 				}
