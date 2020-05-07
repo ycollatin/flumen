@@ -89,11 +89,12 @@ func (b *Branche) copie() *Branche {
 		for _, sr := range r {
 			var nr gocol.Sr
 			nr.Lem = sr.Lem
-			copy(sr.Morphos, nr.Morphos)
+			for _, morf := range sr.Morphos {
+				nr.Morphos = append(nr.Morphos, morf)
+			}
 			nb.photos[i] = append(nb.photos[i], nr)
 		}
 	}
-	//nb.photos[i] = r
 	nb.veto = make(map[int][]Nod)
 	nb.veto = b.veto
 	return nb
