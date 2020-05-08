@@ -4,6 +4,7 @@
 package main
 
 // FIXME
+// Atlas dicitur caelum sustinere : attrPass mal attribué.
 // ob hanc rem : hanc ne peut être à la fois noyau de a.prepacc et déterminant
 // de rem.
 // - classement des analyses ramum fregit...
