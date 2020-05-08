@@ -407,6 +407,10 @@ func (b *Branche) recolte() (rec [][]Nod) {
 func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 	// signet sresEl
 
+	//grp:v.adv
+	//n:v;;indic,subj,impér
+	//a:@Adv !"non" !"neque" !"et";+adv
+
 	// contraintes de groupe
 	if !el.multi && b.adeja(mn, el.lien) {
 		return nil
@@ -494,7 +498,7 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 	}
 
 	// canons exclus et possibles
-	if len(el.cles) > 0 {
+	if len(el.cles) > 0 || len(el.clesexcl) > 0 {
 		nres = nil
 		for _, an := range res {
 			if contient(el.clesexcl, an.Lem.Cle) {
