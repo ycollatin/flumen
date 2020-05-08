@@ -263,12 +263,6 @@ func (b *Branche) motCourant() *Mot {
 func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 	// snoeud, signet
 
-	/*
-	grp:v.adv
-	n:v;;indic,subj,impér
-	a:@Adv !"non" !"neque" !"et";+adv
-	*/
-
 	// noeud nnul pour le retour d'échec
 	var nnul Nod
 
