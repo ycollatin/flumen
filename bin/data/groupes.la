@@ -279,8 +279,8 @@ n:@v;;act indic,act subj;;infobj
 pg:@v !v.sujInf;infobj;inf
 
 grp:v.subconj
-n:@v;;indic
-ag:v.conjvsubj v.conjvind;subconj
+n:@v v;;indic
+ag:v.conj v.conjvsubj v.conjvind;subconj
 
 grp:v.subconjv
 n:@v;;indic
