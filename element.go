@@ -72,7 +72,7 @@ func creeEl(v string, g *Groupe, t bool) *El {
 					if ecl[0] == '!' {
 						el.clesexcl = append(el.clesexcl, ecl[2:len(ecl)-1])
 					} else {
-						el.cles = append(el.clesexcl, ecl[1:len(ecl)-1])
+						el.cles = append(el.cles, ecl[1:len(ecl)-1])
 					}
 				} else if strings.Contains(ecl, "@") {
 					// n:v.sujet;;;;!attr !intr
