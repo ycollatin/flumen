@@ -174,7 +174,7 @@ n:@n
 pg:@n @NP;gen;gén
 
 grp:v.neg
-n:@v;;indic,subj
+n:@v v;;indic,subj
 a:"non" "neque" "haud";neg
 
 grp:v.attrPass
