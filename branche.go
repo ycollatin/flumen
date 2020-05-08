@@ -28,9 +28,9 @@ var (
 type Branche struct {
 	gr     string            // texte de la phrase
 	imot   int               // rang du mot courant
-	nods   []Nod            // noeuds validés
+	nods   []Nod             // noeuds validés
 	niveau int               // n° de la branche par rapport au tronc
-	veto   map[int][]Nod    // index : rang du mot; valeur : liste des liens interdits
+	veto   map[int][]Nod     // index : rang du mot; valeur : liste des liens interdits
 	photos map[int]gocol.Res // lemmatisations et appartenance de groupe propres à la branche
 	filles []*Branche        // liste des branches filles
 }
@@ -456,7 +456,7 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		va = true
 	}
 	// si l'élément n'a aucune des propriétés requises pour un mot isolé,
-	if  !va && len(el.poss) + +len(el.cles) + len(el.morpho) + len(el.lexsynt) == 0 {
+	if !va && len(el.poss) + +len(el.cles) + len(el.morpho) + len(el.lexsynt) == 0 {
 		// il ne peut appartenir au groupe
 		return nil
 	}
@@ -515,7 +515,7 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 	// pos
 	if len(el.poss) > 0 {
 		nres = nil
-		for  _, an := range res {
+		for _, an := range res {
 			if contient(el.posexcl, an.Lem.Pos) {
 				continue
 			}
