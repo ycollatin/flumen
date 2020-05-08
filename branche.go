@@ -456,7 +456,7 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		va = true
 	}
 	// si l'élément n'a aucune des propriétés requises pour un mot isolé,
-	if !va && len(el.poss) + +len(el.cles) + len(el.morpho) + len(el.lexsynt) == 0 {
+	if !va && len(el.poss) +len(el.cles) + len(el.morpho) + len(el.lexsynt) == 0 {
 		// il ne peut appartenir au groupe
 		return nil
 	}
