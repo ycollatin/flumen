@@ -1,5 +1,4 @@
 Antoni exhausit domus.
-Python eam non invenerat.
 Atlas dicitur caelum sustinere.
 feras bestias ad currum iunxit.
 Python Terrae filius draco ingens.
@@ -48,6 +47,7 @@ omnia ardere coeperunt.
 dicitur prima mortalis.
 Magium fratrem reliquit.
 se in mare praecipitavit.
+Python eam non invenerat.
 Pluton venit et eam rapuit.
 mare Ionium est appellatum.
 voluptatem Epicurus ignorat.
