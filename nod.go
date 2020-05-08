@@ -9,13 +9,13 @@ import (
 )
 
 type Nod struct {
-	groupe      *Groupe           // groupe du noeud Nod
+	groupe   *Groupe           // groupe du noeud Nod
 	mma, mmp []*Mot            // liste des mots avant et après le noyau
 	rra, rrp map[int]gocol.Res // liste des lemmatisations de chaque mot
 	nucl     *Mot              // noyau du Nod
 	rnucl    gocol.Res         // lemmatisations du noyau
 	rang     int
-	valide	bool
+	valide   bool
 }
 
 // liste des éléments du noeud, noyau en rouge
@@ -121,6 +121,6 @@ func (n *Nod) inclut(m *Mot) bool {
 	return false
 }
 
-func (n *Nod) nbEl()  int {
+func (n *Nod) nbEl() int {
 	return len(n.mma) + len(n.mmp) + 1
 }
