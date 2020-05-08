@@ -124,11 +124,17 @@ ter:n.nepith
 n:@n
 p:@a;epith;;cgn
 
-! FIXME
+! hyperbate
 ter:n.nvepith
 n:@n;;nomin
 p:@v;;3;n
 p:@a;epith;nomin;gn
+
+! FIXME hyperbate
+ter:a.avgen
+n:@a;;gén;;subst
+p:@v;;3
+p:@n;gen;gén sing
 
 !!!!!!!!!!!!!!!!!!!!!!!!!
 ! Groupes non terminaux !
@@ -205,7 +211,6 @@ grp:n.det
 n:@n
 a:@p;det;;cgn;det
 
-! 	FIXME in mare praecipitavit
 grp:v.gprep
 n:@v
 ag:n.prepAbl n.prepAcc a.prepAcc n.prepDet n.inperpetuum;+gprep
@@ -245,7 +250,7 @@ n:@v;;inf;;attr
 p:@a;attr;acc
 
 grp:v.conjet
-n:@v
+n:@v;;
 a:"et";conj
 
 grp:v.adv
@@ -303,7 +308,6 @@ ag:@n @NP @p !n.prepDet;objet;acc
 !n:v.sujet;;;;!attr !intr
 !ag:@n @NP @p !n.prepDet;objet;acc
 
-! FIXME se in mare praecipitavit cf. v.gprep
 grp:v.objGprep
 n:v.gprep;;act;;!intr
 ag:@n @NP @p;objet;acc
@@ -338,12 +342,6 @@ grp:v.sujet
 n:@v;;3
 ag:@n @NP;sujet;nomin;n
 
-!FIXME At ego suasi
-!grp:v.sujetEgo
-!n:@v;;1
-!ag:"ego" "nos";sujet;nomin;n
-
-
 grp:v.vsujet
 n:@v;;3
 p:@n @NP !n.prepAcc;sujet;nomin;n
@@ -353,7 +351,7 @@ n:@v;;indic,subj
 a:@conj;conj
 
 grp:n.app
-n:n
+n:n;-
 p:@n @NP !n.prepAcc !n.prepAbl;app;;cgn
 
 ! a|ag|p|pg:pos [pos pos...];[+]lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
