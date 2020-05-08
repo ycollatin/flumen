@@ -4,9 +4,12 @@
 package main
 
 // FIXME
+// grp:v.adv/n:v;;indic,subj,impér/a:@Adv !"non" !"neque" !"et";+adv
+//  l'exclusion de Clé ne marche pas avec a:...
 // - encore des solutions manquantes ou redondantes
 // - nombreuses règles à vérifier
 // - hyperbate : alquantum est negoti
+// - impossibilité de décrire les arcs en cas d'hyperbate : Antoni exhausit domus.
 // XXX
 // - Trouver une solution pour la construction personnelle de l'infinitive
 //   Homerus dicitur caecus fuisse. (ou caecum)
@@ -15,7 +18,8 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
-// - impossibilité de décrire les arcs en cas d'hyperbate : Antoni exhausit domus.
+// - factoriѕer la négation : neg(ch string) string {}
+// - factoriser les " : guil(ch string) string {}
 // - surlignage des lemmatisations : la récolte doit aussi rapporter les nods
 //   des branches terminales
 // - éviter une réanalyse ?
@@ -40,12 +44,14 @@ import (
 
 const (
 	version = "Alpha"
-	aidePh  = `    l->mot suivant ; h->mot précédent ;
-    j->phrase suivante ; k->phrase précédente ;
-    c->lemmatisation du mot courant ;
-    a->arbre de la phrase ; g->arbre ٍ& sa source ;
-	s->solution suivante ; p->solution précédente ;
-	r->retour; x->quitter.`
+	entete  = "Gentes - grammaire latine"
+	licence = " licence GPL3 © Yves Ouvrard 2020"
+	aidePh  = `l->mot suivant ; h->mot précédent ;
+j->phrase suivante ; k->phrase précédente ;
+c->lemmatisation du mot courant ;
+a->arbre de la phrase ; g->arbre ٍ& sa source ;
+s->solution suivante ; p->solution précédente ;
+r->retour; x->quitter.`
 )
 
 var (
@@ -104,8 +110,8 @@ func analyse(expl bool, j bool) {
 // choix du texte latin
 func chxTexte() {
 	ClearScreen()
-	fmt.Println("Suites, grammaire latine")
-	fmt.Println(" © Yves Ouvrard 2020, licence GPL3")
+	fmt.Println(entete)
+	fmt.Println(licence)
 	texte = nil
 	files, err := ioutil.ReadDir(ch + "/corpus/")
 	if err != nil {
@@ -161,6 +167,7 @@ func motsuiv() {
 
 func saisie() {
 	ClearScreen()
+	fmt.Println(entete)
 	fmt.Println("Phrase à analyser :")
 	reader := bufio.NewReader(os.Stdin)
 	p, _ := reader.ReadString('\n')
