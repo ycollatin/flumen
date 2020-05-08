@@ -317,12 +317,13 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 			ma = mots[r]
 		}
 		// vérification de réciprocité, puis du lien lui-même
-		// FIXME : si l'élément ma->m n'a pas de lien nommé, domine = false
 		if b.domine(ma, m) {
 			return nnul
 		}
 		sub := g.ante[ia]
+		// réinitialisation des lemmatisations de test
 		ma.restmp = b.photos[ma.rang]
+		// validation du noyau
 		ma.restmp = b.resEl(ma, sub, m, ma.restmp)
 		if ma.restmp == nil {
 			return nnul
@@ -414,7 +415,6 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 	// vérification du pos : id du noyau, ou pos du mot
 	ids := b.ids(m)
 	var va bool
-	//if id > "" {
 	if len(ids) > 0 {
 		for _, id := range ids {
 			// familles
@@ -439,6 +439,7 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 				return nil
 			}
 		}
+		// id des groupes dont m est noyau
 		if len(el.ids) > 0 {
 			var vaids bool
 			for _, id := range ids {
@@ -454,7 +455,9 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		}
 		va = true
 	}
-	if  !va && len(el.poss) + len(el.morpho) + len(el.lexsynt) == 0 {
+	// si l'élément n'a aucune des propriétés requises pour un mot isolé,
+	if  !va && len(el.poss) + +len(el.cles) + len(el.morpho) + len(el.lexsynt) == 0 {
+		// il ne peut appartenir au groupe
 		return nil
 	}
 	var nres gocol.Res
@@ -489,7 +492,6 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		}
 		res = nres
 	}
-
 
 	// canons exclus et possibles
 	if len(el.cles) > 0 {
