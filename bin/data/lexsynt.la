@@ -38,7 +38,6 @@
 ! - nogen : le nom ne peut avoir de génitif (ex. dea)
 ! - nom : tout nom qui peut être accompagné d'une apposition à initiale majuscule (rex, flumen, etc.)
 ! - posn,posc,posa : le lemme peut avoir aussi le pos a, c, n, etc.
-! - subst : l'adjectif est substantivable
 ! - ppr : le participe présent du verbe est substantivable
 ! - ppp : le participe parfait du verbe est substantivable
 ! - prep : bien que n'étant pas verbe, le mot peut avoir un complément prépositionnel
@@ -1101,7 +1100,7 @@ aliquam:
 aliquando:
 aliquantisper:
 aliquanto:
-aliquantum:
+aliquantum:subst
 aliquantus:
 aliqua:
 aliquatenus:
