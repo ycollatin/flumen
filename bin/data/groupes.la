@@ -65,7 +65,7 @@ a:@v;pp;part parf
 
 ter:v.vAdvObj
 n:@v;;indic,subj
-p:@Adv;adv
+p:@Adv !"et";adv
 p:@n @NP @p;objet;acc
 
 ter:n.prepDet
@@ -82,6 +82,7 @@ ter:a.prepAcc
 n:@a;;acc;;subst
 a:@prepAcc @prepAA;prep
 
+! FIXME ob hanc rem
 ter:a.prepAcc
 n:"hic";;acc
 a:@prepAcc @prepAA;prep
@@ -298,15 +299,9 @@ grp:n.sr
 n:@n @NP
 pg:sr;subrel
 
-grp:v.objsuj
-n:v.sujet;;act;;!attr !intr
-ag:@n @NP @p !n.prepDet;objet;acc
-
 !grp:v.objsuj
-!pos:v.sujet
-!lexsynt:!attr !intr
-!n:v.sujet;;;;!attr !intr
-!ag:@n @NP @p !n.prepDet;objet;acc
+!n:v.sujet;;act;;!attr !intr
+!ag:@n @NP @p !n.prepDet !n.prepAcc;objet;acc
 
 grp:v.objGprep
 n:v.gprep;;act;;!intr

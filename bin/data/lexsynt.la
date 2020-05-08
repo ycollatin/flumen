@@ -33,7 +33,7 @@
 ! - det : le pronom peut servir de déterminant
 ! - gen : le verbe, l'adjectif ou le nom peut avoir comme sub un génitif (memini)
 ! - infobj : le verbe peut avoir un infinitif objet
-! - loc : peut être fléchi au locatif; se construit sans préposition
+! - loc : peut être fléchi au locatif
 ! - mvm : (pour les verbes) mouvement, accepte l'acc.seul
 ! - nogen : le nom ne peut avoir de génitif (ex. dea)
 ! - nom : tout nom qui peut être accompagné d'une apposition à initiale majuscule (rex, flumen, etc.)
@@ -46,6 +46,7 @@
 ! - prepacc  : la préposition gouverne l'accusatif
 ! - propinf : le verbe peut avoir comme sub une proposition infinitive
 ! - subst : l'adjectif est substantivable
+! - topo : toponyme
 ! Descripteurs ontologiques sont ajoutés 
 ! - fam : nom désignant des relations familiales (filius, pater, soror)
 ! - excl : lemmes exclus à cause de l'insuffisance de l'algo actuel
@@ -6564,7 +6565,7 @@ deunx:
 deuro:
 deus:
 deueneror:
-deuenio:
+deuenio:mvm
 deuerbium:
 deuersitor:
 deuersor2:
