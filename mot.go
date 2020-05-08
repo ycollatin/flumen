@@ -54,6 +54,8 @@ func creeMot(m string) *Mot {
 	return mot
 }
 
+// vrai si les lemmatisation lma et lmb sont accordées
+// en cas (c) genre (g) et nombre (n)
 func accord(lma, lmb, cgn string) bool {
 	if strings.Contains(lmb, "inv.") {
 		return false
@@ -93,6 +95,8 @@ func genus(sr gocol.Sr) gocol.Sr {
 	return sr
 }
 
+// retourne une chaîne humainement lisible des
+// lemmatisations de an.
 func restostring(an gocol.Res) string {
 	var lr []string
 	for _, rl := range an {

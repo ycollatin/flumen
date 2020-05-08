@@ -73,18 +73,6 @@ func creeGroupe(ll []string) *Groupe {
 	return g
 }
 
-/*
-// vrai si l'élément de pos ou id id est exclu par le groupe
-func (g *Groupe) estExclu(id string) bool {
-	for _, ne := range g.noyexcl {
-		if ne.id == id {
-			return true
-		}
-	}
-	return false
-}
-*/
-
 // lecture des groupes dans le fichier nf
 func lisGroupes(nf string) {
 	llin := gocol.Lignes(nf)
@@ -107,23 +95,6 @@ func lisGroupes(nf string) {
 	}
 	grp = append(grp, creeGroupe(ll))
 }
-
-/*
-// le pos pos est-il compatible avec le noyau du groupe g ?
-func (g *Groupe) vaPos(pos string) bool {
-	for _, ne := range g.noyexcl {
-		if ne.vaPos(pos) {
-			return false
-		}
-	}
-	for _, noy := range g.noyaux {
-		if noy.vaPos(pos) {
-			return true
-		}
-	}
-	return false
-}
-*/
 
 // la morpho morf est-elle compatible avec le noyau du groupe g ?
 func (g *Groupe) vaMorph(morf string) bool {

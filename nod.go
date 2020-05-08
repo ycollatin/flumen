@@ -32,6 +32,8 @@ func (n *Nod) doc() string {
 	return strings.Join(mm, " ")
 }
 
+// Compare les noeuds na et nb et renvoie vrai
+// s'ils sont égaux
 func (na Nod) egale(nb Nod) bool {
 	if na.nucl != nb.nucl && egaleRes(na.rnucl, nb.rnucl) {
 		return false
@@ -61,6 +63,8 @@ func (na Nod) egale(nb Nod) bool {
 	return true
 }
 
+// Compare les lemmatisations resa et resb et renvoie
+// vrai si elles sont égales
 func egaleRes(resa, resb gocol.Res) bool {
 	va := true
 	for _, sra := range resa {
@@ -102,25 +106,4 @@ func (n *Nod) graf() []string {
 		}
 	}
 	return ll
-}
-
-func (n *Nod) inclut(m *Mot) bool {
-	for _, el := range n.mma {
-		if el == m {
-			return true
-		}
-	}
-	if m == n.nucl {
-		return true
-	}
-	for _, el := range n.mmp {
-		if el == m {
-			return true
-		}
-	}
-	return false
-}
-
-func (n *Nod) nbEl() int {
-	return len(n.mma) + len(n.mmp) + 1
 }

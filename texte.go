@@ -59,11 +59,14 @@ func CreeTexte(nf string) *Texte {
 	return t
 }
 
+// initialise la phrase sur laquelle
+// pointe t.compteur
 func (t *Texte) majPhrase() {
 	initArcs()
 	tronc = creeTronc(t.phrases[t.compteur])
 }
 
+// avance d'une phrase
 func (t *Texte) porro() {
 	if len(t.phrases)-t.compteur > 1 {
 		t.compteur++
@@ -72,6 +75,7 @@ func (t *Texte) porro() {
 	}
 }
 
+// recule d'une phrase
 func (t *Texte) retro() {
 	if t.compteur > 0 {
 		t.compteur--

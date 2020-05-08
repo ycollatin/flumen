@@ -143,6 +143,7 @@ func chxTexte() {
 	texte.affiche(aidePh)
 }
 
+// lemmatisation du mot courant
 func lemmatise() {
 	texte.affiche(aidePh)
 	im := tronc.imot
@@ -152,6 +153,7 @@ func lemmatise() {
 	fmt.Println(restostring(mc.ans))
 }
 
+// surlignage du mot précédent
 func motprec() {
 	if tronc.imot > 0 {
 		tronc.imot--
@@ -159,6 +161,7 @@ func motprec() {
 	}
 }
 
+// surlignage du mot suivant
 func motsuiv() {
 	if tronc.imot < len(mots)-1 {
 		tronc.imot++
@@ -166,6 +169,7 @@ func motsuiv() {
 	}
 }
 
+// saisie d'une phrase, et ajout au début de la liste
 func saisie() {
 	ClearScreen()
 	fmt.Println(entete)

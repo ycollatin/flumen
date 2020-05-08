@@ -78,6 +78,7 @@ func (b *Branche) adeja(noyau *Mot, lien string) bool {
 	return false
 }
 
+// copie branche mère  - branche fille
 func (b *Branche) copie() *Branche {
 	// signet scopie
 	nb := new(Branche)
@@ -100,6 +101,7 @@ func (b *Branche) copie() *Branche {
 	return nb
 }
 
+// Faux si m є à un groupe
 func (b *Branche) dejasub(m *Mot) bool {
 	for _, n := range b.nods {
 		for _, ma := range n.mma {
@@ -116,6 +118,7 @@ func (b *Branche) dejasub(m *Mot) bool {
 	return false
 }
 
+// mb є au groupe ma, directement ou indirectement
 func (b *Branche) domine(ma, mb *Mot) bool {
 	mnoy := b.noyau(mb)
 	for mnoy != nil {
@@ -242,23 +245,11 @@ func (b *Branche) exr(d, n int) (e string) {
 	return
 }
 
+// id des groupes dont m est noyau
 func (b *Branche) ids(m *Mot) (lids []string) {
 	for _, nod := range b.nods {
 		if nod.nucl == m {
 			lids = append(lids, nod.groupe.id)
-		}
-	}
-	return
-}
-
-// renvoie, parmi les groupes dont m est noyau,
-// celui qui a le plus de mots.
-func (b *Branche) idgr(m *Mot) (id string) {
-	var max int
-	for _, nod := range b.nods {
-		nbe := nod.nbEl()
-		if nod.nucl == m && nbe > max {
-			id = nod.groupe.id
 		}
 	}
 	return
@@ -271,12 +262,6 @@ func (b *Branche) motCourant() *Mot {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 	// snoeud, signet
-/*
-ter:a.avgen
-n:@a;;gén;;subst
-p:@v;;3
-p:@n;gen;gén sing
-*/
 
 	// noeud nnul pour le retour d'échec
 	var nnul Nod
@@ -462,7 +447,7 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		va = true
 	}
 	// si l'élément n'a aucune des propriétés requises pour un mot isolé,
-	if !va && len(el.poss) +len(el.cles) + len(el.morpho) + len(el.lexsynt) == 0 {
+	if !va && len(el.poss)+len(el.cles)+len(el.morpho)+len(el.lexsynt) == 0 {
 		// il ne peut appartenir au groupe
 		return nil
 	}
@@ -577,6 +562,9 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 	return res
 }
 
+// Une branche est terminale si elle n'a pas de filles
+// la récolte récupère alors tous les liens des noeuds
+// dont elle a hérité.
 func (b *Branche) terminale() bool {
 	return len(b.filles) == 0
 }
