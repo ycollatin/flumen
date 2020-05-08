@@ -4,9 +4,11 @@
 package main
 
 // FIXME
-// - classement des analyses ramum fregit...
+// ob hanc rem : hanc ne peut être à la fois noyau de a.prepacc et déterminant
+// de rem.
 // grp:v.adv/n:v;;indic,subj,impér/a:@Adv !"non" !"neque" !"et";+adv
 //  l'exclusion de Clé ne marche pas avec a:...
+// - classement des analyses ramum fregit...
 // - encore des solutions manquantes ou redondantes
 // - nombreuses règles à vérifier
 // - hyperbate : alquantum est negoti
