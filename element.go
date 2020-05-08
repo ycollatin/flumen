@@ -8,13 +8,13 @@ import (
 // un el est un élément de Groupe
 type El struct {
 	groupe   *Groupe  // groupe propriétaire du el
-	ids		 []string // identifiants des groupes possibles pour le noyau
+	ids      []string // identifiants des groupes possibles pour le noyau
 	idsexcl  []string // ids exclus
 	familles []string // le préfixe seulement des ces ids est requis
 	famexcl  []string // préfixes exclus
-	cles	 []string // clés des lemmes possibles
+	cles     []string // clés des lemmes possibles
 	clesexcl []string // clés exclues
-	poss	 []string // pos des lemmes
+	poss     []string // pos des lemmes
 	posexcl  []string // pos exclus
 	lien     string   // étiquette du lien noyau -> el
 	multi    bool     // armé : le lien peut être utilisé plusieurs fois
@@ -44,7 +44,7 @@ type El struct {
 // accord : accord entre l'élément du groupe et son noyau : 'c' 'g' 'n' ou une combinaison des 3
 // lexsynt : propriétés requises du lemme (lexsynt.la)
 //
-// identifiant, lemme, famille_groupe et groupe peuvent être préfixés en '!' pour 
+// identifiant, lemme, famille_groupe et groupe peuvent être préfixés en '!' pour
 // en faire des propriétés interdites.
 //
 func creeEl(v string, g *Groupe, t bool) *El {
@@ -54,7 +54,7 @@ func creeEl(v string, g *Groupe, t bool) *El {
 	for i, e := range vv {
 		switch i {
 		case 0: // noyaux
-			// partage des éléments 
+			// partage des éléments
 			ee := strings.Split(e, " ")
 			for _, ecl := range ee {
 				parts := strings.Split(ecl, ".")
