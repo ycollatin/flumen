@@ -407,10 +407,6 @@ func (b *Branche) recolte() (rec [][]Nod) {
 func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 	// signet sresEl
 
-	//grp:v.adv
-	//n:v;;indic,subj,impér
-	//a:@Adv !"non" !"neque" !"et";+adv
-
 	// contraintes de groupe
 	if !el.multi && b.adeja(mn, el.lien) {
 		return nil
