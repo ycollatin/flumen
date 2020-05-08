@@ -4,6 +4,8 @@
 package main
 
 // FIXME
+// - v.coord : ramum fregit et ... imposuit.
+// - classement des analyses ramum fregit...
 // - encore des solutions manquantes ou redondantes
 // - nombreuses règles à vérifier
 // - hyperbate : alquantum est negoti
