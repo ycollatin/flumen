@@ -250,7 +250,7 @@ n:@v;;inf;;attr
 p:@a;attr;acc
 
 grp:v.conjet
-n:@v;;
+n:@v v
 a:"et";conj
 
 grp:v.adv
@@ -258,7 +258,7 @@ n:v;;indic,subj,impér
 a:@Adv !"non" !"neque" !"et";+adv
 
 grp:v.coord
-n:@v
+n:@v v
 pg:v.conjet;coord;;n
 
 grp:v.conjvsubj
