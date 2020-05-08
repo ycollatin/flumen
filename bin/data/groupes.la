@@ -212,8 +212,8 @@ n:@n
 a:@p;det;;cgn;det
 
 grp:v.gprep
-n:@v
-ag:n.prepAbl n.prepAcc a.prepAcc n.prepDet n.inperpetuum;+gprep
+n:@v v
+ag:n.prepAbl n.prepAcc a.prepAcc n.prepDet n.inperpetuum !n.conjet;+gprep
 
 grp:v.vgprep
 n:@v
