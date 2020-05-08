@@ -1,9 +1,12 @@
-ob hanc rem.
+Immo locuples erat.
 Antoni exhausit domus.
+Python eam non invenerat.
+Atlas dicitur caelum sustinere.
+feras bestias ad currum iunxit.
+Python Terrae filius draco ingens.
 Ob hanc rem Mercurius deligavit eum.
 quod Marsya tibiis facere non potuit.
 ea data in coniugium Epimetheo fratri.
-Ceres alumnum suum lacte divino alebat. 
 effigiem fecit, cui Minerva animam dedit.
 aquilam apposuit, quae cor eius exesset.
 Europa Argiopes et Agenoris filia Sidonia.
@@ -16,12 +19,16 @@ Apollo datus est in servitutem Admeto regi Thessaliae.
 Prometheus Iapeti filius primus homines ex luto finxit.
 se in mare praecipitavit quod mare Ionium est appellatum.
 nos tamen nihil quod ad eam rem pertineat praetermittimus.
-Phaethon cum currum conscendisset decidit in flumen Eridanum.
 inde nata est Pyrrha, quae mortalis dicitur prima esse creata.
-Phaethon Solis et Clymenes filius cum currum conscendisset decidit in flumen.
 Ceres cum vellet alumnum suum immortalem reddere, interdiu lacte divino alebat.
 Ob hanc rem Mercurius Iovis iussu deligavit eum in monte Caucaso ad saxum clavis ferreis.
 At sorores Phaethontis, quod equos iniussu patris iunxerant, in arbores populos commutatae sunt.
+
+! réussi, mais une ou plusieurs solutions illégales
+ob hanc rem.
+mutationis spes nulla est.
+neque in perpetuum servare sciebant.
+
 ! réussi (ou ambigu mais mauvais choix)
 mare Ionium.
 ceterique dii.
@@ -30,7 +37,6 @@ magna turba est.
 Legatos decernis.
 in Monte Parnasso.
 Marcus erat aeger.
-Immo locuples erat.
 dea Isis nuncupatur.
 Consul populi Romani.
 Lentulus consul fuit.
@@ -42,26 +48,23 @@ omnia ardere coeperunt.
 dicitur prima mortalis.
 Magium fratrem reliquit.
 se in mare praecipitavit.
-Python eam non invenerat.
-mutationis spes nulla est.
 Pluton venit et eam rapuit.
 mare Ionium est appellatum.
 voluptatem Epicurus ignorat.
 vitam mihi esse acerbam puto.
 Ammonius pecunia nos oppugnat.
 Pyrrha dicitur prima mortalis.
-Atlas dicitur caelum sustinere.
-feras bestias ad currum iunxit.
 Mercurius deligavit eum ad saxum.
 Marcellinum tibi esse iratum scis.
-Python Terrae filius draco ingens.
 ramum fregit et in caput imposuit.
 Lentulus consul populi Romani fuit.
 in arbores populos commutatae sunt.
 Cadmus cum erraret, Delphos devenit.
-neque in perpetuum servare sciebant.
 Pluton quadrigis venit et eam rapuit.
 hunc Mercurius Iovis iussu interfecit.
+Ceres alumnum suum lacte divino alebat. 
 Marsyas Apollinem in certamen provocavit.
 nata est Pyrrha, quae dicitur prima mortalis.
 Marsyas Apollinem ad citharae cantum in certamen provocavit.
+Phaethon cum currum conscendisset decidit in flumen Eridanum.
+Phaethon Solis et Clymenes filius cum currum conscendisset decidit in flumen.
