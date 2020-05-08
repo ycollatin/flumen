@@ -23,7 +23,7 @@ import (
 type Mot struct {
 	gr     string    // graphie du mot
 	rang   int       // rang du mot dans la phrase à partir de 0
-	ans	   gocol.Res // lemmatisations et id du groupe si le mot devient noyau
+	ans    gocol.Res // lemmatisations et id du groupe si le mot devient noyau
 	restmp gocol.Res // lemmatisation de test d'un noeud
 }
 
