@@ -11,14 +11,14 @@ import (
 )
 
 type Groupe struct {
-	id              string
-	nucl, nuclexcl  *El
-	morph           []string // traits morpho du noyau
-	lexsynt         []string // étiquettes lexicosyntaxiques du noyau
-	ante            []*El   // éléments précédant le noyau
-	post            []*El   // éléments suivant le noyau
-	multi           bool     // le groupe possède au moins un sub multi
-	nbsubs          int      // nombre de subs
+	id             string
+	nucl, nuclexcl *El
+	morph          []string // traits morpho du noyau
+	lexsynt        []string // étiquettes lexicosyntaxiques du noyau
+	ante           []*El    // éléments précédant le noyau
+	post           []*El    // éléments suivant le noyau
+	multi          bool     // le groupe possède au moins un sub multi
+	nbsubs         int      // nombre de subs
 }
 
 var grpTerm, grp []*Groupe
