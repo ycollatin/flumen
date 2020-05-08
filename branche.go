@@ -263,6 +263,12 @@ func (b *Branche) motCourant() *Mot {
 func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 	// snoeud, signet
 
+	/*
+	grp:v.adv
+	n:v;;indic,subj,impér
+	a:@Adv !"non" !"neque" !"et";+adv
+	*/
+
 	// noeud nnul pour le retour d'échec
 	var nnul Nod
 
@@ -277,6 +283,8 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 	if rang+len(g.post)-1 >= nbmots {
 		return nnul
 	}
+
+	// validation du noyau
 	m.restmp = b.photos[m.rang]
 	m.restmp = b.resEl(m, g.nucl, m, m.restmp)
 	if m.restmp == nil {
@@ -486,12 +494,23 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 	}
 
 	// canons exclus et possibles
-	if len(el.cles) > 0 || len(el.clesexcl) > 0 {
+	if len(el.clesexcl) > 0 {
 		nres = nil
 		for _, an := range res {
 			if contient(el.clesexcl, an.Lem.Cle) {
 				continue
 			}
+			nres = append(nres, an)
+		}
+		if len(nres) == 0 {
+			return nil
+		}
+		res = nres
+	}
+
+	if len(el.cles) > 0 {
+		nres = nil
+		for _, an := range res {
 			for _, cle := range el.cles {
 				if an.Lem.Cle == cle {
 					nres = append(nres, an)
