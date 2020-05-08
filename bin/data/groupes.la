@@ -131,9 +131,8 @@ n:@n;;nomin
 p:@v;;3;n
 p:@a;epith;nomin;gn
 
-! FIXME hyperbate
 ter:a.avgen
-n:@a;;gén;;subst
+n:@a;;;;subst
 p:@v;;3
 p:@n;gen;gén sing
 
