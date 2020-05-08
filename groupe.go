@@ -90,11 +90,12 @@ func lisGroupes(nf string) {
 	llin := gocol.Lignes(nf)
 	var ll []string
 	for _, l := range llin {
-		deb := l[:4]
-		if deb == "ter:" || deb == "grp:" {
+		vk := strings.Split(l, ":")
+		deb := vk[0]
+		if deb == "ter" || deb == "grp" {
 			g := creeGroupe(ll)
 			if g != nil {
-				if ll[0][:4] == "grp:" {
+				if PrimEl(ll[0], ":") == "grp" {
 					grp = append(grp, g)
 				} else {
 					grpTerm = append(grpTerm, g)
