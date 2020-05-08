@@ -271,6 +271,12 @@ func (b *Branche) motCourant() *Mot {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 	// snoeud, signet
+/*
+ter:a.avgen
+n:@a;;gén;;subst
+p:@v;;3
+p:@n;gen;gén sing
+*/
 
 	// noeud nnul pour le retour d'échec
 	var nnul Nod
@@ -461,6 +467,7 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		return nil
 	}
 	var nres gocol.Res
+
 	// contraintes de lemmatisation
 	// lexicosyntaxe, exclus
 	if len(el.lsexcl) > 0 {
