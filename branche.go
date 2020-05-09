@@ -84,7 +84,10 @@ func (b *Branche) copie() *Branche {
 	nb := new(Branche)
 	nb.gr = b.gr
 	nb.niveau = b.niveau + 1
-	nb.nods = b.nods
+	//nb.nods = b.nods
+	for _, nbm := range b.nods {
+		nb.nods = append(nb.nods, nbm.copie())
+	}
 	nb.photos = make(map[int]gocol.Res)
 	for i, r := range b.photos {
 		for _, sr := range r {
@@ -97,7 +100,12 @@ func (b *Branche) copie() *Branche {
 		}
 	}
 	nb.veto = make(map[int][]Nod)
-	nb.veto = b.veto
+	for i, v := range b.veto {
+		for _, nod := range v {
+			nb.veto[i] = append(nb.veto[i], nod.copie())
+		}
+	}
+	//nb.veto = b.veto
 	return nb
 }
 
@@ -191,7 +199,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 					// photos des éléments antéposés
 					if mph == ma {
 						bf.photos[ma.rang] = ma.restmp
-						n.rra[ma.rang] = mph.restmp
+						//n.rra[ma.rang] = mph.restmp
 					}
 				}
 				for _, mp := range n.mmp {

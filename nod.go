@@ -18,6 +18,29 @@ type Nod struct {
 	valide   bool
 }
 
+func (n *Nod) copie() Nod {
+	//nn := new(Nod)
+	var nn Nod
+	nn.groupe = n.groupe
+	for _, m := range n.mma {
+		nn.mma = append(nn.mma, m)
+	}
+	for _, m := range n.mmp {
+		nn.mmp = append(nn.mmp, m)
+	}
+	nn.nucl = n.nucl
+	for _, r := range n.rnucl {
+		var nr gocol.Sr
+		nr.Lem = r.Lem
+		for _, morf := range r.Morphos {
+			nr.Morphos = append(nr.Morphos, morf)
+		}
+		nn.rnucl = append(nn.rnucl, nr)
+	}
+	nn.rang = n.rang
+	return nn
+}
+
 // liste des éléments du noeud, noyau en rouge
 func (n *Nod) doc() string {
 	var mm []string
