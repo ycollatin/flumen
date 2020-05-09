@@ -125,7 +125,7 @@ ter:n.nepith
 n:@n
 p:@a;epith;;cgn
 
-! hyperbate FIXME fragile
+! hyperbate
 ter:n.nvepith
 n:@n;;nomin
 p:@v;;3;n
