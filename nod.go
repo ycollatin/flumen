@@ -19,7 +19,6 @@ type Nod struct {
 }
 
 func (n *Nod) copie() Nod {
-	//nn := new(Nod)
 	var nn Nod
 	nn.groupe = n.groupe
 	for _, m := range n.mma {
