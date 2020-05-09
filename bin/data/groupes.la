@@ -224,11 +224,6 @@ grp:v.vgprep
 n:@v
 pg:n.prepAbl n.prepAcc n.inperpetuum n.prepDet;+gprep
 
-!sr = subordonnée relative
-grp:sr.cui
-n:@v;;indic,subj;;datif
-a:"qui2";dat;dat sing
-
 grp:v.dat
 n:@v;;indic,subj,part,inf;;datif
 ag:@n @NP @p;dat;datif
@@ -290,7 +285,8 @@ grp:v.subconjv
 n:@v;;indic
 pg:v.conjv;subconj
 
-! FIXME aquilam apposuit quae cor eius exesset
+! RELATIVES
+
 grp:sr.sujet
 n:@v;;indic,subj
 a:"qui2";sujet;nomin;n
@@ -299,19 +295,16 @@ grp:sr.objet
 n:@v;;indic,subj
 a:"qui2";objet;acc
 
+grp:sr.cui
+n:@v;;indic,subj;;datif
+a:"qui2";dat;dat
+
 grp:n.sr
-n:@n @NP
+n:@n @NP;
 pg:sr;subrel
 
-!grp:v.objsuj
-!n:v.sujet;;act;;!attr !intr
-!ag:@n @NP @p !n.prepDet !n.prepAcc;objet;acc
+! INFINITIVE
 
-grp:v.objGprep
-n:v.gprep;;act;;!intr
-ag:@n @NP @p;objet;acc
-
-! verbe d'une prop inf
 grp:v.sujInf
 n:@v;;inf
 ag:@n @NP @p !n.prepAcc;sujet;acc
@@ -320,7 +313,6 @@ grp:v.infSuj
 n:@v;;inf
 pg:@n @NP @p !n.prepAcc;sujet;acc
 
-! verbe précédé d'une prop.inf
 grp:v.propinf
 n:@v;;act;;propinf
 ag:v.sujInf v.infSuj;subInf
@@ -354,7 +346,9 @@ n:@v;;indic,subj
 a:@conj;conj
 
 grp:n.app
-n:n;-
+n:n;;
 p:@n @NP !n.prepAcc !n.prepAbl;app;;cgn
 
-! a|ag|p|pg:pos [pos pos...];[+]lien;traita traitb,traita traitb;accord;lexsynt lexsynt...
+grp:n.npApp
+n:@NP;;
+p:@n !n.prepAcc !n.prepAbl;app;;cgn
