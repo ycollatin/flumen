@@ -11,7 +11,6 @@ package main
 // - nombreuses règles à vérifier
 // XXX
 //
-//
 // - CONSTRUCTIONS LEXICALES chez Cic.
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
