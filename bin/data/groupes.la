@@ -125,7 +125,7 @@ ter:n.nepith
 n:@n
 p:@a;epith;;cgn
 
-! hyperbate
+! hyperbate FIXME fragile
 ter:n.nvepith
 n:@n;;nomin
 p:@v;;3;n
@@ -134,7 +134,12 @@ p:@a;epith;nomin;gn
 ter:a.avgen
 n:@a;;;;subst
 p:@v;;3
-p:@n;gen;gén sing
+p:@n @NP;gen;gén sing
+
+ter:n.genvn
+n:@n
+a:@n @NP;gen;gén
+a:@v;;3;n
 
 !!!!!!!!!!!!!!!!!!!!!!!!!
 ! Groupes non terminaux !
@@ -334,7 +339,7 @@ pg:@n @NP @p !n.prepAcc !n.prepAbl !n.inperpetuum !n.conjet;obj;acc
 
 grp:v.sujet
 n:@v;;3
-ag:@n @NP;sujet;nomin;n
+ag:n;sujet;nomin;n
 
 grp:v.vsujet
 n:@v;;3
