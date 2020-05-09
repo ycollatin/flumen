@@ -105,7 +105,6 @@ func (b *Branche) copie() *Branche {
 			nb.veto[i] = append(nb.veto[i], nod.copie())
 		}
 	}
-	//nb.veto = b.veto
 	return nb
 }
 
@@ -199,7 +198,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 					// photos des éléments antéposés
 					if mph == ma {
 						bf.photos[ma.rang] = ma.restmp
-						//n.rra[ma.rang] = mph.restmp
+						n.rra[ma.rang] = mph.restmp
 					}
 				}
 				for _, mp := range n.mmp {
