@@ -39,7 +39,7 @@ func CreeTexte(nf string) *Texte {
 	t.nom = nf
 	for _, l := range ll {
 		for {
-			ifp := strings.IndexAny(l, ".?;:!")
+			ifp := strings.IndexAny(l, ".?;!:")
 			if ifp < 0 {
 				tp += l + " "
 				break

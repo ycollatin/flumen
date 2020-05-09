@@ -26,7 +26,6 @@ package main
 // - traiter la coordination par -que := et -
 // - un champ groupe.anrel - analyses du relatif ?
 // - accord :de personne sujet-verbe et verbe-verbe coord; de mode v-v, etc.
-// - saisie d'une phrase ?
 // - fonction de sortie au format GraphViz
 // - parasitage de /sum/ par /edo/ : comment supprimer "excl" dans lexsynt
 // - parasitage de /do/ par /dato/ :   "

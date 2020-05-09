@@ -1,4 +1,4 @@
-!	groupes.la
+!	groupes.la -- Gentes
 !
 ! NOYAU :
 !- ter|grp:<groupe>.<id>		// identifiant syntaxique,identifiant unique 
@@ -207,7 +207,7 @@ grp:v.obj
 n:@v;;act;;!intr
 ag:@n @NP @p !v.coord !n.conjet !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
 
-! pour Hygin, FRAGILE
+! FIXME pour Hygin, FRAGILE
 grp:n.eadata
 n:"is";;nomin fém sing
 p:"do";epith;part pass nomin fém sing
@@ -327,7 +327,11 @@ ag:v.sujInf v.infSuj;subInf
 
 grp:v.vpropinfPass
 n:"dico2" "habeo";;indic pass,subj pass
-pg:@v;propinf;inf
+pg:v.sujInf v.infSuj;propinf;inf
+
+grp:v.homerus
+n:"dico2";;indic pass,subj pass
+pg:v.obj;obj
 
 grp:v.abl
 n:@v;;act;;abl
