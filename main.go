@@ -4,21 +4,19 @@
 package main
 
 // FIXME
-// Atlas dicitur caelum sustinere : attrPass mal attribué.
 // ob hanc rem : hanc ne peut être à la fois noyau de a.prepacc et déterminant
 // de rem.
 // - classement des analyses ramum fregit...
 // - encore des solutions manquantes ou redondantes
 // - nombreuses règles à vérifier
 // XXX
-// - Trouver une solution pour la construction personnelle de l'infinitive
-//   Homerus dicitur caecus fuisse. (ou caecum)
+//
 //
 // - CONSTRUCTIONS LEXICALES chez Cic.
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
-// - factoriѕer la négation : neg(ch string) string {}
+// - factoriѕer la négation ? neg(ch string) string {}
 // - factoriser les " : guil(ch string) string {}
 // - surlignage des lemmatisations : la récolte doit aussi rapporter les nods
 //   des branches terminales
