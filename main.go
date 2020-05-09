@@ -10,7 +10,6 @@ package main
 // - classement des analyses ramum fregit...
 // - encore des solutions manquantes ou redondantes
 // - nombreuses règles à vérifier
-// - hyperbate : alquantum est negoti
 // - impossibilité de décrire les arcs en cas d'hyperbate : Antoni exhausit domus.
 // XXX
 // - Trouver une solution pour la construction personnelle de l'infinitive
@@ -20,6 +19,7 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
+// - trouver une syntaxe pour les liens hyperbates : Antoni exhausit domus
 // - factoriѕer la négation : neg(ch string) string {}
 // - factoriser les " : guil(ch string) string {}
 // - surlignage des lemmatisations : la récolte doit aussi rapporter les nods
