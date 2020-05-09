@@ -310,7 +310,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 			ma = mots[r]
 		}
 		// vérification de réciprocité, puis du lien lui-même
-		if b.domine(ma, m) {
+		if b.domine(ma, m) && g.ante[ia].lien > "" {
 			return nnul
 		}
 		sub := g.ante[ia]
@@ -321,13 +321,18 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 		if ma.restmp == nil {
 			return nnul
 		}
-		nod.mma = append(nod.mma, ma)
+		// si le lien est muet, c'est qu'il est étranger au
+		// groupe. Il y a hyperbate.
+		if sub.lien > "" {
+			nod.mma = append(nod.mma, ma)
+		}
+		//nod.mma = append(nod.mma, ma)
 		r--
 	}
 
 	// reгcherche des subs post
 	r = rang + 1
-	for _, sub := range g.post {
+	for ip, sub := range g.post {
 		if r >= nbmots {
 			break
 		}
@@ -352,8 +357,15 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 		if mp.restmp == nil {
 			return nnul
 		}
+		// cf. supra nod.mma
+		if g.post[ip].lien > "" {
+			nod.mmp = append(nod.mmp, mp)
+		}
+/*
 		nod.mmp = append(nod.mmp, mp)
+*/
 		r++
+
 	}
 
 	if len(nod.mma)+len(nod.mmp) > 0 {
