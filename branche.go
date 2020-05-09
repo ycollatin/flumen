@@ -165,7 +165,6 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 		if n.valide {
 			// Si le groupe a été exploré pour m dans une
 			// autre branche, passer
-			// XXX Pourrait être fait dans noeud(m, g) avant calcul.
 			va := true
 			for _, veto := range bm.veto[m.rang] {
 				va = va && !n.egale(veto)
@@ -326,7 +325,6 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 		if sub.lien > "" {
 			nod.mma = append(nod.mma, ma)
 		}
-		//nod.mma = append(nod.mma, ma)
 		r--
 	}
 
@@ -361,9 +359,6 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 		if g.post[ip].lien > "" {
 			nod.mmp = append(nod.mmp, mp)
 		}
-/*
-		nod.mmp = append(nod.mmp, mp)
-*/
 		r++
 
 	}
