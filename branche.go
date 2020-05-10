@@ -85,7 +85,6 @@ func (b *Branche) copie() *Branche {
 	nb := new(Branche)
 	nb.gr = b.gr
 	nb.niveau = b.niveau + 1
-	//nb.nods = b.nods
 	for _, nbm := range b.nods {
 		nb.nods = append(nb.nods, nbm.copie())
 	}
@@ -395,8 +394,6 @@ func (b *Branche) noyau(m *Mot) *Mot {
 }
 
 // récolte tous les noeuds terminaux d'un arbre
-//func (b *Branche) recolte() (rec [][]Nod) {
-
 func (b *Branche) recolte() {
 	// signet srecolte
 	var rec [][]Nod
@@ -415,24 +412,6 @@ func (b *Branche) recolte() {
 
 	b.vendange = rec
 }
-
-/*
-func (b *Branche) recolte() (rec [][]Nod) {
-	// signet srecolte
-	if b.terminale() {
-		rec = append(rec, b.nods)
-		return rec
-	}
-	for _, f := range b.filles {
-		nrec := f.recolte()
-		rec = append(rec, nrec...)
-	}
-	sort.Slice(rec, func(i, j int) bool {
-		return len(rec[i]) > len(rec[j])
-	})
-	return rec
-}
-*/
 
 // vrai si m est compatible avec Sub et le noyau mn
 func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
