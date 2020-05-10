@@ -284,12 +284,6 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 		return nnul
 	}
 
-/*
-grp:v.vdat
-n:@v;;indic,subj,part,inf;;datif
-pg:@n @NP @p !"qui2";dat;datif
-*/
-
 	// validation du noyau
 	m.restmp = b.photos[m.rang]
 	m.restmp = b.resEl(m, g.nucl, m, m.restmp)
