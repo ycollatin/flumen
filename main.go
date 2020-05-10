@@ -4,7 +4,8 @@
 package main
 
 // FIXME
-// ob hanc rem : hanc ne peut être à la fois noyau de a.prepacc et déterminant
+// ob hanc rem : solution trop loin dans la liste.
+// At sorores : la bonne solution est en troisième position
 // de rem.
 // - classement des analyses ramum fregit...
 // - nombreuses règles à vérifier
@@ -18,6 +19,8 @@ package main
 //   - durcir les conditions des règles
 //   - élaguer les branches avant la fin
 //   - élaguer les branches après récolte
+//   - utiliser les goroutines : go bf.explore()
+// - Si pléthore, trouver un moyen de navigation en fixant des arcs.
 // - factoriѕer la négation ? neg(ch string) string {}
 // - factoriser les " : guil(ch string) string {}
 // - surlignage des lemmatisations : la récolte doit aussi rapporter les nods
