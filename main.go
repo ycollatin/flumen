@@ -14,7 +14,10 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
-// - éviter une réanalyse ?
+// - Pour éviter la pléthore :
+//   - durcir les conditions des règles
+//   - élaguer les branches avant la fin
+//   - élaguer les branches après récolte
 // - factoriѕer la négation ? neg(ch string) string {}
 // - factoriser les " : guil(ch string) string {}
 // - surlignage des lemmatisations : la récolte doit aussi rapporter les nods
@@ -62,21 +65,25 @@ var (
 
 // affiche les arcs syntaxique de la phrase
 func analyse(expl bool, j bool) {
-	texte.majPhrase()
 	texte.affiche(aidePh)
-	tronc.explore()
-	recolte := tronc.recolte()
-	if recolte == nil {
+	if tronc.vendange == nil {
+		texte.majPhrase()
+		tronc.explore()
+		tronc.recolte()
+	}
+	//recolte := tronc.recolte()
+	if tronc.vendange == nil {
 		fmt.Println("échec de l'analyse")
 		return
 	}
 	if ibr < 0 {
 		ibr = 0
 	}
-	if ibr >= len(recolte) {
-		ibr = len(recolte) - 1
+	if ibr >= len(tronc.vendange) {
+		ibr = len(tronc.vendange) - 1
 	}
-	nods := recolte[ibr]
+	//nods := recolte[ibr]
+	nods := tronc.vendange[ibr]
 	// graphe
 	var src []string
 	src = append(src, tronc.gr)
@@ -96,7 +103,7 @@ func analyse(expl bool, j bool) {
 	}
 	fmt.Println("----------------")
 	// numérotation de la solution
-	fmt.Printf("%d/%d\n", ibr+1, len(recolte))
+	fmt.Printf("%d/%d\n", ibr+1, len(tronc.vendange))
 	// graphe en arcs
 	initArcs()
 	fmt.Println(strings.Join(graphe(src), "\n"))

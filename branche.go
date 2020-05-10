@@ -33,6 +33,7 @@ type Branche struct {
 	veto   map[int][]Nod     // index : rang du mot; valeur : liste des liens interdits
 	photos map[int]gocol.Res // lemmatisations et appartenance de groupe propres à la branche
 	filles []*Branche        // liste des branches filles
+	vendange [][]Nod         // résultat de la récolte
 }
 
 // le tronc est la branche de départ. Il
@@ -394,6 +395,28 @@ func (b *Branche) noyau(m *Mot) *Mot {
 }
 
 // récolte tous les noeuds terminaux d'un arbre
+//func (b *Branche) recolte() (rec [][]Nod) {
+
+func (b *Branche) recolte() {
+	// signet srecolte
+	var rec [][]Nod
+	if b.terminale() {
+		rec = append(rec, b.nods)
+		b.vendange = rec
+	}
+	for _, f := range b.filles {
+		f.recolte()
+		nrec := f.vendange
+		rec = append(rec, nrec...)
+	}
+	sort.SliceStable(rec, func(i, j int) bool {
+		return len(rec[i]) > len(rec[j])
+	})
+
+	b.vendange = rec
+}
+
+/*
 func (b *Branche) recolte() (rec [][]Nod) {
 	// signet srecolte
 	if b.terminale() {
@@ -409,6 +432,7 @@ func (b *Branche) recolte() (rec [][]Nod) {
 	})
 	return rec
 }
+*/
 
 // vrai si m est compatible avec Sub et le noyau mn
 func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
