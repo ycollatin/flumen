@@ -284,6 +284,12 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 		return nnul
 	}
 
+/*
+grp:v.vdat
+n:@v;;indic,subj,part,inf;;datif
+pg:@n @NP @p !"qui2";dat;datif
+*/
+
 	// validation du noyau
 	m.restmp = b.photos[m.rang]
 	m.restmp = b.resEl(m, g.nucl, m, m.restmp)
@@ -307,7 +313,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 			return nnul
 		}
 		ma := mots[r]
-		// passer les mots déjà subordonnés | b branche.go:336 cond 2 m.gr=="rapuit" && g.id=="v.conjet"
+		// passer les mots déjà subordonnés
 		for b.dejasub(ma) {
 			r--
 			if r < 0 {
@@ -342,7 +348,8 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 			break
 		}
 		mp := mots[r]
-		for b.dejasub(mp) {
+		//for b.dejasub(mp) { // XXX domine à vérifier
+		for b.dejasub(mp) || b.domine(mp, m) {
 			r++
 			if r >= nbmots {
 				return nnul
@@ -354,9 +361,9 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 			mp = mots[r]
 		}
 		// réciprocité
-		if b.domine(mp, m) {
-			return nnul
-		}
+		//if b.domine(mp, m) {
+		//	return nnul
+		//}
 		mp.restmp = b.photos[mp.rang]
 		mp.restmp = b.resEl(mp, sub, m, mp.restmp)
 		if mp.restmp == nil {
@@ -367,9 +374,8 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 			nod.mmp = append(nod.mmp, mp)
 		}
 		r++
-
 	}
-
+	// le noeud est valide s'il a trouvé des subs.
 	if len(nod.mma)+len(nod.mmp) > 0 {
 		nod.valide = true
 		return nod
