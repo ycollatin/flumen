@@ -230,7 +230,7 @@ ag:@n @NP @p;dat;datif
 
 grp:v.vdat
 n:@v;;indic,subj,part,inf;;datif
-pg:@n @NP @p;dat;datif
+pg:@n @NP @p !"qui2" !"quis";dat;datif
 
 grp:v.attrObj
 n:@v;;act;;attrà !propinf
@@ -300,7 +300,7 @@ n:@v;;indic,subj;;datif
 a:"qui2";dat;dat
 
 grp:n.sr
-n:@n @NP;
+n:@n n @NP;
 pg:sr;subrel
 
 ! INFINITIVE
