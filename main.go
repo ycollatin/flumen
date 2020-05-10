@@ -7,7 +7,6 @@ package main
 // ob hanc rem : hanc ne peut être à la fois noyau de a.prepacc et déterminant
 // de rem.
 // - classement des analyses ramum fregit...
-// - encore des solutions manquantes ou redondantes
 // - nombreuses règles à vérifier
 // XXX
 //
@@ -15,11 +14,11 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
+// - éviter une réanalyse ?
 // - factoriѕer la négation ? neg(ch string) string {}
 // - factoriser les " : guil(ch string) string {}
 // - surlignage des lemmatisations : la récolte doit aussi rapporter les nods
 //   des branches terminales
-// - éviter une réanalyse ?
 // - traiter la coordination par -que := et -
 // - un champ groupe.anrel - analyses du relatif ?
 // - accord :de personne sujet-verbe et verbe-verbe coord; de mode v-v, etc.
