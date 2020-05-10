@@ -68,7 +68,6 @@ p:@Adv !"et";adv
 p:@n @NP @p;objet;acc
 
 ter:n.prepDet
-pos:n
 n:@n
 a:@prepAcc @prepAA;prep
 a:@p;det;acc;n
@@ -77,25 +76,25 @@ ter:n.epith
 n:@n
 a:@a;epith;;cgn
 
-ter:a.prepAcc
-n:@a;;acc;;subst
-a:@prepAcc @prepAA;prep
+!ter:a.prepAcc
+!n:@a;;acc;;subst
+!a:@prepAcc @prepAA;prep
 
 ! FIXME ob hanc rem
-ter:a.prepAcc
-n:"hic";;acc
-a:@prepAcc @prepAA;prep
+!ter:a.prepAcc
+!n:"hic";;acc
+!a:@prepAcc @prepAA;prep
 
 ter:v.sujAblObj
 n:@v;;3;;abl
 a:@n @NP;sujet;nomin;n
 a:@n;abl;abl
-a:@n @p;obj;acc
+a:@n @p;objet;acc
 
 ter:v.sujInfobj
 n:@v;;3
 a:@n @NP @p;sujet;nomin;n
-a:@v;obj;inf
+a:@v;objet;inf
 
 ter:v.sujNpAttrP
 n:@v;;3 pass;;attrp
@@ -168,10 +167,6 @@ grp:n.gen
 n:@n
 ag:@n @NP;gen;gén
 
-grp:n.ngen
-n:@n
-pg:@n @NP;gen;gén
-
 ter:a.agen
 n:@a;;;;subst
 p:@n;gen;gén sing
@@ -194,16 +189,16 @@ a:@prepAbl @prepAA;prep
 
 grp:v.objAbl
 n:@v;;;;abl
-ag:@n;obj;acc
+ag:@n;objet;acc
 ag:@n;abl;abl
 
 grp:n.prepAcc
-n:@n @NP @p;;acc
+n:@n @NP;;acc
 a:@prepAcc @prepAA !n.det;prep
 
 grp:v.obj
 n:@v;;act;;!intr
-ag:@n @NP @p !v.coord !n.conjet !n.prepAcc !n.prepAbl !n.inperpetuum;obj;acc
+ag:@n @NP @p !v.coord !n.conjet !n.prepAcc !n.prepAbl !n.inperpetuum;objet;acc
 
 ! FIXME pour Hygin, FRAGILE
 grp:n.eadata
@@ -301,6 +296,10 @@ grp:n.sr
 n:@n n @NP;
 pg:sr;subrel
 
+grp:p.sr
+n:"is" "nihil"
+pg:sr;subrel
+
 ! INFINITIVE
 
 grp:v.sujInf
@@ -321,7 +320,7 @@ pg:v.sujInf v.infSuj;propinf;inf
 
 grp:v.homerus
 n:"dico2";;indic pass,subj pass
-pg:v.obj;obj
+pg:v.obj;objet
 
 grp:v.abl
 n:@v;;act;;abl
@@ -348,9 +347,13 @@ n:@v;;indic,subj
 a:@conj;conj
 
 grp:n.app
-n:n;;
+n:@n;;
 p:@n @NP !n.prepAcc !n.prepAbl;app;;cgn
 
 grp:n.npApp
 n:@NP;;
 p:@n !n.prepAcc !n.prepAbl;app;;cgn
+
+grp:n.ngen
+n:@n
+pg:@n @NP;gen;gén
