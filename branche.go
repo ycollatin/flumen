@@ -342,7 +342,6 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 			break
 		}
 		mp := mots[r]
-		//for b.dejasub(mp) { // XXX domine à vérifier
 		for b.dejasub(mp) || b.domine(mp, m) {
 			r++
 			if r >= nbmots {
@@ -354,10 +353,6 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 			}
 			mp = mots[r]
 		}
-		// réciprocité
-		//if b.domine(mp, m) {
-		//	return nnul
-		//}
 		mp.restmp = b.photos[mp.rang]
 		mp.restmp = b.resEl(mp, sub, m, mp.restmp)
 		if mp.restmp == nil {

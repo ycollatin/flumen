@@ -74,7 +74,6 @@ func analyse(expl bool, j bool) {
 		tronc.explore()
 		tronc.recolte()
 	}
-	//recolte := tronc.recolte()
 	if tronc.vendange == nil {
 		fmt.Println("échec de l'analyse")
 		return
@@ -85,7 +84,6 @@ func analyse(expl bool, j bool) {
 	if ibr >= len(tronc.vendange) {
 		ibr = len(tronc.vendange) - 1
 	}
-	//nods := recolte[ibr]
 	nods := tronc.vendange[ibr]
 	// graphe
 	var src []string
