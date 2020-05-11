@@ -4,6 +4,7 @@
 package main
 
 // FIXME
+// Mercurius deligavit eu clavis ferreis : tri défectueux : la sol 6 est 3 rangs trop bas.
 // elague semble bloquer dans la phr. 5 de Familiares : regis causa si qui sunt qui velint etc.
 // ob hanc rem : solution trop loin dans la liste.
 // At sorores : la bonne solution est en troisième position
@@ -21,6 +22,7 @@ package main
 //   - élaguer les branches avant la fin
 //   - élaguer les branches après récolte
 //   - utiliser les goroutines : go bf.explore()
+//   - enrichir la syntaxe de groupes.la 
 // - Si pléthore, trouver un moyen de navigation en fixant des arcs.
 // - factoriѕer la négation ? neg(ch string) string {}
 // - factoriser les " : guil(ch string) string {}
@@ -41,6 +43,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
+	"sort"
 	"strings"
 )
 
@@ -74,7 +77,10 @@ func analyse(expl bool, j bool) {
 		texte.majPhrase()
 		tronc.explore()
 		tronc.recolte()
-		//tronc.elague()
+		tronc.elague()
+		sort.Slice(tronc.vendange, func(i, j int) bool {
+			return len(tronc.vendange[i]) > len(tronc.vendange[j])
+		})
 	}
 	if tronc.vendange == nil {
 		fmt.Println("échec de l'analyse")
