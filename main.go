@@ -78,8 +78,9 @@ func analyse(expl bool, j bool) {
 		tronc.explore()
 		tronc.recolte()
 		tronc.elague()
-		sort.Slice(tronc.vendange, func(i, j int) bool {
-			return len(tronc.vendange[i]) > len(tronc.vendange[j])
+		// tri
+		sort.SliceStable(tronc.vendange, func(i, j int) bool {
+			return tronc.vendange[i].nbarcs < tronc.vendange[j].nbarcs
 		})
 	}
 	if tronc.vendange == nil {
@@ -92,20 +93,18 @@ func analyse(expl bool, j bool) {
 	if ibr >= len(tronc.vendange) {
 		ibr = len(tronc.vendange) - 1
 	}
-	nods := tronc.vendange[ibr]
+	sol := tronc.vendange[ibr]
 	// graphe
 	var src []string
 	src = append(src, tronc.gr)
-	for _, n := range nods {
+	for _, n := range sol.nods {
 		src = append(src, n.graf()...)
 	}
-	if expl {
-		for _, n := range nods {
-			fmt.Println(n.doc())
-		}
-		fmt.Println("\n---- source ----\n")
-		fmt.Println(strings.Join(src, "\n"))
+	for _, n := range sol.nods {
+		fmt.Println(n.doc())
 	}
+	fmt.Println("\n---- source ----\n")
+	fmt.Println(strings.Join(src, "\n"))
 	if j {
 		fmt.Println("--- journal ----")
 		fmt.Println(strings.Join(journal, "\n"))
