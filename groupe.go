@@ -10,13 +10,6 @@ import (
 	"strings"
 )
 
-// Coupe permet à un groupe de supprimer, sous certaines conditions, des
-// noeuds dont fait partie l'un des éléments du groupe.
-type Coupe struct {
-	subde string // le noyau est, dans une autre branche, le sub d'un groupe subde
-	noyde string // le noyau est, dans une autre branche, le noyau d'un groupe noyde
-}
-
 type Groupe struct {
 	id             string
 	nucl, nuclexcl *El
@@ -26,8 +19,6 @@ type Groupe struct {
 	post           []*El    // éléments suivant le noyau
 	multi          bool     // le groupe possède au moins un sub multi
 	nbsubs         int      // nombre de subs
-	// coupeSiSub : si le groupe est sub d'un groupe [0] les groupes [1]... sont interdits
-	coupe []Coupe
 }
 
 var grpTerm, grp []*Groupe
