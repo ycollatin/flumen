@@ -333,7 +333,7 @@ ag:@n @p;abl;abl
 
 grp:v.vobj
 n:@v !v.sumpp !v.ppsum;;act;;!intr
-pg:@n @NP @p !n.prepAcc !n.prepAbl !n.inperpetuum !n.conjet;obj;acc
+pg:@n @NP @p !n.prepAcc !n.prepAbl !n.inperpetuum !n.conjet;objet;acc
 
 grp:v.sujet
 n:@v;;3
