@@ -192,13 +192,18 @@ n:@v;;;;abl
 ag:@n;objet;acc
 ag:@n;abl;abl
 
+grp:v.vobjAbl
+n:@v;;;;abl
+pg:@n n @p;objet;acc
+pg:@n n;abl;abl
+
 grp:n.prepAcc
-n:@n @NP;;acc
-a:@prepAcc @prepAA !n.det;prep
+n:@n @NP @p !n.det;;acc
+a:@prepAcc @prepAA;prep
 
 grp:v.obj
 n:@v;;act;;!intr
-ag:@n @NP @p !v.coord !n.conjet !n.prepAcc !n.prepAbl !n.inperpetuum;objet;acc
+ag:@n @a @NP @p !v.coord !n.conjet !n.prepAcc !n.prepAbl !n.inperpetuum;objet;acc
 
 ! FIXME pour Hygin, FRAGILE
 grp:n.eadata
@@ -336,7 +341,7 @@ ag:n;sujet;nomin;n
 
 grp:v.sujet1
 n:@v;;1
-a:"ego" "nos";sujet;;n
+a:"ego" "nos" !n.prepAcc;sujet;;n
 
 grp:v.vsujet
 n:@v;;3
@@ -344,7 +349,7 @@ p:@n @NP !n.prepAcc;sujet;nomin;n
 
 grp:v.conj
 n:@v;;indic,subj
-a:@conj;conj
+a:"ut" "cum" "ubi" "quando" !"et" !"neque";conj
 
 grp:n.app
 n:@n;;
@@ -356,4 +361,4 @@ p:@n !n.prepAcc !n.prepAbl;app;;cgn
 
 grp:n.ngen
 n:@n
-pg:@n @NP;gen;gén
+pg:@n @NP !"sus";gen;gén
