@@ -24,6 +24,11 @@ var (
 	journal []string
 )
 
+type Sol struct {
+	nods  []Nod
+	nbarcs int
+}
+
 type Branche struct {
 	gr     string            // texte de la phrase
 	imot   int               // rang du mot courant
@@ -32,7 +37,7 @@ type Branche struct {
 	veto   map[int][]Nod     // index : rang du mot; valeur : liste des liens interdits
 	photos map[int]gocol.Res // lemmatisations et appartenance de groupe propres à la branche
 	filles []*Branche        // liste des branches filles
-	vendange [][]Nod         // résultat de la récolte
+	vendange []Sol         // résultat de la récolte
 }
 
 // le tronc est la branche de départ. Il
@@ -145,18 +150,18 @@ func (b *Branche) elague() {
 	max := nbmots - 1
 	var maxn int
 	for _, sol := range b.vendange {
-		if len(sol) > maxn {
-			maxn = len(sol)
+		if sol.nbarcs > maxn {
+			maxn = sol.nbarcs
 		}
 	}
 	if maxn < max {
 		max = maxn
 	}
-	nv := make([][]Nod, len(b.vendange))
+	nv := make([]Sol, len(b.vendange))
 	copy(nv, b.vendange)
 	b.vendange = nil
 	for _, sol := range nv {
-		if len(sol) == max {
+		if sol.nbarcs == max {
 			b.vendange = append(b.vendange, sol)
 		}
 	}
@@ -323,6 +328,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 	nod.groupe = g
 	nod.nucl = m
 	nod.rang = rang
+	nod.nbsubs = nod.groupe.nbsubs
 
 	// reгcherche rétrograde des subs ante
 	r := rang - 1
@@ -416,9 +422,13 @@ func (b *Branche) noyau(m *Mot) *Mot {
 // récolte tous les noeuds terminaux d'un arbre
 func (b *Branche) recolte() {
 	// signet srecolte
-	var rec [][]Nod
+	var rec []Sol
 	if b.terminale() {
-		rec = append(rec, b.nods)
+		var nbs int
+		for _, n := range b.nods {
+			nbs += n.nbsubs
+		}
+		rec = append(rec, Sol{b.nods, nbs})
 		b.vendange = rec
 	}
 	for _, f := range b.filles {

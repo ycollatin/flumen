@@ -10,6 +10,12 @@ import (
 	"strings"
 )
 
+type Coupe struct {
+	subde  string
+	noyde  string
+	coupes []string
+}
+
 type Groupe struct {
 	id             string
 	nucl, nuclexcl *El
@@ -19,6 +25,8 @@ type Groupe struct {
 	post           []*El    // éléments suivant le noyau
 	multi          bool     // le groupe possède au moins un sub multi
 	nbsubs         int      // nombre de subs
+	// coupeSiSub : si le groupe est sub d'un groupe [0] les groupes [1]... sont interdits
+	coupeSiSub     []Coupe
 }
 
 var grpTerm, grp []*Groupe

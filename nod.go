@@ -11,6 +11,7 @@ import (
 type Nod struct {
 	groupe   *Groupe           // groupe du noeud Nod
 	mma, mmp []*Mot            // liste des mots avant et après le noyau
+	nbsubs   int
 	rra, rrp map[int]gocol.Res // liste des lemmatisations de chaque mot
 	nucl     *Mot              // noyau du Nod
 	rnucl    gocol.Res         // lemmatisations du noyau
@@ -37,6 +38,7 @@ func (n *Nod) copie() Nod {
 		nn.rnucl = append(nn.rnucl, nr)
 	}
 	nn.rang = n.rang
+	nn.nbsubs = nn.groupe.nbsubs
 	return nn
 }
 
