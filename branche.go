@@ -328,7 +328,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 	nod.groupe = g
 	nod.nucl = m
 	nod.rang = rang
-	nod.nbsubs = nod.groupe.nbsubs
+	nod.nbsubs = g.nbsubs
 
 	// reгcherche rétrograde des subs ante
 	r := rang - 1
@@ -366,6 +366,11 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 		r--
 	}
 
+	// si les ante ne sont pas au complet, renvoyer nnul
+	if len(nod.mma) < lante {
+		return nnul
+	}
+
 	// reгcherche des subs post
 	r = rang + 1
 	for ip, sub := range g.post {
@@ -395,12 +400,15 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 		}
 		r++
 	}
+	if len(nod.mmp) < len(g.post) {
+		return nnul
+	}
 	// le noeud est valide s'il a trouvé des subs.
-	if len(nod.mma)+len(nod.mmp) > 0 {
+	//if len(nod.mma)+len(nod.mmp) == nod.nbsubs {
 		nod.valide = true
 		return nod
-	}
-	return nnul
+	//}
+	//return nnul
 }
 
 func (b *Branche) noyau(m *Mot) *Mot {
