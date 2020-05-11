@@ -25,19 +25,19 @@ var (
 )
 
 type Sol struct {
-	nods  []Nod
+	nods   []Nod
 	nbarcs int
 }
 
 type Branche struct {
-	gr     string            // texte de la phrase
-	imot   int               // rang du mot courant
-	nods   []Nod             // noeuds validés
-	niveau int               // n° de la branche par rapport au tronc
-	veto   map[int][]Nod     // index : rang du mot; valeur : liste des liens interdits
-	photos map[int]gocol.Res // lemmatisations et appartenance de groupe propres à la branche
-	filles []*Branche        // liste des branches filles
-	vendange []Sol         // résultat de la récolte
+	gr       string            // texte de la phrase
+	imot     int               // rang du mot courant
+	nods     []Nod             // noeuds validés
+	niveau   int               // n° de la branche par rapport au tronc
+	veto     map[int][]Nod     // index : rang du mot; valeur : liste des liens interdits
+	photos   map[int]gocol.Res // lemmatisations et appartenance de groupe propres à la branche
+	filles   []*Branche        // liste des branches filles
+	vendange []Sol             // résultat de la récolte
 }
 
 // le tronc est la branche de départ. Il
@@ -141,12 +141,12 @@ func (b *Branche) domine(ma, mb *Mot) bool {
 	return false
 }
 
-
 func (b *Branche) elague() {
-	// nm nombre de mots
-	if nbmots < 5 {
-		return
-	}
+	/*
+		if nbmots < 4 {
+			return
+		}
+	*/
 	max := nbmots - 1
 	var maxn int
 	for _, sol := range b.vendange {

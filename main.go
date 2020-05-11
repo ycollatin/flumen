@@ -22,7 +22,7 @@ package main
 //   - élaguer les branches avant la fin
 //   - élaguer les branches après récolte
 //   - utiliser les goroutines : go bf.explore()
-//   - enrichir la syntaxe de groupes.la 
+//   - enrichir la syntaxe de groupes.la
 // - Si pléthore, trouver un moyen de navigation en fixant des arcs.
 // - factoriѕer la négation ? neg(ch string) string {}
 // - factoriser les " : guil(ch string) string {}
