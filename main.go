@@ -4,6 +4,8 @@
 package main
 
 // FIXME
+//
+// Pyrrha dicitur esse creata. boucle infinie
 // Mercurius deligavit eu clavis ferreis : tri défectueux : la sol 6 est 3 rangs trop bas.
 // elague semble bloquer dans la phr. 5 de Familiares : regis causa si qui sunt qui velint etc.
 // ob hanc rem : solution trop loin dans la liste.
@@ -17,6 +19,7 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
+// - groupes isolés : Bene hercle faciunt.
 // - Pour éviter la pléthore :
 //   - durcir les conditions des règles
 //   - élaguer les branches avant la fin
