@@ -4,6 +4,7 @@
 package main
 
 // FIXME
+// elague semble bloquer dans la phr. 5 de Familiares : regis causa si qui sunt qui velint etc.
 // ob hanc rem : solution trop loin dans la liste.
 // At sorores : la bonne solution est en troisième position
 // de rem.
@@ -73,6 +74,7 @@ func analyse(expl bool, j bool) {
 		texte.majPhrase()
 		tronc.explore()
 		tronc.recolte()
+		//tronc.elague()
 	}
 	if tronc.vendange == nil {
 		fmt.Println("échec de l'analyse")

@@ -137,6 +137,35 @@ func (b *Branche) domine(ma, mb *Mot) bool {
 	return false
 }
 
+func (b *Branche) elague() {
+	// nm nombre de mots
+	if nbmots < 5 {
+		return
+	}
+	max := nbmots - 1
+	var maxn int
+	for _, sol := range b.vendange {
+		if len(sol) > maxn {
+			maxn = len(sol)
+		}
+	}
+	if maxn < max {
+		max = maxn
+	}
+	for i, sol := range b.vendange {
+		nnods := len(sol)
+		if nnods < max {
+			av := b.vendange[:i]
+			if i < len(b.vendange)-1 {
+				ap := b.vendange[i+1]
+				b.vendange = append(av, ap)
+			} else {
+				copy(b.vendange, av)
+			}
+		}
+	}
+}
+
 // texte de la Branche, le mot courant surligné en rouge
 func (b *Branche) enClair() string {
 	var lm []string
