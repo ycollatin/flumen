@@ -15,7 +15,6 @@ package main
 import (
 	"fmt"
 	"github.com/ycollatin/gocol"
-	"sort"
 	"strings"
 )
 
@@ -137,6 +136,7 @@ func (b *Branche) domine(ma, mb *Mot) bool {
 	return false
 }
 
+
 func (b *Branche) elague() {
 	// nm nombre de mots
 	if nbmots < 5 {
@@ -152,16 +152,12 @@ func (b *Branche) elague() {
 	if maxn < max {
 		max = maxn
 	}
-	for i, sol := range b.vendange {
-		nnods := len(sol)
-		if nnods < max {
-			av := b.vendange[:i]
-			if i < len(b.vendange)-1 {
-				ap := b.vendange[i+1]
-				b.vendange = append(av, ap)
-			} else {
-				copy(b.vendange, av)
-			}
+	nv := make([][]Nod, len(b.vendange))
+	copy(nv, b.vendange)
+	b.vendange = nil
+	for _, sol := range nv {
+		if len(sol) == max {
+			b.vendange = append(b.vendange, sol)
 		}
 	}
 }
@@ -430,10 +426,6 @@ func (b *Branche) recolte() {
 		nrec := f.vendange
 		rec = append(rec, nrec...)
 	}
-	sort.SliceStable(rec, func(i, j int) bool {
-		return len(rec[i]) > len(rec[j])
-	})
-
 	b.vendange = rec
 }
 
