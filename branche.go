@@ -365,7 +365,6 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 		}
 		r--
 	}
-
 	// si les ante ne sont pas au complet, renvoyer nnul
 	if len(nod.mma) < lante {
 		return nnul
@@ -400,15 +399,12 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 		}
 		r++
 	}
+	// le noeud est valide si tous les post ont été trouvés
 	if len(nod.mmp) < len(g.post) {
 		return nnul
 	}
-	// le noeud est valide s'il a trouvé des subs.
-	//if len(nod.mma)+len(nod.mmp) == nod.nbsubs {
-		nod.valide = true
-		return nod
-	//}
-	//return nnul
+	nod.valide = true
+	return nod
 }
 
 func (b *Branche) noyau(m *Mot) *Mot {
