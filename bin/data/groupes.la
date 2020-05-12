@@ -76,15 +76,6 @@ ter:n.epith
 n:@n
 a:@a;epith;;cgn
 
-!ter:a.prepAcc
-!n:@a;;acc;;subst
-!a:@prepAcc @prepAA;prep
-
-! FIXME ob hanc rem
-!ter:a.prepAcc
-!n:"hic";;acc
-!a:@prepAcc @prepAA;prep
-
 ter:v.sujAblObj
 n:@v;;3;;abl
 a:@n @NP;sujet;nomin;n
@@ -134,6 +125,11 @@ n:@n
 a:@n @NP;gen;gén
 a:@v;;3;n
 
+! FIXME carus omnibus
+!ter:a.adat
+!n:@a
+!p:@n @NP @p;dat;dat;;datif
+
 !!!!!!!!!!!!!!!!!!!!!!!!!
 ! Groupes non terminaux !
 !!!!!!!!!!!!!!!!!!!!!!!!!
@@ -141,10 +137,6 @@ a:@v;;3;n
 grp:n.appFam
 n:@NP
 pg:n.fam;app;;cgn
-
-!grp:n.npapp
-!n:@n;app;;;nom
-!p:@NP;app;;cn
 
 ! FIXME dicitur prima mortalis
 grp:v.vEpithSuj
@@ -165,6 +157,10 @@ ag:"dies" "nox" "hora";abl;abl
 
 grp:n.gen
 n:@n
+ag:@n @NP;gen;gén
+
+ter:a.gen
+n:@a
 ag:@n @NP;gen;gén
 
 ter:a.agen
@@ -203,7 +199,7 @@ a:@prepAcc @prepAA;prep
 
 grp:v.obj
 n:@v;;act;;!intr
-ag:@n @a @NP @p !v.coord !n.conjet !n.prepAcc !n.prepAbl !n.inperpetuum;objet;acc
+ag:@n @a @NP @p !n.prepDet !n.conjet !n.prepAcc !n.prepAbl !n.inperpetuum;objet;acc
 
 ! FIXME pour Hygin, FRAGILE
 grp:n.eadata
@@ -251,6 +247,10 @@ grp:v.conjet
 n:@v v
 a:"et";conj
 
+grp:v.conjCoord
+n:@v v
+a:"at" "sed" "nam" "enim";+conj
+
 grp:v.adv
 n:v;;indic,subj,impér
 a:@Adv !"non" !"neque" !"et";+adv
@@ -286,7 +286,7 @@ pg:v.conjv v.conjvsubj v.conjvind;subconj
 ! RELATIVES
 
 grp:sr.sujet
-n:@v;;indic,subj
+n:v;;indic,subj
 a:"qui2";sujet;nomin;n
 
 grp:sr.objet
@@ -332,7 +332,7 @@ n:@v;;act;;abl
 ag:@n @p;abl;abl
 
 grp:v.vobj
-n:@v !v.sumpp !v.ppsum;;act;;!intr
+n:@v !v.sumpp !v.ppsum;;act !part;;!intr
 pg:@n @NP @p !n.prepAcc !n.prepAbl !n.inperpetuum !n.conjet;objet;acc
 
 grp:v.sujet
