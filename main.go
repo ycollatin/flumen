@@ -5,7 +5,7 @@ package main
 
 // FIXME
 //
-// Pyrrha dicitur esse creata. boucle infinie
+// Pyrrha dicitur esse creata. boucle infinie, due au lexsynt dico2:...,attrp
 // Mercurius deligavit eu clavis ferreis : tri défectueux : la sol 6 est 3 rangs trop bas.
 // elague semble bloquer dans la phr. 5 de Familiares : regis causa si qui sunt qui velint etc.
 // ob hanc rem : solution trop loin dans la liste.
