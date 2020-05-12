@@ -130,6 +130,10 @@ a:@v;;3;n
 !n:@a
 !p:@n @NP @p;dat;dat;;datif
 
+ter:v.vSujetInf
+n:"sum";;indic 3 sing
+p:@v;sujet;inf
+
 !!!!!!!!!!!!!!!!!!!!!!!!!
 ! Groupes non terminaux !
 !!!!!!!!!!!!!!!!!!!!!!!!!
@@ -195,6 +199,10 @@ pg:@n n;abl;abl
 
 grp:n.prepAcc
 n:@n @NP @p !n.det;;acc
+a:@prepAcc @prepAA;prep
+
+grp:a.prepAcc
+n:@a;;acc;;subst
 a:@prepAcc @prepAA;prep
 
 grp:v.obj
@@ -319,6 +327,10 @@ grp:v.propinf
 n:@v;;act;;propinf
 ag:v.sujInf v.infSuj;subInf
 
+grp:v.vpropinf
+n:@v;;act;;propinf
+pg:v.sujInf v.infSuj;subInf
+
 grp:v.vpropinfPass
 n:"dico2" "habeo";;indic pass,subj pass
 pg:v.sujInf v.infSuj;propinf;inf
@@ -332,7 +344,7 @@ n:@v;;act;;abl
 ag:@n @p;abl;abl
 
 grp:v.vobj
-n:@v !v.sumpp !v.ppsum;;act !part;;!intr
+n:@v !v.sumpp !v.ppsum;;act, !part;;!intr
 pg:@n @NP @p !n.prepAcc !n.prepAbl !n.inperpetuum !n.conjet;objet;acc
 
 grp:v.sujet
