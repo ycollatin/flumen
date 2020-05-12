@@ -212,7 +212,7 @@ p:"do";epith;part pass nomin fém sing
 
 grp:n.det
 n:@n
-a:@p;det;;cgn;det
+a:@p !n.prepAcc;det;;cgn;det
 
 grp:v.gprep
 n:@v v
