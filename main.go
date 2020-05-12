@@ -5,8 +5,9 @@ package main
 
 // FIXME
 //
+// vult alumnum suum immortalem reddere. La bonne analyse n'apparaît qu'en 8e position.
 // Pyrrha dicitur esse creata. boucle infinie, due au lexsynt dico2:...,attrp
-// Mercurius deligavit eu clavis ferreis : tri défectueux : la sol 6 est 3 rangs trop bas.
+// Mercurius deligavit eum clavis ferreis : tri défectueux : la sol 6 est 3 rangs trop bas.
 // elague semble bloquer dans la phr. 5 de Familiares : regis causa si qui sunt qui velint etc.
 // ob hanc rem : solution trop loin dans la liste.
 // At sorores : la bonne solution est en troisième position
@@ -14,6 +15,9 @@ package main
 // - classement des analyses ramum fregit...
 // - nombreuses règles à vérifier
 // XXX
+//
+// Attention ! l'étiquette 'n' ne désigne pas un pos, mais une famille de groupes.
+// Si un nom nominatif est requis, il faut écrire @n
 //
 // - CONSTRUCTIONS LEXICALES chez Cic.
 // 		* pietate erga te
