@@ -5,6 +5,8 @@ package main
 
 // FIXME
 //
+// l'analyse simple ('a') ne marche plus, c'est 'g' qui est envoyé.
+// v.vobj ne marche plus.
 // vult alumnum suum immortalem reddere. La bonne analyse n'apparaît qu'en 8e position.
 // Pyrrha dicitur esse creata. boucle infinie, due au lexsynt dico2:...,attrp
 // Mercurius deligavit eum clavis ferreis : tri défectueux : la sol 6 est 3 rangs trop bas.
@@ -22,6 +24,8 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
+// - dicitur prima mortalis. avec lexsynt dico1:attrp, boucle infinie.
+// - verbes se construisant avec locatif. Caesarem Sinuessae mansurum nuntiabant.
 // - groupes isolés : Bene hercle faciunt.
 // - Pour éviter la pléthore :
 //   - durcir les conditions des règles
@@ -106,11 +110,12 @@ func analyse(expl bool, j bool) {
 	for _, n := range sol.nods {
 		src = append(src, n.graf()...)
 	}
-	for _, n := range sol.nods {
-		fmt.Println(n.doc())
+	if expl {
+		fmt.Println("\n---- source ----\n")
+		for _, n := range sol.nods {
+			fmt.Println(n.doc())
+		}
 	}
-	fmt.Println("\n---- source ----\n")
-	fmt.Println(strings.Join(src, "\n"))
 	if j {
 		fmt.Println("--- journal ----")
 		fmt.Println(strings.Join(journal, "\n"))
@@ -213,8 +218,8 @@ func main() {
 	lisLexsynt()
 	// choix du texte
 	chxTexte()
-	var modeA bool
-	var modeJ bool
+	var modeA bool  // source du graphe
+	var modeJ bool  // débogage de l'arbre
 	// capture des touches
 	for {
 		k := GetKey()
@@ -232,16 +237,15 @@ func main() {
 		case "c":
 			lemmatise()
 		case "a":
-			analyse(false, false)
 			modeA = false
 			modeJ = false
+			analyse(false, false)
 		case "g":
-			analyse(true, false)
 			modeA = true
-			modeJ = false
+			analyse(true, false)
 		case "d":
-			analyse(true, true)
 			modeJ = true
+			analyse(true, true)
 		case "p":
 			ibr--
 			analyse(modeA, modeJ)
