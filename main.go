@@ -5,8 +5,6 @@ package main
 
 // FIXME
 //
-// l'analyse simple ('a') ne marche plus, c'est 'g' qui est envoyé.
-// v.vobj ne marche plus.
 // vult alumnum suum immortalem reddere. La bonne analyse n'apparaît qu'en 8e position.
 // Pyrrha dicitur esse creata. boucle infinie, due au lexsynt dico2:...,attrp
 // Mercurius deligavit eum clavis ferreis : tri défectueux : la sol 6 est 3 rangs trop bas.
