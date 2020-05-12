@@ -1,10 +1,3 @@
-!FIXME : boucle infinie !
-Pyrrha dicitur.
-dicitur esse.
-esse creata.
-Pyrrha dicitur esse.
-dicitur esse creata.
-Pyrrha dicitur esse creata.
 ob eam rem.
 Mercurius deligavit eum clavis ferreis.
 quantum die ederat, tantum nocte crescebat.
