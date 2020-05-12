@@ -426,21 +426,21 @@ func (b *Branche) noyau(m *Mot) *Mot {
 // récolte tous les noeuds terminaux d'un arbre
 func (b *Branche) recolte() {
 	// signet srecolte
-	var rec []Sol
+	var sols []Sol
 	if b.terminale() {
 		var nbs int
 		for _, n := range b.nods {
 			nbs += n.nbsubs
 		}
-		rec = append(rec, Sol{b.nods, nbs})
-		b.vendange = rec
+		sols = append(sols, Sol{b.nods, nbs})
+		b.vendange = sols
 	}
 	for _, f := range b.filles {
 		f.recolte()
-		nrec := f.vendange
-		rec = append(rec, nrec...)
+		nsols := f.vendange
+		sols = append(sols, nsols...)
 	}
-	b.vendange = rec
+	b.vendange = sols
 }
 
 // vrai si m est compatible avec Sub et le noyau mn
