@@ -231,7 +231,7 @@ n:@v;;indic,subj,part,inf;;datif
 pg:@n @NP @p !"qui2" !"quis";dat;datif
 
 grp:v.attrObj
-n:@v;;act;;attrà !propinf
+n:@v;;act;;attro
 ag:@n @a;attro;acc
 
 grp:v.sujAttr
@@ -290,7 +290,7 @@ n:@v;;indic,subj
 a:"qui2";sujet;nomin;n
 
 grp:sr.objet
-n:@v;;indic,subj
+n:@v;;indic act,subj act
 a:"qui2";objet;acc
 
 grp:sr.cui
@@ -337,7 +337,7 @@ pg:@n @NP @p !n.prepAcc !n.prepAbl !n.inperpetuum !n.conjet;objet;acc
 
 grp:v.sujet
 n:@v;;3
-ag:n;sujet;nomin;n
+ag:@n @NP;sujet;nomin;n
 
 grp:v.sujet1
 n:@v;;1
