@@ -4,6 +4,8 @@
 package main
 
 // FIXME
+//
+// Pyrrha dicitur esse creata. boucle infinie, due au lexsynt dico2:...,attrp
 // Mercurius deligavit eu clavis ferreis : tri défectueux : la sol 6 est 3 rangs trop bas.
 // elague semble bloquer dans la phr. 5 de Familiares : regis causa si qui sunt qui velint etc.
 // ob hanc rem : solution trop loin dans la liste.
@@ -17,12 +19,13 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
+// - groupes isolés : Bene hercle faciunt.
 // - Pour éviter la pléthore :
 //   - durcir les conditions des règles
 //   - élaguer les branches avant la fin
 //   - élaguer les branches après récolte
 //   - utiliser les goroutines : go bf.explore()
-//   - enrichir la syntaxe de groupes.la 
+//   - enrichir la syntaxe de groupes.la
 // - Si pléthore, trouver un moyen de navigation en fixant des arcs.
 // - factoriѕer la négation ? neg(ch string) string {}
 // - factoriser les " : guil(ch string) string {}

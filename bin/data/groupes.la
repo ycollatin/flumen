@@ -176,7 +176,7 @@ n:@v v;;indic,subj
 a:"non" "neque" "haud";neg
 
 grp:v.attrPass
-n:@v;;pass indic,pass subj
+n:@v;;pass indic,pass subj;;attrp
 ag:@NP @n @a;attr;nomin
 
 grp:v.vattrPass

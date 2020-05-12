@@ -9,8 +9,8 @@ import (
 )
 
 type Nod struct {
-	groupe   *Groupe           // groupe du noeud Nod
-	mma, mmp []*Mot            // liste des mots avant et après le noyau
+	groupe   *Groupe // groupe du noeud Nod
+	mma, mmp []*Mot  // liste des mots avant et après le noyau
 	nbsubs   int
 	rra, rrp map[int]gocol.Res // liste des lemmatisations de chaque mot
 	nucl     *Mot              // noyau du Nod

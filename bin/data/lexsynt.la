@@ -6624,7 +6624,8 @@ dica:
 dicatio:
 dicax:
 dicio:
-dico2:datif,infobj,propinf,attrp
+!dico2:datif,infobj,propinf,attrp
+dico2:datif,infobj,propfinf
 dico:
 dicrota:
 Dictaeus:

@@ -25,19 +25,19 @@ var (
 )
 
 type Sol struct {
-	nods  []Nod
+	nods   []Nod
 	nbarcs int
 }
 
 type Branche struct {
-	gr     string            // texte de la phrase
-	imot   int               // rang du mot courant
-	nods   []Nod             // noeuds validés
-	niveau int               // n° de la branche par rapport au tronc
-	veto   map[int][]Nod     // index : rang du mot; valeur : liste des liens interdits
-	photos map[int]gocol.Res // lemmatisations et appartenance de groupe propres à la branche
-	filles []*Branche        // liste des branches filles
-	vendange []Sol         // résultat de la récolte
+	gr       string            // texte de la phrase
+	imot     int               // rang du mot courant
+	nods     []Nod             // noeuds validés
+	niveau   int               // n° de la branche par rapport au tronc
+	veto     map[int][]Nod     // index : rang du mot; valeur : liste des liens interdits
+	photos   map[int]gocol.Res // lemmatisations et appartenance de groupe propres à la branche
+	filles   []*Branche        // liste des branches filles
+	vendange []Sol             // résultat de la récolte
 }
 
 // le tronc est la branche de départ. Il
@@ -141,12 +141,12 @@ func (b *Branche) domine(ma, mb *Mot) bool {
 	return false
 }
 
-
 func (b *Branche) elague() {
-	// nm nombre de mots
-	if nbmots < 5 {
-		return
-	}
+	/*
+		if nbmots < 4 {
+			return
+		}
+	*/
 	max := nbmots - 1
 	var maxn int
 	for _, sol := range b.vendange {
@@ -328,7 +328,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 	nod.groupe = g
 	nod.nucl = m
 	nod.rang = rang
-	nod.nbsubs = nod.groupe.nbsubs
+	nod.nbsubs = g.nbsubs
 
 	// reгcherche rétrograde des subs ante
 	r := rang - 1
@@ -366,6 +366,11 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 		r--
 	}
 
+	// si les ante ne sont pas au complet, renvoyer nnul
+	if len(nod.mma) < lante {
+		return nnul
+	}
+
 	// reгcherche des subs post
 	r = rang + 1
 	for ip, sub := range g.post {
@@ -395,12 +400,15 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 		}
 		r++
 	}
+	if len(nod.mmp) < len(g.post) {
+		return nnul
+	}
 	// le noeud est valide s'il a trouvé des subs.
-	if len(nod.mma)+len(nod.mmp) > 0 {
+	//if len(nod.mma)+len(nod.mmp) == nod.nbsubs {
 		nod.valide = true
 		return nod
-	}
-	return nnul
+	//}
+	//return nnul
 }
 
 func (b *Branche) noyau(m *Mot) *Mot {

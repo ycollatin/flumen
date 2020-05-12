@@ -1,5 +1,14 @@
+!FIXME : boucle infinie !
+Pyrrha dicitur.
+dicitur esse.
+esse creata.
+Pyrrha dicitur esse.
+dicitur esse creata.
+Pyrrha dicitur esse creata.
+ob eam rem.
 Mercurius deligavit eum clavis ferreis.
 quantum die ederat, tantum nocte crescebat.
+Pyrrha mortalis dicitur prima esse creata.
 inde nata est Pyrrha, quae mortalis dicitur prima esse creata.
 Ceres cum vellet alumnum suum immortalem reddere, interdiu lacte divino alebat.
 Ob hanc rem Mercurius Iovis iussu deligavit eum in monte Caucaso ad saxum clavis ferreis.
