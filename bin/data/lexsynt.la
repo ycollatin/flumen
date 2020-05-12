@@ -2326,7 +2326,7 @@ audentia:
 audeo:infobj
 audiens:
 audientia:
-audio:
+audio:propinf
 auditio:
 auditor:
 auditorium:
@@ -6624,7 +6624,6 @@ dica:
 dicatio:
 dicax:
 dicio:
-!dico2:datif,infobj,propinf,attrp
 dico2:datif,infobj,propfinf
 dico:
 dicrota:
@@ -16926,8 +16925,8 @@ placenta:
 Placentia2:
 Placentini:
 Placentinus:
-placeo:
-placet:infobj
+placeo:datif
+placet:infobj,datif
 placide:
 placidus:
 placito:
