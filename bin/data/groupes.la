@@ -142,6 +142,16 @@ ter:v.vinfobj
 n:@v;;act indic,act subj;;infobj
 p:@v;objet;inf
 
+ter:v.sujPropInf
+n:@v;;inf
+a:@n @NP;sujet;acc
+
+! FIXME	bene hercle faciunt
+ter:v.advInterj
+n:@v;;indic,subj
+a:"hercle";;
+a:@Adv;adv
+
 !!!!!!!!!!!!!!!!!!!!!!!!!!
 !! Groupes non terminaux !
 !!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -197,6 +207,10 @@ pg:@n @NP @p !n.prepAcc !n.prepAbl !n.inperpetuum !n.conjet;objet;acc
 grp:v.AdjAttrSuj
 n:v.attr
 a:@n;sujet;nomin;n
+
+grp:v.propInf
+n:@v;;act;;propinf
+a:v.sujPropInf;subInf
 
 !ter:n.nadjp
 !n:@n
