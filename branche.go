@@ -506,12 +506,17 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 	// lexicosyntaxe, exclus
 	if len(el.lsexcl) > 0 {
 		nres = nil
-		for _, excl := range el.lsexcl {
-			for _, an := range res {
-				if !lexsynt(an.Lem, excl) {
-					nres = append(nres, an)
-				}
+		for _, an := range res {
+			va := true
+			for _, excl := range el.lsexcl {
+				va = va && !lexsynt(an.Lem, excl)
 			}
+			if va {
+				nres = append(nres, an)
+			}
+		}
+		if len(nres) == 0 {
+			return nil
 		}
 		res = nres
 	}
