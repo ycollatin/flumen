@@ -31,7 +31,7 @@
 ! - datp : le verbe au passif peut avoir comme sub un datif seul
 ! - dblacc : le verbe peut avoir deux accusatifs comme subs (double accusatif)
 ! - det : le pronom peut servir de déterminant
-! - gen : le verbe, l'adjectif ou le nom peut avoir comme sub un génitif (memini)
+! - gen : le verbe, l'adjectif le nom ou l'adverbe peut avoir comme sub un génitif (memini)
 ! - infobj : le verbe peut avoir un infinitif objet
 ! - loc : peut être fléchi au locatif
 ! - mvm : (pour les verbes) mouvement, accepte l'acc.seul
@@ -1101,8 +1101,8 @@ aliquam:
 aliquando:
 aliquantisper:
 aliquanto:
-aliquantum:
-aliquantus:subst
+aliquantum:gen
+aliquantus:
 aliqua:
 aliquatenus:
 aliqui:
@@ -3882,7 +3882,7 @@ cetera:
 ceteri:det
 ceterum2:
 ceterum:
-ceterus:
+ceterus:det
 Cethegus:
 Ceto:
 cetra:
