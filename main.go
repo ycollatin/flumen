@@ -29,6 +29,7 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
+// - une option pour charger une base de groupes différente ?
 // - dicitur prima mortalis. avec lexsynt dico1:attrp, boucle infinie.
 // - verbes se construisant avec locatif. Caesarem Sinuessae mansurum nuntiabant.
 // - groupes isolés : Bene hercle faciunt.
@@ -46,7 +47,8 @@ package main
 // - traiter la coordination par -que := et -
 // - un champ groupe.anrel - analyses du relatif ?
 // - accord :de personne sujet-verbe et verbe-verbe coord; de mode v-v, etc.
-// - fonction de sortie au format GraphViz
+// - fonction de sortie au format GraphViz.
+// - sortie de lemmatisation exacte.
 // - parasitage de /sum/ par /edo/ : comment supprimer "excl" dans lexsynt
 // - parasitage de /do/ par /dato/ :   "
 
