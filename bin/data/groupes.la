@@ -58,6 +58,10 @@ ter:n.gen
 n:@n
 a:@n @NP;gen;gén
 
+ter:n.etiam
+n:@n @NP
+a:"etiam";adv
+
 ter:adv.gen
 n:@Adv;;;;gen
 p:@n;gen;gén
@@ -119,6 +123,10 @@ a:@n;sujet;nomin;n
 grp:v.sujVAttr
 n:v.sujet;;;;attr
 p:@a;attr;nomin;n
+
+grp:v.gSujet
+n:@v;;3
+pg:n;sujet;nomin;n
 
 grp:v.adv
 n:v
