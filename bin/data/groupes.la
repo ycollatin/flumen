@@ -62,17 +62,45 @@ ter:n.etiam
 n:@n @NP
 a:"etiam";adv
 
+ter:n.net
+n:@n @NP
+a:"et";conj
+
 ter:adv.gen
 n:@Adv;;;;gen
 p:@n;gen;gén
+
+ter:v.ppsum
+n:"sum";;indic,subj,inf
+a:@v;pp;part parf
 
 ter:v.sujet
 n:@v;;3
 a:@n @NP;sujet;nomin;n
 
+ter:v.ego
+n:@v;;1
+a:"ego" "nos";sujet;nomin;n
+
+ter:v.tu
+n:@v;;2
+a:"tu" "vos";sujet;nomin;n
+
+ter:v.hic
+n:@v;;3
+a:"hic" "is";sujet;nomin;n
+
+ter:v.vsujet
+n:@v;;3
+p:@n @NP;sujet;nomin;n
+
 ter:v.attr
 n:@v;;act;;attr
 a:@n @NP @a;attr;nomin;n
+
+ter:v.vattr
+n:@v;;act;;attr
+p:@n @a;attr;nomin;n
 
 ter:v.attrP
 n:@v;;pass;;attrp
@@ -81,6 +109,38 @@ a:@n @NP @a;attr;nomin;n
 ter:v.obj
 n:@v;;act;;!intr
 a:@n;objet;acc
+
+ter:v.objp
+n:@v;;act;;!intr
+a:"nemo" "is";objet;acc
+
+ter:v.datif
+n:@v;;;;datif
+a:@n @NP @p;dat;dat
+
+ter:v.vdatif
+n:@v;;;;datif
+p:@n @NP @p;dat;dat
+
+ter:v.abl
+n:@v;;;;abl
+a:@n @NP @p;abl;abl
+
+ter:v.net
+n:@v;;indic
+a:"et" "at" "sed";conj
+
+ter:v.adv
+n:@v
+a:@Adv;adv
+
+ter:v.vAdv
+n:@v
+p:@Adv !"etiam";adv
+
+ter:v.vinfobj
+n:@v;;act indic,act subj;;infobj
+p:@v;objet;inf
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!
 !! Groupes non terminaux !
@@ -94,6 +154,14 @@ grp:n.prepAcc
 n:@n @NP n.det;;acc
 a:@prepAcc @prepAA n.det;prep
 
+grp:p.prepAcc
+n:"hic" "is" "ego";;acc
+a:@prepAcc @prepAA n.det;prep
+
+grp:a.prepAcc
+n:@a;;acc;;subst
+a:@prepAcc @prepAA n.det;prep
+
 grp:n.prepAblApp
 n:n.app;;abl
 a:@prepAbl @prepAA;prep
@@ -102,15 +170,25 @@ grp:n.nGen
 n:@n
 p:@n @NP n.adj;gen;gén
 
+grp:n.coord
+n:@n @NP
+pg:n.net;coord;;c
+
+! FIXME Antoni exhausit domus
+grp:n.hgen
+n:@n
+a:@v;;3
+a:@n @NP;gen;gén
+
 !FIXME aliquantum est negoti
 grp:adv.hGen
 n:@Adv;;;;gen
-p:v;;
+p:@v;;ind,subj
 p:@n;gen;gén
 
 grp:v.gprep
 n:@v
-ag:n.prepAbl;+gprep
+ag:n.prepAbl n.prepAcc p.prepAcc a.prepAcc;+gprep
 
 grp:v.vobj
 n:@v !v.sumpp !v.ppsum;;act, !part;;!intr
@@ -119,18 +197,6 @@ pg:@n @NP @p !n.prepAcc !n.prepAbl !n.inperpetuum !n.conjet;objet;acc
 grp:v.AdjAttrSuj
 n:v.attr
 a:@n;sujet;nomin;n
-
-grp:v.sujVAttr
-n:v.sujet;;;;attr
-p:@a;attr;nomin;n
-
-grp:v.gSujet
-n:@v;;3
-pg:n;sujet;nomin;n
-
-grp:v.adv
-n:v
-a:@Adv;adv
 
 !ter:n.nadjp
 !n:@n
