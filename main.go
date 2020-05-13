@@ -5,6 +5,13 @@ package main
 
 // FIXME
 //
+// turba *est* - v.attr
+// magna *est* - v.AdjAttrSuj
+//
+// grp:v.AdjAttrSuj
+// n:v.attr
+// a:@a;sujet;nomin;n
+//
 // vult alumnum suum immortalem reddere. La bonne analyse n'apparaît qu'en 8e position.
 // Pyrrha dicitur esse creata. boucle infinie, due au lexsynt dico2:...,attrp
 // Mercurius deligavit eum clavis ferreis : tri défectueux : la sol 6 est 3 rangs trop bas.
