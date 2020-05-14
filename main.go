@@ -6,6 +6,7 @@ package main
 // FIXME
 //
 // Atticae plurimam salutem : Atticae vu comme un génitif
+// Certe non est : adv. certe inconnu
 //
 // Pyrrha dicitur esse creata. boucle infinie, due au lexsynt dico2:...,attrp
 // XXX
