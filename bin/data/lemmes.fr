@@ -18183,6 +18183,7 @@ pugnax:belliqueux, acharné
 pugneus:de poing
 pugno:combattre
 pugnus:poing
+pulchellus:beau petit
 Pulcher2:Pulcher (surnom)
 pulcher:beau
 pulchralia:friandises

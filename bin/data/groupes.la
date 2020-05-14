@@ -76,6 +76,7 @@ ter:n.epith
 n:@n
 a:@a;epith;;cgn
 
+<<<<<<< HEAD
 ter:v.sujAblObj
 n:@v;;3;;abl
 a:@n @NP;sujet;nomin;n
@@ -83,6 +84,25 @@ a:@n;abl;abl
 a:@n @p;objet;acc
 
 ter:v.sujInfobj
+=======
+ter:n.etiam
+n:@n @NP
+a:"etiam";adv
+
+ter:n.net
+n:@n @NP
+a:"et";conj
+
+ter:adv.gen
+n:@Adv;;;;gen
+p:@n;gen;gén
+
+ter:v.ppsum
+n:"sum";;indic,subj,inf
+a:@v;pp;part parf
+
+ter:v.sujet
+>>>>>>> test
 n:@v;;3
 a:@n @NP @p;sujet;nomin;n
 a:@v;objet;inf
@@ -102,13 +122,39 @@ n:@v;;3;;attr
 a:@a;attr;nomin;n
 a:@n @NP @p;sujet;nomin;n
 
+ter:v.ego
+n:@v;;1
+a:"ego" "nos";sujet;nomin;n
+
+ter:v.tu
+n:@v;;2
+a:"tu" "vos";sujet;nomin;n
+
+ter:v.hic
+n:@v;;3
+a:"hic" "is";sujet;nomin;n
+
+ter:v.vsujet
+n:@v;;3
+p:@n @NP;sujet;nomin;n
+
 ter:v.attr
 n:@v !v.ppsum;;act;;attr
 a:@n @NP @a;attr;nomin;n
 
+<<<<<<< HEAD
 ter:v.accMvmt
 n:@v;;;;mvm
 a:@NP @n;accl;acc;;topo
+=======
+ter:v.vattr
+n:@v;;act;;attr
+p:@n @a;attr;nomin;n
+
+ter:v.attrP
+n:@v;;pass;;attrp
+a:@n @NP @a;attr;nomin;n
+>>>>>>> test
 
 ter:n.nepith
 n:@n @NP
@@ -120,6 +166,7 @@ n:@n;;nomin
 p:@v;;3;n
 p:@a;epith;nomin;gn
 
+<<<<<<< HEAD
 ter:n.genvn
 n:@n
 a:@n @NP;gen;gén
@@ -182,6 +229,53 @@ ag:@NP @n @a;attr;nomin
 grp:v.vattrPass
 n:@v;;pass indic,pass subj;;attrp
 pg:@NP @n @a;attr;nomin
+=======
+ter:v.objp
+n:@v;;act;;!intr
+a:"nemo" "is";objet;acc
+
+ter:v.datif
+n:@v;;;;datif
+a:@n @NP @p;dat;dat
+
+ter:v.vdatif
+n:@v;;;;datif
+p:@n @NP @p;dat;dat
+
+ter:v.abl
+n:@v;;;;abl
+a:@n @NP @p;abl;abl
+
+ter:v.net
+n:@v;;indic
+a:"et" "at" "sed";conj
+
+ter:v.adv
+n:@v
+a:@Adv;adv
+
+ter:v.vAdv
+n:@v
+p:@Adv !"etiam";adv
+
+ter:v.vinfobj
+n:@v;;act indic,act subj;;infobj
+p:@v !v.sujPropInf;objet;inf
+
+ter:v.sujPropInf
+n:@v;;inf
+a:@n @NP;sujet;acc
+
+! FIXME	bene hercle faciunt
+ter:v.advInterj
+n:@v;;indic,subj
+a:@Adv;adv
+a:"hercle"
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! Groupes non terminaux !
+!!!!!!!!!!!!!!!!!!!!!!!!!!
+>>>>>>> test
 
 grp:n.prepAbl
 n:@n @NP @p;;abl
@@ -201,9 +295,23 @@ grp:n.prepAcc
 n:@n @NP @p !n.det;;acc
 a:@prepAcc @prepAA;prep
 
+<<<<<<< HEAD
 grp:a.prepAcc
 n:@a;;acc;;subst
 a:@prepAcc @prepAA;prep
+=======
+grp:p.prepAcc
+n:"hic" "is" "ego";;acc
+a:@prepAcc @prepAA n.det;prep
+
+grp:a.prepAcc
+n:@a;;acc;;subst
+a:@prepAcc @prepAA n.det;prep
+
+grp:n.prepAblApp
+n:n.app;;abl
+a:@prepAbl @prepAA;prep
+>>>>>>> test
 
 grp:v.obj
 n:@v;;act;;!intr
@@ -214,9 +322,27 @@ grp:n.eadata
 n:"is";;nomin fém sing
 p:"do";epith;part pass nomin fém sing
 
+<<<<<<< HEAD
 grp:n.det
 n:@n
 a:@p !n.prepAcc;det;;cgn;det
+=======
+grp:n.coord
+n:@n @NP
+pg:n.net;coord;;c
+
+! FIXME Antoni exhausit domus
+grp:n.hgen
+n:@n
+a:@v;;3
+a:@n @NP;gen;gén
+
+!FIXME aliquantum est negoti
+grp:adv.hGen
+n:@Adv;;;;gen
+p:@v;;ind,subj
+p:@n;gen;gén
+>>>>>>> test
 
 grp:v.gprep
 n:@v v
@@ -224,6 +350,7 @@ ag:n.prepAbl n.prepAcc a.prepAcc n.prepDet n.inperpetuum !n.conjet;+gprep
 
 grp:v.vgprep
 n:@v
+<<<<<<< HEAD
 pg:n.prepAbl n.prepAcc n.inperpetuum n.prepDet;+gprep
 
 grp:v.dat
@@ -342,6 +469,9 @@ pg:v.obj;objet
 grp:v.abl
 n:@v;;act;;abl
 ag:@n @p;abl;abl
+=======
+ag:n.prepAbl n.prepAcc p.prepAcc a.prepAcc;+gprep
+>>>>>>> test
 
 grp:v.vobj
 n:@v !v.sumpp !v.ppsum;;act, !part;;!intr
@@ -351,6 +481,7 @@ grp:v.sujet
 n:@v;;3
 ag:@n @NP;sujet;nomin;n
 
+<<<<<<< HEAD
 grp:v.sujet1
 n:@v;;1
 a:"ego" "nos" !n.prepAcc;sujet;;n
@@ -358,6 +489,11 @@ a:"ego" "nos" !n.prepAcc;sujet;;n
 grp:v.vsujet
 n:@v;;3
 p:@n @NP !n.prepAcc;sujet;nomin;n
+=======
+grp:v.propInf
+n:@v;;act;;propinf
+a:v.sujPropInf;subInf
+>>>>>>> test
 
 grp:v.conj
 n:@v;;indic,subj

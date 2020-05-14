@@ -5,21 +5,10 @@ package main
 
 // FIXME
 //
-// turba *est* - v.attr
-// magna *est* - v.AdjAttrSuj
+// Bene hercle faciunt : règle inopérante
+// Atticae plurimam salutem : Atticae vu comme un génitif
 //
-// grp:v.AdjAttrSuj
-// n:v.attr
-// a:@a;sujet;nomin;n
-//
-// vult alumnum suum immortalem reddere. La bonne analyse n'apparaît qu'en 8e position.
 // Pyrrha dicitur esse creata. boucle infinie, due au lexsynt dico2:...,attrp
-// Mercurius deligavit eum clavis ferreis : tri défectueux : la sol 6 est 3 rangs trop bas.
-// elague semble bloquer dans la phr. 5 de Familiares : regis causa si qui sunt qui velint etc.
-// At sorores : la bonne solution est en troisième position
-// de rem.
-// - classement des analyses ramum fregit...
-// - nombreuses règles à vérifier
 // XXX
 //
 // Attention ! l'étiquette 'n' ne désigne pas un pos, mais une famille de groupes.
@@ -29,6 +18,7 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
+// - une option pour charger une base de groupes différente ?
 // - dicitur prima mortalis. avec lexsynt dico1:attrp, boucle infinie.
 // - verbes se construisant avec locatif. Caesarem Sinuessae mansurum nuntiabant.
 // - groupes isolés : Bene hercle faciunt.
@@ -46,7 +36,8 @@ package main
 // - traiter la coordination par -que := et -
 // - un champ groupe.anrel - analyses du relatif ?
 // - accord :de personne sujet-verbe et verbe-verbe coord; de mode v-v, etc.
-// - fonction de sortie au format GraphViz
+// - fonction de sortie au format GraphViz.
+// - sortie de lemmatisation exacte.
 // - parasitage de /sum/ par /edo/ : comment supprimer "excl" dans lexsynt
 // - parasitage de /do/ par /dato/ :   "
 
