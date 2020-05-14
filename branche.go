@@ -313,12 +313,6 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 	if rang+len(g.post)-1 >= nbmots {
 		return nnul
 	}
-/*
-ter:v.advInterj
-n:@v;;indic,subj
-a:"hercle";;
-a:@Adv;adv
-*/
 
 	// validation du noyau
 	m.restmp = b.photos[m.rang]
