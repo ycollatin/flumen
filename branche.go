@@ -313,6 +313,12 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 	if rang+len(g.post)-1 >= nbmots {
 		return nnul
 	}
+/*
+ter:v.advInterj
+n:@v;;indic,subj
+a:"hercle";;
+a:@Adv;adv
+*/
 
 	// validation du noyau
 	m.restmp = b.photos[m.rang]
@@ -332,6 +338,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 
 	// reгcherche rétrograde des subs ante
 	r := rang - 1
+	var nonLies int
 	for ia := lante - 1; ia > -1; ia-- {
 		if r < 0 {
 			// le rang du mot est < 0 : impossible
@@ -339,6 +346,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 		}
 		ma := mots[r]
 		// passer les mots déjà subordonnés
+		//for b.dejasub(ma) || g.ante[ia].lien=="" {
 		for b.dejasub(ma) {
 			r--
 			if r < 0 {
@@ -362,11 +370,15 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 		// groupe. Il y a hyperbate.
 		if sub.lien > "" {
 			nod.mma = append(nod.mma, ma)
+		} else {
+			nonLies++
 		}
 		r--
 	}
 	// si les ante ne sont pas au complet, renvoyer nnul
-	if len(nod.mma) < lante {
+	// Tenir compte des éléments non liés :
+	// hyperbates, vocatifs et interjections
+	if len(nod.mma) + nonLies < lante {
 		return nnul
 	}
 
