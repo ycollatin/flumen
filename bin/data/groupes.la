@@ -140,7 +140,7 @@ p:@Adv !"etiam";adv
 
 ter:v.vinfobj
 n:@v;;act indic,act subj;;infobj
-p:@v;objet;inf
+p:@v !v.sujPropInf;objet;inf
 
 ter:v.sujPropInf
 n:@v;;inf
@@ -149,8 +149,8 @@ a:@n @NP;sujet;acc
 ! FIXME	bene hercle faciunt
 ter:v.advInterj
 n:@v;;indic,subj
-a:"hercle";;
 a:@Adv;adv
+a:"hercle"
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!
 !! Groupes non terminaux !
