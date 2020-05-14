@@ -5,7 +5,6 @@ package main
 
 // FIXME
 //
-// Bene hercle faciunt : règle inopérante
 // Atticae plurimam salutem : Atticae vu comme un génitif
 //
 // Pyrrha dicitur esse creata. boucle infinie, due au lexsynt dico2:...,attrp
