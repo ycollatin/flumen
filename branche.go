@@ -340,7 +340,6 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 		}
 		ma := mots[r]
 		// passer les mots déjà subordonnés
-		//for b.dejasub(ma) || g.ante[ia].lien=="" {
 		for b.dejasub(ma) {
 			r--
 			if r < 0 {
@@ -431,27 +430,30 @@ func (b *Branche) noyau(m *Mot) *Mot {
 
 // récolte tous les noeuds terminaux d'un arbre
 func (b *Branche) recolte() {
-	// signet srecolte
-	var sols []Sol
-	if b.terminale() {
-		var nbs int
-		for _, n := range b.nods {
-			nbs += n.nbsubs
-		}
-		sols = append(sols, Sol{b.nods, nbs})
-		b.vendange = sols
-	}
+	b.vendange = nil
 	for _, f := range b.filles {
-		f.recolte()
-		nsols := f.vendange
-		sols = append(sols, nsols...)
+		if f.terminale() {
+			var nods []Nod
+			for _, n := range f.nods {
+				nods = append(nods, n)
+			}
+			b.vendange = append(b.vendange, Sol{nods, len(nods)})
+		} else {
+			f.recolte()
+			b.vendange = append(b.vendange, f.vendange...)
+		}
 	}
-	b.vendange = sols
 }
 
 // vrai si m est compatible avec Sub et le noyau mn
 func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 	// signet sresEl
+/*
+ter:n.hgen
+n:@n;;nomin,acc,dat,abl
+a:@n @NP;gen;gén
+a:@v;;indic,subj
+*/
 
 	// contraintes de groupe
 	if !el.multi && b.adeja(mn, el.lien) {
