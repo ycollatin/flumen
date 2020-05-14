@@ -40,7 +40,7 @@
 
 ter:n.det
 n:@n
-a:@p @a;det;;cgn;det
+a:@p @a !p.prepAcc;det;;cgn;det
 
 ter:n.adj
 n:@n
@@ -87,6 +87,10 @@ a:@v;pp;part parf
 ter:v.sujet
 n:@v;;3
 a:@n @NP;sujet;nomin;n
+
+ter:v.aSujet
+n:@v;;3
+a:@a;sujet;nomin;n;subst
 
 ter:v.ego
 n:@v;;1
@@ -136,7 +140,7 @@ ter:v.abl
 n:@v;;;;abl
 a:@n @NP @p;abl;abl
 
-ter:v.net
+ter:v.et
 n:@v;;indic
 a:"et" "at" "sed";conj
 
@@ -146,7 +150,11 @@ a:@Adv;adv
 
 ter:v.vAdv
 n:@v
-p:@Adv !"etiam";adv
+p:@Adv !"et" !"etiam";adv
+
+ter:v.neg
+n:@v
+a:"non";neg
 
 ter:v.vinfobj
 n:@v;;act indic,act subj;;infobj
@@ -155,6 +163,14 @@ p:@v !v.sujPropInf;objet;inf
 ter:v.sujPropInf
 n:@v;;inf
 a:@n @NP;sujet;acc
+
+ter:v.capuam
+n:@v;;act
+a:@NP;lieu;acc
+
+ter:v.conjSub
+n:v;;indic,subj
+a:"ut" "cum" "ubi" "quando" "ne";conj
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!
 !! Groupes non terminaux !
@@ -216,137 +232,14 @@ grp:v.propInf
 n:@v;;act;;propinf
 a:v.sujPropInf;subInf
 
-!ter:n.nadjp
-!n:@n
-!p:"Romanus";epith;;cgn
-!
-!ter:n.eius
-!n:@n
-!p:"is";gen;gén
-!
-!ter:n.inperpetuum
-!n:"perpetuus";;acc neut sing
-!a:"in";prep
-!
-!ter:n.etiam
-!n:@n @NP
-!a:"etiam";adv
-!
-!ter:v.sumpp
-!n:"sum";;indic,subj,inf
-!p:@v;pp;part parf
-!
-!ter:v.ppsum
-!n:"sum";;indic,subj,inf
-!a:@v;pp;part parf
-!
-!ter:v.vAdvObj
-!n:@v;;indic,subj
-!p:@Adv !"et";adv
-!p:@n @NP @p;objet;acc
-!
-!ter:n.prepDet
-!n:@n
-!a:@prepAcc @prepAA;prep
-!a:@p;det;acc;n
-!
-!ter:n.epith
-!n:@n
-!a:@a;epith;;cgn
-!
-!ter:v.sujAblObj
-!n:@v;;3;;abl
-!a:@n @NP;sujet;nomin;n
-!a:@n;abl;abl
-!a:@n @p;objet;acc
-!
-!ter:v.sujInfobj
-!n:@v;;3
-!a:@n @NP @p;sujet;nomin;n
-!a:@v;objet;inf
-!
-!ter:v.sujNpAttrP
-!n:@v;;3 pass;;attrp
-!a:@n;sujet;nomin;n
-!a:@NP;attr;nomin;n
-!
-!ter:v.NPsujAttr
-!n:@v;;3;;attr
-!a:@NP;sujet;nomin;n
-!a:@n;attr;nomin;n
-!
-!ter:v.attrsuj
-!n:@v;;3;;attr
-!a:@a;attr;nomin;n
-!a:@n @NP @p;sujet;nomin;n
-!
-!
-!ter:v.accMvmt
-!n:@v;;;;mvm
-!a:@NP @n;accl;acc;;topo
-!
-!ter:n.nepith
-!n:@n @NP
-!p:@a;epith;;cgn
-!
-!! hyperbates
-!ter:n.nvepith
-!n:@n;;nomin
-!p:@v;;3;n
-!p:@a;epith;nomin;gn
-!
-!ter:n.genvn
-!n:@n
-!a:@n @NP;gen;gén
-!a:@v;;3;n
-!
-!! FIXME carus omnibus
-!!ter:a.adat
-!!n:@a
-!!p:@n @NP @p;dat;dat;;datif
-!
-!ter:v.vSujetInf
-!n:"sum";;indic 3 sing
-!p:@v;sujet;inf
-!
-!!!!!!!!!!!!!!!!!!!!!!!!!!
-!! Groupes non terminaux !
-!!!!!!!!!!!!!!!!!!!!!!!!!!
-!
-!grp:n.appFam
-!n:@NP
-!pg:n.fam;app;;cgn
-!
-!! FIXME dicitur prima mortalis
-!grp:v.vEpithSuj
-!n:@v;;3 pass;;attrp
-!gp:n.epith;attr;nomin;;n
-!
-!grp:n.conjet
-!n:@n @NP
-!a:"et";conj
-!
-!grp:n.coord
-!n:@n @NP
-!pg:n.conjet;coord;;c
-!
-!grp:v.dienocte
-!n:@v
-!ag:"dies" "nox" "hora";abl;abl
-!
-!
-!ter:a.gen
-!n:@a
-!ag:@n @NP;gen;gén
-!
-!ter:a.agen
-!n:@a;;;;subst
-!p:@n;gen;gén sing
-!
-!grp:v.neg
-!n:@v v;;indic,subj
-!a:"non" "neque" "haud";neg
-!
+grp:v.coord
+n:@v
+p:v.et;coor
+
+grp:v.vSubConj
+n:@v;;indic,impér
+pg:v.conjSub;sConj
+
 !grp:v.attrPass
 !n:@v;;pass indic,pass subj;;attrp
 !ag:@NP @n @a;attr;nomin
