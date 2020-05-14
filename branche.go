@@ -448,12 +448,6 @@ func (b *Branche) recolte() {
 // vrai si m est compatible avec Sub et le noyau mn
 func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 	// signet sresEl
-/*
-ter:n.hgen
-n:@n;;nomin,acc,dat,abl
-a:@n @NP;gen;gén
-a:@v;;indic,subj
-*/
 
 	// contraintes de groupe
 	if !el.multi && b.adeja(mn, el.lien) {

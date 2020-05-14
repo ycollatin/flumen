@@ -71,7 +71,6 @@ n:@v;;indic,subj
 a:@Adv;adv
 a:"hercle"
 
-! FIXME Bruti accessit exercitus : plus de sujet
 ter:n.hgen
 n:@n;;nomin,acc,dat,abl
 a:@n @NP;gen;gén
