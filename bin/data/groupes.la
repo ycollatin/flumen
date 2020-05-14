@@ -66,6 +66,17 @@ ter:n.net
 n:@n @NP
 a:"et";conj
 
+ter:n.advInterj
+n:@v;;indic,subj
+a:@Adv;adv
+a:"hercle"
+
+! FIXME Bruti accessit exercitus : plus de sujet
+ter:n.hgen
+n:@n;;nomin,acc,dat,abl
+a:@n @NP;gen;gén
+a:@v;;indic,subj
+
 ter:adv.gen
 n:@Adv;;;;gen
 p:@n;gen;gén
@@ -145,12 +156,6 @@ p:@v !v.sujPropInf;objet;inf
 ter:v.sujPropInf
 n:@v;;inf
 a:@n @NP;sujet;acc
-
-! FIXME	bene hercle faciunt
-ter:v.advInterj
-n:@v;;indic,subj
-a:@Adv;adv
-a:"hercle"
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!
 !! Groupes non terminaux !
