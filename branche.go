@@ -625,7 +625,6 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		}
 		res = nres
 	}
-	//res = nres
 	return res
 }
 

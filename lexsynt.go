@@ -23,13 +23,6 @@ func lisLexsynt() {
 
 // vrai si le lemme lem a el parmi ses étiquettes
 func lexsynt(l *gocol.Lemme, el string) bool {
-	/*
-	// exclusion
-	if el[0] == '!' {
-		el := el[1:]
-		return !lexsynt(l, el)
-	}
-	*/
 	// verbes intransitifs
 	if el == "intr" {
 		return strings.Contains(l.Indmorph, "intr.")
