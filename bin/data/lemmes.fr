@@ -16373,6 +16373,7 @@ perpetuo2:faire continuer, ne pas interrompre, rendre continu
 perpetuo:depuis toujours
 perpetuum2:à jamais
 perpetuus:perpétuel
+perplaceo:plaire beaucoup
 perplexabilis:embrouillé, entortillé, embarrassé
 perplexe:avec des détours, d'une manière ambiguë
 perplexus:enchevêtré, entrelacé, confondu, sinueux, tortueux, embrouillé, embarrassé, obscur
