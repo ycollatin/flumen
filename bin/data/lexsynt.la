@@ -5390,7 +5390,7 @@ corcodillus:
 corcodilus:
 cor:
 corculum:
-Corcyra:
+Corcyra:mvm
 Corcyraeus:
 Cordalio:
 cordatus:
@@ -7719,7 +7719,7 @@ erilis:
 Erillus:
 Erinys:
 Eriphyle:
-eripio:
+eripio:datif
 erneum:
 erodo:
 erogatio:
@@ -14042,7 +14042,7 @@ multitudo:
 multiuagus:
 multiuolus:
 multo2:
-multo:
+multo:abl
 multum2:
 multum:
 multus:
@@ -14326,7 +14326,7 @@ nauigatio:
 nauiger:
 nauigiolum:
 nauigium:
-nauigo:
+nauigo:mvm
 nauis:
 nauita:
 nauiter:
