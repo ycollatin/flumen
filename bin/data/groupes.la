@@ -122,7 +122,7 @@ a:@n @NP @a;attr;nomin;n
 
 ter:v.obj
 n:@v;;act;;!intr
-a:@n;objet;acc
+a:@n @NP;objet;acc
 
 ter:v.objp
 n:@v;;act;;!intr
@@ -142,7 +142,7 @@ a:@n @NP @p;abl;abl
 
 ter:v.et
 n:@v;;indic
-a:"et" "at" "sed";conj
+a:"et" "at" "sed" "ergo";conj
 
 ter:v.adv
 n:@v
@@ -150,7 +150,7 @@ a:@Adv;adv
 
 ter:v.vAdv
 n:@v
-p:@Adv !"et" !"etiam";adv
+p:@Adv !"et" !"etiam";+adv
 
 ter:v.neg
 n:@v
