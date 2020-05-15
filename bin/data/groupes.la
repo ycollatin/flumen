@@ -156,6 +156,10 @@ ter:v.neg
 n:@v
 a:"non";neg
 
+ter:v.infobj
+n:@v;;act indic,act subj;;infobj
+a:@v !v.sujPropInf;objet;inf
+
 ter:v.vinfobj
 n:@v;;act indic,act subj;;infobj
 p:@v !v.sujPropInf;objet;inf
@@ -164,6 +168,10 @@ ter:v.sujPropInf
 n:@v;;inf
 a:@n @NP;sujet;acc
 
+ter:v.vSujPropInf
+n:@v;;inf
+p:@p;sujet;acc
+
 ter:v.capuam
 n:@v;;act
 a:@NP;lieu;acc
@@ -171,6 +179,10 @@ a:@NP;lieu;acc
 ter:v.conjSub
 n:v;;indic,subj
 a:"ut" "cum" "ubi" "quando" "ne";conj
+
+ter:nv.enim
+n:@v @n
+a:"enim" "autem";conj
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!
 !! Groupes non terminaux !
@@ -229,8 +241,8 @@ n:v.attr
 a:@n;sujet;nomin;n
 
 grp:v.propInf
-n:@v;;act;;propinf
-a:v.sujPropInf;subInf
+n:@v;;indic;;propinf
+ag:v.sujPropInf v.vSujPropInf;subInf
 
 grp:v.coord
 n:@v
