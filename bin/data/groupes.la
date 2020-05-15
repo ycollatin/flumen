@@ -126,7 +126,7 @@ a:@n;objet;acc
 
 ter:v.objp
 n:@v;;act;;!intr
-a:"nemo" "is";objet;acc
+a:"nemo" "is" "ego" "nihil";objet;acc
 
 ter:v.datif
 n:@v;;;;datif
@@ -160,6 +160,10 @@ ter:v.infobj
 n:@v;;act indic,act subj;;infobj
 a:@v !v.sujPropInf;objet;inf
 
+ter:v.vinfsuj
+n:@v;;act indic,act subj;;infsuj
+p:@v;sujet;inf prés
+
 ter:v.vinfobj
 n:@v;;act indic,act subj;;infobj
 p:@v !v.sujPropInf;objet;inf
@@ -173,8 +177,8 @@ n:@v;;inf
 p:@p;sujet;acc
 
 ter:v.capuam
-n:@v;;act
-a:@NP;lieu;acc
+n:@v;;act;;mvm
+a:@NP;lieu;acc;;mvm
 
 ter:v.conjSub
 n:v;;indic,subj
