@@ -28,7 +28,7 @@ func (t *Texte) append(p string) {
 func (t Texte) affiche(aide string) {
 	ClearScreen()
 	fmt.Printf("%s\n%s, phrase %d, mot %d\n", entete, t.nom, t.compteur+1, texte.imot)
-	fmt.Println(tronc.enClair())
+	fmt.Println(t.enClair())
 	fmt.Println(aide)
 }
 
@@ -58,6 +58,19 @@ func CreeTexte(nf string) *Texte {
 		}
 	}
 	return t
+}
+
+// texte de la Branche, le mot courant surligné en rouge
+func (t *Texte) enClair() string {
+	var lm []string
+	for i := 0; i < len(mots); i++ {
+		m := mots[i].gr
+		if i == t.imot {
+			m = rouge(m)
+		}
+		lm = append(lm, m)
+	}
+	return strings.Join(lm, " ") + "."
 }
 
 // initialise la phrase sur laquelle
