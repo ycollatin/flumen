@@ -69,6 +69,7 @@ var (
 	//modules		[]string
 	ibr   int         // rang de l'analyse (branche) courante
 	rouge func(...interface{}) string
+	vert  func(...interface{}) string
 )
 
 // affiche les arcs syntaxique de la phrase
@@ -204,6 +205,7 @@ func saisie() {
 func main() {
 	// couleur
 	rouge = color.New(color.FgRed, color.Bold).SprintFunc()
+	vert = color.New(color.FgGreen, color.Bold).SprintFunc()
 	// chemins
 	dir, _ := os.Executable()
 	ch = path.Dir(dir)
