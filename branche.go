@@ -31,7 +31,7 @@ type Sol struct {
 
 type Branche struct {
 	gr       string            // texte de la phrase
-	imot     int               // rang du mot courant
+	//imot     int               // rang du mot courant
 	nods     []Nod             // noeuds validés
 	niveau   int               // n° de la branche par rapport au tronc
 	veto     map[int][]Nod     // index : rang du mot; valeur : liste des liens interdits
@@ -172,7 +172,7 @@ func (b *Branche) enClair() string {
 	var lm []string
 	for i := 0; i < len(mots); i++ {
 		m := mots[i].gr
-		if i == b.imot {
+		if i == texte.imot {
 			m = rouge(m)
 		}
 		lm = append(lm, m)
@@ -292,7 +292,7 @@ func (b *Branche) ids(m *Mot) (lids []string) {
 }
 
 func (b *Branche) motCourant() *Mot {
-	return mots[b.imot]
+	return mots[texte.imot]
 }
 
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
