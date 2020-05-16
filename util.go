@@ -4,6 +4,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ycollatin/gocol"
 	"os"
 	"os/exec"
 	"strings"
@@ -89,4 +90,56 @@ func InputInt(q string) int {
 func PrimEl(s, sep string) string {
 	eclats := strings.Split(s, sep)
 	return eclats[0]
+}
+
+func srToString(sr gocol.Sr) (k string, ll []string) {
+	for _, l := range sr.Morphos {
+		ll = append(ll, fmt.Sprintf("   %s", l))
+	}
+	return sr.Lem.Cle, ll
+}
+
+func resToString(resGentes, resCol gocol.Res) (res string) {
+	mapg := make(map[string][]string)
+	mapc := make(map[string][]string)
+	//var clesg, clesc []string
+	var clesg []string
+	// lemmatisation réduite par Gentes
+	for _, srg := range resGentes {
+		k, ll := srToString(srg)
+		mapg[k] = ll
+	}
+	// lemmatisation totale par Collatinus
+	for _, src := range resCol {
+		k, ll := srToString(src)
+		mapc[k] = ll
+	}
+	var lres []string
+	// pour chaque cle de clesc
+	for _, clec := range clesg {
+		if contient(clesg, clec) {
+			// si elle est dans clg : rouge
+			lres = append(lres, rouge(clec))
+			//   pour chaque morpho de clesc
+			morfc := mapc[clec]
+			morfg := mapg[clec]
+			for _, mc := range morfc {
+				if contient(morfg, mc) {
+					//   si elle est dans cleg : rouge
+					lres = append(lres, rouge(mc))
+				} else {
+					//   sinon, en normal
+					lres = append(lres, mc)
+				}
+			}
+		} else {
+			// sinon, tout en normal
+			lres = append(lres, clec)
+			morfc := mapc[clec]
+			for _, mc := range morfc {
+				lres = append(lres, mc)
+			}
+		}
+	}
+	return strings.Join(lres, "\n")
 }

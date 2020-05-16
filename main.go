@@ -159,11 +159,15 @@ func lemmatise() {
 	texte.affiche(aidePh)
 	mc := texte.motCourant()
 	fmt.Println("lemmatisation", rouge(mc.gr))
-	if len(tronc.vendange) > 0 {
+	var res gocol.Res
+	if tronc.vendange != nil {
 		sol := tronc.vendange[ibr]
-		fmt.Println(mc.lemmatisation(sol))
+		for _, nod := range sol.nods {
+			res = append(res, nod.toRes(mc)...)
+		}
+		fmt.Println(resToString(res, mc.ans))
 	} else {
-		fmt.Println(restostring(mc.ans))
+		fmt.Println(gocol.Restostring(mc.ans))
 	}
 }
 

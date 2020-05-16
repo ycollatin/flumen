@@ -131,3 +131,20 @@ func (n *Nod) graf() []string {
 	}
 	return ll
 }
+
+func (n *Nod) toRes(m *Mot) gocol.Res {
+	if n.nucl == m {
+		return n.rnucl
+	}
+	for i, ra := range n.rra {
+		if i == m.rang {
+			return ra
+		}
+	}
+	for i, rp := range n.rrp {
+		if i == m.rang {
+			return rp
+		}
+	}
+	return nil
+}
