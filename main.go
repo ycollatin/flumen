@@ -158,7 +158,7 @@ func chxTexte() {
 // lemmatisation du mot courant
 func lemmatise() {
 	texte.affiche(aidePh)
-	mc := tronc.motCourant()
+	mc := texte.motCourant()
 	fmt.Println("lemmatisation", rouge(mc.gr))
 	if len(tronc.vendange) > 0 {
 		sol := tronc.vendange[ibr]

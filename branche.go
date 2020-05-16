@@ -256,10 +256,6 @@ func (b *Branche) ids(m *Mot) (lids []string) {
 	return
 }
 
-func (b *Branche) motCourant() *Mot {
-	return mots[texte.imot]
-}
-
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 	// snoeud, signet

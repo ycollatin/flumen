@@ -80,6 +80,10 @@ func (t *Texte) majPhrase() {
 	tronc = creeTronc(t.phrases[t.compteur])
 }
 
+func (t *Texte) motCourant() *Mot {
+	return mots[t.imot]
+}
+
 // avance d'une phrase
 func (t *Texte) porro() {
 	if len(t.phrases)-t.compteur > 1 {
