@@ -172,6 +172,11 @@ ter:v.sujPropInf
 n:@v;;inf
 a:@n @NP;sujet;acc
 
+ter:v.hsujPropInf
+n:@v;;inf
+a:@n @NP;sujet;acc
+a:@v;;1,2,3
+
 ter:v.vSujPropInf
 n:@v;;inf
 p:@p;sujet;acc
@@ -245,8 +250,12 @@ n:v.attr
 a:@n;sujet;nomin;n
 
 grp:v.propInf
-n:@v;;indic;;propinf
+n:@v;;indic,impér;;propinf
 ag:v.sujPropInf v.vSujPropInf;subInf
+
+grp:v.vpropInf
+n:@v;;indic,impér;;propinf
+pg:v.sujPropInf v.vSujPropInf v.hsujPropInf;subInf
 
 grp:v.coord
 n:@v
