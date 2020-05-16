@@ -18,12 +18,6 @@ import (
 	"strings"
 )
 
-var (
-	mots    []*Mot
-	nbmots  int
-	journal []string
-)
-
 type Sol struct {
 	nods   []Nod
 	nbarcs int
@@ -31,7 +25,6 @@ type Sol struct {
 
 type Branche struct {
 	gr       string            // texte de la phrase
-	//imot     int               // rang du mot courant
 	nods     []Nod             // noeuds validés
 	niveau   int               // n° de la branche par rapport au tronc
 	veto     map[int][]Nod     // index : rang du mot; valeur : liste des liens interdits
@@ -39,6 +32,13 @@ type Branche struct {
 	filles   []*Branche        // liste des branches filles
 	vendange []Sol             // résultat de la récolte
 }
+
+var (
+	mots    []*Mot
+	nbmots  int
+	journal []string
+	tronc   *Branche
+)
 
 // le tronc est la branche de départ. Il
 // est initialisé avec les mots lemmatisés
