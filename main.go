@@ -6,6 +6,7 @@ package main
 // FIXME
 //
 // Atticae plurimam salutem : Atticae vu comme un génitif
+// Le surlignage des lemmatisations est défectueux.
 //
 // Pyrrha dicitur esse creata. boucle infinie, due au lexsynt dico2:...,attrp
 // Pour d'autres phrases aussi.
@@ -29,15 +30,10 @@ package main
 //   - utiliser les goroutines : go bf.explore()
 //   - enrichir la syntaxe de groupes.la
 // - Si pléthore, trouver un moyen de navigation en fixant des arcs.
-// - factoriѕer la négation ? neg(ch string) string {}
-// - factoriser les " : guil(ch string) string {}
-// - surlignage des lemmatisations : la récolte doit aussi rapporter les nods
-//   des branches terminales
 // - traiter la coordination par -que := et -
 // - un champ groupe.anrel - analyses du relatif ?
 // - accord :de personne sujet-verbe et verbe-verbe coord; de mode v-v, etc.
 // - fonction de sortie au format GraphViz.
-// - sortie de lemmatisation exacte.
 // - parasitage de /sum/ par /edo/ : comment supprimer "excl" dans lexsynt
 // - parasitage de /do/ par /dato/ :   "
 
@@ -162,25 +158,28 @@ func chxTexte() {
 // lemmatisation du mot courant
 func lemmatise() {
 	texte.affiche(aidePh)
-	im := tronc.imot
-	tronc.imot = im
 	mc := tronc.motCourant()
 	fmt.Println("lemmatisation", rouge(mc.gr))
-	fmt.Println(restostring(mc.ans))
+	if len(tronc.vendange) > 0 {
+		sol := tronc.vendange[ibr]
+		fmt.Println(mc.lemmatisation(sol))
+	} else {
+		fmt.Println(restostring(mc.ans))
+	}
 }
 
 // surlignage du mot précédent
 func motprec() {
-	if tronc.imot > 0 {
-		tronc.imot--
+	if texte.imot > 0 {
+		texte.imot--
 		texte.affiche(aidePh)
 	}
 }
 
 // surlignage du mot suivant
 func motsuiv() {
-	if tronc.imot < len(mots)-1 {
-		tronc.imot++
+	if texte.imot < len(mots)-1 {
+		texte.imot++
 		texte.affiche(aidePh)
 	}
 }
