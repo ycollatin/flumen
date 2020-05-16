@@ -13,12 +13,11 @@ import (
 type Texte struct {
 	nom      string
 	compteur int
-	imot     int       // rang du mot courant
+	imot     int // rang du mot courant
 	phrases  []string
 }
 
 var texte *Texte
-
 
 func (t *Texte) append(p string) {
 	t.phrases = append(t.phrases, p)

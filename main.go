@@ -67,7 +67,7 @@ var (
 	dat        bool   // drapeau de chargement des données
 	//module		string
 	//modules		[]string
-	ibr   int         // rang de l'analyse (branche) courante
+	ibr   int // rang de l'analyse (branche) courante
 	rouge func(...interface{}) string
 	vert  func(...interface{}) string
 )
@@ -218,8 +218,8 @@ func main() {
 	lisLexsynt()
 	// choix du texte
 	chxTexte()
-	var modeA bool  // source du graphe
-	var modeJ bool  // débogage de l'arbre
+	var modeA bool // source du graphe
+	var modeJ bool // débogage de l'arbre
 	// capture des touches
 	for {
 		k := GetKey()

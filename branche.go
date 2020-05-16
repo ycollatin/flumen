@@ -332,7 +332,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 	// si les ante ne sont pas au complet, renvoyer nnul
 	// Tenir compte des éléments non liés :
 	// hyperbates, vocatifs et interjections
-	if len(nod.mma) + nonLies < lante {
+	if len(nod.mma)+nonLies < lante {
 		return nnul
 	}
 
