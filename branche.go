@@ -142,11 +142,6 @@ func (b *Branche) domine(ma, mb *Mot) bool {
 }
 
 func (b *Branche) elague() {
-	/*
-		if nbmots < 4 {
-			return
-		}
-	*/
 	max := nbmots - 1
 	var maxn int
 	for _, sol := range b.vendange {
@@ -166,21 +161,6 @@ func (b *Branche) elague() {
 		}
 	}
 }
-
-/*
-// texte de la Branche, le mot courant surligné en rouge
-func (b *Branche) enClair() string {
-	var lm []string
-	for i := 0; i < len(mots); i++ {
-		m := mots[i].gr
-		if i == texte.imot {
-			m = rouge(m)
-		}
-		lm = append(lm, m)
-	}
-	return strings.Join(lm, " ") + "."
-}
-*/
 
 // explore toutes les possibilités d'une branche
 func (b *Branche) explore() {
@@ -264,23 +244,6 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 			}
 		}
 	}
-}
-
-// affiche la Branche en colorant n mots à partir
-// du mot n° d
-func (b *Branche) exr(d, n int) (e string) {
-	var gab string = "%s"
-	for i := 0; i < len(mots); i++ {
-		if e != "" {
-			gab = " %s"
-		}
-		if i >= d && i < d+n {
-			e += fmt.Sprintf(gab, rouge(mots[i].gr))
-		} else {
-			e += fmt.Sprintf(gab, mots[i].gr)
-		}
-	}
-	return
 }
 
 // id des groupes dont m est noyau
