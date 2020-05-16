@@ -13,6 +13,7 @@ import (
 type Texte struct {
 	nom      string
 	compteur int
+	imot     int       // rang du mot courant
 	phrases  []string
 }
 
@@ -26,7 +27,7 @@ func (t *Texte) append(p string) {
 // le texte du param aide.
 func (t Texte) affiche(aide string) {
 	ClearScreen()
-	fmt.Printf("%s\n%s, phrase %d, mot %d\n", entete, t.nom, t.compteur+1, tronc.imot)
+	fmt.Printf("%s\n%s, phrase %d, mot %d\n", entete, t.nom, t.compteur+1, texte.imot)
 	fmt.Println(tronc.enClair())
 	fmt.Println(aide)
 }
