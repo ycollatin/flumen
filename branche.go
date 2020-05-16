@@ -167,6 +167,7 @@ func (b *Branche) elague() {
 	}
 }
 
+/*
 // texte de la Branche, le mot courant surligné en rouge
 func (b *Branche) enClair() string {
 	var lm []string
@@ -179,6 +180,7 @@ func (b *Branche) enClair() string {
 	}
 	return strings.Join(lm, " ") + "."
 }
+*/
 
 // explore toutes les possibilités d'une branche
 func (b *Branche) explore() {
