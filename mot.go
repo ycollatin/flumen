@@ -95,9 +95,38 @@ func genus(sr gocol.Sr) gocol.Sr {
 	return sr
 }
 
-// retourne une chaîne humainement lisible des
-// lemmatisations de an.
-func restostring(an gocol.Res) string {
+func (m *Mot) lemmatisation(sol Sol) string {
+	var ll []string
+	for _, nod := range sol.nods {
+		if nod.nucl == m {
+			for _, l := range restoll(nod.rnucl) {
+				ll = append(ll, rouge(l))
+			}
+		}
+		for i, ma := range nod.mma {
+			if ma == m {
+				for _, l := range restoll(nod.rra[i]) {
+					ll = append(ll, rouge(l))
+				}
+			}
+		}
+		for i, mp := range nod.mmp {
+			if mp == m {
+				for _, l := range restoll(nod.rrp[i]) {
+					ll = append(ll, rouge(l))
+				}
+			}
+		}
+	}
+	for _, l := range restoll(m.ans) {
+		if !contient(ll, l) {
+			ll = append(ll, l)
+		}
+	}
+	return strings.Join(ll, "\n")
+}
+
+func restoll(an gocol.Res) []string {
 	var lr []string
 	for _, rl := range an {
 		if rl.Lem == nil {
@@ -113,5 +142,11 @@ func restostring(an gocol.Res) string {
 			lr = append(lr, "      "+m)
 		}
 	}
-	return strings.Join(lr, "\n")
+	return lr
+}
+
+// retourne une chaîne humainement lisible des
+// lemmatisations de an.
+func restostring(an gocol.Res) string {
+	return strings.Join(restoll(an), "\n")
 }
