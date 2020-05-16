@@ -102,34 +102,33 @@ func srToString(sr gocol.Sr) (k string, ll []string) {
 func resToString(resGentes, resCol gocol.Res) (res string) {
 	mapg := make(map[string][]string)
 	mapc := make(map[string][]string)
-	//var clesg, clesc []string
-	var clesg []string
+	var clesg, clesc []string
 	// lemmatisation réduite par Gentes
 	for _, srg := range resGentes {
 		k, ll := srToString(srg)
+		clesg = append(clesg, k)
 		mapg[k] = ll
 	}
 	// lemmatisation totale par Collatinus
 	for _, src := range resCol {
 		k, ll := srToString(src)
+		clesc = append(clesc, k)
 		mapc[k] = ll
 	}
 	var lres []string
 	// pour chaque cle de clesc
-	for _, clec := range clesg {
+	for _, clec := range clesc {
 		if contient(clesg, clec) {
-			// si elle est dans clg : rouge
-			lres = append(lres, rouge(clec))
-			//   pour chaque morpho de clesc
-			morfc := mapc[clec]
-			morfg := mapg[clec]
-			for _, mc := range morfc {
-				if contient(morfg, mc) {
-					//   si elle est dans cleg : rouge
-					lres = append(lres, rouge(mc))
-				} else {
-					//   sinon, en normal
-					lres = append(lres, mc)
+			// si elle est dans clg : vert
+			lres = append(lres, vert(clec))
+			//  afficher toutes les morphos de cleg
+			for _, morf := range mapg[clec] {
+				lres = append(lres, vert(morf))
+			}
+			// afficher les clés de mapc absentes de mapg
+			for _, morf := range mapc[clec] {
+				if !contient(mapg[clec], morf) {
+					lres = append(lres, morf)
 				}
 			}
 		} else {
