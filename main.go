@@ -67,9 +67,8 @@ var (
 	dat        bool   // drapeau de chargement des données
 	//module		string
 	//modules		[]string
-	ibr   int
+	ibr   int         // rang de l'analyse (branche) courante
 	rouge func(...interface{}) string
-	texte *Texte
 )
 
 // affiche les arcs syntaxique de la phrase
