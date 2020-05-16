@@ -17,7 +17,8 @@ type Texte struct {
 	phrases  []string
 }
 
-var tronc *Branche
+var texte *Texte
+
 
 func (t *Texte) append(p string) {
 	t.phrases = append(t.phrases, p)
