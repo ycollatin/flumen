@@ -99,17 +99,21 @@ func srToString(sr gocol.Sr) (k string, ll []string) {
 	return sr.Lem.Cle, ll
 }
 
+// Compare les lemmatisations Gentes et les lemmatisations Collatinus
+// Les premières sont un sous-ensemble des secondes, et seront 
+// colorées en vert.
 func resToString(resGentes, resCol gocol.Res) (res string) {
-	mapg := make(map[string][]string)
-	mapc := make(map[string][]string)
-	var clesg, clesc []string
-	// lemmatisation réduite par Gentes
+	// 
+	mapg := make(map[string][]string) // clé : Clé de lemme
+	mapc := make(map[string][]string) // valeur : morphos
+	var clesg, clesc []string         // clés des deux maps
+	// map et clés Gentes
 	for _, srg := range resGentes {
 		k, ll := srToString(srg)
 		clesg = append(clesg, k)
 		mapg[k] = ll
 	}
-	// lemmatisation totale par Collatinus
+	// map et clés Collatinus
 	for _, src := range resCol {
 		k, ll := srToString(src)
 		clesc = append(clesc, k)
