@@ -105,9 +105,19 @@ ter:v.tu
 n:@v;;2
 a:"tu" "vos";sujet;nomin;n
 
+ter:v.gratias
+n:@v;;act
+a:@n @p @NP;datif;dat
+p:"gratia";objet;acc plur
+
 ter:v.hic
 n:@v;;3
 a:"hic" "is" "ille" "iste";sujet;nomin;n
+
+ter:v.interjHic
+n:@v;;3
+a:"hic" "is" "ille" "iste";sujet;nomin;n
+a:"hercle"
 
 ter:v.vsujet
 n:@v;;3
@@ -131,7 +141,7 @@ a:@n @NP;objet;acc
 
 ter:v.objp
 n:@v;;act;;!intr
-a:"ego" "hic" "is" "nemo" "nihil";objet;acc
+a:"ego" "hic" "is" "nemo" "nihil" "tu";objet;acc
 
 ter:v.datif
 n:@v;;;;datif
