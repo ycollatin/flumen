@@ -4,14 +4,6 @@
 package main
 
 // FIXME
-//
-// Improbas frumentum Siculorum
-//      ┌obje┐   ┌gen──┐
-//      │    ▽   │     ▽
-//Improbas frumentum Siculorum.
-// Le surlignage des lemmatisations est défectueux
-// pour Improbas et frumentum
-//
 // Pyrrha dicitur esse creata. boucle infinie, due au lexsynt dico2:...,attrp
 // Pour d'autres phrases aussi.
 //
