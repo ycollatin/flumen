@@ -24,6 +24,8 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
+// - trouver un moyen d'éliminer de l'arbre "hercle" et autres interjections,
+//   ce qui permettrait d'économiser 2+ règles.
 // - une option pour charger une base de groupes différente ?
 // - dicitur prima mortalis. avec lexsynt dico1:attrp, boucle infinie.
 // - verbes se construisant avec locatif. Caesarem Sinuessae mansurum nuntiabant.
