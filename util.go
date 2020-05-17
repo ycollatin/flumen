@@ -103,6 +103,26 @@ func srToTr(sr gocol.Sr) (tr string) {
 	return fmt.Sprintf("%s [%s] : %s", sr.Lem.Gr, sr.Lem.Pos, sr.Lem.Traduction)
 }
 
+// renvoie l'intersection entre resa et resb
+func diffRes(resa, resb gocol.Res) (res gocol.Res) {
+	for _, sra := range resa {
+		for _, srb := range resb {
+			if sra.Lem == srb.Lem {
+				var nsr gocol.Sr
+				nsr.Morphos = make([]string, len(sra.Morphos))
+				nsr.Lem = sra.Lem
+				for _, morfa := range sra.Morphos {
+					if contient(srb.Morphos, morfa) {
+						nsr.Morphos = append(nsr.Morphos, morfa)
+					}
+				}
+				res = append(res, nsr)
+			}
+		}
+	}
+	return
+}
+
 // Compare les lemmatisations Gentes et les lemmatisations Collatinus
 // Les premières sont un sous-ensemble des secondes, et seront
 // colorées en vert.

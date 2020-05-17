@@ -204,20 +204,17 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 				if mph == m {
 					// photo du noyau
 					bf.photos[mph.rang] = m.restmp
-					n.rnucl = mph.restmp
 				}
 				for _, ma := range n.mma {
 					// photos des éléments antéposés
 					if mph == ma {
 						bf.photos[ma.rang] = ma.restmp
-						n.rra[ma.rang] = mph.restmp
 					}
 				}
 				for _, mp := range n.mmp {
 					// photos des éléments postposés
 					if mph == mp {
 						bf.photos[mp.rang] = mp.restmp
-						n.rrp[mp.rang] = mph.restmp
 					}
 				}
 			}
@@ -320,11 +317,12 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 		if ma.restmp == nil {
 			return nnul
 		}
-		// si le lien est muet, c'est qu'il est étranger au
-		// groupe. Il y a hyperbate.
 		if sub.lien > "" {
 			nod.mma = append(nod.mma, ma)
+			nod.rra[ma.rang] = ma.restmp
 		} else {
+			// si le lien est muet, c'est qu'il est étranger au
+			// groupe. Il y a hyperbate.
 			nonLies++
 		}
 		r--
@@ -362,6 +360,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 		// cf. supra nod.mma
 		if g.post[ip].lien > "" {
 			nod.mmp = append(nod.mmp, mp)
+			nod.rrp[mp.rang] = mp.restmp
 		}
 		r++
 	}

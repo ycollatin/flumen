@@ -29,6 +29,16 @@ func (n *Nod) copie() Nod {
 		nn.mmp = append(nn.mmp, m)
 	}
 	nn.nucl = n.nucl
+	// ajout des lemmatisations réduites
+	nn.rra = make(map[int]gocol.Res)
+	for k, v := range n.rra {
+		nn.rra[k] = v
+	}
+	nn.rrp = make(map[int]gocol.Res)
+	for k, v := range n.rrp {
+		nn.rrp[k] = v
+	}
+	// lemmatisation réduite du noyau
 	for _, r := range n.rnucl {
 		var nr gocol.Sr
 		nr.Lem = r.Lem
