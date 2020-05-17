@@ -99,6 +99,10 @@ func srToString(sr gocol.Sr) (k string, ll []string) {
 	return sr.Lem.Cle, ll
 }
 
+func srToTr(sr gocol.Sr) (tr string) {
+	return fmt.Sprintf("%s [%s] : %s", sr.Lem.Gr, sr.Lem.Pos, sr.Lem.Traduction)
+}
+
 // Compare les lemmatisations Gentes et les lemmatisations Collatinus
 // Les premières sont un sous-ensemble des secondes, et seront 
 // colorées en vert.
@@ -107,6 +111,7 @@ func resToString(resGentes, resCol gocol.Res) (res string) {
 	mapg := make(map[string][]string) // clé : Clé de lemme
 	mapc := make(map[string][]string) // valeur : morphos
 	var clesg, clesc []string         // clés des deux maps
+	var trsc []string
 	// map et clés Gentes
 	for _, srg := range resGentes {
 		k, ll := srToString(srg)
@@ -117,14 +122,15 @@ func resToString(resGentes, resCol gocol.Res) (res string) {
 	for _, src := range resCol {
 		k, ll := srToString(src)
 		clesc = append(clesc, k)
+		trsc = append(trsc, srToTr(src))
 		mapc[k] = ll
 	}
 	var lres []string
 	// pour chaque cle de clesc
-	for _, clec := range clesc {
+	for i, clec := range clesc {
 		if contient(clesg, clec) {
 			// si elle est dans clg : vert
-			lres = append(lres, vert(clec))
+			lres = append(lres, vert(trsc[i]))
 			//  afficher toutes les morphos de cleg
 			for _, morf := range mapg[clec] {
 				lres = append(lres, vert(morf))
@@ -137,7 +143,7 @@ func resToString(resGentes, resCol gocol.Res) (res string) {
 			}
 		} else {
 			// sinon, tout en normal
-			lres = append(lres, clec)
+			lres = append(lres, trsc[i])
 			morfc := mapc[clec]
 			for _, mc := range morfc {
 				lres = append(lres, mc)
