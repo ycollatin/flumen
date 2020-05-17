@@ -80,6 +80,11 @@ ter:adv.gen
 n:@Adv;;;;gen
 p:@n;gen;gén
 
+! FIXME horum nihil negat
+ter:p.gen
+n:@p;;;;gen
+a:"hic" "qui2";gen;gén
+
 ter:v.ppsum
 n:"sum";;indic,subj,inf
 a:@v;pp;part parf
@@ -102,7 +107,7 @@ a:"tu" "vos";sujet;nomin;n
 
 ter:v.hic
 n:@v;;3
-a:"hic" "is";sujet;nomin;n
+a:"hic" "is" "ille" "iste";sujet;nomin;n
 
 ter:v.vsujet
 n:@v;;3
@@ -126,7 +131,7 @@ a:@n @NP;objet;acc
 
 ter:v.objp
 n:@v;;act;;!intr
-a:"nemo" "is" "ego" "nihil";objet;acc
+a:"ego" "hic" "is" "nemo" "nihil";objet;acc
 
 ter:v.datif
 n:@v;;;;datif
@@ -154,7 +159,7 @@ p:@Adv !"et" !"etiam";+adv
 
 ter:v.neg
 n:@v
-a:"non";neg
+a:"non" "haud";neg
 
 ter:v.infobj
 n:@v;;act indic,act subj;;infobj
@@ -225,13 +230,11 @@ grp:n.coord
 n:@n @NP
 pg:n.net;coord;;c
 
-! FIXME Antoni exhausit domus
 grp:n.hgen
 n:@n
 a:@v;;3
 a:@n @NP;gen;gén
 
-!FIXME aliquantum est negoti
 grp:adv.hGen
 n:@Adv;;;;gen
 p:@v;;ind,subj
@@ -446,7 +449,3 @@ pg:v.conjSub;sConj
 !grp:n.npApp
 !n:@NP;;
 !p:@n !n.prepAcc !n.prepAbl;app;;cgn
-!
-!grp:n.ngen
-!n:@n
-!pg:@n @NP !"sus";gen;gén
