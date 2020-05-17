@@ -1,25 +1,24 @@
-!114
-Haec ille dixit
-! 117
+! 136
+id hercle restabat.
+id uelim cogites.
+!139
+illis egi gratias.
 haec properantes scripsimus.
-! 120
-Haud equidem adsentior.
-! 127
-hoc igitur explica.
-! -> 132
 faciam quod uolunt.
 Dubitate quid agatis.
 Dicendum necessario est.
-
+! testés 
 ob eam rem.
 mare Ionium.
 ceterique dii.
 ambitus redit.
 epistulam legi.
+Haec ille dixit.
 magna turba est.
 Legatos decernis.
 in Monte Parnasso.
 Marcus erat aeger.
+hoc igitur explica.
 Immo locuples erat.
 dea Isis nuncupatur.
 Eodem duce redibant.
@@ -29,6 +28,7 @@ aderat etiam Fauonius.
 Dionysum iube saluere.
 ambitus redit immanis.
 Ex Inacho et Argia Io.
+Haud equidem adsentior.
 omnia ardere coeperunt.
 dicitur prima mortalis.
 Magium fratrem reliquit.
