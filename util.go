@@ -104,10 +104,10 @@ func srToTr(sr gocol.Sr) (tr string) {
 }
 
 // Compare les lemmatisations Gentes et les lemmatisations Collatinus
-// Les premières sont un sous-ensemble des secondes, et seront 
+// Les premières sont un sous-ensemble des secondes, et seront
 // colorées en vert.
 func resToString(resGentes, resCol gocol.Res) (res string) {
-	// 
+	//
 	mapg := make(map[string][]string) // clé : Clé de lemme
 	mapc := make(map[string][]string) // valeur : morphos
 	var clesg, clesc []string         // clés des deux maps
