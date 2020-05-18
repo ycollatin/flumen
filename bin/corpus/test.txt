@@ -1,16 +1,23 @@
-!187
-nam ibi erat.
-!183
-moriar nisi facete.
-! 174
-Mihi ita uidetur.
-Mihi haec uidentur.
-Male hercule narras.
-! 163 3 solutions erronnées
-Magnum dicis malum
+!236
+o prudentem Oppium.
+nullo modo quidem
+Nostis quae sequuntur.
+non fuit negandum
+! nil = nihil non détecté
+nil me laedet.
+nihil tamen certi.
+Neminem uestrum fallit.
+nemo est minus.
+nihil legi humanius
+! solutions erronnées
+Multos necesse est.
+Minus est mirandum
+Magnum dicis malum.
 inuideo potentiae Vestori.
 itaque miser torquetur.
 Magium fratrem reliquit.
+moriar nisi facete.
+Male hercule narras.
 !
 id uelim cogites.
 haec properantes scripsimus.
