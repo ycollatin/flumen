@@ -43,7 +43,7 @@ n:@n
 a:@p @a !p.prepAcc;det;;cgn;det
 
 ter:n.adj
-n:@n
+n:@n @NP
 a:@a;epith;;cgn
 
 ter:n.nAdj
@@ -74,6 +74,12 @@ a:"hercle"
 ter:n.hgen
 n:@n;;nomin,acc,dat,abl
 a:@n @NP;gen;gén
+a:@v;;indic,subj
+
+! FIXME Magnum dicis malum.
+ter:n.hepith
+n:@n
+a:@a;epith;!nomin;cgn
 a:@v;;indic,subj
 
 ter:adv.gen
@@ -147,6 +153,10 @@ ter:v.datif
 n:@v;;;;datif
 a:@n @NP @p;dat;dat
 
+ter:v.datp
+n:@v;;pass;;datp
+a:@n @NP @p;dat;dat
+
 ter:v.vdatif
 n:@v;;;;datif
 p:@n @NP @p;dat;dat
@@ -157,7 +167,7 @@ a:@n @NP @p;abl;abl
 
 ter:v.et
 n:@v;;indic
-a:"et" "at" "sed" "ergo";conj
+a:"et" "at" "ergo" "nam" "sed";conj
 
 ter:v.adv
 n:@v
@@ -202,7 +212,7 @@ a:@NP;lieu;acc;;mvm
 
 ter:v.conjSub
 n:v;;indic,subj
-a:"ut" "cum" "ubi" "quando" "ne";conj
+a:"cum" "ne" "nisi" "quando" "si" "ubi" "ut";conj
 
 ter:nv.enim
 n:@v @n
