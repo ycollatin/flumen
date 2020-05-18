@@ -66,11 +66,6 @@ ter:n.net
 n:@n @NP
 a:"et";conj
 
-!ter:n.advInterj
-!n:@v;;indic,subj
-!a:@Adv;adv
-!a:"hercle"
-
 ter:n.hgen
 n:@n;;nomin,acc,dat,abl
 a:@n @NP;gen;gén
@@ -119,11 +114,6 @@ p:"gratia";objet;acc plur
 ter:v.hic
 n:@v;;3
 a:"hic" "is" "ille" "iste";sujet;nomin;n
-
-ter:v.interjHic
-n:@v;;3
-a:"hic" "is" "ille" "iste";sujet;nomin;n
-a:"hercle"
 
 ter:v.vsujet
 n:@v;;3
