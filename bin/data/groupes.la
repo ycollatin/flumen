@@ -66,10 +66,10 @@ ter:n.net
 n:@n @NP
 a:"et";conj
 
-ter:n.advInterj
-n:@v;;indic,subj
-a:@Adv;adv
-a:"hercle"
+!ter:n.advInterj
+!n:@v;;indic,subj
+!a:@Adv;adv
+!a:"hercle"
 
 ter:n.hgen
 n:@n;;nomin,acc,dat,abl
