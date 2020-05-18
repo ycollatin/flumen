@@ -25,6 +25,7 @@ type Mot struct {
 	rang   int       // rang du mot dans la phrase à partir de 0
 	ans    gocol.Res // lemmatisations et id du groupe si le mot devient noyau
 	restmp gocol.Res // lemmatisation de test d'un noeud
+	interj bool		 // tous les lemmes du mot sont des interjections
 }
 
 func creeMot(m string) *Mot {
@@ -45,10 +46,12 @@ func creeMot(m string) *Mot {
 	// provisoire XXX
 	// exclusions de mots rares faisant obstacle à des analyses importantes
 	var nres gocol.Res
+	mot.interj = true
 	for _, an := range mot.ans {
 		if !lexsynt(an.Lem, "excl") {
 			nres = append(nres, an)
 		}
+		mot.interj = mot.interj && an.Lem.Pos == "intj"
 	}
 	mot.ans = nres
 	return mot
