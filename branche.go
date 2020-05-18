@@ -298,7 +298,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 		}
 		ma := mots[r]
 		// passer les mots déjà subordonnés
-		for b.dejasub(ma) {
+		for b.dejasub(ma) || ma.interj {
 			r--
 			if r < 0 {
 				return nnul
@@ -341,7 +341,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 			break
 		}
 		mp := mots[r]
-		for b.dejasub(mp) || b.domine(mp, m) {
+		for b.dejasub(mp) || b.domine(mp, m) || mp.interj {
 			r++
 			if r >= nbmots {
 				return nnul
