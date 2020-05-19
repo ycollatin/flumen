@@ -151,6 +151,10 @@ ter:v.obj
 n:@v;;act;;!intr
 a:@n @NP;objet;acc
 
+ter:v.vobja
+n:@v;;act;;!intr
+p:@a;objet;acc;;subst
+
 ter:v.obja
 n:@v;;act;;!intr
 a:@a;objet;acc;;subst
@@ -162,6 +166,10 @@ a:"ego" "hic" "is" "nemo" "nihil" "tu";objet;acc
 ter:v.datif
 n:@v;;;;datif
 a:@n @NP @p;dat;dat
+
+ter:v.datifa
+n:@v;;;;datif
+a:@a;dat;dat;;subst
 
 ter:v.vdatif
 n:@v;;;;datif
@@ -182,6 +190,10 @@ p:@n @NP @p;dat;dat
 ter:v.abl
 n:@v;;;;abl
 a:@n @NP @p;abl;abl
+
+ter:v.prcum
+n:v;;;;abl
+a:"mecum" "tecum" "nobiscum" "vobiscum";abl
 
 ter:v.vabl
 n:@v;;;;abl
@@ -252,6 +264,14 @@ p:@n @NP;gen;gén
 ter:v.conjSub
 n:v;;indic,subj
 a:"cum" "ne" "nisi" "quando" "quia" "si" "ubi" "ut";conj
+
+ter:v.subjDir
+n:@v;;indic,subj;;subjdir
+a:@v;subj;subj
+
+ter:v.vSubjDir
+n:@v;;indic,subj;;subjdir
+p:@v;subj;subj
 
 ter:nv.enim
 n:@v @n
@@ -335,6 +355,34 @@ grp:v.vSubConj
 n:@v;;indic,impér
 pg:v.conjSub;sConj
 
+! RELATIVES
+ter:v.ubicumque
+n:v;;indic,subj
+a:"ubicumque";lieu
+
+grp:v.advrel
+n:@v;;indic,subj
+ag:v.ubicumque;subrel
+
+!grp:sr.sujet
+!n:v;;indic,subj
+!a:"qui2";sujet;nomin;n
+!
+!grp:sr.objet
+!n:@v;;indic act,subj act
+!a:"qui2";objet;acc
+!
+!grp:sr.cui
+!n:@v;;indic,subj;;datif
+!a:"qui2";dat;dat
+!
+!grp:n.sr
+!n:@n n @NP;
+!pg:sr;subrel
+!
+!grp:p.sr
+!n:"is" "nihil"
+!pg:sr;subrel
 !grp:v.attrPass
 !n:@v;;pass indic,pass subj;;attrp
 !ag:@NP @n @a;attr;nomin
