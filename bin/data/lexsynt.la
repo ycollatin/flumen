@@ -591,7 +591,7 @@ adsensor:
 adsensus:
 adsentatio:
 adsentator:
-adsentio:
+adsentio:datif
 adsentior:datif
 adsentor:
 adsequor:
@@ -947,7 +947,7 @@ agninus:
 agnitio:
 agnosco:
 agnus:
-ago:ppp
+ago:ppp,datif
 Agonalis2:
 Agonis:
 Agonius:
@@ -1867,7 +1867,7 @@ Ardeates:
 Ardeatinus:
 ardens:
 ardenter:
-ardeo:
+ardeo:abl
 ardesco:
 ardor:
 Arduenna:
@@ -2959,7 +2959,7 @@ brumalis:
 bruma:
 Brundisini:
 Brundisinus:
-Brundisium:
+Brundisium:loc
 Bruttedius:
 Bruttiani:
 Bruttianus:
@@ -6228,7 +6228,7 @@ delectabilis:
 delectamentum:
 delectatio:
 delecto:
-delector:
+delector:abl
 delectus:
 delegatio:
 delego:
@@ -14045,7 +14045,7 @@ multo2:
 multo:abl
 multum2:
 multum:
-multus:
+multus:subst
 Muluccha:
 mulus:
 Muluius:
@@ -15813,7 +15813,7 @@ parumper:
 parum:
 paruulus:
 paruum:
-paruus:datif,posn
+paruus:datif,posn,subst
 pasceolus:
 pasco:
 pascuum:
@@ -17994,7 +17994,7 @@ propinquitas:
 propinquo:
 propinquum:
 propinquus2:
-propinquus:
+propinquus:subst
 propitio:
 propitius:
 propius:
@@ -18095,7 +18095,7 @@ protrudo:
 proturbo:
 prout:
 prouectus:
-proueho:
+proueho:abl
 prouenio:
 prouentus:
 prouerbium:
@@ -18183,7 +18183,7 @@ pudendus:
 Pudens2:
 pudens:
 pudenter:
-pudeo:infobj
+pudeo:infobj,gen
 pudibundus:
 pudice:
 pudicitia:
@@ -19298,7 +19298,7 @@ rorulentus:
 rosarium:
 rosa:
 roscidus:
-Roscius:
+Roscius:subst
 rosetum:
 Roseus2:
 roseus:
@@ -22830,7 +22830,7 @@ tutor:
 tuto:
 tutum:
 tutus:
-tuus:det
+tuus:det,subst
 Tycha:
 Tychius:
 Tydeus:
@@ -23077,7 +23077,7 @@ utiliter:
 utinam:conjsubj
 utique:
 uti:
-utor:
+utor:abl
 utpote:
 ut:conjind,conjsubj
 utqui:
@@ -23597,7 +23597,7 @@ uictrix:
 uictus:
 uicus:
 uidelicet:
-uideo:datp,attro
+uideo:datp,attro,propinf
 uidibius:
 uidua:
 uiduertas:
