@@ -17325,6 +17325,7 @@ praeceptum:précepte, règle, leçon
 praecerpo:cueillir avant le temps, arracher en avant, arracher, déflorer, flétrir
 praecidaneus:précidané (préalablement immolé en parl. de victimes)
 praecido:couper à ras, couper
+praecinctura:enceinte ; manière de porter la toge
 praecinctus:vêtu, entouré, recouvert
 praecingo:ceindre, entourer
 praecino:résonner devant
