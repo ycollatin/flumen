@@ -33,11 +33,12 @@ func creeMot(m string) *Mot {
 	mot.gr = m
 	var echec bool
 	mot.ans, echec = gocol.Lemmatise(m)
-	if echec {
-		mot.ans, echec = gocol.Lemmatise(gocol.Majminmaj(m))
+	ans2, echec2 := gocol.Lemmatise(gocol.Majminmaj(m))
+	if !echec2 {
+		mot.ans = append(mot.ans, ans2...)
 	}
 	// ajout du genre pour les noms
-	if !echec {
+	if !echec || !echec2 {
 		for i, a := range mot.ans {
 			mot.ans[i] = genus(a)
 		}
