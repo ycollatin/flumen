@@ -6,6 +6,7 @@ package main
 // FIXME
 // Pyrrha dicitur esse creata. boucle infinie, due au lexsynt dico2:...,attrp
 // Pour d'autres phrases aussi.
+// Coll : Brundisi pour Brundisii non reconnu
 //
 // XXX
 //
@@ -16,10 +17,9 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
-// - trouver un moyen d'éliminer de l'arbre "hercle" et autres interjections,
-//   -> ajouter le pos "interj" à gocol.
-//   ce qui permettrait d'économiser 2+ règles.
+// - groupe pour les adj neutres + est : malum, opus, necesse est
 // - une option pour charger une base de groupes différente ?
+// - un signet pour les textes longs ?
 // - dicitur prima mortalis. avec lexsynt dico1:attrp, boucle infinie.
 // - verbes se construisant avec locatif. Caesarem Sinuessae mansurum nuntiabant.
 // - groupes isolés : Bene hercle faciunt.
