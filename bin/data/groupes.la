@@ -49,6 +49,7 @@ ter:n.nAdj
 n:@n
 p:@a;epith;;cgn
 
+! FIXME male hercule narras.
 ter:n.hAdj
 n:@n @NP
 a:@a;epith;;cgn
