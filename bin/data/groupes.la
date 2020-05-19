@@ -49,6 +49,11 @@ ter:n.nAdj
 n:@n
 p:@a;epith;;cgn
 
+ter:n.hAdj
+n:@n @NP
+a:@a;epith;;cgn
+a:@v;;indic,subj,part,inf
+
 ter:n.app
 n:@n
 p:@n @NP;app;;cgn
@@ -183,7 +188,7 @@ p:@n @NP @p;abl;abl
 
 ter:v.et
 n:@v;;indic,subj,impér
-a:"et" "at" "ergo" "nam" "sed";conj
+a:"et" "at" "ergo" "nam" "sed" "verum";conj
 
 ter:v.adv
 n:@v
