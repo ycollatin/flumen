@@ -9604,7 +9604,7 @@ gyro:
 gyrus:
 Gytheum:
 habena:
-habeo:datif,attrp
+habeo:datif,attrp,abl
 habilis:
 habiliter:
 habitabilis:
@@ -13645,7 +13645,7 @@ metuo:
 Metus2:
 metus:
 meum:
-meus:det
+meus:det,subst
 Meuania:
 Meuia:
 Meuius:
@@ -14671,7 +14671,7 @@ nouitas:
 nouiter:
 Nouius:
 nouo:
-nouus:
+nouus:subst
 noxa:
 noxia:
 noxiosus:
@@ -19876,7 +19876,7 @@ scriblita:
 Scribonianus:
 Scribonia:
 Scribonius:
-scribo:infobj,datif
+scribo:infobj,datif,abl
 scrinium:
 scriptio:
 scriptito:
@@ -23835,7 +23835,7 @@ uolesus:
 uolgiuagus:
 uolito:
 uolo2:
-uolo:infobj
+uolo:infobj,subjdir
 uolsci:
 uolscus:
 uolsella:
