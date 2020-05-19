@@ -1,19 +1,4 @@
 ! m3.txt
-uelim igitur cogites.
-ubicumque erimus sistas.
-tuis salutem dic.
-tui nostrique ualent.
-Tu inimicus negas.
-Trebatium nobiscum habemus.
-tibi meos commendo.
-tempori seruiendum est.
-tamen exspecto nouas.
-sed satis lacrimis.
-sed haec posterius.
-sed haec hactenus.
-Sed ad rem.
-scripseram rogatu tuo.
-rescribas uelim hodie.
 quod censueris faciam.
 quid enim indignius?
 quam legem recitauit.
@@ -42,6 +27,15 @@ haec properantes scripsimus.
 faciam quod uolunt.
 Dubitate quid agatis.
 Dicendum necessario est.
+tui nostrique ualent.
+Tu inimicus negas.
+tempori seruiendum est.
+sed satis lacrimis.
+sed haec posterius.
+sed haec hactenus.
+
+! bon, mais après contresens manifeste(s)
+scripseram rogatu tuo.
 
 ! testés 
 ob eam rem.
