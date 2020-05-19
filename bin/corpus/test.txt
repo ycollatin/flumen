@@ -1,4 +1,4 @@
-!352
+! m3.txt
 uideo te scire.
 uideo te ingemuisse.
 Verum haec uidebimus.
@@ -51,12 +51,12 @@ itaque miser torquetur.
 Magium fratrem reliquit.
 moriar nisi facete.
 Male hercule narras.
-!
 id uelim cogites.
 haec properantes scripsimus.
 faciam quod uolunt.
 Dubitate quid agatis.
 Dicendum necessario est.
+
 ! testés 
 ob eam rem.
 mare Ionium.
