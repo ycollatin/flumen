@@ -1,5 +1,4 @@
-!	groupes.la -- Gentes
-!
+!	groupes.la -- Gentes !
 ! NOYAU :
 !- ter|grp:<groupe>.<id>		// identifiant syntaxique,identifiant unique 
 !  ter : noyau et subs sont des mots
@@ -58,8 +57,16 @@ ter:n.gen
 n:@n
 a:@n @NP;gen;gén
 
+ter:a.gen
+n:@n
+a:@a;gen;gén;;subst
+
 ter:n.etiam
 n:@n @NP
+a:"etiam";adv
+
+ter:a.etiam
+n:@a;;;;subst
 a:"etiam";adv
 
 ter:n.net
@@ -81,7 +88,6 @@ ter:adv.gen
 n:@Adv;;;;gen
 p:@n;gen;gén
 
-! FIXME horum nihil negat
 ter:p.gen
 n:@p;;;;gen
 a:"hic" "qui2";gen;gén
@@ -113,7 +119,11 @@ p:"gratia";objet;acc plur
 
 ter:v.hic
 n:@v;;3
-a:"hic" "is" "ille" "iste";sujet;nomin;n
+a:"hic" "is" "ille" "iste" "nemo";sujet;nomin;n
+
+ter:v.vhic
+n:@v;;3
+p:"hic" "is" "ille" "iste";sujet;nomin;n
 
 ter:v.vsujet
 n:@v;;3
@@ -135,6 +145,10 @@ ter:v.obj
 n:@v;;act;;!intr
 a:@n @NP;objet;acc
 
+ter:v.obja
+n:@v;;act;;!intr
+a:@a;objet;acc;;subst
+
 ter:v.objp
 n:@v;;act;;!intr
 a:"ego" "hic" "is" "nemo" "nihil" "tu";objet;acc
@@ -142,6 +156,14 @@ a:"ego" "hic" "is" "nemo" "nihil" "tu";objet;acc
 ter:v.datif
 n:@v;;;;datif
 a:@n @NP @p;dat;dat
+
+ter:v.vdatif
+n:@v;;;;datif
+p:@n @NP @p;dat;dat
+
+ter:v.vdatifa
+n:@v;;;;datif
+p:@a;dat;dat;;subst
 
 ter:v.datp
 n:@v;;pass;;datp
@@ -155,13 +177,17 @@ ter:v.abl
 n:@v;;;;abl
 a:@n @NP @p;abl;abl
 
+ter:v.vabl
+n:@v;;;;abl
+p:@n @NP @p;abl;abl
+
 ter:v.et
-n:@v;;indic
+n:@v;;indic,subj,impér
 a:"et" "at" "ergo" "nam" "sed";conj
 
 ter:v.adv
 n:@v
-a:@Adv;adv
+a:@Adv;+adv
 
 ter:v.vAdv
 n:@v
@@ -183,9 +209,10 @@ ter:v.vinfobj
 n:@v;;act indic,act subj;;infobj
 p:@v !v.sujPropInf;objet;inf
 
+! FIXME @p trop laxiste ?
 ter:v.sujPropInf
 n:@v;;inf
-a:@n @NP;sujet;acc
+a:@n @NP @p;sujet;acc
 
 ter:v.hsujPropInf
 n:@v;;inf
@@ -200,9 +227,25 @@ ter:v.capuam
 n:@v;;act;;mvm
 a:@NP;lieu;acc;;mvm
 
+ter:v.loc
+n:@v;;act
+a:@NP;loc;gén;;loc
+
+ter:v.vloc
+n:@v;;act
+p:@NP;loc;gén;;loc
+
+ter:v.gen
+n:@v;;act;;gen
+a:@n @NP;gen;gén
+
+ter:v.vgen
+n:@v;;act;;gen
+p:@n @NP;gen;gén
+
 ter:v.conjSub
 n:v;;indic,subj
-a:"cum" "ne" "nisi" "quando" "si" "ubi" "ut";conj
+a:"cum" "ne" "nisi" "quando" "quia" "si" "ubi" "ut";conj
 
 ter:nv.enim
 n:@v @n
@@ -253,6 +296,14 @@ p:@n;gen;gén
 grp:v.gprep
 n:@v
 ag:n.prepAbl n.prepAcc p.prepAcc a.prepAcc;+gprep
+
+grp:v.vgprep
+n:@v
+pg:n.prepAbl n.prepAcc p.prepAcc a.prepAcc;+gprep
+
+grp:v.vacclieu
+n:@v;;;;mvm
+pg:n.prepAcc;lieu
 
 grp:v.vobj
 n:@v !v.sumpp !v.ppsum;;act, !part;;!intr
@@ -315,10 +366,6 @@ pg:v.conjSub;sConj
 !n:"is";;nomin fém sing
 !p:"do";epith;part pass nomin fém sing
 
-!grp:v.vgprep
-!n:@v
-!pg:n.prepAbl n.prepAcc n.inperpetuum n.prepDet;+gprep
-!
 !grp:v.dat
 !n:@v;;indic,subj,part,inf;;datif
 !ag:@n @NP @p;dat;datif
