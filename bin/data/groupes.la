@@ -88,7 +88,6 @@ n:@n;;nomin,acc,dat,abl
 a:@n @NP;gen;gén
 a:@v;;indic,subj
 
-! FIXME Magnum dicis malum.
 ter:n.hepith
 n:@n
 a:@a;epith;!nomin;cgn
