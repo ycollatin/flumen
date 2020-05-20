@@ -974,7 +974,8 @@ albatus:vêtu de blanc
 albeo:être blanc
 albesco:blanchir
 albesia:boucliers albains.
-Albianus:d'Albius ;
+Albianus:d'Albius
+Albianus2:Albianus (nom d'h.)
 albicerus:blanc (en parlant d'une variété d'olive)
 Albici:Albici (peuple voisin de Marseille)
 albico:blanchir
