@@ -1,14 +1,6 @@
 ! m4.txt -> 30
-ad resistendum me paro.
-Ais esse uadimonium desertum.
-Albianum te confecisse arbitror.
-Ambula tamquam uir.
-an censebas aliter ?
-An ingratus sum ?
 Antonium non arbitror repudiaturum.
-Appellandi tempus non erat.
 astute nihil sum acturus.
-At coluit ipse amicitias.
 ! m3.txt
 Dubitate quid agatis.
 Dicendum necessario est.
@@ -34,6 +26,8 @@ id uelim cogites.
 haec properantes scripsimus.
 ! bon, mais après contresens manifeste(s)
 scripseram rogatu tuo.
+Ais esse uadimonium desertum.
+Albianum te confecisse arbitror.
 ! testés 
 ob eam rem.
 mare Ionium.
