@@ -1,30 +1,5 @@
 ! m3.txt
-quod censueris faciam.
-quid enim indignius?
-quam legem recitauit.
-qua re aduola.
-plura habet utilia.
-plorando fessus sum.
-pace opus est.
-omnia igitur metuenda.
-Nostis quae sequuntur.
-non fuit negandum.
-! nil = nihil non détecté
-nil me laedet.
-nihil tamen certi.
-Neminem uestrum fallit.
-nihil legi humanius.
 ! solutions erronnées
-Multos necesse est.
-Minus est mirandum.
-inuideo potentiae Vestori.
-itaque miser torquetur.
-Magium fratrem reliquit.
-moriar nisi facete.
-Male hercule narras.
-id uelim cogites.
-haec properantes scripsimus.
-faciam quod uolunt.
 Dubitate quid agatis.
 Dicendum necessario est.
 tui nostrique ualent.
@@ -33,6 +8,20 @@ tempori seruiendum est.
 sed satis lacrimis.
 sed haec posterius.
 sed haec hactenus.
+quid enim indignius?
+quam legem recitauit.
+qua re aduola.
+omnia igitur metuenda.
+Nostis quae sequuntur.
+non fuit negandum.
+nihil tamen certi.
+Neminem uestrum fallit.
+nihil legi humanius.
+Multos necesse est.
+moriar nisi facete.
+Male hercule narras.
+id uelim cogites.
+haec properantes scripsimus.
 
 ! bon, mais après contresens manifeste(s)
 scripseram rogatu tuo.
