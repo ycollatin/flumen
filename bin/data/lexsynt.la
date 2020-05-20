@@ -32,6 +32,7 @@
 ! - dblacc : le verbe peut avoir deux accusatifs comme subs (double accusatif)
 ! - det : le pronom peut servir de déterminant
 ! - gen : le verbe, l'adjectif le nom ou l'adverbe peut avoir comme sub un génitif (memini)
+! - gergen : le nom peut être suivi d'un gérondif génitif
 ! - infobj : le verbe peut avoir un infinitif objet
 ! - infsuj : le verbe peut avoir un infinitif sujet
 ! - loc : peut être fléchi au locatif
