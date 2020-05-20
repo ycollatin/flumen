@@ -142,6 +142,7 @@ func (n *Nod) graf() []string {
 	return ll
 }
 
+// renvoie les lemmatisations réduites de tous les mots du Nod 
 func (n *Nod) toRes(m *Mot) gocol.Res {
 	if n.nucl == m {
 		return n.rnucl
