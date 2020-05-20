@@ -168,9 +168,9 @@ ter:v.attrP
 n:@v;;pass;;attrp
 a:@n @NP @a;attr;nomin;n
 
-ter:v.obj
+grp:v.obj
 n:@v;;act;;!intr
-a:@n @NP;objet;acc
+ag:@n @NP !n.prepAcc;objet;acc
 
 ter:v.vobja
 n:@v;;act;;!intr
@@ -286,6 +286,14 @@ ter:v.vgen
 n:@v;;act;;gen
 p:@n @NP;gen;gén
 
+ter:v.adger
+n:@v;;gér acc
+a:"ad";prep
+
+grp:v.ger
+n:@v;;indic,subj
+ag:v.adger;ger
+
 ter:v.conjSub
 n:v;;indic,subj
 a:"cum" "ne" "nisi" "quando" "quia" "si" "ubi" "ut";conj
@@ -310,9 +318,11 @@ grp:n.prepAbl
 n:@n @NP n.det;;abl
 a:@prepAbl @prepAA;prep
 
+! FIXME : ad populum Romanum : 'n' devrait suffire
 grp:n.prepAcc
-n:@n @NP n.det;;acc
-a:@prepAcc @prepAA n.det;prep
+!n:n @NP;;acc
+n:@n @NP n.det n.adj n.nAdj;;acc
+a:@prepAcc @prepAA;prep
 
 grp:p.prepAcc
 n:"hic" "is" "ego";;acc
