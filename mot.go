@@ -26,6 +26,7 @@ type Mot struct {
 	ans    gocol.Res // lemmatisations et id du groupe si le mot devient noyau
 	restmp gocol.Res // lemmatisation de test d'un noeud
 	interj bool		 // tous les lemmes du mot sont des interjections
+	que    bool      // le mot est en -que
 }
 
 func creeMot(m string) *Mot {
@@ -55,6 +56,7 @@ func creeMot(m string) *Mot {
 		mot.interj = mot.interj && an.Lem.Pos == "intj"
 	}
 	mot.ans = nres
+	mot.que = strings.HasSuffix(mot.gr, "que")
 	return mot
 }
 
