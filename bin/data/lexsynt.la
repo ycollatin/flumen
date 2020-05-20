@@ -2712,7 +2712,7 @@ beneficiarius:
 beneficium:
 beneficus:
 Beneuentanus:
-Beneuentum:
+Beneuentum:loc
 beneuole:
 beneuolens:
 beneuolentia:
@@ -5150,7 +5150,7 @@ constipo:
 constituo:
 constitutio:
 constitutum:
-consto:
+consto:propinf
 constratum:
 constratus:
 constrepo:
@@ -14751,7 +14751,7 @@ nundinor:
 nunquam:neg
 nuntia:
 nuntiatio:
-nuntio:
+nuntio:propinf
 nuntium:
 nuntius2:
 nuntius:
@@ -20511,7 +20511,7 @@ Sinopensis:
 sino:
 Sinope:
 Sinuessanus:
-Sinuessa:
+Sinuessa:loc
 sinuo:
 sinuosus:
 sinus:
