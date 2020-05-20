@@ -8580,7 +8580,7 @@ feruo:
 feruor:
 Fescenninus2:
 Fescenninus:
-fessus:
+fessus:abl
 festinanter:
 festinatio:
 festino:
@@ -11603,7 +11603,7 @@ inueteratus:
 inuia:
 inuicem:
 inuictus:
-inuideo:
+inuideo:datif
 inuidia:
 inuidiose:
 inuidiosus:
@@ -13775,7 +13775,7 @@ miseria:
 misericordia:
 misericors:
 miseriter:
-miser:posn
+miser:posn,subst
 miseror:
 missiculo:
 missile:
@@ -14395,7 +14395,7 @@ ne2:conjsubj
 Nemesis:
 Nemetes:
 Nemetocenna:
-nemo:neg
+nemo:neg,gen
 nemoralis:
 Nemorensis2:
 nemoriuagus:
@@ -15331,7 +15331,7 @@ Opuntius:
 opus2:
 opusculum:
 opust:
-opus:
+opus:abl
 Ora2:
 ora:
 oraclum:
@@ -23071,7 +23071,7 @@ Utica:
 Uticenses:
 Uticensis:
 utile:
-utilis:
+utilis:subst
 utilitas:
 utiliter:
 utinam:conjsubj
