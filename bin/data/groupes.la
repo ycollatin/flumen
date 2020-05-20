@@ -59,6 +59,10 @@ ter:n.app
 n:@n
 p:@n @NP;app;;cgn
 
+ter:n.appNp
+n:@NP
+p:@n;app;;cgn
+
 ter:n.gen
 n:@n
 a:@n @NP;gen;gén
@@ -90,6 +94,19 @@ n:@n
 a:@a;epith;!nomin;cgn
 a:@v;;indic,subj
 
+ter:n.abl
+n:@n;;;;abl
+a:@n;abl;abl
+
+ter:a.hepith
+n:@a;;;;subst
+a:@a;epith;;cgn
+a:@v;;indic,subj
+
+ter:a.gerabl
+n:@a;;;;abl
+a:@v;abl;gér abl
+
 ter:adv.gen
 n:@Adv;;;;gen
 p:@n;gen;gén
@@ -97,6 +114,10 @@ p:@n;gen;gén
 ter:p.gen
 n:@p;;;;gen
 a:"hic" "qui2";gen;gén
+
+ter:p.pgen
+n:@p;;;;gen
+p:@a;gen;gén
 
 ter:v.ppsum
 n:"sum";;indic,subj,inf
@@ -125,7 +146,7 @@ p:"gratia";objet;acc plur
 
 ter:v.hic
 n:@v;;3
-a:"hic" "is" "ille" "iste" "nemo";sujet;nomin;n
+a:"hic" "is" "ille" "iste" "nemo" "nihil";sujet;nomin;n
 
 ter:v.vhic
 n:@v;;3
@@ -190,6 +211,10 @@ p:@n @NP @p;dat;dat
 ter:v.abl
 n:@v;;;;abl
 a:@n @NP @p;abl;abl
+
+!ter:v.gerabl
+!n:@v;;;;abl
+!a:@v;abl;gér abl
 
 ter:v.prcum
 n:v;;;;abl
@@ -364,22 +389,22 @@ grp:v.advrel
 n:@v;;indic,subj
 ag:v.ubicumque;subrel
 
-!grp:sr.sujet
-!n:v;;indic,subj
-!a:"qui2";sujet;nomin;n
-!
-!grp:sr.objet
-!n:@v;;indic act,subj act
-!a:"qui2";objet;acc
-!
-!grp:sr.cui
-!n:@v;;indic,subj;;datif
-!a:"qui2";dat;dat
-!
-!grp:n.sr
-!n:@n n @NP;
-!pg:sr;subrel
-!
+ter:sr.objet
+n:@v;;indic act,subj act
+a:"qui2";objet;acc
+
+ter:sr.cui
+n:@v;;indic,subj;;datif
+a:"qui2";dat;dat
+
+grp:n.sr
+n:@n n @NP;
+pg:sr;subrel
+
+grp:v.rel
+n:@v;;indic,subj
+ag:sr.objet sr.sujet;rel
+
 !grp:p.sr
 !n:"is" "nihil"
 !pg:sr;subrel
