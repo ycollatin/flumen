@@ -23,7 +23,6 @@ package main
 // - un signet pour les textes longs ?
 // - dicitur prima mortalis. avec lexsynt dico1:attrp, boucle infinie.
 // - verbes se construisant avec locatif. Caesarem Sinuessae mansurum nuntiabant.
-// - groupes isolés : Bene hercle faciunt.
 // - Pour éviter la pléthore :
 //   - durcir les conditions des règles
 //   - élaguer les branches avant la fin
@@ -31,7 +30,6 @@ package main
 //   - utiliser les goroutines : go bf.explore()
 //   - enrichir la syntaxe de groupes.la
 // - Si pléthore, trouver un moyen de navigation en fixant des arcs.
-// - traiter la coordination par -que := et -
 // - un champ groupe.anrel - analyses du relatif ?
 // - accord :de personne sujet-verbe et verbe-verbe coord; de mode v-v, etc.
 // - fonction de sortie au format GraphViz.
