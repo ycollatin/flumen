@@ -1,4 +1,4 @@
-! m4.txt
+! m4.txt -> 30
 Ad populum Romanum confugient.
 ad resistendum me paro.
 Ais esse uadimonium desertum.
@@ -33,10 +33,8 @@ moriar nisi facete.
 Male hercule narras.
 id uelim cogites.
 haec properantes scripsimus.
-
 ! bon, mais après contresens manifeste(s)
 scripseram rogatu tuo.
-
 ! testés 
 ob eam rem.
 mare Ionium.
