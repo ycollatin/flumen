@@ -4,6 +4,7 @@
 package main
 
 // FIXME
+// Albianum te confecisse arbitror : mauvais tri des solutions.
 // Pyrrha dicitur esse creata. boucle infinie, due au lexsynt dico2:...,attrp
 // Pour d'autres phrases aussi.
 // Coll : Brundisi pour Brundisii non reconnu
