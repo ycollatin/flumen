@@ -102,6 +102,14 @@ n:@a;;;;subst
 a:@a;epith;;cgn
 a:@v;;indic,subj
 
+ter:n.gergen
+n:@n;;;;gergen
+a:@v;gen;gér gén
+
+ter:n.ngergen
+n:@n;;;;gergen
+p:@v;gen;gér gén
+
 ter:a.gerabl
 n:@a;;;;abl
 a:@v;abl;gér abl
@@ -149,7 +157,7 @@ a:"hic" "is" "ille" "iste" "nemo" "nihil";sujet;nomin;n
 
 ter:v.vhic
 n:@v;;3
-p:"hic" "is" "ille" "iste";sujet;nomin;n
+p:"hic" "is" "ille" "iste" "ipse";sujet;nomin;n
 
 ter:v.vsujet
 n:@v;;3
@@ -225,7 +233,7 @@ p:@n @NP @p;abl;abl
 
 ter:v.et
 n:@v;;indic,subj,impér
-a:"et" "at" "ergo" "nam" "sed" "verum";conj
+a:"et" "at" "ergo" "nam" "sed" "verum" "an";conj
 
 ter:v.adv
 n:@v
@@ -251,10 +259,21 @@ ter:v.vinfobj
 n:@v;;act indic,act subj;;infobj
 p:@v !v.sujPropInf;objet;inf
 
+ter:adv.tamquam
+n:"tamquam"
+p:@n;comp;nomin
+
+! PROPOSITION INFINITIVE
+
 ! FIXME @p trop laxiste ?
-ter:v.sujPropInf
+!ter:v.sujPropInf
+!n:@v;;inf
+!a:@n @NP @p;sujet;acc
+
+grp:v.sujObjPropInf
 n:@v;;inf
-a:@n @NP @p;sujet;acc
+a:@n @NP;sujet;acc
+a:@p;objet;acc
 
 ter:v.hsujPropInf
 n:@v;;inf
@@ -263,7 +282,11 @@ a:@v;;1,2,3
 
 ter:v.vSujPropInf
 n:@v;;inf
-p:@p;sujet;acc
+p:@p @n @NP;sujet;acc
+
+grp:v.propInf
+n:@v;;indic,impér;;propinf
+ag:v.sujObjPropInf v.sujPropInf v.vSujPropInf;subInf
 
 ter:v.capuam
 n:@v;;act;;mvm
@@ -376,10 +399,6 @@ pg:@n @NP @p !n.prepAcc !n.prepAbl !n.inperpetuum !n.conjet;objet;acc
 grp:v.AdjAttrSuj
 n:v.attr
 a:@n;sujet;nomin;n
-
-grp:v.propInf
-n:@v;;indic,impér;;propinf
-ag:v.sujPropInf v.vSujPropInf;subInf
 
 grp:v.vpropInf
 n:@v;;indic,impér;;propinf
