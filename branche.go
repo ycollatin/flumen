@@ -489,8 +489,9 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		for _, an := range res {
 			va := true
 			for _, ls := range el.lexsynt {
-				va = va && lexsynt(an.Lem, ls)
+				va = va && lexsynt(an.Lem, ls) || (ls == "que" && m.que)
 			}
+			// suffixe -que
 			if va {
 				nres = append(nres, an)
 			}
