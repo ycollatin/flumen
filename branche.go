@@ -415,8 +415,9 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 	}
 
 	// vérification du pos : id du noyau, ou pos du mot
-	ids := b.ids(m)
+	grpseulѕ := len(el.poss)+len(el.cles)+len(el.morpho)+len(el.lexsynt) == 0
 	var va bool
+	ids := b.ids(m)
 	if len(ids) > 0 {
 		for _, id := range ids {
 			// familles
@@ -457,11 +458,20 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		}
 		va = true
 	}
+	if grpseulѕ {
+		if va {
+			return res
+		} else {
+			return nil
+		}
+	}
+	/*
 	// si l'élément n'a aucune des propriétés requises pour un mot isolé,
 	if !va && len(el.poss)+len(el.cles)+len(el.morpho)+len(el.lexsynt) == 0 {
 		// il ne peut appartenir au groupe
 		return nil
 	}
+	*/
 	var nres gocol.Res
 
 	// contraintes de lemmatisation
