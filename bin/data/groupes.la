@@ -130,6 +130,10 @@ ter:v.ppsum
 n:"sum";;indic,subj,inf
 a:@v;pp;part parf
 
+ter:v.sumPfut
+n:"sum";;indic,subj,inf
+p:@v;pfut;part fut
+
 ter:v.sujet
 n:@v;;3
 a:@n @NP;sujet;nomin;n
@@ -189,6 +193,10 @@ a:@a;objet;acc;;subst
 
 ter:v.objp
 n:@v;;act;;!intr
+a:"ego" "hic" "is" "nemo" "nihil" "tu";objet;acc
+
+grp:v.objpf
+n:v.sumPfut
 a:"ego" "hic" "is" "nemo" "nihil" "tu";objet;acc
 
 ter:v.datif
@@ -434,8 +442,21 @@ n:@n n @NP;
 pg:sr;subrel
 
 grp:v.rel
-n:@v;;indic,subj
+n:@v;;indic,subj,impér
 ag:sr.objet sr.sujet;rel
+
+grp:v.vrel
+n:@v;;indic,subj,impér
+pg:sr.objet sr.sujet;rel
+
+! interrogative indirecte
+ter:ii.obj
+n:@v;;subj
+a:"quis";objet;acc
+
+grp:v.vii
+n:@v;;indic,impér
+pg:ii.obj;objet
 
 !grp:p.sr
 !n:"is" "nihil"
