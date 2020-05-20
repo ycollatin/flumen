@@ -334,6 +334,10 @@ grp:n.coord
 n:@n @NP
 pg:n.net;coord;;c
 
+grp:n.coordque
+n:@n @NP
+p:@n @NP;coord;;c;que
+
 grp:n.hgen
 n:@n
 a:@v;;3
