@@ -120,7 +120,7 @@ func creeEl(v string, g *Groupe, t bool) *El {
 }
 
 func (el *El) generique() bool {
-	return len(el.poss) + len(el.cles) == 0
+	return len(el.poss)+len(el.cles) == 0
 }
 
 // vrai si la morpho est acceptée par l'une des morphos du el

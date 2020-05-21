@@ -25,7 +25,7 @@ type Mot struct {
 	rang   int       // rang du mot dans la phrase à partir de 0
 	ans    gocol.Res // lemmatisations et id du groupe si le mot devient noyau
 	restmp gocol.Res // lemmatisation de test d'un noeud
-	interj bool		 // tous les lemmes du mot sont des interjections
+	interj bool      // tous les lemmes du mot sont des interjections
 	que    bool      // le mot est en -que
 }
 

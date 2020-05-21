@@ -460,7 +460,7 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		va = true
 	}
 	if el.generique() {
-	    // l'élément n'a aucune des propriétés requises pour un mot isolé,
+		// l'élément n'a aucune des propriétés requises pour un mot isolé,
 		// la recherche est terminée.
 		if va {
 			return res
@@ -469,7 +469,7 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		}
 	}
 
-	// terminer si aucune des propriétés suivantes n'est requise 
+	// terminer si aucune des propriétés suivantes n'est requise
 	if len(el.poss)+len(el.cles)+len(el.morpho)+len(el.lexsynt) == 0 {
 		return nil
 	}
