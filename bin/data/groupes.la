@@ -101,6 +101,14 @@ ter:n.abl
 n:@n;;;;abl
 a:@n;abl;abl
 
+ter:a.datif
+n:@a;;;;datif
+a:@n @NP @p;datif;dat
+
+ter:a.adatif
+n:@a;;;;datif
+p:@n @NP @p;datif;dat
+
 ter:a.hepith
 n:@a;;;;subst
 a:@a;epith;;cgn
@@ -396,6 +404,10 @@ grp:n.coordque
 n:@n @NP
 p:@n @NP;coord;;c;que
 
+grp:a.coordque
+n:@a
+p:@a;coord;;cg;que
+
 grp:n.hgen
 n:@n
 a:@v;;3
@@ -408,7 +420,7 @@ p:@n;gen;gén
 
 grp:v.gprep
 n:@v
-ag:n.prepAbl n.prepAcc p.prepAcc a.prepAcc;+gprep
+ag:n.prepAbl n.prepAcc p.prepAcc a.prepAcc v.prepger;+gprep
 
 grp:v.vgprep
 n:@v
