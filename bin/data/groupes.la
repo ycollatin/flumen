@@ -67,9 +67,13 @@ ter:n.gen
 n:@n
 a:@n @NP;gen;gén
 
-ter:a.gen
+ter:n.gena
 n:@n
 a:@a;gen;gén;;subst
+
+ter:a.gen
+n:@a;;;;gen
+a:@n @NP;gen;gén
 
 ter:n.etiam
 n:@n @NP
@@ -156,12 +160,12 @@ a:@n @p @NP;datif;dat
 p:"gratia";objet;acc plur
 
 ter:v.hic
-n:@v;;3
-a:"hic" "is" "ille" "iste" "nemo" "nihil";sujet;nomin;n
+n:@v;;indic,subj
+a:"hic" "is" "ille" "ipse" "iste" "nemo" "neuter" "nihil";sujet;nomin;n
 
 ter:v.vhic
 n:@v;;3
-p:"hic" "is" "ille" "iste" "ipse";sujet;nomin;n
+p:"hic" "is" "ille" "ipse" "iste";sujet;nomin;n
 
 ter:v.vsujet
 n:@v;;3
@@ -241,7 +245,7 @@ p:@n @NP @p;abl;abl
 
 ter:v.et
 n:@v;;indic,subj,impér
-a:"et" "at" "ergo" "nam" "sed" "verum" "an";conj
+a:"et" "at" "atqui" "ergo" "nam" "sed" "verum" "an";+conj
 
 ter:v.adv
 n:@v
@@ -256,8 +260,12 @@ n:@v
 a:"non" "haud";neg
 
 ter:v.infobj
-n:@v;;act indic,act subj;;infobj
+n:@v;;indic,subj;;infobj
 a:@v !v.sujPropInf;objet;inf
+
+ter:v.vinfobj
+n:@v;;indic,subj;;infobj
+p:@v !v.sujPropInf;objet;inf
 
 ter:v.vinfsuj
 n:@v;;act indic,act subj;;infsuj
@@ -324,9 +332,13 @@ grp:v.ger
 n:@v;;indic,subj
 ag:v.adger;ger
 
-ter:v.conjSub
-n:v;;indic,subj
-a:"cum" "ne" "nisi" "quando" "quia" "si" "ubi" "ut";conj
+ter:v.conjSubInd
+n:v;;indic
+a:"cum" "nisi" "quando" "quia" "si" "ubi" "ut";conj
+
+ter:v.conjSubSubj
+n:v;;subj
+a:"cum" "ne" "nisi""si" "ut" "utinam";conj
 
 ter:v.subjDir
 n:@v;;indic,subj;;subjdir
@@ -362,6 +374,7 @@ grp:a.prepAcc
 n:@a;;acc;;subst
 a:@prepAcc @prepAA n.det;prep
 
+! FIXME : breuiloquentiam in dicendo colat.
 grp:n.prepAblApp
 n:n.app;;abl
 a:@prepAbl @prepAA;prep
@@ -448,6 +461,11 @@ ag:sr.objet sr.sujet;rel
 grp:v.vrel
 n:@v;;indic,subj,impér
 pg:sr.objet sr.sujet;rel
+
+! interrogation
+ter:v.quis
+n:@v;;indic
+a:"quis";sujet;nomin;n
 
 ! interrogative indirecte
 ter:ii.obj
