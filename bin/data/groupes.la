@@ -297,7 +297,6 @@ p:@n;comp;nomin
 
 ! PROPOSITION INFINITIVE
 
-! FIXME @p trop laxiste ?
 ter:v.sujPropInf
 n:@v;;inf
 a:@n @NP;sujet;acc
@@ -394,7 +393,6 @@ grp:a.prepAcc
 n:@a;;acc;;subst
 a:@prepAcc @prepAA n.det;prep
 
-! FIXME : breuiloquentiam in dicendo colat.
 grp:n.prepAblApp
 n:n.app;;abl
 a:@prepAbl @prepAA;prep
