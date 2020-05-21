@@ -1,13 +1,11 @@
 ! m4.txt -> 30
-Cassium profectum esse constat.
-celari uideor a te.
-clamori enim uestro adsentior.
 Cocceius uide ne frustretur.
 cogitat reliquas colonias obire.
 Confecit tabulas diligentissime Cluentius.
 Commiserationem breuem esse oportet.
 Atticum quanti faciam scis.
 Antonium non arbitror repudiaturum.
+Cassium profectum esse constat.
 ! m3.txt
 Dubitate quid agatis.
 Dicendum necessario est.
