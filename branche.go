@@ -256,19 +256,6 @@ func (b *Branche) ids(m *Mot) (lids []string) {
 // si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
 func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 	// snoeud, signet
-/*
-in dicendo - n.prepAblApp
-
-! FIXME : breuiloquentiam in dicendo colat.
-grp:n.prepAblApp
-n:n.app;;abl
-a:@prepAbl @prepAA;prep
-
-ter:n.app
-n:@n
-p:@n @NP;app;;cgn
-
-*/
 
 	// noeud nnul pour le retour d'échec
 	var nnul Nod
@@ -480,8 +467,7 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		}
 	}
 
-	//grpseuls := len(el.poss)+len(el.cles)+len(el.morpho)+len(el.lexsynt) == 0
-
+	// terminer si aucune des propriétés suivantes n'est requise 
 	if len(el.poss)+len(el.cles)+len(el.morpho)+len(el.lexsynt) == 0 {
 		return nil
 	}
