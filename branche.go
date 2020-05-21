@@ -361,11 +361,13 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 		if g.post[ip].lien > "" {
 			nod.mmp = append(nod.mmp, mp)
 			nod.rrp[mp.rang] = mp.restmp
+		} else {
+			nonLies++
 		}
 		r++
 	}
 	// le noeud est valide si tous les post ont été trouvés
-	if len(nod.mmp) < len(g.post) {
+	if len(nod.mmp)+nonLies < len(g.post) {
 		return nnul
 	}
 	nod.valide = true
