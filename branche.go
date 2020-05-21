@@ -457,7 +457,7 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		}
 		va = true
 	}
-	if len(el.poss) == 0 {
+	if el.generique() {
 	    // l'élément n'a aucune des propriétés requises pour un mot isolé,
 		// la recherche est terminée.
 		if va {

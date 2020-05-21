@@ -119,6 +119,10 @@ func creeEl(v string, g *Groupe, t bool) *El {
 	return el
 }
 
+func (el *El) generique() bool {
+	return len(el.poss) + len(el.cles) == 0
+}
+
 // vrai si la morpho est acceptée par l'une des morphos du el
 func (s *El) vaMorpho(m string) bool {
 	if len(s.morpho) == 0 {
