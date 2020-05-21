@@ -353,8 +353,12 @@ n:v;;indic
 a:"cum" "nisi" "quando" "quia" "si" "ubi" "ut";conj
 
 ter:v.conjSubSubj
-n:v;;subj
-a:"cum" "ne" "nisi""si" "ut" "utinam";conj
+n:@v;;subj
+a:"cum" "ne" "nisi" "si" "ut" "utinam";conj
+
+grp:v.vConj
+n:@v;;indic,impér
+pg:v.conjSubInd v.conjSubSubj;subconj
 
 ter:v.subjDir
 n:@v;;indic,subj;;subjdir
