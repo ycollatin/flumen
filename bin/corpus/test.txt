@@ -1,26 +1,17 @@
 ! m4.txt -> 30
-at enim ita decreuimus.
-at enim sequor utilitatem.
-at iam ipse ades.
-at quis est ?
-Athenis non uidetur fore.
-Atque utinam neges.
-atqui neutrum est obscenum.
-Atticorum similes esse uolumus.
-Atticum quanti faciam scis.
-Audit pupillum esse filium.
-Antonium non arbitror repudiaturum.
+in dicendo.
 breuiloquentiam in dicendo colat.
 Brutus uelim sit Asturae.
-Beneuenti cogitabam hodie esse.
 carus omnibus exspectatusque uenies.
 Cassium profectum esse constat.
 celari uideor a te.
 clamori enim uestro adsentior.
 Cocceius uide ne frustretur.
-cogitat reliques colonias obire.
+cogitat reliquas colonias obire.
 Confecit tabulas diligentissime Cluentius.
 Commiserationem breuem esse oportet.
+Atticum quanti faciam scis.
+Antonium non arbitror repudiaturum.
 ! m3.txt
 Dubitate quid agatis.
 Dicendum necessario est.
