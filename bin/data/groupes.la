@@ -49,6 +49,12 @@ ter:n.nAdj
 n:@n
 p:@a;epith;;cgn
 
+! FIXME clamori enim uestro adsentior
+ter:n.hnAdj
+n:@n
+p:"enim"
+p:@a;epith;;cgn
+
 ! FIXME male hercule narras.
 ter:n.hAdj
 n:@n @NP
@@ -185,7 +191,7 @@ n:@v;;3
 p:@n @NP;sujet;nomin;n
 
 ter:v.attr
-n:@v;;act;;attr
+n:@v !v.ppsum;;act;;attr
 a:@n @NP @a;attr;nomin;n
 
 ter:v.vattr
@@ -295,9 +301,9 @@ p:@n;comp;nomin
 ! PROPOSITION INFINITIVE
 
 ! FIXME @p trop laxiste ?
-!ter:v.sujPropInf
-!n:@v;;inf
-!a:@n @NP @p;sujet;acc
+ter:v.sujPropInf
+n:@v;;inf
+a:@n @NP;sujet;acc
 
 grp:v.sujObjPropInf
 n:@v;;inf
@@ -370,7 +376,7 @@ a:"enim" "autem";conj
 !!!!!!!!!!!!!!!!!!!!!!!!!!
 
 grp:n.prepAbl
-n:@n @NP n.det;;abl
+n:@n @NP @p n.det;;abl
 a:@prepAbl @prepAA;prep
 
 ! FIXME : ad populum Romanum : 'n' devrait suffire
