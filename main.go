@@ -18,6 +18,7 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
+// - pseudovariables pour groupes.la
 // - groupe pour les adj neutres + est : malum, opus, necesse est
 // - une option pour charger une base de groupes différente ?
 // - un signet pour les textes longs ?
