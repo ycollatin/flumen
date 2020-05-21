@@ -4318,6 +4318,7 @@ cludo:enfermer, fermer
 Cluentia:Cluentia (nom de femme)
 Cluentianus:de Cluentius
 Cluentius:Cluentius (nom romain)
+Cluentius2:Cluentius (nom d'h.)
 clueo:s'entendre dire, avoir la réputation de, passer pour
 Cluilius:de Cluilius (chef des Albains)
 clunis:fesses, cuissot
