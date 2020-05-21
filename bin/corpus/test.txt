@@ -1,11 +1,10 @@
 ! m4.txt -> 30
-Cocceius uide ne frustretur.
-cogitat reliquas colonias obire.
-Confecit tabulas diligentissime Cluentius.
 Commiserationem breuem esse oportet.
 Atticum quanti faciam scis.
 Antonium non arbitror repudiaturum.
+! échec m4
 Cassium profectum esse constat.
+Cocceius uide ne frustretur.
 ! m3.txt
 Dubitate quid agatis.
 Dicendum necessario est.
