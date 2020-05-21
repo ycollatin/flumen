@@ -49,13 +49,11 @@ ter:n.nAdj
 n:@n
 p:@a;epith;;cgn
 
-! FIXME clamori enim uestro adsentior
 ter:n.hnAdj
 n:@n
 p:"enim"
 p:@a;epith;;cgn
 
-! FIXME male hercule narras.
 ter:n.hAdj
 n:@n @NP
 a:@a;epith;;cgn
@@ -124,7 +122,6 @@ ter:n.gergen
 n:@n;;;;gergen
 a:@v;gen;gér gén
 
-! FIXME in dicendo
 ter:v.prepger
 n:@v;;gér
 a:"in";prep
