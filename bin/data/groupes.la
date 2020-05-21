@@ -110,6 +110,11 @@ ter:n.gergen
 n:@n;;;;gergen
 a:@v;gen;gér gén
 
+! FIXME in dicendo
+ter:v.prepger
+n:@v;;gér
+a:"in";prep
+
 ter:n.ngergen
 n:@n;;;;gergen
 p:@v;gen;gér gén
