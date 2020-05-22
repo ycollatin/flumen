@@ -4,7 +4,10 @@
 package main
 
 // FIXME
-// Albianum te confecisse arbitror : mauvais tri des solutions.
+// credo te audisse aliquid : la règle v.sujetPropInf refuse d'accepter a:@n @NP et "ego" "se" "tu"
+// Tri :
+//    - Albianum te confecisse arbitror : mauvais tri des solutions.
+//    - favoriser les arcs non croisés
 // Pyrrha dicitur esse creata. boucle infinie, due au lexsynt dico2:...,attrp
 // Pour d'autres phrases aussi.
 // Coll : Brundisi pour Brundisii non reconnu
