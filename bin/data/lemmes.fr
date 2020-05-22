@@ -4603,6 +4603,7 @@ comminor:menacer (alicui mortem : qqn. de mort)
 comminuo:émietter
 comminus:de près
 commisceo:mêler avec; unir, allier
+commiseratio:commisération [partie de la plaidoierie où l'avocat cherche à exciter la pitié]
 commisereor:déplorer
 commiseror:plaindre, déplorer; exciter la compassion
 commissio:jointure, joint, action de mettre en contact, de commencer, [en part.] représentation [au théâtre, au cirque], action de commettre
