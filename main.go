@@ -4,7 +4,7 @@
 package main
 
 // FIXME
-// credo te audisse aliquid : la règle v.sujetPropInf refuse d'accepter a:@n @NP et "ego" "se" "tu"
+// credo te audisse aliquid : sol en 4/7.
 // Tri :
 //    - Albianum te confecisse arbitror : mauvais tri des solutions.
 //    - favoriser les arcs non croisés
