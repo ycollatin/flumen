@@ -4394,7 +4394,7 @@ coangusto:
 coarguo:
 coartatio:
 coarto:
-Cocceius:
+Cocceius:subst
 coccineus:
 coccinus:
 coccum:
@@ -5581,7 +5581,7 @@ credibiliter:
 creditast:
 creditor:
 creditum:
-credo:datif,propinf
+credo:propinf,datif
 credulitas:
 credulus:
 Cremera:
@@ -8214,7 +8214,7 @@ exstimulo:
 exstinctor:
 exstinguo:
 exstirpo:abl
-exsto:
+exsto:datif
 exstructio:
 exstruo:
 exsuctus:
@@ -8938,7 +8938,7 @@ fraxinus2:
 Fregellae:
 Fregellanus:
 fremitus:
-fremo:
+fremo:abl
 fremor:
 frenator:
 frendeo:
@@ -14242,7 +14242,7 @@ Narniense:
 Naro:
 narratio:
 narratiuncula:
-narro:
+narro:datif
 Narycius:
 Nasamones:
 Nasamonius:
