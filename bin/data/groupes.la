@@ -59,6 +59,10 @@ n:@n @NP
 a:@a;epith;;cgn
 a:@v;;indic,subj,part,inf
 
+ter:n.npp
+n:@n @NP
+p:@v;epith;part;cgn
+
 ter:n.app
 n:@n
 p:@n @NP;app;;cgn
@@ -299,11 +303,11 @@ p:@n;comp;nomin
 
 ter:v.sujPropInf
 n:@v;;inf
-a:@n @NP;sujet;acc
+a:@n @NP @p;sujet;acc
 
 grp:v.sujObjPropInf
 n:@v;;inf
-a:@n @NP;sujet;acc
+a:@n @NP "ego" "se" "tu";sujet;acc
 a:@p;objet;acc
 
 ter:v.hsujPropInf
@@ -311,13 +315,19 @@ n:@v;;inf
 a:@n @NP;sujet;acc
 a:@v;;1,2,3
 
-ter:v.vSujPropInf
+grp:v.vSujPropInf
 n:@v;;inf
 p:@p @n @NP;sujet;acc
 
 grp:v.propInf
 n:@v;;indic,impér;;propinf
 ag:v.sujObjPropInf v.sujPropInf v.vSujPropInf;subInf
+
+grp:v.vpropInf
+n:@v;;indic,impér;;propinf
+pg:v.sujObjPropInf v.sujPropInf v.vSujPropInf;subInf
+
+! fin prop inf
 
 ter:v.capuam
 n:@v;;act;;mvm
@@ -443,9 +453,12 @@ grp:v.AdjAttrSuj
 n:v.attr
 a:@n;sujet;nomin;n
 
-grp:v.vpropInf
-n:@v;;indic,impér;;propinf
-pg:v.sujPropInf v.vSujPropInf v.hsujPropInf;subInf
+! FIXME Cocceius uide ne frustretur.
+!		Brutus uelim sit Romae.
+grp:v.hsujet
+n:v.conjSubSubj v.vSubjDir
+a:@v;;impér,subj
+a:@a;sujet;nomin;n;subst
 
 grp:v.coord
 n:@v
