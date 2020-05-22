@@ -1,5 +1,16 @@
-! m4.txt -> 30
-Commiserationem breuem esse oportet.
+! m4.txt -> 106 / 603
+Deinde patres conscripti uocabantur.
+de Oppiis egeo consili.
+cui heres non exstabit.
+cui ego autem narraui.
+credo te audisse aliquid.
+consulares duce Fauonio fremunt.
+Cocceius uide ne frustretur.
+Claudius reliquit, donauit.
+Caesarem Sinuessae mansurum nuntiabant.
+Brutus uelim sit Asturae.
+Beneuenti cogitabam hodie esse.
+Athenis non uidetur fore.
 Atticum quanti faciam scis.
 Antonium non arbitror repudiaturum.
 ! échec m4
