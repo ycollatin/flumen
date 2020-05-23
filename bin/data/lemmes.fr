@@ -23273,6 +23273,7 @@ velum:la voile
 velut:comme
 veluti:comme, comme si
 venabulum:épieu
+Venafrum:Vénafre (v. de Campanie)
 Venafer:de Vénafre
 Venafranus:de Vénafre
 venalicium:marché d'esclaves, esclaves à vendre, droit sur les marchandises
