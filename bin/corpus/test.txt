@@ -1,4 +1,19 @@
-! m4.txt -> 106 / 603
+! m4.txt -> 150 / 603
+Est haec exornatio copiosa.
+erimus nos qui solemus.
+ergo ei negandum est.
+erat enim rescribendum tuis.
+eo maturius agendum est.
+eo die mansit Venafri.
+ego eadem illa repetiui.
+Ego Catilinam perire uolui.
+Eadem nostra causa est.
+eadem dicit quae Stoici.
+ea uolebam tabellis ornare.
+Dolabellam spero domi esse.
+dies xxx nondum fuerant.
+denique quid turpius ?
+dic audacter et aperte.
 Brutus uelim sit Asturae.
 Beneuenti cogitabam hodie esse.
 Athenis non uidetur fore.
