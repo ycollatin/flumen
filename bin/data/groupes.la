@@ -95,6 +95,10 @@ ter:n.net
 n:@n @NP
 a:"et";conj
 
+ter:adv.et
+n:@Adv
+a:"et";conj
+
 ter:n.hgen
 n:@n;;nomin,acc,dat,abl
 a:@n @NP;gen;gén
@@ -138,7 +142,7 @@ ter:a.gerabl
 n:@a;;;;abl
 a:@v;abl;gér abl
 
-ter:adv.gen
+ter:ad.gen
 n:@Adv;;;;gen
 p:@n;gen;gén
 
@@ -149,6 +153,10 @@ a:"hic" "qui2";gen;gén
 ter:p.pgen
 n:@p;;;;gen
 p:@a;gen;gén
+
+ter:p.quidGen
+n:"quis";;nomin
+p:@a;gen;gén neut
 
 ter:v.ppsum
 n:"sum";;indic,subj,inf
@@ -231,6 +239,10 @@ ter:v.datifa
 n:@v;;;;datif
 a:@a;dat;dat;;subst
 
+ter:v.datifv
+n:@v;;;;datif
+a:@v;dat;part dat
+
 ter:v.vdatif
 n:@v;;;;datif
 p:@n @NP @p;dat;dat
@@ -250,6 +262,14 @@ p:@n @NP @p;dat;dat
 ter:v.abl
 n:@v;;;;abl
 a:@n @NP @p;abl;abl
+
+ter:v.die
+n:@v
+a:"dies";tps;abl
+
+ter:v.dies
+n:@v
+a:"dies";tps;acc
 
 !ter:v.gerabl
 !n:@v;;;;abl
@@ -414,6 +434,10 @@ p:@n @NP n.adj;gen;gén
 grp:n.coord
 n:@n @NP
 pg:n.net;coord;;c
+
+grp:adv.coord
+n:@Adv
+p:adv.et;coord
 
 grp:n.coordque
 n:@n @NP
