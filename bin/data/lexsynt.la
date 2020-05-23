@@ -208,7 +208,7 @@ accido2:
 accido:datif
 accingo:
 accio:
-accipio:
+accipio:abl
 accipiter:
 accipitrina:
 accitus:
@@ -13042,8 +13042,7 @@ magnitudo:
 magnopere:
 magnum:
 Magnus2:
-magnus:datif,posn
-magnust:
+magnus:datif,posn,subst
 magus2:
 Magus3:
 magus:
@@ -15407,7 +15406,7 @@ ornate:
 ornatrix:
 ornatus2:
 ornatus:
-orno:
+orno:abl
 ornus:
 Ornytus:
 Oroandicus:
@@ -20799,7 +20798,7 @@ speratus:
 Spercheos:
 spernendus:
 sperno:
-spero:
+spero:propinf
 Spes2:
 spes:
 Speusippus:
@@ -21410,7 +21409,7 @@ Sulpicius:
 sulpureus:
 sultis:
 sumen:
-sum:attr,datif,gen,infsuj
+sum:attr,datif,gen,infsuj,abl
 summa:
 summano:
 Summanus:
@@ -23304,7 +23303,8 @@ uelum:
 uelut:
 ueluti:
 uenabulum:
-uenafer:
+Venafer:
+Venafrum:loc
 uenafranus:
 uenalicium:
 uenalicius2:
