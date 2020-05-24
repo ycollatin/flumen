@@ -41,6 +41,10 @@ ter:n.det
 n:@n
 a:@p @a !p.prepAcc;det;;cgn;det
 
+ter:n.detfm
+n:"dies"
+a:@p @a !p.prepAcc;det;;cn;det
+
 ter:n.adj
 n:@n @NP
 a:@a;epith;;cgn
@@ -177,6 +181,10 @@ a:@a;sujet;nomin;n;subst
 ter:v.ego
 n:@v;;1
 a:"ego" "nos";sujet;nomin;n
+
+ter:v.vego
+n:@v;;1
+p:"ego" "nos";sujet;nomin;n
 
 ter:v.tu
 n:@v;;2
@@ -377,6 +385,14 @@ grp:v.ger
 n:@v;;indic,subj
 ag:v.adger;ger
 
+ter:v.adjv
+n:"sum";;3 sing
+a:@v;attr;verbal nomin neut sing
+
+ter:v.vadjv
+n:"sum";;3 sing
+p:@v;attr;verbal nomin neut sing
+
 ter:v.conjSubInd
 n:v;;indic
 a:"cum" "nisi" "quando" "quia" "si" "ubi" "ut";conj
@@ -500,6 +516,10 @@ a:"ubicumque";lieu
 grp:v.advrel
 n:@v;;indic,subj
 ag:v.ubicumque;subrel
+
+ter:sr.sujet
+n:@v;;indic,subj
+a:"qui2";sujet;nomin;n
 
 ter:sr.objet
 n:@v;;indic act,subj act
