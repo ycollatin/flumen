@@ -41,6 +41,10 @@ ter:n.det
 n:@n
 a:@p @a !p.prepAcc;det;;cgn;det
 
+ter:n.ndet
+n:@n
+p:"hic";det;;cgn
+
 ter:n.detfm
 n:"dies"
 a:@p @a !p.prepAcc;det;;cn;det
@@ -101,7 +105,7 @@ a:"et";conj
 
 ter:adv.et
 n:@Adv
-a:"et";conj
+a:"et" "atque";conj
 
 ter:n.hgen
 n:@n;;nomin,acc,dat,abl
@@ -349,11 +353,11 @@ p:@p @n @NP;sujet;acc
 
 grp:v.propInf
 n:@v;;indic,impér;;propinf
-ag:v.sujObjPropInf v.sujPropInf v.vSujPropInf;subInf
+ag:v.sujObjPropInf v.sujPropInf v.hsujPropInf v.vSujPropInf;subInf
 
 grp:v.vpropInf
 n:@v;;indic,impér;;propinf
-pg:v.sujObjPropInf v.sujPropInf v.vSujPropInf;subInf
+pg:v.sujObjPropInf v.sujPropInf v.hsujPropInf v.vSujPropInf;subInf
 
 ! fin prop inf
 
@@ -364,6 +368,11 @@ a:@NP;lieu;acc;;mvm
 ter:v.loc
 n:@v;;act
 a:@NP;loc;gén;;loc
+
+ter:v.hloc
+n:@v;;act inf
+a:@NP;loc;gén;;loc
+a:@v;;indic;;infobj
 
 ter:v.vloc
 n:@v;;act
@@ -394,7 +403,7 @@ n:"sum";;3 sing
 p:@v;attr;verbal nomin neut sing
 
 ter:v.conjSubInd
-n:v;;indic
+n:@v;;indic
 a:"cum" "nisi" "quando" "quia" "si" "ubi" "ut";conj
 
 ter:v.conjSubSubj
@@ -416,6 +425,10 @@ p:@v;subj;subj
 ter:nv.enim
 n:@v @n
 a:"enim" "autem";conj
+
+ter:nv.nvenim
+n:@v @n
+p:"enim" "autem";conj
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!
 !! Groupes non terminaux !
@@ -495,10 +508,16 @@ a:@n;sujet;nomin;n
 
 ! FIXME Cocceius uide ne frustretur.
 !		Brutus uelim sit Romae.
+grp:v.hsujeta
+n:v.conjSubSubj v.vSubjDir
+a:@a;sujet;nomin;n;subst
+a:@v;;impér,subj
+
+! FIXME idem
 grp:v.hsujet
 n:v.conjSubSubj v.vSubjDir
-a:@v;;impér,subj
-a:@a;sujet;nomin;n;subst
+a:@NP @n;sujet;nomin;n;subst
+a:@v;;indic,impér,subj
 
 grp:v.coord
 n:@v
