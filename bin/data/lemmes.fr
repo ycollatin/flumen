@@ -16353,6 +16353,7 @@ Pero:Pero (fille de Nélée et soeur de Nestor)
 peropportune:fort à propos, fort à point
 peropportunus:très approprié
 peroptatus:vivement désiré
+peroratio:péroraison
 perorno:rehausser beaucoup, être un grand ornement pour
 peroro:achever, conclure, terminer (un discours) ; (in + acc.) pester contre
 perosus:qui hait fort, qui abhorre, qui déteste; (passivt) détesté
