@@ -1,24 +1,39 @@
-! m4.txt -> 150 / 603
+! m4.txt -> 220 / 603
+id Sextilius factum negabat.
+hoc te praetermisisse miror.
+hoc quicquam pote impurius.
+hoc placetne ueteranis istis.
+heri enim uesperi uenerat.
+hereditas tanti non est.
+Haec somniantis est diuinatio.
+haec pro certo putamus.
+gratum hominem obseruantemque cognosces.
+Glabrio potes prouidere.
+gestio scire ista omnia.
+fortunae sunt committenda omnia.
+Fieri nullo modo potuit.
+Exheredare pater filium cogitabat.
+eum puto magistrum fore.
+eum mihi uelim mittas.
+et heus tu.
+! sol mal placée m4
+Haec te scire uolui.
+est enim turpe iudicium.
+credo te audisse aliquid.
+Beneuenti cogitabam hodie esse.
+! échecs m4
+Atticum quanti faciam scis.
 ego eadem illa repetiui.
-Ego Catilinam perire uolui.
 Eadem nostra causa est.
 eadem dicit quae Stoici.
 ea uolebam tabellis ornare.
-Dolabellam spero domi esse.
 dies xxx nondum fuerant.
 denique quid turpius ?
-dic audacter et aperte.
-Brutus uelim sit Asturae.
-Beneuenti cogitabam hodie esse.
 Athenis non uidetur fore.
-Atticum quanti faciam scis.
-! sol mal placée m4
-credo te audisse aliquid.
-! échec m4
 Cocceius uide ne frustretur.
 Cassium profectum esse constat.
 Cocceius uide ne frustretur.
-! m3.txt
+! échecs m3.txt
 Dubitate quid agatis.
 Dicendum necessario est.
 tui nostrique ualent.
