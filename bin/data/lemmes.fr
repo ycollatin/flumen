@@ -8044,6 +8044,7 @@ exordinatio:désordre
 exordior:commencer
 exordium:commencement, origine ; commencement d'un discours, exorde
 exorior:se lever, sortir, se montrer, commencer
+exornatio:ornement, embellissement
 exorno:équiper, pouvoir
 exoro:essayer de fléchir, obtenir par des prières
 exorsa:préambule, préliminaire, entreprise
