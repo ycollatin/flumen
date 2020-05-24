@@ -5,6 +5,7 @@ package main
 
 // FIXME
 // credo te audisse aliquid : sol en 4/7.
+// Beneuenti cogitabam hodie esse : sol en 11/14.
 // Tri :
 //    - Albianum te confecisse arbitror : mauvais tri des solutions.
 //    - favoriser les arcs non croisés
@@ -21,6 +22,7 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
+// - POS des romains : dies xxx nondum fuerant.
 // - lexsynt.la : identifier et changer les initiales majuscules u > V
 // - pseudovariables pour groupes.la
 // - groupe pour les adj neutres + est : malum, opus, necesse est
