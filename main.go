@@ -21,7 +21,7 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
-// - lexsynt.la : idenifier et changer les initiales majuscules u > V
+// - lexsynt.la : identifier et changer les initiales majuscules u > V
 // - pseudovariables pour groupes.la
 // - groupe pour les adj neutres + est : malum, opus, necesse est
 // - une option pour charger une base de groupes différente ?
