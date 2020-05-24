@@ -4441,7 +4441,7 @@ cogitabundus:
 cogitate:
 cogitatio:
 cogitatum:
-cogito:propinf
+cogito:propinf,infobj
 cognatio:
 cognatus2:
 cognatus:
@@ -9518,7 +9518,7 @@ gratulatio:
 gratulator:
 gratulor:
 Gratus2:
-gratus:
+gratus:datif
 grauastellus:
 grauate:
 grauatim:
@@ -13750,7 +13750,7 @@ miratrix:
 mire:
 mirifice:
 mirificus:
-miror:
+miror:propinf
 mirus:
 miscellanea2:
 miscellaneus:
@@ -23836,7 +23836,7 @@ uolesus:
 uolgiuagus:
 uolito:
 uolo2:
-uolo:infobj,subjdir
+uolo:propinf,infobj,subjdir
 uolsci:
 uolscus:
 uolsella:
