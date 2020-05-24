@@ -26,6 +26,7 @@ package main
 // - lexsynt.la : identifier et changer les initiales majuscules u > V
 // - pseudovariables pour groupes.la
 // - groupe pour les adj neutres + est : malum, opus, necesse est
+// - a: p: essayer un préfixe ap: pour économiser le nombre de groupes.
 // - une option pour charger une base de groupes différente ?
 // - un signet pour les textes longs ?
 // - dicitur prima mortalis. avec lexsynt dico1:attrp, boucle infinie.
