@@ -17278,6 +17278,7 @@ Postumus:Postumus
 Postverta:Postverta (probablement autre nom de Carmenta, déesse de la naissance)
 Potamo:Potamo (nom d'homme)
 potatio:beuverie, orgie
+pote:possiblement (neutre de potis)
 potens:puissant
 potentatus:souveraineté, primauté, hégémonie [d'un peuple]
 potenter:puissamment, avec force, avec efficacité
