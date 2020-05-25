@@ -9223,7 +9223,7 @@ Garumna:
 Garunna:
 gastrum:
 Gates:
-gaudeo:infobj
+gaudeo:infobj,propinf
 gaudimonium:
 gaudium:
 Gauranus:
@@ -11352,7 +11352,7 @@ intellegens:
 intellegenter:
 intellegentia:
 intellegibilis:
-intellego:
+intellego:propinf
 intelligentia:
 intemeratus:
 intemperans:
@@ -23071,7 +23071,7 @@ Utica:
 Uticenses:
 Uticensis:
 utile:
-utilis:subst
+utilis:subst,dat
 utilitas:
 utiliter:
 utinam:conjsubj
