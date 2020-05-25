@@ -9346,7 +9346,7 @@ gestatoria:
 gestator:
 gesticulatio:
 gesticulor:
-gestio:
+gestio:infobj
 gestito:
 gesto:
 gestus:
@@ -17263,7 +17263,7 @@ possessorius:
 possessor:
 possideo:
 possido:
-possum:infobj
+possum:infobj,abl
 post:prepacc
 postea:
 posteaquam:
@@ -18102,7 +18102,7 @@ prouerbium:
 prouidens:
 prouidenter:
 prouidentia:
-prouideo:
+prouideo:datif
 prouidus:
 prouincialis2:
 prouincialis:
@@ -20662,7 +20662,7 @@ Solymus:
 somniculose:
 somniculosus:
 somnifer:
-somnio:
+somnio:subst
 somnior:
 somnium:
 somnus:
@@ -23485,7 +23485,7 @@ uespa:
 uespasianus:
 uesperasco:
 uespera:
-uesper:
+uesper:loc
 uespertinus:
 uesperugo:
 uespillo2:
@@ -23512,7 +23512,7 @@ uestricius:
 uesulus:
 uesuuius:
 uetera2:
-ueteranus:
+ueteranus:subst
 ueterarium:
 ueterator:
 ueteratorius:
