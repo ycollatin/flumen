@@ -53,6 +53,10 @@ ter:n.detfm
 n:"dies"
 a:@p @a !p.prepAcc;det;;cn;det
 
+ter:n.afm
+n:"dies"
+a:@a;epith;;cn
+
 ter:n.adj
 n:@n @NP
 a:@a;epith;;cgn
@@ -139,7 +143,7 @@ n:@a;;;;datif
 a:@n @NP @p;datif;dat
 
 ter:a.adatif
-n:@a;;;;datif
+n:@a
 p:@n @NP @p;datif;dat
 
 ter:a.hepith
@@ -186,6 +190,10 @@ p:@a;gen;gén neut
 ter:v.ppsum
 n:"sum";;indic,subj,inf
 a:@v;pp;part parf
+
+ter:v.itum
+n:"sum";;3
+a:"eo";pp;supin
 
 ter:v.sumPfut
 n:"sum";;indic,subj,inf
@@ -291,18 +299,14 @@ a:@n @NP @p;abl;abl
 
 ter:v.die
 n:@v
-a:"dies";tps;abl
+a:"dies";tps;abl,acc
 
 ter:v.dies
 n:@v
 a:"dies";tps;acc
 
-!ter:v.gerabl
-!n:@v;;;;abl
-!a:@v;abl;gér abl
-
 ter:v.prcum
-n:v;;;;abl
+n:@v;;;;abl
 a:"mecum" "tecum" "nobiscum" "vobiscum";abl
 
 ter:v.vabl
@@ -437,6 +441,10 @@ ter:v.conjSubSubj
 n:@v;;subj
 a:"cum" "ne" "nisi" "si" "ut" "utinam";conj
 
+grp:v.conj
+n:@v;;indic,impér
+ag:v.conjSubInd v.conjSubSubj;subconj
+
 grp:v.vConj
 n:@v;;indic,impér
 pg:v.conjSubInd v.conjSubSubj;subconj
@@ -472,7 +480,7 @@ n:@n @NP n.det n.adj n.nAdj;;acc
 a:@prepAcc @prepAA;prep
 
 grp:p.prepAcc
-n:"hic" "is" "ego";;acc
+n:"hic" "is" "ego" "tu" "nos" "vos";;acc
 a:@prepAcc @prepAA n.det;prep
 
 ter:a.prepAcc
