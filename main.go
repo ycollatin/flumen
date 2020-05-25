@@ -4,8 +4,6 @@
 package main
 
 // FIXME
-// credo te audisse aliquid : sol en 4/7.
-// Beneuenti cogitabam hodie esse : sol en 11/14.
 // Tri :
 //    - Albianum te confecisse arbitror : mauvais tri des solutions.
 //    - favoriser les arcs non croisés
@@ -14,9 +12,6 @@ package main
 // Coll : Brundisi pour Brundisii non reconnu
 //
 // XXX
-//
-// Attention ! l'étiquette 'n' ne désigne pas un pos, mais une famille de groupes.
-// Si un nom nominatif est requis, il faut écrire @n
 //
 // - CONSTRUCTIONS LEXICALES chez Cic.
 // 		* pietate erga te
