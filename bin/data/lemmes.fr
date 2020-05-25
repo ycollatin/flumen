@@ -23313,6 +23313,7 @@ venerabundus:plein de respect, respectueux
 venerandus:vénérable, respectable
 venerarius:d'amour, amoureux
 veneratio:culte, respect religieux
+Venerius:de Vénus; esclave [dans un temple de Vénus]
 venero:adorer, prier, rendre un culte à
 veneror:révérer, vénérer, témoigner du respect à, honorer, prier respectueusement, supplier respectueusement
 Venetia:la Vénétie (au nord-est de la Gaule Cisalpine; autre aux environs de Vannes)
