@@ -1,27 +1,16 @@
 ! m4.txt -> 220 / 603
-id Sextilius factum negabat.
-hoc te praetermisisse miror.
-hoc quicquam pote impurius.
-hoc placetne ueteranis istis.
-heri enim uesperi uenerat.
-hereditas tanti non est.
-Haec somniantis est diuinatio.
-haec pro certo putamus.
-gratum hominem obseruantemque cognosces.
-Glabrio potes prouidere.
-gestio scire ista omnia.
-fortunae sunt committenda omnia.
-Fieri nullo modo potuit.
-Exheredare pater filium cogitabat.
-eum puto magistrum fore.
-eum mihi uelim mittas.
-et heus tu.
+hoc quicquam pote impurius ?
 ! sol mal placée m4
 Haec te scire uolui.
 est enim turpe iudicium.
 credo te audisse aliquid.
 Beneuenti cogitabam hodie esse.
+gratum hominem obseruantemque cognosces.
+gestio scire ista omnia.
+eum puto magistrum fore.
 ! échecs m4
+eum mihi uelim mittas.
+Exheredare pater filium cogitabat.
 Atticum quanti faciam scis.
 ego eadem illa repetiui.
 Eadem nostra causa est.
@@ -34,6 +23,7 @@ Cocceius uide ne frustretur.
 Cassium profectum esse constat.
 Cocceius uide ne frustretur.
 ! échecs m3.txt
+et heus tu.
 Dubitate quid agatis.
 Dicendum necessario est.
 tui nostrique ualent.
