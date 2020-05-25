@@ -167,6 +167,10 @@ ter:ad.gen
 n:@Adv;;;;gen
 p:@n;gen;gén
 
+ter:p.padj
+n:@p
+p:@a;epith;;cgn
+
 ter:p.gen
 n:@p;;;;gen
 a:"hic" "qui2";gen;gén
@@ -214,7 +218,7 @@ p:"gratia";objet;acc plur
 
 ter:v.hic
 n:@v;;indic,subj
-a:"hic" "is" "ille" "ipse" "iste" "nemo" "neuter" "nihil";sujet;nomin;n
+a:"hic" "idem" "is" "ille" "ipse" "iste" "nemo" "neuter" "nihil";sujet;nomin;n
 
 ter:v.vhic
 n:@v;;3
@@ -643,12 +647,6 @@ pg:ii.obj;objet
 !n:@v;;act;;!intr
 !ag:@n @a @NP @p !n.prepDet !n.conjet !n.prepAcc !n.prepAbl !n.inperpetuum;objet;acc
 !
-!
-!! FIXME pour Hygin, FRAGILE
-!grp:n.eadata
-!n:"is";;nomin fém sing
-!p:"do";epith;part pass nomin fém sing
-
 !grp:v.dat
 !n:@v;;indic,subj,part,inf;;datif
 !ag:@n @NP @p;dat;datif
