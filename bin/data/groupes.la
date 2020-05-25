@@ -43,7 +43,11 @@ a:@p @a !p.prepAcc;det;;cgn;det
 
 ter:n.ndet
 n:@n
-p:"hic";det;;cgn
+p:"hic" "iste";det;;cgn
+
+ter:a.adet
+n:@a;;;;subst
+p:"hic" "iste";det;;cgn
 
 ter:n.detfm
 n:"dies"
@@ -83,6 +87,15 @@ ter:n.gen
 n:@n
 a:@n @NP;gen;gén
 
+ter:n.genpart
+n:@n
+a:@v;gen;part gén;;subst
+
+ter:n.hgenpart
+n:@n
+a:@v;gen;part gén;;subst
+a:"sum";;indic 3
+
 ter:n.gena
 n:@n
 a:@a;gen;gén;;subst
@@ -97,7 +110,7 @@ a:"etiam";adv
 
 ter:a.etiam
 n:@a;;;;subst
-a:"etiam";adv
+a:"etiam" "pote";adv
 
 ter:n.net
 n:@n @NP
@@ -247,6 +260,11 @@ ter:v.datif
 n:@v;;;;datif
 a:@n @NP @p;dat;dat
 
+ter:v.hdatif
+n:@v;;subj;;datif
+a:@n @NP @p;dat;dat
+a:@v;;indic,subj;;subjdir
+
 ter:v.datifa
 n:@v;;;;datif
 a:@a;dat;dat;;subst
@@ -259,17 +277,9 @@ ter:v.vdatif
 n:@v;;;;datif
 p:@n @NP @p;dat;dat
 
-ter:v.vdatifa
-n:@v;;;;datif
-p:@a;dat;dat;;subst
-
 ter:v.datp
 n:@v;;pass;;datp
 a:@n @NP @p;dat;dat
-
-ter:v.vdatif
-n:@v;;;;datif
-p:@n @NP @p;dat;dat
 
 ter:v.abl
 n:@v;;;;abl
@@ -337,6 +347,15 @@ ter:v.sujPropInf
 n:@v;;inf
 a:@n @NP @p;sujet;acc
 
+ter:v.attrPropInf
+n:"sum";;inf
+a:@n @NP @p;attr;acc
+
+ter:v.hattrPropinf
+n:"sum";;inf
+a:@n @NP @p;attr;acc
+a:@v;;indic;;propinf
+
 grp:v.sujObjPropInf
 n:@v;;inf
 a:@n @NP "ego" "se" "tu";sujet;acc
@@ -344,7 +363,7 @@ a:@p;objet;acc
 
 ter:v.hsujPropInf
 n:@v;;inf
-a:@n @NP;sujet;acc
+a:@n @NP @p;sujet;acc
 a:@v;;1,2,3
 
 grp:v.vSujPropInf
@@ -367,7 +386,7 @@ a:@NP;lieu;acc;;mvm
 
 ter:v.loc
 n:@v;;act
-a:@NP;loc;gén;;loc
+a:@NP @n;loc;gén;;loc
 
 ter:v.hloc
 n:@v;;act inf
@@ -399,8 +418,12 @@ n:"sum";;3 sing
 a:@v;attr;verbal nomin neut sing
 
 ter:v.vadjv
-n:"sum";;3 sing
-p:@v;attr;verbal nomin neut sing
+n:"sum";;3
+p:@v;attr;verbal nomin neut;n
+
+ter:v.tantisum
+n:"sum";;indic,subj
+a:"tantus";gen;gén neu sing
 
 ter:v.conjSubInd
 n:@v;;indic
@@ -448,9 +471,17 @@ grp:p.prepAcc
 n:"hic" "is" "ego";;acc
 a:@prepAcc @prepAA n.det;prep
 
-grp:a.prepAcc
+ter:a.prepAcc
 n:@a;;acc;;subst
 a:@prepAcc @prepAA n.det;prep
+
+ter:a.procerto
+n:@a;;abl neu
+a:"pro";prep
+
+grp:v.procerto
+n:"habeo" "affirmo" "pono" "puto"
+ag:a.procerto;gprep
 
 grp:n.prepAblApp
 n:n.app;;abl
@@ -502,21 +533,25 @@ grp:v.vobj
 n:@v !v.sumpp !v.ppsum;;act, !part;;!intr
 pg:@n @NP @p !n.prepAcc !n.prepAbl !n.inperpetuum !n.conjet;objet;acc
 
+! FIXME exheredare pater filium cogitabat.
+ter:v.hvobj
+n:@v;;inf;;!intr
+p:@n;;nomin
+p:@n @NP;objet;acc
+
 grp:v.AdjAttrSuj
 n:v.attr
 a:@n;sujet;nomin;n
 
-! FIXME Cocceius uide ne frustretur.
-!		Brutus uelim sit Romae.
 grp:v.hsujeta
 n:v.conjSubSubj v.vSubjDir
 a:@a;sujet;nomin;n;subst
 a:@v;;impér,subj
 
-! FIXME idem
+! FIXME	Brutus uelim sit Romae.
 grp:v.hsujet
 n:v.conjSubSubj v.vSubjDir
-a:@NP @n;sujet;nomin;n;subst
+a:@NP @n;sujet;nomin;n
 a:@v;;indic,impér,subj
 
 grp:v.coord
