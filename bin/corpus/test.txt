@@ -1,6 +1,22 @@
-! m4.txt -> 220 / 603
-hoc quicquam pote impurius ?
+! m4.txt -> 280 / 603
+Multorum testimonia audistis antea.
+Mittit ad hominem Venerios.
+misi ad te exemplum.
+Mi frater uale.
+linquamus naturam artisque uideamus.
+legiones armo, paro.
+Itum est in consilium.
+itaque ut constitui adero.
+itaque obduxi posterum diem.
+ita res somnium conprobauit.
+ita multi nobiscum sunt.
+instat Scandilius poscere recuperatores.
+illud non utile nobis.
+in Italia speramus fore.
 ! sol mal placée m4
+Misericordia commotus ne sis.
+Legati in castra ueniunt.
+lapidibus duo consules ceciderunt.
 Haec te scire uolui.
 est enim turpe iudicium.
 credo te audisse aliquid.
@@ -9,6 +25,7 @@ gratum hominem obseruantemque cognosces.
 gestio scire ista omnia.
 eum puto magistrum fore.
 ! échecs m4
+hoc quicquam pote impurius ?
 eum mihi uelim mittas.
 Exheredare pater filium cogitabat.
 Atticum quanti faciam scis.
