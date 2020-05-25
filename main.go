@@ -17,6 +17,8 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
+// - in Italia speramus fore : règle pour décider que /in Italia/ est sub de /fore/.
+// - la coordination -que est difficile pour "linquamus naturam artisque uideamus."
 // - quand un verbe a un sujet et un objet et qu'on ne peut dire lequel
 //   est sujet et lequel l'objet, c'est le premier qui est sujet :
 //   Cic. Div. I, 50 : Ita res somnium conprobauit.
