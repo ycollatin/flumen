@@ -9,7 +9,6 @@ package main
 //    - favoriser les arcs non croisés
 // Pyrrha dicitur esse creata. boucle infinie, due au lexsynt dico2:...,attrp
 // Pour d'autres phrases aussi.
-// Coll : Brundisi pour Brundisii non reconnu
 //
 // XXX
 //
