@@ -20798,7 +20798,7 @@ speratus:
 Spercheos:
 spernendus:
 sperno:
-spero:propinf
+spero:propinf,infobj
 Spes2:
 spes:
 Speusippus:
@@ -23340,6 +23340,7 @@ uenerabundus:
 uenerandus:
 uenerarius:
 ueneratio:
+Venerius:subst
 uenero:
 ueneror:
 uenetia:
