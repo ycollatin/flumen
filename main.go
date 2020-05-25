@@ -17,11 +17,11 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
-// - quand un verbe a un sujet et un objet et qu'on ne peut dire leques
-// - quand un groupe peut être sujet et objet d'un v. transitif, le groupe
-//   est plutôt objet : lapidibus duo consules ceciderunt.
+// - quand un verbe a un sujet et un objet et qu'on ne peut dire lequel
 //   est sujet et lequel l'objet, c'est le premier qui est sujet :
 //   Cic. Div. I, 50 : Ita res somnium conprobauit.
+// - quand un groupe peut être sujet et objet d'un v. transitif, le groupe
+//   le prmier est plutôt objet : lapidibus duo consules ceciderunt.
 // - POS des romains : dies xxx nondum fuerant.
 // - lexsynt.la : identifier et changer les initiales majuscules u > V
 // - pseudovariables pour groupes.la
