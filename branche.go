@@ -579,13 +579,18 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 	}
 
 	// accord
-	if el.accord > "" {
+	acc := el.accord
+	if acc > "" {
 		var nres gocol.Res
 		for _, an := range res {
 			for _, anoy := range mn.restmp {
+				if strings.Contains(acc, "g") && lexsynt(anoy.Lem, "mf") {
+					acc = strings.Replace(acc, "g", "", 1)
+				}
 				for _, morfs := range an.Morphos {
 					for _, morfn := range anoy.Morphos {
-						if accord(morfn, morfs, el.accord) {
+						// cas des noms f. et m.
+						if accord(morfn, morfs, acc) {
 							//nres = append(nres, an)
 							nres = gocol.AddRes(nres, an.Lem, morfs, 0)
 						}
