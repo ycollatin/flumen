@@ -3,13 +3,14 @@
 
 package main
 
-// FIXME
-// [Coll] uereare (uerearis)
-// Tri :
+//     FIXME
+// - La lemmatisation est affichée en double
+// - [Coll] uereare (uerearis)
+//   Tri :
 //    - Albianum te confecisse arbitror : mauvais tri des solutions.
 //    - favoriser les arcs non croisés
-// Pyrrha dicitur esse creata. boucle infinie, due au lexsynt dico2:...,attrp
-// Pour d'autres phrases aussi.
+//   Pyrrha dicitur esse creata. boucle infinie, due au lexsynt dico2:...,attrp
+//   Pour d'autres phrases aussi.
 //
 // XXX
 //
