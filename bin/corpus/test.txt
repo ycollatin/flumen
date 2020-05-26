@@ -1,12 +1,4 @@
 ! m4.txt -> 330 / 603
-nullum uideo finem mali.
-Noui tibi quidnam scribam ?
-nos tamen aliquid excogitabimus.
-Nos prouiciae praefecimus Coelium.
-Nos Asia accepit admirabiliter.
-non tenebo te pluribus.
-non queo omnia scribere.
-non parenti manus adtulisti.
 Non ius iurandum reliquistis.
 nisi forte se suspendit.
 nihil turpius nec desertius.
@@ -17,6 +9,7 @@ negant id fieri posse.
 nec uero lepidum timebamus.
 mutationis tamen spes nulla.
 ! sol mal placée m4
+non parenti manus adtulisti.
 Noua tibi haec sunt.
 nondum uenerant legiones duae.
 non scribo hoc temere
