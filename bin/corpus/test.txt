@@ -1,10 +1,30 @@
-! m4.txt -> 280 / 603
-Mi frater uale.
-linquamus naturam artisque uideamus.
-legiones armo, paro.
-illud non utile nobis.
-in Italia speramus fore.
+! m4.txt -> 330 / 603
+nullum uideo finem mali.
+Noui tibi quidnam scribam ?
+nos tamen aliquid excogitabimus.
+Nos prouiciae praefecimus Coelium.
+Nos Asia accepit admirabiliter.
+non tenebo te pluribus.
+non queo omnia scribere.
+non parenti manus adtulisti.
+Non ius iurandum reliquistis.
+nisi forte se suspendit.
+nihil turpius nec desertius.
+nihil Pompeio postulanti negarunt.
+nihil est quod uereare.
+Negent, si possunt.
+negant id fieri posse.
+nec uero lepidum timebamus.
+mutationis tamen spes nulla.
 ! sol mal placée m4
+Noua tibi haec sunt.
+nondum uenerant legiones duae.
+non scribo hoc temere
+Nihil gratiae causa feceris.
+Nihil autem umquam debuit.
+neque id est mirum.
+Narrationum tria sunt genera.
+in Italia speramus fore.
 ita res somnium conprobauit.
 Misericordia commotus ne sis.
 Legati in castra ueniunt.
@@ -16,7 +36,14 @@ Beneuenti cogitabam hodie esse.
 gratum hominem obseruantemque cognosces.
 gestio scire ista omnia.
 eum puto magistrum fore.
+scripseram rogatu tuo.
+Ais esse uadimonium desertum.
+Albianum te confecisse arbitror.
 ! échecs m4
+Mi frater uale.
+linquamus naturam artisque uideamus.
+legiones armo, paro.
+illud non utile nobis.
 hoc quicquam pote impurius ?
 eum mihi uelim mittas.
 Exheredare pater filium cogitabat.
@@ -55,10 +82,6 @@ moriar nisi facete.
 Male hercule narras.
 id uelim cogites.
 haec properantes scripsimus.
-! bon, mais après contresens manifeste(s)
-scripseram rogatu tuo.
-Ais esse uadimonium desertum.
-Albianum te confecisse arbitror.
 ! testés 
 ob eam rem.
 mare Ionium.
