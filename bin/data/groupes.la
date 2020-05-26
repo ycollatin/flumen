@@ -80,6 +80,10 @@ n:@n @NP
 a:@a;epith;;cgn
 a:@v;;indic,subj,part,inf
 
+ter:n.nadjv
+n:@n
+p:@v;epith;verbal;cgn
+
 ter:n.npp
 n:@n @NP
 p:@v;epith;part;cgn
@@ -95,6 +99,11 @@ p:@n;app;;cgn
 ter:n.gen
 n:@n
 a:@n @NP;gen;gén
+
+ter:n.hgen
+n:@n
+a:@n @NP;gen;gén
+a:@Adv
 
 ter:n.genpart
 n:@n
@@ -155,6 +164,14 @@ ter:a.hepith
 n:@a;;;;subst
 a:@a;epith;;cgn
 a:@v;;indic,subj
+
+ter:a.et
+n:@a
+a:"et" "nec";conj
+
+grp:a.coord
+n:@a
+pg:a.et;coord;;cgn
 
 ter:n.gergen
 n:@n;;;;gergen
@@ -338,7 +355,7 @@ p:@Adv !"et" !"etiam";+adv
 
 ter:v.neg
 n:@v
-a:"non" "haud";neg
+a:"non" "haud" "nec" "neque";neg
 
 ter:v.infobj
 n:@v;;indic,subj;;infobj
@@ -457,7 +474,7 @@ n:@v;;indic,impér
 ag:v.conjSubInd v.conjSubSubj;subconj
 
 grp:v.vConj
-n:@v;;indic,impér
+n:@v;;indic,impér,subj
 pg:v.conjSubInd v.conjSubSubj;subconj
 
 ter:v.subjDir
