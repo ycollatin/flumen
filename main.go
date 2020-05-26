@@ -4,6 +4,7 @@
 package main
 
 // FIXME
+// [Coll] uereare (uerearis)
 // Tri :
 //    - Albianum te confecisse arbitror : mauvais tri des solutions.
 //    - favoriser les arcs non croisés
@@ -16,7 +17,9 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
-// - in Italia speramus fore : règle pour décider que /in Italia/ est sub de /fore/.
+// - in Italia speramus fore : la règle ter:hgprep permet d'avoir la bonne solution,
+//   mais en 2ème position. Il faudrait une ligne supplémentaire pour donner un indice
+//   de priorité d'une règle par rapport à d'autres.
 // - la coordination -que est difficile pour "linquamus naturam artisque uideamus."
 // - quand un verbe a un sujet et un objet et qu'on ne peut dire lequel
 //   est sujet et lequel l'objet, c'est le premier qui est sujet :
