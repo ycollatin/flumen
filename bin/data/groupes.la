@@ -70,6 +70,11 @@ n:@n
 p:"enim"
 p:@a;epith;;cgn
 
+ter:n.hvAdj
+n:@n
+p:@v;;indic
+p:@a;epith;;cgn
+
 ter:n.hAdj
 n:@n @NP
 a:@a;epith;;cgn
@@ -143,7 +148,7 @@ n:@a;;;;datif
 a:@n @NP @p;datif;dat
 
 ter:a.adatif
-n:@a
+n:@a;;;;datif
 p:@n @NP @p;datif;dat
 
 ter:a.hepith
@@ -183,9 +188,10 @@ ter:p.pgen
 n:@p;;;;gen
 p:@a;gen;gén
 
-ter:p.quidGen
-n:"quis";;nomin
-p:@a;gen;gén neut
+ter:p.hgen
+n:@p;;;;gen
+a:@a;gen;gén neut
+a:@p;;dat
 
 ter:v.ppsum
 n:"sum";;indic,subj,inf
@@ -262,7 +268,8 @@ a:@a;objet;acc;;subst
 
 ter:v.objp
 n:@v;;act;;!intr
-a:"ego" "hic" "is" "nemo" "nihil" "tu";objet;acc
+!a:"ego" "hic" "is" "nemo" "nihil" "nos" "tu" "quis" "quisnam" "aliquis";objet;acc
+a:@p;objet;acc
 
 grp:v.objpf
 n:v.sumPfut
@@ -312,6 +319,10 @@ a:"mecum" "tecum" "nobiscum" "vobiscum";abl
 ter:v.vabl
 n:@v;;;;abl
 p:@n @NP @p;abl;abl
+
+ter:v.vabla
+n:@v;;;;abl
+p:@a;abl;abl;;subst
 
 ter:v.et
 n:@v;;indic,subj,impér
