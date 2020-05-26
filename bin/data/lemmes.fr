@@ -471,6 +471,7 @@ administratio:action de prêter son aide; administration, exécution, gestion, d
 administro:gouverner, administrer
 admirabilis:étonnant, admirable
 admirabilitas:le fait d'être digne d'admiration
+admirabiliter:admirablement
 admirandus:digne d'admiration, admirable
 admiratio:admiration
 admirator:admirateur
