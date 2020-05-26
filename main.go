@@ -17,8 +17,9 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
-// - in Italia speramus fore : la règle ter:hgprep permet d'avoir la bonne solution,
-//   mais en 2ème position. Il faudrait une ligne supplémentaire pour donner un indice
+// - Hiérarchie des règles :
+//   /in Italia speramus fore/ La règle ter:hgprep permet d'avoir la bonne solution,
+//   mais en 2ème position. Il faut une solution pour donner un indice
 //   de priorité d'une règle par rapport à d'autres.
 // - la coordination -que est difficile pour "linquamus naturam artisque uideamus."
 // - quand un verbe a un sujet et un objet et qu'on ne peut dire lequel
