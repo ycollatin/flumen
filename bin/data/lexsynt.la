@@ -31,11 +31,12 @@
 ! - datp : le verbe au passif peut avoir comme sub un datif seul
 ! - dblacc : le verbe peut avoir deux accusatifs comme subs (double accusatif)
 ! - det : le pronom peut servir de déterminant
-! - gen : le verbe, l'adjectif le nom ou l'adverbe peut avoir comme sub un génitif (memini)
+! - gen : le verbe, l'adjectif le nom, le pronom ou l'adverbe peut avoir comme sub un génitif (memini)
 ! - gergen : le nom peut être suivi d'un gérondif génitif
 ! - infobj : le verbe peut avoir un infinitif objet
 ! - infsuj : le verbe peut avoir un infinitif sujet
 ! - loc : peut être fléchi au locatif
+! - mf : le nom peu être féminin ou masculin (dies, finis)
 ! - mvm : (pour les verbes) mouvement, accepte l'acc.seul; pour les noms : construction acc. direct
 ! - nogen : le nom ne peut avoir de génitif (ex. dea)
 ! - nom : tout nom qui peut être accompagné d'une apposition à initiale majuscule (rex, flumen, etc.)
@@ -408,7 +409,7 @@ adfectio:
 adfecto:
 adfectus2:
 adfectus:
-adfero:
+adfero:datif
 adficio:abl
 adfigo:
 adfingo:
@@ -6651,7 +6652,7 @@ Didymus:
 diecula:
 diequinti:
 dierectus:
-dies:tps
+dies:tps,mf
 Diespiter:
 diffamo:
 differentia:
@@ -8659,7 +8660,7 @@ fimus:
 findo:
 fingo:prepex
 finio:
-finis:
+finis:mf
 finitimi:
 finitimus:
 finitio:
@@ -17428,7 +17429,7 @@ praeferox:
 praeferratus:
 praeferuidus:
 praefestino:
-praeficio:
+praeficio:datif
 praefidens:
 praefigo:
 praefinio:
@@ -18490,7 +18491,7 @@ quattuor:num
 quattuoruiri:
 quauis:
 quemadmodum:
-queo:
+queo:infobj
 Quercens:
 querceus:
 quercus:
@@ -18583,13 +18584,13 @@ Quirinus2:
 Quirinus:
 Quiris:
 quiritatus:
-quisnam:
+quisnam:gen
 quispiam:
 quisquam:
 quisque:
 quisquilia:
 quisquiliae:
-quis:subint
+quis:subint,gen
 quisquis:
 quiuis:
 quoad:
