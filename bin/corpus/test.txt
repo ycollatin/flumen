@@ -1,14 +1,8 @@
 ! m4.txt -> 330 / 603
-Non ius iurandum reliquistis.
-nisi forte se suspendit.
-nihil turpius nec desertius.
-nihil Pompeio postulanti negarunt.
-nihil est quod uereare.
-Negent, si possunt.
-negant id fieri posse.
-nec uero lepidum timebamus.
-mutationis tamen spes nulla.
 ! sol mal placée m4
+nihil est quod uereare.
+nihil Pompeio postulanti negarunt.
+Non ius iurandum reliquistis.
 non parenti manus adtulisti.
 Noua tibi haec sunt.
 nondum uenerant legiones duae.
@@ -33,6 +27,7 @@ scripseram rogatu tuo.
 Ais esse uadimonium desertum.
 Albianum te confecisse arbitror.
 ! échecs m4
+negant id fieri posse.
 Mi frater uale.
 linquamus naturam artisque uideamus.
 legiones armo, paro.
