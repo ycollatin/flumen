@@ -537,6 +537,11 @@ grp:v.vgprep
 n:@v
 pg:n.prepAbl n.prepAcc p.prepAcc a.prepAcc;+gprep
 
+grp:v.hgprep
+n:@v;;inf
+ag:n.prepAbl n.prepAcc p.prepAcc a.prepAcc v.prepger;+gprep
+a:@v;;indic;;infobj
+
 grp:v.vacclieu
 n:@v;;;;mvm
 pg:n.prepAcc;lieu
