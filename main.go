@@ -5,7 +5,7 @@ package main
 
 //     FIXME
 // - La lemmatisation est affichée en double
-// - [Coll] uereare (uerearis)
+// - Coll : obliuisci donné comme gén. de oblivium ?
 //   Tri :
 //    - Albianum te confecisse arbitror : mauvais tri des solutions.
 //    - favoriser les arcs non croisés
@@ -18,6 +18,8 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
+// - épithète d'un sujet elliptique : nunquam uidelicet sitiens biberat.
+// - sujet d'une inf. futur elliptique : omnia se facturum recepit.
 // - Hiérarchie des règles :
 //   /in Italia speramus fore/ La règle ter:hgprep permet d'avoir la bonne solution,
 //   mais en 2ème position. Il faut une solution pour donner un indice
