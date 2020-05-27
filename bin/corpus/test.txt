@@ -1,5 +1,11 @@
-! m4.txt -> 330 / 603
+! m4.txt -> 400 / 603 (Primum uidete hominis audaciam)
 ! sol mal placée m4
+plena uita exemplorum est.
+pertinet ad nostrum officium.
+perierunt illa quae amabas.
+ostendit pedes et pectus.
+Omnia peccata paria dicitis.
+Omnia peccata sunt paria.
 nihil est quod uereare.
 nihil Pompeio postulanti negarunt.
 Non ius iurandum reliquistis.
@@ -27,6 +33,11 @@ scripseram rogatu tuo.
 Ais esse uadimonium desertum.
 Albianum te confecisse arbitror.
 ! échecs m4
+nunquam uidelicet sitiens biberat.
+praetor solet iudicare deberi.
+possum obliuisci qui fuerim.
+Plane istuc ipsum desidero.
+omnia se facturum recepit.
 negant id fieri posse.
 Mi frater uale.
 linquamus naturam artisque uideamus.
