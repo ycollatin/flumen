@@ -84,9 +84,22 @@ ter:n.nadjv
 n:@n
 p:@v;epith;verbal;cgn
 
+ter:n.nnequam
+n:@n
+p:"nequam";epith
+
+ter:n.ablabs
+n:@n @NP
+a:@v;epith;abl;gn
+
 ter:n.npp
 n:@n @NP
 p:@v;epith;part;cgn
+
+! FIXME à vérifier
+ter:n.nipse
+n:@n @NP @p !"ipse"
+p:"ipse";epith;;cgn
 
 ter:n.app
 n:@n
@@ -121,6 +134,15 @@ a:@a;gen;gén;;subst
 ter:a.gen
 n:@a;;;;gen
 a:@n @NP;gen;gén
+
+ter:a.agen
+n:@a;;;;gen
+p:@n @NP;gen;gén
+
+ter:a.hagen
+n:@a;;;;gen
+p:@n @NP;gen;gén
+p:@n;;nomin
 
 ter:n.etiam
 n:@n @NP
@@ -214,6 +236,10 @@ ter:v.ppsum
 n:"sum";;indic,subj,inf
 a:@v;pp;part parf
 
+ter:v.sumpp
+n:"sum";;indic,subj,inf
+p:@v;pp;part parf
+
 ter:v.itum
 n:"sum";;3
 a:"eo";pp;supin
@@ -258,6 +284,10 @@ p:"hic" "is" "ille" "ipse" "iste";sujet;nomin;n
 ter:v.vsujet
 n:@v;;3
 p:@n @NP;sujet;nomin;n
+
+ter:v.vinquit
+n:"inquit"
+p:@NP @n;sujet;nomin sing
 
 ter:v.attr
 n:@v !v.ppsum;;act;;attr
@@ -320,6 +350,10 @@ a:@n @NP @p;dat;dat
 ter:v.abl
 n:@v;;;;abl
 a:@n @NP @p;abl;abl
+
+ter:v.agent
+n:@v;;pass
+a:@n;agent;abl
 
 ter:v.die
 n:@v
@@ -575,8 +609,12 @@ n:@v;;;;mvm
 pg:n.prepAcc;lieu
 
 grp:v.vobj
-n:@v !v.sumpp !v.ppsum;;act, !part;;!intr
+n:@v;;act,!part;;!intr
 pg:@n @NP @p !n.prepAcc !n.prepAbl !n.inperpetuum !n.conjet;objet;acc
+
+grp:v.objppa
+n:v.sumpp;;act
+a:@a;objet;acc;;subst
 
 ! FIXME exheredare pater filium cogitabat.
 ter:v.hvobj
@@ -650,181 +688,10 @@ ter:ii.obj
 n:@v;;subj
 a:"quis";objet;acc
 
+grp:v.ii
+n:@v;;indic,impér
+ag:ii.obj;objet
+
 grp:v.vii
 n:@v;;indic,impér
 pg:ii.obj;objet
-
-!grp:p.sr
-!n:"is" "nihil"
-!pg:sr;subrel
-!grp:v.attrPass
-!n:@v;;pass indic,pass subj;;attrp
-!ag:@NP @n @a;attr;nomin
-!
-!grp:v.vattrPass
-!n:@v;;pass indic,pass subj;;attrp
-!pg:@NP @n @a;attr;nomin
-!
-!
-!grp:v.objAbl
-!n:@v;;;;abl
-!ag:@n;objet;acc
-!ag:@n;abl;abl
-!
-!grp:v.vobjAbl
-!n:@v;;;;abl
-!pg:@n n @p;objet;acc
-!pg:@n n;abl;abl
-!
-!grp:n.prepAcc
-!n:@n @NP @p !n.det;;acc
-!a:@prepAcc @prepAA;prep
-!
-!grp:a.prepAcc
-!n:@a;;acc;;subst
-!a:@prepAcc @prepAA;prep
-!
-!grp:v.obj
-!n:@v;;act;;!intr
-!ag:@n @a @NP @p !n.prepDet !n.conjet !n.prepAcc !n.prepAbl !n.inperpetuum;objet;acc
-!
-!grp:v.dat
-!n:@v;;indic,subj,part,inf;;datif
-!ag:@n @NP @p;dat;datif
-!
-!grp:v.vdat
-!n:@v;;indic,subj,part,inf;;datif
-!pg:@n @NP @p !"qui2" !"quis";dat;datif
-!
-!grp:v.attrObj
-!n:@v;;act;;attro
-!ag:@n @a;attro;acc
-!
-!grp:v.sujAttr
-!n:@v;;3;;attr
-!ag:@NP @n;sujet;nomin;n
-!ag:@n @a;attr;nomin;n
-!
-!grp:v.vattr
-!n:@v;;;;attr
-!pg:@a;attr;nomin;n
-!
-!grp:v.infattr
-!n:@v;;inf;;attr
-!p:@a;attr;acc
-!
-!grp:v.conjet
-!n:@v v
-!a:"et";conj
-!
-!grp:v.conjCoord
-!n:@v v
-!a:"at" "sed" "nam" "enim";+conj
-!
-!grp:v.adv
-!n:v;;indic,subj,impér
-!a:@Adv !"non" !"neque" !"et";+adv
-!
-!grp:v.coord
-!n:@v v
-!pg:v.conjet;coord;;n
-!
-!grp:v.conjvsubj
-!n:@v;;subj
-!a:"cum" "ut";conj
-!
-!grp:v.conjvind
-!n:@v;;indic
-!a:"quod" "quia" "quando";conj
-!
-!grp:v.infobj
-!n:@v;;act indic,act subj;;infobj
-!ag:@v;obj;inf
-!
-!grp:v.vinfobj
-!n:@v;;act indic,act subj;;infobj
-!pg:@v !v.sujInf;infobj;inf
-!
-!grp:v.subconj
-!n:@v v;;indic
-!ag:v.conj v.conjvsubj v.conjvind;subconj
-!
-!grp:v.subconjv
-!n:@v;;indic
-!pg:v.conjv v.conjvsubj v.conjvind;subconj
-!
-!! RELATIVES
-!
-!grp:sr.sujet
-!n:v;;indic,subj
-!a:"qui2";sujet;nomin;n
-!
-!grp:sr.objet
-!n:@v;;indic act,subj act
-!a:"qui2";objet;acc
-!
-!grp:sr.cui
-!n:@v;;indic,subj;;datif
-!a:"qui2";dat;dat
-!
-!grp:n.sr
-!n:@n n @NP;
-!pg:sr;subrel
-!
-!grp:p.sr
-!n:"is" "nihil"
-!pg:sr;subrel
-!
-!! INFINITIVE
-!
-!grp:v.sujInf
-!n:@v;;inf
-!ag:@n @NP @p !n.prepAcc;sujet;acc
-!
-!grp:v.infSuj
-!n:@v;;inf
-!pg:@n @NP @p !n.prepAcc;sujet;acc
-!
-!grp:v.propinf
-!n:@v;;act;;propinf
-!ag:v.sujInf v.infSuj;subInf
-!
-!grp:v.vpropinf
-!n:@v;;act;;propinf
-!pg:v.sujInf v.infSuj;subInf
-!
-!grp:v.vpropinfPass
-!n:"dico2" "habeo";;indic pass,subj pass
-!pg:v.sujInf v.infSuj;propinf;inf
-!
-!grp:v.homerus
-!n:"dico2";;indic pass,subj pass
-!pg:v.obj;objet
-!
-!grp:v.abl
-!n:@v;;act;;abl
-!ag:@n @p;abl;abl
-!
-!grp:v.sujet
-!n:@v;;3
-!ag:@n @NP;sujet;nomin;n
-!
-!grp:v.sujet1
-!n:@v;;1
-!a:"ego" "nos" !n.prepAcc;sujet;;n
-!
-!grp:v.vsujet
-!n:@v;;3
-!p:@n @NP !n.prepAcc;sujet;nomin;n
-!
-!grp:v.conj
-!n:@v;;indic,subj
-!a:"ut" "cum" "ubi" "quando" !"et" !"neque";conj
-!
-!grp:n.app
-!n:@n;;
-!p:@n @NP !n.prepAcc !n.prepAbl;app;;cgn
-!
-!grp:n.npApp
-!n:@NP;;
-!p:@n !n.prepAcc !n.prepAbl;app;;cgn
