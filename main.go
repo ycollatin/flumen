@@ -18,6 +18,10 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
+// - option 'g' -  analyse : donner la fonction (lien)
+// - dans la périphrase inf. futur, l'aux. esse est souvent omis :
+//   /responsurum hominem nemo arbitrabatur./
+// - Dans les phrases brève, "est" final souvent omis : quid autem absurdum ? quid enim molestius ?
 // - épithète d'un sujet elliptique : nunquam uidelicet sitiens biberat.
 // - sujet d'une inf. futur elliptique : omnia se facturum recepit.
 // - Hiérarchie des règles :
