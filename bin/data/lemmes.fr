@@ -16537,6 +16537,7 @@ pervivo:continuer de vivre
 pervolgo:divulguer, publier, offrir à tous, prodiguer, fréquenter, parcourir souvent
 pervolito:parcourir en volant, parcourir rapidement
 pervolo:voler à travers, parcourir en volant
+pervolo2:désirer vivement, brûler de
 pervolvo:rouler, feuilleter, lire
 pervorto:bouleverser, renverser [de fond en comble], abattre
 pervulgo:répandre partout, divulguer
