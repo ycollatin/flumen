@@ -43,7 +43,7 @@ a:@p @a !p.prepAcc;det;;cgn;det
 
 ter:n.ndet
 n:@n
-p:"hic" "iste";det;;cgn
+p:"hic" "iste" "nullus";det;;cgn
 
 ter:a.adet
 n:@a;;;;subst
@@ -187,9 +187,17 @@ n:@a;;;;subst
 a:@a;epith;;cgn
 a:@v;;indic,subj
 
+ter:a.adv
+n:@a
+a:"minime";adv
+
 ter:a.et
 n:@a
 a:"et" "nec";conj
+
+ter:a.complcomp
+n:@a
+a:@p @n @NP;ccomp;abl
 
 grp:a.coord
 n:@a
@@ -293,13 +301,22 @@ ter:v.attr
 n:@v !v.ppsum;;act;;attr
 a:@n @NP @a;attr;nomin;n
 
+! FIXME le + est à vérifier. Reginus erat totus noster
 ter:v.vattr
 n:@v;;act;;attr
-p:@n @a;attr;nomin;n
+p:@n @a;+attr;nomin;n
 
 ter:v.attrP
 n:@v;;pass;;attrp
 a:@n @NP @a;attr;nomin;n
+
+ter:v.attro
+n:@v;;act;;attro
+a:@n;attro;acc
+
+ter:v.attrquis
+n:@v;;act;;attr
+a:"quis";attr;nomin;n
 
 grp:v.obj
 n:@v;;act;;!intr
@@ -342,6 +359,10 @@ a:@v;dat;part dat
 ter:v.vdatif
 n:@v;;;;datif
 p:@n @NP @p;dat;dat
+
+ter:v.vdatifa
+n:@v;;;;datif
+p:@a;dat;dat;;subst
 
 ter:v.datp
 n:@v;;pass;;datp
@@ -604,6 +625,14 @@ n:@v;;inf
 ag:n.prepAbl n.prepAcc p.prepAcc a.prepAcc v.prepger;+gprep
 a:@v;;indic;;infobj
 
+ter:prep.quousque
+n:"usque"
+a:"quo";adv
+
+grp:v.quousque
+n:@v;;indic,subj
+ag:prep.quousque;adv
+
 grp:v.vacclieu
 n:@v;;;;mvm
 pg:n.prepAcc;lieu
@@ -671,12 +700,12 @@ n:@n n @NP;
 pg:sr;subrel
 
 grp:v.rel
-n:@v;;indic,subj,impér
+n:@v;;indic,subj,impér;;rel
 ag:sr.objet sr.sujet;rel
 
 grp:v.vrel
-n:@v;;indic,subj,impér
-pg:sr.objet sr.sujet;rel
+n:@v;;indic,subj,impér;;rel
+pg:sr;rel
 
 ! interrogation
 ter:v.quis
