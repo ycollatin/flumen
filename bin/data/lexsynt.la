@@ -8327,7 +8327,7 @@ facilitas:
 facinerosus:
 facinorosus:
 facinus:
-facio:abl,datif,prepex
+facio:abl,datif,prepex,attro
 factio:
 factiosus:
 factito:
@@ -17738,7 +17738,7 @@ principaliter:
 principatus:
 principialis:
 principium:
-prior:
+prior:subst
 priores:
 Prisca:
 prisce:
@@ -18507,7 +18507,7 @@ Querquetulanus2:
 querquetum:
 querulus:
 questus:
-qui2:
+qui2:det
 quianam:
 quia:conjind
 quibuscum:
@@ -19833,7 +19833,7 @@ scindo:
 sciniphes:
 scintilla:
 scintillo:
-scio:infobj,propinf,attro
+scio:infobj,propinf,attro,rel,abl
 Scipiadas:
 Scipiades:
 Scipio2:
