@@ -6885,7 +6885,7 @@ disputabilis:
 disputatio:
 disputatiuncula:
 disputator:
-disputo:
+disputo:abl
 disquiro:
 disquisitio:
 disrumpo:
@@ -8069,7 +8069,7 @@ exorcismus:
 exorcista:
 exorcizo:
 exordinatio:
-exordior:
+exordior:infobj
 exordium:
 exorior:
 exorno:
@@ -8327,7 +8327,7 @@ facilitas:
 facinerosus:
 facinorosus:
 facinus:
-facio:abl,datif,prepex,attro
+facio:abl,datif,prepex,attro,subjdir
 factio:
 factiosus:
 factito:
@@ -11663,7 +11663,7 @@ ira:
 iracunde:
 iracundia:
 iracundus:
-irascor:
+irascor:datif
 irate:
 iratus:
 iris2:
@@ -16567,6 +16567,7 @@ peruiuo:
 peruolgo:
 peruolito:
 peruolo:
+peruolo2:infobj
 peruoluo:
 peruorto:
 peruulgo:
@@ -23002,7 +23003,7 @@ unoculus2:
 Unomammia:
 unquam:
 unusquisque:
-unus:det
+unus:det,subst
 upilio:
 upupa:
 Urania:
