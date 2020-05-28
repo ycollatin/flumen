@@ -1,4 +1,39 @@
-! m4.txt -> 500 / 603 (sed complere paginam uolui.)
+! m4.txt, fin
+Vnum etiam uelim cogites.
+uirtutem eorum diligentiamque cognoscite.
+uidetis primas litteras integras.
+uideo hominem ualde petiturire.
+uideo difficile esse consilium.
+Vicit ergo utilitas honestatem.
+Vere loquar, iudices.
+Vennonius domum Vindilli uenit.
+uelim scire quid sit.
+Varro satis facit nobis.
+Varro mihi satis facit.
+ubi est acumen tuum ?
+tuus unus Tullius aberat.
+Tum dicere exorsus est.
+tu nos fac ames.
+tu Atticae salutem dices.
+tibi ego possem irasci.
+tamen opinio est grauis.
+Talem autem cognouimus neminem.
+taedet omnino eos uitae.
+Summa cum exspectatione concurritur.
+Successit tibi L Metellus.
+stultorum plena sunt omnia.
+Socrates disputabat isto modo.
+Simillima est accusatorum ratio.
+Similis me dius fidius.
+sic enim faciendum fuisset.
+! peruelim inconnu
+sed tamen scire peruelim.
+Sed redeo ad illud.
+sed id quoque uidebimus.
+sed haec sero agimus.
+sed haec minora sunt.
+Sed domina natura est.
+set haec coram agemus.
 ! sol mal placée m4
 res enim concurrent contrariae.
 Res erat minime obscura.
