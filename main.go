@@ -14,6 +14,7 @@ package main
 // - Coll : sero3 adv non reconnu.
 // - Coll : obliuisci donné comme gén. de oblivium ?
 // - Coll : faciendum n'est pas donné comme adj. verbal.
+// - Coll : praetoriis : voir les vargraph
 //   Tri :
 //    - Albianum te confecisse arbitror : mauvais tri des solutions.
 //    - favoriser les arcs non croisés
