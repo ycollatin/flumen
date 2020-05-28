@@ -1623,7 +1623,7 @@ Aonides2:
 Aonius:
 aorgesias:
 apage:
-Apamea:
+Apamea:loc
 Apamensis:
 Apamenus:
 Ap:
@@ -1807,7 +1807,7 @@ arbitra:
 arbitrarius:
 arbitratus:
 arbitrium:
-arbitror:propinf,attro
+arbitror:propinf,attro,infobj
 arbor:
 arborarius:
 arboreus:
@@ -6524,7 +6524,7 @@ desuetudo:
 desuetus:
 desultor:
 desultorius2:
-desum:
+desum:datif
 desumo:
 desuper:
 desurgo:
@@ -7017,7 +7017,7 @@ documen:
 documentum:
 Dodonaeus:
 Dodonius:
-do:datif
+do:datif,abl
 dodrans:
 dodrantarius:
 dogma2:
@@ -8550,7 +8550,7 @@ ferocitas:
 ferociter:
 feroculus:
 Feronia:
-fero:
+fero:propinf
 ferox:
 ferramentum:
 ferraria:
@@ -8892,7 +8892,7 @@ fortuna:
 fortunate:
 Fortunatus2:
 fortunatus:
-fortuno:
+fortuno:datif
 Foruli2:
 foruli:
 Forum2:
@@ -11820,6 +11820,7 @@ iesus:
 ioca:
 iocatio:
 ioco:
+iocor:abl
 iocose:
 iocosus:
 iocularis:
