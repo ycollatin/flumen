@@ -208,7 +208,7 @@ n:@a
 a:"et" "nec";conj
 
 ter:a.complcomp
-n:@a
+n:@a;;compar
 a:@p @n @NP;ccomp;abl
 
 grp:a.coord
@@ -304,7 +304,7 @@ a:@n @p @NP;datif;dat
 p:"gratia";objet;acc plur
 
 ter:v.hic
-n:@v;;indic,subj
+n:@v;;3
 a:"hic" "idem" "is" "ille" "ipse" "iste" "nemo" "neuter" "nihil";sujet;nomin;n
 
 ter:v.vhic
@@ -352,10 +352,10 @@ ter:v.obja
 n:@v;;act;;!intr
 a:@a;objet;acc;;subst
 
-ter:v.objp
+grp:v.objp
 n:@v;;act;;!intr
-!a:"ego" "hic" "is" "nemo" "nihil" "nos" "tu" "quis" "quisnam" "aliquis";objet;acc
-a:@p;objet;acc
+!a:"ego" "hic" "is" "nemo" "nihil" "nos" "tu" "quis" "quisnam" "aliquis" !p.prepAcc;objet;acc
+ag:@p !p.prepAcc;objet;acc
 
 grp:v.hobjp
 n:@v;;act;;!intr
@@ -399,9 +399,9 @@ ter:v.abl
 n:@v;;;;abl
 a:@n @NP @p;abl;abl
 
-ter:v.agent
+grp:v.agent
 n:@v;;pass
-a:@n;agent;abl
+ag:@n;agent;abl
 
 ter:v.die
 n:@v
@@ -417,7 +417,7 @@ a:"mecum" "tecum" "nobiscum" "vobiscum";abl
 
 ter:v.vabl
 n:@v;;;;abl
-p:@n @NP @p;abl;abl
+p:@n @NP @p !n.prepAbl;abl;abl
 
 ter:v.vabla
 n:@v;;;;abl
@@ -425,7 +425,7 @@ p:@a;abl;abl;;subst
 
 ter:v.et
 n:@v;;indic,subj,impér
-a:"et" "at" "atqui" "ergo" "nam" "sed" "verum" "an";+conj
+a:"et" "at" "atqui" "ergo" "nam" "sed" "tametsi" "verum" "an";+conj
 
 ter:v.vet
 n:@v;;indic,subj,impér
