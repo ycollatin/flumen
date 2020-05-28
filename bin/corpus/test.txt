@@ -1,40 +1,17 @@
-! m4.txt, fin
-Vnum etiam uelim cogites.
-uirtutem eorum diligentiamque cognoscite.
-uidetis primas litteras integras.
-uideo hominem ualde petiturire.
-uideo difficile esse consilium.
-Vicit ergo utilitas honestatem.
-Vere loquar, iudices.
-Vennonius domum Vindilli uenit.
-uelim scire quid sit.
-Varro satis facit nobis.
-Varro mihi satis facit.
-ubi est acumen tuum ?
-tuus unus Tullius aberat.
-Tum dicere exorsus est.
-tu nos fac ames.
-tu Atticae salutem dices.
-tibi ego possem irasci.
-tamen opinio est grauis.
-Talem autem cognouimus neminem.
-taedet omnino eos uitae.
-Summa cum exspectatione concurritur.
-Successit tibi L Metellus.
-stultorum plena sunt omnia.
-Socrates disputabat isto modo.
-Simillima est accusatorum ratio.
-Similis me dius fidius.
-sic enim faciendum fuisset.
-! peruelim inconnu
-sed tamen scire peruelim.
-Sed redeo ad illud.
-sed id quoque uidebimus.
-sed haec sero agimus.
-sed haec minora sunt.
-Sed domina natura est.
-set haec coram agemus.
+! m4.txt
 ! sol mal placée m4
+sed haec coram agemus.
+Sed domina natura est.
+Simillima est accusatorum ratio.
+Socrates disputabat isto modo.
+stultorum plena sunt omnia.
+Summa cum exspectatione concurritur.
+tamen opinio est grauis.
+ubi est acumen tuum ?
+Varro satis facit nobis.
+uelim scire quid sit.
+uideo difficile esse consilium.
+uirtutem eorum diligentiamque cognoscite.
 res enim concurrent contrariae.
 Res erat minime obscura.
 sane res erat perturbata.
@@ -77,6 +54,11 @@ scripseram rogatu tuo.
 Ais esse uadimonium desertum.
 Albianum te confecisse arbitror.
 ! échecs m4
+Vennonius domum Vindilli uenit.
+taedet omnino eos uitae.
+Similis me dius fidius.
+sed haec sero agimus.
+Vere loquar, iudices.
 quid autem absurdum.
 quid enim molestius ?
 responsurum hominem nemo arbitrabatur.
