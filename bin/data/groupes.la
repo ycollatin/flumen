@@ -59,11 +59,11 @@ a:@a;epith;;cn
 
 ter:n.adj
 n:@n @NP
-a:@a;epith;;cgn
+a:@a;+epith;;cgn
 
 ter:n.nAdj
 n:@n
-p:@a;epith;;cgn
+p:@a;+epith;;cgn
 
 ter:n.hnAdj
 n:@n
@@ -113,6 +113,14 @@ ter:n.gen
 n:@n
 a:@n @NP;gen;gén
 
+ter:n.genis
+n:@n
+a:"is";gen;gén
+
+ter:n.ngenis
+n:@n
+p:"is";gen;gén
+
 ter:n.hgen
 n:@n
 a:@n @NP;gen;gén
@@ -130,6 +138,10 @@ a:"sum";;indic 3
 ter:n.gena
 n:@n
 a:@a;gen;gén;;subst
+
+ter:n.nquoque
+n:@n @p
+p:"quoque";adv
 
 ter:a.gen
 n:@a;;;;gen
@@ -222,6 +234,16 @@ a:@v;abl;gér abl
 ter:ad.gen
 n:@Adv;;;;gen
 p:@n;gen;gén
+
+! à compléter
+ter:p.adj
+n:"nemo"
+a:@a;epith;;cgn
+
+ter:p.hadj
+n:"nemo"
+a:@a;epith;;cgn
+a:@v;;indic
 
 ter:p.padj
 n:@p
@@ -335,6 +357,11 @@ n:@v;;act;;!intr
 !a:"ego" "hic" "is" "nemo" "nihil" "nos" "tu" "quis" "quisnam" "aliquis";objet;acc
 a:@p;objet;acc
 
+grp:v.hobjp
+n:@v;;act;;!intr
+ag:@p;objet;acc
+a:@v;;impér;;subjdir
+
 grp:v.objpf
 n:v.sumPfut
 a:"ego" "hic" "is" "nemo" "nihil" "tu";objet;acc
@@ -344,9 +371,9 @@ n:@v;;;;datif
 a:@n @NP @p;dat;dat
 
 ter:v.hdatif
-n:@v;;subj;;datif
+n:@v;;subj,inf;;datif
 a:@n @NP @p;dat;dat
-a:@v;;indic,subj;;subjdir
+a:@v;;indic,subj
 
 ter:v.datifa
 n:@v;;;;datif
@@ -400,6 +427,10 @@ ter:v.et
 n:@v;;indic,subj,impér
 a:"et" "at" "atqui" "ergo" "nam" "sed" "verum" "an";+conj
 
+ter:v.vet
+n:@v;;indic,subj,impér
+p:"ergo";conj
+
 ter:v.adv
 n:@v
 a:@Adv;+adv
@@ -413,7 +444,7 @@ n:@v
 a:"non" "haud" "nec" "neque";neg
 
 ter:v.infobj
-n:@v;;indic,subj;;infobj
+n:@v;;indic,subj,part;;infobj
 a:@v !v.sujPropInf;objet;inf
 
 ter:v.vinfobj
@@ -473,6 +504,7 @@ pg:v.sujObjPropInf v.sujPropInf v.hsujPropInf v.vSujPropInf;subInf
 
 ter:v.capuam
 n:@v;;act;;mvm
+!a:"domus" @NP;lieu;acc;;mvm
 a:@NP;lieu;acc;;mvm
 
 ter:v.loc
@@ -536,6 +568,12 @@ ter:v.subjDir
 n:@v;;indic,subj;;subjdir
 a:@v;subj;subj
 
+! Vnum etiam uelim cogites
+ter:a.objSubjDir
+n:@v;;subj
+a:@a;objet;acc;;subst
+a:@v;;indic,subj;;subjdir
+
 ter:v.vSubjDir
 n:@v;;indic,subj;;subjdir
 p:@v;subj;subj
@@ -563,7 +601,7 @@ n:@n @NP n.det n.adj n.nAdj;;acc
 a:@prepAcc @prepAA;prep
 
 grp:p.prepAcc
-n:"hic" "is" "ego" "tu" "nos" "vos";;acc
+n:"hic" "ille" "is" "ego" "tu" "nos" "vos";;acc
 a:@prepAcc @prepAA n.det;prep
 
 ter:a.prepAcc
@@ -717,10 +755,14 @@ ter:ii.obj
 n:@v;;subj
 a:"quis";objet;acc
 
+ter:ii.attr
+n:@v;;subj
+a:"quis";objet;nomin
+
 grp:v.ii
 n:@v;;indic,impér
 ag:ii.obj;objet
 
 grp:v.vii
-n:@v;;indic,impér
+n:@v;;indic,impér,inf
 pg:ii.obj;objet
