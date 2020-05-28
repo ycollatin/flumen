@@ -4,8 +4,16 @@
 package main
 
 //     FIXME
+// la définition d'un lemme voisine très mal avec celle d'u POS :
+// ter:v.capuam
+// n:@v;;act;;mvm
+// !a:"domus" @NP;lieu;acc;;mvm
+// a:@NP;lieu;acc;;mvm
+//
 // - La lemmatisation est affichée en double
+// - Coll : sero3 adv non reconnu.
 // - Coll : obliuisci donné comme gén. de oblivium ?
+// - Coll : faciendum n'est pas donné comme adj. verbal.
 //   Tri :
 //    - Albianum te confecisse arbitror : mauvais tri des solutions.
 //    - favoriser les arcs non croisés
@@ -18,6 +26,8 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
+// - traiter les praenomina M. L. etc.
+// - Le vocatif confondu avec nomin ou acc : Vere loquar, iudices.
 // - option 'g' -  analyse : donner la fonction (lien)
 // - dans la périphrase inf. futur, l'aux. esse est souvent omis :
 //   /responsurum hominem nemo arbitrabatur./
