@@ -43,7 +43,7 @@ a:@p @a !p.prepAcc;det;;cgn;det
 
 ter:n.ndet
 n:@n
-p:"hic" "iste" "nullus";det;;cgn
+p:"hic" "iste" "nullus" "quidam";det;;cgn
 
 ter:a.adet
 n:@a;;;;subst
@@ -172,6 +172,10 @@ ter:adv.et
 n:@Adv
 a:"et" "atque";conj
 
+ter:adv:adv
+n:@Adv
+a:"nimis" "minime";adv
+
 ter:n.hgen
 n:@n;;nomin,acc,dat,abl
 a:@n @NP;gen;gén
@@ -248,6 +252,10 @@ a:@v;;indic
 ter:p.padj
 n:@p
 p:@a;epith;;cgn
+
+ter:p.app
+n:@p
+p:@n @NP;app;;cgn
 
 ter:p.gen
 n:@p;;;;gen
@@ -425,7 +433,7 @@ p:@a;abl;abl;;subst
 
 ter:v.et
 n:@v;;indic,subj,impér
-a:"et" "at" "atqui" "ergo" "nam" "sed" "tametsi" "verum" "an";+conj
+a:"et" "at" "atqui" "ergo" "nam" "sed" "tametsi" "verum" "an" "quamquam";+conj
 
 ter:v.vet
 n:@v;;indic,subj,impér
@@ -441,7 +449,7 @@ p:@Adv !"et" !"etiam";+adv
 
 ter:v.neg
 n:@v
-a:"non" "haud" "nec" "neque";neg
+a:"non" "nondum" "haud" "nec" "neque";neg
 
 ter:v.infobj
 n:@v;;indic,subj,part;;infobj
@@ -511,6 +519,10 @@ ter:v.loc
 n:@v;;act
 a:@NP @n;loc;gén;;loc
 
+ter:v.vubitopo
+n:@v
+p:@NP;lieu;abl;;topo
+
 ter:v.hloc
 n:@v;;act inf
 a:@NP;loc;gén;;loc
@@ -537,7 +549,7 @@ n:@v;;indic,subj
 ag:v.adger;ger
 
 ter:v.adjv
-n:"sum";;3 sing
+n:"sum";;3 sing,inf
 a:@v;attr;verbal nomin neut sing
 
 ter:v.vadjv
@@ -550,7 +562,7 @@ a:"tantus";gen;gén neu sing
 
 ter:v.conjSubInd
 n:@v;;indic
-a:"cum" "nisi" "quando" "quia" "si" "ubi" "ut";conj
+a:"cum" "etsi" "nisi" "quando" "quia" "si" "ubi" "ut";conj
 
 ter:v.conjSubSubj
 n:@v;;subj
@@ -601,7 +613,7 @@ n:@n @NP n.det n.adj n.nAdj;;acc
 a:@prepAcc @prepAA;prep
 
 grp:p.prepAcc
-n:"hic" "ille" "is" "ego" "tu" "nos" "vos";;acc
+n:"hic" "ille" "is" "ego" "tu" "nos" "qui2" "vos";;acc
 a:@prepAcc @prepAA n.det;prep
 
 ter:a.prepAcc
