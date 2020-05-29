@@ -4194,7 +4194,7 @@ cistula:
 citatim:
 citatus:
 citeria:
-citerior:
+citerior:subst
 citerius:
 citer:
 cite:
@@ -9517,7 +9517,7 @@ gratuitus:
 gratulabundus:
 gratulatio:
 gratulator:
-gratulor:
+gratulor:datif
 Gratus2:
 gratus:datif
 grauastellus:
@@ -10623,7 +10623,7 @@ incestus2:
 incestus:
 inchoo:
 incido2:
-incido:
+incido:datif
 incile:
 incilo:
 incingo:
@@ -13131,7 +13131,7 @@ mandatum:
 mandatus2:
 Mandela:
 mando2:
-mando:
+mando:datif
 mandra:
 Mandubii:
 Mandubracius:
