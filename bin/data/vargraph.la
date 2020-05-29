@@ -38,14 +38,14 @@ istis$:iuistis
 [^u]eritis$:eueritis
 [^u]erint$:euerint
 [^u]erunt$:euerunt
-iui:i
+!iui:i
 esse$:euisse
 esset$:euisset
 esti$:euisti
 estis$:euistis
 uom$:uum
 lubet$:libet
-i$:ii
+!i$:ii
 !                   assimilations
 adc:acc
 adf:aff
