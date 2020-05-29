@@ -23,6 +23,7 @@ package main
 //
 // XXX
 //
+// - dans vargraph, commenté iui:i et i$:ii
 // - CONSTRUCTIONS LEXICALES chez Cic.
 // 		* pietate erga te
 //      * tempus agendi et cogitandi

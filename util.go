@@ -92,6 +92,7 @@ func PrimEl(s, sep string) string {
 	return eclats[0]
 }
 
+// renvoie la lemmatisation sr sous forme de chaîne
 func srToString(sr gocol.Sr) (k string, ll []string) {
 	for _, l := range sr.Morphos {
 		ll = append(ll, fmt.Sprintf("   %s", l))
@@ -99,28 +100,29 @@ func srToString(sr gocol.Sr) (k string, ll []string) {
 	return sr.Lem.Cle, ll
 }
 
+// renvoie la traduction du lemme de sr
 func srToTr(sr gocol.Sr) (tr string) {
 	return fmt.Sprintf("%s [%s] : %s", sr.Lem.Gr, sr.Lem.Pos, sr.Lem.Traduction)
 }
 
-// renvoie l'intersection entre resa et resb
-func diffRes(resa, resb gocol.Res) (res gocol.Res) {
-	for _, sra := range resa {
-		for _, srb := range resb {
+func appendRes(resa, resb gocol.Res) gocol.Res {
+	for _, srb := range resb {
+		var ai bool
+		for i, sra := range resa {
 			if sra.Lem == srb.Lem {
-				var nsr gocol.Sr
-				nsr.Morphos = make([]string, len(sra.Morphos))
-				nsr.Lem = sra.Lem
-				for _, morfa := range sra.Morphos {
-					if contient(srb.Morphos, morfa) {
-						nsr.Morphos = append(nsr.Morphos, morfa)
+				ai = true
+				for _, mb := range srb.Morphos {
+					if !contient(sra.Morphos, mb) {
+						resa[i].Morphos = append(resa[i].Morphos, mb)
 					}
 				}
-				res = append(res, nsr)
 			}
 		}
+		if !ai {
+			resa = append(resa, resb...)
+		}
 	}
-	return
+	return resa
 }
 
 // Compare les lemmatisations Gentes et les lemmatisations Collatinus
