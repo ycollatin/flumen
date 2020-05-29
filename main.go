@@ -10,7 +10,6 @@ package main
 // !a:"domus" @NP;lieu;acc;;mvm
 // a:@NP;lieu;acc;;mvm
 //
-// - La lemmatisation est affichée en double
 // - Coll : sero3 adv non reconnu.
 // - Coll : obliuisci donné comme gén. de oblivium ?
 // - Coll : faciendum n'est pas donné comme adj. verbal.
@@ -54,14 +53,6 @@ package main
 // - une option pour charger une base de groupes différente ?
 // - un signet pour les textes longs ?
 // - dicitur prima mortalis. avec lexsynt dico1:attrp, boucle infinie.
-// - verbes se construisant avec locatif. Caesarem Sinuessae mansurum nuntiabant.
-// - Pour éviter la pléthore :
-//   - durcir les conditions des règles
-//   - élaguer les branches avant la fin
-//   - élaguer les branches après récolte
-//   - utiliser les goroutines : go bf.explore()
-//   - enrichir la syntaxe de groupes.la
-// - Si pléthore, trouver un moyen de navigation en fixant des arcs.
 // - un champ groupe.anrel - analyses du relatif ?
 // - accord :de personne sujet-verbe et verbe-verbe coord; de mode v-v, etc.
 // - fonction de sortie au format GraphViz.
