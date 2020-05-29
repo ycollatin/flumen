@@ -36,7 +36,7 @@ func creeMot(m string) *Mot {
 	mot.ans, echec = gocol.Lemmatise(m)
 	ans2, echec2 := gocol.Lemmatise(gocol.Majminmaj(m))
 	if !echec2 {
-		mot.ans = append(mot.ans, ans2...)
+		mot.ans = appendRes(mot.ans, ans2)
 	}
 	// ajout du genre pour les noms
 	if !echec || !echec2 {
