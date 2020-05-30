@@ -10,10 +10,9 @@ package main
 // !a:"domus" @NP;lieu;acc;;mvm
 // a:@NP;lieu;acc;;mvm
 //
+// - Coll : ego de egeo, 1S prés ?
 // - Coll : sero3 adv non reconnu.
 // - Coll : obliuisci donné comme gén. de oblivium ?
-// - Coll : faciendum n'est pas donné comme adj. verbal.
-// - Coll : praetoriis : voir les vargraph
 //   Tri :
 //    - Albianum te confecisse arbitror : mauvais tri des solutions.
 //    - favoriser les arcs non croisés
@@ -27,6 +26,7 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
+// - pos multiples ?
 // - traiter les praenomina M. L. etc.
 // - Le vocatif confondu avec nomin ou acc : Vere loquar, iudices.
 // - option 'g' -  analyse : donner la fonction (lien)
