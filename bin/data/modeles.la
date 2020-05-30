@@ -816,9 +816,9 @@ des:297,298:0:ērĕ;ēmĭnī
 des:299-301:0:ētŏr;ētŏr;ēntŏr
 des:302:0:ērī
 ! adjectif verbal
-des:339-350:0:ēndŭs;ēndĕ;ēndŭm;ēndī;ēndō;ēndō;ēndī;ēndī;ēndōs;ēndōrŭm;ēndīs;ēndīs
-des:351-362:0:ēndă;ēndă;ēndăm;ēndāe;ēndāe;ēndā;ēndāe;ēndāe;ēndās;ēndārŭm;ēndīs;ēndīs
-des:363-374:0:ēndŭm;ēndŭm;ēndŭm;ēndī;ēndō;ēndō;ēndă;ēndă;ēndă;ēndōrŭm;ēndīs;ēndīs
+des:339-350:0:ēnd$lupus
+des:351-362:0:ēnd$uita
+des:363-374:0:ēnd$templum
 pos:v
 
 modele:licet
@@ -872,6 +872,10 @@ des:163-168:3:$em
 des:291-296:3:ĕr;ērĭs,ērĕ;ētŭr;ēmŭr;ēmĭnī;ēntŭr
 ! ind. passif
 des:269:5:tŭr
+! adjectif verbal
+des:339-350:0:ēnd$lupus
+des:351-362:0:ēnd$uita
+des:363-374:0:ēndemplum
 
 modele:aio
 pere:lego
