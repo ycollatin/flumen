@@ -10,8 +10,6 @@ package main
 // !a:"domus" @NP;lieu;acc;;mvm
 // a:@NP;lieu;acc;;mvm
 //
-// - Coll : ego de egeo, 1S prés ?
-// - Coll : sero3 adv non reconnu.
 // - Coll : obliuisci donné comme gén. de oblivium ?
 //   Tri :
 //    - Albianum te confecisse arbitror : mauvais tri des solutions.
