@@ -949,7 +949,7 @@ agninus:
 agnitio:
 agnosco:
 agnus:
-ago:ppp,datif
+ago:ppp,datif,abl
 Agonalis2:
 Agonis:
 Agonius:
@@ -4442,7 +4442,7 @@ cogitabundus:
 cogitate:
 cogitatio:
 cogitatum:
-cogito:propinf,infobj
+cogito:propinf,infobj,abl
 cognatio:
 cognatus2:
 cognatus:
@@ -4938,7 +4938,7 @@ confio:
 confirmatio:
 confirmator:
 confirmatus:
-confirmo:propinf
+confirmo:propinf,datif
 confiteor:
 conflagro:
 conflicto:
@@ -13866,7 +13866,7 @@ moles:
 moleste:
 molestia:
 molesto:
-molestus:
+molestus:datif
 moletrina:
 molile:
 molimen:
@@ -14021,7 +14021,7 @@ multa:
 multangulus:
 multatio:
 multesimus:
-multi:
+multi:subst
 multibibus:
 multicia:
 multifacio:
@@ -14397,7 +14397,7 @@ ne2:conjsubj
 Nemesis:
 Nemetes:
 Nemetocenna:
-nemo:neg,gen
+nemo:neg,gen,det
 nemoralis:
 Nemorensis2:
 nemoriuagus:
@@ -14579,7 +14579,7 @@ Nola:
 Nolanus:
 noli:
 nolite:
-nolo:infobj
+nolo:infobj,subjdir
 Nomades:
 Nomas:
 nomenclator:
@@ -14963,7 +14963,7 @@ obtestor:
 obtexo:
 obticesco:
 obtineo:
-obtingo:
+obtingo:datif
 obtorpesco:
 obtorqueo:
 obtrectatio:
@@ -15027,7 +15027,7 @@ occupatio:
 occupatus:
 occupo2:
 occupo:
-occurro:
+occurro:datif
 occursatio:
 occurso:
 occursus:
