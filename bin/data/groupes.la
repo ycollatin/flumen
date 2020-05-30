@@ -42,8 +42,12 @@ n:@n
 a:@p @a !p.prepAcc;det;;cgn;det
 
 ter:n.ndet
-n:@n
+n:@n @NP
 p:"hic" "iste" "nullus" "quidam";det;;cgn
+
+ter:np.ndet
+n:@NP
+p:"noster" "iste";det;;cgn
 
 ter:a.adet
 n:@a;;;;subst
@@ -115,7 +119,7 @@ a:@n @NP;gen;gén
 
 ter:n.genis
 n:@n
-a:"is";gen;gén
+a:"is" "hic";gen;gén
 
 ter:n.ngenis
 n:@n
@@ -211,9 +215,22 @@ ter:a.et
 n:@a
 a:"et" "nec";conj
 
+ter:n.quam
+n:@n @p
+a:"quam";conj
+
 ter:a.complcomp
 n:@a;;compar
 a:@p @n @NP;ccomp;abl
+
+ter:a.acomplcomp
+n:@a;;compar
+p:@p @n @NP;ccomp;abl
+
+grp:a.hcomplcompquam
+n:@a;;compar
+ag:n.quam;ccomp
+a:@v;;indic,subj
 
 grp:a.coord
 n:@a
@@ -283,6 +300,10 @@ n:"sum";;3
 a:"eo";pp;supin
 
 ter:v.sumPfut
+n:"sum";;indic,subj,inf
+a:@v;pfut;part fut
+
+ter:v.vsumPfut
 n:"sum";;indic,subj,inf
 p:@v;pfut;part fut
 
@@ -479,7 +500,7 @@ a:@n @NP @p;sujet;acc
 
 ter:v.attrPropInf
 n:"sum";;inf
-a:@n @NP @p;attr;acc
+a:@a @n @NP @p;attr;acc
 
 ter:v.hattrPropinf
 n:"sum";;inf
@@ -501,8 +522,13 @@ n:@v;;inf
 p:@p @n @NP;sujet;acc
 
 grp:v.propInf
-n:@v;;indic,impér;;propinf
+n:@v;;indic,subj,impér;;propinf
 ag:v.sujObjPropInf v.sujPropInf v.hsujPropInf v.vSujPropInf;subInf
+
+grp:v.hpropInf
+n:@v;;inf;;propinf
+ag:v.sujObjPropInf v.sujPropInf v.hsujPropInf v.vSujPropInf;subInf
+a:@v;;indic;;infobj
 
 grp:v.vpropInf
 n:@v;;indic,impér;;propinf
@@ -562,7 +588,7 @@ a:"tantus";gen;gén neu sing
 
 ter:v.conjSubInd
 n:@v;;indic
-a:"cum" "etsi" "nisi" "quando" "quia" "si" "ubi" "ut";conj
+a:"cum" "etenim" "etsi" "nisi" "quando" "quia" "si" "ubi" "ut";conj
 
 ter:v.conjSubSubj
 n:@v;;subj
@@ -603,7 +629,7 @@ p:"enim" "autem";conj
 !!!!!!!!!!!!!!!!!!!!!!!!!!
 
 grp:n.prepAbl
-n:@n @NP @p n.det;;abl
+n:@n @NP @p;;abl
 a:@prepAbl @prepAA;prep
 
 ! FIXME : ad populum Romanum : 'n' devrait suffire
@@ -695,6 +721,10 @@ grp:v.objppa
 n:v.sumpp;;act
 a:@a;objet;acc;;subst
 
+grp:v.objppp
+n:v.sumpp;;act
+a:@p;objet;acc
+
 ! FIXME exheredare pater filium cogitabat.
 ter:v.hvobj
 n:@v;;inf;;!intr
@@ -757,12 +787,16 @@ grp:v.vrel
 n:@v;;indic,subj,impér;;rel
 pg:sr;rel
 
-! interrogation
+! interrogation directe
 ter:v.quis
 n:@v;;indic
 a:"quis";sujet;nomin;n
 
 ! interrogative indirecte
+ter:ii.suj
+n:@v;;subj
+a:"quis";sujet;nomin;n
+
 ter:ii.obj
 n:@v;;subj
 a:"quis";objet;acc
@@ -771,10 +805,15 @@ ter:ii.attr
 n:@v;;subj
 a:"quis";objet;nomin
 
+ter:ii.adv
+n:@v;;subj
+a:"quemadmodum";+adv
+
 grp:v.ii
 n:@v;;indic,impér
 ag:ii.obj;objet
 
 grp:v.vii
 n:@v;;indic,impér,inf
-pg:ii.obj;objet
+pg:ii.suj ii.obj ii.adv;objet
+
