@@ -4,11 +4,13 @@
 package main
 
 //     FIXME
+// une espace finale dans groupes.la fait planter !
 // la définition d'un lemme voisine très mal avec celle d'u POS :
 // ter:v.capuam
 // n:@v;;act;;mvm
 // !a:"domus" @NP;lieu;acc;;mvm
 // a:@NP;lieu;acc;;mvm
+// idem pour n.hnAdj
 //
 // - Coll : obliuisci donné comme gén. de oblivium ?
 //   Tri :
@@ -24,13 +26,14 @@ package main
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
 // TODO
+// - Deux sujets : Sustulimus manus et ego et Balbus (m6)
 // - pos multiples ?
 // - traiter les praenomina M. L. etc.
 // - Le vocatif confondu avec nomin ou acc : Vere loquar, iudices.
 // - option 'g' -  analyse : donner la fonction (lien)
 // - dans la périphrase inf. futur, l'aux. esse est souvent omis :
 //   /responsurum hominem nemo arbitrabatur./
-// - Dans les phrases brève, "est" final souvent omis : quid autem absurdum ? quid enim molestius ?
+// - Dans les phrases brèves, "est" final souvent omis : quid autem absurdum ? quid enim molestius ?
 // - épithète d'un sujet elliptique : nunquam uidelicet sitiens biberat.
 // - sujet d'une inf. futur elliptique : omnia se facturum recepit.
 // - Hiérarchie des règles :
