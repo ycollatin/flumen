@@ -93,8 +93,12 @@ n:@n
 p:"nequam";epith
 
 ter:n.ablabs
-n:@n @NP
+n:@n @NP;;abl
 a:@v;epith;abl;gn
+
+ter:n.nablabs
+n:@n @NP;;abl
+p:@v;epith;abl;gn
 
 ter:n.npp
 n:@n @NP
@@ -153,7 +157,7 @@ a:@n @NP;gen;gén
 
 ter:a.agen
 n:@a;;;;gen
-p:@n @NP;gen;gén
+p:@n @NP @p;gen;gén
 
 ter:a.hagen
 n:@a;;;;gen
@@ -426,7 +430,12 @@ a:@n @NP @p;dat;dat
 
 ter:v.abl
 n:@v;;;;abl
-a:@n @NP @p;abl;abl
+ag:@n @NP @p !v.ablabs;abl;abl
+
+! fixme imperiis distributis ardere
+grp:v.ablabs
+n:@v;;;;abl
+ag:n.ablabs n.nablabs;ablabs
 
 grp:v.agent
 n:@v;;pass
@@ -575,12 +584,12 @@ n:@v;;indic,subj
 ag:v.adger;ger
 
 ter:v.adjv
-n:"sum";;3 sing,inf
-a:@v;attr;verbal nomin neut sing
+n:"sum";;3,inf
+a:@v;attr;verbal nomin;n
 
 ter:v.vadjv
 n:"sum";;3
-p:@v;attr;verbal nomin neut;n
+p:@v;attr;verbal nomin;n
 
 ter:v.tantisum
 n:"sum";;indic,subj
@@ -766,6 +775,10 @@ ag:v.ubicumque;subrel
 ter:sr.sujet
 n:@v;;indic,subj
 a:"qui2";sujet;nomin;n
+
+ter:sr.attr
+n:@v;;indic,subj
+a:"qui2";attr;nomin;n
 
 ter:sr.objet
 n:@v;;indic act,subj act
