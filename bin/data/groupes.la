@@ -39,7 +39,7 @@
 
 ter:n.det
 n:@n
-a:@p @a !p.prepAcc;det;;cgn;det
+a:@p @a "ipse" !p.prepAcc;det;;cgn;det
 
 ter:n.ndet
 n:@n @NP
@@ -172,6 +172,10 @@ ter:a.etiam
 n:@a;;;;subst
 a:"etiam" "pote";adv
 
+ter:conj.quinetiam
+n:"quin"
+p:"etiam";adv
+
 ter:n.net
 n:@n @NP
 a:"et";conj
@@ -225,11 +229,11 @@ a:"quam";conj
 
 ter:a.complcomp
 n:@a;;compar
-a:@p @n @NP;ccomp;abl
+a:@p @n @NP !n.prepAbl;ccomp;abl
 
-ter:a.acomplcomp
+grp:a.acomplcomp
 n:@a;;compar
-p:@p @n @NP;ccomp;abl
+pg:@p @n @NP;ccomp;abl
 
 grp:a.hcomplcompquam
 n:@a;;compar
@@ -294,6 +298,11 @@ a:@p;;dat
 ter:v.ppsum
 n:"sum";;indic,subj,inf
 a:@v;pp;part parf
+
+ter:v.hppsum
+n:"sum";;indic,subj,inf
+a:@v;pp;part parf
+a:@Adv
 
 ter:v.sumpp
 n:"sum";;indic,subj,inf
@@ -465,6 +474,10 @@ ter:v.et
 n:@v;;indic,subj,impér
 a:"et" "at" "atqui" "ergo" "nam" "sed" "tametsi" "verum" "an" "quamquam";+conj
 
+ter:v.conjc
+n:@v;;indic,subj,impér
+a:conj;conj
+
 ter:v.vet
 n:@v;;indic,subj,impér
 p:"ergo";conj
@@ -482,7 +495,7 @@ n:@v
 a:"non" "nondum" "haud" "nec" "neque";neg
 
 ter:v.infobj
-n:@v;;indic,subj,part;;infobj
+n:@v;;act;;infobj
 a:@v !v.sujPropInf;objet;inf
 
 ter:v.vinfobj
@@ -671,6 +684,10 @@ grp:n.nGen
 n:@n
 p:@n @NP n.adj;gen;gén
 
+ter:n.npGen
+n:@NP;;;gen
+p:@n @NP n.adj;gen;gén
+
 grp:n.coord
 n:@n @NP
 pg:n.net;coord;;c
@@ -820,7 +837,7 @@ a:"quis";objet;nomin
 
 ter:ii.adv
 n:@v;;subj
-a:"quemadmodum";+adv
+a:"quemadmodum" "cur";+adv
 
 grp:v.ii
 n:@v;;indic,impér
@@ -828,5 +845,6 @@ ag:ii.obj;objet
 
 grp:v.vii
 n:@v;;indic,impér,inf
-pg:ii.suj ii.obj ii.adv;objet
+!pg:ii.suj ii.obj ii.adv;objet
+pg:ii;intind
 
