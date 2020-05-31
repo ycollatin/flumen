@@ -11656,7 +11656,7 @@ Iphiclus:
 Iphicrates:
 Iphigenia:
 Iphitus:
-ipse:
+ipse:det
 ipsima:
 ipsimus:
 ira:
@@ -12122,7 +12122,7 @@ Lanuuium:
 lanx:
 Laocoon:
 Laodamia:
-Laodicea:
+Laodicea:loc
 Laodice:
 Laodiceni:
 Laodicia:
@@ -14110,7 +14110,7 @@ murteus:
 murus:
 Mus2:
 Musaeus:
-Musa:
+Musa:gen
 musca:
 muscarium:
 muscipulum:
@@ -14752,7 +14752,7 @@ nundinor:
 nunquam:neg
 nuntia:
 nuntiatio:
-nuntio:propinf
+nuntio:propinf,datif,abl
 nuntium:
 nuntius2:
 nuntius:
@@ -19094,7 +19094,7 @@ respicio:
 respiratio:
 respiro:
 resplendeo:
-respondeo:datif
+respondeo:datif,propinf
 responsio:
 responso:
 responsum:
