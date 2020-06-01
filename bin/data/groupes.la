@@ -560,8 +560,7 @@ pg:v.sujObjPropInf v.sujPropInf v.hsujPropInf v.vSujPropInf;subInf
 
 ter:v.capuam
 n:@v;;act;;mvm
-!a:"domus" @NP;lieu;acc;;mvm
-a:@NP;lieu;acc;;mvm
+a:@NP "domus";lieu;acc;;mvm
 
 ter:v.loc
 n:@v;;act
