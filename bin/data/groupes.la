@@ -570,7 +570,7 @@ a:@NP;lieu;acc;;mvm
 
 ter:v.domum
 n:@v;;act;;mvm
-a:"domus";lieu;acc
+a:"domus" "humus" "rus";lieu;acc
 
 ter:v.loc
 n:@v;;act
