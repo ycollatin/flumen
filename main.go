@@ -4,7 +4,6 @@
 package main
 
 //     FIXME
-// une espace finale dans groupes.la fait planter !
 // la définition d'un lemme voisine très mal avec celle d'un POS :
 //	 ter:v.capuam
 // 	 n:@v;;act;;mvm
