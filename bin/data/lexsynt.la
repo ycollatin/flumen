@@ -3744,7 +3744,7 @@ Celtiberia:
 Celtiberi:
 Celtillus:
 Cenabensis:
-Cenabum:
+Cenabum:mvm
 cena:
 cenaculum:
 Cenaeus:
@@ -7068,7 +7068,7 @@ domitrix:
 domo:
 domuitio:
 domusio:
-domus:topo
+domus:mvm,topo
 donaria:
 donaticus:
 donatio:
@@ -19384,7 +19384,7 @@ ruricola:
 ruro:
 rursum:
 rursus:
-rus:
+rus:topo
 rusceus:
 Ruscino:
 ruscum:
