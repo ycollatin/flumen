@@ -4,11 +4,15 @@
 package main
 
 //     FIXME
-// la définition d'un lemme voisine très mal avec celle d'un POS :
-//	 ter:v.capuam
-// 	 n:@v;;act;;mvm
-// 	 !a:"domus" @NP;lieu;acc;;mvm
-// 	 a:@NP;lieu;acc;;mvm
+// 
+// ter:v.capuam
+// n:@v;;act;;mvm
+// 1 a:@NP "domus";lieu;acc;;mvm
+// 2 a:"domus";lieu;acc
+// 3 a:@NP;lieu;acc;;mvm
+//
+// si la dernière ligne est 1, rien ne marche
+// si 2 ou 3, OK
 //
 //   idem pour n.hnAdj
 //
