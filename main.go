@@ -5,14 +5,14 @@ package main
 
 //     FIXME
 // une espace finale dans groupes.la fait planter !
-// la définition d'un lemme voisine très mal avec celle d'u POS :
-// ter:v.capuam
-// n:@v;;act;;mvm
-// !a:"domus" @NP;lieu;acc;;mvm
-// a:@NP;lieu;acc;;mvm
-// idem pour n.hnAdj
+// la définition d'un lemme voisine très mal avec celle d'un POS :
+//	 ter:v.capuam
+// 	 n:@v;;act;;mvm
+// 	 !a:"domus" @NP;lieu;acc;;mvm
+// 	 a:@NP;lieu;acc;;mvm
 //
-// - Coll : obliuisci donné comme gén. de oblivium ?
+//   idem pour n.hnAdj
+//
 //   Tri :
 //    - Albianum te confecisse arbitror : mauvais tri des solutions.
 //    - favoriser les arcs non croisés
