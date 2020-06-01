@@ -840,11 +840,11 @@ n:@v;;subj
 a:"quemadmodum" "cur";+adv
 
 grp:v.ii
-n:@v;;indic,impér
+n:@v;;indic,impér;;propinf
 ag:ii.obj;objet
 
 grp:v.vii
-n:@v;;indic,impér,inf
+n:@v;;indic,impér,inf;;propinf
 !pg:ii.suj ii.obj ii.adv;objet
 pg:ii;intind
 
