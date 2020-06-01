@@ -477,6 +477,7 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 	var nres gocol.Res
 
 	// contraintes de lemmatisation
+	// Commencer par les exclusions
 	// lexicosyntaxe, exclus
 	if len(el.lsexcl) > 0 {
 		nres = nil
@@ -495,7 +496,36 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		res = nres
 	}
 
-	// lexicosyntaxe, possibles
+	// canons exclus
+	if len(el.clesexcl) > 0 {
+		nres = nil
+		for _, an := range res {
+			if contient(el.clesexcl, an.Lem.Cle) {
+				continue
+			}
+			nres = append(nres, an)
+		}
+		if len(nres) == 0 {
+			return nil
+		}
+		res = nres
+	}
+	// pos exclus
+	if len(el.posexcl) > 0 {
+		nres = nil
+		for _, an := range res {
+			if contient(el.posexcl, an.Lem.Pos) {
+				continue
+			}
+		}
+		if len(nres) == 0 {
+			return nil
+		}
+		res = nres
+	}
+
+	// ensuite les possibles
+	// lexicosyntaxe
 	if len(el.lexsynt) > 0 {
 		nres = nil
 		for _, an := range res {
@@ -514,21 +544,7 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		res = nres
 	}
 
-	// canons exclus et possibles
-	if len(el.clesexcl) > 0 {
-		nres = nil
-		for _, an := range res {
-			if contient(el.clesexcl, an.Lem.Cle) {
-				continue
-			}
-			nres = append(nres, an)
-		}
-		if len(nres) == 0 {
-			return nil
-		}
-		res = nres
-	}
-
+	// canons
 	if len(el.cles) > 0 {
 		nres = nil
 		for _, an := range res {
@@ -548,9 +564,6 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 	if len(el.poss) > 0 {
 		nres = nil
 		for _, an := range res {
-			if contient(el.posexcl, an.Lem.Pos) {
-				continue
-			}
 			if contient(el.poss, an.Lem.Pos) {
 				nres = append(nres, an)
 			}
