@@ -2,6 +2,8 @@
 package main
 
 import (
+	"fmt"
+	"os"
 	"strings"
 )
 
@@ -52,13 +54,22 @@ func creeEl(v string, g *Groupe, t bool) *El {
 	el.groupe = g
 	vv := strings.Split(v, ";")
 	for i, e := range vv {
+		if strings.HasSuffix(e, " ") {
+			fmt.Printf("groupe %s, ligne %s, espace(s) de fin à supprimer.\n", g.id, v)
+			os.Exit(1)
+		}
+		//ter:v.capuam
+		//n:@v;;act;;mvm
+		//a:@NP "domus";lieu;acc;;mvm
 		switch i {
-		case 0: // noyaux
+			case 0: // noyaux
 			// partage des éléments
 			ee := strings.Split(e, " ")
 			for _, ecl := range ee {
 				parts := strings.Split(ecl, ".")
-				if len(parts) == 2 {
+				switch {
+				case len(parts) == 2:
+					// l'élément est un groupe ex. p.prepAcc
 					part := parts[0]
 					if part[0] == '!' {
 						// idsexcl
@@ -67,23 +78,20 @@ func creeEl(v string, g *Groupe, t bool) *El {
 						// ids
 						el.ids = append(el.ids, ecl)
 					}
-				} else if strings.Contains(ecl, "\"") {
-					// clés
-					if ecl[0] == '!' {
-						el.clesexcl = append(el.clesexcl, ecl[2:len(ecl)-1])
-					} else {
-						el.cles = append(el.cles, ecl[1:len(ecl)-1])
-					}
-				} else if strings.Contains(ecl, "@") {
-					// n:v.sujet;;;;!attr !intr
-					if ecl[0] == '!' {
-						el.posexcl = append(el.posexcl, ecl[2:len(ecl)-1])
-					} else {
-						el.poss = append(el.poss, ecl[1:])
-					}
-				} else {
-					// familles
-					if ecl[0] == '!' {
+				case strings.HasPrefix(ecl, "!\""):
+					// clé de lemme exclu
+					el.clesexcl = append(el.clesexcl, strings.Trim(ecl, "!\""))
+				case strings.HasPrefix(ecl, "\""):
+					// clé de lemme
+					el.cles = append(el.cles, strings.Trim(ecl, "\""))
+				case strings.HasPrefix(ecl, "!@"):
+					// pos de lemme exclu
+					el.posexcl = append(el.posexcl, ecl[2:])
+				case strings.HasPrefix(ecl, "@"):
+					el.poss = append(el.poss, ecl[1:])
+				default:
+					// familles (i.e. préfixes de groupes)
+					if strings.HasPrefix(ecl, "!") {
 						el.famexcl = append(el.famexcl, ecl[1:])
 					} else {
 						el.familles = append(el.familles, ecl)
