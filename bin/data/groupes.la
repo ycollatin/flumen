@@ -558,9 +558,19 @@ pg:v.sujObjPropInf v.sujPropInf v.hsujPropInf v.vSujPropInf;subInf
 
 ! fin prop inf
 
+!ter:v.capuam
+!n:@v;;act;;mvm
+!a:"domus" @NP;lieu;acc;;mvm
+!a:"domus";lieu;acc
+!a:@NP;lieu;acc;;mvm
+
 ter:v.capuam
 n:@v;;act;;mvm
-a:@NP "domus";lieu;acc;;mvm
+a:@NP;lieu;acc;;mvm
+
+ter:v.domum
+n:@v;;act;;mvm
+a:"domus";lieu;acc
 
 ter:v.loc
 n:@v;;act
