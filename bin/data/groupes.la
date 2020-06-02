@@ -279,7 +279,7 @@ n:@p
 p:@a;epith;;cgn
 
 ter:p.app
-n:@p
+n:@p !"se"
 p:@n @NP;app;;cgn
 
 ter:p.gen
