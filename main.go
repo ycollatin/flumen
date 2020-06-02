@@ -57,7 +57,7 @@ package main
 // - parasitage de /do/ par /dato/ :   "
 //
 // TODO COMMANDES
-// - enregistrement 
+// - enregistrement
 // - option "c" -  analyse : donner la fonction (lien)
 // - a: p: essayer un préfixe ap: pour économiser le nombre de groupes.
 // - pseudovariables pour groupes.la
