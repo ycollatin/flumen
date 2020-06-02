@@ -30,12 +30,11 @@ package main
 // - CONSTRUCTIONS LEXICALES chez Cic.
 // 		* pietate erga te
 //      * tempus agendi et cogitandi
-// TODO
+// TODO GROUPES
 // - Deux sujets : Sustulimus manus et ego et Balbus (m6)
 // - pos multiples ?
 // - traiter les praenomina M. L. etc.
 // - Le vocatif confondu avec nomin ou acc : Vere loquar, iudices.
-// - option "c" -  analyse : donner la fonction (lien)
 // - dans la périphrase inf. futur, l'aux. esse est souvent omis :
 //   /responsurum hominem nemo arbitrabatur./
 // - Dans les phrases brèves, "est" final souvent omis : quid autem absurdum ? quid enim molestius ?
@@ -53,17 +52,20 @@ package main
 //   le premier est plutôt objet : lapidibus duo consules ceciderunt.
 // - POS des romains : dies xxx nondum fuerant.
 // - lexsynt.la : identifier et changer les initiales majuscules u > V
-// - pseudovariables pour groupes.la
 // - groupe pour les adj neutres + est : malum, opus, necesse est
+// - parasitage de /sum/ par /edo/ : comment supprimer "excl" dans lexsynt
+// - parasitage de /do/ par /dato/ :   "
+//
+// TODO COMMANDES
+// - enregistrement 
+// - option "c" -  analyse : donner la fonction (lien)
 // - a: p: essayer un préfixe ap: pour économiser le nombre de groupes.
+// - pseudovariables pour groupes.la
 // - une option pour charger une base de groupes différente ?
 // - un signet pour les textes longs ?
-// - dicitur prima mortalis. avec lexsynt dico1:attrp, boucle infinie.
 // - un champ groupe.anrel - analyses du relatif ?
 // - accord :de personne sujet-verbe et verbe-verbe coord; de mode v-v, etc.
 // - fonction de sortie au format GraphViz.
-// - parasitage de /sum/ par /edo/ : comment supprimer "excl" dans lexsynt
-// - parasitage de /do/ par /dato/ :   "
 
 import (
 	"bufio"
