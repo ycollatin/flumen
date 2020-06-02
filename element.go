@@ -62,7 +62,7 @@ func creeEl(v string, g *Groupe, t bool) *El {
 		//n:@v;;act;;mvm
 		//a:@NP "domus";lieu;acc;;mvm
 		switch i {
-			case 0: // noyaux
+		case 0: // noyaux
 			// partage des éléments
 			ee := strings.Split(e, " ")
 			for _, ecl := range ee {
