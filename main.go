@@ -4,7 +4,9 @@
 package main
 
 //     FIXME
-// 
+//
+// is se tui defensorem ostendit :
+// Deux solutions identiques, les 2 1ers arcs étant inversés.
 // ter:v.capuam
 // n:@v;;act;;mvm
 // 1 a:@NP "domus";lieu;acc;;mvm
@@ -33,12 +35,12 @@ package main
 // - pos multiples ?
 // - traiter les praenomina M. L. etc.
 // - Le vocatif confondu avec nomin ou acc : Vere loquar, iudices.
-// - option 'g' -  analyse : donner la fonction (lien)
+// - option "c" -  analyse : donner la fonction (lien)
 // - dans la périphrase inf. futur, l'aux. esse est souvent omis :
 //   /responsurum hominem nemo arbitrabatur./
 // - Dans les phrases brèves, "est" final souvent omis : quid autem absurdum ? quid enim molestius ?
-// - épithète d'un sujet elliptique : nunquam uidelicet sitiens biberat.
 // - sujet d'une inf. futur elliptique : omnia se facturum recepit.
+// - épithète d'un sujet elliptique : nunquam uidelicet sitiens biberat.
 // - Hiérarchie des règles :
 //   /in Italia speramus fore/ La règle ter:hgprep permet d'avoir la bonne solution,
 //   mais en 2ème position. Il faut une solution pour donner un indice
@@ -48,7 +50,7 @@ package main
 //   est sujet et lequel l'objet, c'est le premier qui est sujet :
 //   Cic. Div. I, 50 : Ita res somnium conprobauit.
 // - quand un groupe peut être sujet et objet d'un v. transitif, le groupe
-//   le prmier est plutôt objet : lapidibus duo consules ceciderunt.
+//   le premier est plutôt objet : lapidibus duo consules ceciderunt.
 // - POS des romains : dies xxx nondum fuerant.
 // - lexsynt.la : identifier et changer les initiales majuscules u > V
 // - pseudovariables pour groupes.la
@@ -99,6 +101,8 @@ var (
 )
 
 // affiche les arcs syntaxique de la phrase
+// expl : la source du graphe est affichée
+// j : débogage de l'arbre
 func analyse(expl bool, j bool) {
 	texte.affiche(aidePh)
 	if tronc.vendange == nil {
@@ -129,7 +133,7 @@ func analyse(expl bool, j bool) {
 		src = append(src, n.graf()...)
 	}
 	if expl {
-		fmt.Println("\n---- source ----\n")
+		fmt.Println("\n---- source ----")
 		for _, n := range sol.nods {
 			fmt.Println(n.doc())
 		}
@@ -287,5 +291,4 @@ func main() {
 			os.Exit(0)
 		}
 	}
-	return
 }
