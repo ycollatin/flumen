@@ -53,12 +53,16 @@ func (n *Nod) copie() Nod {
 }
 
 // liste des éléments du noeud, noyau en rouge
-func (n *Nod) doc() string {
+func (n *Nod) doc(color bool) string {
 	var mm []string
 	for _, m := range n.mma {
 		mm = append(mm, m.gr)
 	}
-	mm = append(mm, rouge(n.nucl.gr))
+	if color {
+		mm = append(mm, rouge(n.nucl.gr))
+	} else {
+		mm = append(mm, fmt.Sprintf("*%s*", n.nucl.gr))
+	}
 	for _, m := range n.mmp {
 		mm = append(mm, m.gr)
 	}

@@ -88,6 +88,7 @@ j->phrase suivante ; k->phrase précédente ;
 c->lemmatisation du mot courant ;
 a->arbre de la phrase ; g->arbre ٍ& sa source ;
 s->solution suivante ; p->solution précédente ;
+f->enregistrer la sortie;
 r->retour; x->quitter.`
 )
 
@@ -99,6 +100,7 @@ var (
 	//modules		[]string
 	ibr   int // rang de l'analyse (branche) courante
 	rouge func(...interface{}) string
+	scrb, ajout  string    // tampon et résultat d'analyse
 	vert  func(...interface{}) string
 )
 
@@ -117,8 +119,11 @@ func analyse(expl bool, j bool) {
 			return tronc.vendange[i].nbarcs < tronc.vendange[j].nbarcs
 		})
 	}
+	scrb = ""
+	ajout = ""
 	if tronc.vendange == nil {
-		fmt.Println("échec de l'analyse")
+		scrb = "échec de l'analyse"
+		fmt.Println(scrb)
 		return
 	}
 	if ibr < 0 {
@@ -135,21 +140,34 @@ func analyse(expl bool, j bool) {
 		src = append(src, n.graf()...)
 	}
 	if expl {
-		fmt.Println("\n---- source ----")
+		ajout = "\n---- source ----\n"
+		scrb += ajout
+		fmt.Println(ajout)
 		for _, n := range sol.nods {
-			fmt.Println(n.doc())
+			scrb += alin(n.doc(false))
+			fmt.Println(n.doc(true))
 		}
 	}
 	if j {
-		fmt.Println("--- journal ----")
-		fmt.Println(strings.Join(journal, "\n"))
+		ajout = "--- journal ----\n"
+		scrb += ajout
+		fmt.Print(ajout)
+		ajout = strings.Join(journal, "\n")
+		scrb += alin(ajout)
+		fmt.Println(ajout)
 	}
-	fmt.Println("----------------")
+	ajout = "----------------\n"
+	fmt.Print(ajout)
+	scrb += ajout
 	// numérotation de la solution
-	fmt.Printf("%d/%d\n", ibr+1, len(tronc.vendange))
+	ajout = fmt.Sprintf("%d/%d\n", ibr+1, len(tronc.vendange))
+	fmt.Print(ajout)
+	scrb += ajout
 	// graphe en arcs
 	initArcs()
-	fmt.Println(strings.Join(graphe(src), "\n"))
+	ajout = strings.Join(graphe(src), "\n")
+	fmt.Println(ajout)
+	scrb += alin(ajout)
 }
 
 // choix du texte latin
@@ -256,38 +274,40 @@ func main() {
 	for {
 		k := GetKey()
 		switch k {
-		case "l":
-			motsuiv()
+		case "a":
+			modeA = false
+			modeJ = false
+			analyse(false, false)
+		case "c":
+			lemmatise()
+		case "d":
+			modeJ = true
+			analyse(true, true)
+		case "g":
+			modeA = true
+			analyse(true, false)
+		case "f":
+			log(scrb)
 		case "h":
 			motprec()
+		case "i":
+			saisie()
 		case "j":
 			texte.porro()
 			ibr = 0
 		case "k":
 			texte.retro()
+		case "l":
+			motsuiv()
 			ibr = 0
-		case "c":
-			lemmatise()
-		case "a":
-			modeA = false
-			modeJ = false
-			analyse(false, false)
-		case "g":
-			modeA = true
-			analyse(true, false)
-		case "d":
-			modeJ = true
-			analyse(true, true)
 		case "p":
 			ibr--
 			analyse(modeA, modeJ)
+		case "r":
+			chxTexte()
 		case "s":
 			ibr++
 			analyse(modeA, modeJ)
-		case "r":
-			chxTexte()
-		case "i":
-			saisie()
 		case "x":
 			fmt.Println("\nVale")
 			os.Exit(0)

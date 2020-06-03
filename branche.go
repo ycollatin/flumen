@@ -220,7 +220,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 			}
 			// màj journal
 			indent := strings.Repeat("  ", bm.niveau)
-			journal = append(journal, fmt.Sprintf("%s %d. %s", indent, bm.niveau, n.doc()))
+			journal = append(journal, fmt.Sprintf("%s %d. %s", indent, bm.niveau, n.doc(false)))
 			// la fille est explorée récursivement
 			journal = append(journal, fmt.Sprintf("%s %d montée au niveau %d", indent, bm.niveau, bf.niveau))
 			bf.explore()
