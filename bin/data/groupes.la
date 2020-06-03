@@ -39,7 +39,7 @@
 
 ter:n.det
 n:@n
-a:@p @a "ipse" !p.prepAcc;det;;cgn;det
+a:@p @a !p.prepAcc;det;;cgn;det
 
 ter:n.ndet
 n:@n @NP
@@ -63,7 +63,7 @@ a:@a;epith;;cn
 
 ter:n.adj
 n:@n @NP
-a:@a;+epith;;cgn
+a:@a;+epith;;cgn;!det
 
 ter:n.nAdj
 n:@n
@@ -275,7 +275,7 @@ a:@a;epith;;cgn
 a:@v;;indic
 
 ter:p.padj
-n:@p
+n:@p !"se"
 p:@a;epith;;cgn
 
 ter:p.app
@@ -409,7 +409,7 @@ n:v.sumPfut
 a:"ego" "hic" "is" "nemo" "nihil" "tu";objet;acc
 
 ter:v.datif
-n:@v;;;;datif
+n:@v;;!inf;;datif
 a:@n @NP @p;dat;dat
 
 ter:v.hdatif
