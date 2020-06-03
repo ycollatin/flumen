@@ -1,6 +1,5 @@
-is se tui defensorem ostendit.
-is in ceteris rebus se ostendit.
-is in ceteris rebus se tui defensorem fore ostendit.
+se tui defensorem fore ostendit.
+is se tui defensorem fore ostendit.
 is in ceteris rebus se acerrimum tui defensorem fore ostendit.
 is ceteris in rebus se acerrimum tui defensorem fore ostendit.
 ob eam rem.
