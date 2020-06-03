@@ -57,7 +57,7 @@ package main
 // - parasitage de /do/ par /dato/ :   "
 //
 // TODO COMMANDES
-// - enregistrement
+// - fonction de sortie au format GraphViz.
 // - option "c" -  analyse : donner la fonction (lien)
 // - a: p: essayer un préfixe ap: pour économiser le nombre de groupes.
 // - pseudovariables pour groupes.la
@@ -65,7 +65,6 @@ package main
 // - un signet pour les textes longs ?
 // - un champ groupe.anrel - analyses du relatif ?
 // - accord :de personne sujet-verbe et verbe-verbe coord; de mode v-v, etc.
-// - fonction de sortie au format GraphViz.
 
 import (
 	"bufio"
@@ -205,6 +204,45 @@ func chxTexte() {
 	texte.affiche(aidePh)
 }
 
+// TODO : factoriser le calcul de src
+func dot() {
+
+	texte.affiche(aidePh)
+	if tronc.vendange == nil {
+		texte.majPhrase()
+		tronc.explore()
+		tronc.recolte()
+		tronc.elague()
+		// tri
+		sort.SliceStable(tronc.vendange, func(i, j int) bool {
+			return tronc.vendange[i].nbarcs < tronc.vendange[j].nbarcs
+		})
+	}
+	scrb = ""
+	ajout = ""
+	if tronc.vendange == nil {
+		scrb = "échec de l'analyse"
+		fmt.Println(scrb)
+		return
+	}
+	if ibr < 0 {
+		ibr = 0
+	}
+	if ibr >= len(tronc.vendange) {
+		ibr = len(tronc.vendange) - 1
+	}
+	sol := tronc.vendange[ibr]
+	// graphe
+	var src []string
+	src = append(src, tronc.gr)
+	for _, n := range sol.nods {
+		src = append(src, n.graf()...)
+	}
+
+	texte.affiche(aidePh)
+	fmt.Println(strings.Join(srcDot(src), "\n"))
+}
+
 // lemmatisation du mot courant
 func lemmatise() {
 	texte.affiche(aidePh)
@@ -308,6 +346,8 @@ func main() {
 		case "s":
 			ibr++
 			analyse(modeA, modeJ)
+		case "t":
+			dot()
 		case "x":
 			fmt.Println("\nVale")
 			os.Exit(0)

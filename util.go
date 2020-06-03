@@ -31,24 +31,24 @@ func cas(morpho string) string {
 	return ""
 }
 
-// renvoie le premier genre de la liste lgenre contenu dans morpho
-func genre(morpho string) string {
-	for _, g := range lgenre {
-		if strings.Contains(morpho, g) {
-			return g
+func appendRes(resa, resb gocol.Res) gocol.Res {
+	for _, srb := range resb {
+		var ai bool
+		for i, sra := range resa {
+			if sra.Lem == srb.Lem {
+				ai = true
+				for _, mb := range srb.Morphos {
+					if !contient(sra.Morphos, mb) {
+						resa[i].Morphos = append(resa[i].Morphos, mb)
+					}
+				}
+			}
+		}
+		if !ai {
+			resa = append(resa, resb...)
 		}
 	}
-	return ""
-}
-
-// renvoie le premier genre de la liste lnombre contenu dans morpho
-func nombre(morpho string) string {
-	for _, n := range lnombre {
-		if strings.Contains(morpho, n) {
-			return n
-		}
-	}
-	return ""
+	return resa
 }
 
 // efface l'écran
@@ -70,6 +70,16 @@ func contient(ls []string, s string) bool {
 
 func log(s string) {
 	ioutil.WriteFile("log-gentes.txt", []byte(s), 0644)
+}
+
+// renvoie le premier genre de la liste lgenre contenu dans morpho
+func genre(morpho string) string {
+	for _, g := range lgenre {
+		if strings.Contains(morpho, g) {
+			return g
+		}
+	}
+	return ""
 }
 
 // capture de la dernière touche enfoncée
@@ -95,43 +105,20 @@ func InputInt(q string) int {
 	return i
 }
 
+// renvoie le premier genre de la liste lnombre contenu dans morpho
+func nombre(morpho string) string {
+	for _, n := range lnombre {
+		if strings.Contains(morpho, n) {
+			return n
+		}
+	}
+	return ""
+}
+
 // renvoie le premier élément du split(s, sep)
 func PrimEl(s, sep string) string {
 	eclats := strings.Split(s, sep)
 	return eclats[0]
-}
-
-// renvoie la lemmatisation sr sous forme de chaîne
-func srToString(sr gocol.Sr) (k string, ll []string) {
-	for _, l := range sr.Morphos {
-		ll = append(ll, fmt.Sprintf("   %s", l))
-	}
-	return sr.Lem.Cle, ll
-}
-
-// renvoie la traduction du lemme de sr
-func srToTr(sr gocol.Sr) (tr string) {
-	return fmt.Sprintf("%s [%s] : %s", sr.Lem.Gr, sr.Lem.Pos, sr.Lem.Traduction)
-}
-
-func appendRes(resa, resb gocol.Res) gocol.Res {
-	for _, srb := range resb {
-		var ai bool
-		for i, sra := range resa {
-			if sra.Lem == srb.Lem {
-				ai = true
-				for _, mb := range srb.Morphos {
-					if !contient(sra.Morphos, mb) {
-						resa[i].Morphos = append(resa[i].Morphos, mb)
-					}
-				}
-			}
-		}
-		if !ai {
-			resa = append(resa, resb...)
-		}
-	}
-	return resa
 }
 
 // Compare les lemmatisations Gentes et les lemmatisations Collatinus
@@ -182,4 +169,35 @@ func resToString(resGentes, resCol gocol.Res) (res string) {
 		}
 	}
 	return strings.Join(lres, "\n")
+}
+
+func srcDot(src []string) (dot []string) {
+	dot = append(dot, "digraph D {")
+	for i, m := range mots {
+		dot = append(dot, fmt.Sprintf("%d [label=\"%s\"];",i,m.gr))
+	}
+	for i, ls := range src {
+		if i == 0 {
+			dot = append(dot, fmt.Sprintf("label=\"%s\";", ls))
+		} else {
+			ls = strings.Replace(ls, "[", "[label=\"", 1)
+			ls = strings.Replace(ls, "]", "\"]", 1)
+			dot = append(dot, ls+";")
+		}
+	}
+	dot = append(dot, "}")
+	return dot
+}
+
+// renvoie la lemmatisation sr sous forme de chaîne
+func srToString(sr gocol.Sr) (k string, ll []string) {
+	for _, l := range sr.Morphos {
+		ll = append(ll, fmt.Sprintf("   %s", l))
+	}
+	return sr.Lem.Cle, ll
+}
+
+// renvoie la traduction du lemme de sr
+func srToTr(sr gocol.Sr) (tr string) {
+	return fmt.Sprintf("%s [%s] : %s", sr.Lem.Gr, sr.Lem.Pos, sr.Lem.Traduction)
 }
