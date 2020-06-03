@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/ycollatin/gocol"
 	"os"
+	"io/ioutil"
 	"os/exec"
 	"strings"
 )
@@ -15,6 +16,10 @@ var (
 	lgenre  = [...]string{"masculin", "féminin", "neutre"}
 	lnombre = [...]string{"singulier", "pluriel"}
 )
+
+func alin(s string) string {
+	return fmt.Sprintf("%s\n", s)
+}
 
 // renvoie le premier cas de la liste lcas contenu dans morpho
 func cas(morpho string) string {
@@ -61,6 +66,10 @@ func contient(ls []string, s string) bool {
 		}
 	}
 	return false
+}
+
+func log(s string) {
+	ioutil.WriteFile("log-gentes.txt", []byte(s), 0644)
 }
 
 // capture de la dernière touche enfoncée
