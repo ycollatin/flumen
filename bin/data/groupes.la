@@ -437,11 +437,12 @@ ter:v.datp
 n:@v;;pass;;datp
 a:@n @NP @p;dat;dat
 
+! FIXME il faudra un v.sumabl pour sum
 ter:v.abl
 n:@v;;;;abl
 ag:@n @NP @p !v.ablabs;abl;abl
 
-! fixme imperiis distributis ardere
+! FIXME imperiis distributis ardere
 grp:v.ablabs
 n:@v;;;;abl
 ag:n.ablabs n.nablabs;ablabs
@@ -516,12 +517,9 @@ p:@n;comp;nomin
 
 ! PROPOSITION INFINITIVE
 
-ter:v.sujPropInf
-n:@v;;inf
-a:@n @NP @p;sujet;acc
-
-ter:v.attrPropInf
+ter:v.sujAttrPropInf
 n:"sum";;inf
+a:@n @NP @p;sujet;acc
 a:@a @n @NP @p;attr;acc
 
 ter:v.hattrPropinf
@@ -539,13 +537,16 @@ n:@v;;inf
 a:@n @NP @p;sujet;acc
 a:@v;;1,2,3
 
-grp:v.vSujPropInf
-n:@v;;inf
-p:@p @n @NP;sujet;acc
+! FIXME : provoque une inversion sujet-attribut.
+!grp:v.sujPropInf
+!n:@v !v.sujAttrPropInf;;inf
+!a:@n @NP @p;sujet;acc
+
+! verbes ayant un sub propinf 
 
 grp:v.propInf
 n:@v;;indic,subj,impér;;propinf
-ag:v.sujObjPropInf v.sujPropInf v.hsujPropInf v.vSujPropInf;subInf
+ag:v.sujAttrPropInf v.sujObjPropInf v.sujPropInf v.hsujPropInf v.vSujPropInf;subInf
 
 grp:v.hpropInf
 n:@v;;inf;;propinf
@@ -556,7 +557,7 @@ grp:v.vpropInf
 n:@v;;indic,impér;;propinf
 pg:v.sujObjPropInf v.sujPropInf v.hsujPropInf v.vSujPropInf;subInf
 
-! fin prop inf
+! FIN PROP INF
 
 !ter:v.capuam
 !n:@v;;act;;mvm
