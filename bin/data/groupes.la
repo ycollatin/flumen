@@ -172,13 +172,13 @@ ter:a.etiam
 n:@a;;;;subst
 a:"etiam" "pote";adv
 
-ter:conj.quinetiam
-n:"quin"
-p:"etiam";adv
+ter:conj.adv
+n:@conj
+p:"etiam" "potius";adv
 
-ter:n.net
+ter:n.et
 n:@n @NP
-a:"et";conj
+a:"et" "ac" "atque";conj
 
 ter:adv.et
 n:@Adv
@@ -700,7 +700,7 @@ p:@n @NP n.adj;gen;gén
 
 grp:n.coord
 n:@n @NP
-pg:n.net;coord;;c
+pg:n.et;coord;;c
 
 grp:adv.coord
 n:@Adv
@@ -718,6 +718,10 @@ grp:n.hgen
 n:@n
 a:@v;;3
 a:@n @NP;gen;gén
+
+grp:n.ngprep
+n:@n
+pg:n.prepAbl n.prepAcc p.prepAcc a.prepAcc v.prepger;+gprep
 
 grp:adv.hGen
 n:@Adv;;;;gen
@@ -751,7 +755,7 @@ pg:n.prepAcc;lieu
 
 grp:v.vobj
 n:@v;;act,!part;;!intr
-pg:@n @NP @p !n.prepAcc !n.prepAbl !n.inperpetuum !n.conjet;objet;acc
+pg:@n @NP @p !n.prepAcc !n.prepAbl !n.inperpetuum;objet;acc
 
 grp:v.objppa
 n:v.sumpp;;act
