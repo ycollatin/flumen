@@ -524,6 +524,8 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		res = nres
 	}
 
+	// groupes exclus
+
 	// ensuite les possibles
 	// lexicosyntaxe
 	if len(el.lexsynt) > 0 {
