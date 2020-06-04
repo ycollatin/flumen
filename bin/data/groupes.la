@@ -441,11 +441,11 @@ ter:v.datp
 n:@v;;pass;;datp
 a:@n @NP @p;dat;dat
 
-! FIXME il faudra un v.sumabl pour sum
-! pb dans la prop. inf.
+! FIXME pb dans la prop. inf.
+! vérifier l'exclusion de "tu"
 ter:v.abl
-n:@v;;;;abl
-ag:@n @NP @p !v.ablabs;abl;abl
+n:@v !v.psujPropInf !v.nsujPropInf;;;;abl
+ag:@n @NP @p !"tu" !v.ablabs;abl;abl
 
 ! FIXME imperiis distributis ardere
 grp:v.ablabs
@@ -502,11 +502,11 @@ a:"non" "nondum" "haud" "nec" "neque";neg
 
 ter:v.infobj
 n:@v;;act;;infobj
-a:@v !v.sujPropInf;objet;inf
+a:@v !v.nsujPropInf !v.psujPropInf;objet;inf
 
 ter:v.vinfobj
 n:@v;;indic,subj;;infobj
-p:@v !v.sujPropInf;objet;inf
+p:@v !v.nsujPropInf v.pSujPropInf;objet;inf
 
 ter:v.vinfsuj
 n:@v;;act indic,act subj;;infsuj
@@ -514,7 +514,7 @@ p:@v;sujet;inf prés
 
 ter:v.vinfobj
 n:@v;;act indic,act subj;;infobj
-p:@v !v.sujPropInf;objet;inf
+p:@v !v.nsujPropInf !v.psujPropInf;objet;inf
 
 ter:adv.tamquam
 n:"tamquam"
@@ -523,9 +523,13 @@ p:@n;comp;nomin
 ! PROPOSITION INFINITIVE
 
 ! FIXME : confusion ѕujet-objet
-!ter:v.sujPropInf
-!n:@v !v.sujObjPropInf;;inf
-!a:@NP @n @p;sujet;acc
+ter:v.psujPropInf
+n:@v !v.abl !v.sujObjPropInf !v.sujAttrPropInf;;inf
+a:@p;sujet;acc
+
+ter:v.nsujPropInf
+n:@v !v.abl !v.sujObjPropInf !v.sujAttrPropInf;;inf
+a:@NP @n !v.psujPropInf;sujet;acc
 
 ter:v.sujAttrPropInf
 n:"sum";;inf
@@ -547,25 +551,20 @@ n:@v;;inf
 a:@n @NP @p;sujet;acc
 a:@v;;1,2,3
 
-! FIXME : provoque une inversion sujet-attribut.
-!grp:v.sujPropInf
-!n:@v !v.sujAttrPropInf;;inf
-!a:@n @NP @p;sujet;acc
-
 ! verbes ayant un sub propinf 
 
 grp:v.propInf
 n:@v;;indic,subj,impér;;propinf
-ag:v.sujAttrPropInf v.sujObjPropInf v.sujPropInf v.hsujPropInf v.vSujPropInf;subInf
+ag:v.sujAttrPropInf v.sujObjPropInf v.nsujPropInf !v.psujPropInf v.hsujPropInf v.vSujPropInf;subInf
 
 grp:v.hpropInf
 n:@v;;inf;;propinf
-ag:v.sujObjPropInf v.sujPropInf v.hsujPropInf v.vSujPropInf;subInf
+ag:v.sujObjPropInf v.nsujPropInf !v.psujPropInf v.hsujPropInf v.vSujPropInf;subInf
 a:@v;;indic;;infobj
 
 grp:v.vpropInf
 n:@v;;indic,impér;;propinf
-pg:v.sujObjPropInf v.sujPropInf v.hsujPropInf v.vSujPropInf;subInf
+pg:v.sujObjPropInf !v.nsujPropInf v.psujPropInf v.hsujPropInf v.vSujPropInf;subInf
 
 ! FIN PROP INF
 
