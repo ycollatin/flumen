@@ -5,8 +5,12 @@ package main
 
 //     FIXME
 //
-// is se tui defensorem ostendit :
-// Deux solutions identiques, les 2 1ers arcs étant inversés.
+// Il manque le moyen d'appliquer la règle suivante :
+// dans une proposition infinitive,
+//     le sujet précède l'objet
+//     il est au premier rang de l'infinitive
+//     s'il n'y a qu'un accusatif, c'est le sujet
+//
 // ter:v.capuam
 // n:@v;;act;;mvm
 // 1 a:@NP "domus";lieu;acc;;mvm
@@ -16,21 +20,19 @@ package main
 // si la dernière ligne est 1, rien ne marche
 // si 2 ou 3, OK
 //
-//   idem pour n.hnAdj
+//  idem pour n.hnAdj
 //
 //   Tri :
-//    - Albianum te confecisse arbitror : mauvais tri des solutions.
 //    - favoriser les arcs non croisés
-//   Pyrrha dicitur esse creata. boucle infinie, due au lexsynt dico2:...,attrp
-//   Pour d'autres phrases aussi.
 //
 // XXX
 //
 // - dans vargraph, commenté iui:i et i$:ii
 // - CONSTRUCTIONS LEXICALES chez Cic.
-// 		* pietate erga te
 //      * tempus agendi et cogitandi
+//
 // TODO GROUPES
+// - omni officio : n.app apparaît avant n.det. Comment résoudre ?
 // - Deux sujets : Sustulimus manus et ego et Balbus (m6)
 // - pos multiples ?
 // - traiter les praenomina M. L. etc.
@@ -57,12 +59,11 @@ package main
 // - parasitage de /do/ par /dato/ :   "
 //
 // TODO COMMANDES
-// - fonction de sortie au format GraphViz.
 // - option "c" -  analyse : donner la fonction (lien)
 // - a: p: essayer un préfixe ap: pour économiser le nombre de groupes.
 // - pseudovariables pour groupes.la
 // - une option pour charger une base de groupes différente ?
-// - un signet pour les textes longs ?
+// - une commande pour atteindre une phrase dans les textes longs ?
 // - un champ groupe.anrel - analyses du relatif ?
 // - accord :de personne sujet-verbe et verbe-verbe coord; de mode v-v, etc.
 
