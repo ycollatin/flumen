@@ -5,11 +5,11 @@ package main
 
 //     FIXME
 //
-// Il manque le moyen d'appliquer la règle suivante :
-// dans une proposition infinitive,
-//     le sujet précède l'objet
-//     il est au premier rang de l'infinitive
-//     s'il n'y a qu'un accusatif, c'est le sujet
+// ter:v.abl
+// n:@v !v.sujPropInf;;;;abl
+// ag:@n @NP @p !v.ablabs;abl;abl
+//
+// Albianum te confecisse arbitror : te *confecisse* - v.abl ne devrait pas être accepté.
 //
 // ter:v.capuam
 // n:@v;;act;;mvm
