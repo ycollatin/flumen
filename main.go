@@ -98,10 +98,10 @@ var (
 	dat        bool   // drapeau de chargement des données
 	//module		string
 	//modules		[]string
-	ibr   int // rang de l'analyse (branche) courante
-	rouge func(...interface{}) string
-	scrb, ajout  string    // tampon et résultat d'analyse
-	vert  func(...interface{}) string
+	ibr         int // rang de l'analyse (branche) courante
+	rouge       func(...interface{}) string
+	scrb, ajout string // tampon et résultat d'analyse
+	vert        func(...interface{}) string
 )
 
 // affiche les arcs syntaxique de la phrase

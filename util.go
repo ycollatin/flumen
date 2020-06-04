@@ -5,8 +5,8 @@ package main
 import (
 	"fmt"
 	"github.com/ycollatin/gocol"
-	"os"
 	"io/ioutil"
+	"os"
 	"os/exec"
 	"strings"
 )
@@ -174,7 +174,7 @@ func resToString(resGentes, resCol gocol.Res) (res string) {
 func srcDot(src []string) (dot []string) {
 	dot = append(dot, "digraph D {")
 	for i, m := range mots {
-		dot = append(dot, fmt.Sprintf("%d [label=\"%s\"];",i,m.gr))
+		dot = append(dot, fmt.Sprintf("%d [label=\"%s\"];", i, m.gr))
 	}
 	for i, ls := range src {
 		if i == 0 {
