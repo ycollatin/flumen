@@ -369,10 +369,11 @@ ter:v.attr
 n:@v !v.ppsum;;act;;attr
 a:@n @NP @a;attr;nomin;n
 
-! FIXME le + est à vérifier. Reginus erat totus noster
+! FIXME multi ? Reginus erat totus noster
+! totus est plutôt epith de Reginus
 ter:v.vattr
 n:@v;;act;;attr
-p:@n @a;+attr;nomin;n
+p:@n @a;attr;nomin;n
 
 ter:v.attrP
 n:@v;;pass;;attrp
@@ -387,7 +388,7 @@ n:@v;;act;;attr
 a:"quis";attr;nomin;n
 
 grp:v.obj
-n:@v;;act;;!intr
+n:@v !v.psujPropInf !vnsujPropInf;;act;;!intr
 ag:@n @NP !n.prepAcc;objet;acc
 
 ter:v.vobja
