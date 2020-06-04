@@ -110,7 +110,7 @@ n:@n @NP @p !"ipse"
 p:"ipse";epith;;cgn
 
 ter:n.app
-n:@n
+n:@n !"omne"
 p:@n @NP;app;;cgn
 
 ter:n.appNp
@@ -187,6 +187,10 @@ a:"et" "atque";conj
 ter:adv:adv
 n:@Adv
 a:"nimis" "minime";adv
+
+ter:v.declet
+n:@v;;part,gér,verbal
+a:"et";conj
 
 ter:n.hgen
 n:@n;;nomin,acc,dat,abl
@@ -438,6 +442,7 @@ n:@v;;pass;;datp
 a:@n @NP @p;dat;dat
 
 ! FIXME il faudra un v.sumabl pour sum
+! pb dans la prop. inf.
 ter:v.abl
 n:@v;;;;abl
 ag:@n @NP @p !v.ablabs;abl;abl
@@ -485,7 +490,7 @@ p:"ergo";conj
 
 ter:v.adv
 n:@v
-a:@Adv;+adv
+a:@Adv !"et";+adv
 
 ter:v.vAdv
 n:@v
@@ -516,6 +521,11 @@ n:"tamquam"
 p:@n;comp;nomin
 
 ! PROPOSITION INFINITIVE
+
+! FIXME : confusion ѕujet-objet
+!ter:v.sujPropInf
+!n:@v !v.sujObjPropInf;;inf
+!a:@NP @n @p;sujet;acc
 
 ter:v.sujAttrPropInf
 n:"sum";;inf
@@ -671,7 +681,7 @@ n:@n @NP n.det n.adj n.nAdj;;acc
 a:@prepAcc @prepAA;prep
 
 grp:p.prepAcc
-n:"hic" "ille" "is" "ego" "tu" "nos" "qui2" "vos";;acc
+n:"hic" "ille" "is" "ego" "tu" "nos" "qui2" "vos" !p.app;;acc
 a:@prepAcc @prepAA n.det;prep
 
 ter:a.prepAcc
@@ -788,7 +798,7 @@ a:@v;;indic,impér,subj
 
 grp:v.coord
 n:@v
-p:v.et;coor
+p:v.et v.declet;coor
 
 grp:v.vSubConj
 n:@v;;indic,impér
