@@ -13,7 +13,7 @@ type El struct {
 	ids      []string // identifiants des groupes possibles pour le noyau
 	idsexcl  []string // ids exclus
 	familles []string // le préfixe seulement des ces ids est requis
-	famexcl  []string // préfixes exclus
+	famexcl  []string // familles excluses (une famille regroupe les groupes de même préfixe)
 	cles     []string // clés des lemmes possibles
 	clesexcl []string // clés exclues
 	poss     []string // pos des lemmes
