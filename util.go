@@ -5,7 +5,7 @@ package main
 import (
 	"fmt"
 	"github.com/ycollatin/gocol"
-	"io/ioutil"
+	//"io/ioutil"
 	"os"
 	"os/exec"
 	"strings"
@@ -69,7 +69,16 @@ func contient(ls []string, s string) bool {
 }
 
 func log(s string) {
-	ioutil.WriteFile("log-gentes.txt", []byte(s), 0644)
+	//ioutil.WriteFile("log-gentes.txt", []byte(s), 0644)
+	nf := "log-gentes.txt"
+
+	//if _, err := os.Stat(filename); os.IsNotExist(err) { fmt.Printf("no such file or directory: %s", filename) return }
+	f, err := os.OpenFile(nf, os.O_WRONLY|os.O_APPEND, 0600)
+	if err != nil {
+		f, _ = os.OpenFile(nf, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0600)
+	}
+	defer f.Close() // on ferme automatiquement à la fin de notre programme
+	f.WriteString(s)
 }
 
 // renvoie le premier genre de la liste lgenre contenu dans morpho
