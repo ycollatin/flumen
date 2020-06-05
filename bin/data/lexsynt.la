@@ -53,6 +53,7 @@
 ! Descripteurs ontologiques sont ajoutés 
 ! - fam : nom désignant des relations familiales (filius, pater, soror)
 ! - excl : lemmes exclus à cause de l'insuffisance de l'algo actuel
+! - nh : non-humain (pour les agents à l'abl. direct)
 !
 a:prepabl
 abactus2:
@@ -6627,7 +6628,7 @@ dica:
 dicatio:
 dicax:
 dicio:
-dico2:datif,infobj,propfinf
+dico2:datif,infobj,propfinf,attrp
 dico:
 dicrota:
 Dictaeus:
