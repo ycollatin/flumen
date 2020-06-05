@@ -5,27 +5,6 @@ package main
 
 //     FIXME
 //
-//  Est < edo complique bien les choses.
-//  1/3
-//     ┌objet─────────┐  
-//     │┌gen─┐        │  
-//     ▽│    ▽        │  
-//  Capuam profectus est.
-//  Il mange la Capoue du progrès. 
-//  ----------------
-//  2/3
-//      ┌lieu┐   ┌pp──┐  
-//      ▽    │   ▽    │  
-//  Capuam profectus est.
-//  Il est parti à Capoue.
-//  ----------------
-//  3/3
-//      ┌objet─────────┐ 
-//      │        ┌suje┐│ 
-//      ▽        ▽    ││ 
-//  Capuam profectus est.
-//  Le progrès mange Capoue.
-//
 //   Tri :
 //	  - ambitus redit immanis : erreur de tri
 //    - favoriser les arcs non croisés
