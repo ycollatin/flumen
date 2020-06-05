@@ -74,11 +74,6 @@ n:@n
 p:"enim"
 p:@a;epith;;cgn
 
-ter:n.hvAdj
-n:@n
-p:@v;;indic
-p:@a;epith;;cgn
-
 ter:n.hAdj
 n:@n @NP
 a:@a;epith;;cgn
@@ -379,6 +374,10 @@ ter:v.attrP
 n:@v;;pass;;attrp
 a:@n @NP @a;attr;nomin;n
 
+ter:v.vattrP
+n:@v;;pass;;attrp
+p:@n @NP @a;attr;nomin;n
+
 ter:v.attro
 n:@v;;act;;attro
 a:@n;attro;acc
@@ -455,7 +454,7 @@ ag:n.ablabs n.nablabs;ablabs
 
 grp:v.agent
 n:@v;;pass
-ag:@n;agent;abl
+ag:@n;agent;abl;;nh
 
 ter:v.die
 n:@v
@@ -600,6 +599,7 @@ ter:v.vloc
 n:@v;;act
 p:@NP;loc;gén;;loc
 
+! FIXME règle trop permissive : mutationis spes nulla est : mutationies est - v.gen
 ter:v.gen
 n:@v;;act;;gen
 a:@n @NP;gen;gén
@@ -696,9 +696,9 @@ grp:v.procerto
 n:"habeo" "affirmo" "pono" "puto"
 ag:a.procerto;gprep
 
-grp:n.prepAblApp
-n:n.app;;abl
-a:@prepAbl @prepAA;prep
+!grp:n.prepAblApp
+!n:n.app;;abl
+!a:@prepAbl @prepAA;prep
 
 grp:n.nGen
 n:@n
