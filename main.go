@@ -5,24 +5,29 @@ package main
 
 //     FIXME
 //
-// ter:v.abl
-// n:@v !v.sujPropInf;;;;abl
-// ag:@n @NP @p !v.ablabs;abl;abl
-//
-// Albianum te confecisse arbitror : te *confecisse* - v.abl ne devrait pas être accepté.
-//
-// ter:v.capuam
-// n:@v;;act;;mvm
-// 1 a:@NP "domus";lieu;acc;;mvm
-// 2 a:"domus";lieu;acc
-// 3 a:@NP;lieu;acc;;mvm
-//
-// si la dernière ligne est 1, rien ne marche
-// si 2 ou 3, OK
-//
-//  idem pour n.hnAdj
+//  Est < edo complique bien les choses.
+//  1/3
+//     ┌objet─────────┐  
+//     │┌gen─┐        │  
+//     ▽│    ▽        │  
+//  Capuam profectus est.
+//  Il mange la Capoue du progrès. 
+//  ----------------
+//  2/3
+//      ┌lieu┐   ┌pp──┐  
+//      ▽    │   ▽    │  
+//  Capuam profectus est.
+//  Il est parti à Capoue.
+//  ----------------
+//  3/3
+//      ┌objet─────────┐ 
+//      │        ┌suje┐│ 
+//      ▽        ▽    ││ 
+//  Capuam profectus est.
+//  Le progrès mange Capoue.
 //
 //   Tri :
+//	  - ambitus redit immanis : erreur de tri
 //    - favoriser les arcs non croisés
 //
 // XXX
