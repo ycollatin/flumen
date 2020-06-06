@@ -426,7 +426,7 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		return nil
 	}
 
-	// Si le noyau doit être sub par un lien 
+	// Si le noyau doit être sub par un lien
 	if el.lienN > "" {
 		for _, nod := range b.nods {
 			for i, ma := range nod.mma {
@@ -435,7 +435,7 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 				}
 			}
 			for i, mp := range nod.mmp {
-				if mp == mn && nod.groupe.post[i].lien != el.lienN  {
+				if mp == mn && nod.groupe.post[i].lien != el.lienN {
 					return nil
 				}
 			}
