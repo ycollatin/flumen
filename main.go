@@ -43,6 +43,8 @@ package main
 // - parasitage de /sum/ par /edo/ : comment supprimer "excl" dans lexsynt
 // - parasitage de /do/ par /dato/ :   "
 //
+// TODO CODE
+//
 // TODO COMMANDES
 // - option "c" -  analyse : donner la fonction (lien)
 // - a: p: essayer un préfixe ap: pour économiser le nombre de groupes.
