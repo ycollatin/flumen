@@ -536,6 +536,11 @@ n:"sum";subInf;inf
 a:@n @NP @p;sujet;acc
 a:@a @n @NP @p;attr;acc
 
+ter:v.sujDatPropInf
+n:"sum";subInf;inf
+a:@n @NP @p;sujet;acc
+a:@n @NP @p;datif;dat
+
 ter:v.hattrPropinf
 n:"sum";subInf;inf
 a:@n @NP @p;attr;acc
@@ -555,7 +560,7 @@ a:@v;;1,2,3
 
 grp:v.propInf
 n:@v;;indic,subj,impér;;propinf
-ag:v.sujAttrPropInf v.sujObjPropInf v.nsujPropInf !v.psujPropInf v.hsujPropInf v.vSujPropInf;subInf
+ag:v.sujAttrPropInf v.sujObjPropInf v.nsujPropInf !v.psujPropInf v.hsujPropInf v.vSujPropInf v.sujDatPropInf;subInf
 
 grp:v.hpropInf
 n:@v;;inf;;propinf
