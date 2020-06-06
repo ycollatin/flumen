@@ -426,6 +426,22 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		return nil
 	}
 
+	// Si le noyau doit être sub par un lien 
+	if el.lienN > "" {
+		for _, nod := range b.nods {
+			for i, ma := range nod.mma {
+				if ma == mn && nod.groupe.ante[i].lien != el.lienN {
+					return nil
+				}
+			}
+			for i, mp := range nod.mmp {
+				if mp == mn && nod.groupe.post[i].lien != el.lienN  {
+					return nil
+				}
+			}
+		}
+	}
+
 	// vérification du pos : id du noyau, ou pos du mot
 	var va bool
 	ids := b.ids(m)
