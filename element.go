@@ -7,18 +7,19 @@ import (
 	"strings"
 )
 
-// un el est un élément de Groupe
+// un el est la définition d'un élément de Groupe
 type El struct {
 	groupe   *Groupe  // groupe propriétaire du el
 	ids      []string // identifiants des groupes possibles pour le noyau
 	idsexcl  []string // ids exclus
 	familles []string // le préfixe seulement des ces ids est requis
-	famexcl  []string // familles excluses (une famille regroupe les groupes de même préfixe)
+	famexcl  []string // familles exclues (une famille regroupe les groupes de même préfixe)
 	cles     []string // clés des lemmes possibles
 	clesexcl []string // clés exclues
 	poss     []string // pos des lemmes
 	posexcl  []string // pos exclus
 	lien     string   // étiquette du lien noyau -> el
+	lienN    string   // si l'élément est noyau, il doit être sub par un lien d'id lienN
 	multi    bool     // armé : le lien peut être utilisé plusieurs fois
 	morpho   []string // traits morphos requis
 	accord   string   // accord el - noyau
@@ -27,6 +28,7 @@ type El struct {
 	lsexcl   []string // exclusions lexicosyntaxiques
 }
 
+// func creeEl(v string, g *Groupe, t bool) *El 
 // crée un el du groupe g à partir de la ligne v, terminal si v armé
 // type_groupe;identifiant;lien;morpho;accord;lexsynt
 // type_groupe: n|a|p|ag|pg
@@ -41,7 +43,8 @@ type El struct {
 // 		"lemme" : clé du lemme d'une lemmatisation (gocol.Sr) du mot
 // 		famille_groupe : la partie précédant le point '.' dans l'identifiant du groupe
 // 		groupe : l'identifiant complet du groupe
-// lien: identifiant du lien qui sera affiché dans le graphe
+// lien: si l'élément n'est pas noyau, identifiant du lien qui sera affiché dans le graphe
+//       si l'élément est noyau, identifiant du lien entre l'élément et son propre noyau.
 // morpho : morpho d'une lemmatisation (gocol.Sr.Morphos[i])
 // accord : accord entre l'élément du groupe et son noyau : 'c' 'g' 'n' ou une combinaison des 3
 // lexsynt : propriétés requises du lemme (lexsynt.la)

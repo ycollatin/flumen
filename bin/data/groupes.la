@@ -23,7 +23,7 @@
 ! morpho : morpho d'une lemmatisation (gocol.Sr.Morphos[i])
 ! accord : accord entre l'élément du groupe et son noyau : 'c' 'g' 'n' ou une combinaison des 3
 ! lexsynt : propriétés requises du lemme (lexsynt.la)
-!
+! 
 ! identifiant, lemme, famille_groupe et groupe peuvent être préfixés en '!' pour 
 ! en faire des propriétés interdites.
 !
@@ -567,12 +567,6 @@ n:@v;;indic,impér;;propinf
 pg:v.sujObjPropInf !v.nsujPropInf v.psujPropInf v.hsujPropInf v.vSujPropInf;subInf
 
 ! FIN PROP INF
-
-!ter:v.capuam
-!n:@v;;act;;mvm
-!a:"domus" @NP;lieu;acc;;mvm
-!a:"domus";lieu;acc
-!a:@NP;lieu;acc;;mvm
 
 ter:v.capuam
 n:@v;;act;;mvm
