@@ -2,7 +2,7 @@ defaut:
 	go build -o bin/gentes
 fmt:
 	go fmt ./
-edn:
+ed:
 	nvim -c ":b branche.go" *.go bin/data/groupes.la bin/data/lexsynt.la bin/corpus/test.txt
 edit:
 	vim -c ":b branche.go" *.go bin/data/groupes.la bin/data/lexsynt.la bin/corpus/test.txt
