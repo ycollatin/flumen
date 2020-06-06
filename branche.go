@@ -24,13 +24,14 @@ type Sol struct {
 }
 
 type Branche struct {
+	filles   []*Branche        // liste des branches filles
 	gr       string            // texte de la phrase
+	mere     *Branche          // branche mère
 	nods     []Nod             // noeuds validés
 	niveau   int               // n° de la branche par rapport au tronc
-	veto     map[int][]Nod     // index : rang du mot; valeur : liste des liens interdits
 	photos   map[int]gocol.Res // lemmatisations et appartenance de groupe propres à la branche
-	filles   []*Branche        // liste des branches filles
 	vendange []Sol             // résultat de la récolte
+	veto     map[int][]Nod     // index : rang du mot; valeur : liste des liens interdits
 }
 
 var (
@@ -141,17 +142,25 @@ func (b *Branche) domine(ma, mb *Mot) bool {
 	return false
 }
 
+// supprime les branches qui ne sont pas assez productive
 func (b *Branche) elague() {
+	// le nombre maximal d'arcs est immédiatement inférieur
+	// au nombre de mots.
 	max := nbmots - 1
+	// recherche du nombre maximal de branches dans les
+	// solutions enregistrées dans b.vendange
 	var maxn int
 	for _, sol := range b.vendange {
 		if sol.nbarcs > maxn {
 			maxn = sol.nbarcs
 		}
 	}
+	// réajustement de max si aucune solution maximale
+	// n'a été trouvée
 	if maxn < max {
 		max = maxn
 	}
+	// on ne gardera que les solutions maximale.
 	nv := make([]Sol, len(b.vendange))
 	copy(nv, b.vendange)
 	b.vendange = nil
@@ -407,7 +416,8 @@ func (b *Branche) recolte() {
 	}
 }
 
-// vrai si m est compatible avec Sub et le noyau mn
+// teste m comme élément du groupe de mn comme défini par el, retourne et modifie en conséquence
+// sa lemmatisation res. Renvoie nil si m ne peut pas être élément du groupe el.groupe
 func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 	// signet sresEl
 
