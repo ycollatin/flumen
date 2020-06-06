@@ -38,7 +38,7 @@ func creeGroupe(ll []string) *Groupe {
 			g.id = v
 		case "n":
 			// test sur v.objsuj et n.sr
-			g.nucl = creeEl(v, g, false)
+			g.nucl = creeEl(k, v, g)
 		case "morph":
 			g.morph = strings.Split(v, ",")
 		case "lexsynt":
@@ -47,13 +47,13 @@ func creeGroupe(ll []string) *Groupe {
 				g.lexsynt = append(g.lexsynt, ecl)
 			}
 		case "a":
-			g.ante = append(g.ante, creeEl(v, g, true))
+			g.ante = append(g.ante, creeEl(k, v, g))
 		case "ag":
-			g.ante = append(g.ante, creeEl(v, g, false))
+			g.ante = append(g.ante, creeEl(k, v, g))
 		case "p":
-			g.post = append(g.post, creeEl(v, g, true))
+			g.post = append(g.post, creeEl(k, v, g))
 		case "pg":
-			g.post = append(g.post, creeEl(v, g, false))
+			g.post = append(g.post, creeEl(k, v, g))
 		}
 	}
 	// multi

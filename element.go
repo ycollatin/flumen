@@ -52,9 +52,18 @@ type El struct {
 // identifiant, lemme, famille_groupe et groupe peuvent être préfixés en '!' pour
 // en faire des propriétés interdites.
 //
-func creeEl(v string, g *Groupe, t bool) *El {
+func creeEl(k, v string, g *Groupe) *El {
 	el := new(El)
 	el.groupe = g
+	var noyau bool
+	switch k {
+	case "ter":
+		el.terminal = true
+	case "grp":
+		el.terminal = false
+	case "n":
+		noyau = true
+	}
 	vv := strings.Split(v, ";")
 	for i, e := range vv {
 		if strings.HasSuffix(e, " ") {
@@ -101,12 +110,16 @@ func creeEl(v string, g *Groupe, t bool) *El {
 					}
 				}
 			}
-		case 1: // id-lien
-			if e > "" && e[0] == '+' {
-				el.lien = e[1:]
-				el.multi = true
+			case 1: // id-lien
+			if noyau {
+				el.lienN = e
 			} else {
-				el.lien = e
+				if e > "" && e[0] == '+' {
+					el.lien = e[1:]
+					el.multi = true
+				} else {
+					el.lien = e
+				}
 			}
 		case 2: // morpho
 			el.morpho = strings.Split(e, ",")
@@ -126,7 +139,6 @@ func creeEl(v string, g *Groupe, t bool) *El {
 			}
 		}
 	}
-	el.terminal = t
 	return el
 }
 

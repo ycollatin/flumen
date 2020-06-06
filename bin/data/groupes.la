@@ -524,30 +524,30 @@ p:@n;comp;nomin
 
 ! FIXME : confusion ѕujet-objet
 ter:v.psujPropInf
-n:@v !v.abl !v.sujObjPropInf !v.sujAttrPropInf;;inf
+n:@v !v.abl !v.sujObjPropInf !v.sujAttrPropInf;subInf;inf
 a:@p;sujet;acc
 
 ter:v.nsujPropInf
-n:@v !v.abl !v.sujObjPropInf !v.sujAttrPropInf;;inf
+n:@v !v.abl !v.sujObjPropInf !v.sujAttrPropInf;subInf;inf
 a:@NP @n !v.psujPropInf;sujet;acc
 
 ter:v.sujAttrPropInf
-n:"sum";;inf
+n:"sum";subInf;inf
 a:@n @NP @p;sujet;acc
 a:@a @n @NP @p;attr;acc
 
 ter:v.hattrPropinf
-n:"sum";;inf
+n:"sum";subInf;inf
 a:@n @NP @p;attr;acc
 a:@v;;indic;;propinf
 
 grp:v.sujObjPropInf
-n:@v;;inf
+n:@v;subInf;inf
 a:@n @NP "ego" "se" "tu";sujet;acc
 a:@p;objet;acc
 
 ter:v.hsujPropInf
-n:@v;;inf
+n:@v;subInf;inf
 a:@n @NP @p;sujet;acc
 a:@v;;1,2,3
 
