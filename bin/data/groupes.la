@@ -387,7 +387,7 @@ n:@v;;act;;attr
 a:"quis";attr;nomin;n
 
 grp:v.obj
-n:@v !v.psujPropInf !vnsujPropInf;;act;;!intr
+n:@v !v.psujPropInf !vnsujPropInf !v.propInf;;act;;!intr
 ag:@n @NP !n.prepAcc;objet;acc
 
 ter:v.vobja
@@ -399,8 +399,7 @@ n:@v;;act;;!intr
 a:@a;objet;acc;;subst
 
 grp:v.objp
-n:@v;;act;;!intr
-!a:"ego" "hic" "is" "nemo" "nihil" "nos" "tu" "quis" "quisnam" "aliquis" !p.prepAcc;objet;acc
+n:@v !v.propInf;;act;;!intr
 ag:@p !p.prepAcc;objet;acc
 
 grp:v.hobjp
@@ -560,7 +559,8 @@ a:@v;;1,2,3
 
 grp:v.propInf
 n:@v;;indic,subj,impér;;propinf
-ag:v.sujAttrPropInf v.sujObjPropInf v.nsujPropInf !v.psujPropInf v.hsujPropInf v.vSujPropInf v.sujDatPropInf;subInf
+!ag:v.sujAttrPropInf v.sujObjPropInf v.nsujPropInf !v.psujPropInf v.hsujPropInf v.vSujPropInf v.sujDatPropInf;subInf
+ag:@v;subInf;inf
 
 grp:v.hpropInf
 n:@v;;inf;;propinf
