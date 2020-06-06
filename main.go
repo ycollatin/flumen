@@ -16,6 +16,7 @@ package main
 //      * tempus agendi et cogitandi
 //
 // TODO GROUPES
+// - faire passer attr. et det. avant app.
 // - omni officio : n.app apparaît avant n.det. Comment résoudre ?
 // - Deux sujets : Sustulimus manus et ego et Balbus (m6)
 // - pos multiples ?
