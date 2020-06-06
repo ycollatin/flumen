@@ -66,6 +66,7 @@ func creeTronc(t string) *Branche {
 	return br
 }
 
+// vrai si le *Mot noyau a déjà un sub de lien "lien"
 func (b *Branche) adeja(noyau *Mot, lien string) bool {
 	for _, nod := range b.nods {
 		if nod.nucl == noyau {
@@ -78,6 +79,22 @@ func (b *Branche) adeja(noyau *Mot, lien string) bool {
 				if nod.groupe.post[i].lien == lien {
 					return true
 				}
+			}
+		}
+	}
+	return false
+}
+
+func (b *Branche) aSubLien(lien string, mot *Mot) bool {
+	for _, nod := range b.nods {
+		for k, v := range nod.lla {
+			if k == mot.rang && v == lien {
+				return true
+			}
+		}
+		for k, v := range nod.llp {
+			if k == mot.rang && v == lien {
+				return true
 			}
 		}
 	}
@@ -262,7 +279,7 @@ func (b *Branche) ids(m *Mot) (lids []string) {
 	return
 }
 
-// si m peut être noyau d'un gourpe g, un Nod est renvoyé, sinon nil.
+// si m peut être noyau d'un Groupe g, un Nod est renvoyé, sinon nil.
 func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 	// snoeud, signet
 
@@ -292,6 +309,8 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 	var nod Nod
 	nod.rra = make(map[int]gocol.Res)
 	nod.rrp = make(map[int]gocol.Res)
+	nod.lla = make(map[int]string)
+	nod.llp = make(map[int]string)
 	nod.groupe = g
 	nod.nucl = m
 	nod.rang = rang
@@ -329,6 +348,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 		if sub.lien > "" {
 			nod.mma = append(nod.mma, ma)
 			nod.rra[ma.rang] = ma.restmp
+			nod.lla[ma.rang] = sub.lien
 		} else {
 			// si le lien est muet, c'est qu'il est étranger au
 			// groupe. Il y a hyperbate.
@@ -370,6 +390,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 		if g.post[ip].lien > "" {
 			nod.mmp = append(nod.mmp, mp)
 			nod.rrp[mp.rang] = mp.restmp
+			nod.llp[mp.rang] = sub.lien
 		} else {
 			nonLies++
 		}
@@ -426,20 +447,8 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		return nil
 	}
 
-	// Si le noyau doit être sub par un lien
-	if el.lienN > "" {
-		for _, nod := range b.nods {
-			for i, ma := range nod.mma {
-				if ma == mn && nod.groupe.ante[i].lien != el.lienN {
-					return nil
-				}
-			}
-			for i, mp := range nod.mmp {
-				if mp == mn && nod.groupe.post[i].lien != el.lienN {
-					return nil
-				}
-			}
-		}
+	if el.lienN > "" && !b.aSubLien(el.lienN, mn) {
+		return nil
 	}
 
 	// vérification du pos : id du noyau, ou pos du mot
