@@ -550,6 +550,11 @@ n:@v;subInf;inf
 a:@n @NP "ego" "se" "tu";sujet;acc
 a:@p;objet;acc
 
+grp:v.hpropInf
+n:@v;;inf;;propinf
+ag:v.sujObjPropInf v.nsujPropInf !v.psujPropInf v.hsujPropInf v.vSujPropInf;subInf
+a:@v;;indic;;infobj
+
 ter:v.hsujPropInf
 n:@v;subInf;inf
 a:@n @NP @p;sujet;acc
@@ -559,17 +564,11 @@ a:@v;;1,2,3
 
 grp:v.propInf
 n:@v;;indic,subj,impér;;propinf
-!ag:v.sujAttrPropInf v.sujObjPropInf v.nsujPropInf !v.psujPropInf v.hsujPropInf v.vSujPropInf v.sujDatPropInf;subInf
 ag:@v;subInf;inf
 
-grp:v.hpropInf
-n:@v;;inf;;propinf
-ag:v.sujObjPropInf v.nsujPropInf !v.psujPropInf v.hsujPropInf v.vSujPropInf;subInf
-a:@v;;indic;;infobj
-
 grp:v.vpropInf
-n:@v;;indic,impér;;propinf
-pg:v.sujObjPropInf !v.nsujPropInf v.psujPropInf v.hsujPropInf v.vSujPropInf;subInf
+n:@v !v.obj;;indic,impér;;propinf
+pg:@v;subInf;inf
 
 ! FIN PROP INF
 
