@@ -14,7 +14,7 @@ type Nod struct {
 	nbsubs   int
 	nucl     *Mot              // noyau du Nod
 	rra, rrp map[int]gocol.Res // liste des lemmatisations de chaque mot
-	lla, llp map[int]string		   // liste des liens entre le noyau et chaque mot
+	lla, llp map[int]string    // liste des liens entre le noyau et chaque mot
 	rnucl    gocol.Res         // lemmatisations du noyau
 	rang     int
 	valide   bool
