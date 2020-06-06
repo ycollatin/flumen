@@ -136,9 +136,8 @@ func (n *Nod) graf() []string {
 			ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, n.groupe.ante[j].lien))
 		}
 	}
-	diff := 0
 	for i, m := range n.mmp {
-		lien := n.groupe.post[i+diff].lien
+		lien := n.groupe.post[i].lien
 		if lien != "" {
 			ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, lien))
 		}
