@@ -28,7 +28,7 @@ type El struct {
 	lsexcl   []string // exclusions lexicosyntaxiques
 }
 
-// func creeEl(v string, g *Groupe, t bool) *El 
+// func creeEl(v string, g *Groupe, t bool) *El
 // crée un el du groupe g à partir de la ligne v, terminal si v armé
 // type_groupe;identifiant;lien;morpho;accord;lexsynt
 // type_groupe: n|a|p|ag|pg
@@ -110,7 +110,7 @@ func creeEl(k, v string, g *Groupe) *El {
 					}
 				}
 			}
-			case 1: // id-lien
+		case 1: // id-lien
 			if noyau {
 				el.lienN = e
 			} else {
