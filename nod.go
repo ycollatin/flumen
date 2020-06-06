@@ -12,8 +12,9 @@ type Nod struct {
 	groupe   *Groupe // groupe du noeud Nod
 	mma, mmp []*Mot  // liste des mots avant et après le noyau
 	nbsubs   int
-	rra, rrp map[int]gocol.Res // liste des lemmatisations de chaque mot
 	nucl     *Mot              // noyau du Nod
+	rra, rrp map[int]gocol.Res // liste des lemmatisations de chaque mot
+	lla, llp map[int]string		   // liste des liens entre le noyau et chaque mot
 	rnucl    gocol.Res         // lemmatisations du noyau
 	rang     int
 	valide   bool
@@ -34,9 +35,17 @@ func (n *Nod) copie() Nod {
 	for k, v := range n.rra {
 		nn.rra[k] = v
 	}
+	nn.lla = make(map[int]string)
+	for k, v := range n.lla {
+		nn.lla[k] = v
+	}
 	nn.rrp = make(map[int]gocol.Res)
 	for k, v := range n.rrp {
 		nn.rrp[k] = v
+	}
+	nn.llp = make(map[int]string)
+	for k, v := range n.llp {
+		nn.llp[k] = v
 	}
 	// lemmatisation réduite du noyau
 	for _, r := range n.rnucl {
