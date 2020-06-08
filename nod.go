@@ -75,7 +75,13 @@ func (n *Nod) doc(color bool) string {
 	for _, m := range n.mmp {
 		mm = append(mm, m.gr)
 	}
-	mm = append(mm, " - "+n.groupe.id)
+	mm = append(mm, fmt.Sprintf("- %s", n.groupe.id))
+	for _, v := range n.lla {
+		mm = append(mm, fmt.Sprintf("- %s", v))
+	}
+	for _, v := range n.llp {
+		mm = append(mm, fmt.Sprintf("- %s", v))
+	}
 	return strings.Join(mm, " ")
 }
 
