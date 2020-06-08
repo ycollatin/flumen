@@ -387,7 +387,7 @@ n:@v;;act;;attr
 a:"quis";attr;nomin;n
 
 grp:v.obj
-n:@v !v.psujPropInf !vnsujPropInf !v.propInf;;act;;!intr
+n:@v !si;;act;;!intr
 ag:@n @NP !n.prepAcc;objet;acc
 
 ter:v.vobja
@@ -399,7 +399,7 @@ n:@v;;act;;!intr
 a:@a;objet;acc;;subst
 
 grp:v.objp
-n:@v !v.propInf;;act;;!intr
+n:@v !si;;act;;!intr
 ag:@p !p.prepAcc;objet;acc
 
 grp:v.hobjp
@@ -443,7 +443,7 @@ a:@n @NP @p;dat;dat
 ! FIXME pb dans la prop. inf.
 ! vérifier l'exclusion de "tu"
 ter:v.abl
-n:@v !v.psujPropInf !v.nsujPropInf;;;;abl
+n:@v !si;;;;abl
 ag:@n @NP @p !"tu" !v.ablabs;abl;abl
 
 ! FIXME imperiis distributis ardere
@@ -501,11 +501,11 @@ a:"non" "nondum" "haud" "nec" "neque";neg
 
 ter:v.infobj
 n:@v;;act;;infobj
-a:@v !v.nsujPropInf !v.psujPropInf;objet;inf
+a:@v !si;objet;inf
 
 ter:v.vinfobj
 n:@v;;indic,subj;;infobj
-p:@v !v.nsujPropInf v.pSujPropInf;objet;inf
+p:@v !si;objet;inf
 
 ter:v.vinfsuj
 n:@v;;act indic,act subj;;infsuj
@@ -513,7 +513,7 @@ p:@v;sujet;inf prés
 
 ter:v.vinfobj
 n:@v;;act indic,act subj;;infobj
-p:@v !v.nsujPropInf !v.psujPropInf;objet;inf
+p:@v !si;objet;inf
 
 ter:adv.tamquam
 n:"tamquam"
@@ -522,53 +522,65 @@ p:@n;comp;nomin
 ! PROPOSITION INFINITIVE
 
 ! FIXME : confusion ѕujet-objet
-ter:v.psujPropInf
-n:@v !v.abl !v.sujObjPropInf !v.sujAttrPropInf;subInf;inf
+grp:si.psujPropInf
+n:@v !v.abl !v.sujObjPropInf !v.sujAttrPropInf;;inf
 a:@p;sujet;acc
 
-ter:v.nsujPropInf
-n:@v !v.abl !v.sujObjPropInf !v.sujAttrPropInf;subInf;inf
+grp:si.nsujPropInf
+n:@v !v.abl !v.sujObjPropInf !v.sujAttrPropInf;;inf
 a:@NP @n !v.psujPropInf;sujet;acc
 
-ter:v.sujAttrPropInf
-n:"sum";subInf;inf
+grp:si.sujAttrPropInf
+n:"sum";;inf
 a:@n @NP @p;sujet;acc
 a:@a @n @NP @p;attr;acc
 
-ter:v.sujDatPropInf
-n:"sum";subInf;inf
+grp:si.sujDatPropInf
+n:"sum";;inf
 a:@n @NP @p;sujet;acc
 a:@n @NP @p;datif;dat
 
-ter:v.hattrPropinf
-n:"sum";subInf;inf
+grp:si.sujDatvAttrPropInf
+n:"sum";;inf
+a:@n @NP @p;sujet;acc
+a:@n @NP @p;datif;dat
+p:@a;attr;acc
+
+grp:si.hattrPropinf
+n:"sum";;inf
 a:@n @NP @p;attr;acc
 a:@v;;indic;;propinf
 
-grp:v.sujObjPropInf
-n:@v;subInf;inf
+grp:si.sujObjPropInf
+n:@v;;inf
 a:@n @NP "ego" "se" "tu";sujet;acc
 a:@p;objet;acc
 
-grp:v.hpropInf
-n:@v;;inf;;propinf
-ag:v.sujObjPropInf v.nsujPropInf !v.psujPropInf v.hsujPropInf v.vSujPropInf;subInf
-a:@v;;indic;;infobj
-
-ter:v.hsujPropInf
-n:@v;subInf;inf
-a:@n @NP @p;sujet;acc
-a:@v;;1,2,3
+ter:si.hsujPropInf
+n:@v;;inf
+a:@NP;sujet;acc
+a:@v;;impér;;propinf
 
 ! verbes ayant un sub propinf 
 
 grp:v.propInf
 n:@v;;indic,subj,impér;;propinf
-ag:@v;subInf;inf
+ag:si;subInf
 
 grp:v.vpropInf
 n:@v !v.obj;;indic,impér;;propinf
-pg:@v;subInf;inf
+pg:si;subInf;inf
+
+! FIXME vérifie
+grp:v.hpropInf
+n:@v;;inf;;propinf
+ag:si;subInf
+a:@v;;indic;;infobj
+
+grp:v.hsujPropInf
+n:@v;subInf;inf
+a:@n @NP @p;sujet;acc
+a:@v;;1,2,3
 
 ! FIN PROP INF
 
