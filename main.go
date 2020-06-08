@@ -128,7 +128,7 @@ func analyse(expl bool, j bool) {
 		src = append(src, n.graf()...)
 	}
 	if expl {
-		ajout = "\n---- source ----\n"
+		ajout = "\n---- groupes ----\n"
 		scrb += ajout
 		fmt.Println(ajout)
 		for _, n := range sol.nods {
