@@ -1,8 +1,3 @@
-vitam mihi esse acerbam puto.
-Dionysum iube saluere.
-Albianum te confecisse arbitror.
-Marcellinum tibi esse iratum scis.
-Haec te scire uolui.
 ob eam rem.
 mare Ionium.
 ceterique dii.
@@ -17,6 +12,7 @@ hoc igitur explica.
 Immo locuples erat.
 dea Isis nuncupatur.
 Eodem duce redibant.
+Haec te scire uolui.
 Consul populi Romani.
 Capuam profectus est.
 Lentulus consul fuit.
