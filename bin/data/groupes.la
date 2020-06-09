@@ -499,9 +499,10 @@ ter:v.neg
 n:@v
 a:"non" "nondum" "haud" "nec" "neque";neg
 
-ter:v.infobj
+! FIXME : !si inopérant dans /Haec te scire uolui./
+grp:v.infobj
 n:@v;;act;;infobj
-a:@v !si;objet;inf
+ag:@v !si;objet;inf
 
 ter:v.vinfobj
 n:@v;;indic,subj;;infobj
@@ -523,12 +524,12 @@ p:@n;comp;nomin
 
 ! FIXME : confusion ѕujet-objet
 grp:si.psujPropInf
-n:@v !v.abl !v.sujObjPropInf !v.sujAttrPropInf;;inf
+n:@v !v.abl;!v.objp;inf
 a:@p;sujet;acc
 
 grp:si.nsujPropInf
 n:@v !v.abl !v.sujObjPropInf !v.sujAttrPropInf;;inf
-a:@NP @n !v.psujPropInf;sujet;acc
+a:@NP @n !si.psujPropInf;sujet;acc
 
 grp:si.sujAttrPropInf
 n:"sum";;inf
@@ -555,6 +556,11 @@ grp:si.sujObjPropInf
 n:@v;;inf
 a:@n @NP "ego" "se" "tu";sujet;acc
 a:@p;objet;acc
+
+grp:si.objSujPropInf
+n:@v;;inf
+a:@p;objet;acc neut
+a:@p @n @NP;sujet;acc masc,acc fém;
 
 ter:si.hsujPropInf
 n:@v;;inf
