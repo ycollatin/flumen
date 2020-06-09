@@ -342,7 +342,6 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 		// réinitialisation des lemmatisations de test
 		ma.restmp = b.photos[ma.rang]
 		// validation du noyau
-		// FIXME : pê ma == m
 		ma.restmp = b.resEl(ma, sub, m, ma.restmp)
 		if ma.restmp == nil {
 			return nnul
