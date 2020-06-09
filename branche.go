@@ -164,29 +164,21 @@ func (b *Branche) domine(ma, mb *Mot) bool {
 func (b *Branche) elague() {
 	// le nombre maximal d'arcs est immédiatement inférieur
 	// au nombre de mots.
-	max := nbmots - 1
 	// recherche du nombre maximal de branches dans les
 	// solutions enregistrées dans b.vendange
-	var maxn int
+	var max int
 	for _, sol := range b.vendange {
-		if sol.nbarcs > maxn {
-			maxn = sol.nbarcs
+		if sol.nbarcs > max {
+			max = sol.nbarcs
 		}
 	}
-	// réajustement de max si aucune solution maximale
-	// n'a été trouvée
-	if maxn < max {
-		max = maxn
-	}
-	// on ne gardera que les solutions maximale.
-	nv := make([]Sol, len(b.vendange))
-	copy(nv, b.vendange)
-	b.vendange = nil
-	for _, sol := range nv {
+	var nv []Sol
+	for _, sol := range b.vendange {
 		if sol.nbarcs == max {
-			b.vendange = append(b.vendange, sol)
+			nv = append(nv, sol)
 		}
 	}
+	b.vendange = nv
 }
 
 // explore toutes les possibilités d'une branche
@@ -426,11 +418,17 @@ func (b *Branche) recolte() {
 	b.vendange = nil
 	for _, f := range b.filles {
 		if f.terminale() {
-			var nods []Nod
+			var (
+				nods []Nod
+				nbn  int
+			)
 			for _, n := range f.nods {
 				nods = append(nods, n)
+				nbn += len(n.mma) + len(n.mmp)
 			}
-			b.vendange = append(b.vendange, Sol{nods, len(nods)})
+			if nbn > 0 {
+				b.vendange = append(b.vendange, Sol{nods, nbn})
+			}
 		} else {
 			f.recolte()
 			b.vendange = append(b.vendange, f.vendange...)

@@ -6,8 +6,8 @@ package main
 //     FIXME
 //
 //   Tri :
-//	  - ambitus redit immanis : erreur de tri
-//    - favoriser les arcs non croisés
+//    - Erreurs de tri : Haec te scire uolui.
+//		Supprimer, quand une solution est complète, les autres ?
 //
 // XXX
 //
@@ -18,6 +18,7 @@ package main
 // TODO GROUPES
 // - détecter les phrases sum+génitif, et rendre les conditions plus contraignantes.
 // - faire passer attr. et det. avant app.
+// - favoriser les arcs non croisés
 // - omni officio : n.app apparaît avant n.det. Comment résoudre ?
 // - Deux sujets : Sustulimus manus et ego et Balbus (m6)
 // - pos multiples ?
@@ -58,13 +59,14 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"github.com/fatih/color"
-	"github.com/ycollatin/gocol"
 	"io/ioutil"
 	"os"
 	"path"
 	"sort"
 	"strings"
+
+	"github.com/fatih/color"
+	"github.com/ycollatin/gocol"
 )
 
 const (
@@ -102,9 +104,9 @@ func analyse(expl bool, j bool) {
 		tronc.explore()
 		tronc.recolte()
 		tronc.elague()
-		// tri
+		//tri
 		sort.SliceStable(tronc.vendange, func(i, j int) bool {
-			return tronc.vendange[i].nbarcs < tronc.vendange[j].nbarcs
+			return tronc.vendange[i].nbarcs > tronc.vendange[j].nbarcs
 		})
 	}
 	scrb = ""
