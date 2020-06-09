@@ -5,9 +5,6 @@ package main
 
 //     FIXME
 //
-//   Tri :
-//    - Erreurs de tri : Haec te scire uolui.
-//		Supprimer, quand une solution est complète, les autres ?
 //
 // XXX
 //
