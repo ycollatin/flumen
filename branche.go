@@ -306,6 +306,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 	nod.llp = make(map[int]string)
 	nod.groupe = g
 	nod.nucl = m
+	nod.rnucl = m.restmp
 	nod.rang = rang
 	nod.nbsubs = g.nbsubs
 
