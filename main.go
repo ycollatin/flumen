@@ -5,6 +5,8 @@ package main
 
 // FIXME
 // Plangages quand on demande la lemmatisation.
+// Présence de doublons parfaits dans l'arbre d'analyses /credo te audisse
+// aliquid/
 //
 // XXX
 //
