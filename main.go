@@ -3,8 +3,8 @@
 
 package main
 
-//     FIXME
-//
+// FIXME
+// Plangages quand on demande la lemmatisation.
 //
 // XXX
 //
