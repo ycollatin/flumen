@@ -9,23 +9,24 @@ import (
 
 // un el est la définition d'un élément de Groupe
 type El struct {
-	groupe   *Groupe  // groupe propriétaire du el
-	ids      []string // identifiants des groupes possibles pour le noyau
-	idsexcl  []string // ids exclus
-	familles []string // le préfixe seulement des ces ids est requis
-	famexcl  []string // familles exclues (une famille regroupe les groupes de même préfixe)
-	cles     []string // clés des lemmes possibles
-	clesexcl []string // clés exclues
-	poss     []string // pos des lemmes
-	posexcl  []string // pos exclus
-	lien     string   // étiquette du lien noyau -> el
-	lienN    string   // si l'élément est noyau, il doit être sub par un lien d'id lienN
-	multi    bool     // armé : le lien peut être utilisé plusieurs fois
-	morpho   []string // traits morphos requis
-	accord   string   // accord el - noyau
-	terminal bool     // le el est un mot
-	lexsynt  []string // étiquettes lexicosyntaxiques
-	lsexcl   []string // exclusions lexicosyntaxiques
+	groupe    *Groupe  // groupe propriétaire du el
+	ids       []string // identifiants des groupes possibles pour le noyau
+	idsexcl   []string // ids exclus
+	familles  []string // le préfixe seulement des ces ids est requis
+	famexcl   []string // familles exclues (une famille regroupe les groupes de même préfixe)
+	cles      []string // clés des lemmes possibles
+	clesexcl  []string // clés exclues
+	poss      []string // pos des lemmes
+	posexcl   []string // pos exclus
+	lien      string   // étiquette du lien noyau -> el
+	lienN     string   // si l'élément est noyau, il doit être sub par un lien d'id lienN
+	lienNexcl string   // si l'élément est noyau, il ne doit pas être sub par un lein d'id lienN
+	multi     bool     // armé : le lien peut être utilisé plusieurs fois
+	morpho    []string // traits morphos requis
+	accord    string   // accord el - noyau
+	terminal  bool     // le el est un mot
+	lexsynt   []string // étiquettes lexicosyntaxiques
+	lsexcl    []string // exclusions lexicosyntaxiques
 }
 
 // func creeEl(v string, g *Groupe, t bool) *El
@@ -111,10 +112,17 @@ func creeEl(k, v string, g *Groupe) *El {
 				}
 			}
 		case 1: // id-lien
+			if e == "" {
+				continue
+			}
 			if noyau {
-				el.lienN = e
+				if e[0] == '!' {
+					el.lienNexcl = e[1:]
+				} else {
+					el.lienN = e
+				}
 			} else {
-				if e > "" && e[0] == '+' {
+				if e[0] == '+' {
 					el.lien = e[1:]
 					el.multi = true
 				} else {
