@@ -4,8 +4,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/ycollatin/gocol"
 	"strings"
+
+	"github.com/ycollatin/gocol"
 )
 
 type Nod struct {
@@ -146,9 +147,8 @@ func (n *Nod) graf() []string {
 		lien := n.groupe.ante[i].lien
 		// si le lien du sub est vide, c'est que c'est un élément étranger, appartenant à un autre groupe
 		// (hyperbate). Il ne faut donc pas l'inclure dans le noeud.
-		j := len(n.mma) - i - 1
 		if lien > "" {
-			ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, n.groupe.ante[j].lien))
+			ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, lien))
 		}
 	}
 	for i, m := range n.mmp {
