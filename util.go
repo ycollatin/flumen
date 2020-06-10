@@ -4,13 +4,11 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/ycollatin/gocol"
-
-	//"io/ioutil"
 	"os"
 	"os/exec"
 	"strings"
+
+	"github.com/ycollatin/gocol"
 )
 
 var (
