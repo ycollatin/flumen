@@ -447,6 +447,10 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 		return nil
 	}
 
+	if el.lienNexcl > "" && b.aSubLien(el.lienNexcl, mn) {
+		return nil
+	}
+
 	if el.lienN > "" && !b.aSubLien(el.lienN, mn) {
 		return nil
 	}
@@ -459,6 +463,13 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 			// familles
 			pel := PrimEl(id, ".")
 			if len(el.famexcl) > 0 && contient(el.famexcl, pel) {
+
+				/*
+					! FIXME : !si inopérant dans /Haec te scire uolui./
+					grp:v.infobj
+					n:@v;;act;;infobj
+					ag:@v !si;objet;inf
+				*/
 				return nil
 			}
 			if len(el.idsexcl) > 0 && contient(el.idsexcl, id) {
