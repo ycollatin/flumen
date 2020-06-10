@@ -4,7 +4,9 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/ycollatin/gocol"
+
 	//"io/ioutil"
 	"os"
 	"os/exec"
@@ -134,7 +136,6 @@ func PrimEl(s, sep string) string {
 // Les premières sont un sous-ensemble des secondes, et seront
 // colorées en vert.
 func resToString(resGentes, resCol gocol.Res) (res string) {
-	//
 	mapg := make(map[string][]string) // clé : Clé de lemme
 	mapc := make(map[string][]string) // valeur : morphos
 	var clesg, clesc []string         // clés des deux maps
