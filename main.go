@@ -4,9 +4,10 @@
 package main
 
 // FIXME
-// Plangages quand on demande la lemmatisation.
-// Présence de doublons parfaits dans l'arbre d'analyses /credo te audisse
-// aliquid/
+// - Plangages quand on demande la lemmatisation.
+// - Présence de doublons parfaits dans l'arbre d'analyses /credo te audisse
+//   aliquid/
+// - l. 414 groupes.la : !inf dans le champ morpho empêche l'analyse de Agrum eis diuisit.
 //
 // XXX
 //
