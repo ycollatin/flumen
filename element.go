@@ -75,9 +75,6 @@ func creeEl(k, v string, g *Groupe) *El {
 			fmt.Printf("groupe %s, ligne %s, espace(s) de fin à supprimer.\n", g.id, v)
 			os.Exit(1)
 		}
-		//ter:v.capuam
-		//n:@v;;act;;mvm
-		//a:@NP "domus";lieu;acc;;mvm
 		switch i {
 		case 0: // noyaux
 			// partage des éléments
@@ -116,9 +113,6 @@ func creeEl(k, v string, g *Groupe) *El {
 				}
 			}
 		case 1: // id-lien
-			//if e == "" {
-			//	continue
-			//}
 			if noyau {
 				if e[0] == '!' {
 					el.lienNexcl = e[1:]
@@ -134,9 +128,6 @@ func creeEl(k, v string, g *Groupe) *El {
 				}
 			}
 		case 2: // morpho
-			//if e == "" {
-			//	continue
-			//}
 			elsm := strings.Split(e, ",")
 			for _, elm := range elsm {
 				if elm[0] == '!' {
