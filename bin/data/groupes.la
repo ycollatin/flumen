@@ -390,10 +390,6 @@ grp:v.obj
 n:@v !si;;act;;!intr
 ag:@n @NP !n.prepAcc;objet;acc
 
-ter:v.vobja
-n:@v;;act;;!intr
-p:@a;objet;acc;;subst
-
 ter:v.obja
 n:@v;;act;;!intr
 a:@a;objet;acc;;subst
@@ -524,11 +520,11 @@ p:@n;comp;nomin
 
 ! FIXME : confusion ѕujet-objet
 grp:si.psujPropInf
-n:@v !v.abl;!v.objp;inf
+n:@v !v.abl;;inf
 a:@p;sujet;acc
 
 grp:si.nsujPropInf
-n:@v !v.abl !v.sujObjPropInf !v.sujAttrPropInf;;inf
+n:@v !v.abl !v.sujObjPropInf !v.sujAttrPropInf;v.propInf;inf
 a:@NP @n !si.psujPropInf;sujet;acc
 
 grp:si.sujAttrPropInf
@@ -552,13 +548,28 @@ n:"sum";;inf
 a:@n @NP @p;attr;acc
 a:@v;;indic;;propinf
 
+ter:si.attrvSuj
+n:"sum";;inf
+a:@a;attr;acc
+p:@n;sujet;acc
+
+ter:si.vAttrSuj
+n:"sum";;inf
+p:@n;sujet;acc
+p:@a;attr;acc
+
+ter:si.sujAttr
+n:"sum";;inf
+a:@n;sujet;acc
+a:@a;attr;acc
+
 grp:si.sujObjPropInf
 n:@v;;inf
 a:@n @NP "ego" "se" "tu";sujet;acc
 a:@p;objet;acc
 
 grp:si.objSujPropInf
-n:@v;;inf
+n:@v;!v.infobj;inf
 a:@p;objet;acc neut
 a:@p @n @NP;sujet;acc masc,acc fém;
 
@@ -571,20 +582,20 @@ a:@v;;impér;;propinf
 
 grp:v.propInf
 n:@v;;indic,subj,impér;;propinf
-ag:si;subInf
+ag:si;objet
 
 grp:v.vpropInf
 n:@v !v.obj;;indic,impér;;propinf
-pg:si;subInf;inf
+pg:si;objet;inf
 
 ! FIXME vérifie
 grp:v.hpropInf
 n:@v;;inf;;propinf
-ag:si;subInf
+ag:si;objet
 a:@v;;indic;;infobj
 
 grp:v.hsujPropInf
-n:@v;subInf;inf
+n:@v;objet;inf
 a:@n @NP @p;sujet;acc
 a:@v;;1,2,3
 
@@ -782,6 +793,10 @@ pg:n.prepAcc;lieu
 grp:v.vobj
 n:@v;;act,!part;;!intr
 pg:@n @NP @p !n.prepAcc !n.prepAbl !n.inperpetuum;objet;acc
+
+ter:v.vobja
+n:@v;;act;;!intr
+p:@a;objet;acc;;subst
 
 grp:v.objppa
 n:v.sumpp;;act
