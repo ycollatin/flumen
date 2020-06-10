@@ -22,7 +22,8 @@ type El struct {
 	lienN     string   // si l'élément est noyau, il doit être sub par un lien d'id lienN
 	lienNexcl string   // si l'élément est noyau, il ne doit pas être sub par un lein d'id lienN
 	multi     bool     // armé : le lien peut être utilisé plusieurs fois
-	morpho    []string // traits morphos requis
+	morpho    []string // traits morpho requis
+	morphexcl []string // traits morpho exclus
 	accord    string   // accord el - noyau
 	terminal  bool     // le el est un mot
 	lexsynt   []string // étiquettes lexicosyntaxiques
@@ -67,6 +68,9 @@ func creeEl(k, v string, g *Groupe) *El {
 	}
 	vv := strings.Split(v, ";")
 	for i, e := range vv {
+		if e == "" {
+			continue
+		}
 		if strings.HasSuffix(e, " ") {
 			fmt.Printf("groupe %s, ligne %s, espace(s) de fin à supprimer.\n", g.id, v)
 			os.Exit(1)
@@ -112,9 +116,9 @@ func creeEl(k, v string, g *Groupe) *El {
 				}
 			}
 		case 1: // id-lien
-			if e == "" {
-				continue
-			}
+			//if e == "" {
+			//	continue
+			//}
 			if noyau {
 				if e[0] == '!' {
 					el.lienNexcl = e[1:]
@@ -130,7 +134,17 @@ func creeEl(k, v string, g *Groupe) *El {
 				}
 			}
 		case 2: // morpho
-			el.morpho = strings.Split(e, ",")
+			//if e == "" {
+			//	continue
+			//}
+			elsm := strings.Split(e, ",")
+			for _, elm := range elsm {
+				if elm[0] == '!' {
+					el.morphexcl = append(el.morphexcl, elm[1:])
+				} else {
+					el.morpho = append(el.morpho, elm)
+				}
+			}
 			if len(el.morpho) == 1 && el.morpho[0] == "" {
 				el.morpho = nil
 			}

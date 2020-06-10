@@ -516,7 +516,7 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 	}
 
 	// terminer si aucune des propriétés suivantes n'est requise
-	if len(el.poss)+len(el.cles)+len(el.morpho)+len(el.lexsynt) == 0 {
+	if len(el.poss)+len(el.cles)+len(el.morpho)+len(el.morphexcl)+len(el.lexsynt) == 0 {
 		return nil
 	}
 
@@ -568,6 +568,19 @@ func (b *Branche) resEl(m *Mot, el *El, mn *Mot, res gocol.Res) gocol.Res {
 			return nil
 		}
 		res = nres
+	}
+	// morpho exclues
+	if len(el.morphexcl) > 0 {
+		for _, mexcl := range el.morphexcl {
+			for _, an := range res {
+				for _, morfs := range an.Morphos {
+					// pour toutes les morphos valides de m
+					if strings.Contains(morfs, mexcl) {
+						return nil
+					}
+				}
+			}
+		}
 	}
 
 	// groupes exclus

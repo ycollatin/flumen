@@ -171,6 +171,10 @@ ter:conj.adv
 n:@conj
 p:"etiam" "potius";adv
 
+ter:adv.adv
+n:"nunc"
+a:"etiam";adv
+
 ter:n.et
 n:@n @NP
 a:"et" "ac" "atque";conj
@@ -392,7 +396,7 @@ ag:@n @NP !n.prepAcc;objet;acc
 
 ter:v.obja
 n:@v;;act;;!intr
-a:@a;objet;acc;;subst
+a:@a !a.prepAcc;objet;acc;;subst
 
 grp:v.objp
 n:@v !si;;act;;!intr
@@ -407,9 +411,10 @@ grp:v.objpf
 n:v.sumPfut
 a:"ego" "hic" "is" "nemo" "nihil" "tu";objet;acc
 
+! FIXME : ;!inf; empêche l'analyse
 ter:v.datif
 n:@v;;!inf;;datif
-a:@n @NP @p;dat;dat
+a:@n @NP @p;datif;dat
 
 ter:v.hdatif
 n:@v;;subj,inf;;datif
@@ -703,7 +708,6 @@ a:@prepAbl @prepAA;prep
 
 ! FIXME : ad populum Romanum : 'n' devrait suffire
 grp:n.prepAcc
-!n:n @NP;;acc
 n:@n @NP n.det n.adj n.nAdj;;acc
 a:@prepAcc @prepAA;prep
 
