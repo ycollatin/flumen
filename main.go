@@ -4,6 +4,7 @@
 package main
 
 // FIXME
+// - L'existence d'un lien non multi doit être vérifiée ante et post.
 // - Plangages quand on demande la lemmatisation.
 // - Présence de doublons parfaits dans l'arbre d'analyses
 //   credo te audisse aliquid.
@@ -45,9 +46,10 @@ package main
 // - lexsynt.la : identifier et changer les initiales majuscules u > V
 // - groupe pour les adj neutres + est : malum, opus, necesse est
 // - parasitage de /sum/ par /edo/ : comment supprimer "excl" dans lexsynt
-// - parasitage de /do/ par /dato/ :   "
+// - parasitage de /do/ par /dato/, de /ego/ par /Egus/.
 //
 // TODO CODE
+// - Tronquer la profondeur des recherches par un système de % d'échecs ?
 //
 // TODO COMMANDES
 // - option "c" -  analyse : donner la fonction (lien)
