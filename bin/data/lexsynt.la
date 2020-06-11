@@ -7371,7 +7371,7 @@ egregie:
 egregius:
 egressus:
 egurgito:
-Egus:
+Egus:excl
 ehem:
 eheu:
 eho:
@@ -19718,7 +19718,7 @@ satio2:
 satio:
 satis:
 satisdatio:
-satisfacio:abl,datif
+satisfacio:datif
 satisfactio:
 satius:
 sator:
