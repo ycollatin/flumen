@@ -5,8 +5,9 @@ package main
 
 // FIXME
 // - Plangages quand on demande la lemmatisation.
-// - Présence de doublons parfaits dans l'arbre d'analyses /credo te audisse
-//   aliquid/
+// - Présence de doublons parfaits dans l'arbre d'analyses
+//   credo te audisse aliquid.
+//   Ego satisfacio omnibus.
 // - De nouveau, mauvais tri des arcs.
 //
 // XXX
@@ -16,6 +17,7 @@ package main
 //      * tempus agendi et cogitandi
 //
 // TODO GROUPES
+// - traiter différemment abl et abl. absolu
 // - détecter les phrases sum+génitif, et rendre les conditions plus contraignantes.
 // - faire passer attr. et det. avant app.
 // - favoriser les arcs non croisés
