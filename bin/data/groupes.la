@@ -207,11 +207,11 @@ a:@n;abl;abl
 
 ter:a.datif
 n:@a;;;;datif
-a:@n @NP @p;datif;dat
+a:@n @NP @p;dat;dat
 
 ter:a.adatif
 n:@a;;;;datif
-p:@n @NP @p;datif;dat
+p:@n @NP @p;dat;dat
 
 ter:a.hepith
 n:@a;;;;subst
@@ -345,7 +345,7 @@ a:"tu" "vos";sujet;nomin;n
 
 ter:v.gratias
 n:@v;;act
-a:@n @p @NP;datif;dat
+a:@n @p @NP;dat;dat
 p:"gratia";objet;acc plur
 
 ter:v.hic
@@ -414,7 +414,7 @@ a:"ego" "hic" "is" "nemo" "nihil" "tu";objet;acc
 ! FIXME : ;!inf; empêche l'analyse
 ter:v.datif
 n:@v;;!inf;;datif
-a:@n @NP @p;datif;dat
+a:@n @NP @p;dat;dat
 
 ter:v.hdatif
 n:@v;;subj,inf;;datif
@@ -540,12 +540,12 @@ a:@a @n @NP @p;attr;acc
 grp:si.sujDatPropInf
 n:"sum";;inf
 a:@n @NP @p;sujet;acc
-a:@n @NP @p;datif;dat
+a:@n @NP @p;dat;dat
 
 grp:si.sujDatvAttrPropInf
 n:"sum";;inf
 a:@n @NP @p;sujet;acc
-a:@n @NP @p;datif;dat
+a:@n @NP @p;dat;dat
 p:@a;attr;acc
 
 grp:si.hattrPropinf
