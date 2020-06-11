@@ -142,10 +142,6 @@ ter:n.gena
 n:@n
 a:@a;gen;gén;;subst
 
-ter:n.nquoque
-n:@n @p
-p:"quoque";adv
-
 ter:a.gen
 n:@a;;;;gen
 a:@n @NP;gen;gén
@@ -159,21 +155,13 @@ n:@a;;;;gen
 p:@n @NP;gen;gén
 p:@n;;nomin
 
-ter:n.etiam
-n:@n @NP
-a:"etiam";adv
+ter:m.adv
+n:@conj @n @NP @a @Adv
+a:"etiam" "pote" "potius";adv
 
-ter:a.etiam
-n:@a;;;;subst
-a:"etiam" "pote";adv
-
-ter:conj.adv
-n:@conj
-p:"etiam" "potius";adv
-
-ter:adv.adv
-n:"nunc"
-a:"etiam";adv
+ter:n.nquoque
+n:@n @p
+p:"quoque";adv
 
 ter:n.et
 n:@n @NP
