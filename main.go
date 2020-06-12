@@ -4,7 +4,6 @@
 package main
 
 // FIXME
-// - L'existence d'un lien non multi doit être vérifiée ante et post.
 // - Plangages quand on demande la lemmatisation.
 // - Présence de doublons parfaits dans l'arbre d'analyses
 //   credo te audisse aliquid.
@@ -18,6 +17,8 @@ package main
 //      * tempus agendi et cogitandi
 //
 // TODO GROUPES
+// - format de groupes.la. Parvenir à exprimer une règle comme
+//   « Si hoc peut être déterminant, il est exclu qu'il puisse être adverbe. »
 // - traiter différemment abl et abl. absolu
 // - détecter les phrases sum+génitif, et rendre les conditions plus contraignantes.
 // - faire passer attr. et det. avant app.
@@ -49,7 +50,9 @@ package main
 // - parasitage de /do/ par /dato/, de /ego/ par /Egus/.
 //
 // TODO CODE
-// - Tronquer la profondeur des recherches par un système de % d'échecs ?
+// - Tronquer la profondeur des recherches : si deux groupes subs d'une branche
+//   sont rigoureusement égaux à ceux d'une autre branche, interrompre l'exploration
+//   de cette branche, considérée comme doublon.
 //
 // TODO COMMANDES
 // - option "c" -  analyse : donner la fonction (lien)
