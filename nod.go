@@ -89,17 +89,20 @@ func (n *Nod) doc(color bool) string {
 // Compare les noeuds na et nb et renvoie vrai
 // s'ils sont égaux
 func (na *Nod) egale(nb *Nod) bool {
-	if na.nucl != nb.nucl && egaleRes(na.rnucl, nb.rnucl) {
+	//if na.nucl != nb.nucl && egaleRes(na.rnucl, nb.rnucl) {
+	if na.nucl != nb.nucl {
 		return false
 	}
-	if na.groupe.id != nb.groupe.id {
+	//if na.groupe.id != nb.groupe.id {
+	if !na.groupe.equiv(nb.groupe) {
 		return false
 	}
 	va := true
 	for _, ma := range na.mma {
 		va = false
 		for _, mb := range nb.mma {
-			va = va || (ma == mb && egaleRes(na.rra[ma.rang], nb.rra[mb.rang]))
+			//va = va || (ma == mb && egaleRes(na.rra[ma.rang], nb.rra[mb.rang]))
+			va = va || ma == mb
 		}
 		if !va {
 			return false
@@ -108,7 +111,8 @@ func (na *Nod) egale(nb *Nod) bool {
 	for _, ma := range na.mmp {
 		va = false
 		for _, mb := range nb.mmp {
-			va = va || (ma == mb && egaleRes(na.rrp[ma.rang], nb.rrp[mb.rang]))
+			//va = va || (ma == mb && egaleRes(na.rrp[ma.rang], nb.rrp[mb.rang]))
+			va = va || ma == mb
 		}
 		if !va {
 			return false

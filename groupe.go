@@ -72,6 +72,32 @@ func creeGroupe(ll []string) *Groupe {
 	return g
 }
 
+// Renvoie vrai si, dans le même ordre, tous les
+// éléments de ga portent le même lien que
+// les éléments correspondants de gb.
+func (ga *Groupe) equiv(gb *Groupe) bool {
+	if ga.id == gb.id {
+		return true
+	}
+	if len(ga.ante) != len(gb.ante) {
+		return false
+	}
+	if len(ga.post) != len(gb.post) {
+		return false
+	}
+	for i, el := range ga.ante {
+		if gb.ante[i].lien != el.lien {
+			return false
+		}
+	}
+	for i, el := range ga.post {
+		if gb.post[i].lien != el.lien {
+			return false
+		}
+	}
+	return true
+}
+
 // lecture des groupes dans le fichier nf
 func lisGroupes(nf string) {
 	llin := gocol.Lignes(nf)
