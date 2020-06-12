@@ -6,8 +6,9 @@ package main
 // vaMorph
 
 import (
-	"github.com/ycollatin/gocol"
 	"strings"
+
+	"github.com/ycollatin/gocol"
 )
 
 type Groupe struct {
