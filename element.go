@@ -1,4 +1,4 @@
-//    element.go   -- gentes
+//    element.go   -- Gentes
 package main
 
 import (

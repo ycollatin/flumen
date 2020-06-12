@@ -21,8 +21,8 @@ type Nod struct {
 	valide   bool
 }
 
-func (n *Nod) copie() Nod {
-	var nn Nod
+func (n *Nod) copie() *Nod {
+	nn := new(Nod)
 	nn.groupe = n.groupe
 	for _, m := range n.mma {
 		nn.mma = append(nn.mma, m)
@@ -88,7 +88,7 @@ func (n *Nod) doc(color bool) string {
 
 // Compare les noeuds na et nb et renvoie vrai
 // s'ils sont égaux
-func (na Nod) egale(nb Nod) bool {
+func (na *Nod) egale(nb *Nod) bool {
 	if na.nucl != nb.nucl && egaleRes(na.rnucl, nb.rnucl) {
 		return false
 	}
@@ -143,8 +143,9 @@ func egaleRes(resa, resb gocol.Res) bool {
 // lignes graphviz du nœud
 func (n *Nod) graf() []string {
 	var ll []string
+	lenmma := len(n.mma) - 1
 	for i, m := range n.mma {
-		lien := n.groupe.ante[i].lien
+		lien := n.groupe.ante[lenmma-i].lien
 		// si le lien du sub est vide, c'est que c'est un élément étranger, appartenant à un autre groupe
 		// (hyperbate). Il ne faut donc pas l'inclure dans le noeud.
 		if lien > "" {

@@ -1,4 +1,10 @@
 //     Branche.go - Gentes
+// Une Branche essaie d'intégrer dans des groupes les mots de la phrase qui
+// sont encore isolés. Dès qu'elle a trouvé une solution, elle passe la
+// main à une branche fille, qui fait la même chose, puis lui rend la main
+// quand elle est parvenue à la fin de son exploration.
+// Si elle ne trouve aucune solution, elle rend la main à sa branche mère, si
+// elle existe.
 
 /*
 Signets
@@ -20,7 +26,7 @@ import (
 )
 
 type Sol struct {
-	nods   []Nod
+	nods   []*Nod
 	nbarcs int
 }
 
@@ -28,11 +34,11 @@ type Branche struct {
 	filles   []*Branche        // liste des branches filles
 	gr       string            // texte de la phrase
 	mere     *Branche          // branche mère
-	nods     []Nod             // noeuds validés
+	nods     []*Nod            // noeuds validés
 	niveau   int               // n° de la branche par rapport au tronc
 	photos   map[int]gocol.Res // lemmatisations et appartenance de groupe propres à la branche
 	vendange []Sol             // résultat de la récolte
-	veto     map[int][]Nod     // index : rang du mot; valeur : liste des liens interdits
+	veto     map[int][]*Nod    // index : rang du mot; valeur : liste des liens interdits
 }
 
 var (
@@ -57,7 +63,7 @@ func creeTronc(t string) *Branche {
 	}
 	nbmots = len(mots)
 	br.photos = make(map[int]gocol.Res) // l'index de la map est le numéro des mots
-	br.veto = make(map[int][]Nod)
+	br.veto = make(map[int][]*Nod)
 	// peuplement des photos
 	for _, m := range mots {
 		phm := m.ans
@@ -122,7 +128,7 @@ func (b *Branche) copie() *Branche {
 			nb.photos[i] = append(nb.photos[i], nr)
 		}
 	}
-	nb.veto = make(map[int][]Nod)
+	nb.veto = make(map[int][]*Nod)
 	for i, v := range b.veto {
 		for _, nod := range v {
 			nb.veto[i] = append(nb.veto[i], nod.copie())
@@ -200,7 +206,7 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 		// tester la possibilité de création noeud de type g
 		// dont le noyau est m
 		n := bm.noeud(m, g)
-		if n.valide {
+		if n != nil && n.valide {
 			// Si le groupe a été exploré pour m dans une
 			// autre branche, passer
 			va := true
@@ -273,11 +279,11 @@ func (b *Branche) ids(m *Mot) (lids []string) {
 }
 
 // si m peut être noyau d'un Groupe g, un Nod est renvoyé, sinon nil.
-func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
+func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	// snoeud, signet
 
 	// noeud nnul pour le retour d'échec
-	var nnul Nod
+	var nnul *Nod
 
 	// vérification de rang
 	rang := m.rang
@@ -299,7 +305,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) Nod {
 	}
 
 	// création du noeud de retour
-	var nod Nod
+	nod := new(Nod)
 	nod.rra = make(map[int]gocol.Res)
 	nod.rrp = make(map[int]gocol.Res)
 	nod.lla = make(map[int]string)
@@ -420,7 +426,7 @@ func (b *Branche) recolte() {
 	for _, f := range b.filles {
 		if f.terminale() {
 			var (
-				nods []Nod
+				nods []*Nod
 				nbn  int
 			)
 			for _, n := range f.nods {
