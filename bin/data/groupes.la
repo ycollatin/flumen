@@ -402,7 +402,7 @@ a:"ego" "hic" "is" "nemo" "nihil" "tu";objet;acc
 ! FIXME : ;!inf; empêche l'analyse
 ter:v.datif
 n:@v;;!inf;;datif
-a:@n @NP @p !"vero" !"Verus2" !"Curiu";dat;dat
+a:@n @NP @p !"vero" !"Verus2" !"Curius";dat;dat
 
 ter:v.hdatif
 n:@v;;subj,inf;;datif
