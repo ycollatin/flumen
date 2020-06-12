@@ -402,7 +402,7 @@ a:"ego" "hic" "is" "nemo" "nihil" "tu";objet;acc
 ! FIXME : ;!inf; empêche l'analyse
 ter:v.datif
 n:@v;;!inf;;datif
-a:@n @NP @p;dat;dat
+a:@n @NP @p !"vero" !"Verus2" !"Curiu";dat;dat
 
 ter:v.hdatif
 n:@v;;subj,inf;;datif
@@ -749,7 +749,7 @@ a:@v;;3
 a:@n @NP;gen;gén
 
 grp:n.ngprep
-n:@n
+n:@n;;;;prep
 pg:n.prepAbl n.prepAcc p.prepAcc a.prepAcc v.prepger;+gprep
 
 grp:adv.hGen
