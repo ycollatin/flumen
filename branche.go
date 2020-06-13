@@ -33,7 +33,6 @@ type Sol struct {
 type Branche struct {
 	filles   []*Branche        // liste des branches filles
 	gr       string            // texte de la phrase
-	mere     *Branche          // branche mère
 	nods     []*Nod            // noeuds validés
 	niveau   int               // n° de la branche par rapport au tronc
 	photos   map[int]gocol.Res // lemmatisations et appartenance de groupe propres à la branche
