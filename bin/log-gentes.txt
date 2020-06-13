@@ -1,0 +1,14 @@
+----------------
+1/2
+          ┌coor────────┐   
+          │  ┌conj────┐│   
+    ┌suj┐ │  │     ┌o┐││   
+    ▽   │ │  ▽     ▽ ││▽   
+Pluton venit et eam rapuit.
+----------------
+2/2
+          ┌coor────────┐   
+          │  ┌conj────┐│   
+    ┌att┐ │  │     ┌o┐││   
+    ▽   │ │  ▽     ▽ ││▽   
+Pluton venit et eam rapuit.
