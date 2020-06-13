@@ -4,7 +4,7 @@
 package main
 
 // FIXME
-// - Plangages quand on demande la lemmatisation.
+// - Plangages quand on demande la lemmatisation avant analyse.
 // - Présence de doublons parfaits dans l'arbre d'analyses
 //   credo te audisse aliquid.
 //   Ego satisfacio omnibus.
