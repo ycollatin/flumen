@@ -1,3 +1,0 @@
-#!/bin/sh
-# débogueur delve, serveur
-dlv --headless debug ../
