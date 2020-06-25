@@ -1,4 +1,4 @@
-// groupe.go - Gentes
+// regle.go - Gentes
 
 package main
 
@@ -11,7 +11,7 @@ import (
 	"github.com/ycollatin/gocol"
 )
 
-type Groupe struct {
+type Regle struct {
 	id             string
 	nucl, nuclexcl *El
 	morph          []string // traits morpho du noyau
@@ -22,14 +22,14 @@ type Groupe struct {
 	nbsubs         int      // nombre de subs
 }
 
-var grpTerm, grp []*Groupe
+var grpTerm, grp []*Regle
 
 // créateur de Groupe
-func creeGroupe(ll []string) *Groupe {
+func creeRegle(ll []string) *Regle {
 	if len(ll) == 0 {
 		return nil
 	}
-	g := new(Groupe)
+	g := new(Regle)
 	for _, l := range ll {
 		kv := strings.Split(l, ":")
 		k := kv[0]
@@ -75,7 +75,7 @@ func creeGroupe(ll []string) *Groupe {
 // Renvoie vrai si, dans le même ordre, tous les
 // éléments de ga portent le même lien que
 // les éléments correspondants de gb.
-func (ga *Groupe) equiv(gb *Groupe) bool {
+func (ga *Regle) equiv(gb *Regle) bool {
 	if ga.id == gb.id {
 		return true
 	}
@@ -99,14 +99,14 @@ func (ga *Groupe) equiv(gb *Groupe) bool {
 }
 
 // lecture des groupes dans le fichier nf
-func lisGroupes(nf string) {
+func lisRegles(nf string) {
 	llin := gocol.Lignes(nf)
 	var ll []string
 	for _, l := range llin {
 		vk := strings.Split(l, ":")
 		deb := vk[0]
 		if deb == "ter" || deb == "grp" {
-			g := creeGroupe(ll)
+			g := creeRegle(ll)
 			if g != nil {
 				if PrimEl(ll[0], ":") == "grp" {
 					grp = append(grp, g)
@@ -118,11 +118,11 @@ func lisGroupes(nf string) {
 		}
 		ll = append(ll, l)
 	}
-	grp = append(grp, creeGroupe(ll))
+	grp = append(grp, creeRegle(ll))
 }
 
 // la morpho morf est-elle compatible avec le noyau du groupe g ?
-func (g *Groupe) vaMorph(morf string) bool {
+func (g *Regle) vaMorph(morf string) bool {
 	for _, gmorf := range g.morph {
 		va := true
 		ecl := strings.Split(gmorf, " ")
