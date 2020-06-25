@@ -1,4 +1,4 @@
-//     util.go - Gentes
+//     util.go - flumen
 
 package main
 
@@ -69,10 +69,7 @@ func contient(ls []string, s string) bool {
 }
 
 func log(s string) {
-	//ioutil.WriteFile("log-gentes.txt", []byte(s), 0644)
-	nf := "log-gentes.txt"
-
-	//if _, err := os.Stat(filename); os.IsNotExist(err) { fmt.Printf("no such file or directory: %s", filename) return }
+	nf := "log-flumen.txt"
 	f, err := os.OpenFile(nf, os.O_WRONLY|os.O_APPEND, 0600)
 	if err != nil {
 		f, _ = os.OpenFile(nf, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0600)
@@ -130,16 +127,16 @@ func PrimEl(s, sep string) string {
 	return eclats[0]
 }
 
-// Compare les lemmatisations Gentes et les lemmatisations Collatinus
+// Compare les lemmatisations Flumen et les lemmatisations Collatinus
 // Les premières sont un sous-ensemble des secondes, et seront
 // colorées en vert.
-func resToString(resGentes, resCol gocol.Res) (res string) {
+func resToString(resFlumen, resCol gocol.Res) (res string) {
 	mapg := make(map[string][]string) // clé : Clé de lemme
 	mapc := make(map[string][]string) // valeur : morphos
 	var clesg, clesc []string         // clés des deux maps
 	var trsc []string
-	// map et clés Gentes
-	for _, srg := range resGentes {
+	// map et clés Flumen
+	for _, srg := range resFlumen {
 		k, ll := srToString(srg)
 		clesg = append(clesg, k)
 		mapg[k] = ll

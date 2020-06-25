@@ -1,4 +1,4 @@
-//     Branche.go - Gentes
+//   Branche.go - Flumen
 // Une Branche essaie d'intégrer dans des groupes les mots de la phrase qui
 // sont encore isolés. Dès qu'elle a trouvé une solution, elle passe la
 // main à une branche fille, qui fait la même chose, puis lui rend la main

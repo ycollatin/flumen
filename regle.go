@@ -1,4 +1,4 @@
-// regle.go - Gentes
+// regle.go - Flumen
 
 package main
 

@@ -1,4 +1,4 @@
-//    element.go   -- Gentes
+//    element.go   -- Flumen
 package main
 
 import (

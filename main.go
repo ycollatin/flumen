@@ -1,4 +1,4 @@
-//   main.go --	Gentes
+//   main.go --	Flumen
 //	analyseur syntaxique du latin
 
 package main
@@ -78,7 +78,7 @@ import (
 
 const (
 	version = "Alpha"
-	entete  = "Gentes - grammaire latine"
+	entete  = "Flumen - grammaire latine"
 	licence = " licence GPL3 © Yves Ouvrard 2020"
 	aidePh  = `l->mot suivant ; h->mot précédent ;
 j->phrase suivante ; k->phrase précédente ;

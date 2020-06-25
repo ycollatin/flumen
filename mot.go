@@ -1,4 +1,4 @@
-//       mot.go - Gentes
+//       mot.go - Flumen
 
 // signets :
 // motadeja

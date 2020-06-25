@@ -1,4 +1,4 @@
-//      lexsynt.go -- gentes
+//      lexsynt.go -- Flumen
 // 		samedi 21 mars 2020
 
 package main

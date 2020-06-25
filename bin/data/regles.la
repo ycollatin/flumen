@@ -1,4 +1,4 @@
-!	regles.la -- Gentes !
+!	regles.la -- Flumen
 !
 ! NOYAU :
 !- ter|grp:<groupe>.<id>		// identifiant syntaxique,identifiant unique 
@@ -21,9 +21,9 @@
 ! 		groupe : l'identifiant complet du groupe
 ! lien: identifiant du lien qui sera affiché dans le graphe. S'il est préfixé en '+', 
 !	    plusieurs éléments subordonnés du groupe pourront avoir ce lien	
-! morpho : morpho d'une lemmatisation (gocol.Sr.Morphos[i])
-! accord : accord entre l'élément du groupe et son noyau : 'c' 'g' 'n' ou une combinaison des 3
-! lexsynt : propriétés requises du lemme (lexsynt.la)
+! lexsynt: liste des propriétés lexicosyntaxiques requises pour le lemme candidat.
+!       les propriétés syntaxiques de chaque lemme sont enregistrées dans le fichier
+!       data/lexsynt.la
 ! 
 ! identifiant, lemme, famille_groupe et groupe peuvent être préfixés en '!' pour 
 ! en faire des propriétés interdites.
@@ -31,9 +31,6 @@
 ! code des pos
 ! n=nom, NP=nom propre, p=pronom a=adjectif Adv = adverbe
 !
-! CAVEAT : il faut terminer par un groupe non terminal
-!
-
 !!!!!!!!!!!!!!!!!!!!!
 ! Groupes terminaux !
 !!!!!!!!!!!!!!!!!!!!!
@@ -572,7 +569,7 @@ n:@v;;inf
 a:@NP;sujet;acc
 a:@v;;impér;;propinf
 
-! verbes ayant un sub propinf 
+! verbes ayant un sub propinf
 
 grp:v.propInf
 n:@v;;indic,subj,impér;;propinf
@@ -702,7 +699,7 @@ a:@prepAcc @prepAA;prep
 
 grp:p.prepAcc
 n:"hic" "ille" "is" "ego" "tu" "nos" "qui2" "vos" !p.app;;acc
-a:@prepAcc @prepAA n.det;prep
+a:@prepAcc @prepAA;prep
 
 ter:a.prepAcc
 n:@a;;acc;;subst
