@@ -1,4 +1,5 @@
-!	groupes.la -- Gentes !
+!	regles.la -- Gentes !
+!
 ! NOYAU :
 !- ter|grp:<groupe>.<id>		// identifiant syntaxique,identifiant unique 
 !  ter : noyau et subs sont des mots
