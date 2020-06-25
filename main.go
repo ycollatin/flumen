@@ -300,7 +300,7 @@ func main() {
 	// lecture des données Collatinus
 	gocol.Data(chData)
 	// lecture des données syntaxiques
-	lisGroupes(chData + "groupes.la")
+	lisRegles(chData + "regles.la")
 	lisLexsynt()
 	// choix du texte
 	chxTexte()

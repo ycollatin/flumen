@@ -10,7 +10,7 @@ import (
 )
 
 type Nod struct {
-	groupe   *Groupe // groupe du noeud Nod
+	regle   *Regle // règle du noeud Nod
 	mma, mmp []*Mot  // liste des mots avant et après le noyau
 	nbsubs   int
 	nucl     *Mot              // noyau du Nod
@@ -23,7 +23,7 @@ type Nod struct {
 
 func (n *Nod) copie() *Nod {
 	nn := new(Nod)
-	nn.groupe = n.groupe
+	nn.regle = n.regle
 	for _, m := range n.mma {
 		nn.mma = append(nn.mma, m)
 	}
@@ -58,7 +58,7 @@ func (n *Nod) copie() *Nod {
 		nn.rnucl = append(nn.rnucl, nr)
 	}
 	nn.rang = n.rang
-	nn.nbsubs = nn.groupe.nbsubs
+	nn.nbsubs = nn.regle.nbsubs
 	return nn
 }
 
@@ -76,7 +76,7 @@ func (n *Nod) doc(color bool) string {
 	for _, m := range n.mmp {
 		mm = append(mm, m.gr)
 	}
-	mm = append(mm, fmt.Sprintf("- %s", n.groupe.id))
+	mm = append(mm, fmt.Sprintf("- %s", n.regle.id))
 	for _, v := range n.lla {
 		mm = append(mm, fmt.Sprintf("- %s", v))
 	}
@@ -93,8 +93,8 @@ func (na *Nod) egale(nb *Nod) bool {
 	if na.nucl != nb.nucl {
 		return false
 	}
-	//if na.groupe.id != nb.groupe.id {
-	if !na.groupe.equiv(nb.groupe) {
+	//if na.regle.id != nb.regle.id {
+	if !na.regle.equiv(nb.regle) {
 		return false
 	}
 	va := true
@@ -149,15 +149,15 @@ func (n *Nod) graf() []string {
 	var ll []string
 	lenmma := len(n.mma) - 1
 	for i, m := range n.mma {
-		lien := n.groupe.ante[lenmma-i].lien
-		// si le lien du sub est vide, c'est que c'est un élément étranger, appartenant à un autre groupe
+		lien := n.regle.ante[lenmma-i].lien
+		// si le lien du sub est vide, c'est que c'est un élément étranger, appartenant à une autre règle
 		// (hyperbate). Il ne faut donc pas l'inclure dans le noeud.
 		if lien > "" {
 			ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, lien))
 		}
 	}
 	for i, m := range n.mmp {
-		lien := n.groupe.post[i].lien
+		lien := n.regle.post[i].lien
 		if lien != "" {
 			ll = append(ll, fmt.Sprintf("%d -> %d [%s]", n.nucl.rang, m.rang, lien))
 		}
