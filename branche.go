@@ -8,7 +8,7 @@
 
 /*
 Signets
-exploregrou
+exploreregles
 scopie
 sexplore
 snoeud
@@ -77,12 +77,12 @@ func (b *Branche) adeja(noyau *Mot, lien string) bool {
 	for _, nod := range b.nods {
 		if nod.nucl == noyau {
 			for i, _ := range nod.mma {
-				if nod.groupe.ante[i].lien == lien {
+				if nod.regle.ante[i].lien == lien {
 					return true
 				}
 			}
 			for i, _ := range nod.mmp {
-				if nod.groupe.post[i].lien == lien {
+				if nod.regle.post[i].lien == lien {
 					return true
 				}
 			}
@@ -136,7 +136,7 @@ func (b *Branche) copie() *Branche {
 	return nb
 }
 
-// Faux si m є à un groupe
+// Faux si m є à une règle
 func (b *Branche) dejasub(m *Mot) bool {
 	for _, n := range b.nods {
 		for _, ma := range n.mma {
@@ -153,7 +153,7 @@ func (b *Branche) dejasub(m *Mot) bool {
 	return false
 }
 
-// mb є au groupe ma, directement ou indirectement
+// mb є à la règle ma, directement ou indirectement
 func (b *Branche) domine(ma, mb *Mot) bool {
 	mnoy := b.noyau(mb)
 	for mnoy != nil {
@@ -190,16 +190,16 @@ func (b *Branche) elague() {
 func (b *Branche) explore() {
 	// signet sexplore
 	for _, m := range mots {
-		// 1. groupes terminaux
-		b.exploreGroupes(m, grpTerm)
-		// 2. groupes non terminaux
-		b.exploreGroupes(m, grp)
+		// 1. règles terminales
+		b.exploreRegles(m, grpTerm)
+		// 2. règles non terminales
+		b.exploreRegles(m, grp)
 	}
 }
 
 // essaye toutes les règles de groupes de grps où m pourrait
 // être noyau
-func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
+func (bm *Branche) exploreRegles(m *Mot, grps []*Regle) {
 	// signet exploregrou
 	for _, g := range grps {
 		// tester la possibilité de création noeud de type g
@@ -271,14 +271,14 @@ func (bm *Branche) exploreGroupes(m *Mot, grps []*Groupe) {
 func (b *Branche) ids(m *Mot) (lids []string) {
 	for _, nod := range b.nods {
 		if nod.nucl == m {
-			lids = append(lids, nod.groupe.id)
+			lids = append(lids, nod.regle.id)
 		}
 	}
 	return
 }
 
 // si m peut être noyau d'un Groupe g, un Nod est renvoyé, sinon nil.
-func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
+func (b *Branche) noeud(m *Mot, g *Regle) *Nod {
 	// snoeud, signet
 
 	// noeud nnul pour le retour d'échec
@@ -309,7 +309,7 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 	nod.rrp = make(map[int]gocol.Res)
 	nod.lla = make(map[int]string)
 	nod.llp = make(map[int]string)
-	nod.groupe = g
+	nod.regle = g
 	nod.nucl = m
 	nod.rnucl = m.restmp
 	nod.rang = rang
@@ -406,12 +406,12 @@ func (b *Branche) noeud(m *Mot, g *Groupe) *Nod {
 func (b *Branche) noyau(m *Mot) *Mot {
 	for _, n := range b.nods {
 		for i, msub := range n.mma {
-			if n.groupe.ante[i].lien > "" && msub == m {
+			if n.regle.ante[i].lien > "" && msub == m {
 				return n.nucl
 			}
 		}
 		for i, msub := range n.mmp {
-			if n.groupe.post[i].lien > "" && msub == m {
+			if n.regle.post[i].lien > "" && msub == m {
 				return n.nucl
 			}
 		}

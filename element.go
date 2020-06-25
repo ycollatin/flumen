@@ -9,7 +9,7 @@ import (
 
 // un el est la définition d'un élément de Groupe
 type El struct {
-	groupe    *Groupe  // groupe propriétaire du el
+	regle     *Regle   // regle propriétaire du el
 	ids       []string // identifiants des groupes possibles pour le noyau
 	idsexcl   []string // ids exclus
 	familles  []string // le préfixe seulement des ces ids est requis
@@ -54,9 +54,9 @@ type El struct {
 // identifiant, lemme, famille_groupe et groupe peuvent être préfixés en '!' pour
 // en faire des propriétés interdites.
 //
-func creeEl(k, v string, g *Groupe) *El {
+func creeEl(k, v string, g *Regle) *El {
 	el := new(El)
-	el.groupe = g
+	el.regle = g
 	var noyau bool
 	switch k {
 	case "ter":
